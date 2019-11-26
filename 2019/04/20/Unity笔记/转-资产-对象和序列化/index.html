@@ -1,0 +1,618 @@
+<!DOCTYPE html>
+<html>
+<head>
+    
+<!-- Google Analytics -->
+<script>
+window.ga=window.ga||function(){(ga.q=ga.q||[]).push(arguments)};ga.l=+new Date;
+ga('create', 'true', 'auto');
+ga('send', 'pageview');
+</script>
+<script async src='https://www.google-analytics.com/analytics.js'></script>
+<!-- End Google Analytics -->
+
+
+    
+
+    
+
+
+
+    <meta charset="utf-8">
+    
+    <meta name="google-site-verification" content="true">
+    
+    
+    
+    
+    <title>[转] 资产, 对象和序列化 | zhangMo Blog</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+    
+    <meta name="theme-color" content="#1eb4e9">
+    
+    
+    <meta name="keywords" content="Unity">
+    <meta name="description" content="资产, 对象和序列化。">
+<meta name="keywords" content="Unity">
+<meta property="og:type" content="article">
+<meta property="og:title" content="[转] 资产, 对象和序列化">
+<meta property="og:url" content="https:&#x2F;&#x2F;bitzhangmo.github.io&#x2F;2019&#x2F;04&#x2F;20&#x2F;Unity%E7%AC%94%E8%AE%B0&#x2F;%E8%BD%AC-%E8%B5%84%E4%BA%A7-%E5%AF%B9%E8%B1%A1%E5%92%8C%E5%BA%8F%E5%88%97%E5%8C%96&#x2F;index.html">
+<meta property="og:site_name" content="zhangMo Blog">
+<meta property="og:description" content="资产, 对象和序列化。">
+<meta property="og:locale" content="zh-CN">
+<meta property="og:updated_time" content="2019-04-20T12:44:31.042Z">
+<meta name="twitter:card" content="summary">
+    
+    <link rel="shortcut icon" href="/favicon.ico">
+    <link rel="stylesheet" href="//unpkg.com/hexo-theme-material-indigo@latest/css/style.css">
+    <script>window.lazyScripts=[]</script>
+
+    <!-- custom head -->
+    
+
+</head>
+
+<body>
+    <div id="loading" class="active"></div>
+
+    <aside id="menu" class="hide" >
+  <div class="inner flex-row-vertical">
+    <a href="javascript:;" target="_blank" rel="noopener" class="header-icon waves-effect waves-circle waves-light" id="menu-off">
+        <i class="icon icon-lg icon-close"></i>
+    </a>
+    <div class="brand-wrap" style="background-image:url(/img/brand.jpg)">
+      <div class="brand">
+        <a href="/" class="avatar waves-effect waves-circle waves-light">
+          <img src="/img/avatar.png">
+        </a>
+        <hgroup class="introduce">
+          <h5 class="nickname">zhangMo</h5>
+          <a href="mailto:wangxc1998@qq.com" target="_blank" rel="noopener" title="wangxc1998@qq.com" class="mail">wangxc1998@qq.com</a>
+        </hgroup>
+      </div>
+    </div>
+    <div class="scroll-wrap flex-col">
+      <ul class="nav">
+        
+            <li class="waves-block waves-effect">
+              <a href="/"  >
+                <i class="icon icon-lg icon-home"></i>
+                主页
+              </a>
+            </li>
+        
+            <li class="waves-block waves-effect">
+              <a href="/archives"  >
+                <i class="icon icon-lg icon-archives"></i>
+                Archives
+              </a>
+            </li>
+        
+            <li class="waves-block waves-effect">
+              <a href="/tags/"  >
+                <i class="icon icon-lg icon-tags"></i>
+                Tags
+              </a>
+            </li>
+        
+            <li class="waves-block waves-effect">
+              <a href="/categories/"  >
+                <i class="icon icon-lg icon-th-list"></i>
+                Categories
+              </a>
+            </li>
+        
+            <li class="waves-block waves-effect">
+              <a href="/about/"  >
+                <i class="icon icon-lg icon-child"></i>
+                About
+              </a>
+            </li>
+        
+            <li class="waves-block waves-effect">
+              <a href="https://github.com/bitzhangmo" target="_blank" >
+                <i class="icon icon-lg icon-github"></i>
+                Github
+              </a>
+            </li>
+        
+            <li class="waves-block waves-effect">
+              <a href="https://weibo.com/u/7175236950" target="_blank" >
+                <i class="icon icon-lg icon-weibo"></i>
+                Weibo
+              </a>
+            </li>
+        
+            <li class="waves-block waves-effect">
+              <a href="/"  >
+                <i class="icon icon-lg icon-steam"></i>
+                Steam
+              </a>
+            </li>
+        
+            <li class="waves-block waves-effect">
+              <a href="https://skmtjun.github.io/" target="_blank" >
+                <i class="icon icon-lg icon-dice"></i>
+                螺涅神社
+              </a>
+            </li>
+        
+            <li class="waves-block waves-effect">
+              <a href="https://tenwoods.github.io/" target="_blank" >
+                <i class="icon icon-lg icon-link"></i>
+                十木杂物间
+              </a>
+            </li>
+        
+      </ul>
+    </div>
+  </div>
+</aside>
+
+    <main id="main">
+        <header class="top-header" id="header">
+    <div class="flex-row">
+        <a href="javascript:;" target="_blank" rel="noopener" class="header-icon waves-effect waves-circle waves-light on" id="menu-toggle">
+          <i class="icon icon-lg icon-navicon"></i>
+        </a>
+        <div class="flex-col header-title ellipsis">[转] 资产, 对象和序列化</div>
+        
+        <div class="search-wrap" id="search-wrap">
+            <a href="javascript:;" target="_blank" rel="noopener" class="header-icon waves-effect waves-circle waves-light" id="back">
+                <i class="icon icon-lg icon-chevron-left"></i>
+            </a>
+            <input type="text" id="key" class="search-input" autocomplete="off" placeholder="输入感兴趣的关键字">
+            <a href="javascript:;" target="_blank" rel="noopener" class="header-icon waves-effect waves-circle waves-light" id="search">
+                <i class="icon icon-lg icon-search"></i>
+            </a>
+        </div>
+        
+        
+        <a href="javascript:;" target="_blank" rel="noopener" class="header-icon waves-effect waves-circle waves-light" id="menuShare">
+            <i class="icon icon-lg icon-share-alt"></i>
+        </a>
+        
+    </div>
+</header>
+<header class="content-header post-header">
+
+    <div class="container fade-scale">
+        <h1 class="title">[转] 资产, 对象和序列化</h1>
+        <h5 class="subtitle">
+            
+                <time datetime="2019-04-20T12:43:32.000Z" itemprop="datePublished" class="page-time">
+  2019-04-20
+</time>
+
+
+	<ul class="article-category-list"><li class="article-category-list-item"><a class="article-category-list-link" href="/categories/%E8%BD%AC%E8%BD%BD/">转载</a></li></ul>
+
+            
+        </h5>
+    </div>
+
+    
+
+
+</header>
+
+
+<div class="container body-wrap">
+    
+    <aside class="post-widget">
+        <nav class="post-toc-wrap post-toc-shrink" id="post-toc">
+            <h4>TOC</h4>
+            <ol class="post-toc"><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#资产和对象的内部"><span class="post-toc-number">1.</span> <span class="post-toc-text">资产和对象的内部</span></a></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#内置对象的引用"><span class="post-toc-number">2.</span> <span class="post-toc-text">内置对象的引用</span></a></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#为什么要文件-GUID-和本地-ID"><span class="post-toc-number">3.</span> <span class="post-toc-text">为什么要文件 GUID 和本地 ID</span></a></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#组合资产和-Importers"><span class="post-toc-number">4.</span> <span class="post-toc-text">组合资产和 Importers</span></a></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#序列化和实例"><span class="post-toc-number">5.</span> <span class="post-toc-text">序列化和实例</span></a></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#MonoScripts"><span class="post-toc-number">6.</span> <span class="post-toc-text">MonoScripts</span></a></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#Resouce-的生命周期"><span class="post-toc-number">7.</span> <span class="post-toc-text">Resouce 的生命周期</span></a></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#加载大层次结构"><span class="post-toc-number">8.</span> <span class="post-toc-text">加载大层次结构</span></a></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#脚记"><span class="post-toc-number">9.</span> <span class="post-toc-text">脚记</span></a></li></ol>
+        </nav>
+    </aside>
+
+
+<article id="post-Unity笔记/转-资产-对象和序列化"
+  class="post-article article-type-post fade" itemprop="blogPost">
+
+    <div class="post-card">
+        <h1 class="post-card-title">[转] 资产, 对象和序列化</h1>
+        <div class="post-meta">
+            <time class="post-time" title="2019-04-20 20:43:32" datetime="2019-04-20T12:43:32.000Z"  itemprop="datePublished">2019-04-20</time>
+
+            
+	<ul class="article-category-list"><li class="article-category-list-item"><a class="article-category-list-link" href="/categories/%E8%BD%AC%E8%BD%BD/">转载</a></li></ul>
+
+
+
+            
+<span id="busuanzi_container_page_pv" title="文章总阅读量" style='display:none'>
+    <i class="icon icon-eye icon-pr"></i><span id="busuanzi_value_page_pv"></span>
+</span>
+
+
+        </div>
+        <div class="post-content" id="post-content" itemprop="postContent">
+            <p>资产, 对象和序列化。</p>
+<a id="more"></a>
+
+<p>原文地址：<a href="http://blog.shuiguzi.com/2016/12/15/Assets_Objects_serialization/" target="_blank" rel="noopener">http://blog.shuiguzi.com/2016/12/15/Assets_Objects_serialization/</a></p>
+<hr>
+<p>这是 Unity 5 <a href="http://blog.shuiguzi.com/2016/12/15/GuideToABAndRes/" target="_blank" rel="noopener">[资产, 资源和资源管理系列文章]</a>的第二篇。</p>
+<p>这篇文章涵盖了 Unity 序列化系统的底层知识和 Unity 怎么在它的编辑器及运行时维持不同对象的稳定的引用，理解怎么样在 Unity 中高效的加载和卸载资产。正确的资产管理是保持低内存和快速加载的关键。</p>
+<h3 id="资产和对象的内部"><a href="#资产和对象的内部" class="headerlink" title="资产和对象的内部"></a>资产和对象的内部</h3><p>要理解怎么样正确的管理数据，Unity 怎么鉴别和序列化数据很重要。其中首先的关键点是理解 <strong>资产</strong> 和 <strong>对象（UnityEngine.Objects）</strong> 的区别。</p>
+<p>一个资产是存储在 Unity Project 中资产文件夹下的文件。比如纹理文件，材质文件和 FBX 文件都是资产。有些资产包含 Unity 原生数据格式，比如材质。而有些资产需要转换成 Unity 原生数据格式，比如 FBX 文件。</p>
+<p>一个 <strong>UnityEngine.Object</strong> 或者大写字母 O 的 <strong>Object</strong>，是个序列化数据集合，用来表述某个资源的具体实例。它可以是任何 Unity 引擎使用的资源，比如一个网格，一个精灵，一个音频剪辑和一个动画片段。所有的对象都是 <a href="http://docs.unity3d.com/ScriptReference/Object.html" target="_blank" rel="noopener">UnityEngine.Object</a> 的子类。</p>
+<p>在 Unity 中基本所有的对象类型都是内置的，除了两种特殊的类型。</p>
+<ol>
+<li><a href="http://docs.unity3d.com/ScriptReference/ScriptableObject.html" target="_blank" rel="noopener">ScriptableObject</a> 给开发者提供了一个便捷的，可以定义自己数据类型的系统。这些类型能被 Unity 序列化和反序列化和在 Unity 编辑器的 Inspector Window 中使用。</li>
+<li>A <a href="http://docs.unity3d.com/ScriptReference/MonoBehaviour.html" target="_blank" rel="noopener">MonoBehaviour</a> 提供了一个链接到 <a href="http://docs.unity3d.com/ScriptReference/MonoScript.html" target="_blank" rel="noopener">MonoScript</a> 的封装。MonoScript 是一个内置的数据类型，在 Unity 中用来保持程序集或者命名空间中一个脚本的引用。MonoSript 不包含任何可以执行的代码。</li>
+</ol>
+<h3 id="内置对象的引用"><a href="#内置对象的引用" class="headerlink" title="内置对象的引用"></a>内置对象的引用</h3><p>所有的 UnityEngine.Objects 都能拥有其他 UnityEngine.Objects 的引用。而这些其他的 UnityEngine.Objects 可能同一个资产文件，或者从其他资产文件中导入。比如，一个材质对象通常拥有一个或者多个纹理对象的引用。这些纹理对象一般都是从一个或者多个纹理资产文件中导入的（比如 PNG 和 JPG 文件）。</p>
+<p>当被序列化之后，由两部分数据组成了这些引用：一个是 <strong>文件 GUID</strong> 另外一个是 <strong>本地 ID</strong>。文件 GUID 用来 标识目标资源存储位置下的资产文件。本地ID（唯一的 <a href="http://blog.shuiguzi.com/2016/12/15/Assets_Objects_serialization/#f1" target="_blank" rel="noopener">[1]</a>）用来标识一个资产文件中的每个对象，因为一个资产文件可能包含多个对象。</p>
+<p>文件 GUID 存储在 .meta 文件中。这些 .meata 文件在 Unity 导入资产的时候创建，存储在和资产文件同一个目录中。</p>
+<p>上面提到的鉴别和引用系统可以在文本编辑器中看到：创建一个新 Unity 项目，然后将 <strong>编辑器</strong> 设置为 <strong>Visible Meta Files</strong> 和 <strong>序列化为文本</strong>。然后创建一个材质和导入一个纹理到项目中。将新创建的材质指定到场景中的一个立方体上面，然后保存场景。</p>
+<p>我们用文本编辑器打开和材质关联的 .meta 文件。在文件头部会有标识了 “guid” 的行。这行定义了材质的文件 GUID。查找本地 ID, 我们可以在文本编辑器中打开材质文件。我们会看到类似于如下所示的材质对象的定义：</p>
+<blockquote>
+<p>— !u!21 &amp;2100000<br>Material:<br>serializedVersion: 3<br>… more data …</p>
+</blockquote>
+<p>在上面的例子中，前面带 &amp; 符号的数字就是材质的本地 ID。如果一个材质对象在一个文件 GUID 为 <code>abcdefg</code> 的资产里面，这个材质对象就可以用文件 GUID <code>abcdefg</code> 和本地 ID <code>2100000</code> 组合唯一地标识。</p>
+<h3 id="为什么要文件-GUID-和本地-ID"><a href="#为什么要文件-GUID-和本地-ID" class="headerlink" title="为什么要文件 GUID 和本地 ID"></a>为什么要文件 GUID 和本地 ID</h3><p>为什么需要 Unity 的文件 GUID 和本地 ID 系统？答案是为了健壮性和提供一个灵活和平台独立的工作流。</p>
+<p>文件 GUID 提供了文件位置的抽象。只要文件 GUID 和一个文件关联上，那文件在磁盘上的位置就变得无关紧要了。这个文件可以随意移动，而不必更新所有引用了该文件的对象。</p>
+<p>一个资产文件可能包含多个 UnityEngine.Object，为了清楚的区分它们，需要本地 ID。</p>
+<p>如果和资产文件相关的文件 GUID 丢失了，所有对象对这个文件的引用就会丢失。这就是为什么 .meta 文件必须和它们相关联的资产文件存储在同一个位置，并且拥有相同的文件名很重要。注意 Unity 会重新生成被删除的或者被乱放的 .meta 文件。</p>
+<p>Unity 编辑器拥有已知文件 GUID 到文件路径的映射。这个映射实体会把资产的文件路径和文件 GUID 关联起来。如果 Unity 编辑器打开时，一个 .meta 文件丢失而资产的路径并没有改变的资产，编辑器会确保这个资产得到相同的文件 GUID。</p>
+<p>如果 .meta 文件在 Unity Editor 关闭时丢失，或者资产的路径变化时没有把 .meta 文件一起跟资产文件移动，所有对资产内对象的引用都会丢失。</p>
+<h3 id="组合资产和-Importers"><a href="#组合资产和-Importers" class="headerlink" title="组合资产和 Importers"></a>组合资产和 Importers</h3><p>在 <a href="https://unity3d.com/cn/learn/tutorials/topics/best-practices/assets-objects-and-serialization#Inside_Assets_and_Objects" target="_blank" rel="noopener">资产和对象的内部</a> 章节中提到，非原生的资产类型需要导入到 Unity 中。这是靠 Assets Importer 完成的。这些 Importers 都是自动调用的，他们靠 <a href="http://docs.unity3d.com/ScriptReference/AssetImporter.html" target="_blank" rel="noopener">AssetImporter</a> API 和它的子类来暴露给脚本。比如，TextureImporter API 提供了导入 PNG 和 JPG 等纹理资产时的设置访问。</p>
+<p>导入过程的结果是一个或者多个 UnityEngine.Objects。这些对象在 Unity 编辑器中显示为一个资产的子资产。比如设置成精灵图集方式导入纹理资产，会有多个精灵嵌套在这个资产下。这些精灵对象会共享一个文件 UIID 作为他们的源资产文件。而在导入的纹理资产中靠本地 ID 来区分他们。</p>
+<p>导入过程会将源资产文件转换成在 Unity 编辑器中选中的目标平台合适的格式。导入过程也可能会带有比较重的操作，比如纹理压缩。如果每次 Unity 编辑器打开的时候都要执行导入过程的话会是 Unity 编辑器变得特别没有效率。</p>
+<p>作为解决方案，Unity 会讲资产导入后的结果缓存到 Libraray 文件夹。导入后的结果会缓存到以资产的文件 GUID 前两个字母命名的文件夹中。这个文件夹在 Library/metadat/ 文件夹内。每个独立的对象都会被序列化为单独的以它们资产文件 GUID 命名的二进制文件。</p>
+<p>这对所有的资产都适用，而不仅仅是非原生的资产。但是原生的资产不需要做长时间的转换或者重新序列化。</p>
+<h3 id="序列化和实例"><a href="#序列化和实例" class="headerlink" title="序列化和实例"></a>序列化和实例</h3><p>文件 GUID 和本地 ID 系统健壮的同时，GUID 的比较是比较慢的，这就需要一个在运行期时更高效的系统。Unity 内部维持了一个能把文件 GUID 和本地 ID 换成在独立会话内唯一的，简单的数字的缓存<a href="http://blog.shuiguzi.com/2016/12/15/Assets_Objects_serialization/#f2" target="_blank" rel="noopener">[2]</a>。这个数字叫做实例 ID。当新的对象注册到缓存时，会给它分配一个严格递增的值。</p>
+<p>这个缓存维护了给定的实例 ID、对象源文件中定义的文件 GUID 和本地 ID 和内存中对象（如果有的话）的映射关系。它让 UnityEngine.Objects 稳定的维护各个对象间的引用成为可能。通过一个实例 ID 的引用可以快速的返回这个 ID 对应的对象。如果这个对象没有加载，Unity 就可以根据 FileID 和本地 ID 来实时的加载对象。</p>
+<p>在启动的时候，实例 ID 缓存会初始化所有被场景引用的的对象和 Resources 文件夹下的所有对象数据。运行时导入的新资产<a href="http://blog.shuiguzi.com/2016/12/15/Assets_Objects_serialization/#f3" target="_blank" rel="noopener">[3]</a>和从 AssetBundles 里面加载的对象会被额外的添加到缓存中。当实例 ID 不在有用的时候他们会从缓存中移除。当一个 AssetBunld 访问未加载的文件 GUID 和本地 ID 时会生这种情况。</p>
+<p>卸载 AssetBundle 时引起实例 ID 无效时，为了节省内存，实例 ID 和文件 GUID 及 本地 ID 间的映射将会被移除。当 AssetBundle 重新被加载时，将会给从 AssetBundle 中重新加载的对象分配一个新的实例 ID。</p>
+<p>更深入的探讨卸载 AssetBundles 带来的问题，可以参照 <a href="https://unity3d.com/ru/learn/tutorials/topics/best-practices/asset-bundle-usage-patterns" target="_blank" rel="noopener">AssetBundle 使用模式</a> 中的 <a href="https://unity3d.com/ru/learn/tutorials/topics/best-practices/asset-bundle-usage-patterns#Managing_Loaded_Assets" target="_blank" rel="noopener">管理加载的资产</a> 这一节。</p>
+<p>注意，在某些平台上的特定的事件会强制从内存中删除对象。比如，在 iOS平台，当程序挂起的时候，可以从图形内存里面卸载图形资产。如果这些对象是从已卸载的 AssetBundle 里加载的，Unity 将会无法从对象的源数据重新加载对象了。所有对这些对象的引用也会变成无效。在这个例子中可能会出现看不见的网格或者模型带有洋红色的纹理和材质的现象。</p>
+<p><strong>提示：</strong> 在运行时，上述控制流程不是特别精确。对于重度加载操作，比较文件 GUID 和本地 ID 是非常不高效的。当构建一个 Unity 项目时，文件 GUID 和本地 ID 都被映射到了一个简单的格式上。但是概念依然一样，运行时考虑使用文件 GUID 和本地 ID 来做对比依然很有用。</p>
+<p>这也是为什么资产的文件 GUID 不能再运行时查询的一个原因。（因为被转换成了其他简单格式。）</p>
+<h3 id="MonoScripts"><a href="#MonoScripts" class="headerlink" title="MonoScripts"></a>MonoScripts</h3><p>理解 MonoBehaviour 拥有一个 MonoScript 的引用和 MonoScript 仅包含简单的用来定位特定脚本的信息是比较重要的。MonoScript 并不包括脚本的执行代码。</p>
+<p>MonoScript 包含 3 个字符串：程序集的名字， 一个类名和一个命名空间。</p>
+<p>当构建项目的时候，Unity 收集所有 Assets 文件下零散放置的脚本，然后将他们编译成 Mono 程序集。Unity 会为 Assets 文件夹下的不同语言和 Assets/Plugins 文件夹下的脚本构建单独的程序集。在 Plugins 子文件夹外的 C# 脚本会编译到 Assembly-CSharp.dll 中，而 Plugins 子文件夹内的脚本会编译到 Assembly-CSharp-firstpass.dll 中。</p>
+<p>这些程序集（包括预先编译好的程序集的 DLL）会被包含到 Unity 应用的最终构建里面。他么也是 MonoScript 引用的程序集。与其他资源不同，所有 Unity 程序内的程序集会在程序第一次启动时加载。</p>
+<p>因为有 MonoScript 对象，AssetBundle（或者是场景文件，或者是预设）中 MonoBehaviour 组件可以不包含实际运行代码。这使得不同的 MonoBehaviour 可以指向特定的共享的类，即使这些不同的 MonoBehaviour 在不同的 AssetBundle 中。</p>
+<h3 id="Resouce-的生命周期"><a href="#Resouce-的生命周期" class="headerlink" title="Resouce 的生命周期"></a>Resouce 的生命周期</h3><p>UnityEingine.Objects 会在具体或者特定的时间从内存中加载/卸载。为了减少加载时间和管理应用的内存，理解 UnityEngine.Objects 的生命周期是比较重要的。</p>
+<p>有两种方式可以加载 UnityEngine.Objects: 自动的和显式的。当一个实例 ID 映射到一个源数据存在，但是没有加载进内存并被间接引用的对象时，对象会被自动创建。对象可以在脚本中显式的加载。显式加载方式要可以是直接创建他们，也可以是通过资源加载的 API, 例如 <a href="http://docs.unity3d.com/ScriptReference/AssetBundle.LoadAsset.html" target="_blank" rel="noopener">AssetBundle.LoadAsset</a>。</p>
+<p>当一个对象被加载，Unity 会尝试将所有引用从文件 GUID 和本地 ID 转换成实例 ID。</p>
+<p>当满足下面两个条件时，一个对象在它的实例 ID 被第一次引用时按需加载：</p>
+<ol>
+<li>实例 ID 引用了没有加载的对象</li>
+<li>实例 ID 在缓存中有有效的、对应文件 GUID 和本地 ID</li>
+</ol>
+<p>这通常发生在引用被加载和处理后的非常短的时间里。</p>
+<p>如果一个文件 GUID 和本地 ID 不包含实例 ID, 或者一个实例 ID 关联一个引用无效的文件 GUID 和本地 ID 的未加载的对象，实例 ID 引用将会保留但是实际对象缺不能加载。这个在 Unity 编辑器里面显示为 <code>(Missing)</code>。在程序运行时或者场景视图里， 基于 <code>(Missing)</code> 对象的类型，会有下面几种显示：比如网格不可见，纹理显示成洋红色。</p>
+<p>对象会在下面 3 种情况下被卸载：</p>
+<ol>
+<li>对象会在未使用的资产被清理时卸载。这个过程当场景破坏性的改变时（例如使用非增量的 Application.LoadLevel API）或者在代码里面调用 Resources.UnloadUnusedAssets API 时自动发生。这个过程只能卸载未被引用的对象：一个对象仅当没有 Mono 变量引用它，和没有其他对象保持其引用时才会卸载。</li>
+<li>从 Resources 文件夹内加载的对象可以用 Resources.UnloadAsset API 来卸载。它们的实例 ID 会保持有效，依然对应着有效的文件 GUID 和本地 ID。如果任何 Mono 变量或者对象保留着被 Resources.UnloadAsset 卸载的对象的引用，这些对象则会被重新加载。</li>
+<li>当我们调用 <a href="http://docs.unity3d.com/ScriptReference/AssetBundle.Unload.html" target="_blank" rel="noopener">AssetBundle.Unload(true)</a> API 时，从 AssetBundle 加载的对象会被立即自动的卸载。这会使对象的实例 ID 的文件 GUID 和本地 ID 引用无效，并且任何引用的已卸载的对象的引用将会变成 <code>(Missing)</code>。从 C# 脚本中尝试访问已卸载的对象的方法和属性会抛出 NullReferenceException 异常。</li>
+</ol>
+<p>如果调用 <a href="http://docs.unity3d.com/ScriptReference/AssetBundle.Unload.html" target="_blank" rel="noopener">AssetBundle.Unload(false)</a>，从已卸载的 AssetBundle 中得到的活动的对象将不会被销毁，但是 Unity 会使这些对象的实例 ID 对其文件 GUID 和本地 ID 引用无效。如果这些对象从内存中卸载并且对这些已卸载的对象的引用依然保持着，Unity 将无法重新加载对象。</p>
+<h3 id="加载大层次结构"><a href="#加载大层次结构" class="headerlink" title="加载大层次结构"></a>加载大层次结构</h3><p>当序列化有大层次结构的 Unity 游戏对象（比如序列化预设）时，重要的是要记住整个层次结构都会被序列化。也就是说层次结构中的每个游戏对象和组件都会被单独的序列化到序列化后的数据里面。这对加载和实例化对象层次需索的时间有影响。</p>
+<p>当创建游戏对象层次结构时，CPU 时间会花费在下面几种方面上</p>
+<ul>
+<li>从存储，别的游戏对象等读取源数据的时间</li>
+<li>构建新 Transform 间父-子关系的时间</li>
+<li>实例化新游戏对象和组件的时间</li>
+<li>激活新游戏对象和组件的时间</li>
+</ul>
+<p>后面三种时间花费一般是不变的，无论是从现成的层次结构中拷贝或者从存储中加载（比如 AssetBundle)。但是读取源数据的时间与层次结构中的组件和游戏对象成线性增加的关系，当然还要乘以读取源数据的速度。</p>
+<p>在当前支持的所有平台中，从内存中读取数据会比从设备存储中读取明显快不少。而且不同平台上的存储媒介在性能上有很大差别–比如从 PC 上加载数据的数据会比移动设备快很多。</p>
+<p>所以在低速存储设备的平台上加载预设，读取从存储上读取预设的实际会快速的超过实例化预设所花费的实际。也就是说，设备 I/O 的时间主导了加载操作所消耗的时间。</p>
+<p>前面提到过，序列化大预设的时候，每个游戏对象和组件的数据都会单独的被序列化，即使这些数据是重复的。一个拥有 30 个一样的元素的 UI，这 30 一样的元素都会被序列化。这将会产生大量的数据。当在加载时期，这些重复数据元素必须从磁盘中读取，然后传递给新实例化的对象。文件读取时间主导了大预设实例化花费的时间。</p>
+<p>直到 Unity 支持可嵌套预设之前，对于加载大层次游戏对象预设的项目，可以通过将冗余的元素拆分出来，然后在运行时加载它们的，而不依赖于 Unity 的序列化和预设系统来加载整个大对象的方式来大幅减少加载时间</p>
+<p>一旦预设或者对象已经构建了，从拷贝已存在的对象会比从存储中加载快一个新拷贝快很多。</p>
+<p><strong>Unity 5.4:</strong> Unity 5.4 修改了内存中 tranform 的呈现方式。每个根 tranform 的所有子物体都存在内存中一段紧凑的，连续的区域中。实例化会重指定父级的新游戏对象时，考虑用 <strong>GameObject.Instantiate</strong> 的接受父物体为参数的新重载。</p>
+<p>使用这个重载可以避免给新物体新分配根 tranform 层次。测试结果中，这个可以提高 5 - 10 % 的实例化时间。</p>
+<h3 id="脚记"><a href="#脚记" class="headerlink" title="脚记"></a>脚记</h3><ul>
+<li><p>[1] 本地 ID 在包含它文件中是唯一的。也就是说在同一个资产文件中一个本地 ID 会区别于其他本地 ID。</p>
+</li>
+<li><p>[2] 在 Unity 内部，这个缓存叫做 <strong>PresistenManager</strong>。这个转换过程在 Unity 的 C++ Remapper 类中发生。Remapper 类当前不能被任何 C# API 访问。</p>
+</li>
+<li><p>[3] 一个在运行时创建资产的例子就是在脚本中创建 Texture2D 对象，例如</p>
+</li>
+</ul>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">var myTexture = new Texture2D(1024, 768);</span><br></pre></td></tr></table></figure>
+
+<ul>
+<li>[4] 最常见的是，当 Unity 丢失了对已在运行时从内存中移除的对象的 图形上下文的控制的时候，对象不会被 Unity 卸载。例如，这会发生在一个移动端应用被强制切到后台并挂起的时候，移动端系统通常会将从 GPU 显存中删除所有图形资源。当应用切回到前台，Unity 在恢复渲染当前场景之前， 必须重新上次所有需要的纹理，着色器和网格到 GPU 中。</li>
+</ul>
+<p>英文原文地址：<a href="https://unity3d.com/learn/tutorials/topics/best-practices/assets-objects-and-serialization" target="_blank" rel="noopener">https://unity3d.com/learn/tutorials/topics/best-practices/assets-objects-and-serialization</a></p>
+
+        </div>
+
+        <blockquote class="post-copyright">
+    
+    <div class="content">
+        
+<span class="post-time">
+    最后更新时间：<time datetime="2019-04-20T12:44:31.042Z" itemprop="dateUpdated">2019-04-20 20:44:31</time>
+</span><br>
+
+
+        
+        欢迎指正～
+        
+    </div>
+    
+    <footer>
+        <a href="https://bitzhangmo.github.io">
+            <img src="/img/avatar.png" alt="zhangMo">
+            zhangMo
+        </a>
+    </footer>
+</blockquote>
+
+        
+
+
+        <div class="post-footer">
+            
+	<ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Unity/" rel="tag">Unity</a></li></ul>
+
+
+            
+<div class="page-share-wrap">
+    
+
+<div class="page-share" id="pageShare">
+    <ul class="reset share-icons">
+      <li>
+        <a class="weibo share-sns" target="_blank" href="http://service.weibo.com/share/share.php?url=https://bitzhangmo.github.io/2019/04/20/Unity%E7%AC%94%E8%AE%B0/%E8%BD%AC-%E8%B5%84%E4%BA%A7-%E5%AF%B9%E8%B1%A1%E5%92%8C%E5%BA%8F%E5%88%97%E5%8C%96/&title=《[转] 资产, 对象和序列化》 — zhangMo Blog&pic=https://bitzhangmo.github.io/img/avatar.png" data-title="微博">
+          <i class="icon icon-weibo"></i>
+        </a>
+      </li>
+      <li>
+        <a class="weixin share-sns wxFab" href="javascript:;" target="_blank" rel="noopener" data-title="微信">
+          <i class="icon icon-weixin"></i>
+        </a>
+      </li>
+      <li>
+        <a class="qq share-sns" target="_blank" href="http://connect.qq.com/widget/shareqq/index.html?url=https://bitzhangmo.github.io/2019/04/20/Unity%E7%AC%94%E8%AE%B0/%E8%BD%AC-%E8%B5%84%E4%BA%A7-%E5%AF%B9%E8%B1%A1%E5%92%8C%E5%BA%8F%E5%88%97%E5%8C%96/&title=《[转] 资产, 对象和序列化》 — zhangMo Blog&source=资产, 对象和序列化。" data-title=" QQ">
+          <i class="icon icon-qq"></i>
+        </a>
+      </li>
+      <li>
+        <a class="facebook share-sns" target="_blank" href="https://www.facebook.com/sharer/sharer.php?u=https://bitzhangmo.github.io/2019/04/20/Unity%E7%AC%94%E8%AE%B0/%E8%BD%AC-%E8%B5%84%E4%BA%A7-%E5%AF%B9%E8%B1%A1%E5%92%8C%E5%BA%8F%E5%88%97%E5%8C%96/" data-title=" Facebook">
+          <i class="icon icon-facebook"></i>
+        </a>
+      </li>
+      <li>
+        <a class="twitter share-sns" target="_blank" href="https://twitter.com/intent/tweet?text=《[转] 资产, 对象和序列化》 — zhangMo Blog&url=https://bitzhangmo.github.io/2019/04/20/Unity%E7%AC%94%E8%AE%B0/%E8%BD%AC-%E8%B5%84%E4%BA%A7-%E5%AF%B9%E8%B1%A1%E5%92%8C%E5%BA%8F%E5%88%97%E5%8C%96/&via=https://bitzhangmo.github.io" data-title=" Twitter">
+          <i class="icon icon-twitter"></i>
+        </a>
+      </li>
+      <li>
+        <a class="google share-sns" target="_blank" href="https://plus.google.com/share?url=https://bitzhangmo.github.io/2019/04/20/Unity%E7%AC%94%E8%AE%B0/%E8%BD%AC-%E8%B5%84%E4%BA%A7-%E5%AF%B9%E8%B1%A1%E5%92%8C%E5%BA%8F%E5%88%97%E5%8C%96/" data-title=" Google+">
+          <i class="icon icon-google-plus"></i>
+        </a>
+      </li>
+    </ul>
+ </div>
+
+
+
+    <a href="javascript:;" target="_blank" rel="noopener" id="shareFab" class="page-share-fab waves-effect waves-circle">
+        <i class="icon icon-share-alt icon-lg"></i>
+    </a>
+</div>
+
+
+
+        </div>
+    </div>
+
+    
+<nav class="post-nav flex-row flex-justify-between">
+  
+    <div class="waves-block waves-effect prev">
+      <a href="/2019/04/20/Unity%E7%AC%94%E8%AE%B0/%E8%BD%AC-Resources-%E6%96%87%E4%BB%B6%E5%A4%B9/" id="post-prev" class="post-nav-link">
+        <div class="tips"><i class="icon icon-angle-left icon-lg icon-pr"></i> Prev</div>
+        <h4 class="title">[转] Resources 文件夹</h4>
+      </a>
+    </div>
+  
+
+  
+    <div class="waves-block waves-effect next">
+      <a href="/2019/04/20/Unity%E7%AC%94%E8%AE%B0/%E8%BD%AC-%E8%B5%84%E6%BA%90%E5%92%8C-AssetBundle-%E6%8C%87%E5%AF%BC/" id="post-next" class="post-nav-link">
+        <div class="tips">Next <i class="icon icon-angle-right icon-lg icon-pl"></i></div>
+        <h4 class="title">[转] 资源和 AssetBundle 指导</h4>
+      </a>
+    </div>
+  
+</nav>
+
+
+
+    
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+</article>
+
+
+
+</div>
+
+        <footer class="footer">
+    <div class="top">
+        
+<p>
+    <span id="busuanzi_container_site_uv" style='display:none'>
+        站点总访客数：<span id="busuanzi_value_site_uv"></span>
+    </span>
+    <span id="busuanzi_container_site_pv" style='display:none'>
+        站点总访问量：<span id="busuanzi_value_site_pv"></span>
+    </span>
+</p>
+
+
+        <p>
+            
+            <span>博客内容遵循 <a rel="license noopener" href="https://creativecommons.org/licenses/by-nc-sa/4.0/deed.zh" target="_blank">知识共享 署名 - 非商业性 - 相同方式共享 4.0 国际协议</a></span>
+        </p>
+    </div>
+    <div class="bottom">
+        <p><span>zhangMo &copy; 2018 - 2019</span>
+            <span>
+                
+                Power by <a href="http://hexo.io/" target="_blank">Hexo</a> Theme <a href="https://github.com/yscoder/hexo-theme-indigo" target="_blank">indigo</a>
+            </span>
+        </p>
+    </div>
+</footer>
+
+    </main>
+    <div class="mask" id="mask"></div>
+<a href="javascript:;" target="_blank" rel="noopener" id="gotop" class="waves-effect waves-circle waves-light"><span class="icon icon-lg icon-chevron-up"></span></a>
+
+
+
+<div class="global-share" id="globalShare">
+    <ul class="reset share-icons">
+      <li>
+        <a class="weibo share-sns" target="_blank" href="http://service.weibo.com/share/share.php?url=https://bitzhangmo.github.io/2019/04/20/Unity%E7%AC%94%E8%AE%B0/%E8%BD%AC-%E8%B5%84%E4%BA%A7-%E5%AF%B9%E8%B1%A1%E5%92%8C%E5%BA%8F%E5%88%97%E5%8C%96/&title=《[转] 资产, 对象和序列化》 — zhangMo Blog&pic=https://bitzhangmo.github.io/img/avatar.png" data-title="微博">
+          <i class="icon icon-weibo"></i>
+        </a>
+      </li>
+      <li>
+        <a class="weixin share-sns wxFab" href="javascript:;" target="_blank" rel="noopener" data-title="微信">
+          <i class="icon icon-weixin"></i>
+        </a>
+      </li>
+      <li>
+        <a class="qq share-sns" target="_blank" href="http://connect.qq.com/widget/shareqq/index.html?url=https://bitzhangmo.github.io/2019/04/20/Unity%E7%AC%94%E8%AE%B0/%E8%BD%AC-%E8%B5%84%E4%BA%A7-%E5%AF%B9%E8%B1%A1%E5%92%8C%E5%BA%8F%E5%88%97%E5%8C%96/&title=《[转] 资产, 对象和序列化》 — zhangMo Blog&source=资产, 对象和序列化。" data-title=" QQ">
+          <i class="icon icon-qq"></i>
+        </a>
+      </li>
+      <li>
+        <a class="facebook share-sns" target="_blank" href="https://www.facebook.com/sharer/sharer.php?u=https://bitzhangmo.github.io/2019/04/20/Unity%E7%AC%94%E8%AE%B0/%E8%BD%AC-%E8%B5%84%E4%BA%A7-%E5%AF%B9%E8%B1%A1%E5%92%8C%E5%BA%8F%E5%88%97%E5%8C%96/" data-title=" Facebook">
+          <i class="icon icon-facebook"></i>
+        </a>
+      </li>
+      <li>
+        <a class="twitter share-sns" target="_blank" href="https://twitter.com/intent/tweet?text=《[转] 资产, 对象和序列化》 — zhangMo Blog&url=https://bitzhangmo.github.io/2019/04/20/Unity%E7%AC%94%E8%AE%B0/%E8%BD%AC-%E8%B5%84%E4%BA%A7-%E5%AF%B9%E8%B1%A1%E5%92%8C%E5%BA%8F%E5%88%97%E5%8C%96/&via=https://bitzhangmo.github.io" data-title=" Twitter">
+          <i class="icon icon-twitter"></i>
+        </a>
+      </li>
+      <li>
+        <a class="google share-sns" target="_blank" href="https://plus.google.com/share?url=https://bitzhangmo.github.io/2019/04/20/Unity%E7%AC%94%E8%AE%B0/%E8%BD%AC-%E8%B5%84%E4%BA%A7-%E5%AF%B9%E8%B1%A1%E5%92%8C%E5%BA%8F%E5%88%97%E5%8C%96/" data-title=" Google+">
+          <i class="icon icon-google-plus"></i>
+        </a>
+      </li>
+    </ul>
+ </div>
+
+
+<div class="page-modal wx-share" id="wxShare">
+    <a class="close" href="javascript:;" target="_blank" rel="noopener"><i class="icon icon-close"></i></a>
+    <p>扫一扫，分享到微信</p>
+    <img src="//api.qrserver.com/v1/create-qr-code/?data=https://bitzhangmo.github.io/2019/04/20/Unity%E7%AC%94%E8%AE%B0/%E8%BD%AC-%E8%B5%84%E4%BA%A7-%E5%AF%B9%E8%B1%A1%E5%92%8C%E5%BA%8F%E5%88%97%E5%8C%96/" alt="微信分享二维码">
+</div>
+
+
+
+
+    <script src="//cdn.bootcss.com/node-waves/0.7.4/waves.min.js"></script>
+<script>
+var BLOG = { ROOT: '/', SHARE: true, REWARD: false };
+
+
+</script>
+
+<script src="//unpkg.com/hexo-theme-material-indigo@latest/js/main.min.js"></script>
+
+
+<div class="search-panel" id="search-panel">
+    <ul class="search-result" id="search-result"></ul>
+</div>
+<template id="search-tpl">
+<li class="item">
+    <a href="{path}" class="waves-block waves-effect">
+        <div class="title ellipsis" title="{title}">{title}</div>
+        <div class="flex-row flex-middle">
+            <div class="tags ellipsis">
+                {tags}
+            </div>
+            <time class="flex-col time">{date}</time>
+        </div>
+    </a>
+</li>
+</template>
+
+<script src="//unpkg.com/hexo-theme-material-indigo@latest/js/search.min.js" async></script>
+
+
+
+<!-- mathjax config similar to math.stackexchange -->
+
+<script type="text/x-mathjax-config">
+MathJax.Hub.Config({
+    tex2jax: {
+        inlineMath: [ ['$','$'], ["\\(","\\)"]  ],
+        processEscapes: true,
+        skipTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code']
+    }
+});
+
+MathJax.Hub.Queue(function() {
+    var all = MathJax.Hub.getAllJax(), i;
+    for(i=0; i < all.length; i += 1) {
+        all[i].SourceElement().parentNode.className += ' has-jax';
+    }
+});
+</script>
+
+<script async src="//cdn.bootcss.com/mathjax/2.7.0/MathJax.js?config=TeX-MML-AM_CHTML" async></script>
+
+
+
+
+<script async src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+
+
+
+<script>
+(function() {
+    var OriginTitile = document.title, titleTime;
+    document.addEventListener('visibilitychange', function() {
+        if (document.hidden) {
+            document.title = 'MossWang';
+            clearTimeout(titleTime);
+        } else {
+            document.title = 'zhangMo';
+            titleTime = setTimeout(function() {
+                document.title = OriginTitile;
+            },2000);
+        }
+    });
+})();
+</script>
+
+
+
+</body>
+</html>

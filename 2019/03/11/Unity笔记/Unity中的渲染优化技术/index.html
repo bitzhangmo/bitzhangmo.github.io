@@ -1,0 +1,678 @@
+<!DOCTYPE html>
+<html>
+<head>
+    
+<!-- Google Analytics -->
+<script>
+window.ga=window.ga||function(){(ga.q=ga.q||[]).push(arguments)};ga.l=+new Date;
+ga('create', 'true', 'auto');
+ga('send', 'pageview');
+</script>
+<script async src='https://www.google-analytics.com/analytics.js'></script>
+<!-- End Google Analytics -->
+
+
+    
+
+    
+
+
+
+    <meta charset="utf-8">
+    
+    <meta name="google-site-verification" content="true">
+    
+    
+    
+    
+    <title>Unity中的渲染优化技术 | zhangMo Blog</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+    
+    <meta name="theme-color" content="#1eb4e9">
+    
+    
+    <meta name="keywords" content="Unity,Shader">
+    <meta name="description" content="Unity中的渲染优化技术。">
+<meta name="keywords" content="Unity,Shader">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Unity中的渲染优化技术">
+<meta property="og:url" content="https:&#x2F;&#x2F;bitzhangmo.github.io&#x2F;2019&#x2F;03&#x2F;11&#x2F;Unity%E7%AC%94%E8%AE%B0&#x2F;Unity%E4%B8%AD%E7%9A%84%E6%B8%B2%E6%9F%93%E4%BC%98%E5%8C%96%E6%8A%80%E6%9C%AF&#x2F;index.html">
+<meta property="og:site_name" content="zhangMo Blog">
+<meta property="og:description" content="Unity中的渲染优化技术。">
+<meta property="og:locale" content="zh-CN">
+<meta property="og:updated_time" content="2019-04-17T06:45:49.249Z">
+<meta name="twitter:card" content="summary">
+    
+    <link rel="shortcut icon" href="/favicon.ico">
+    <link rel="stylesheet" href="//unpkg.com/hexo-theme-material-indigo@latest/css/style.css">
+    <script>window.lazyScripts=[]</script>
+
+    <!-- custom head -->
+    
+
+</head>
+
+<body>
+    <div id="loading" class="active"></div>
+
+    <aside id="menu" class="hide" >
+  <div class="inner flex-row-vertical">
+    <a href="javascript:;" target="_blank" rel="noopener" class="header-icon waves-effect waves-circle waves-light" id="menu-off">
+        <i class="icon icon-lg icon-close"></i>
+    </a>
+    <div class="brand-wrap" style="background-image:url(/img/brand.jpg)">
+      <div class="brand">
+        <a href="/" class="avatar waves-effect waves-circle waves-light">
+          <img src="/img/avatar.png">
+        </a>
+        <hgroup class="introduce">
+          <h5 class="nickname">zhangMo</h5>
+          <a href="mailto:wangxc1998@qq.com" target="_blank" rel="noopener" title="wangxc1998@qq.com" class="mail">wangxc1998@qq.com</a>
+        </hgroup>
+      </div>
+    </div>
+    <div class="scroll-wrap flex-col">
+      <ul class="nav">
+        
+            <li class="waves-block waves-effect">
+              <a href="/"  >
+                <i class="icon icon-lg icon-home"></i>
+                主页
+              </a>
+            </li>
+        
+            <li class="waves-block waves-effect">
+              <a href="/archives"  >
+                <i class="icon icon-lg icon-archives"></i>
+                Archives
+              </a>
+            </li>
+        
+            <li class="waves-block waves-effect">
+              <a href="/tags/"  >
+                <i class="icon icon-lg icon-tags"></i>
+                Tags
+              </a>
+            </li>
+        
+            <li class="waves-block waves-effect">
+              <a href="/categories/"  >
+                <i class="icon icon-lg icon-th-list"></i>
+                Categories
+              </a>
+            </li>
+        
+            <li class="waves-block waves-effect">
+              <a href="/about/"  >
+                <i class="icon icon-lg icon-child"></i>
+                About
+              </a>
+            </li>
+        
+            <li class="waves-block waves-effect">
+              <a href="https://github.com/bitzhangmo" target="_blank" >
+                <i class="icon icon-lg icon-github"></i>
+                Github
+              </a>
+            </li>
+        
+            <li class="waves-block waves-effect">
+              <a href="https://weibo.com/u/7175236950" target="_blank" >
+                <i class="icon icon-lg icon-weibo"></i>
+                Weibo
+              </a>
+            </li>
+        
+            <li class="waves-block waves-effect">
+              <a href="/"  >
+                <i class="icon icon-lg icon-steam"></i>
+                Steam
+              </a>
+            </li>
+        
+            <li class="waves-block waves-effect">
+              <a href="https://skmtjun.github.io/" target="_blank" >
+                <i class="icon icon-lg icon-dice"></i>
+                螺涅神社
+              </a>
+            </li>
+        
+            <li class="waves-block waves-effect">
+              <a href="https://tenwoods.github.io/" target="_blank" >
+                <i class="icon icon-lg icon-link"></i>
+                十木杂物间
+              </a>
+            </li>
+        
+      </ul>
+    </div>
+  </div>
+</aside>
+
+    <main id="main">
+        <header class="top-header" id="header">
+    <div class="flex-row">
+        <a href="javascript:;" target="_blank" rel="noopener" class="header-icon waves-effect waves-circle waves-light on" id="menu-toggle">
+          <i class="icon icon-lg icon-navicon"></i>
+        </a>
+        <div class="flex-col header-title ellipsis">Unity中的渲染优化技术</div>
+        
+        <div class="search-wrap" id="search-wrap">
+            <a href="javascript:;" target="_blank" rel="noopener" class="header-icon waves-effect waves-circle waves-light" id="back">
+                <i class="icon icon-lg icon-chevron-left"></i>
+            </a>
+            <input type="text" id="key" class="search-input" autocomplete="off" placeholder="输入感兴趣的关键字">
+            <a href="javascript:;" target="_blank" rel="noopener" class="header-icon waves-effect waves-circle waves-light" id="search">
+                <i class="icon icon-lg icon-search"></i>
+            </a>
+        </div>
+        
+        
+        <a href="javascript:;" target="_blank" rel="noopener" class="header-icon waves-effect waves-circle waves-light" id="menuShare">
+            <i class="icon icon-lg icon-share-alt"></i>
+        </a>
+        
+    </div>
+</header>
+<header class="content-header post-header">
+
+    <div class="container fade-scale">
+        <h1 class="title">Unity中的渲染优化技术</h1>
+        <h5 class="subtitle">
+            
+                <time datetime="2019-03-11T03:12:12.000Z" itemprop="datePublished" class="page-time">
+  2019-03-11
+</time>
+
+
+	<ul class="article-category-list"><li class="article-category-list-item"><a class="article-category-list-link" href="/categories/Unity/">Unity</a></li></ul>
+
+            
+        </h5>
+    </div>
+
+    
+
+
+</header>
+
+
+<div class="container body-wrap">
+    
+    <aside class="post-widget">
+        <nav class="post-toc-wrap post-toc-shrink" id="post-toc">
+            <h4>TOC</h4>
+            <ol class="post-toc"><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#影响性能的因素："><span class="post-toc-number">1.</span> <span class="post-toc-text">影响性能的因素：</span></a><ol class="post-toc-child"><li class="post-toc-item post-toc-level-4"><a class="post-toc-link" href="#性能瓶颈："><span class="post-toc-number">1.1.</span> <span class="post-toc-text">性能瓶颈：</span></a></li><li class="post-toc-item post-toc-level-4"><a class="post-toc-link" href="#优化技术："><span class="post-toc-number">1.2.</span> <span class="post-toc-text">优化技术：</span></a></li></ol></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#CPU和GPU做了什么："><span class="post-toc-number">2.</span> <span class="post-toc-text">CPU和GPU做了什么：</span></a></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#CPU渲染优化："><span class="post-toc-number">3.</span> <span class="post-toc-text">CPU渲染优化：</span></a><ol class="post-toc-child"><li class="post-toc-item post-toc-level-4"><a class="post-toc-link" href="#减少要渲染的对象数量"><span class="post-toc-number">3.1.</span> <span class="post-toc-text">减少要渲染的对象数量</span></a></li><li class="post-toc-item post-toc-level-4"><a class="post-toc-link" href="#减少渲染对象的渲染次数"><span class="post-toc-number">3.2.</span> <span class="post-toc-text">减少渲染对象的渲染次数</span></a></li><li class="post-toc-item post-toc-level-4"><a class="post-toc-link" href="#合并要渲染的对象的数据"><span class="post-toc-number">3.3.</span> <span class="post-toc-text">合并要渲染的对象的数据</span></a></li></ol></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#GPU渲染优化："><span class="post-toc-number">4.</span> <span class="post-toc-text">GPU渲染优化：</span></a><ol class="post-toc-child"><li class="post-toc-item post-toc-level-4"><a class="post-toc-link" href="#纹理压缩："><span class="post-toc-number">4.1.</span> <span class="post-toc-text">纹理压缩：</span></a></li><li class="post-toc-item post-toc-level-4"><a class="post-toc-link" href="#Mipmap："><span class="post-toc-number">4.2.</span> <span class="post-toc-text">Mipmap：</span></a></li><li class="post-toc-item post-toc-level-4"><a class="post-toc-link" href="#LOD（Levels-of-Detail）："><span class="post-toc-number">4.3.</span> <span class="post-toc-text">LOD（Levels of Detail）：</span></a></li></ol></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#Unity-中的渲染分析工具："><span class="post-toc-number">5.</span> <span class="post-toc-text">Unity 中的渲染分析工具：</span></a><ol class="post-toc-child"><li class="post-toc-item post-toc-level-4"><a class="post-toc-link" href="#渲染统计窗口：Rendering-Statistics-Window"><span class="post-toc-number">5.1.</span> <span class="post-toc-text">渲染统计窗口：Rendering Statistics Window</span></a></li><li class="post-toc-item post-toc-level-4"><a class="post-toc-link" href="#性能分析器：Profiler"><span class="post-toc-number">5.2.</span> <span class="post-toc-text">性能分析器：Profiler</span></a></li><li class="post-toc-item post-toc-level-4"><a class="post-toc-link" href="#帧调试器：Frame-Debugger"><span class="post-toc-number">5.3.</span> <span class="post-toc-text">帧调试器：Frame Debugger</span></a></li></ol></li></ol>
+        </nav>
+    </aside>
+
+
+<article id="post-Unity笔记/Unity中的渲染优化技术"
+  class="post-article article-type-post fade" itemprop="blogPost">
+
+    <div class="post-card">
+        <h1 class="post-card-title">Unity中的渲染优化技术</h1>
+        <div class="post-meta">
+            <time class="post-time" title="2019-03-11 11:12:12" datetime="2019-03-11T03:12:12.000Z"  itemprop="datePublished">2019-03-11</time>
+
+            
+	<ul class="article-category-list"><li class="article-category-list-item"><a class="article-category-list-link" href="/categories/Unity/">Unity</a></li></ul>
+
+
+
+            
+<span id="busuanzi_container_page_pv" title="文章总阅读量" style='display:none'>
+    <i class="icon icon-eye icon-pr"></i><span id="busuanzi_value_page_pv"></span>
+</span>
+
+
+        </div>
+        <div class="post-content" id="post-content" itemprop="postContent">
+            <p>Unity中的渲染优化技术。</p>
+<a id="more"></a>
+
+<h3 id="影响性能的因素："><a href="#影响性能的因素：" class="headerlink" title="影响性能的因素："></a>影响性能的因素：</h3><p>对于一个游戏来说，主要适用两种计算资源：CPU和GPU。它们会相互合作，来让我们的游戏可以在预期的帧率和分辨率下工作，其中CPU负责保证帧率，GPU负责分辨率相关的的一些处理。</p>
+<h4 id="性能瓶颈："><a href="#性能瓶颈：" class="headerlink" title="性能瓶颈："></a>性能瓶颈：</h4><ol>
+<li>CPU：<ul>
+<li>过多的draw call</li>
+<li>复杂的脚本或者物理模拟</li>
+</ul>
+</li>
+<li>GPU：<ul>
+<li>顶点处理<ul>
+<li>过多的顶点</li>
+<li>过多的逐顶点计算</li>
+</ul>
+</li>
+<li>片元处理<ul>
+<li>过多的片元（由分辨率造成或者由overdraw造成）</li>
+<li>过多的逐片元计算</li>
+</ul>
+</li>
+<li>带宽<ul>
+<li>使用了尺寸很大且未压缩的纹理</li>
+<li>分辨率过高的帧缓存</li>
+</ul>
+</li>
+</ul>
+</li>
+</ol>
+<h4 id="优化技术："><a href="#优化技术：" class="headerlink" title="优化技术："></a>优化技术：</h4><ol>
+<li>CPU优化：<ul>
+<li>使用批处理减少draw call数目</li>
+</ul>
+</li>
+<li>GPU优化：<ul>
+<li>减少要处理的顶点数目：<ul>
+<li>优化几何体</li>
+<li>使用模型的Level of Detail 技术</li>
+<li>使用遮挡剔除（Occlusion Culling）技术</li>
+</ul>
+</li>
+<li>减少需要处理的片元数目：<ul>
+<li>控制绘制顺序</li>
+<li>警惕透明物体</li>
+<li>减少实时光照</li>
+</ul>
+</li>
+<li>减少计算复杂度<ul>
+<li>使用Shader的LOD技术</li>
+<li>代码方面的优化</li>
+</ul>
+</li>
+</ul>
+</li>
+<li>节省内存带宽：<ul>
+<li>减少纹理大小</li>
+<li>使用分辨率缩放</li>
+</ul>
+</li>
+</ol>
+<h3 id="CPU和GPU做了什么："><a href="#CPU和GPU做了什么：" class="headerlink" title="CPU和GPU做了什么："></a>CPU和GPU做了什么：</h3><p>在了解优化渲染前，我们需要了解在unity中，每一帧的渲染CPU和GPU都做了些什么：</p>
+<ol>
+<li>CPU检查场景中每个对象，决定他们是否应该被渲染。（这些对象只有满足一定的条件才会被渲染。）</li>
+<li>CPU收集即将被渲染的对象信息，并把这些信息分类为渲染指令（也就是draw calls，我们在之前的文章中也有提到，Draw Call实际上就是一个命令）。一个draw call包含网格数据以及网格如何被渲染。在某些场景，共享设置的一些对象可能会被合并为一个draw call。合并不同对象的数据到同一个draw call被称作batching。</li>
+<li>CPU给每个draw call创建一个数据包，称为batch。每一个batch必须包含一个draw call。</li>
+<li>CPU会发出指令，使GPU改变一些渲染状态。这个指令被称为SetPass call。SetPass call通知GPU，如何去渲染下一个网格。只有在渲染下一个网格时，其渲染状态相对于渲染上一个网格发生了变化时，才会调用SetPass call。</li>
+<li>CPU把draw call发送给GPU。draw call通知GPU使用最近的SetPass call去渲染指定的网格。</li>
+<li>有时，batch可能需要不止一个的pass。pass是shader代码的一部分，而新的pass需要改变渲染状态。对于batch中的每个pass，CPU必须发送一个新的SetPass call然后必须要再次发送draw call。</li>
+<li>GPU按照CPU发送的指令顺序处理这些指令。</li>
+<li>如果当前任务是SetPass call，那么GPU更新渲染状态。</li>
+<li>如果当前任务是draw call，那么GPU渲染网格。渲染网格发生在很多阶段，不同阶段的shader代码可以定义渲染。其中：顶点着色器vertex shader告诉GPU怎么处理网格的顶点。片元着色器fragment shader告诉GPU怎么绘制单独的像素。</li>
+<li>以上过程会重复执行，直到所有CPU发送的任务都被GPU完成。</li>
+</ol>
+<h3 id="CPU渲染优化："><a href="#CPU渲染优化：" class="headerlink" title="CPU渲染优化："></a>CPU渲染优化：</h3><p>发送命令到GPU花费时间过长是引起CPU限制的最常见的原因，其最耗时的操作是<strong>SetPass call</strong>。如果CPU限制是由发送命令到GPU引起的，那么降低SetPass的数量通常是最好的改善性能的方式。</p>
+<ul>
+<li>降低SetPass call和batches数量，我们通常可以从以下几个方面来进行：<ul>
+<li>减少要渲染的对象数量，通常可以同时降低SetPass call和batches的数量。</li>
+<li>减少每个要渲染的对象的渲染次数，通常可以降低SetPass call</li>
+<li>合并要渲染的对象的数据，可以降低batches数量不同的技术适用于不同的项目，我们在项目开发中因该从项目本身需求出发来选择最合适的方法。</li>
+</ul>
+</li>
+</ul>
+<h4 id="减少要渲染的对象数量"><a href="#减少要渲染的对象数量" class="headerlink" title="减少要渲染的对象数量"></a>减少要渲染的对象数量</h4><ol>
+<li><p>手动减少场景中物体的数量</p>
+</li>
+<li><p>Occlusion Culling（遮挡剔除）：</p>
+<p>遮挡剔除的原理就是当一个物体被其他物体遮挡住，不在摄像机的可视范围内时不对其进行渲染。</p>
+</li>
+<li><p>摄像机Clipping Planes：</p>
+<p>我们可以通过摄像机的Clipping Planes 的Far裁剪远端，从而降低摄像机的绘制范围，为了降低性能损耗同时保证游戏质量，Far的值应该合理控制，不要造成不好的游戏体验，或者我们可以用雾来掩盖不被渲染的远端。</p>
+</li>
+</ol>
+<h4 id="减少渲染对象的渲染次数"><a href="#减少渲染对象的渲染次数" class="headerlink" title="减少渲染对象的渲染次数"></a>减少渲染对象的渲染次数</h4><ol>
+<li><p>LightMap（光照贴图）</p>
+<p>Unity灯光默认是实时光照，也就是说物体在灯光下不同位置会产生不同灯光效果，由于动态光源在实时光照下会有大量的Setpass Calls，为了减小Setpass Calls，我们可以烘焙灯光效果，Unity会为我们生成光照贴图，这样大大减少了Setpass Calls。</p>
+</li>
+<li><p>阴影</p>
+<ol>
+<li><p>阴影 (Shadows)：此项决定应该使用哪种阴影类型。 </p>
+<ul>
+<li>硬阴影和软阴影 (Hard and Soft Shadows)：硬阴影和软阴影都将得到渲染。</li>
+<li>仅硬阴影 (Hard Shadows Only)：仅硬阴影 (hard shadows) 将得到渲染。</li>
+<li>禁用阴影 (Disable Shadows)：没有阴影会被渲染。</li>
+</ul>
+</li>
+<li><p>阴影分辨率 (Shadow resolution)：阴影可以按以下几种不同分辨率进行渲染： 低 (Low) 、中 (Medium) 、高 (High) 和很高 (Very High)。分辨率越高，处理开销就越大。</p>
+</li>
+<li><p>阴影投射 (Shadow Projection)：从平行光源投射阴影有两种方法：</p>
+<ul>
+<li><p>紧密配合 (Close Fit) 渲染分辨率更高的阴影，但是如果摄影机移动，这些阴影有时就会有些许摇晃。</p>
+</li>
+<li><p>稳定配合 (Stable Fit) 渲染分辨率更低的阴影，而阴影不会随摄影机的移动而摇晃。</p>
+</li>
+</ul>
+</li>
+<li><p>阴影距离 (Shadow Distance)：从摄影机处可以看见阴影的最大距离。超出此距离的阴影将不会被渲染。</p>
+</li>
+<li><p>阴影层叠 (Shadow Cascades)：阴影层叠 (shadow cascades) 数可设置为零、二或四。层叠数越高质量越好，但这要以处理开销为代价。</p>
+</li>
+</ol>
+</li>
+<li><p>反射探针：</p>
+<p>反射探头没有很好的优化方法，在我们实际的项目中却常会用到，以创建更真实的反射，但却会增加batches， 所以我们应该在性能消耗较大的场合尽量最小化其使用率。</p>
+</li>
+</ol>
+<h4 id="合并要渲染的对象的数据"><a href="#合并要渲染的对象的数据" class="headerlink" title="合并要渲染的对象的数据"></a>合并要渲染的对象的数据</h4><ol>
+<li><p>静态批处理和动态批处理：</p>
+<ul>
+<li>在Unity中如果动态物体共用相同的材质，那么Unity会自动对这些物体进行批处理。动态批处理操作是自动完成的。<strong>但同时我们注意CPU时间，同一材质的CPU时间明显更高，所以我们要注意增加的CPU时间是否会高于优化节省的时间。</strong></li>
+<li>我们进行静态批处理时，其网格会合并，这也是进行静态批处理的一个重要过程，我们需要他们使用同一个网格同一个材质。<strong>静态批处理没动态批处理的诸多限制，且不会造成CPU损耗，但会有更高的内存占用。使用静态批处理时，只需要同一个材质且批处理的物体处于静态，同时勾上Static。</strong></li>
+</ul>
+</li>
+<li><p>纹理图集：</p>
+<p><strong>纹理图集是把大量的小纹理合并为一张大的纹理图的技术</strong>，当我们使用这个技术为游戏创建美术资源时，我们可以确保物体共享同一图集，因此适合合并。Unity内置了图集工具老版本为Sprite Packer，新版本为SpriteAtlas。</p>
+</li>
+</ol>
+<h3 id="GPU渲染优化："><a href="#GPU渲染优化：" class="headerlink" title="GPU渲染优化："></a>GPU渲染优化：</h3><ul>
+<li>优化GPU渲染问题主要从三个方面来进行，分别是<strong>顶点，填充，带宽</strong>。我们需要明确这三个方面的概念。</li>
+</ul>
+<ol>
+<li><p>顶点处理。顶点处理是指GPU需要渲染网格中每一个顶点的工作。<br>顶点处理的消耗受两方面影响：必须渲染的顶点数量，以及在每个顶点上要进行的操作数量。</p>
+</li>
+<li><p>填充率。填充率是指GPU在屏幕上每秒可以渲染的像素数。如果我们的游戏受到填充率的限制，意味着我们的游戏每帧尝试绘制的像素数量超过了GPU的处理能力。</p>
+</li>
+<li><p>显存带宽。显存带宽是指GPU读写其专用内存的速度。如果我们的游戏速度受限于显存带宽，通常可能是我们使用的纹理太大，以至于GPU无法快速处理。</p>
+</li>
+</ol>
+<h4 id="纹理压缩："><a href="#纹理压缩：" class="headerlink" title="纹理压缩："></a>纹理压缩：</h4><p>纹理压缩技术可以同时极大的降低纹理在磁盘和内存中的大小。如果是显存带宽的问题，那么使用纹理压缩减小纹理在内存的大小可以帮助改善性能，Unity提供了很多纹理压缩的格式和设置，运用也十分简单，根据不同的需求、机器和场景我们使用的方式也有所不同，具体可以参照<a href="http://link.zhihu.com/?target=https%3A//docs.unity3d.com/Manual/class-TextureImporter.html">Unity 官方文档</a></p>
+<h4 id="Mipmap："><a href="#Mipmap：" class="headerlink" title="Mipmap："></a>Mipmap：</h4><p>如果我们的场景包含距离摄像机很远的物体，我们可以通过使用mipmap来缓解显存带宽的问题，mipmap的主要作用便是模型的贴图会根据摄像机距离模型的远近而调整不同质量的贴图显示，以达到优化目的。</p>
+<h4 id="LOD（Levels-of-Detail）："><a href="#LOD（Levels-of-Detail）：" class="headerlink" title="LOD（Levels of Detail）："></a>LOD（Levels of Detail）：</h4><p>LOD与Mipmap类似，根据距离的远近使用不同精度模型，远处选择低精度的模型，近的时候选择高精度模型，这样就可以减少模型上面的顶点和面片数量从而提高性能。<br>其和Mipmap的差异主要在一Mipmap针对贴图，而LOD针对模型。Mipmap可以自动生成八张精度不同的贴图，而LOD必须由我们自己提供三个不同精度的模型。</p>
+<h3 id="Unity-中的渲染分析工具："><a href="#Unity-中的渲染分析工具：" class="headerlink" title="Unity 中的渲染分析工具："></a>Unity 中的渲染分析工具：</h3><h4 id="渲染统计窗口：Rendering-Statistics-Window"><a href="#渲染统计窗口：Rendering-Statistics-Window" class="headerlink" title="渲染统计窗口：Rendering Statistics Window"></a>渲染统计窗口：Rendering Statistics Window</h4><h4 id="性能分析器：Profiler"><a href="#性能分析器：Profiler" class="headerlink" title="性能分析器：Profiler"></a>性能分析器：Profiler</h4><h4 id="帧调试器：Frame-Debugger"><a href="#帧调试器：Frame-Debugger" class="headerlink" title="帧调试器：Frame Debugger"></a>帧调试器：Frame Debugger</h4><hr>
+<p>参考：</p>
+<ol>
+<li><a href="https://zhuanlan.zhihu.com/p/40900056" target="_blank" rel="noopener">Unity3D性能优化——渲染篇</a></li>
+</ol>
+
+        </div>
+
+        <blockquote class="post-copyright">
+    
+    <div class="content">
+        
+<span class="post-time">
+    最后更新时间：<time datetime="2019-04-17T06:45:49.249Z" itemprop="dateUpdated">2019-04-17 14:45:49</time>
+</span><br>
+
+
+        
+        欢迎指正～
+        
+    </div>
+    
+    <footer>
+        <a href="https://bitzhangmo.github.io">
+            <img src="/img/avatar.png" alt="zhangMo">
+            zhangMo
+        </a>
+    </footer>
+</blockquote>
+
+        
+
+
+        <div class="post-footer">
+            
+	<ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Shader/" rel="tag">Shader</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Unity/" rel="tag">Unity</a></li></ul>
+
+
+            
+<div class="page-share-wrap">
+    
+
+<div class="page-share" id="pageShare">
+    <ul class="reset share-icons">
+      <li>
+        <a class="weibo share-sns" target="_blank" href="http://service.weibo.com/share/share.php?url=https://bitzhangmo.github.io/2019/03/11/Unity%E7%AC%94%E8%AE%B0/Unity%E4%B8%AD%E7%9A%84%E6%B8%B2%E6%9F%93%E4%BC%98%E5%8C%96%E6%8A%80%E6%9C%AF/&title=《Unity中的渲染优化技术》 — zhangMo Blog&pic=https://bitzhangmo.github.io/img/avatar.png" data-title="微博">
+          <i class="icon icon-weibo"></i>
+        </a>
+      </li>
+      <li>
+        <a class="weixin share-sns wxFab" href="javascript:;" target="_blank" rel="noopener" data-title="微信">
+          <i class="icon icon-weixin"></i>
+        </a>
+      </li>
+      <li>
+        <a class="qq share-sns" target="_blank" href="http://connect.qq.com/widget/shareqq/index.html?url=https://bitzhangmo.github.io/2019/03/11/Unity%E7%AC%94%E8%AE%B0/Unity%E4%B8%AD%E7%9A%84%E6%B8%B2%E6%9F%93%E4%BC%98%E5%8C%96%E6%8A%80%E6%9C%AF/&title=《Unity中的渲染优化技术》 — zhangMo Blog&source=Unity中的渲染优化技术。" data-title=" QQ">
+          <i class="icon icon-qq"></i>
+        </a>
+      </li>
+      <li>
+        <a class="facebook share-sns" target="_blank" href="https://www.facebook.com/sharer/sharer.php?u=https://bitzhangmo.github.io/2019/03/11/Unity%E7%AC%94%E8%AE%B0/Unity%E4%B8%AD%E7%9A%84%E6%B8%B2%E6%9F%93%E4%BC%98%E5%8C%96%E6%8A%80%E6%9C%AF/" data-title=" Facebook">
+          <i class="icon icon-facebook"></i>
+        </a>
+      </li>
+      <li>
+        <a class="twitter share-sns" target="_blank" href="https://twitter.com/intent/tweet?text=《Unity中的渲染优化技术》 — zhangMo Blog&url=https://bitzhangmo.github.io/2019/03/11/Unity%E7%AC%94%E8%AE%B0/Unity%E4%B8%AD%E7%9A%84%E6%B8%B2%E6%9F%93%E4%BC%98%E5%8C%96%E6%8A%80%E6%9C%AF/&via=https://bitzhangmo.github.io" data-title=" Twitter">
+          <i class="icon icon-twitter"></i>
+        </a>
+      </li>
+      <li>
+        <a class="google share-sns" target="_blank" href="https://plus.google.com/share?url=https://bitzhangmo.github.io/2019/03/11/Unity%E7%AC%94%E8%AE%B0/Unity%E4%B8%AD%E7%9A%84%E6%B8%B2%E6%9F%93%E4%BC%98%E5%8C%96%E6%8A%80%E6%9C%AF/" data-title=" Google+">
+          <i class="icon icon-google-plus"></i>
+        </a>
+      </li>
+    </ul>
+ </div>
+
+
+
+    <a href="javascript:;" target="_blank" rel="noopener" id="shareFab" class="page-share-fab waves-effect waves-circle">
+        <i class="icon icon-share-alt icon-lg"></i>
+    </a>
+</div>
+
+
+
+        </div>
+    </div>
+
+    
+<nav class="post-nav flex-row flex-justify-between">
+  
+    <div class="waves-block waves-effect prev">
+      <a href="/2019/03/11/%E9%9A%8F%E7%AC%94/%E9%9D%A2%E8%AF%95%E7%9B%B8%E5%85%B3%E9%97%AE%E9%A2%98%E6%B1%87%E6%80%BB/" id="post-prev" class="post-nav-link">
+        <div class="tips"><i class="icon icon-angle-left icon-lg icon-pr"></i> Prev</div>
+        <h4 class="title">面试相关问题汇总</h4>
+      </a>
+    </div>
+  
+
+  
+    <div class="waves-block waves-effect next">
+      <a href="/2019/03/10/Unity%E7%AC%94%E8%AE%B0/Unity-Shader-%E4%BD%BF%E7%94%A8%E5%99%AA%E5%A3%B0/" id="post-next" class="post-nav-link">
+        <div class="tips">Next <i class="icon icon-angle-right icon-lg icon-pl"></i></div>
+        <h4 class="title">Unity Shader 使用噪声</h4>
+      </a>
+    </div>
+  
+</nav>
+
+
+
+    
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+</article>
+
+
+
+</div>
+
+        <footer class="footer">
+    <div class="top">
+        
+<p>
+    <span id="busuanzi_container_site_uv" style='display:none'>
+        站点总访客数：<span id="busuanzi_value_site_uv"></span>
+    </span>
+    <span id="busuanzi_container_site_pv" style='display:none'>
+        站点总访问量：<span id="busuanzi_value_site_pv"></span>
+    </span>
+</p>
+
+
+        <p>
+            
+            <span>博客内容遵循 <a rel="license noopener" href="https://creativecommons.org/licenses/by-nc-sa/4.0/deed.zh" target="_blank">知识共享 署名 - 非商业性 - 相同方式共享 4.0 国际协议</a></span>
+        </p>
+    </div>
+    <div class="bottom">
+        <p><span>zhangMo &copy; 2018 - 2019</span>
+            <span>
+                
+                Power by <a href="http://hexo.io/" target="_blank">Hexo</a> Theme <a href="https://github.com/yscoder/hexo-theme-indigo" target="_blank">indigo</a>
+            </span>
+        </p>
+    </div>
+</footer>
+
+    </main>
+    <div class="mask" id="mask"></div>
+<a href="javascript:;" target="_blank" rel="noopener" id="gotop" class="waves-effect waves-circle waves-light"><span class="icon icon-lg icon-chevron-up"></span></a>
+
+
+
+<div class="global-share" id="globalShare">
+    <ul class="reset share-icons">
+      <li>
+        <a class="weibo share-sns" target="_blank" href="http://service.weibo.com/share/share.php?url=https://bitzhangmo.github.io/2019/03/11/Unity%E7%AC%94%E8%AE%B0/Unity%E4%B8%AD%E7%9A%84%E6%B8%B2%E6%9F%93%E4%BC%98%E5%8C%96%E6%8A%80%E6%9C%AF/&title=《Unity中的渲染优化技术》 — zhangMo Blog&pic=https://bitzhangmo.github.io/img/avatar.png" data-title="微博">
+          <i class="icon icon-weibo"></i>
+        </a>
+      </li>
+      <li>
+        <a class="weixin share-sns wxFab" href="javascript:;" target="_blank" rel="noopener" data-title="微信">
+          <i class="icon icon-weixin"></i>
+        </a>
+      </li>
+      <li>
+        <a class="qq share-sns" target="_blank" href="http://connect.qq.com/widget/shareqq/index.html?url=https://bitzhangmo.github.io/2019/03/11/Unity%E7%AC%94%E8%AE%B0/Unity%E4%B8%AD%E7%9A%84%E6%B8%B2%E6%9F%93%E4%BC%98%E5%8C%96%E6%8A%80%E6%9C%AF/&title=《Unity中的渲染优化技术》 — zhangMo Blog&source=Unity中的渲染优化技术。" data-title=" QQ">
+          <i class="icon icon-qq"></i>
+        </a>
+      </li>
+      <li>
+        <a class="facebook share-sns" target="_blank" href="https://www.facebook.com/sharer/sharer.php?u=https://bitzhangmo.github.io/2019/03/11/Unity%E7%AC%94%E8%AE%B0/Unity%E4%B8%AD%E7%9A%84%E6%B8%B2%E6%9F%93%E4%BC%98%E5%8C%96%E6%8A%80%E6%9C%AF/" data-title=" Facebook">
+          <i class="icon icon-facebook"></i>
+        </a>
+      </li>
+      <li>
+        <a class="twitter share-sns" target="_blank" href="https://twitter.com/intent/tweet?text=《Unity中的渲染优化技术》 — zhangMo Blog&url=https://bitzhangmo.github.io/2019/03/11/Unity%E7%AC%94%E8%AE%B0/Unity%E4%B8%AD%E7%9A%84%E6%B8%B2%E6%9F%93%E4%BC%98%E5%8C%96%E6%8A%80%E6%9C%AF/&via=https://bitzhangmo.github.io" data-title=" Twitter">
+          <i class="icon icon-twitter"></i>
+        </a>
+      </li>
+      <li>
+        <a class="google share-sns" target="_blank" href="https://plus.google.com/share?url=https://bitzhangmo.github.io/2019/03/11/Unity%E7%AC%94%E8%AE%B0/Unity%E4%B8%AD%E7%9A%84%E6%B8%B2%E6%9F%93%E4%BC%98%E5%8C%96%E6%8A%80%E6%9C%AF/" data-title=" Google+">
+          <i class="icon icon-google-plus"></i>
+        </a>
+      </li>
+    </ul>
+ </div>
+
+
+<div class="page-modal wx-share" id="wxShare">
+    <a class="close" href="javascript:;" target="_blank" rel="noopener"><i class="icon icon-close"></i></a>
+    <p>扫一扫，分享到微信</p>
+    <img src="//api.qrserver.com/v1/create-qr-code/?data=https://bitzhangmo.github.io/2019/03/11/Unity%E7%AC%94%E8%AE%B0/Unity%E4%B8%AD%E7%9A%84%E6%B8%B2%E6%9F%93%E4%BC%98%E5%8C%96%E6%8A%80%E6%9C%AF/" alt="微信分享二维码">
+</div>
+
+
+
+
+    <script src="//cdn.bootcss.com/node-waves/0.7.4/waves.min.js"></script>
+<script>
+var BLOG = { ROOT: '/', SHARE: true, REWARD: false };
+
+
+</script>
+
+<script src="//unpkg.com/hexo-theme-material-indigo@latest/js/main.min.js"></script>
+
+
+<div class="search-panel" id="search-panel">
+    <ul class="search-result" id="search-result"></ul>
+</div>
+<template id="search-tpl">
+<li class="item">
+    <a href="{path}" class="waves-block waves-effect">
+        <div class="title ellipsis" title="{title}">{title}</div>
+        <div class="flex-row flex-middle">
+            <div class="tags ellipsis">
+                {tags}
+            </div>
+            <time class="flex-col time">{date}</time>
+        </div>
+    </a>
+</li>
+</template>
+
+<script src="//unpkg.com/hexo-theme-material-indigo@latest/js/search.min.js" async></script>
+
+
+
+<!-- mathjax config similar to math.stackexchange -->
+
+<script type="text/x-mathjax-config">
+MathJax.Hub.Config({
+    tex2jax: {
+        inlineMath: [ ['$','$'], ["\\(","\\)"]  ],
+        processEscapes: true,
+        skipTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code']
+    }
+});
+
+MathJax.Hub.Queue(function() {
+    var all = MathJax.Hub.getAllJax(), i;
+    for(i=0; i < all.length; i += 1) {
+        all[i].SourceElement().parentNode.className += ' has-jax';
+    }
+});
+</script>
+
+<script async src="//cdn.bootcss.com/mathjax/2.7.0/MathJax.js?config=TeX-MML-AM_CHTML" async></script>
+
+
+
+
+<script async src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+
+
+
+<script>
+(function() {
+    var OriginTitile = document.title, titleTime;
+    document.addEventListener('visibilitychange', function() {
+        if (document.hidden) {
+            document.title = 'MossWang';
+            clearTimeout(titleTime);
+        } else {
+            document.title = 'zhangMo';
+            titleTime = setTimeout(function() {
+                document.title = OriginTitile;
+            },2000);
+        }
+    });
+})();
+</script>
+
+
+
+</body>
+</html>
