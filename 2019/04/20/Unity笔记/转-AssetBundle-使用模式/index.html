@@ -215,13 +215,49 @@
 <p>要了解AssetBundle管理资源的关键，是要了解在调用 <a href="https://link.zhihu.com/?target=http%3A//docs.unity3d.com/ScriptReference/AssetBundle.Unload.html">AssetBundle.Unload</a> 函数时参数 true 或是 false 时的不同行为。</p>
 <p>这个 API 会卸载调用的 AssetBundle 的信息头，参数意思是是否也卸载从这个 AssetBundle 加载的对象实例。如果是 true, 所有从这个 AssetBundle 实例化的对象会立即被卸载，即便是它们被当前场景正在被使用。</p>
 <p>例如，假设材质 M 是从 AssetBundle AB 中加载的，并且当前场景正使用着材质 M：</p>
-<p><img src="https://pic1.zhimg.com/80/v2-d1e9243af1c9eec1c84d5dfd35c48174_hd.jpg" alt="img"></p>
+<figure class="image-bubble">
+                <div class="img-lightbox">
+                    <div class="overlay"></div>
+                    <img src="https://pic1.zhimg.com/80/v2-d1e9243af1c9eec1c84d5dfd35c48174_hd.jpg" alt="img" title="">
+                </div>
+                <div class="image-caption">img</div>
+            </figure>
+
+
+
 <p>如果调用了 AB.Unload(true)，那么 M 会从当前场景中删除，同时销毁和卸载。如果调用了 AB.Unload(false)，那么 AB 的信息头会被卸载，但是材质 M 依然在当前场景中并且可用。调用 AssetBundle.Unload(false) 会打破 M 和 AB 直接的关联关系，如果稍后再次加载 AB，则 AB 中包含的对象的新副本将被加载到内存中：</p>
-<p><img src="https://pic3.zhimg.com/80/v2-f8c1be947da9e9965529317888c98a9e_hd.jpg" alt="img"></p>
+<figure class="image-bubble">
+                <div class="img-lightbox">
+                    <div class="overlay"></div>
+                    <img src="https://pic3.zhimg.com/80/v2-f8c1be947da9e9965529317888c98a9e_hd.jpg" alt="img" title="">
+                </div>
+                <div class="image-caption">img</div>
+            </figure>
+
+
+
 <p>如果稍后再次加载 AB, 将会加载一个新的 AB 信息头的副本，但是 M 不是从 AB 新副本中加载的，所以Unity 不会为 M 和新的 AB 拷贝间建立新的关联关系：</p>
-<p><img src="https://pic4.zhimg.com/80/v2-94762ab26286d455ae71670a8903a5eb_hd.jpg" alt="img"></p>
+<figure class="image-bubble">
+                <div class="img-lightbox">
+                    <div class="overlay"></div>
+                    <img src="https://pic4.zhimg.com/80/v2-94762ab26286d455ae71670a8903a5eb_hd.jpg" alt="img" title="">
+                </div>
+                <div class="image-caption">img</div>
+            </figure>
+
+
+
 <p>如果调用了 AB.LoadAsset() 来重新加载 M,Unity 不会把 M 的旧副本解析为 AB 的数据的实例，所以，Unity 会重新加载一个 M 的副本，这时场景中就会有 <strong>两个</strong> 完全一摸一样的 M 的副本。</p>
-<p><img src="https://pic2.zhimg.com/80/v2-50a875967379cab7cedd2b5287ad1ec5_hd.jpg" alt="img"></p>
+<figure class="image-bubble">
+                <div class="img-lightbox">
+                    <div class="overlay"></div>
+                    <img src="https://pic2.zhimg.com/80/v2-50a875967379cab7cedd2b5287ad1ec5_hd.jpg" alt="img" title="">
+                </div>
+                <div class="image-caption">img</div>
+            </figure>
+
+
+
 <p>对大多数项目而言，这种行为是不可取的，大多数项目应该使用 AssetBundle.Unload(true) 并且使用额外方法来确保对象不会有重复副本，一般常用的方法有：</p>
 <ol>
 <li>在应用生命周期中，在明确定义的时间点对临时的AssetBundle 卸载，比如两个关卡之间或者加载场景的时候。这个比较简单，也是使用最多的情况。</li>

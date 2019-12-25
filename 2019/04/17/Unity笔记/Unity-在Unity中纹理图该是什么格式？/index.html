@@ -252,7 +252,14 @@
 <li>RGBA 16 bit    低质量真彩色。具有16级的红、绿、蓝和alpha。比PVRTC格式使用更多的内存，但如果需要精确的alpha通道，会更方便。（128 KB 256x256）</li>
 <li>RGBA 32 bit   真彩色带alpha - 这是最高质量。256KB 256x256，这个是很消耗性能的。大多数情况下，PVRTC格式提供足够的质量，但有更小的文件大小。</li>
 </ul>
-<p><img src="http://wx4.sinaimg.cn/large/007CSzD7ly1g26isghucpj319j0cvwkf.jpg" alt=""></p>
+<figure class="image-bubble">
+                <div class="img-lightbox">
+                    <div class="overlay"></div>
+                    <img src="http://wx4.sinaimg.cn/large/007CSzD7ly1g26isghucpj319j0cvwkf.jpg" alt="" title="">
+                </div>
+                <div class="image-caption"></div>
+            </figure>
+
 <p>(图片来自：<strong>喵小逗@UWA问答社区</strong>)</p>
 <h3 id="几种主要的压缩格式介绍："><a href="#几种主要的压缩格式介绍：" class="headerlink" title="几种主要的压缩格式介绍："></a>几种主要的压缩格式介绍：</h3><h4 id="高清晰无压缩-RGBA32"><a href="#高清晰无压缩-RGBA32" class="headerlink" title="高清晰无压缩 - RGBA32"></a>高清晰无压缩 - RGBA32</h4><p>RGBA32等同于原图了，优点是清晰、与原图一致，缺点是内存占用十分大；对于一些美术要求最好清晰度的图片，是首选。</p>
 <p>要注意一些png图片，在硬盘中占用几KB，怎么在Unity中显示却变大？因为Unity显示的是Texture大小，是实际运行时占用内存的大小，而png却是一种压缩显示格式；可以这样理解，png类似于zip格式，是一个压缩文件，只不过在运行时会自动解压解析罢了。</p>

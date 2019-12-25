@@ -206,7 +206,14 @@
 <a id="more"></a>
 
 <h2 id="静态对象"><a href="#静态对象" class="headerlink" title="静态对象"></a>静态对象</h2><p>静态对象是Unity提供的一个属性，它可以附加在游戏对象或者Prefab上。它的原理是<strong>限制物体在运行中不能发生位移变化，预先生成一些辅助的数据，从而达成一种用内存换时间的优化方式</strong>。静态元素的种类很多，如图所示：</p>
-<p><img src="https://wx3.sinaimg.cn/mw690/007CSzD7ly1g275ufrmjlj30mu0auagm.jpg" alt=""></p>
+<figure class="image-bubble">
+                <div class="img-lightbox">
+                    <div class="overlay"></div>
+                    <img src="https://wx3.sinaimg.cn/mw690/007CSzD7ly1g275ufrmjlj30mu0auagm.jpg" alt="" title="">
+                </div>
+                <div class="image-caption"></div>
+            </figure>
+
 <ul>
 <li>Lightmap Static : 用来表示接受烘焙光照计算，可烘焙光照贴图。</li>
 <li>Occluder Static : 表示自身可以被遮挡剔除掉。</li>
@@ -218,10 +225,40 @@
 </ul>
 <h3 id="Lightmap："><a href="#Lightmap：" class="headerlink" title="Lightmap："></a>Lightmap：</h3><p>Lightmap技术的原理是将场景中的灯光和物体产生的光照与阴影信息烘焙在一张或者多张Lightmap贴图中，这些物体将不再参与实时光照计算，从而减少了大量的性能开销。它的缺点就是参与烘焙计算的对象在游戏过程中不能发生移动，所以游戏中通常会将物体分为两类，一类是可发生位移变化的，它们使用实时光照计算；另一类是不可发生位移变化的，它们采取预先烘焙Lightmap。</p>
 <h3 id="遮挡剔除："><a href="#遮挡剔除：" class="headerlink" title="遮挡剔除："></a>遮挡剔除：</h3><h3 id="Batching（静态合批）："><a href="#Batching（静态合批）：" class="headerlink" title="Batching（静态合批）："></a>Batching（静态合批）：</h3><h4 id="设置静态合批："><a href="#设置静态合批：" class="headerlink" title="设置静态合批："></a>设置静态合批：</h4><p>首先需要在Player Settings页面中勾选Static Batching和Dynamic Batching(表示动态合批)；接着，在游戏场景中选择需要合批的游戏对象，并选中Batching Static标记，然后运行游戏。Mesh Filter会自动生成一个新的Mesh，这样如果<strong>有相同的材质、Shader并且参数一致的话</strong>，就会合并DrawCall。</p>
-<p><img src="https://wx4.sinaimg.cn/mw690/007CSzD7ly1g275ufqgbpj30ty0ho7dv.jpg" alt=""></p>
-<p><img src="https://wx1.sinaimg.cn/mw690/007CSzD7ly1g275ufntlqj30to0pyjwm.jpg" alt=""></p>
-<p><img src="https://wx4.sinaimg.cn/mw690/007CSzD7ly1g275ufml3qj30tw0owq7y.jpg" alt=""></p>
-<p><img src="https://wx3.sinaimg.cn/mw690/007CSzD7ly1g275uflix0j30gq1bagnm.jpg" alt=""></p>
+<figure class="image-bubble">
+                <div class="img-lightbox">
+                    <div class="overlay"></div>
+                    <img src="https://wx4.sinaimg.cn/mw690/007CSzD7ly1g275ufqgbpj30ty0ho7dv.jpg" alt="" title="">
+                </div>
+                <div class="image-caption"></div>
+            </figure>
+
+<figure class="image-bubble">
+                <div class="img-lightbox">
+                    <div class="overlay"></div>
+                    <img src="https://wx1.sinaimg.cn/mw690/007CSzD7ly1g275ufntlqj30to0pyjwm.jpg" alt="" title="">
+                </div>
+                <div class="image-caption"></div>
+            </figure>
+
+<figure class="image-bubble">
+                <div class="img-lightbox">
+                    <div class="overlay"></div>
+                    <img src="https://wx4.sinaimg.cn/mw690/007CSzD7ly1g275ufml3qj30tw0owq7y.jpg" alt="" title="">
+                </div>
+                <div class="image-caption"></div>
+            </figure>
+
+<figure class="image-bubble">
+                <div class="img-lightbox">
+                    <div class="overlay"></div>
+                    <img src="https://wx3.sinaimg.cn/mw690/007CSzD7ly1g275uflix0j30gq1bagnm.jpg" alt="" title="">
+                </div>
+                <div class="image-caption"></div>
+            </figure>
+
+
+
 <h4 id="脚本静态合批："><a href="#脚本静态合批：" class="headerlink" title="脚本静态合批："></a>脚本静态合批：</h4><p>自动的静态合批用起来很方便，但是也有隐患。加入场景非常庞大，那么合并出来的Mesh会非常大，运行游戏之后，只要其中有一小部分出现在摄像机内，那么整个Mesh都需要参与渲染。另外，静态合批的最大顶点数是65535，如果顶点数超过了它，Unity就会自动合并出多个Mesh。我们可以利用脚本来动态设置需要合批在一起的游戏对象。如果使用脚本合并，游戏对象不需要选中Static标记。</p>
 <figure class="highlight csharp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">using</span> UnityEngine;</span><br><span class="line"></span><br><span class="line"><span class="keyword">public</span> <span class="keyword">class</span> <span class="title">Script_09_05</span> : <span class="title">MonoBehavior</span></span><br><span class="line">&#123;</span><br><span class="line">  <span class="keyword">public</span> GameObject[] datas;</span><br><span class="line">  </span><br><span class="line">  <span class="function"><span class="keyword">void</span> <span class="title">Start</span>(<span class="params"></span>)</span></span><br><span class="line"><span class="function"></span>  &#123;</span><br><span class="line">    StaticBatchingUtility.Combine(datas,gameObject);</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 

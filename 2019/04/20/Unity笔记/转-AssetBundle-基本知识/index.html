@@ -280,7 +280,14 @@
 <p>就像在那片文章中的 <a href="https://unity3d.com/assets-objects-and-serialization#Serialization_and_Instances" target="_blank" rel="noopener">序列化和实例</a> 小结中提到，AssetBundle 提供 AssetBundle 内每个靠文件 GUID 和 本地 ID 来鉴别的对象的源数据。</p>
 <p>因为当对象的实例 ID 第一次被间接引用时加载，并且对象在 AssetBundle 加载后被分配了一个有效的实例 ID，所以对象在 AssetBundle 中的顺序并不是很重要。反而重要的是加载对象之前，加载这个对象所有依赖的 AssetBundle。Unity 不会在加载完父 AssetBundle 只有去自动加载子 AssetBundle。</p>
 <h4 id="例子："><a href="#例子：" class="headerlink" title="例子："></a>例子：</h4><p>假设材质 A 引用了纹理 B。材质 A 被打包进 AssetBundle 1, 而纹理 B 被打包进 AssetBundle 2</p>
-<p><img src="https://unity3d.com/sites/default/files/learn/ab1.jpg" alt="description"></p>
+<figure class="image-bubble">
+                <div class="img-lightbox">
+                    <div class="overlay"></div>
+                    <img src="https://unity3d.com/sites/default/files/learn/ab1.jpg" alt="description" title="">
+                </div>
+                <div class="image-caption">description</div>
+            </figure>
+
 <p>在这种情况下，AssetBundle 2 必须在加载来自 AssetBundle 1 的材质 A 之前加载。</p>
 <p>这不是在暗示 AssetBundle 2 必须要在 AssetBundle 1 之前加载，或者或者纹理 B 必须在 AssetBundle 2 中显式的加载。在加载来自 AssetBundle 1 中的材质 A 之前加载 AssetBundle 2 就够了。</p>
 <p>Unity 不会在加载完 AssetBundle 1 之后自动的加载 AssetBundle 2。它必须手动的通过脚本加载。加载 AssetBundle 1 和 AssetBundle 2 时使用的 API并不重要。 使用 <strong><a href="WWW.LoadFromCacheOrDownload">WWW.LoadFromCacheOrDownload</a></strong> 加载的 AssetBundle 可以和被 <strong>AssetBundle.LoadFromFile</strong> 或者 <strong>AssetBundle.LoadFromMemoryAsync</strong> 加载的 AssetBundle 混合使用。</p>

@@ -217,7 +217,14 @@
 <p><strong>具体产品角色是创建目标，所有创建的对象都充当这个角色的某个具体类的实例。</strong></p>
 </li>
 </ul>
-<p><img src="https://design-patterns.readthedocs.io/zh_CN/latest/_images/SimpleFactory.jpg" alt=""></p>
+<figure class="image-bubble">
+                <div class="img-lightbox">
+                    <div class="overlay"></div>
+                    <img src="https://design-patterns.readthedocs.io/zh_CN/latest/_images/SimpleFactory.jpg" alt="" title="">
+                </div>
+                <div class="image-caption"></div>
+            </figure>
+
 <h3 id="模式分析"><a href="#模式分析" class="headerlink" title="模式分析"></a>模式分析</h3><ul>
 <li>将对象的创建和对象本身业务分离可以降低系统的耦合度，使得两者修改起来相对容易。</li>
 <li>在调用工厂类的工厂方法时，由于工厂方法时静态方法，使用起来很方便，可通过类名直接调用，而且只需要传入一个参数即可。在实际开发中，还可以在调用时将传入的参数保存在XML等格式的配置文件中，修改参数时无须修改任何源代码。</li>
@@ -247,7 +254,14 @@
 <li>Factory：抽象工厂</li>
 <li>ConcreteFactory：具体工厂</li>
 </ul>
-<p><img src="https://design-patterns.readthedocs.io/zh_CN/latest/_images/FactoryMethod.jpg" alt=""></p>
+<figure class="image-bubble">
+                <div class="img-lightbox">
+                    <div class="overlay"></div>
+                    <img src="https://design-patterns.readthedocs.io/zh_CN/latest/_images/FactoryMethod.jpg" alt="" title="">
+                </div>
+                <div class="image-caption"></div>
+            </figure>
+
 <h3 id="模式分析-1"><a href="#模式分析-1" class="headerlink" title="模式分析"></a>模式分析</h3><p>工厂方法模式是简单工厂模式的<strong>进一步抽象和推广。</strong>由于使用了面向对象的多态性，工厂方法模式保持了简单工厂模式的优点，而且克服了它的缺点。<strong>在工厂方法模式中，核心的工厂类不再负责所有产品的创建，而是将具体创建工作交给子类去做。这个核心类仅仅负责给出具体工厂必须实现的接口，而不负责哪一个产品类被实例化这种细节，这使得工厂方法模式可以允许系统在不修改工厂角色的情况下引进新产品。</strong></p>
 <h3 id="优缺点-1"><a href="#优缺点-1" class="headerlink" title="优缺点"></a>优缺点</h3><h4 id="优点-1"><a href="#优点-1" class="headerlink" title="优点"></a>优点</h4><ul>
 <li><p>在工厂方法模式中，工厂方法用来创建客户所需要的产品，同时还向客户隐藏了哪种具体产品类将被实例化这一细节，<strong>用户只需要关心所需产品对应的工厂，无须关心创建细节，甚至无须知道具体产品类的类名。</strong></p>
@@ -298,7 +312,14 @@
 <li>AbstractProduct：抽象产品</li>
 <li>Product：具体产品</li>
 </ul>
-<p><img src="https://design-patterns.readthedocs.io/zh_CN/latest/_images/AbatractFactory.jpg" alt=""></p>
+<figure class="image-bubble">
+                <div class="img-lightbox">
+                    <div class="overlay"></div>
+                    <img src="https://design-patterns.readthedocs.io/zh_CN/latest/_images/AbatractFactory.jpg" alt="" title="">
+                </div>
+                <div class="image-caption"></div>
+            </figure>
+
 <h3 id="优缺点-2"><a href="#优缺点-2" class="headerlink" title="优缺点"></a>优缺点</h3><h4 id="优点-2"><a href="#优点-2" class="headerlink" title="优点"></a>优点</h4><ul>
 <li><strong>抽象工厂模式隔离了具体类的生成，使得客户并不需要知道什么被创建。由于这种隔离，更换一个具体工厂就变得相对容易。所有的具体工厂都实现了抽象工厂中定义的那些公共接口，因此只需改变具体工厂的实例，就可以在某种程度上改变整个软件系统的行为。</strong>另外，应用抽象工厂模式可以实现高内聚低耦合的设计目的，因此抽象工厂模式得到了广泛的应用。</li>
 <li><strong>当一个产品族中的多个对象被设计成一起工作时，它能够保证客户端始终只使用同一个产品族中的对象。</strong>这对一些需要根据当前环境来决定其行为的软件系统来说，是一种非常实用的设计模式。</li>

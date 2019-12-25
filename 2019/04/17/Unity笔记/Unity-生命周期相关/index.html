@@ -202,7 +202,14 @@
 <a id="more"></a>
 
 <h3 id="脚本的生命周期："><a href="#脚本的生命周期：" class="headerlink" title="脚本的生命周期："></a>脚本的生命周期：</h3><p>Unity脚本有一套完整的生命周期，脚本需要挂在任意游戏对象上，并且同一个游戏对象可以挂不同的脚本，各脚本执行自己的生命周期，它们可以互相组合并且互不干预。生命周期中的所有方法都是Unity系统自己回调的，不需要手动调用，主要有编辑脚本、初始化、物理碰撞事件、更新回调、渲染和销毁等。学习脚本的生命周期之前，我们不得不引用文档中非常经典的一张图，它完整的描述了脚本的生命周期：</p>
-<p><img src="https://docs.unity3d.com/uploads/Main/monobehaviour_flowchart.svg" alt=""></p>
+<figure class="image-bubble">
+                <div class="img-lightbox">
+                    <div class="overlay"></div>
+                    <img src="https://docs.unity3d.com/uploads/Main/monobehaviour_flowchart.svg" alt="" title="">
+                </div>
+                <div class="image-caption"></div>
+            </figure>
+
 <h4 id="第一个场景加载："><a href="#第一个场景加载：" class="headerlink" title="第一个场景加载："></a>第一个场景加载：</h4><p>这些函数将在场景开始加载时调用。(场景中的每个物体仅调用一次)</p>
 <ul>
 <li><strong>Awake</strong>：这个方法总是在在任何开始方法之前调用(可以理解成最先调用吧？)，并且在一个prefab<strong>刚被实例化后</strong>就调用。(如果一个游戏物体在开始时是不活跃的(inactive)则将不会调用awake函数，直到其变为活跃。)</li>

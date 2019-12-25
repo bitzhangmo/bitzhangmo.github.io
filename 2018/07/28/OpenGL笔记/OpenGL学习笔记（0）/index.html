@@ -215,7 +215,13 @@
 </li>
 <li><p>新建Xcode的Command Line C++项目，在<code>build settings</code>中设置<code>Header Search Path</code>与<code>Library Search Path</code>，在其中添加对应的<code>glew</code>与<code>glfw</code>的头文件(include)与库文件(lib)路径。</p>
 </li>
-<li><p>在<code>build Phases</code>中添加库文件<img src="https://wx3.sinaimg.cn/mw1024/007dFQ0Igy1ftpq5ygm41j31kw0eh0zx.jpg" alt="屏幕快照 2018-07-28 下午5.27.39"></p>
+<li><p>在<code>build Phases</code>中添加库文件<figure class="image-bubble">
+                <div class="img-lightbox">
+                    <div class="overlay"></div>
+                    <img src="https://wx3.sinaimg.cn/mw1024/007dFQ0Igy1ftpq5ygm41j31kw0eh0zx.jpg" alt="屏幕快照 2018-07-28 下午5.27.39" title="">
+                </div>
+                <div class="image-caption">屏幕快照 2018-07-28 下午5.27.39</div>
+            </figure></p>
 </li>
 </ol>
 <p>（在对应的文件夹中将两个/.dylib的文件直接拖拽进来）</p>
@@ -256,10 +262,24 @@
 <li>通过glVertexAttribPointer设置的顶点属性配置。</li>
 <li>通过glVertexAttribPointer调用与顶点属性关联的顶点缓冲对象。</li>
 </ul>
-<p><img src="https://learnopengl-cn.github.io/img/01/04/vertex_array_objects.png" alt=""></p>
+<figure class="image-bubble">
+                <div class="img-lightbox">
+                    <div class="overlay"></div>
+                    <img src="https://learnopengl-cn.github.io/img/01/04/vertex_array_objects.png" alt="" title="">
+                </div>
+                <div class="image-caption"></div>
+            </figure>
+
 <h4 id="索引缓冲对象（Element-Buffer-Object，EBO）："><a href="#索引缓冲对象（Element-Buffer-Object，EBO）：" class="headerlink" title="索引缓冲对象（Element Buffer Object，EBO）："></a>索引缓冲对象（Element Buffer Object，EBO）：</h4><p>​    和顶点缓冲对象一样，EBO也是一个缓冲，它专门储存索引，OpenGL调用这些顶点的索引来决定该绘制哪个顶点。</p>
 <p>​    glDrawElements函数从当前绑定到GL_ELEMENT_ARRAY_BUFFER目标的EBO中获取索引。这意味着我们必须在每次要用索引渲染一个物体时绑定相应的EBO，这还是有点麻烦。不过顶点数组对象同样可以保存索引缓冲对象的绑定状态。VAO绑定时正在绑定的索引缓冲对象会被保存为VAO的元素缓冲对象。绑定VAO的同时也会自动绑定EBO。</p>
-<p><img src="https://learnopengl-cn.github.io/img/01/04/vertex_array_objects_ebo.png" alt=""></p>
+<figure class="image-bubble">
+                <div class="img-lightbox">
+                    <div class="overlay"></div>
+                    <img src="https://learnopengl-cn.github.io/img/01/04/vertex_array_objects_ebo.png" alt="" title="">
+                </div>
+                <div class="image-caption"></div>
+            </figure>
+
 <p>​    当目标是GL_ELEMENT_ARRAY_BUFFER的时候，VAO会储存glBindBuffer的函数调用。这也意味着它也会储存解绑调用，所以确保你没有在解绑VAO之前解绑索引数组缓冲，否则它就没有这个EBO配置了。</p>
 
         </div>

@@ -268,7 +268,14 @@
 <li>在luaV_execute函数中，pc指针指向第二步的savedpc指针（Lua5.3中似乎直接使用的savedpc指针），紧跟着就是一个大的循环体，依次取出其中的OpCode执行。</li>
 <li>执行完毕后，调用luaD_poscall函数恢复到上一个函数的环境。</li>
 </ol>
-<p><img src="https://i.loli.net/2019/08/22/sUtLPaW61eX8jx7.png" alt="FlowchartDiagram2.png"></p>
+<figure class="image-bubble">
+                <div class="img-lightbox">
+                    <div class="overlay"></div>
+                    <img src="https://i.loli.net/2019/08/22/sUtLPaW61eX8jx7.png" alt="FlowchartDiagram2.png" title="">
+                </div>
+                <div class="image-caption">FlowchartDiagram2.png</div>
+            </figure>
+
 <p>虚拟机指令执行的两大入口如下：</p>
 <ul>
 <li>词法、语法分析阶段的luaY_parser，Lua一次遍历脚本文件完成了词法分析和语法分析，生成的OpCode存放在Proto结构体的code数组中。</li>

@@ -29,8 +29,18 @@
 <meta property="og:site_name" content="zhangMo Blog">
 <meta property="og:description" content="[TOC] 游戏中的状态机，分层状态机以及伪代码实现。">
 <meta property="og:locale" content="zh-CN">
+<meta property="og:image" content="https:&#x2F;&#x2F;bitzhangmo.github.io&#x2F;Users&#x2F;zhangmo&#x2F;Library&#x2F;Application">
+<meta property="og:image" content="https:&#x2F;&#x2F;bitzhangmo.github.io&#x2F;Users&#x2F;zhangmo&#x2F;Library&#x2F;Application">
+<meta property="og:image" content="https:&#x2F;&#x2F;bitzhangmo.github.io&#x2F;Users&#x2F;zhangmo&#x2F;Library&#x2F;Application">
+<meta property="og:image" content="https:&#x2F;&#x2F;bitzhangmo.github.io&#x2F;Users&#x2F;zhangmo&#x2F;Library&#x2F;Application">
+<meta property="og:image" content="https:&#x2F;&#x2F;bitzhangmo.github.io&#x2F;Users&#x2F;zhangmo&#x2F;Library&#x2F;Application">
+<meta property="og:image" content="https:&#x2F;&#x2F;bitzhangmo.github.io&#x2F;Users&#x2F;zhangmo&#x2F;Library&#x2F;Application">
+<meta property="og:image" content="https:&#x2F;&#x2F;bitzhangmo.github.io&#x2F;Users&#x2F;zhangmo&#x2F;Library&#x2F;Application">
+<meta property="og:image" content="https:&#x2F;&#x2F;bitzhangmo.github.io&#x2F;Users&#x2F;zhangmo&#x2F;Library&#x2F;Application">
+<meta property="og:image" content="https:&#x2F;&#x2F;bitzhangmo.github.io&#x2F;Users&#x2F;zhangmo&#x2F;Library&#x2F;Application">
 <meta property="og:updated_time" content="2018-12-17T07:49:14.762Z">
 <meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="https:&#x2F;&#x2F;bitzhangmo.github.io&#x2F;Users&#x2F;zhangmo&#x2F;Library&#x2F;Application">
     
     <link rel="shortcut icon" href="/favicon.ico">
     <link rel="stylesheet" href="//unpkg.com/hexo-theme-material-indigo@latest/css/style.css">
@@ -218,7 +228,14 @@
 <p>本章中的状态机图表基于UML状态图表格式，这是整个软件工程中使用的标准符号。状态显示为弯角框。过渡是箭头线，由触发它们的条件标记。条件包含在方括号中。</p>
 <p>The solid circle in Figure 5.13 has only one transition without a trigger condition. The transition points to the initial state that will be entered when the state machine is first run. </p>
 <p>图5.13中的实心圆只有一个没有触发条件的转换。转换指向首次运行状态机时将进入的初始状态。</p>
-<p>![image-20181122004651145](/Users/zhangmo/Library/Application Support/typora-user-images/image-20181122004651145.png)</p>
+<figure class="image-bubble">
+                <div class="img-lightbox">
+                    <div class="overlay"></div>
+                    <img src="/Users/zhangmo/Library/Application" alt="image-20181122004651145" title="Support/typora-user-images/image-20181122004651145.png">
+                </div>
+                <div class="image-caption">Support/typora-user-images/image-20181122004651145.png</div>
+            </figure>
+
 <p>You won’t need an in-depth understanding of UML to understand this chapter. If you want to find out more about UML, I’d recommend Pilone [2005]. </p>
 <p>您不需要深入了解UML来理解本章。如果你想了解更多关于UML的信息，我推荐<em>Pilone [2005]</em>。</p>
 <p>In a decision tree the same set of decisions is always used, and any action can be reached through the tree. In a state machine only transitions from the current state are considered, so not every action can be reached. </p>
@@ -323,7 +340,14 @@
 <p>就其本身而言，一台状态机是一种强大的工具，但表达某些行为可能很困难。一个常见的例子是“警报行为”。</p>
 <p>Imagine a service robot that moves around a facility cleaning the floors. It has a state machine allowing it to do this. It might search around for objects that have been dropped, pick one up when it finds it, and carry it off to the trash compactor. This can be simply implemented using a normal state machine (see Figure 5.14). </p>
 <p>想象一下一个机器人在清洁地板的设施周围移动。 它有一个状态机允许它这样做。 它可能会搜索掉落的物体，找到它时拾取一个物体，然后将它带到垃圾压缩机。 这可以使用普通状态机简单地实现（参见图5.14）。</p>
-<p>![image-20181121110155364](/Users/zhangmo/Library/Application Support/typora-user-images/image-20181121110155364.png)</p>
+<figure class="image-bubble">
+                <div class="img-lightbox">
+                    <div class="overlay"></div>
+                    <img src="/Users/zhangmo/Library/Application" alt="image-20181121110155364" title="Support/typora-user-images/image-20181121110155364.png">
+                </div>
+                <div class="image-caption">Support/typora-user-images/image-20181121110155364.png</div>
+            </figure>
+
 <p>Unfortunately, the robot can run low on power, whereupon it has to scurry off to the nearest electrical point and get recharged. Regardless of what it is doing at the time, it needs to stop, and when it is fully charged again, it needs to pick up where it left off. The recharging periods could allow the player to sneak by unnoticed, for example, or allow the player to disable all electricity to the area and thereby disable the robot. </p>
 <p>不幸的是，机器人的能源不是无限的，因此它必须赶到最近的电气点并进行充电。 不管它当时在做什么，它需要停止。当它再次充满电时，它需要从它停止的地方开始。 例如，充电时段可允许玩家不加注意地潜行，或允许玩家禁用该区域的所有电力，从而禁用机器人。（注：游戏场景模拟）</p>
 <p>This is an alarm mechanism: something that interrupts normal behavior to respond to something important. Representing this in a state machine leads to a dou- bling in the number of states. </p>
@@ -334,10 +358,24 @@
 <p>我们可以将它分成几个，而不是将所有逻辑组合到一个状态机中。 每个报警机制都有自己的状态机以及原始行为。 它们按层次结构排列，因此仅当较高级别的状态机未响应其警报时才考虑下一个状态机。</p>
 <p>Figure 5.15 shows one alarm mechanism and corresponds exactly to the diagram above. </p>
 <p>图5.15显示了一种报警机制，与上图完全一致。</p>
-<p>![image-20181121111241030](/Users/zhangmo/Library/Application Support/typora-user-images/image-20181121111241030.png)</p>
+<figure class="image-bubble">
+                <div class="img-lightbox">
+                    <div class="overlay"></div>
+                    <img src="/Users/zhangmo/Library/Application" alt="image-20181121111241030" title="Support/typora-user-images/image-20181121111241030.png">
+                </div>
+                <div class="image-caption">Support/typora-user-images/image-20181121111241030.png</div>
+            </figure>
+
 <p>We will nest one state machine inside another to indicate a hierarchical state ma- chine (Figure 5.16). The solid circle again represents the start state of the machine. When a composite state is first entered, the circle with H* inside it indicates which sub-state should be entered. </p>
 <p>我们将一个状态机嵌套在另一个状态机中以指示分层状态机（图5.16）。 实心圆圈再次表示机器的启动状态。 首次输入复合状态时，其中带有H *的圆圈表示应输入哪个子状态。</p>
-<p>![image-20181121111547584](/Users/zhangmo/Library/Application Support/typora-user-images/image-20181121111547584.png)</p>
+<figure class="image-bubble">
+                <div class="img-lightbox">
+                    <div class="overlay"></div>
+                    <img src="/Users/zhangmo/Library/Application" alt="image-20181121111547584" title="Support/typora-user-images/image-20181121111547584.png">
+                </div>
+                <div class="image-caption">Support/typora-user-images/image-20181121111547584.png</div>
+            </figure>
+
 <p>If the composite state has already been entered, then the previous sub-state is returned to. The H* node is called the “history state” for this reason. </p>
 <p>如果已经输入复合状态，则返回先前的子状态。 由于这个原因，H *节点被称为“历史状态”。</p>
 <p>The details of why there’s an asterisk after the H, and some of the other vagaries of the UML state chart diagram, are beyond the scope of this chapter. Refer back to Pilone [2005] for more details. </p>
@@ -352,7 +390,14 @@
 <p>虽然这会导致稍微丑陋的代码，但它会实现我们的场景。 但是，大多数分层状态机支持层次结构级别之间的转换，为此我们需要更复杂的算法。</p>
 <p>For example, let’s expand our robot so that it can do something useful if there are no objects to collect. It makes sense that it will use the opportunity to go and recharge, rather than standing around waiting for its battery to go flat. The new state machine is shown in Figure 5.17. </p>
 <p>例如，让我们扩展我们的机器人，以便在没有要收集的对象时它可以做一些有用的事情。 这是有意义的，它会利用这个机会去充电，而不是站在那里等待电池电量消失。 新的状态机如图5.17所示。</p>
-<p>![image-20181121112706544](/Users/zhangmo/Library/Application Support/typora-user-images/image-20181121112706544.png)</p>
+<figure class="image-bubble">
+                <div class="img-lightbox">
+                    <div class="overlay"></div>
+                    <img src="/Users/zhangmo/Library/Application" alt="image-20181121112706544" title="Support/typora-user-images/image-20181121112706544.png">
+                </div>
+                <div class="image-caption">Support/typora-user-images/image-20181121112706544.png</div>
+            </figure>
+
 <p>Notice that we’ve added one more transition: from the “Search” state right out into the “Refuel” state. This transition is triggered when there are no objects to collect. Because we transitioned directly out of this state, the inner state machine no longer has any state. When the robot has refuelled and the alarm system transitions back to cleaning, the robot will not have a record of where to pick up from, so it must start the state machine again from its initial node (“Search”). </p>
 <p>请注意，我们又添加了一个转换：从“搜索”状态直接进入“加油”状态。 没有要收集的对象时会触发此转换。 因为我们直接从这个状态转换，内部状态机不再具有任何状态。 当机器人加满了油并且报警系统转换回清洁时，机器人将无法记录从哪里取货，因此它必须从其初始节点（“搜索”）再次启动状态机。</p>
 <h5 id="The-Problem-：问题"><a href="#The-Problem-：问题" class="headerlink" title="The Problem ：问题"></a>The Problem ：问题</h5><p>We’d like an implementation of a state machine system that supports hierarchical state machines. We’d also like transitions that pass between different layers of the machine. </p>
@@ -363,7 +408,14 @@
 <p>系统的第一部分返回当前状态。 结果是状态列表，从层次结构的最高到最低。 状态机要求其当前状态返回其层次结构。 如果状态是终端状态，则返回自身; 否则，它返回自身并从其当前状态向其添加状态层次结构。</p>
 <p>In Figure 5.18 the current state is [State L, State A]. </p>
 <p>在图5.18中，当前状态是[状态L，状态A]。</p>
-<p>![image-20181121113748202](/Users/zhangmo/Library/Application Support/typora-user-images/image-20181121113748202.png)</p>
+<figure class="image-bubble">
+                <div class="img-lightbox">
+                    <div class="overlay"></div>
+                    <img src="/Users/zhangmo/Library/Application" alt="image-20181121113748202" title="Support/typora-user-images/image-20181121113748202.png">
+                </div>
+                <div class="image-caption">Support/typora-user-images/image-20181121113748202.png</div>
+            </figure>
+
 <p>The second part of the hierarchical state machine is its update. In the original state machine we assumed that each state machine started off in its initial state. Because the state machine always transitioned from one state to another, there was never any need to check if there was no state. State machines in a hierarchy can be in no state; they may have a cross hierarchy transition. The first stage of the update, then, is to check if the state machine has a state. If not, it should enter its initial state. </p>
 <p>分层状态机的第二部分是它的更新。 在原始状态机中，我们假设每个状态机在其初始状态下启动。 因为状态机总是从一个状态转换到另一个状态，所以从来没有必要检查是否没有状态。 <strong>层次结构中的状态机可以处于无状态; 他们可能有一个跨层次的过渡。 然后，更新的第一阶段是检查状态机是否具有状态。 如果没有，它应该进入其初始状态。</strong></p>
 <p>Next, we check if the current state has a transition it wants to execute. Transitions at higher levels in the hierarchy always take priority, and the transitions of sub-states will not be considered if the super-state has one that triggers. </p>
@@ -392,7 +444,14 @@
 <p>幸运的是，这种算法至少与实现一样难以解释。 为了了解它的工作原理和原因，让我们来看一个例子。</p>
 <h5 id="Examples-：例子"><a href="#Examples-：例子" class="headerlink" title="Examples ：例子"></a>Examples ：例子</h5><p>Figure 5.19 shows a hierarchical state machine that we will use as an example.</p>
 <p>图5.19显示了我们将用作示例的分层状态机。</p>
-<p>![image-20181121133703875](/Users/zhangmo/Library/Application Support/typora-user-images/image-20181121133703875.png)</p>
+<figure class="image-bubble">
+                <div class="img-lightbox">
+                    <div class="overlay"></div>
+                    <img src="/Users/zhangmo/Library/Application" alt="image-20181121133703875" title="Support/typora-user-images/image-20181121133703875.png">
+                </div>
+                <div class="image-caption">Support/typora-user-images/image-20181121133703875.png</div>
+            </figure>
+
 <p>To clarify the actions returned for each example, we will say S-entry is the set of entry actions for state S, similarly S-active and S-exit for active and exit actions. In transitions we use the same format 1-actions for the actions associated with transi- tion 1. </p>
 <p>为了阐明每个示例返回的操作，我们将说S-entry是状态S的入口操作集，类似于活动和退出操作的S-active和S-exit。 在转换中，我们对与转换1相关的操作使用相同的格式1动作。</p>
 <p>These examples can appear confusing if you skim them through. If you’re having trouble with the algorithm, I urge you to follow through step by step with both the diagram above and the pseudo-code from the next section. </p>
@@ -447,7 +506,14 @@
 <p>我们可以通过用状态替换状态转换的方式来组合这两种方法决策树。树的叶子，而不是像以前那样的动作，是向新状态的过渡。</p>
 <p>A simple state machine might look like Figure 5.20. </p>
 <p>一个简单的状态机可能如图5.20所示。</p>
-<p>![image-20181122004826206](/Users/zhangmo/Library/Application Support/typora-user-images/image-20181122004826206.png)</p>
+<figure class="image-bubble">
+                <div class="img-lightbox">
+                    <div class="overlay"></div>
+                    <img src="/Users/zhangmo/Library/Application" alt="image-20181122004826206" title="Support/typora-user-images/image-20181122004826206.png">
+                </div>
+                <div class="image-caption">Support/typora-user-images/image-20181122004826206.png</div>
+            </figure>
+
 <p>The diamond symbol is also part of the UML state chart diagram format, repre- senting a decision. In UML there is no differentiation between decisions and transi- tions, and the decisions themselves are usually not labelled. </p>
 <p>In this book I’ve labelled the decisions with the test that they perform, which is clearer for our needs. </p>
 <p>菱形符号也是UML状态图表格式的一部分，代表了一个决定。在UML中，决策和转换之间没有区别，决策本身通常没有标记。</p>
@@ -456,7 +522,14 @@
 <p>当处于“警报”状态时，哨兵只有一个可能的过渡：通过决策树。它可以快速确定哨兵是否可以看到玩家。如果哨兵无法看到该玩家，则转换结束并且不会达到新的状态。如果哨兵能够看到玩家，则决策树根据玩家的距离做出选择。根据此选择的结果，可能会达到两种不同的状态：“提升警报”或“防御”。只有在进一步测试（与玩家的距离）通过后才能达到后者。</p>
 <p>To implement the same state machine without the decision nodes, the state ma- chine in Figure 5.21 would be required. Note that now we have two very complex con- ditions and both have to evaluate the same information (distance to the player and distance to the alarm point). If the condition involved a time-consuming algorithm (such as the line of sight test in our example), then the decision tree implementation<br>would be significantly faster.</p>
 <p>要在没有决策节点的情况下实现相同的状态机，将需要图5.21中的状态机。请注意，现在我们有两个非常复杂的条件，两者都必须评估相同的信息（到播放器的距离和到报警点的距离）。如果条件涉及耗时的算法（例如我们示例中的视线测试），那么决策树实现将明显更快。</p>
-<p>![image-20181122004853810](/Users/zhangmo/Library/Application Support/typora-user-images/image-20181122004853810.png)</p>
+<figure class="image-bubble">
+                <div class="img-lightbox">
+                    <div class="overlay"></div>
+                    <img src="/Users/zhangmo/Library/Application" alt="image-20181122004853810" title="Support/typora-user-images/image-20181122004853810.png">
+                </div>
+                <div class="image-caption">Support/typora-user-images/image-20181122004853810.png</div>
+            </figure>
+
 <h5 id="Pseudo-Code-：伪代码-2"><a href="#Pseudo-Code-：伪代码-2" class="headerlink" title="Pseudo-Code ：伪代码"></a>Pseudo-Code ：伪代码</h5><p>We can incorporate a decision tree into the state machine framework we’ve developed so far. </p>
 <p>我们可以将决策树合并到我们迄今为止开发的状态机框架中。</p>
 <p>The decision tree, as before, consists of DecisionTreeNodes. These may be decisions (using the same Decision class as before) or TargetStates (which replace the Action class in the basic decision tree). TargetStates hold the state to transition to and can contain actions. As before, if a branch of the decision tree should lead to no result, then we can have some null value at the leaf of the tree. </p>

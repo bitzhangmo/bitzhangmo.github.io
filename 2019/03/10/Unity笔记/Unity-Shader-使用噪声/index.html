@@ -209,20 +209,69 @@
 
 <h3 id="消融效果的实现："><a href="#消融效果的实现：" class="headerlink" title="消融效果的实现："></a>消融效果的实现：</h3><p>通过噪声纹理采样与设置好的消融属性相减，将算得结果小于0的像素剔除。对于剩下的像素进行正常的光照计算，然后在设定好的宽度范围内对两种溶解颜色进行插值，再将混合得到的颜色与环境光和漫反射光照混合输出。</p>
 <p>后面还需要加一个用于处理阴影的Pass，否则已经消融的部分会投射影子。</p>
-<p><img src="https://wx3.sinaimg.cn/mw690/007CSzD7ly1g0yn0oximmj313k0s6qso.jpg" alt=""></p>
-<h4 id="定义属性："><a href="#定义属性：" class="headerlink" title="定义属性："></a>定义属性：</h4><p><img src="https://wx2.sinaimg.cn/mw690/007CSzD7ly1g0yn0ofirkj30yo0igdjv.jpg" alt="消融的属性"></p>
+<figure class="image-bubble">
+                <div class="img-lightbox">
+                    <div class="overlay"></div>
+                    <img src="https://wx3.sinaimg.cn/mw690/007CSzD7ly1g0yn0oximmj313k0s6qso.jpg" alt="" title="">
+                </div>
+                <div class="image-caption"></div>
+            </figure>
+
+<h4 id="定义属性："><a href="#定义属性：" class="headerlink" title="定义属性："></a>定义属性：</h4><figure class="image-bubble">
+                <div class="img-lightbox">
+                    <div class="overlay"></div>
+                    <img src="https://wx2.sinaimg.cn/mw690/007CSzD7ly1g0yn0ofirkj30yo0igdjv.jpg" alt="消融的属性" title="">
+                </div>
+                <div class="image-caption">消融的属性</div>
+            </figure>
+
 <h4 id="定义消融需要的Pass："><a href="#定义消融需要的Pass：" class="headerlink" title="定义消融需要的Pass："></a>定义消融需要的Pass：</h4><p>为了得到正确的光照，我们设置了Pass的LightMode和multi_compile_fwdbase的编译指令。</p>
 <p>我们使用Cull off来关闭Shader的<strong>面片剔除</strong>，来使得其正面和背面都会被渲染。</p>
-<p><img src="https://wx4.sinaimg.cn/mw690/007CSzD7ly1g0yn0o52rtj30ww0jy76n.jpg" alt="设置正确的光照模式与渲染队列"></p>
-<h4 id="定义顶点着色器："><a href="#定义顶点着色器：" class="headerlink" title="定义顶点着色器："></a>定义顶点着色器：</h4><p><img src="https://wx4.sinaimg.cn/mw690/007CSzD7ly1g0yn0o8u6rj30x60r4dko.jpg" alt="定义顶点着色器"></p>
-<h4 id="通过片元着色器实现模拟消融效果："><a href="#通过片元着色器实现模拟消融效果：" class="headerlink" title="通过片元着色器实现模拟消融效果："></a>通过片元着色器实现模拟消融效果：</h4><p><img src="https://wx4.sinaimg.cn/mw690/007CSzD7ly1g0yn0oqz2xj31100u0gv7.jpg" alt="实现片元着色器"></p>
+<figure class="image-bubble">
+                <div class="img-lightbox">
+                    <div class="overlay"></div>
+                    <img src="https://wx4.sinaimg.cn/mw690/007CSzD7ly1g0yn0o52rtj30ww0jy76n.jpg" alt="设置正确的光照模式与渲染队列" title="">
+                </div>
+                <div class="image-caption">设置正确的光照模式与渲染队列</div>
+            </figure>
+
+<h4 id="定义顶点着色器："><a href="#定义顶点着色器：" class="headerlink" title="定义顶点着色器："></a>定义顶点着色器：</h4><figure class="image-bubble">
+                <div class="img-lightbox">
+                    <div class="overlay"></div>
+                    <img src="https://wx4.sinaimg.cn/mw690/007CSzD7ly1g0yn0o8u6rj30x60r4dko.jpg" alt="定义顶点着色器" title="">
+                </div>
+                <div class="image-caption">定义顶点着色器</div>
+            </figure>
+
+<h4 id="通过片元着色器实现模拟消融效果："><a href="#通过片元着色器实现模拟消融效果：" class="headerlink" title="通过片元着色器实现模拟消融效果："></a>通过片元着色器实现模拟消融效果：</h4><figure class="image-bubble">
+                <div class="img-lightbox">
+                    <div class="overlay"></div>
+                    <img src="https://wx4.sinaimg.cn/mw690/007CSzD7ly1g0yn0oqz2xj31100u0gv7.jpg" alt="实现片元着色器" title="">
+                </div>
+                <div class="image-caption">实现片元着色器</div>
+            </figure>
+
 <ul>
 <li>首先对噪声纹理进行采样，并将结果和用于控制消融程度的属性相减，传递给clip函数，将结果小于0的像素剔除。</li>
 <li>对于剩下的像素，进行正常的光照计算。我们根据漫反射纹理获得反射率albedo，并由此计算环境光照与漫反射光照。</li>
 <li>计算烧焦颜色：在宽度为<code>_LineWidth</code>的范围内模拟一个烧焦的颜色变化，使用smoothstep来计算混合系数（当t为1时，表明该像素位于消融的边界处；当t为0时，表明该像素为正常的模型颜色），插值用来模拟一个烧焦效果：使用t来混合两种火焰颜色。同样使用step函数来保证剔除。</li>
 </ul>
-<h4 id="自定义投射阴影的Pass："><a href="#自定义投射阴影的Pass：" class="headerlink" title="自定义投射阴影的Pass："></a>自定义投射阴影的Pass：</h4><p><img src="https://wx4.sinaimg.cn/mw690/007CSzD7ly1g0yn0o0y8xj30lq0d4mya.jpg" alt="自定义投射阴影的Pass"></p>
-<p><img src="https://wx3.sinaimg.cn/mw690/007CSzD7ly1g0yn0o4ipcj30t80n8acq.jpg" alt=""></p>
+<h4 id="自定义投射阴影的Pass："><a href="#自定义投射阴影的Pass：" class="headerlink" title="自定义投射阴影的Pass："></a>自定义投射阴影的Pass：</h4><figure class="image-bubble">
+                <div class="img-lightbox">
+                    <div class="overlay"></div>
+                    <img src="https://wx4.sinaimg.cn/mw690/007CSzD7ly1g0yn0o0y8xj30lq0d4mya.jpg" alt="自定义投射阴影的Pass" title="">
+                </div>
+                <div class="image-caption">自定义投射阴影的Pass</div>
+            </figure>
+
+<figure class="image-bubble">
+                <div class="img-lightbox">
+                    <div class="overlay"></div>
+                    <img src="https://wx3.sinaimg.cn/mw690/007CSzD7ly1g0yn0o4ipcj30t80n8acq.jpg" alt="" title="">
+                </div>
+                <div class="image-caption"></div>
+            </figure>
+
 <p>同样使用clip函数来剔除片元，然后使用内置宏<code>SHADOW_CASTER_FRAGMENT()</code>来完成阴影投射，将结果输出到深度图和阴影映射纹理中。</p>
 <h3 id="水波效果："><a href="#水波效果：" class="headerlink" title="水波效果："></a>水波效果：</h3><h3 id="全局雾效："><a href="#全局雾效：" class="headerlink" title="全局雾效："></a>全局雾效：</h3><h3 id="生成噪声："><a href="#生成噪声：" class="headerlink" title="生成噪声："></a>生成噪声：</h3><p><strong>噪声是怎么生成的</strong>：<a href="https://blog.csdn.net/candycat1992/article/details/50346469" target="_blank" rel="noopener">https://blog.csdn.net/candycat1992/article/details/50346469</a></p>
 <ul>
