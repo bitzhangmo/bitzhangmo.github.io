@@ -1,0 +1,675 @@
+<!DOCTYPE html>
+<html>
+<head>
+    
+
+    
+
+    
+
+
+
+    <meta charset="utf-8">
+    
+    
+    
+    
+    <title>[Unity] U3D网络开发实战（1） | zhangMo Blog</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+    
+    <meta name="theme-color" content="#3F51B5">
+    
+    
+    <meta name="keywords" content="Unity,计算机网络">
+    <meta name="description" content="第二章：分身有术：异步和多路复用">
+<meta name="keywords" content="Unity,计算机网络">
+<meta property="og:type" content="article">
+<meta property="og:title" content="[Unity] U3D网络开发实战（1）">
+<meta property="og:url" content="https:&#x2F;&#x2F;bitzhangmo.github.io&#x2F;2019&#x2F;05&#x2F;11&#x2F;Unity%E7%AC%94%E8%AE%B0&#x2F;Unity-U3D%E7%BD%91%E7%BB%9C%E5%BC%80%E5%8F%91%E5%AE%9E%E6%88%98%EF%BC%881%EF%BC%89&#x2F;index.html">
+<meta property="og:site_name" content="zhangMo Blog">
+<meta property="og:description" content="第二章：分身有术：异步和多路复用">
+<meta property="og:locale" content="zh-CN">
+<meta property="og:updated_time" content="2019-05-13T16:48:27.444Z">
+<meta name="twitter:card" content="summary">
+    
+    <link rel="shortcut icon" href="/favicon.ico">
+    <link rel="stylesheet" href="//unpkg.com/hexo-theme-material-indigo@latest/css/style.css">
+    <script>window.lazyScripts=[]</script>
+
+    <!-- custom head -->
+    
+
+</head>
+
+<body>
+    <div id="loading" class="active"></div>
+
+    <aside id="menu" class="hide" >
+  <div class="inner flex-row-vertical">
+    <a href="javascript:;" target="_blank" rel="noopener" class="header-icon waves-effect waves-circle waves-light" id="menu-off">
+        <i class="icon icon-lg icon-close"></i>
+    </a>
+    <div class="brand-wrap" style="background-image:url(/img/brand.jpg)">
+      <div class="brand">
+        <a href="/" class="avatar waves-effect waves-circle waves-light">
+          <img src="/img/avatar.jpg">
+        </a>
+        <hgroup class="introduce">
+          <h5 class="nickname">zhangMo</h5>
+          <a href="mailto:634206017@qq.com" target="_blank" rel="noopener" title="634206017@qq.com" class="mail">634206017@qq.com</a>
+        </hgroup>
+      </div>
+    </div>
+    <div class="scroll-wrap flex-col">
+      <ul class="nav">
+        
+            <li class="waves-block waves-effect">
+              <a href="/"  >
+                <i class="icon icon-lg icon-home"></i>
+                主页
+              </a>
+            </li>
+        
+            <li class="waves-block waves-effect">
+              <a href="/archives"  >
+                <i class="icon icon-lg icon-archives"></i>
+                Archives
+              </a>
+            </li>
+        
+            <li class="waves-block waves-effect">
+              <a href="/tags"  >
+                <i class="icon icon-lg icon-tags"></i>
+                Tags
+              </a>
+            </li>
+        
+            <li class="waves-block waves-effect">
+              <a href="/categories"  >
+                <i class="icon icon-lg icon-th-list"></i>
+                Categories
+              </a>
+            </li>
+        
+            <li class="waves-block waves-effect">
+              <a href="https://github.com/yscoder" target="_blank" >
+                <i class="icon icon-lg icon-github"></i>
+                Github
+              </a>
+            </li>
+        
+            <li class="waves-block waves-effect">
+              <a href="http://www.weibo.com/ysweb" target="_blank" >
+                <i class="icon icon-lg icon-weibo"></i>
+                Weibo
+              </a>
+            </li>
+        
+            <li class="waves-block waves-effect">
+              <a href="/custom"  >
+                <i class="icon icon-lg icon-link"></i>
+                测试
+              </a>
+            </li>
+        
+      </ul>
+    </div>
+  </div>
+</aside>
+
+    <main id="main">
+        <header class="top-header" id="header">
+    <div class="flex-row">
+        <a href="javascript:;" target="_blank" rel="noopener" class="header-icon waves-effect waves-circle waves-light on" id="menu-toggle">
+          <i class="icon icon-lg icon-navicon"></i>
+        </a>
+        <div class="flex-col header-title ellipsis">[Unity] U3D网络开发实战（1）</div>
+        
+        <div class="search-wrap" id="search-wrap">
+            <a href="javascript:;" target="_blank" rel="noopener" class="header-icon waves-effect waves-circle waves-light" id="back">
+                <i class="icon icon-lg icon-chevron-left"></i>
+            </a>
+            <input type="text" id="key" class="search-input" autocomplete="off" placeholder="输入感兴趣的关键字">
+            <a href="javascript:;" target="_blank" rel="noopener" class="header-icon waves-effect waves-circle waves-light" id="search">
+                <i class="icon icon-lg icon-search"></i>
+            </a>
+        </div>
+        
+        
+        <a href="javascript:;" target="_blank" rel="noopener" class="header-icon waves-effect waves-circle waves-light" id="menuShare">
+            <i class="icon icon-lg icon-share-alt"></i>
+        </a>
+        
+    </div>
+</header>
+<header class="content-header post-header">
+
+    <div class="container fade-scale">
+        <h1 class="title">[Unity] U3D网络开发实战（1）</h1>
+        <h5 class="subtitle">
+            
+                <time datetime="2019-05-11T03:53:15.000Z" itemprop="datePublished" class="page-time">
+  2019-05-11
+</time>
+
+
+	<ul class="article-category-list"><li class="article-category-list-item"><a class="article-category-list-link" href="/categories/%E8%AF%BB%E4%B9%A6%E7%AC%94%E8%AE%B0/">读书笔记</a></li></ul>
+
+            
+        </h5>
+    </div>
+
+    
+
+
+</header>
+
+
+<div class="container body-wrap">
+    
+    <aside class="post-widget">
+        <nav class="post-toc-wrap post-toc-shrink" id="post-toc">
+            <h4>TOC</h4>
+            <ol class="post-toc"><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#什么样的代码算是异步代码"><span class="post-toc-number">1.</span> <span class="post-toc-text">什么样的代码算是异步代码</span></a></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#异步客户端"><span class="post-toc-number">2.</span> <span class="post-toc-text">异步客户端</span></a><ol class="post-toc-child"><li class="post-toc-item post-toc-level-4"><a class="post-toc-link" href="#异步Connect"><span class="post-toc-number">2.1.</span> <span class="post-toc-text">异步Connect</span></a></li><li class="post-toc-item post-toc-level-4"><a class="post-toc-link" href="#实例："><span class="post-toc-number">2.2.</span> <span class="post-toc-text">实例：</span></a></li><li class="post-toc-item post-toc-level-4"><a class="post-toc-link" href="#异步Receive"><span class="post-toc-number">2.3.</span> <span class="post-toc-text">异步Receive</span></a></li><li class="post-toc-item post-toc-level-4"><a class="post-toc-link" href="#异步Send"><span class="post-toc-number">2.4.</span> <span class="post-toc-text">异步Send</span></a></li></ol></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#异步服务端"><span class="post-toc-number">3.</span> <span class="post-toc-text">异步服务端</span></a><ol class="post-toc-child"><li class="post-toc-item post-toc-level-4"><a class="post-toc-link" href="#管理客户端"><span class="post-toc-number">3.1.</span> <span class="post-toc-text">管理客户端</span></a></li><li class="post-toc-item post-toc-level-4"><a class="post-toc-link" href="#代码"><span class="post-toc-number">3.2.</span> <span class="post-toc-text">代码</span></a></li><li class="post-toc-item post-toc-level-4"><a class="post-toc-link" href="#代码解释"><span class="post-toc-number">3.3.</span> <span class="post-toc-text">代码解释</span></a></li></ol></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#做个聊天室"><span class="post-toc-number">4.</span> <span class="post-toc-text">做个聊天室</span></a></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#状态检测Poll"><span class="post-toc-number">5.</span> <span class="post-toc-text">状态检测Poll</span></a><ol class="post-toc-child"><li class="post-toc-item post-toc-level-4"><a class="post-toc-link" href="#什么是Poll"><span class="post-toc-number">5.1.</span> <span class="post-toc-text">什么是Poll</span></a></li><li class="post-toc-item post-toc-level-4"><a class="post-toc-link" href="#Poll客户端"><span class="post-toc-number">5.2.</span> <span class="post-toc-text">Poll客户端</span></a></li></ol></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#多路复用Select"><span class="post-toc-number">6.</span> <span class="post-toc-text">多路复用Select</span></a><ol class="post-toc-child"><li class="post-toc-item post-toc-level-4"><a class="post-toc-link" href="#什么是多路复用"><span class="post-toc-number">6.1.</span> <span class="post-toc-text">什么是多路复用</span></a></li></ol></li></ol>
+        </nav>
+    </aside>
+
+
+<article id="post-Unity笔记/Unity-U3D网络开发实战（1）"
+  class="post-article article-type-post fade" itemprop="blogPost">
+
+    <div class="post-card">
+        <h1 class="post-card-title">[Unity] U3D网络开发实战（1）</h1>
+        <div class="post-meta">
+            <time class="post-time" title="2019-05-11 11:53:15" datetime="2019-05-11T03:53:15.000Z"  itemprop="datePublished">2019-05-11</time>
+
+            
+	<ul class="article-category-list"><li class="article-category-list-item"><a class="article-category-list-link" href="/categories/%E8%AF%BB%E4%B9%A6%E7%AC%94%E8%AE%B0/">读书笔记</a></li></ul>
+
+
+
+            
+<span id="busuanzi_container_page_pv" title="文章总阅读量" style='display:none'>
+    <i class="icon icon-eye icon-pr"></i><span id="busuanzi_value_page_pv"></span>
+</span>
+
+
+        </div>
+        <div class="post-content" id="post-content" itemprop="postContent">
+            <p>第二章：分身有术：异步和多路复用</p>
+<a id="more"></a>
+
+<h3 id="什么样的代码算是异步代码"><a href="#什么样的代码算是异步代码" class="headerlink" title="什么样的代码算是异步代码"></a>什么样的代码算是异步代码</h3><p>如果想实现一个5秒后响铃的方法，可以：</p>
+<ol>
+<li><p>暂停当前线程5秒，然后响铃：</p>
+<p><code>System.Threading.Thread.Sleep(5000);</code></p>
+</li>
+<li><p>使用多线程技术，异步回调执行响铃函数：</p>
+<p><code>Timer timer = new Timer(TimeOut,null,5000,0);</code></p>
+</li>
+</ol>
+<h3 id="异步客户端"><a href="#异步客户端" class="headerlink" title="异步客户端"></a>异步客户端</h3><h4 id="异步Connect"><a href="#异步Connect" class="headerlink" title="异步Connect"></a>异步Connect</h4><p>每一个同步API对应着两个异步API，分别是在原名称前面加上Begin和End。客户端发起连接时，如果网络不好或者服务端没有回应，可会断会被卡住一段时间（指同步Connect）。若使用异步程序，则可以防止程序卡住，其核心的API BeginConnect的函数原型如下：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">public IAsyncResult BeginConnect(string host,int port,AsyncCallback requestCallback,object state)</span><br></pre></td></tr></table></figure>
+
+<table>
+<thead>
+<tr>
+<th>参数</th>
+<th>说明</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>host</td>
+<td>远程主机的名称（IP），如”127.0.0.1”</td>
+</tr>
+<tr>
+<td>port</td>
+<td>远程主机的端口号，如”8888”</td>
+</tr>
+<tr>
+<td>requestCallback</td>
+<td>一个AsyncCallback委托，即回调函数，回调函数的参数必须是这样的形式：void ConnectCallback(IAsyncResult ar)</td>
+</tr>
+<tr>
+<td>state</td>
+<td>一个用户定义对象，可包含连接操纵的相关信息。此对象会被传递给回调函数</td>
+</tr>
+</tbody></table>
+<p>EndConnect的函数原型如下。在BeginConnect的回调函数中调用EndConnect，可完成连接。</p>
+<p><code>public void EndConnect(IAsyncResult asyncResult)</code></p>
+<h4 id="实例："><a href="#实例：" class="headerlink" title="实例："></a>实例：</h4><figure class="highlight csharp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">using</span> System.Collections;</span><br><span class="line"><span class="keyword">using</span> System.Collections.Generic;</span><br><span class="line"><span class="keyword">using</span> UnityEngine;</span><br><span class="line"><span class="keyword">using</span> System.Net.Sockets;</span><br><span class="line"><span class="keyword">using</span> UnityEngine.UI;</span><br><span class="line"><span class="keyword">using</span> System;</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="keyword">public</span> <span class="keyword">class</span> <span class="title">Chap2_Echo</span> : <span class="title">MonoBehaviour</span> &#123;</span><br><span class="line"></span><br><span class="line">	<span class="comment">// 定义套接字</span></span><br><span class="line">	Socket socket;</span><br><span class="line">	<span class="comment">// UGUI</span></span><br><span class="line">	<span class="keyword">public</span> InputField inputField;</span><br><span class="line">	<span class="keyword">public</span> Text text;</span><br><span class="line"></span><br><span class="line">	<span class="comment">// 点击连接按钮</span></span><br><span class="line">	<span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">Connection</span>(<span class="params"></span>)</span></span><br><span class="line"><span class="function"></span>	&#123;</span><br><span class="line">		<span class="comment">// Socket</span></span><br><span class="line">		socket = <span class="keyword">new</span> Socket(AddressFamily.InterNetwork,SocketType.Stream,ProtocolType.Tcp);</span><br><span class="line">		<span class="comment">// Connect</span></span><br><span class="line">		socket.BeginConnect(<span class="string">"127.0.0.1"</span>,<span class="number">8888</span>,ConnectCallback,socket);</span><br><span class="line">	&#125;</span><br><span class="line">	<span class="comment">// 点击发送按钮</span></span><br><span class="line">	<span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">Send</span>(<span class="params"></span>)</span></span><br><span class="line"><span class="function"></span>	&#123;</span><br><span class="line">		<span class="comment">// Send</span></span><br><span class="line">		<span class="keyword">string</span> sendStr = inputField.text;</span><br><span class="line">		<span class="keyword">byte</span>[] sendBytes = System.Text.Encoding.Default.GetBytes(sendStr);</span><br><span class="line">		socket.Send(sendBytes);</span><br><span class="line"></span><br><span class="line">		<span class="comment">// Reveice</span></span><br><span class="line">		<span class="keyword">byte</span>[] readBuff = <span class="keyword">new</span> <span class="keyword">byte</span>[<span class="number">1024</span>];</span><br><span class="line">		<span class="keyword">int</span> count = socket.Receive(readBuff);</span><br><span class="line">		<span class="keyword">string</span> recvStr = System.Text.Encoding.Default.GetString(readBuff,<span class="number">0</span>,count);</span><br><span class="line"></span><br><span class="line">		text.text = recvStr;</span><br><span class="line"></span><br><span class="line">		<span class="comment">// Close</span></span><br><span class="line">		socket.Close();</span><br><span class="line">	&#125;</span><br><span class="line"></span><br><span class="line">	<span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">ConnectCallback</span>(<span class="params">IAsyncResult ar</span>)</span></span><br><span class="line"><span class="function"></span>	&#123;</span><br><span class="line">		<span class="keyword">try</span></span><br><span class="line">		&#123;</span><br><span class="line">			Socket socket = (Socket) ar.AsyncState;</span><br><span class="line">			socket.EndConnect(ar);</span><br><span class="line">			Debug.Log(<span class="string">"Socket Connect Succ"</span>);</span><br><span class="line">		&#125;</span><br><span class="line">		<span class="keyword">catch</span> (SocketException ex)</span><br><span class="line">		&#123;</span><br><span class="line">			Debug.Log(<span class="string">"Socket Connect fail"</span> + ex.ToString());</span><br><span class="line">		&#125;</span><br><span class="line">	&#125;</span><br><span class="line"></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h4 id="异步Receive"><a href="#异步Receive" class="headerlink" title="异步Receive"></a>异步Receive</h4><p>与BeginConnect相似，BeginReceive用于实现异步数据的接收。</p>
+<p><code>public IAsyncResult BeginReceive(byte[] buffer,int offset,int size,SocketFlags socketFlags,AsyncCallback callback,object state)</code></p>
+<table>
+<thead>
+<tr>
+<th>参数</th>
+<th>说明</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>buffer</td>
+<td>Byte类型的数组，它存储接收到的数据</td>
+</tr>
+<tr>
+<td>offset</td>
+<td>buffer中存储的数据的位置，该位置从0开始计数</td>
+</tr>
+<tr>
+<td>size</td>
+<td>最多接收的字节数</td>
+</tr>
+<tr>
+<td>socketFlags</td>
+<td>SocketFlags值的按位组合，这里设置为0</td>
+</tr>
+<tr>
+<td>callback</td>
+<td>回调函数，一个AsyncCallback委托</td>
+</tr>
+<tr>
+<td>state</td>
+<td>一个用户定义对象，其中包含接收操作的相关信息。当操作完成时，此对象会被传递给EndReceive委托</td>
+</tr>
+</tbody></table>
+<p>对应的EndReceive的原型如下，它的返回值代表了接收到的字节数。</p>
+<p><code>public int EndReceive(IAsyncResult asyncResult)</code></p>
+<h4 id="异步Send"><a href="#异步Send" class="headerlink" title="异步Send"></a>异步Send</h4><p>TCP是可靠连接，当接收方没有收到数据时，发送方会重新发送数据，直至确认接收方收到数据为止。</p>
+<p>在操作系统内部，每个Socket都会有一个发送缓冲区，用于保存那些接收方还没有确认的数据。</p>
+<p>发送缓冲区的长度是有限的，如果缓冲区满，那么Send就会被阻塞，知道缓冲区的数据被确认腾出空间。</p>
+<p>Send过程只是把书记放到发送缓冲区中，然后由操作系统负责重传、确认等步骤。Send方法返回只代表成功将数据放到发送缓冲区中，对方可能还没有收到数据。</p>
+<p>异步Send方法BeginSend的原型如下：</p>
+<p><code>public IAsyncResult BeginSend(byte[] buffer,int offset,int size,SocketFlags socketFlags,AsyncCallback callback,object state)</code></p>
+<table>
+<thead>
+<tr>
+<th>参数</th>
+<th>说明</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>buffer</td>
+<td>byte类型的数组，包含要发送的数据</td>
+</tr>
+<tr>
+<td>offset</td>
+<td>从buffer中的offset位置开始发送</td>
+</tr>
+<tr>
+<td>size</td>
+<td>要发送的字节数</td>
+</tr>
+<tr>
+<td>SocketFlags</td>
+<td>SocketFlags值的按位组合，这里设置为0</td>
+</tr>
+<tr>
+<td>callback</td>
+<td>回调函数，一个AsyncCallback索引</td>
+</tr>
+<tr>
+<td>state</td>
+<td>一个用户定义对象，其中包含发送操作的相关信息。当操作完成时，此对象会被传递给EndSend委托</td>
+</tr>
+</tbody></table>
+<h3 id="异步服务端"><a href="#异步服务端" class="headerlink" title="异步服务端"></a>异步服务端</h3><p>第一章的同步服务端程序同一时间只能处理一个客户端的请求，因为它会一直阻塞，等待某一个客户端的数据，无暇顾及其他客户端。</p>
+<h4 id="管理客户端"><a href="#管理客户端" class="headerlink" title="管理客户端"></a>管理客户端</h4><p>可以定义一个名为ClientState的类，用于保存一个客户端信息。ClientState类包含TCP连接所需Socket，以及应用于BeginReceive参数的读缓冲区readBuff。</p>
+<h4 id="代码"><a href="#代码" class="headerlink" title="代码"></a>代码</h4><figure class="highlight csharp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br><span class="line">78</span><br><span class="line">79</span><br><span class="line">80</span><br><span class="line">81</span><br><span class="line">82</span><br><span class="line">83</span><br><span class="line">84</span><br><span class="line">85</span><br><span class="line">86</span><br><span class="line">87</span><br><span class="line">88</span><br><span class="line">89</span><br><span class="line">90</span><br><span class="line">91</span><br><span class="line">92</span><br><span class="line">93</span><br><span class="line">94</span><br><span class="line">95</span><br><span class="line">96</span><br><span class="line">97</span><br><span class="line">98</span><br><span class="line">99</span><br><span class="line">100</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">using</span> System;</span><br><span class="line"><span class="keyword">using</span> System.Net;</span><br><span class="line"><span class="keyword">using</span> System.Net.Sockets;</span><br><span class="line"><span class="keyword">using</span> System.Collections.Generic;</span><br><span class="line"></span><br><span class="line"><span class="keyword">namespace</span> <span class="title">EchoSever</span></span><br><span class="line">&#123;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">class</span> <span class="title">ClientState</span></span><br><span class="line">    &#123;</span><br><span class="line">        <span class="keyword">public</span> Socket socket;</span><br><span class="line">        <span class="keyword">public</span> <span class="keyword">byte</span>[] readBuff = <span class="keyword">new</span> <span class="keyword">byte</span>[<span class="number">1024</span>];</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">class</span> <span class="title">MainClass</span></span><br><span class="line">    &#123;</span><br><span class="line">        <span class="comment">// 监听 Socket</span></span><br><span class="line">        <span class="keyword">static</span> Socket listenfd;</span><br><span class="line">        <span class="comment">// 客户端Socket及状态信息</span></span><br><span class="line">        <span class="keyword">static</span> Dictionary&lt;Socket, ClientState&gt; clients = <span class="keyword">new</span> Dictionary&lt;Socket, ClientState&gt;();</span><br><span class="line"></span><br><span class="line">        <span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">Main</span>(<span class="params"><span class="keyword">string</span>[] args</span>)</span></span><br><span class="line"><span class="function"></span>        &#123;</span><br><span class="line">            Console.WriteLine(<span class="string">"Hello World!"</span>);</span><br><span class="line"></span><br><span class="line">            <span class="comment">// Socket</span></span><br><span class="line">            Socket listenfd = <span class="keyword">new</span> Socket(AddressFamily.InterNetwork, SocketType.Stream, ProtocolType.Tcp);</span><br><span class="line"></span><br><span class="line">            <span class="comment">// Bind</span></span><br><span class="line">            IPAddress ipAdr = IPAddress.Parse(<span class="string">"127.0.0.1"</span>);</span><br><span class="line">            IPEndPoint iPEp = <span class="keyword">new</span> IPEndPoint(ipAdr, <span class="number">8888</span>);</span><br><span class="line">            listenfd.Bind(iPEp);</span><br><span class="line"></span><br><span class="line">            <span class="comment">// Listen</span></span><br><span class="line">            listenfd.Listen(<span class="number">0</span>);</span><br><span class="line">            Console.WriteLine(<span class="string">"[服务器]启动成功"</span>);</span><br><span class="line">            <span class="comment">// Accept</span></span><br><span class="line">            listenfd.BeginAccept(AcceptCallback, listenfd);</span><br><span class="line">            <span class="comment">// 等待</span></span><br><span class="line">            Console.ReadLine();</span><br><span class="line"></span><br><span class="line">        &#125;</span><br><span class="line"></span><br><span class="line">        <span class="comment">// Accept回调</span></span><br><span class="line">        <span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">AcceptCallback</span>(<span class="params">IAsyncResult ar</span>)</span></span><br><span class="line"><span class="function"></span>        &#123;</span><br><span class="line">            <span class="keyword">try</span></span><br><span class="line">            &#123;</span><br><span class="line">                Console.WriteLine(<span class="string">"[服务器]Accept"</span>);</span><br><span class="line">                Socket listenfd = (Socket)ar.AsyncState;</span><br><span class="line">                Socket clientfd = listenfd.EndAccept(ar);</span><br><span class="line"></span><br><span class="line">                <span class="comment">// clients列表</span></span><br><span class="line">                ClientState state = <span class="keyword">new</span> ClientState();</span><br><span class="line">                state.socket = clientfd;</span><br><span class="line">                clients.Add(clientfd, state);</span><br><span class="line"></span><br><span class="line">                <span class="comment">// 接收数据BeginReceive</span></span><br><span class="line">                clientfd.BeginReceive(state.readBuff, <span class="number">0</span>, <span class="number">1024</span>, <span class="number">0</span>, ReceiveCallback, state);</span><br><span class="line"></span><br><span class="line">                <span class="comment">// 继续Accept</span></span><br><span class="line">                listenfd.BeginAccept(AcceptCallback, listenfd);</span><br><span class="line">            &#125;</span><br><span class="line">            <span class="keyword">catch</span>(SocketException ex)</span><br><span class="line">            &#123;</span><br><span class="line">                Console.WriteLine(<span class="string">"Socket Accept fail"</span> + ex.ToString());</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line"></span><br><span class="line">        <span class="comment">// Receive 回调</span></span><br><span class="line">        <span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">ReceiveCallback</span>(<span class="params">IAsyncResult ar</span>)</span></span><br><span class="line"><span class="function"></span>        &#123;</span><br><span class="line">            <span class="keyword">try</span></span><br><span class="line">            &#123;</span><br><span class="line">                ClientState state = (ClientState)ar.AsyncState;</span><br><span class="line">                Socket clientfd = state.socket;</span><br><span class="line">                <span class="keyword">int</span> count = clientfd.EndReceive(ar);</span><br><span class="line"></span><br><span class="line">                <span class="comment">// 客户端关闭</span></span><br><span class="line">                <span class="keyword">if</span>(count == <span class="number">0</span>)</span><br><span class="line">                &#123;</span><br><span class="line">                    clientfd.Close();</span><br><span class="line">                    clients.Remove(clientfd);</span><br><span class="line">                    Console.WriteLine(<span class="string">"Socket Close"</span>);</span><br><span class="line">                    <span class="keyword">return</span>;</span><br><span class="line">                &#125;</span><br><span class="line"></span><br><span class="line">                <span class="keyword">string</span> recvStr = System.Text.Encoding.Default.GetString(state.readBuff, <span class="number">0</span>, count);</span><br><span class="line">                <span class="keyword">byte</span>[] sendBytes = System.Text.Encoding.Default.GetBytes(<span class="string">"echo"</span> + recvStr);</span><br><span class="line">                clientfd.Send(sendBytes);   <span class="comment">// 减少代码量，不用异步</span></span><br><span class="line">                clientfd.BeginReceive(state.readBuff, <span class="number">0</span>, <span class="number">1024</span>, <span class="number">0</span>, ReceiveCallback, state);</span><br><span class="line">            &#125;</span><br><span class="line">            <span class="keyword">catch</span>(SocketException ex)</span><br><span class="line">            &#123;</span><br><span class="line">                Console.WriteLine(<span class="string">"Socket Receive fail"</span> + ex.ToString());</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h4 id="代码解释"><a href="#代码解释" class="headerlink" title="代码解释"></a>代码解释</h4><ol>
+<li>AcceptCallback是BeginAccept的回调函数：<ol>
+<li>给新的连接分配ClientState，并把它添加到client列表中</li>
+<li>异步接收客户端数据</li>
+<li>再次调用BeginAccept实现循环</li>
+</ol>
+</li>
+<li>ReceiveCallback是BeginReceive的回调函数：<ol>
+<li>服务端收到消息后，回应客户端</li>
+<li>如果收到客户端关闭连接的信号<code>if(Count == 0)</code>，断开连接（当Receive返回值小于等于零时，表示Socket连接断开，可以关闭Socket）</li>
+<li>继续调用BeginReceive接收下一个数据</li>
+</ol>
+</li>
+</ol>
+<h3 id="做个聊天室"><a href="#做个聊天室" class="headerlink" title="做个聊天室"></a>做个聊天室</h3><h3 id="状态检测Poll"><a href="#状态检测Poll" class="headerlink" title="状态检测Poll"></a>状态检测Poll</h3><p>本节的目的是引入Poll来讲述单线程下的响应优化问题。</p>
+<h4 id="什么是Poll"><a href="#什么是Poll" class="headerlink" title="什么是Poll"></a>什么是Poll</h4><p>比起异步程序，同步程序更加简单明了，而且不会引发线程问题。只要在阻塞方法前加上一层判断，有数据可读才调用Receive，有数据可写才调用Send，这样就既能实现功能，又不会卡住程序了。</p>
+<p>Socket类提供的Poll方法原型如下：</p>
+<figure class="highlight csharp"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">public</span> <span class="keyword">bool</span> <span class="title">Poll</span>(<span class="params"><span class="keyword">int</span> microSeconds,SelectMode mode</span>)</span></span><br></pre></td></tr></table></figure>
+
+<ul>
+<li>MicroSeconds为等待回应的时间，以微秒为单位，如果该参数为-1，则一直等待，如果为0表示非阻塞。</li>
+<li>mode对应三种可选的模式，与Socket的可读写性以及连接成功与否有关。</li>
+</ul>
+<h4 id="Poll客户端"><a href="#Poll客户端" class="headerlink" title="Poll客户端"></a>Poll客户端</h4><h3 id="多路复用Select"><a href="#多路复用Select" class="headerlink" title="多路复用Select"></a>多路复用Select</h3><h4 id="什么是多路复用"><a href="#什么是多路复用" class="headerlink" title="什么是多路复用"></a>什么是多路复用</h4><p><strong>多路复用，就是同时处理多路信号，比如同时检测多个Socket的状态。</strong></p>
+<p>解决Poll服务端CPU占用率过高的方法：同时检测多个Socket的状态，在设置要监听的Socket列表后，如果有一个Socket可读（或可写，或发生错误信息），那就返回这些可读的Socket，如果没有可读的，那就阻塞。</p>
+<p>Select方法是实现多路复用的关键，它的原型如下：</p>
+<figure class="highlight csharp"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">Select</span>(<span class="params">IList checkRead,IList checkWrite,IList checkError,<span class="keyword">int</span> microSeconds</span>)</span></span><br></pre></td></tr></table></figure>
+
+<table>
+<thead>
+<tr>
+<th>参数</th>
+<th>说明</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>checkRead</td>
+<td>检测是否有可读的Socket列表</td>
+</tr>
+<tr>
+<td>checkWrite</td>
+<td>检测是否有可写的Socket列表</td>
+</tr>
+<tr>
+<td>checkError</td>
+<td>检测是否有出错的Socket列表</td>
+</tr>
+<tr>
+<td>microSeconds</td>
+<td>等待回应的时间，以微秒为单位，如果该参数为-1，则一直等待，如果为0表示非阻塞</td>
+</tr>
+</tbody></table>
+<p>原理：</p>
+<p>Select可以确定一个或多个Socket对象的状态，使用它时，需先将一个或多个套接字放入IList中。通过调用Select可检查Socket是否具有可读性、可写性或错误条件。在调用Select之后，Select将修改IList列表，仅保留那些满足条件的套接字。当没有任何满足条件的Socket时，程序将会阻塞，不占用CPU资源。</p>
+
+        </div>
+
+        <blockquote class="post-copyright">
+    
+    <div class="content">
+        
+<span class="post-time">
+    最后更新时间：<time datetime="2019-05-13T16:48:27.444Z" itemprop="dateUpdated">2019-05-14 00:48:27</time>
+</span><br>
+
+
+        
+        这里可以写作者留言，标签和 hexo 中所有变量及辅助函数等均可调用，示例：<a href="/2019/05/11/Unity%E7%AC%94%E8%AE%B0/Unity-U3D%E7%BD%91%E7%BB%9C%E5%BC%80%E5%8F%91%E5%AE%9E%E6%88%98%EF%BC%881%EF%BC%89/" target="_blank" rel="external">https://bitzhangmo.github.io/2019/05/11/Unity%E7%AC%94%E8%AE%B0/Unity-U3D%E7%BD%91%E7%BB%9C%E5%BC%80%E5%8F%91%E5%AE%9E%E6%88%98%EF%BC%881%EF%BC%89/</a>
+        
+    </div>
+    
+    <footer>
+        <a href="https://bitzhangmo.github.io">
+            <img src="/img/avatar.jpg" alt="zhangMo">
+            zhangMo
+        </a>
+    </footer>
+</blockquote>
+
+        
+<div class="page-reward">
+    <a id="rewardBtn" href="javascript:;" target="_blank" rel="noopener" class="page-reward-btn waves-effect waves-circle waves-light">赏</a>
+</div>
+
+
+
+        <div class="post-footer">
+            
+	<ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Unity/" rel="tag">Unity</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%BD%91%E7%BB%9C/" rel="tag">计算机网络</a></li></ul>
+
+
+            
+<div class="page-share-wrap">
+    
+
+<div class="page-share" id="pageShare">
+    <ul class="reset share-icons">
+      <li>
+        <a class="weibo share-sns" target="_blank" href="http://service.weibo.com/share/share.php?url=https://bitzhangmo.github.io/2019/05/11/Unity%E7%AC%94%E8%AE%B0/Unity-U3D%E7%BD%91%E7%BB%9C%E5%BC%80%E5%8F%91%E5%AE%9E%E6%88%98%EF%BC%881%EF%BC%89/&title=《[Unity] U3D网络开发实战（1）》 — zhangMo Blog&pic=https://bitzhangmo.github.io/img/avatar.jpg" data-title="微博">
+          <i class="icon icon-weibo"></i>
+        </a>
+      </li>
+      <li>
+        <a class="weixin share-sns wxFab" href="javascript:;" target="_blank" rel="noopener" data-title="微信">
+          <i class="icon icon-weixin"></i>
+        </a>
+      </li>
+      <li>
+        <a class="qq share-sns" target="_blank" href="http://connect.qq.com/widget/shareqq/index.html?url=https://bitzhangmo.github.io/2019/05/11/Unity%E7%AC%94%E8%AE%B0/Unity-U3D%E7%BD%91%E7%BB%9C%E5%BC%80%E5%8F%91%E5%AE%9E%E6%88%98%EF%BC%881%EF%BC%89/&title=《[Unity] U3D网络开发实战（1）》 — zhangMo Blog&source=第二章：分身有术：异步和多路复用" data-title=" QQ">
+          <i class="icon icon-qq"></i>
+        </a>
+      </li>
+      <li>
+        <a class="facebook share-sns" target="_blank" href="https://www.facebook.com/sharer/sharer.php?u=https://bitzhangmo.github.io/2019/05/11/Unity%E7%AC%94%E8%AE%B0/Unity-U3D%E7%BD%91%E7%BB%9C%E5%BC%80%E5%8F%91%E5%AE%9E%E6%88%98%EF%BC%881%EF%BC%89/" data-title=" Facebook">
+          <i class="icon icon-facebook"></i>
+        </a>
+      </li>
+      <li>
+        <a class="twitter share-sns" target="_blank" href="https://twitter.com/intent/tweet?text=《[Unity] U3D网络开发实战（1）》 — zhangMo Blog&url=https://bitzhangmo.github.io/2019/05/11/Unity%E7%AC%94%E8%AE%B0/Unity-U3D%E7%BD%91%E7%BB%9C%E5%BC%80%E5%8F%91%E5%AE%9E%E6%88%98%EF%BC%881%EF%BC%89/&via=https://bitzhangmo.github.io" data-title=" Twitter">
+          <i class="icon icon-twitter"></i>
+        </a>
+      </li>
+      <li>
+        <a class="google share-sns" target="_blank" href="https://plus.google.com/share?url=https://bitzhangmo.github.io/2019/05/11/Unity%E7%AC%94%E8%AE%B0/Unity-U3D%E7%BD%91%E7%BB%9C%E5%BC%80%E5%8F%91%E5%AE%9E%E6%88%98%EF%BC%881%EF%BC%89/" data-title=" Google+">
+          <i class="icon icon-google-plus"></i>
+        </a>
+      </li>
+    </ul>
+ </div>
+
+
+
+    <a href="javascript:;" target="_blank" rel="noopener" id="shareFab" class="page-share-fab waves-effect waves-circle">
+        <i class="icon icon-share-alt icon-lg"></i>
+    </a>
+</div>
+
+
+
+        </div>
+    </div>
+
+    
+<nav class="post-nav flex-row flex-justify-between">
+  
+    <div class="waves-block waves-effect prev">
+      <a href="/2019/05/15/Lua/Lua%E7%A8%8B%E5%BA%8F%E8%AE%BE%E8%AE%A1%EF%BC%881%EF%BC%89/" id="post-prev" class="post-nav-link">
+        <div class="tips"><i class="icon icon-angle-left icon-lg icon-pr"></i> Prev</div>
+        <h4 class="title">Lua程序设计（1）</h4>
+      </a>
+    </div>
+  
+
+  
+    <div class="waves-block waves-effect next">
+      <a href="/2019/05/09/Unity%E7%AC%94%E8%AE%B0/Unity-U3D%E7%BD%91%E7%BB%9C%E5%BC%80%E5%8F%91%E5%AE%9E%E6%88%98%EF%BC%880%EF%BC%89/" id="post-next" class="post-nav-link">
+        <div class="tips">Next <i class="icon icon-angle-right icon-lg icon-pl"></i></div>
+        <h4 class="title">[Unity] U3D网络开发实战（0）</h4>
+      </a>
+    </div>
+  
+</nav>
+
+
+
+    
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+</article>
+
+<div id="reward" class="page-modal reward-lay">
+    <a class="close" href="javascript:;" target="_blank" rel="noopener"><i class="icon icon-close"></i></a>
+    <h3 class="reward-title">
+        <i class="icon icon-quote-left"></i>
+        谢谢大爷~
+        <i class="icon icon-quote-right"></i>
+    </h3>
+    <div class="reward-content">
+        
+        <div class="reward-code">
+            <img id="rewardCode" src="/img/wechat.jpg" alt="打赏二维码">
+        </div>
+        
+        <label class="reward-toggle">
+            <input id="rewardToggle" type="checkbox" class="reward-toggle-check"
+                data-wechat="/img/wechat.jpg" data-alipay="/img/alipay.jpg">
+            <div class="reward-toggle-ctrol">
+                <span class="reward-toggle-item wechat">微信</span>
+                <span class="reward-toggle-label"></span>
+                <span class="reward-toggle-item alipay">支付宝</span>
+            </div>
+        </label>
+        
+    </div>
+</div>
+
+
+
+</div>
+
+        <footer class="footer">
+    <div class="top">
+        
+<p>
+    <span id="busuanzi_container_site_uv" style='display:none'>
+        站点总访客数：<span id="busuanzi_value_site_uv"></span>
+    </span>
+    <span id="busuanzi_container_site_pv" style='display:none'>
+        站点总访问量：<span id="busuanzi_value_site_pv"></span>
+    </span>
+</p>
+
+
+        <p>
+            
+            <span>博客内容遵循 <a rel="license noopener" href="https://creativecommons.org/licenses/by-nc-sa/4.0/deed.zh" target="_blank">知识共享 署名 - 非商业性 - 相同方式共享 4.0 国际协议</a></span>
+        </p>
+    </div>
+    <div class="bottom">
+        <p><span>zhangMo &copy; 2015 - 2019</span>
+            <span>
+                
+                Power by <a href="http://hexo.io/" target="_blank">Hexo</a> Theme <a href="https://github.com/yscoder/hexo-theme-indigo" target="_blank">indigo</a>
+            </span>
+        </p>
+    </div>
+</footer>
+
+    </main>
+    <div class="mask" id="mask"></div>
+<a href="javascript:;" target="_blank" rel="noopener" id="gotop" class="waves-effect waves-circle waves-light"><span class="icon icon-lg icon-chevron-up"></span></a>
+
+
+
+<div class="global-share" id="globalShare">
+    <ul class="reset share-icons">
+      <li>
+        <a class="weibo share-sns" target="_blank" href="http://service.weibo.com/share/share.php?url=https://bitzhangmo.github.io/2019/05/11/Unity%E7%AC%94%E8%AE%B0/Unity-U3D%E7%BD%91%E7%BB%9C%E5%BC%80%E5%8F%91%E5%AE%9E%E6%88%98%EF%BC%881%EF%BC%89/&title=《[Unity] U3D网络开发实战（1）》 — zhangMo Blog&pic=https://bitzhangmo.github.io/img/avatar.jpg" data-title="微博">
+          <i class="icon icon-weibo"></i>
+        </a>
+      </li>
+      <li>
+        <a class="weixin share-sns wxFab" href="javascript:;" target="_blank" rel="noopener" data-title="微信">
+          <i class="icon icon-weixin"></i>
+        </a>
+      </li>
+      <li>
+        <a class="qq share-sns" target="_blank" href="http://connect.qq.com/widget/shareqq/index.html?url=https://bitzhangmo.github.io/2019/05/11/Unity%E7%AC%94%E8%AE%B0/Unity-U3D%E7%BD%91%E7%BB%9C%E5%BC%80%E5%8F%91%E5%AE%9E%E6%88%98%EF%BC%881%EF%BC%89/&title=《[Unity] U3D网络开发实战（1）》 — zhangMo Blog&source=第二章：分身有术：异步和多路复用" data-title=" QQ">
+          <i class="icon icon-qq"></i>
+        </a>
+      </li>
+      <li>
+        <a class="facebook share-sns" target="_blank" href="https://www.facebook.com/sharer/sharer.php?u=https://bitzhangmo.github.io/2019/05/11/Unity%E7%AC%94%E8%AE%B0/Unity-U3D%E7%BD%91%E7%BB%9C%E5%BC%80%E5%8F%91%E5%AE%9E%E6%88%98%EF%BC%881%EF%BC%89/" data-title=" Facebook">
+          <i class="icon icon-facebook"></i>
+        </a>
+      </li>
+      <li>
+        <a class="twitter share-sns" target="_blank" href="https://twitter.com/intent/tweet?text=《[Unity] U3D网络开发实战（1）》 — zhangMo Blog&url=https://bitzhangmo.github.io/2019/05/11/Unity%E7%AC%94%E8%AE%B0/Unity-U3D%E7%BD%91%E7%BB%9C%E5%BC%80%E5%8F%91%E5%AE%9E%E6%88%98%EF%BC%881%EF%BC%89/&via=https://bitzhangmo.github.io" data-title=" Twitter">
+          <i class="icon icon-twitter"></i>
+        </a>
+      </li>
+      <li>
+        <a class="google share-sns" target="_blank" href="https://plus.google.com/share?url=https://bitzhangmo.github.io/2019/05/11/Unity%E7%AC%94%E8%AE%B0/Unity-U3D%E7%BD%91%E7%BB%9C%E5%BC%80%E5%8F%91%E5%AE%9E%E6%88%98%EF%BC%881%EF%BC%89/" data-title=" Google+">
+          <i class="icon icon-google-plus"></i>
+        </a>
+      </li>
+    </ul>
+ </div>
+
+
+<div class="page-modal wx-share" id="wxShare">
+    <a class="close" href="javascript:;" target="_blank" rel="noopener"><i class="icon icon-close"></i></a>
+    <p>扫一扫，分享到微信</p>
+    <img src="//api.qrserver.com/v1/create-qr-code/?data=https://bitzhangmo.github.io/2019/05/11/Unity%E7%AC%94%E8%AE%B0/Unity-U3D%E7%BD%91%E7%BB%9C%E5%BC%80%E5%8F%91%E5%AE%9E%E6%88%98%EF%BC%881%EF%BC%89/" alt="微信分享二维码">
+</div>
+
+
+
+
+    <script src="//cdn.bootcss.com/node-waves/0.7.4/waves.min.js"></script>
+<script>
+var BLOG = { ROOT: '/', SHARE: true, REWARD: true };
+
+
+</script>
+
+<script src="//unpkg.com/hexo-theme-material-indigo@latest/js/main.min.js"></script>
+
+
+<div class="search-panel" id="search-panel">
+    <ul class="search-result" id="search-result"></ul>
+</div>
+<template id="search-tpl">
+<li class="item">
+    <a href="{path}" class="waves-block waves-effect">
+        <div class="title ellipsis" title="{title}">{title}</div>
+        <div class="flex-row flex-middle">
+            <div class="tags ellipsis">
+                {tags}
+            </div>
+            <time class="flex-col time">{date}</time>
+        </div>
+    </a>
+</li>
+</template>
+
+<script src="//unpkg.com/hexo-theme-material-indigo@latest/js/search.min.js" async></script>
+
+
+
+
+
+
+<script async src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+
+
+
+<script>
+(function() {
+    var OriginTitile = document.title, titleTime;
+    document.addEventListener('visibilitychange', function() {
+        if (document.hidden) {
+            document.title = '死鬼去哪里了！';
+            clearTimeout(titleTime);
+        } else {
+            document.title = '(つェ⊂)咦!又好了!';
+            titleTime = setTimeout(function() {
+                document.title = OriginTitile;
+            },2000);
+        }
+    });
+})();
+</script>
+
+
+
+</body>
+</html>

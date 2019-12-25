@@ -1,0 +1,1163 @@
+<!DOCTYPE html>
+<html>
+<head>
+    
+
+    
+
+    
+
+
+
+    <meta charset="utf-8">
+    
+    
+    
+    
+    <title>[翻译] CineMachine用户手册（0） | zhangMo Blog</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+    
+    <meta name="theme-color" content="#3F51B5">
+    
+    
+    <meta name="keywords" content="CineMachine">
+    <meta name="description" content="CineMachine用户手册翻译的第一部分：安装并开始，以及一些相机组件的属性介绍。">
+<meta name="keywords" content="CineMachine">
+<meta property="og:type" content="article">
+<meta property="og:title" content="[翻译] CineMachine用户手册（0）">
+<meta property="og:url" content="https:&#x2F;&#x2F;bitzhangmo.github.io&#x2F;2018&#x2F;12&#x2F;20&#x2F;%E7%BF%BB%E8%AF%91&#x2F;%E7%BF%BB%E8%AF%91-CineMachine%E7%94%A8%E6%88%B7%E6%89%8B%E5%86%8C%EF%BC%880%EF%BC%89&#x2F;index.html">
+<meta property="og:site_name" content="zhangMo Blog">
+<meta property="og:description" content="CineMachine用户手册翻译的第一部分：安装并开始，以及一些相机组件的属性介绍。">
+<meta property="og:locale" content="zh-CN">
+<meta property="og:updated_time" content="2018-12-20T14:47:42.057Z">
+<meta name="twitter:card" content="summary">
+    
+    <link rel="shortcut icon" href="/favicon.ico">
+    <link rel="stylesheet" href="//unpkg.com/hexo-theme-material-indigo@latest/css/style.css">
+    <script>window.lazyScripts=[]</script>
+
+    <!-- custom head -->
+    
+
+</head>
+
+<body>
+    <div id="loading" class="active"></div>
+
+    <aside id="menu" class="hide" >
+  <div class="inner flex-row-vertical">
+    <a href="javascript:;" target="_blank" rel="noopener" class="header-icon waves-effect waves-circle waves-light" id="menu-off">
+        <i class="icon icon-lg icon-close"></i>
+    </a>
+    <div class="brand-wrap" style="background-image:url(/img/brand.jpg)">
+      <div class="brand">
+        <a href="/" class="avatar waves-effect waves-circle waves-light">
+          <img src="/img/avatar.jpg">
+        </a>
+        <hgroup class="introduce">
+          <h5 class="nickname">zhangMo</h5>
+          <a href="mailto:634206017@qq.com" target="_blank" rel="noopener" title="634206017@qq.com" class="mail">634206017@qq.com</a>
+        </hgroup>
+      </div>
+    </div>
+    <div class="scroll-wrap flex-col">
+      <ul class="nav">
+        
+            <li class="waves-block waves-effect">
+              <a href="/"  >
+                <i class="icon icon-lg icon-home"></i>
+                主页
+              </a>
+            </li>
+        
+            <li class="waves-block waves-effect">
+              <a href="/archives"  >
+                <i class="icon icon-lg icon-archives"></i>
+                Archives
+              </a>
+            </li>
+        
+            <li class="waves-block waves-effect">
+              <a href="/tags"  >
+                <i class="icon icon-lg icon-tags"></i>
+                Tags
+              </a>
+            </li>
+        
+            <li class="waves-block waves-effect">
+              <a href="/categories"  >
+                <i class="icon icon-lg icon-th-list"></i>
+                Categories
+              </a>
+            </li>
+        
+            <li class="waves-block waves-effect">
+              <a href="https://github.com/yscoder" target="_blank" >
+                <i class="icon icon-lg icon-github"></i>
+                Github
+              </a>
+            </li>
+        
+            <li class="waves-block waves-effect">
+              <a href="http://www.weibo.com/ysweb" target="_blank" >
+                <i class="icon icon-lg icon-weibo"></i>
+                Weibo
+              </a>
+            </li>
+        
+            <li class="waves-block waves-effect">
+              <a href="/custom"  >
+                <i class="icon icon-lg icon-link"></i>
+                测试
+              </a>
+            </li>
+        
+      </ul>
+    </div>
+  </div>
+</aside>
+
+    <main id="main">
+        <header class="top-header" id="header">
+    <div class="flex-row">
+        <a href="javascript:;" target="_blank" rel="noopener" class="header-icon waves-effect waves-circle waves-light on" id="menu-toggle">
+          <i class="icon icon-lg icon-navicon"></i>
+        </a>
+        <div class="flex-col header-title ellipsis">[翻译] CineMachine用户手册（0）</div>
+        
+        <div class="search-wrap" id="search-wrap">
+            <a href="javascript:;" target="_blank" rel="noopener" class="header-icon waves-effect waves-circle waves-light" id="back">
+                <i class="icon icon-lg icon-chevron-left"></i>
+            </a>
+            <input type="text" id="key" class="search-input" autocomplete="off" placeholder="输入感兴趣的关键字">
+            <a href="javascript:;" target="_blank" rel="noopener" class="header-icon waves-effect waves-circle waves-light" id="search">
+                <i class="icon icon-lg icon-search"></i>
+            </a>
+        </div>
+        
+        
+        <a href="javascript:;" target="_blank" rel="noopener" class="header-icon waves-effect waves-circle waves-light" id="menuShare">
+            <i class="icon icon-lg icon-share-alt"></i>
+        </a>
+        
+    </div>
+</header>
+<header class="content-header post-header">
+
+    <div class="container fade-scale">
+        <h1 class="title">[翻译] CineMachine用户手册（0）</h1>
+        <h5 class="subtitle">
+            
+                <time datetime="2018-12-20T14:45:45.000Z" itemprop="datePublished" class="page-time">
+  2018-12-20
+</time>
+
+
+	<ul class="article-category-list"><li class="article-category-list-item"><a class="article-category-list-link" href="/categories/%E7%BF%BB%E8%AF%91/">翻译</a></li></ul>
+
+            
+        </h5>
+    </div>
+
+    
+
+
+</header>
+
+
+<div class="container body-wrap">
+    
+    <aside class="post-widget">
+        <nav class="post-toc-wrap post-toc-shrink" id="post-toc">
+            <h4>TOC</h4>
+            <ol class="post-toc"><li class="post-toc-item post-toc-level-4"><a class="post-toc-link" href="#What-is-Cinemachine-什么是Cinemachine？"><span class="post-toc-number">1.</span> <span class="post-toc-text">What  is  Cinemachine? : 什么是Cinemachine？</span></a></li><li class="post-toc-item post-toc-level-4"><a class="post-toc-link" href="#History"><span class="post-toc-number">2.</span> <span class="post-toc-text">History :</span></a></li><li class="post-toc-item post-toc-level-4"><a class="post-toc-link" href="#Mission"><span class="post-toc-number">3.</span> <span class="post-toc-text">Mission :</span></a></li><li class="post-toc-item post-toc-level-4"><a class="post-toc-link" href="#Example-Scenes"><span class="post-toc-number">4.</span> <span class="post-toc-text">Example  Scenes :</span></a></li><li class="post-toc-item post-toc-level-4"><a class="post-toc-link" href="#Forums"><span class="post-toc-number">5.</span> <span class="post-toc-text">Forums :</span></a></li><li class="post-toc-item post-toc-level-4"><a class="post-toc-link" href="#Frequently-asked-questions"><span class="post-toc-number">6.</span> <span class="post-toc-text">Frequently  asked  questions :</span></a></li></ol></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#Overview"><span class="post-toc-number"></span> <span class="post-toc-text">Overview :</span></a><ol class="post-toc-child"><li class="post-toc-item post-toc-level-4"><a class="post-toc-link" href="#Cinemachine-Virtual-Camera"><span class="post-toc-number">1.</span> <span class="post-toc-text">Cinemachine Virtual Camera :</span></a></li><li class="post-toc-item post-toc-level-4"><a class="post-toc-link" href="#Cinemachine-Brain"><span class="post-toc-number">2.</span> <span class="post-toc-text">Cinemachine Brain :</span></a></li></ol></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#Installation-and-Getting-Started-：安装并开始"><span class="post-toc-number"></span> <span class="post-toc-text">Installation  and  Getting  Started ：安装并开始</span></a></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#User-Guide-：用户指南"><span class="post-toc-number"></span> <span class="post-toc-text">User  Guide ：用户指南</span></a><ol class="post-toc-child"><li class="post-toc-item post-toc-level-4"><a class="post-toc-link" href="#Basic-Virtual-Cameras"><span class="post-toc-number">1.</span> <span class="post-toc-text">Basic  Virtual  Cameras</span></a><ol class="post-toc-child"><li class="post-toc-item post-toc-level-5"><a class="post-toc-link" href="#CinemachineVirtualCamera"><span class="post-toc-number">1.1.</span> <span class="post-toc-text">CinemachineVirtualCamera</span></a></li><li class="post-toc-item post-toc-level-5"><a class="post-toc-link" href="#LensSettings"><span class="post-toc-number">1.2.</span> <span class="post-toc-text">LensSettings</span></a></li><li class="post-toc-item post-toc-level-5"><a class="post-toc-link" href="#CinemachineComposer-："><span class="post-toc-number">1.3.</span> <span class="post-toc-text">CinemachineComposer ：</span></a></li><li class="post-toc-item post-toc-level-5"><a class="post-toc-link" href="#CinemachineTransposer"><span class="post-toc-number">1.4.</span> <span class="post-toc-text">CinemachineTransposer</span></a></li><li class="post-toc-item post-toc-level-5"><a class="post-toc-link" href="#Cinemachine-BasicMultiChannelPerlin"><span class="post-toc-number">1.5.</span> <span class="post-toc-text">Cinemachine BasicMultiChannelPerlin</span></a></li><li class="post-toc-item post-toc-level-5"><a class="post-toc-link" href="#NoiseSettings"><span class="post-toc-number">1.6.</span> <span class="post-toc-text">NoiseSettings</span></a></li><li class="post-toc-item post-toc-level-5"><a class="post-toc-link" href="#NoiseSettings-NoiseParams"><span class="post-toc-number">1.7.</span> <span class="post-toc-text">NoiseSettings.NoiseParams</span></a></li><li class="post-toc-item post-toc-level-5"><a class="post-toc-link" href="#NoiseSettings-Transform-NoiseParams"><span class="post-toc-number">1.8.</span> <span class="post-toc-text">NoiseSettings.Transform NoiseParams</span></a></li></ol></li></ol>
+        </nav>
+    </aside>
+
+
+<article id="post-翻译/翻译-CineMachine用户手册（0）"
+  class="post-article article-type-post fade" itemprop="blogPost">
+
+    <div class="post-card">
+        <h1 class="post-card-title">[翻译] CineMachine用户手册（0）</h1>
+        <div class="post-meta">
+            <time class="post-time" title="2018-12-20 22:45:45" datetime="2018-12-20T14:45:45.000Z"  itemprop="datePublished">2018-12-20</time>
+
+            
+	<ul class="article-category-list"><li class="article-category-list-item"><a class="article-category-list-link" href="/categories/%E7%BF%BB%E8%AF%91/">翻译</a></li></ul>
+
+
+
+            
+<span id="busuanzi_container_page_pv" title="文章总阅读量" style='display:none'>
+    <i class="icon icon-eye icon-pr"></i><span id="busuanzi_value_page_pv"></span>
+</span>
+
+
+        </div>
+        <div class="post-content" id="post-content" itemprop="postContent">
+            <p>CineMachine用户手册翻译的第一部分：安装并开始，以及一些相机组件的属性介绍。</p>
+<a id="more"></a>
+
+<p>[TOC]</p>
+<h4 id="What-is-Cinemachine-什么是Cinemachine？"><a href="#What-is-Cinemachine-什么是Cinemachine？" class="headerlink" title="What  is  Cinemachine? : 什么是Cinemachine？"></a>What  is  Cinemachine? : 什么是Cinemachine？</h4><p>Cinemachine  is  a  suite  of  ‘smart’  procedural  modules  which  allow  you  to  define  the  shot  and<br>they’ll  dynamically  follow  your  direction.   Setup  shots  which  track  and  compose  motion  in<br>realtime,  like  AI  camera  operators.   The  procedural  nature  makes  them  bug-resistant  as  they<br>always  work  to  make  the  shot  based  on  your  direction.  That’s  great  for  gameplay,  but  they’re<br>also  amazingly  fast  for  cutscenes.   Change  an  animation,  a  vehicle  speed,  ground  terrain  -<br>whatever  -  and  Cinemachine  will  dynamically  make  the  shot.   You  can  use  really  telephoto<br>lenses  and  not  have  to  update  the  cutscene  if  things  change .</p>
+<p>Cinemachine是一套“智能”程序模块，可以让你定义镜头并且他们会动态地按照你的指示行事。如同一个AI相机操作员般，实时地设置跟踪和组成运动的镜头。程序性质使它们像它们一样具有抗病性<br>总是根据你的方向努力拍摄。这对于游戏玩法来说非常棒，并且它们在过场动画的表现也出人意料的快。<br>改变动画、车速、地面地形或者无论什么效果——Cinemachine都将动态拍摄。你可以使用真正的长焦镜头，如果事情发生变化，不必更新过场动画。</p>
+<h4 id="History"><a href="#History" class="headerlink" title="History :"></a>History :</h4><p>Cinemachine  has  been  in development  over  a  number  of  years  across  multiple  projects  We’ve been  designing  camera  systems  for almost  20  years  and  have  shipped  millions  of  AAA  titles across  numerous  genres.   The  Cinemachine  team  has  an  award  winning  cinematographer  and a  senior  engineer  with  heavy  math  skills.   Also,  we  love  this  stuff  to  bits. </p>
+<p>Cinemachine多年来一直处于多个项目的开发之下，我们已经设计了相当近20年的相机系统，并已经出版了数百万种AAA级别的游戏。 Cinemachine团队拥有一位屡获殊荣的摄影师和一名具有繁重数学技能的高级工程师。 此外，我们喜欢这些东西。</p>
+<h4 id="Mission"><a href="#Mission" class="headerlink" title="Mission :"></a>Mission :</h4><p>Our  mission  with  Cinemachine  is  built  to  be  an  entirely  united  camera  system  bridging gameplay,  cutscenes,  from  fully  procedural  cameras  to  entirely  canned  sequences  and everything  in  between.</p>
+<p>我们与Cinemachine的使命是建立一个完全统一的相机系统，与游戏玩法，过场动画，从完全程序相机到完全固定序列以及介于两者之间的所有内容相衔接。</p>
+<h4 id="Example-Scenes"><a href="#Example-Scenes" class="headerlink" title="Example  Scenes :"></a>Example  Scenes :</h4><p>Please  have  a  look  at  our  example  scenes.   They  are  shipped  with  the  package  under Assets/Cinemachine/Examples.   This  folder  also  includes  some  handy  noise  presets  that  you can  use  as  a  starting  point  for  implementing  camera  noise. </p>
+<p>请看一下我们的示例场景。 它们随Assets / Cinemachine / Examples下的package一起提供。 此文件夹还包括一些方便的噪音预设，您可以将其用作实现相机噪音的起点。</p>
+<h4 id="Forums"><a href="#Forums" class="headerlink" title="Forums :"></a>Forums :</h4><p>We  have  a  busy  discussion  area  on  the  forums.<br><a href="https://forum.unity3d.com/forums/cinemachine.136/" target="_blank" rel="noopener">https://forum.unity3d.com/forums/cinemachine.136/</a> </p>
+<p>我们在论坛上有一个热闹的讨论区。</p>
+<h4 id="Frequently-asked-questions"><a href="#Frequently-asked-questions" class="headerlink" title="Frequently  asked  questions :"></a>Frequently  asked  questions :</h4><ul>
+<li><p>Do  we  have  to  replace  our  camera  system  with  Cinemachine?</p>
+<p>No,  Cinemachine  can  work  alongside  your  existing  camera  system  and  you  can seamlessly blend  back  and  forth  between  both  systems.    If  you  wrote  some  camera  tech  you  love  but  want Cinemachine  for  something  else,  no  problem,  mix  the  two  together. </p>
+</li>
+<li><p>我们是否必须用Cinemachine替换我们的相机系统？</p>
+<p>不，Cinemachine可以与您现有的相机系统配合使用，您可以在两个系统之间来回无缝混合。 如果你写了一些你喜欢的相机技术，但想要Cinemachine的一些别的东西，没问题，将两者混合在一起。</p>
+</li>
+</ul>
+<ul>
+<li><p>Isn’t having  all  these  cameras  around  kind  of  heavy?<br>No,  in  fact  it’s  incredibly  light.   Each  virtual  camera  has  a  super  low  overhead -  make  as  many as  you  want.    If  you  are  hypersensitive  to  performance  you  can  disable  all  the  cameras  and  just enable  the  ones  you  wish  to  have  running  at  any  given  moment  for  extreme performance.</p>
+</li>
+<li><p>是不是所有这些相机都很沉重（耗费性能）？</p>
+<p>不，实际上它非常轻盈。 每个虚拟摄像机都具有超低的开销 - 可以根据需要进行调整。 如果您对性能敏感，可以禁用所有摄像头，只需启用您希望在任何给定时刻运行的摄像头以获得极致性能。</p>
+</li>
+</ul>
+<ul>
+<li><p>How does  it  all  work?<br>Cinemachine  works  a  bit  like  a  marionette  system  for  your  existing  Main  Camera.    It  doesn’t create  any  new  cameras,  only  new  virtual  ones.   The  Cinemachine  ‘Brain’  component  is automatically  added  to  the  Main  Camera  in  your  scene  and  Cinemachine  works  with  all  its camera  blending,  priority,  mixing  magic  to  deliver  a  set  of  transforms  to  your  Main  Camera.</p>
+<p>Because  it’s  a  completely  unified  system,  you  can  blend  from  any  camera  type  to  any  other. Seamlessly  go  from  an  in-game  freelook  system  to  a  keyframed  cutscene  camera  and  back.</p>
+<p>Any  combination  is  possible  and  the  options  are  limitless. </p>
+</li>
+</ul>
+<ul>
+<li><p>它是怎么运行的？</p>
+<p>Cinemachine的工作方式有点像现有主摄像头的牵线木偶系统。 它不会创建任何新的相机，只会创建新的虚拟相机。 Cinemachine’Brain’组件会自动添加到场景中的主摄像头中，Cinemachine可以使用其所有摄像头混合，优先级，混合效果来为主摄像头提供一组变换。</p>
+<p>因为它是一个完全统一的系统，您可以从任何相机类型混合到任何其他类型。 无缝地从游戏中的freelook系统转变为关键帧的过场动画相机和背部。</p>
+<p>任何组合都是可能的，选项是无限的。</p>
+</li>
+</ul>
+<ul>
+<li><p>Can  I  really  save  all  my  tunings  in  Play  mode?<br>Yes!   Almost  everything  in  Cinemachine  saves  in  play  mode  so  jump  in  and  tune  some  cameras while  the  game  is  running.   When  you  think  about  it,  it’s  really  the  only  way  to  do  it.   We  want you  to  get  right  into  the  zone  and  massage  cameras  at  any  point  in  your  game  -  while  you’re  in there playing  it. </p>
+<p>Our engineer  spent  a  long  time  on  our  camera  system  and  doesn’t  want  to  change  it.</p>
+<p>We  hear  this  a  lot.  It’s  never  fun  to  throw  code  away  but  you  need  to  think  about  the  big  picture of  your  project.  If  you  can  get  up  and  running  really  quickly  creating  and  tuning  cameras  without further  bothering  your  engineer,  isn’t  that  an  advantage?  <del>It’s  doubtful  your  existing  system behaves  exactly  as  desired  in  every  scenario  so  there’s  yet  more  coding  to  be  done  anyway.</del> </p>
+<p>Cameras  are  such  a  huge  part  of  your  project  and  good  cameras  can make  the  difference between  an  OK  game  and  an  amazing  one.    Try running  Cinemachine  next  to  your  existing cameras  and  see  what  it’s like.    If  that  engineer  is  still  reluctant  share  this  idea  with  them - Rockets  eject  perfectly  great  booster  sections  to  get  into  space.  That camera  code  helped push  you  into  orbit!   Great  scenes  are  often  left on  the  editing  room  floor.   Make  the  decision that’s  best  for  your project. </p>
+</li>
+</ul>
+<ul>
+<li><p>我可以在Play模式下真正保存所有调试吗？</p>
+<p>当然！ Cinemachine中的几乎所有内容都保存在播放模式中，因此在游戏运行时跳入并调整一些相机。 当你想到它时，它确实是唯一的方法。 我们希望您在游戏中的任何一个时间点都能直接进入区域并调整相机 - 即使您在运行中时。</p>
+<p>我们的工程师花了很长时间在我们的相机系统上，并不想改变它。</p>
+<p>我们听到了很多。抛弃代码永远不会有趣，但你需要考虑项目的大局。如果您能够在不进一步打扰工程师的情况下快速启动并运行创建和调整摄像头，那么这不是一个优势吗？<del>令人怀疑的是，您现有的系统在每种情况下的行为都完全符合要求，因此无论如何还有更多的编码要做。</del></p>
+<p>摄像机是你项目中非常重要的一部分，好的摄像机可以在一个尚可的游戏和一个惊人的游戏之间产生差距。尝试在现有相机旁边运行Cinemachine，看看它是什么样的。如果那个工程师仍然不愿意与他们分享这个想法——火箭队会弹出非常好的助推器部分进入太空。相机代码帮助你进入轨道！编辑室的场景经常留下很棒的场景。做出最适合您项目的决定。</p>
+</li>
+</ul>
+<ul>
+<li><p>Can  I  mix  between  gameplay  and  cutscene  cameras?<br>You  can  mix  between  any  cameras.    Seamless  transitions  from  gameplay  to  cutscene  and  back are  as  easy  as  turning  on  a  camera  or  playing  a  Timeline  with  CM  clips  on  it. </p>
+</li>
+<li><p>我可以将游戏玩法和过场动画相机过渡吗？</p>
+<p>你可以在任何相机之间过渡。 从游戏玩法到过场动画和后背的无缝过渡就像打开相机或播放带有CM剪辑的时间轴一样简单。</p>
+</li>
+</ul>
+<ul>
+<li><p>How do  you  typically  configure  the  cameras  for  a  project?<br>Instead  of  one  big  ball-of-code  camera  trying  to  do  everything,  you  make  lots  of  custom  vcams for  every  given  moment  and  turn  them  on  when  needed.   Blending  or  cutting  to  a  new  camera  is as  easy  as  turning  one  on.   If  the  priority  is  the  same  or  higher,  CM  will  use  the  new  camera  and blend  to  it  based  on  how  you’ve  defined  the  default  blend  or  any  other  blends  in  the  Custom Blends section  of  the  CM  ‘Brain’  on  the  Main  Camera. </p>
+</li>
+<li><p>您通常如何为项目配置摄像头？</p>
+<p>区别于一个大的代码相机试图做所有事情，你为每个给定的时刻制作了许多自定义vcams，并在需要时打开它们。 将新相机混合或切割就像打开一个相机一样简单。 如果优先级相同或更高，CM将使用新相机并根据您在主相机上CM’Brain’的自定义混合部分中定义的默认混合方式或任何其他混合的方式进行混合。</p>
+</li>
+</ul>
+<ul>
+<li><p>I don’t  want  to  drastically  change  the  camera  in  X  scenario,  I  just  want  a  little  tweak.</p>
+<p>Camera  changes  can  be  really  subtle.   You  can  duplicate  your  main  camera,  only  change  the FOV or Composition  and  then  blend  to  that  camera  just  when  a  player  enters  a  trigger  volume. You  can  turn  on  vcams  with  only  the  subtlest  of  differences  to  get  exactly  the  behavior  you  want in  whatever  situation.    Projects  can  have  many  vcams  all  with  only  minor  changes,  ready  and waiting  for  whatever  game  scenario  demands  them. </p>
+</li>
+</ul>
+<ul>
+<li><p>我不想在X场景中大幅改变相机，我只想稍微调整一下。</p>
+<p>相机的变化可能会非常微妙。 您可以复制主摄像头，仅更改FOV或构成方式，然后在玩家进入触发音量时混合到该摄像头。您可以只使用最细微的差异打开vcams，以在任何情况下获得您想要的行为。 项目可以拥有许多vcams，只需进行微小的更改，准备好并等待任何游戏场景需要它们。</p>
+</li>
+</ul>
+<ul>
+<li>When  would  I  use  the  State  Driven  Camera?   Why  have  so  many  camera  rigs?<br>The  SDC  makes  it  super  easy  to  link  animations  and  states  to  different  cameras.   Picture  your character’s  local-motion  system  and  orbit  camera.   It  makes  your  game  feel  so  much  more  alive when  the  camera  shakes  a  bit  more  when  your  character  is  running,  when  the  camera  pulls back  to  a  larger  orbit  when  they  go  outside,  when  the  camera  gets  all  close  when  the  character is  sneaking  around.  The  SDC  allows  you  to  craft  the  cameras  to  best  suit  what  your  player  is doing. </li>
+</ul>
+<ul>
+<li><p>我何时使用状态驱动相机？ 为什么有这么多摄像机装备？</p>
+<p>SDC可以非常轻松地将动画和状态链接到不同的摄像机。 想象你角色的本地运动系统和轨道摄像机。 当你的角色在跑步时，相机可以轻微的抖动；当角色向外走时，相机可进入一个更大的轨道；当角色偷偷摸摸移动时，相机可以全部靠近，这些会使你的游戏感觉更加生动。 SDC允许您制作最适合您的播放器正在进行的相机。</p>
+</li>
+</ul>
+<p>For  example,  one  project  in  dev  had  20+  different  camera  rigs  all  listening  to  animations  and game  events.   Stand,  walk,  sprint,  jump,  attack,  &gt;3  enemies  arrive,  inside,  outside,  trigger volumes  in  particular  areas  of  the  map,  health  &lt;20%,  etc.  So  much  control  is  easily  possible. </p>
+<p>例如，开发中的一个项目有20多个不同的摄像机装备都在收听动画和游戏事件。 站立，行走，冲刺，跳跃，攻击，3个以上的敌人到达，内部，外部，触发地图特定区域的体积，健康&lt;20％等。如此多的控制很容易。</p>
+<h3 id="Overview"><a href="#Overview" class="headerlink" title="Overview :"></a>Overview :</h3><p>Cinemachine  is  a  modular  suite  of  camera  tools  for  Unity  which  give  AAA  game  quality  controls for  every  camera  in  your  project.   It’s  an  easy  to  install  plugin  which  lets  you  add  functionality  to cameras  you’ve  already  got,  or  make  new  ones  with  amazing  behaviors.</p>
+<p>Cinemachine  has  been  designed  to  be  the  entire  unified  camera  system  in  your  project  but  can be  used  alongside  your  existing  cameras  as  well.  If  you  have  a  bunch  of  camera  stuff  working already  and  just  want  to  use  Cinemachine  for  cutscenes  or  something  specific,   no  problem  at all.  However  when  you  use  it  across  your  project  it  allows  you  to  blend  any  camera  to  any  other camera  in  a  gameplay-to-cutscene-and-back-seamlessly  kind  of  way. The  heart  of  Cinemachine  is  two  components;  everything  else  builds  on  those.   They  are: </p>
+<p>Cinemachine是Unity的模块化相机工具套件，可为项目中的每个相机提供AAA游戏质量控制。 这是一个易于安装的插件，可以让您为已经拥有的相机添加功能，或者制作具有丰富行为的新相机。</p>
+<p>Cinemachine被设计出来作为您项目中的整个统一摄像系统，但也可以与现有摄像头一起使用。 如果你有一堆相机的东西已经工作，只是想使用Cinemachine的过场动画或特定的东西，没有任何问题。 除此之外，当您在整个项目中使用它时，它也允许您将任何相机混合到从游戏玩法到过场动画再返回过程中的任何其他相机，诸如此类。 Cinemachine的核心是两个件; 其他的一切内容都建立在它们之上。 他们是：</p>
+<h4 id="Cinemachine-Virtual-Camera"><a href="#Cinemachine-Virtual-Camera" class="headerlink" title="Cinemachine Virtual Camera :"></a>Cinemachine Virtual Camera :</h4><p>The  Virtual  Camera  is  a  shot,  a  single  camera.  It  has  child  modules  which  you  can  turn  on  to make  it  do  things  like  procedurally  track  and compose  objects,  follow  things  and  shake  with procedural  noise.   Together  they  are  a  very  powerful  combination  and  can  yield  an unlimited number  of  results.</p>
+<p>These  modules  have  been  designed,  re-designed  and  re-designed  again  to  offer  the  widest range  of  possibilities  with  the  least  number  of  controls.   The  math  driving  these  camera behaviours  is complex  and  sophisticated,  having  gone  through  many  different  scenarios  across all  sorts  of  games.</p>
+<p>The  reason  for  the  ‘virtual’  camera  scenario  is  because  Unity  renders  from  the  main  camera. Out-of-the-box  Unity  is  limited  to  only  one  camera  being  active  camera  at  a  time  –  which  makes the  blending  of  two  shots  effectively  impossible.  Cinemachine  is  engineered  to  solve  this  and provide  a  wealth  of  simple,  powerful  functionality  at  the  same  time,  allowing  unsurpassed camera  behaviors  which  are  fast  and  easy  to  setup. </p>
+<p>虚拟相机是一个镜头，一个相机。它有一些子模块，您可以打开这些模块，使其执行程序跟踪和组合对象，跟踪事物并使用程序噪声进行抖动。它们是一个非常强大的组合，可以产生无数的结果。</p>
+<p>这些模块经过设计，重新设计和再次重新设计，以最少的控制提供最广泛的可能性。推动这些摄像机行为的数学复杂而精密，在各种游戏中经历了许多不同的场景（的考验）。</p>
+<p>“虚拟”相机场景的原因是因为Unity从主相机渲染。开箱即用的Unity限定在同一时间仅能有一台摄像机是有源摄像机 —— 这使得有效地无法混合两个镜头。 Cinemachine旨在解决这个问题，同时提供丰富的简单，强大的功能，允许无与伦比的相机行为，并且它们快速，易于设置。</p>
+<h4 id="Cinemachine-Brain"><a href="#Cinemachine-Brain" class="headerlink" title="Cinemachine Brain :"></a>Cinemachine Brain :</h4><p>This  is  the  central  Cinemachine  component  that  does  all  the  magic.   It’s  a  component  attached to  the  Unity  camera  and  it  monitors  all  the  Virtual  Cameras  in  the  scene  and  drives  the  Unity camera  using  the  shot  it  likes  best. </p>
+<p>这是中央Cinemachine组件，可以完成所有效果。 它是连接到Unity摄像头的一个组件，它监视场景中的所有虚拟摄像机，并使用它最喜欢的镜头驱动Unity摄像机。</p>
+<h3 id="Installation-and-Getting-Started-：安装并开始"><a href="#Installation-and-Getting-Started-：安装并开始" class="headerlink" title="Installation  and  Getting  Started ：安装并开始"></a>Installation  and  Getting  Started ：安装并开始</h3><p>Installing  Cinemachine  is  easy. </p>
+<ol>
+<li>Drag  the  Cinemachine  unitypackage  onto  your assets  folder  in  Unity,  OR  Install  it  directly: Assets-&gt;Import  Package  -&gt;Custom  Package… and  point  to  the  Cinemachine  unitypackage.</li>
+<li>Setup  the  Cinemachine  Virtual Cameraenvironment  Cinemachine-&gt;  Create Virtual  Camera.   This  is  also  the  way  to  create additional  Cinemachine  shots. </li>
+<li>That’s  it!   You  now  have  Cinemachine  installed on  your  machine. </li>
+</ol>
+<p>安装Cinemachine很容易。</p>
+<ol>
+<li>将Cinemachine unitypackage拖到Unity中的assets文件夹中，或直接安装：Assets-&gt; Import Package  - &gt; Custom Package …并指向Cinemachine unitypackage。</li>
+<li>设置Cinemachine虚拟摄像机环境Cinemachine-&gt;创建虚拟摄像机。这也是创建其他Cinemachine镜头的方法。</li>
+<li>仅此而已！您现在已在计算机上安装了Cinemachine。</li>
+</ol>
+<p>You  will  notice  two  changes  to  your  scene: </p>
+<ol>
+<li>The  main  camera  has  a  little  icon  next  to  it  in  the  scene hierarchy.   This  indicates  that  your  camera  has  been Cinemachine-enabled  using  a  new  component:  the CinemachineBrain.</li>
+<li>A  new  GameObject  CM  vcam1  with  a CinemachineVirtualCamera  component,  which  is  a  single camera  or  shot. </li>
+</ol>
+<p>您会注意到场景的两处变化：</p>
+<ol>
+<li>主摄像机在场景层次结构中旁边有一个小图标。这表示您的相机已使用新组件启用Cinemachine：CinemachineBrain。</li>
+<li>带有CinemachineVirtualCamera组件的新GameObject CM vcam1，它是一个摄像头或镜头。</li>
+</ol>
+<p>There’s  more  info  below  on  how  to  use  these  new  things.   Don’t  forget  to  check  out  the  example scenes  included  in  Cinemachine/Examples/Scenes,  and  please  visit  our  user  forum  at <a href="https://forum.unity3d.com/forums/cinemachine.136/" target="_blank" rel="noopener">https://forum.unity3d.com/forums/cinemachine.136/</a> </p>
+<p>下面有关于如何使用这些新东西的更多信息。不要忘记查看Cinemachine / Examples / Scenes中包含的示例场景，请访问我们的用户论坛：https：//forum.unity3d.com/forums/cinemachine.136/</p>
+<h3 id="User-Guide-：用户指南"><a href="#User-Guide-：用户指南" class="headerlink" title="User  Guide ：用户指南"></a>User  Guide ：用户指南</h3><p>This  guide  is  organized  in  logical  sections  that  cover  the  ground  from  simple  basic  setups  all  the way  through  to  advanced  cinematic  features  of   Cinemachine.   Each  of  the  classes  and behaviours  that  make  up  Cinemachine  are  described  in  detail. </p>
+<p>本指南按逻辑部分组织，涵盖了从简单的基本设置到Cinemachine的高级电影功能。 组成Cinemachine的每个类和行为都将详细介绍。</p>
+<p>Cinemachine  is  by  no  means  limited  to  the  classes  and  behaviours  described  here.   It  has  an open  pipeline  architecture,  and  we  look  forward  to  seeing  the  exciting  new  behaviours  and intelligence that  our  users  will  build  into  the  system.</p>
+<p>Cinemachine绝不仅限于此处描述的类和行为。 它具有开放的管道架构，我们期待看到用户将在系统中构建的令人兴奋的新行为和智能。</p>
+<h4 id="Basic-Virtual-Cameras"><a href="#Basic-Virtual-Cameras" class="headerlink" title="Basic  Virtual  Cameras"></a>Basic  Virtual  Cameras</h4><p>Each  virtual  camera  is  a  ‘shot’,  or  a  single  camera.  You  can  animate  them  directly  or  blend  two together  to  create  camera  moves.  The  reason  they  are  ‘virtual’  cameras  is  to  allow  for  blending, camera  selection  based  on  priorities  and  the  ability  to  have  Cinemachine  hold  multiple  cameras in  memory  with  the  final  product  being  presented  to  the  current  active  Unity  camera(s)  which  are rendering.</p>
+<p>Cinemachine  allows  you  to  create  an  unlimited  number  of  virtual  cameras,  blend  them  together with  the  result  being  presented  to  the  single  Unity  camera.    It  does  all  this  automatically. </p>
+<p>每个虚拟摄像机都是“镜头”或单个摄像机。 您可以直接为它们设置动画或将两者混合在一起以创建相机移动。 它们是“虚拟”摄像机的原因是为了允许混合，基于优先级的摄像机选择以及使Cinemachine在内存中保持多个摄像机的能力，最终产品被呈现给正在渲染的当前活动Unity摄像机。</p>
+<p>Cinemachine允许您创建无限数量的虚拟摄像机，将它们混合在一起，并将结果呈现给单个Unity摄像机。 它自动完成所有这些。</p>
+<p>Key  components  of  the  Virtual  Camera  are: </p>
+<ul>
+<li>Priority:   The  priority  of  this  shot.   Equal  or  Higher  value  camera  priorities  compared  to the  current  camera  priority  will  be  activated.   This  allows  for  camera  state  machine setups  where  cameras  are  called  based  on  trigger  volumes,  animations,  health  states, etc.   Important  cameras  will  trigger  over  lower  priority  ones.</li>
+<li>Lens  Settings :   What  kind  of  lens  to  use  for  this  shot:  FOV,  clipping  planes,  and  dutch (camera  roll).   Post-processing  effects  can  also  be  included  here.</li>
+<li>Body:  Where  the  camera  is  placed  in  your  scene,  and  procedural  ways  to  ‘mount’  your camera  to  any  object  and  move  the  camera  with  it.</li>
+<li>Aim:   What  the  camera  looks  at,  and  procedural  ways  to  track  and  compose  any subject.</li>
+<li>Noise:   Procedural  Perlin  multi-layered  noise  system  for  handheld  behaviors,  shakes, and  vibrations.</li>
+<li>Extensions:   These  are  add-ons  to  the  basic  Cinemachine  pipeline.   Post-Processing and  Collision  Avoidance  are  examples  of  standard  extensions  shipped  with Cinemachine.   The  API  is  open,  so  that  you  can  author  your  own  extensions  as  well. </li>
+</ul>
+<p>虚拟相机的关键组件是：</p>
+<ul>
+<li>优先级：此镜头的优先级。与当前摄像机优先级相比，优先级相等或更高值的摄像机将被激活。这允许摄像机状态机设置，使得基于触发音量，动画，健康状态等调用摄像机。重要的摄像机将触发优先级较低的摄像机。</li>
+<li>镜头设置：此镜头使用哪种镜头效果：FOV（画幅），剪裁平面和荷兰（相机胶卷）。这里也可以包括后处理效果。</li>
+<li>主体：摄像机放置在场景中的位置，以及将摄像机“安装”到任何物体并用它移动摄像机的程序方法。</li>
+<li>目标：相机所看到的内容，以及跟踪和撰写任何主题的程序方法。</li>
+<li>噪音：程序Perlin多层噪音系统，用于手持行为，震动和振动。</li>
+<li>扩展：这些是基本Cinemachine管道的附加组件。后处理和冲突避免是Cinemachine附带的标准扩展的示例。 API是开放的，因此您也可以创建自己的扩展程序。</li>
+</ul>
+<p>The  <strong>Solo  Button</strong>  in  the  Virtual  Camera  inspector  panel  will  make  the  virtual  camera  temporarily Live  so  that  you  can  have  immediate  visual  feedback  in  the  game  view  when  tweaking  the behavioural  parameters  of  the  camera.</p>
+<p>The  <strong>Game  Window  Guides</strong>  checkbox  toggles  the  visibility  of  any  screen  compositional  guides that  the  virtual  camera  might  want  to  display  in  the  game  window.   This  toggle  is  a  static  global, and  applies  to  all  virtual  cameras.</p>
+<p>The  <strong>Save  During  Play</strong>  checkbox  enables  the  Cinemachine  feature  of  taking  camera  settings tweaks  made  while  in  Play  mode,  and  propagating  them  back  to  the  scene.   This  allows in-game  fine tuning  of  cameras  without  having  to  do  a  whole  lot  of  copy/pasting.   After  you  exit play  mode,  the  scene  will  be  updated  to  reflect  the  changes  made  during  play.   Pressing  Undo will  revert  those  changes.</p>
+<p>The  following  sections  describe  the  behaviours  and  classes  that  make  up  the  Cinemachine Virtual  Camera,  and  some  of  its  standard  procedural  components. </p>
+<p>虚拟相机检查器面板中的<strong>Solo按钮</strong>将使虚拟相机暂时生效，以便在调整相机的行为参数时可以在游戏视图中立即获得视觉反馈。</p>
+<p>“<strong>Game Window Guides</strong>”复选框可切换虚拟摄像机可能要在游戏窗口中显示的任何屏幕组成指南的可见性。此切换是静态全局，适用于所有虚拟摄像机。</p>
+<p>“<strong>Save During Play</strong>”复选框启用Cinemachine功能，即在播放模式下进行相机设置调整，并将它们传播回场景。这允许在游戏中对相机进行微调，而无需进行大量的复制/粘贴。退出播放模式后，将更新场景以反映播放期间所做的更改。按撤消将还原这些更改。</p>
+<p>以下部分描述了构成Cinemachine虚拟相机的行为和类，以及它的一些标准过程组件。</p>
+<h5 id="CinemachineVirtualCamera"><a href="#CinemachineVirtualCamera" class="headerlink" title="CinemachineVirtualCamera"></a>CinemachineVirtualCamera</h5><p>This  behaviour  is  intended  to  be  attached  to  an  empty  Transform  GameObject,  and  it  represents a  Virtual  Camera  within  the  Unity  scene.</p>
+<p>The  Virtual  Camera  will  animate  its  Transform  according  to  the  rules  contained  in  its CinemachineComponent  pipeline  (Aim,  Body,  and  Noise).  When  the  virtual  camera  is  Live,  the Unity  Camera  equipped  with  a  CinemachineBrain  will  assume  the  position  and  orientation  of  the virtual  camera.</p>
+<p>A  virtual  camera  is  not  a  camera.  Instead,  it  can  be  thought  of  as  a  camera  controller,  not  unlike a  cameraman.  It  can  drive  the  Unity  Camera  and  control  its  position,  orientation,  lens  settings, and  PostProcessing  effects.  Each  Virtual  Camera  owns  its  own  Cinemachine  Component Pipeline,  through  which  you  provide  the  instructions  for  dynamically  tracking  specific  game objects.</p>
+<p>A  virtual  camera  is  very  lightweight,  and  does  no  rendering  of  its  own.  It  merely  tracks interesting  GameObjects,  and  positions  itself  accordingly.  A  typical  game  can  have  dozens  of virtual  cameras,  each  set  up  to  follow  a  particular  character  or  capture  a  particular  event.</p>
+<p>此行为旨在附加到空的Transform GameObject，它表示Unity场景中的虚拟相机。</p>
+<p>虚拟摄像机将根据其CinemachineComponent管道（目标，主体和噪声）中包含的规则为其变换设置动画。当虚拟摄像机处于实时状态时，配备CinemachineBrain的Unity摄像机将采用虚拟摄像机的位置和方向。</p>
+<p>虚拟相机不是相机。相反，它可以被认为是相机控制器，与摄影师不同。它可以驱动Unity相机并控制其位置，方向，镜头设置和后处理效果。每个虚拟相机都拥有自己的Cinemachine组件管道，通过它您可以提供动态跟踪特定游戏对象的说明。</p>
+<p>虚拟相机非常轻巧，不会自行渲染。它只跟踪有趣的GameObjects，并相应地定位自己。典型的游戏可以具有数十个虚拟摄像机，每个摄像机设置为跟随特定角色或捕获特定事件。</p>
+<p>A  Virtual  Camera  can  be  in  any  of  three  states: </p>
+<ul>
+<li>Live :  The  virtual  camera  is  actively  controlling  the  Unity  Camera.  The  virtual  camera  is tracking  its  targets  and  being  updated  every  frame.</li>
+<li>Standby :  The  virtual  camera  is  tracking  its  targets  and  being  updated  every  frame,  but  no Unity  Camera  is  actively  being  controlled  by  it.  This  is  the  state  of  a  virtual  camera that  is enabled  in  the  scene  but  perhaps  at  a  lower  priority  than  the  Live  virtual  camera.</li>
+<li>Disabled :  The  virtual  camera  is  present  but  disabled  in  the  scene.  It  is  not  actively tracking  its  targets  and  so  consumes  no  processing  power.  However,  the  virtual  camera can  be  made  live  from  the  Timeline.</li>
+</ul>
+<p>虚拟摄像机可以处于以下三种状态中的任何一种：</p>
+<ul>
+<li>直播：虚拟摄像机正在主动控制Unity摄像头。 虚拟摄像机正在跟踪其目标并每帧更新。<ul>
+<li>待机：虚拟摄像机正在跟踪其目标并每帧更新，但没有Unity摄像机正在被它主动控制。 这是在场景中启用的虚拟摄像机的状态，但可能比实时虚拟摄像机的优先级低。</li>
+<li>已禁用：虚拟摄像机存在但在场景中已禁用。 它没有主动跟踪其目标，因此不消耗处理能力。 但是，虚拟摄像机可以从时间轴生成。</li>
+</ul>
+</li>
+</ul>
+<p>The  Unity  Camera  can  be  driven  by  any  virtual  camera  in  the  scene.  The  game  logic  can choose  the  virtual  camera  to  make  live  by  manipulating  the  virtual  cameras’  enabled  flags  and their  priorities,  based  on  game  logic.</p>
+<p>In  order  to  be  driven  by  a  virtual  camera,  the  Unity  Camera  must  have  a  CinemachineBrain behaviour,  which  will  select  the  most  eligible  virtual  camera  based  on  its  priority  or  on  other criteria,  and  will  manage  blending. </p>
+<p>Unity Camera可以由场景中的任何虚拟摄像头驱动。 游戏逻辑可以通过基于游戏逻辑操纵虚拟相机的启用标志及其优先级来选择虚拟相机来实现。</p>
+<p>为了由虚拟摄像头驱动，Unity Camera必须具有CinemachineBrain行为，该行为将根据其优先级或其他标准选择最符合条件的虚拟摄像机，并将管理混合。</p>
+<table>
+<thead>
+<tr>
+<th>Setting</th>
+<th>Type</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>Look At</td>
+<td>Transform</td>
+<td>The  object  that  the  camera  wants  to  look  at  (the  Aim  target).  If this  is null,  then  the  vcam’s  Transform  orientation  will  define  the camera’s orientation.</td>
+</tr>
+<tr>
+<td>Follow</td>
+<td>Transform</td>
+<td>The  object  that  the  camera  wants  to  move  with  (the  Body  target). If  this  is  null,  then  the  vcam’s  Transform  position  will  define  the camera’s  position.</td>
+</tr>
+<tr>
+<td>Lens</td>
+<td>LensSettings</td>
+<td>Specifies  the  lens  properties  of  this  Virtual  Camera.  This generally  mirrors  the  Unity  Camera’s  lens  settings,  and  will  beused  to  drive  the  Unity  camera  when  the  vcam  is  active.</td>
+</tr>
+<tr>
+<td>Priority</td>
+<td>Int32</td>
+<td>The  priority  will  determine  which  camera  becomes  active  based on  the  state  of  other  cameras  and  this  camera.  Higher number shave  greater  priority.</td>
+</tr>
+</tbody></table>
+<table>
+<thead>
+<tr>
+<th>设置</th>
+<th>类型</th>
+<th>描述</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>LookAt</td>
+<td>Transform</td>
+<td>相机想要查看的对象（Aim 目标）。 如果为null，则vcam的Transform方向将定义摄像机的方向。</td>
+</tr>
+<tr>
+<td>Follow</td>
+<td>Transform</td>
+<td>相机想要跟随的对象（Body目标）。 如果为null，则vcam的Transform位置将定义摄像机的位置。</td>
+</tr>
+<tr>
+<td>Lens</td>
+<td>LensSettings</td>
+<td>指定此虚拟摄像机的镜头属性。 这通常反映了Unity Camera的镜头设置，并将在vcam处于活动状态时用于驱动Unity相机。</td>
+</tr>
+<tr>
+<td>Priority</td>
+<td>Int32</td>
+<td>优先级将根据其他摄像机和本摄像机的状态确定哪个摄像机变为活动状态。 数字越大，优先级越高。</td>
+</tr>
+</tbody></table>
+<h5 id="LensSettings"><a href="#LensSettings" class="headerlink" title="LensSettings"></a>LensSettings</h5><p>Describes the FOV and clip planes for a camera. This generally mirrors the Unity Camera’s lens settings, and will be used to drive the Unity camera when the vcam is active.</p>
+<p>描述摄像机的FOV和剪裁平面。 这通常反映了Unity Camera的镜头设置，并将在vcam处于活动状态时用于驱动Unity相机。</p>
+<table>
+<thead>
+<tr>
+<th>Setting</th>
+<th>Type</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>Field Of View</td>
+<td>Single</td>
+<td>This is the camera view in vertical degrees. For cinematic people, a 50mm lens on a super-35mm sensor would equal a 19.6 degree FOV.</td>
+</tr>
+<tr>
+<td>Orthographic Size</td>
+<td>Single</td>
+<td>When using an orthographic camera, this defines the half-height, in world coordinates, of the camera view.</td>
+</tr>
+<tr>
+<td>Near Clip Plane</td>
+<td>Single</td>
+<td>This defines the near region in the renderable range of the camera frustum. Raising this value will stop the game from drawing things near the camera, which can sometimes come in handy. Larger values will also increase your shadow resolution.</td>
+</tr>
+<tr>
+<td>Far Clip Plane</td>
+<td>Single</td>
+<td>This defines the far region of the renderable range of the camera frustum. Typically you want to set this value as low as possible without cutting off desired distant objects.</td>
+</tr>
+<tr>
+<td>Dutch</td>
+<td>Single</td>
+<td>Camera Z roll, or tilt, in degrees.</td>
+</tr>
+</tbody></table>
+<table>
+<thead>
+<tr>
+<th>设置</th>
+<th>类型</th>
+<th>描述</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>视野</td>
+<td>Single</td>
+<td>这是垂直度的摄像机视图。 对于电影人来说，超35mm传感器上的50mm镜头等于19.6度FOV。</td>
+</tr>
+<tr>
+<td>正交尺寸</td>
+<td>Single</td>
+<td>使用正交相机时，它定义了摄像机视图的世界坐标的半高。</td>
+</tr>
+<tr>
+<td>近裁剪平面</td>
+<td>Single</td>
+<td>这定义了相机平截头体的可渲染范围内的近区域。 提高此值将阻止游戏在相机附近绘制物品，这有时会派上用场。 较大的值也会增加阴影分辨率。</td>
+</tr>
+<tr>
+<td>远裁剪平面</td>
+<td>Single</td>
+<td>这定义了相机平截头体的可渲染范围的远区域。 通常，您希望在不切断所需远处物体的情况下将此值设置得尽可能低。</td>
+</tr>
+<tr>
+<td>Dutch（镜头倾斜）</td>
+<td>Single</td>
+<td>相机Z以度为单位滚动或倾斜。</td>
+</tr>
+</tbody></table>
+<h5 id="CinemachineComposer-："><a href="#CinemachineComposer-：" class="headerlink" title="CinemachineComposer ："></a>CinemachineComposer ：</h5><p>This is a CinemachineComponent in the Aim section of the component pipeline. Its job is to aim the camera at the vcam’s LookAt target object, with configurable offsets, damping, and composition rules. </p>
+<p>The composer does not change the camera’s position. It will only pan and tilt the camera where it is, in order to get the desired framing. To move the camera, you have to use the virtual camera’s Body section. </p>
+<p>The vcam’s LookAt target is the Composer’s target. Common Composer targets: include bones on a character like the upper spine or head bone, vehicles, or dummy objects which are controlled or animated programmatically. </p>
+<p>这是组件管道的Aim部分中的CinemachineComponent。 它的工作是将摄像机对准vcam的LookAt目标对象，具有可配置的偏移，阻尼和合成规则。</p>
+<p>Composer不会改变相机的位置。 它只会将摄像机平移和倾斜，以获得所需的取景。 要移动相机，您必须使用虚拟相机的“身体”部分。</p>
+<p>vcam的LookAt目标是Composer的目标。 Common Composer目标：在角色上绑定骨骼，例如上部脊柱或头骨，车辆或虚拟对象，这些对象可通过编程方式进行控制或动画处理。</p>
+<p>Once you’ve set the vcam’s LookAt target and are tracking something, you need to define where you’d like it to be on the screen and how aggressively you’d like to camera to track it. The degree of lag, or how tightly the camera follows the subject is defined by the two controls: </p>
+<p><strong>Horizontal/Vertical Soft Damping</strong>: Setting these values to zero means the camera will hard track the subject and the blue regions above will act as rigid barriers locking the camera movement to keep the target inside those values. Setting the larger will allow the target to ‘squish’ into the blue regions, giving you some really nice camera weight and lag. This is what real camera operators do!. The vertical and horizontal values are separated so you can let the camera squish more left to right or follow tighter up and down, etc. </p>
+<p><strong>SoftZone/DeadZone</strong>: Tune these to define where you want the subject to be onscreen. These controls are incredibly versatile. The blue areas are the ‘squishy’ areas based on how much horizontal/vertical damping you have, and the red areas define the ‘no pass’ limits where the camera will always track the subject. Opening up the soft areas to create a ‘dead zone’ in the middle allows you to make areas of the screen immune to target motion, handy for things like animation cycles where you don’t want the camera to track the target if it moves just a little. </p>
+<p>一旦你设置了vcam的LookAt目标并跟踪某些东西，你需要定义你想要它在屏幕上的位置以及你想要相机跟踪它的积极程度。两个控件定义了延迟程度或相机跟随主体的紧密程度：</p>
+<p><strong>水平/垂直软阻尼</strong>：将这些值设置为零意味着摄像机将硬跟踪主体，上方的蓝色区域将作为锁定摄像机移动的刚性障碍，以使目标保持在这些值内。设置较大的将允许目标“挤压”到蓝色区域，给你一些非常好的相机重量和滞后。这就是真正的相机操作员所做的！垂直和水平值是分开的，因此您可以让相机从左到右更加挤压，或者跟随上下更紧，等等。</p>
+<p><strong>SoftZone / DeadZone</strong>：调整这些以定义主体在屏幕上的位置。这些控件非常通用。蓝色区域是基于您具有多少水平/垂直阻尼的“柔软”区域，红色区域定义了摄像机始终跟踪主体的“无通过”限制。打开柔和区域以在中间创建“死区”允许您使屏幕区域免受目标运动的影响，这对于像动画周期这样的事情很方便，如果它只是移动一点点的话，你可能不希望摄像机跟踪目标。</p>
+<table>
+<thead>
+<tr>
+<th>Setting</th>
+<th>Type</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>Tracked Object Offset</td>
+<td>Vector3</td>
+<td>Target offset from the target object’s center in target-local space. Use this to fine-tune the tracking target position when the desired area is not the tracked object’s center.</td>
+</tr>
+<tr>
+<td>Lookahead Time</td>
+<td>Single</td>
+<td>This setting will instruct the composer to adjust its target offset based on the motion of the target. The composer will look at a point where it estimates the target will be this many seconds into the future. Note that this setting is sensitive to noisy animation, and can amplify the noise, resulting in undesirable camera jitter. If the camera jitters unacceptably when the target is in motion, turn down this setting, or animate the target more smoothly.</td>
+</tr>
+<tr>
+<td>Horizontal Damping</td>
+<td>Single</td>
+<td>How aggressively the camera tries to follow the target in the screen-horizontal direction. Small numbers are more responsive, rapidly orienting the camera to keep the target in the dead zone. Larger numbers give a more heavy slowly responding camera. Using different vertical and horizontal settings can yield a wide range of camera behaviors.</td>
+</tr>
+<tr>
+<td>Vertical Damping</td>
+<td>Single</td>
+<td>How aggressively the camera tries to follow the target in the screen-vertical direction. Small numbers are more responsive, rapidly orienting the camera to keep the target in the dead zone. Larger numbers give a more heavy slowly responding camera. Using different vertical and horizontal settings can yield a wide range of camera behaviors.</td>
+</tr>
+<tr>
+<td>Screen X</td>
+<td>Single</td>
+<td>Horizontal screen position for target. The camera will rotate to position the tracked object here.</td>
+</tr>
+<tr>
+<td>Screen Y</td>
+<td>Single</td>
+<td>Vertical screen position for target, The camera will rotate to position the tracked object here.</td>
+</tr>
+<tr>
+<td>Dead Zone Width</td>
+<td>Single</td>
+<td>Camera will not rotate horizontally if the target is within this range of the position.</td>
+</tr>
+<tr>
+<td>Dead Zone Height</td>
+<td>Single</td>
+<td>Camera will not rotate vertically if the target is within this range of the position.</td>
+</tr>
+<tr>
+<td>Soft Zone Width</td>
+<td>Single</td>
+<td>When target is within this region, camera will gradually rotate horizontally to re-align towards the desired position, depending on the damping speed.</td>
+</tr>
+<tr>
+<td>Soft Zone Height</td>
+<td>Single</td>
+<td>When target is within this region, camera will gradually rotate vertically to re-align towards the desired position, depending on the damping speed.</td>
+</tr>
+<tr>
+<td>Bias X</td>
+<td>Single</td>
+<td>A non-zero bias will move the target position horizontally away from the center of the soft zone.</td>
+</tr>
+<tr>
+<td>Bias Y</td>
+<td>Single</td>
+<td>A non-zero bias will move the target position vertically away from<br/>the center of the soft zone.</td>
+</tr>
+</tbody></table>
+<table>
+<thead>
+<tr>
+<th>设置</th>
+<th>类型</th>
+<th>描述</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>跟踪对象偏移</td>
+<td>Vector3</td>
+<td>目标对象在目标 - 本地空间中心的目标偏移量。 当所需区域不是被跟踪对象的中心时，使用此选项微调跟踪目标位置。</td>
+</tr>
+<tr>
+<td>前瞻时间</td>
+<td>Single</td>
+<td>此设置将指示Composer根据目标的运动调整其目标偏移。 Composer将会看到一个点，它估计目标在未来的多少秒内到达目标点。 请注意，此设置对噪声动画很敏感，并且可能会放大噪声，从而导致不需要的相机抖动。 如果在目标运动时相机抖动不可接受，请调低此设置，或者更平稳地为目标设置动画。</td>
+</tr>
+<tr>
+<td>水平阻尼</td>
+<td>Single</td>
+<td>相机在屏幕水平方向上试图跟踪目标的程度如何。 小数字响应更快，快速定向相机以使目标保持在死区。 较大的数字给出了一个更加沉重的慢响应相机。 使用不同的垂直和水平设置可以产生各种相机行为。</td>
+</tr>
+<tr>
+<td>垂直阻尼</td>
+<td>Single</td>
+<td>相机在屏幕垂直方向上试图跟踪目标的程度如何。 小数字响应更快，快速定向相机以使目标保持在死区。 较大的数字给出了一个更加沉重的慢响应相机。 使用不同的垂直和水平设置可以产生各种相机行为。</td>
+</tr>
+<tr>
+<td>水平屏幕位置</td>
+<td>Single</td>
+<td>目标的水平屏幕位置。 相机将旋转以将跟踪对象定位在此处。</td>
+</tr>
+<tr>
+<td>垂直屏幕位置</td>
+<td>Single</td>
+<td>目标的垂直屏幕位置，摄像机将旋转以将跟踪对象定位在此处。</td>
+</tr>
+<tr>
+<td>死区宽度</td>
+<td>Single</td>
+<td>如果目标位于该位置范围内，相机将不会水平旋转。</td>
+</tr>
+<tr>
+<td>死区高度</td>
+<td>Single</td>
+<td>如果目标位于该位置范围内，相机将不会垂直旋转。</td>
+</tr>
+<tr>
+<td>软区宽度</td>
+<td>Single</td>
+<td>当目标位于此区域内时，摄像机将逐渐水平旋转，以根据阻尼速度重新对齐到所需位置。</td>
+</tr>
+<tr>
+<td>软区高度</td>
+<td>Single</td>
+<td>当目标位于此区域内时，摄像机将逐渐垂直旋转，以根据阻尼速度重新对齐到所需位置。</td>
+</tr>
+<tr>
+<td>水平非零偏差</td>
+<td>Single</td>
+<td>非零偏差将使目标位置水平移动远离软区域的中心。</td>
+</tr>
+<tr>
+<td>垂直非零偏差</td>
+<td>Single</td>
+<td>非零偏差将使目标位置垂直移动远离软区域的中心。</td>
+</tr>
+</tbody></table>
+<h5 id="CinemachineTransposer"><a href="#CinemachineTransposer" class="headerlink" title="CinemachineTransposer"></a>CinemachineTransposer</h5><p>This is a CinemachineComponent in the Body section of the component pipeline. Its job is to position the camera in a fixed relationship to the vcam’s Follow target object, with offsets and damping. </p>
+<p>The Transposer will only change the camera’s position in space. It will not re-orient or otherwise aim the camera. To to that, you need to instruct the vcam in the Aim section of its pipeline. </p>
+<p>Transposer is a component which mounts a camera to any object. It has a number of advantages over just putting the camera under the object you want to have the camera follow. Hood Cam, Door Cam, POV Cam, Missile Cam - if you want to mount the camera to something, use Transposer. </p>
+<p>这是组件管道的Body部分中的CinemachineComponent。 它的工作是将摄像机定位到与摄像机的跟随目标物体固定的关系，具有偏移和阻尼。</p>
+<p>Transposer只会改变相机在空间中的位置。 它不会重新定位或以其他方式瞄准相机。 为此，您需要在其管道的Aim部分中指示vcam。</p>
+<p>Transposer是将相机安装到任何物体上的组件。 与将相机放在想要让相机跟随的物体之下相比，它具有许多优点。 相机遮光罩，门镜，视点相机，投掷相机（类似R6的女武神？）如果你想将相机安装到某物上，请使用转换器。</p>
+<p>Using Transposer for your camera body motion has advantages: </p>
+<ul>
+<li>The position tuning is kept, even if the game is running. Tune a regular camera in game mode and the position is lost once you quit, not with Transposer. Tune it up while the game is running and you’re done. </li>
+<li>Add damping to the camera - if your camera follows something, the damping values can give you some ‘weight’ to the camera so they feel smoother. </li>
+<li>Organization: Put all your cameras in one place, instead of having them hidden under all sorts of assets in your project - you pick their targets vs. put the camera under them in the hierarchy. </li>
+</ul>
+<p>使用Transposer进行相机机身运动具有以下优势：</p>
+<ul>
+<li>即使游戏正在运行，也会保持位置调整。 在游戏模式下调整普通相机，一旦退出，位置就会丢失，而不是使用Transposer。 在游戏运行时调整它并完成。</li>
+<li>为相机增加阻尼 - 如果你的相机跟随某些东西，阻尼值可以给你一些相机的“重量”，让它们感觉更顺畅。</li>
+<li>组织：将所有摄像机放在一个位置，而不是将它们隐藏在项目中的各种资产下 - 选择目标而不是将摄像机置于层次结构中。</li>
+</ul>
+<p><strong>Follow Offset</strong>: The camera will go to the centre of the object you’re targeting in the Transposer Camera Target, so if you want the camera to be further behind, put in some offsets. We default at -10 so the camera is behind whatever you’re targeting. </p>
+<p><strong>Damping</strong>: Per channel damping which will cause the camera to lag behind the target. You can control both the position damping, and the orientation damping. </p>
+<p><strong>跟随偏移</strong>：摄像机将转到您在转置相机目标中定位的对象的中心，因此如果您希望将摄像机放在后面，请放入一些偏移。 我们默认为-10，因此无论您的目标是什么，相机都会落后。</p>
+<p><strong>阻尼</strong>：每通道阻尼，这将导致相机滞后于目标。 您可以控制位置阻尼(线阻力？)和方向阻尼（角阻力？）。</p>
+<p><strong>Binding Mode</strong>: There’s options in the relationship between the camera and the target object. </p>
+<ul>
+<li><em>Lock To Target</em> interprets the camera offset in target-local coords. As the target rotates, the camera rotates around it to maintain the offset. </li>
+<li><em>Lock to Target With World Up</em> is the same as the above but it keeps the camera pointing up. Handy if your target flips over. </li>
+<li><em>Lock to Target On Target Assign</em> mounts the camera relative to the target’s local coordinate system at the time the camera is initialized. This offset remains constant in world space, and the camera will not rotate along with the target.</li>
+<li><em>World Space</em> offsets positions the camera relative to the target in world coords no matter what direction the target object is facing. </li>
+<li><em>Simple Follow</em> this will follow the target at the desired distance and height while moving the camera position as little as possible. This is quite similar to what a human camera operator would do when instructed to follow a target. </li>
+</ul>
+<p><strong>绑定模式</strong>：这是一些摄像机和目标对象之间的关系选项。</p>
+<ul>
+<li><em>Lock To Target</em>：解释目标局部坐标中的摄像机偏移。 当目标旋转时，相机围绕它旋转以保持偏移。</li>
+<li><em>使用World Up锁定目标</em>：与上面相同，但它会使摄像机朝上。 如果您的目标翻转，很方便。</li>
+<li><em>基于目标分配锁定目标</em>：摄像机相对于目标的本地坐标系在摄像机初始化时的安装。 此偏移在世界空间中保持不变，并且摄像机不会与目标一起旋转。</li>
+<li>无论目标物体朝向什么方向，<em>世界空间偏移</em>都会使相机相对于目标在世界坐标中定位。</li>
+<li><em>简单跟随</em>：此操作将在所需距离和高度处跟随目标，同时尽可能少地移动摄像机位置。 这非常类似于人类摄像机操作员在被指示跟随目标时所做的事情。</li>
+</ul>
+<p>These different modes do incredibly different things, so try them out and one should work well for whatever your requirements are. The ‘Door Cam’ or ‘Hood Cam’ ideas would use L ocal Space Locked To Target. </p>
+<p>这些不同的模式做了非常不同的事情，所以尝试一下，某个应该适合你的要求。 “监视器”或“固定在遮光罩上的镜头”的想法应使用Local Space Locked To Target。</p>
+<table>
+<thead>
+<tr>
+<th>Setting</th>
+<th>Type</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>Binding Mode</td>
+<td>BindingMode</td>
+<td>The coordinate space to use when interpreting the offset from the target. This is also used to set the camera’s Up vector, which will be maintained when aiming the camera. Possible Values:</td>
+</tr>
+<tr>
+<td></td>
+<td></td>
+<td>Lock To Target On Assign: Camera will be bound to the Follow target using a frame of reference consisting of the target’s local frame at the moment when the virtual camera was enabled, or when the target was assigned.</td>
+</tr>
+<tr>
+<td></td>
+<td></td>
+<td>Lock To Target With World Up: Camera will be bound to the Follow target using a frame of reference consisting of the target’s local frame, with the tilt and roll zeroed out.</td>
+</tr>
+<tr>
+<td></td>
+<td></td>
+<td>Lock To Target No Roll: Camera will be bound to the Follow target using a frame of reference consisting of the target’s local frame, with the roll zeroed out.</td>
+</tr>
+<tr>
+<td></td>
+<td></td>
+<td>Lock To Target: Camera will be bound to the Follow target using the target’s local frame.</td>
+</tr>
+<tr>
+<td></td>
+<td></td>
+<td>World Space: Camera will be bound to the Follow target using a world space offset.</td>
+</tr>
+<tr>
+<td></td>
+<td></td>
+<td>Simple Follow: Offsets will be calculated relative to the target, using Camera-local axes.</td>
+</tr>
+<tr>
+<td>Follow Offset</td>
+<td>Vector3</td>
+<td>The distance vector that the transposer will attempt to maintain from the Follow target.</td>
+</tr>
+<tr>
+<td>X Damping</td>
+<td>Single</td>
+<td>How aggressively the camera tries to maintain the offset in the X-axis. Small numbers are more responsive, rapidly translating the camera to keep the target’s x-axis offset. Larger numbers give a more heavy slowly responding camera. Using different settings per axis can yield a wide range of camera behaviors.</td>
+</tr>
+<tr>
+<td>Y Damping</td>
+<td>Single</td>
+<td>How aggressively the camera tries to maintain the offset in the Y-axis. Small numbers are more responsive, rapidly translating the camera to keep the target’s y-axis offset. Larger numbers give a more heavy slowly responding camera. Using different settings per axis can yield a wide range of camera behaviors.</td>
+</tr>
+<tr>
+<td>Z Damping</td>
+<td>Single</td>
+<td>How aggressively the camera tries to maintain the offset in the Z-axis. Small numbers are more responsive, rapidly translating the camera to keep the target’s z-axis offset. Larger numbers give a more heavy slowly responding camera. Using different settings per axis can yield a wide range of camera behaviors.</td>
+</tr>
+<tr>
+<td>Pitch Damping</td>
+<td>Single</td>
+<td>How aggressively the camera tries to track the target rotation’s X angle. Small numbers are more responsive. Larger numbers give a more heavy slowly responding camera.</td>
+</tr>
+<tr>
+<td>Yaw Damping</td>
+<td>Single</td>
+<td>How aggressively the camera tries to track the target rotation’s Y angle. Small numbers are more responsive. Larger numbers give a more heavy slowly responding camera.</td>
+</tr>
+<tr>
+<td>Roll Damping</td>
+<td>Single</td>
+<td>How aggressively the camera tries to track the target rotation’s Z angle. Small numbers are more responsive. Larger numbers give a more heavy slowly responding camera.</td>
+</tr>
+</tbody></table>
+<table>
+<thead>
+<tr>
+<th>设置</th>
+<th>类型</th>
+<th>描述</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>绑定模式</td>
+<td>绑定模式</td>
+<td>解释目标偏移时使用的坐标空间。 这也用于设置相机的向上矢量，瞄准相机时将保持该矢量。 可能的值：</td>
+</tr>
+<tr>
+<td></td>
+<td></td>
+<td>锁定目标开启分配：摄像机将使用参考框架绑定到“跟随”目标，该框架由启用虚拟摄像机时或目标分配时目标的本地帧组成。</td>
+</tr>
+<tr>
+<td></td>
+<td></td>
+<td>使用World Up锁定目标：使用由目标的本地帧组成的参照系将摄像机绑定到Follow目标，并将倾斜和滚动归零。</td>
+</tr>
+<tr>
+<td></td>
+<td></td>
+<td>锁定目标无滚动：摄像机将使用由目标的本地框架组成的参考框架绑定到“跟随”目标，并将滚动归零。</td>
+</tr>
+<tr>
+<td></td>
+<td></td>
+<td>锁定目标：使用目标的本地帧将相机绑定到关注目标。</td>
+</tr>
+<tr>
+<td></td>
+<td></td>
+<td>世界空间：使用世界空间偏移将摄像机绑定到关注目标。</td>
+</tr>
+<tr>
+<td></td>
+<td></td>
+<td>简单跟随：使用相机局部轴，相对于目标计算偏移。</td>
+</tr>
+<tr>
+<td>跟随位移</td>
+<td>Vector3</td>
+<td>转置器将尝试从Follow目标维护的距离向量。</td>
+</tr>
+<tr>
+<td>X轴阻尼</td>
+<td>Single</td>
+<td>相机如何积极地保持X轴的偏移。 小数字响应更快，快速转换相机以保持目标的x轴偏移。 较大的数字给出了一个更加沉重的慢响应相机。 每个轴使用不同的设置可以产生各种相机行为。</td>
+</tr>
+<tr>
+<td>Y轴阻尼</td>
+<td>Single</td>
+<td>相机如何积极地保持Y轴的偏移。 小数字响应更快，快速转换相机以保持目标的x轴偏移。 较大的数字给出了一个更加沉重的慢响应相机。 每个轴使用不同的设置可以产生各种相机行为。</td>
+</tr>
+<tr>
+<td>Z轴阻尼</td>
+<td>Single</td>
+<td>相机如何积极地保持Z轴的偏移。 小数字响应更快，快速转换相机以保持目标的x轴偏移。 较大的数字给出了一个更加沉重的慢响应相机。 每个轴使用不同的设置可以产生各种相机行为。</td>
+</tr>
+<tr>
+<td>音高阻尼</td>
+<td>Single</td>
+<td>相机如何积极地尝试跟踪目标旋转的X角度。 小数字响应更快。 较大的数字给出了一个更加沉重的慢响应相机。</td>
+</tr>
+<tr>
+<td>偏航阻尼</td>
+<td>Single</td>
+<td>相机如何积极地尝试跟踪目标旋转的Y角度。 小数字响应更快。 较大的数字给出了一个更加沉重的慢响应相机。</td>
+</tr>
+<tr>
+<td>滚动阻尼</td>
+<td>Single</td>
+<td>相机如何积极地尝试跟踪目标旋转的Z角度。 小数字响应更快。 较大的数字给出了一个更加沉重的慢响应相机。</td>
+</tr>
+</tbody></table>
+<h5 id="Cinemachine-BasicMultiChannelPerlin"><a href="#Cinemachine-BasicMultiChannelPerlin" class="headerlink" title="Cinemachine BasicMultiChannelPerlin"></a>Cinemachine BasicMultiChannelPerlin</h5><h5 id="NoiseSettings"><a href="#NoiseSettings" class="headerlink" title="NoiseSettings"></a>NoiseSettings</h5><h5 id="NoiseSettings-NoiseParams"><a href="#NoiseSettings-NoiseParams" class="headerlink" title="NoiseSettings.NoiseParams"></a>NoiseSettings.NoiseParams</h5><h5 id="NoiseSettings-Transform-NoiseParams"><a href="#NoiseSettings-Transform-NoiseParams" class="headerlink" title="NoiseSettings.Transform NoiseParams"></a>NoiseSettings.Transform NoiseParams</h5>
+        </div>
+
+        <blockquote class="post-copyright">
+    
+    <div class="content">
+        
+<span class="post-time">
+    最后更新时间：<time datetime="2018-12-20T14:47:42.057Z" itemprop="dateUpdated">2018-12-20 22:47:42</time>
+</span><br>
+
+
+        
+        这里可以写作者留言，标签和 hexo 中所有变量及辅助函数等均可调用，示例：<a href="/2018/12/20/%E7%BF%BB%E8%AF%91/%E7%BF%BB%E8%AF%91-CineMachine%E7%94%A8%E6%88%B7%E6%89%8B%E5%86%8C%EF%BC%880%EF%BC%89/" target="_blank" rel="external">https://bitzhangmo.github.io/2018/12/20/%E7%BF%BB%E8%AF%91/%E7%BF%BB%E8%AF%91-CineMachine%E7%94%A8%E6%88%B7%E6%89%8B%E5%86%8C%EF%BC%880%EF%BC%89/</a>
+        
+    </div>
+    
+    <footer>
+        <a href="https://bitzhangmo.github.io">
+            <img src="/img/avatar.jpg" alt="zhangMo">
+            zhangMo
+        </a>
+    </footer>
+</blockquote>
+
+        
+<div class="page-reward">
+    <a id="rewardBtn" href="javascript:;" target="_blank" rel="noopener" class="page-reward-btn waves-effect waves-circle waves-light">赏</a>
+</div>
+
+
+
+        <div class="post-footer">
+            
+	<ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/CineMachine/" rel="tag">CineMachine</a></li></ul>
+
+
+            
+<div class="page-share-wrap">
+    
+
+<div class="page-share" id="pageShare">
+    <ul class="reset share-icons">
+      <li>
+        <a class="weibo share-sns" target="_blank" href="http://service.weibo.com/share/share.php?url=https://bitzhangmo.github.io/2018/12/20/%E7%BF%BB%E8%AF%91/%E7%BF%BB%E8%AF%91-CineMachine%E7%94%A8%E6%88%B7%E6%89%8B%E5%86%8C%EF%BC%880%EF%BC%89/&title=《[翻译] CineMachine用户手册（0）》 — zhangMo Blog&pic=https://bitzhangmo.github.io/img/avatar.jpg" data-title="微博">
+          <i class="icon icon-weibo"></i>
+        </a>
+      </li>
+      <li>
+        <a class="weixin share-sns wxFab" href="javascript:;" target="_blank" rel="noopener" data-title="微信">
+          <i class="icon icon-weixin"></i>
+        </a>
+      </li>
+      <li>
+        <a class="qq share-sns" target="_blank" href="http://connect.qq.com/widget/shareqq/index.html?url=https://bitzhangmo.github.io/2018/12/20/%E7%BF%BB%E8%AF%91/%E7%BF%BB%E8%AF%91-CineMachine%E7%94%A8%E6%88%B7%E6%89%8B%E5%86%8C%EF%BC%880%EF%BC%89/&title=《[翻译] CineMachine用户手册（0）》 — zhangMo Blog&source=CineMachine用户手册翻译的第一部分：安装并开始，以及一些相机组件的属性介绍。" data-title=" QQ">
+          <i class="icon icon-qq"></i>
+        </a>
+      </li>
+      <li>
+        <a class="facebook share-sns" target="_blank" href="https://www.facebook.com/sharer/sharer.php?u=https://bitzhangmo.github.io/2018/12/20/%E7%BF%BB%E8%AF%91/%E7%BF%BB%E8%AF%91-CineMachine%E7%94%A8%E6%88%B7%E6%89%8B%E5%86%8C%EF%BC%880%EF%BC%89/" data-title=" Facebook">
+          <i class="icon icon-facebook"></i>
+        </a>
+      </li>
+      <li>
+        <a class="twitter share-sns" target="_blank" href="https://twitter.com/intent/tweet?text=《[翻译] CineMachine用户手册（0）》 — zhangMo Blog&url=https://bitzhangmo.github.io/2018/12/20/%E7%BF%BB%E8%AF%91/%E7%BF%BB%E8%AF%91-CineMachine%E7%94%A8%E6%88%B7%E6%89%8B%E5%86%8C%EF%BC%880%EF%BC%89/&via=https://bitzhangmo.github.io" data-title=" Twitter">
+          <i class="icon icon-twitter"></i>
+        </a>
+      </li>
+      <li>
+        <a class="google share-sns" target="_blank" href="https://plus.google.com/share?url=https://bitzhangmo.github.io/2018/12/20/%E7%BF%BB%E8%AF%91/%E7%BF%BB%E8%AF%91-CineMachine%E7%94%A8%E6%88%B7%E6%89%8B%E5%86%8C%EF%BC%880%EF%BC%89/" data-title=" Google+">
+          <i class="icon icon-google-plus"></i>
+        </a>
+      </li>
+    </ul>
+ </div>
+
+
+
+    <a href="javascript:;" target="_blank" rel="noopener" id="shareFab" class="page-share-fab waves-effect waves-circle">
+        <i class="icon icon-share-alt icon-lg"></i>
+    </a>
+</div>
+
+
+
+        </div>
+    </div>
+
+    
+<nav class="post-nav flex-row flex-justify-between">
+  
+    <div class="waves-block waves-effect prev">
+      <a href="/2018/12/20/%E8%AE%A1%E7%AE%97%E6%9C%BA%E5%9B%BE%E5%BD%A2%E5%AD%A6/%E5%9B%BE%E5%BD%A2%E5%AD%A6-%E7%BB%8F%E5%85%B8%E5%85%89%E7%85%A7%E6%A8%A1%E5%9E%8B/" id="post-prev" class="post-nav-link">
+        <div class="tips"><i class="icon icon-angle-left icon-lg icon-pr"></i> Prev</div>
+        <h4 class="title">[图形学] 经典光照模型</h4>
+      </a>
+    </div>
+  
+
+  
+    <div class="waves-block waves-effect next">
+      <a href="/2018/12/17/%E5%BC%80%E5%8F%91%E7%AC%94%E8%AE%B0/indlecamp-GameJam-%E5%BC%80%E5%8F%91%E7%AC%94%E8%AE%B0/" id="post-next" class="post-nav-link">
+        <div class="tips">Next <i class="icon icon-angle-right icon-lg icon-pl"></i></div>
+        <h4 class="title">indlecamp GameJam 开发笔记</h4>
+      </a>
+    </div>
+  
+</nav>
+
+
+
+    
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+</article>
+
+<div id="reward" class="page-modal reward-lay">
+    <a class="close" href="javascript:;" target="_blank" rel="noopener"><i class="icon icon-close"></i></a>
+    <h3 class="reward-title">
+        <i class="icon icon-quote-left"></i>
+        谢谢大爷~
+        <i class="icon icon-quote-right"></i>
+    </h3>
+    <div class="reward-content">
+        
+        <div class="reward-code">
+            <img id="rewardCode" src="/img/wechat.jpg" alt="打赏二维码">
+        </div>
+        
+        <label class="reward-toggle">
+            <input id="rewardToggle" type="checkbox" class="reward-toggle-check"
+                data-wechat="/img/wechat.jpg" data-alipay="/img/alipay.jpg">
+            <div class="reward-toggle-ctrol">
+                <span class="reward-toggle-item wechat">微信</span>
+                <span class="reward-toggle-label"></span>
+                <span class="reward-toggle-item alipay">支付宝</span>
+            </div>
+        </label>
+        
+    </div>
+</div>
+
+
+
+</div>
+
+        <footer class="footer">
+    <div class="top">
+        
+<p>
+    <span id="busuanzi_container_site_uv" style='display:none'>
+        站点总访客数：<span id="busuanzi_value_site_uv"></span>
+    </span>
+    <span id="busuanzi_container_site_pv" style='display:none'>
+        站点总访问量：<span id="busuanzi_value_site_pv"></span>
+    </span>
+</p>
+
+
+        <p>
+            
+            <span>博客内容遵循 <a rel="license noopener" href="https://creativecommons.org/licenses/by-nc-sa/4.0/deed.zh" target="_blank">知识共享 署名 - 非商业性 - 相同方式共享 4.0 国际协议</a></span>
+        </p>
+    </div>
+    <div class="bottom">
+        <p><span>zhangMo &copy; 2015 - 2019</span>
+            <span>
+                
+                Power by <a href="http://hexo.io/" target="_blank">Hexo</a> Theme <a href="https://github.com/yscoder/hexo-theme-indigo" target="_blank">indigo</a>
+            </span>
+        </p>
+    </div>
+</footer>
+
+    </main>
+    <div class="mask" id="mask"></div>
+<a href="javascript:;" target="_blank" rel="noopener" id="gotop" class="waves-effect waves-circle waves-light"><span class="icon icon-lg icon-chevron-up"></span></a>
+
+
+
+<div class="global-share" id="globalShare">
+    <ul class="reset share-icons">
+      <li>
+        <a class="weibo share-sns" target="_blank" href="http://service.weibo.com/share/share.php?url=https://bitzhangmo.github.io/2018/12/20/%E7%BF%BB%E8%AF%91/%E7%BF%BB%E8%AF%91-CineMachine%E7%94%A8%E6%88%B7%E6%89%8B%E5%86%8C%EF%BC%880%EF%BC%89/&title=《[翻译] CineMachine用户手册（0）》 — zhangMo Blog&pic=https://bitzhangmo.github.io/img/avatar.jpg" data-title="微博">
+          <i class="icon icon-weibo"></i>
+        </a>
+      </li>
+      <li>
+        <a class="weixin share-sns wxFab" href="javascript:;" target="_blank" rel="noopener" data-title="微信">
+          <i class="icon icon-weixin"></i>
+        </a>
+      </li>
+      <li>
+        <a class="qq share-sns" target="_blank" href="http://connect.qq.com/widget/shareqq/index.html?url=https://bitzhangmo.github.io/2018/12/20/%E7%BF%BB%E8%AF%91/%E7%BF%BB%E8%AF%91-CineMachine%E7%94%A8%E6%88%B7%E6%89%8B%E5%86%8C%EF%BC%880%EF%BC%89/&title=《[翻译] CineMachine用户手册（0）》 — zhangMo Blog&source=CineMachine用户手册翻译的第一部分：安装并开始，以及一些相机组件的属性介绍。" data-title=" QQ">
+          <i class="icon icon-qq"></i>
+        </a>
+      </li>
+      <li>
+        <a class="facebook share-sns" target="_blank" href="https://www.facebook.com/sharer/sharer.php?u=https://bitzhangmo.github.io/2018/12/20/%E7%BF%BB%E8%AF%91/%E7%BF%BB%E8%AF%91-CineMachine%E7%94%A8%E6%88%B7%E6%89%8B%E5%86%8C%EF%BC%880%EF%BC%89/" data-title=" Facebook">
+          <i class="icon icon-facebook"></i>
+        </a>
+      </li>
+      <li>
+        <a class="twitter share-sns" target="_blank" href="https://twitter.com/intent/tweet?text=《[翻译] CineMachine用户手册（0）》 — zhangMo Blog&url=https://bitzhangmo.github.io/2018/12/20/%E7%BF%BB%E8%AF%91/%E7%BF%BB%E8%AF%91-CineMachine%E7%94%A8%E6%88%B7%E6%89%8B%E5%86%8C%EF%BC%880%EF%BC%89/&via=https://bitzhangmo.github.io" data-title=" Twitter">
+          <i class="icon icon-twitter"></i>
+        </a>
+      </li>
+      <li>
+        <a class="google share-sns" target="_blank" href="https://plus.google.com/share?url=https://bitzhangmo.github.io/2018/12/20/%E7%BF%BB%E8%AF%91/%E7%BF%BB%E8%AF%91-CineMachine%E7%94%A8%E6%88%B7%E6%89%8B%E5%86%8C%EF%BC%880%EF%BC%89/" data-title=" Google+">
+          <i class="icon icon-google-plus"></i>
+        </a>
+      </li>
+    </ul>
+ </div>
+
+
+<div class="page-modal wx-share" id="wxShare">
+    <a class="close" href="javascript:;" target="_blank" rel="noopener"><i class="icon icon-close"></i></a>
+    <p>扫一扫，分享到微信</p>
+    <img src="//api.qrserver.com/v1/create-qr-code/?data=https://bitzhangmo.github.io/2018/12/20/%E7%BF%BB%E8%AF%91/%E7%BF%BB%E8%AF%91-CineMachine%E7%94%A8%E6%88%B7%E6%89%8B%E5%86%8C%EF%BC%880%EF%BC%89/" alt="微信分享二维码">
+</div>
+
+
+
+
+    <script src="//cdn.bootcss.com/node-waves/0.7.4/waves.min.js"></script>
+<script>
+var BLOG = { ROOT: '/', SHARE: true, REWARD: true };
+
+
+</script>
+
+<script src="//unpkg.com/hexo-theme-material-indigo@latest/js/main.min.js"></script>
+
+
+<div class="search-panel" id="search-panel">
+    <ul class="search-result" id="search-result"></ul>
+</div>
+<template id="search-tpl">
+<li class="item">
+    <a href="{path}" class="waves-block waves-effect">
+        <div class="title ellipsis" title="{title}">{title}</div>
+        <div class="flex-row flex-middle">
+            <div class="tags ellipsis">
+                {tags}
+            </div>
+            <time class="flex-col time">{date}</time>
+        </div>
+    </a>
+</li>
+</template>
+
+<script src="//unpkg.com/hexo-theme-material-indigo@latest/js/search.min.js" async></script>
+
+
+
+
+
+
+<script async src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+
+
+
+<script>
+(function() {
+    var OriginTitile = document.title, titleTime;
+    document.addEventListener('visibilitychange', function() {
+        if (document.hidden) {
+            document.title = '死鬼去哪里了！';
+            clearTimeout(titleTime);
+        } else {
+            document.title = '(つェ⊂)咦!又好了!';
+            titleTime = setTimeout(function() {
+                document.title = OriginTitile;
+            },2000);
+        }
+    });
+})();
+</script>
+
+
+
+</body>
+</html>

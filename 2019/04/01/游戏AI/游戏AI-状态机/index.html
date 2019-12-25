@@ -1,0 +1,584 @@
+<!DOCTYPE html>
+<html>
+<head>
+    
+
+    
+
+    
+
+
+
+    <meta charset="utf-8">
+    
+    
+    
+    
+    <title>[游戏AI] 状态机 | zhangMo Blog</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+    
+    <meta name="theme-color" content="#3F51B5">
+    
+    
+    <meta name="keywords" content="游戏AI">
+    <meta name="description" content="状态机的利与弊。">
+<meta name="keywords" content="游戏AI">
+<meta property="og:type" content="article">
+<meta property="og:title" content="[游戏AI] 状态机">
+<meta property="og:url" content="https:&#x2F;&#x2F;bitzhangmo.github.io&#x2F;2019&#x2F;04&#x2F;01&#x2F;%E6%B8%B8%E6%88%8FAI&#x2F;%E6%B8%B8%E6%88%8FAI-%E7%8A%B6%E6%80%81%E6%9C%BA&#x2F;index.html">
+<meta property="og:site_name" content="zhangMo Blog">
+<meta property="og:description" content="状态机的利与弊。">
+<meta property="og:locale" content="zh-CN">
+<meta property="og:updated_time" content="2019-04-13T08:10:00.618Z">
+<meta name="twitter:card" content="summary">
+    
+    <link rel="shortcut icon" href="/favicon.ico">
+    <link rel="stylesheet" href="//unpkg.com/hexo-theme-material-indigo@latest/css/style.css">
+    <script>window.lazyScripts=[]</script>
+
+    <!-- custom head -->
+    
+
+</head>
+
+<body>
+    <div id="loading" class="active"></div>
+
+    <aside id="menu" class="hide" >
+  <div class="inner flex-row-vertical">
+    <a href="javascript:;" target="_blank" rel="noopener" class="header-icon waves-effect waves-circle waves-light" id="menu-off">
+        <i class="icon icon-lg icon-close"></i>
+    </a>
+    <div class="brand-wrap" style="background-image:url(/img/brand.jpg)">
+      <div class="brand">
+        <a href="/" class="avatar waves-effect waves-circle waves-light">
+          <img src="/img/avatar.jpg">
+        </a>
+        <hgroup class="introduce">
+          <h5 class="nickname">zhangMo</h5>
+          <a href="mailto:634206017@qq.com" target="_blank" rel="noopener" title="634206017@qq.com" class="mail">634206017@qq.com</a>
+        </hgroup>
+      </div>
+    </div>
+    <div class="scroll-wrap flex-col">
+      <ul class="nav">
+        
+            <li class="waves-block waves-effect">
+              <a href="/"  >
+                <i class="icon icon-lg icon-home"></i>
+                主页
+              </a>
+            </li>
+        
+            <li class="waves-block waves-effect">
+              <a href="/archives"  >
+                <i class="icon icon-lg icon-archives"></i>
+                Archives
+              </a>
+            </li>
+        
+            <li class="waves-block waves-effect">
+              <a href="/tags"  >
+                <i class="icon icon-lg icon-tags"></i>
+                Tags
+              </a>
+            </li>
+        
+            <li class="waves-block waves-effect">
+              <a href="/categories"  >
+                <i class="icon icon-lg icon-th-list"></i>
+                Categories
+              </a>
+            </li>
+        
+            <li class="waves-block waves-effect">
+              <a href="https://github.com/yscoder" target="_blank" >
+                <i class="icon icon-lg icon-github"></i>
+                Github
+              </a>
+            </li>
+        
+            <li class="waves-block waves-effect">
+              <a href="http://www.weibo.com/ysweb" target="_blank" >
+                <i class="icon icon-lg icon-weibo"></i>
+                Weibo
+              </a>
+            </li>
+        
+            <li class="waves-block waves-effect">
+              <a href="/custom"  >
+                <i class="icon icon-lg icon-link"></i>
+                测试
+              </a>
+            </li>
+        
+      </ul>
+    </div>
+  </div>
+</aside>
+
+    <main id="main">
+        <header class="top-header" id="header">
+    <div class="flex-row">
+        <a href="javascript:;" target="_blank" rel="noopener" class="header-icon waves-effect waves-circle waves-light on" id="menu-toggle">
+          <i class="icon icon-lg icon-navicon"></i>
+        </a>
+        <div class="flex-col header-title ellipsis">[游戏AI] 状态机</div>
+        
+        <div class="search-wrap" id="search-wrap">
+            <a href="javascript:;" target="_blank" rel="noopener" class="header-icon waves-effect waves-circle waves-light" id="back">
+                <i class="icon icon-lg icon-chevron-left"></i>
+            </a>
+            <input type="text" id="key" class="search-input" autocomplete="off" placeholder="输入感兴趣的关键字">
+            <a href="javascript:;" target="_blank" rel="noopener" class="header-icon waves-effect waves-circle waves-light" id="search">
+                <i class="icon icon-lg icon-search"></i>
+            </a>
+        </div>
+        
+        
+        <a href="javascript:;" target="_blank" rel="noopener" class="header-icon waves-effect waves-circle waves-light" id="menuShare">
+            <i class="icon icon-lg icon-share-alt"></i>
+        </a>
+        
+    </div>
+</header>
+<header class="content-header post-header">
+
+    <div class="container fade-scale">
+        <h1 class="title">[游戏AI] 状态机</h1>
+        <h5 class="subtitle">
+            
+                <time datetime="2019-03-31T16:21:46.000Z" itemprop="datePublished" class="page-time">
+  2019-04-01
+</time>
+
+
+	<ul class="article-category-list"><li class="article-category-list-item"><a class="article-category-list-link" href="/categories/%E8%AF%BB%E4%B9%A6%E7%AC%94%E8%AE%B0/">读书笔记</a></li></ul>
+
+            
+        </h5>
+    </div>
+
+    
+
+
+</header>
+
+
+<div class="container body-wrap">
+    
+    <aside class="post-widget">
+        <nav class="post-toc-wrap post-toc-shrink" id="post-toc">
+            <h4>TOC</h4>
+            <ol class="post-toc"><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#状态机"><span class="post-toc-number">1.</span> <span class="post-toc-text">状态机</span></a><ol class="post-toc-child"><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#状态机是什么："><span class="post-toc-number">1.1.</span> <span class="post-toc-text">状态机是什么：</span></a></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#为什么选择状态机："><span class="post-toc-number">1.2.</span> <span class="post-toc-text">为什么选择状态机：</span></a></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#状态机的演进："><span class="post-toc-number">1.3.</span> <span class="post-toc-text">状态机的演进：</span></a><ol class="post-toc-child"><li class="post-toc-item post-toc-level-4"><a class="post-toc-link" href="#最简单的状态机："><span class="post-toc-number">1.3.1.</span> <span class="post-toc-text">最简单的状态机：</span></a></li><li class="post-toc-item post-toc-level-4"><a class="post-toc-link" href="#决策逻辑和上下文分离："><span class="post-toc-number">1.3.2.</span> <span class="post-toc-text">决策逻辑和上下文分离：</span></a></li><li class="post-toc-item post-toc-level-4"><a class="post-toc-link" href="#分层有限状态机："><span class="post-toc-number">1.3.3.</span> <span class="post-toc-text">分层有限状态机：</span></a></li><li class="post-toc-item post-toc-level-4"><a class="post-toc-link" href="#分层有限状态机的上下文分离："><span class="post-toc-number">1.3.4.</span> <span class="post-toc-text">分层有限状态机的上下文分离：</span></a></li></ol></li></ol></li></ol>
+        </nav>
+    </aside>
+
+
+<article id="post-游戏AI/游戏AI-状态机"
+  class="post-article article-type-post fade" itemprop="blogPost">
+
+    <div class="post-card">
+        <h1 class="post-card-title">[游戏AI] 状态机</h1>
+        <div class="post-meta">
+            <time class="post-time" title="2019-04-01 00:21:46" datetime="2019-03-31T16:21:46.000Z"  itemprop="datePublished">2019-04-01</time>
+
+            
+	<ul class="article-category-list"><li class="article-category-list-item"><a class="article-category-list-link" href="/categories/%E8%AF%BB%E4%B9%A6%E7%AC%94%E8%AE%B0/">读书笔记</a></li></ul>
+
+
+
+            
+<span id="busuanzi_container_page_pv" title="文章总阅读量" style='display:none'>
+    <i class="icon icon-eye icon-pr"></i><span id="busuanzi_value_page_pv"></span>
+</span>
+
+
+        </div>
+        <div class="post-content" id="post-content" itemprop="postContent">
+            <p>状态机的利与弊。</p>
+<a id="more"></a>
+
+
+
+<hr>
+<p>参考：</p>
+<ol>
+<li><a href="http://www.cnblogs.com/fingerpass/p/discussion-about-game-ai.html" target="_blank" rel="noopener">漫谈游戏中的人工智能</a></li>
+<li>《游戏人工智能编程案例精粹》</li>
+</ol>
+<hr>
+<h2 id="状态机"><a href="#状态机" class="headerlink" title="状态机"></a>状态机</h2><h3 id="状态机是什么："><a href="#状态机是什么：" class="headerlink" title="状态机是什么："></a>状态机是什么：</h3><h3 id="为什么选择状态机："><a href="#为什么选择状态机：" class="headerlink" title="为什么选择状态机："></a>为什么选择状态机：</h3><h3 id="状态机的演进："><a href="#状态机的演进：" class="headerlink" title="状态机的演进："></a>状态机的演进：</h3><h4 id="最简单的状态机："><a href="#最简单的状态机：" class="headerlink" title="最简单的状态机："></a>最简单的状态机：</h4><p>首先很容易抽象出IUnit：</p>
+<figure class="highlight csharp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="keyword">interface</span> <span class="title">IUnit</span></span><br><span class="line">&#123;</span><br><span class="line">    <span class="function"><span class="keyword">void</span> <span class="title">ChangeState</span>(<span class="params">UnitStateEnum state</span>)</span>;</span><br><span class="line">    <span class="function"><span class="keyword">void</span> <span class="title">Patrol</span>(<span class="params"></span>)</span>; </span><br><span class="line">    <span class="function">IUnit <span class="title">GetNearestTarget</span>(<span class="params"></span>)</span>; </span><br><span class="line">    <span class="function"><span class="keyword">void</span> <span class="title">LockTarget</span>(<span class="params">IUnit unit</span>)</span>;</span><br><span class="line">    <span class="function"><span class="keyword">float</span> <span class="title">GetFleeBloodRate</span>(<span class="params"></span>)</span>;</span><br><span class="line">    <span class="function"><span class="keyword">bool</span> <span class="title">CanMove</span>(<span class="params"></span>)</span>;</span><br><span class="line">    <span class="function"><span class="keyword">bool</span> <span class="title">HpRateLessThan</span>(<span class="params"><span class="keyword">float</span> rate</span>)</span>;</span><br><span class="line">    <span class="function"><span class="keyword">void</span> <span class="title">Flee</span>(<span class="params"></span>)</span>;</span><br><span class="line">    <span class="function"><span class="keyword">void</span> <span class="title">Speak</span>(<span class="params"></span>)</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>要注意的是，<strong>原作者的实现方式是定义一个单位接口，每个智能体要实现这个单位接口中定义的方法。</strong>(这样写会使每个单位类中有着一套自己所有行为的方法。我之前的实现方式是状态机来控制单位进行相应的行为，这样可以使每个状态仅有这个状态下自身的方法，但是耦合性较高。原作者这种接口是不是可以改写成虚方法的形式，在基类中实现基本行为，具体单位子类中再override出特定的行为？)</p>
+<p>一个最简单的状态机定义：</p>
+<figure class="highlight csharp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">public interface IState&lt;TState,TUnit&gt; where TState : IConvertible</span><br><span class="line">&#123;</span><br><span class="line">  TState Enum &#123;<span class="keyword">get</span>;&#125;</span><br><span class="line">  TUnit Self &#123;<span class="keyword">get</span>;&#125;</span><br><span class="line">  <span class="function"><span class="keyword">void</span> <span class="title">OnEnter</span>(<span class="params"></span>)</span>;</span><br><span class="line">  <span class="function"><span class="keyword">void</span> <span class="title">Drive</span>(<span class="params"></span>)</span>;</span><br><span class="line">  <span class="function"><span class="keyword">void</span> <span class="title">OnExit</span>(<span class="params"></span>)</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>这样写有着一个明显的性能问题：状态机本质是描述状态迁移的，并不需要保存实体的上下文，如果实体的上下文都保存在State中(上文中的TUnit类型的Self)，那么这个状态机的每个状态迁移逻辑需要每个状态都保存一个实体的实例，这样浪费内存，应该将决策逻辑与实体的上下文分离。</p>
+<h4 id="决策逻辑和上下文分离："><a href="#决策逻辑和上下文分离：" class="headerlink" title="决策逻辑和上下文分离："></a>决策逻辑和上下文分离：</h4><p>剥离后：</p>
+<figure class="highlight csharp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">public interface IState&lt;TState,TUnit&gt; where TState : IConvertible</span><br><span class="line">&#123;</span><br><span class="line">  TState Enum &#123;<span class="keyword">get</span>;&#125;</span><br><span class="line">  <span class="function"><span class="keyword">void</span> <span class="title">OnEnter</span>(<span class="params">TUnit self</span>)</span>;</span><br><span class="line">  <span class="function"><span class="keyword">void</span> <span class="title">Drive</span>(<span class="params">TUnit self</span>)</span>;</span><br><span class="line">  <span class="function"><span class="keyword">void</span> <span class="title">OnExit</span>(<span class="params">TUnit self</span>)</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>可以使用单例模式保持静态的状态内容实例只有一个，此时状态之间的迁移逻辑变成了静态，动态的是状态迁移过程中的上下文。</p>
+<h4 id="分层有限状态机："><a href="#分层有限状态机：" class="headerlink" title="分层有限状态机："></a>分层有限状态机：</h4><p>如果想要让状态机框架描述层级结构的概念，需要对其进行拓展：</p>
+<p>例如一个怪物需要在巡逻一段时间后进行休息，在休息一段时间后再次进行巡逻，而巡逻与休息状态均保持着对于战斗的检查。这时如果按照之前的框架(我之前就是最初级的那种)，就需要手动进行装配，在每个状态中都写入一个关于是否进入战斗状态的检查。可以看出战斗状态的优先级较高，并且相对来说算是一种”全局检查”，可以将其抽离出来作为上层状态。</p>
+<ul>
+<li>父状态需要关注子状态的运行结果，所以状态的Drive接口需要一个运行结果的返回值。</li>
+<li>子状态一定是由父状态驱动的。</li>
+</ul>
+<blockquote>
+<p>考虑这样一个组合状态情景：巡逻时，需要依次得先走到一个点，然后怠工一会儿，再走到下一个点，然后再怠工一会儿，循环往复。这样就需要父状态（巡逻状态）注记当前激活的子状态，并且根据子状态执行结果的不同来修改激活的子状态集合。这样不仅是Unit自身有上下文，连组合状态也有了自己的上下文。</p>
+</blockquote>
+<p>状态定义：</p>
+<figure class="highlight csharp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">public interface IState&lt;TState, TCleverUnit, TResult&gt; where TState : IConvertible</span><br><span class="line">&#123;</span><br><span class="line">	<span class="comment">// ...</span></span><br><span class="line">	<span class="function">TResult <span class="title">Drive</span>(<span class="params"></span>)</span>;</span><br><span class="line">	<span class="comment">// ...</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>组合状态的定义：</p>
+<figure class="highlight csharp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="keyword">abstract</span> <span class="keyword">class</span> <span class="title">UnitCompositeStateBase</span> : <span class="title">UnitStateBase</span></span><br><span class="line">&#123;</span><br><span class="line">	<span class="keyword">protected</span> <span class="keyword">readonly</span> LinkedList&lt;UnitStateBase&gt; subStates = <span class="keyword">new</span> LinkedList&lt;UnitStateBase&gt;();</span><br><span class="line"></span><br><span class="line">	<span class="comment">// ...</span></span><br><span class="line">	<span class="function"><span class="keyword">protected</span> Result <span class="title">ProcessSubStates</span>(<span class="params"></span>)</span></span><br><span class="line"><span class="function"></span>	&#123;</span><br><span class="line">		<span class="keyword">if</span> (subStates.Count == <span class="number">0</span>)</span><br><span class="line">		&#123;</span><br><span class="line">			<span class="keyword">return</span> Result.Success;</span><br><span class="line">		&#125;</span><br><span class="line"></span><br><span class="line">		<span class="keyword">var</span> front = subStates.First;</span><br><span class="line">		<span class="keyword">var</span> res = front.Value.Drive();</span><br><span class="line"></span><br><span class="line">		<span class="keyword">if</span> (res != Result.Continue)</span><br><span class="line">		&#123;</span><br><span class="line">			subStates.RemoveFirst();</span><br><span class="line">		&#125;</span><br><span class="line"></span><br><span class="line">		<span class="keyword">return</span> Result.Continue;</span><br><span class="line">	&#125;</span><br><span class="line">	<span class="comment">// ...</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>巡逻状态：</p>
+<figure class="highlight csharp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="keyword">class</span> <span class="title">PatrolState</span> : <span class="title">UnitCompositeStateBase</span></span><br><span class="line">&#123;</span><br><span class="line">	<span class="comment">// ...</span></span><br><span class="line">	<span class="function"><span class="keyword">public</span> <span class="keyword">override</span> <span class="keyword">void</span> <span class="title">OnEnter</span>(<span class="params"></span>)</span></span><br><span class="line"><span class="function"></span>	&#123;</span><br><span class="line">		<span class="keyword">base</span>.OnEnter();</span><br><span class="line">		AddSubState(<span class="keyword">new</span> MoveToState(Self));</span><br><span class="line">	&#125;</span><br><span class="line"></span><br><span class="line">	<span class="function"><span class="keyword">public</span> <span class="keyword">override</span> Result <span class="title">Drive</span>(<span class="params"></span>)</span></span><br><span class="line"><span class="function"></span>	&#123;</span><br><span class="line">		<span class="keyword">if</span> (subStates.Count == <span class="number">0</span>)</span><br><span class="line">		&#123;</span><br><span class="line">			<span class="keyword">return</span> Result.Success;</span><br><span class="line">		&#125;</span><br><span class="line"></span><br><span class="line">		<span class="keyword">var</span> unit = Self.GetNearestTarget();</span><br><span class="line">		<span class="keyword">if</span> (unit != <span class="literal">null</span>)</span><br><span class="line"> 		&#123;</span><br><span class="line">			Self.LockTarget(unit);</span><br><span class="line">			<span class="keyword">return</span> Result.Success;</span><br><span class="line">		&#125;</span><br><span class="line"></span><br><span class="line">		<span class="keyword">var</span> front = subStates.First;</span><br><span class="line">		<span class="keyword">var</span> ret = front.Value.Drive();</span><br><span class="line"></span><br><span class="line">		<span class="keyword">if</span> (ret != Result.Continue)</span><br><span class="line">		&#123;</span><br><span class="line">			<span class="keyword">if</span> (front.Value.Enum == CleverUnitStateEnum.MoveTo)</span><br><span class="line">			&#123;</span><br><span class="line">				AddSubState(<span class="keyword">new</span> IdleState(Self));</span><br><span class="line">			&#125;</span><br><span class="line">			<span class="keyword">else</span></span><br><span class="line">			&#123;</span><br><span class="line">				AddSubState(<span class="keyword">new</span> MoveToState(Self));</span><br><span class="line">			&#125;</span><br><span class="line">		&#125;</span><br><span class="line">            </span><br><span class="line">		<span class="keyword">return</span> Result.Continue;</span><br><span class="line">	&#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h4 id="分层有限状态机的上下文分离："><a href="#分层有限状态机的上下文分离：" class="headerlink" title="分层有限状态机的上下文分离："></a>分层有限状态机的上下文分离：</h4><p>　　我们对之前重构出来的层次状态机框架再进行一次Context分离优化。</p>
+<p>　　要优化的点有这样几个：</p>
+<ul>
+<li>首先是继续之前的，unit不应该作为一个state自己的内部status。</li>
+<li>组合状态的实例内部不应该包括自身执行的status。目前的组合状态，可以动态增删子状态，也就是根据status决定了结构的状态，理应分离静态与动态。巡逻状态组合了两个子状态——A和B，逻辑中是一个完成了就添加另一个，这样一想的话，其实巡逻状态应该重新描述——先进行A，再进行B，循环往复。</li>
+</ul>
+<ul>
+<li>由于有了父状态的概念，其实状态接口的设计也可以再迭代，理论上只需要一个drive即可。因为状态内部的上下文要全部分离出来，所以也没必要对外提供OnEnter、OnExit，提供这两个接口的意义只是做一层内部信息的隐藏，但是现在内部的status没了，也就没必要隐藏了。</li>
+</ul>
+<p>　　具体分析一下需要拆出的status：</p>
+<ul>
+<li>一部分是entity本身的status，这里可以简单的认为是unit。</li>
+<li>另一部分是state本身的status。<ul>
+<li>对于组合状态，这个status描述的是我当前执行到哪个substate。</li>
+<li>对于原子状态，这个status描述的种类可能有所区别。<ul>
+<li>例如MoveTo/Flee，OnEnter的时候，修改了unit的status，然后Drive的时候去check。</li>
+<li>例如Idle，OnEnter时改了自己的status，然后Drive的时候去check。</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+<p>　　经过总结，我们可以发现，每个状态的status本质上都可以通过一个变量来描述。一个State作为一个最小粒度的单元，具有这样的Concept： 输入一个Context，输出一个Result。</p>
+<p>　　Context暂时只需要包括这个Unit，和之前所说的status。同时，考虑这样一个问题：</p>
+<ul>
+<li>父状态A，子状态B。</li>
+<li>子状态B向上返回Continue的同时，status记录下来为b。</li>
+<li>父状态ADrive子状态的结果为Continue，自身也需要向上抛出Continue，同时自己也有status为a。</li>
+</ul>
+<p>　　这样，再还原现场时，就需要即给A一个a，还需要让A有能力从Context中拿到需要给B的b。因此上下文的结构理应是递归定义的，是一个层级结构。</p>
+<p>　　Context如下定义：</p>
+<figure class="highlight csharp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="keyword">class</span> <span class="title">Continuation</span></span><br><span class="line">    &#123;</span><br><span class="line">        <span class="keyword">public</span> Continuation SubContinuation &#123; <span class="keyword">get</span>; <span class="keyword">set</span>; &#125;</span><br><span class="line">        <span class="keyword">public</span> <span class="keyword">int</span> NextStep &#123; <span class="keyword">get</span>; <span class="keyword">set</span>; &#125;</span><br><span class="line">        <span class="keyword">public</span> <span class="keyword">object</span> Param &#123; <span class="keyword">get</span>; <span class="keyword">set</span>; &#125;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">public class Context&lt;T&gt;</span><br><span class="line">&#123;</span><br><span class="line">	<span class="keyword">public</span> Continuation Continuation &#123; <span class="keyword">get</span>; <span class="keyword">set</span>; &#125;</span><br><span class="line">	<span class="keyword">public</span> T Self &#123; <span class="keyword">get</span>; <span class="keyword">set</span>; &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>　　修改State的接口定义为：</p>
+<figure class="highlight csharp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">public interface IState&lt;TCleverUnit, TResult&gt;</span><br><span class="line">    &#123;</span><br><span class="line">        <span class="function">TResult <span class="title">Drive</span>(<span class="params">Context&lt;TCleverUnit&gt; ctx</span>)</span>;</span><br><span class="line">    &#125;</span><br></pre></td></tr></table></figure>
+
+<p>　　已经相当简洁了。</p>
+<p>　　这样，我们对之前的巡逻状态也做下修改，达到一个ContextFree的效果。利用Context中的Continuation来确定当前结点应该从什么状态继续：</p>
+<figure class="highlight csharp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br></pre></td><td class="code"><pre><span class="line">public class PatrolState : IState&lt;ICleverUnit, Result&gt;</span><br><span class="line">    &#123;</span><br><span class="line">        <span class="keyword">private</span> <span class="keyword">readonly</span> List&lt;IState&lt;ICleverUnit, Result&gt;&gt; subStates;</span><br><span class="line">        <span class="function"><span class="keyword">public</span> <span class="title">PatrolState</span>(<span class="params"></span>)</span></span><br><span class="line"><span class="function"></span>        &#123;</span><br><span class="line">            subStates = <span class="keyword">new</span> List&lt;IState&lt;ICleverUnit, Result&gt;&gt;()</span><br><span class="line">            &#123;</span><br><span class="line">                <span class="keyword">new</span> MoveToState(),</span><br><span class="line">                <span class="keyword">new</span> IdleState(),</span><br><span class="line">            &#125;;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="function"><span class="keyword">public</span> Result <span class="title">Drive</span>(<span class="params">Context&lt;ICleverUnit&gt; ctx</span>)</span></span><br><span class="line"><span class="function"></span>        &#123;</span><br><span class="line">            <span class="keyword">var</span> unit = ctx.Self.GetNearestTarget();</span><br><span class="line">            <span class="keyword">if</span> (unit != <span class="literal">null</span>)</span><br><span class="line">            &#123;</span><br><span class="line">                ctx.Self.LockTarget(unit);</span><br><span class="line"></span><br><span class="line">                <span class="keyword">return</span> Result.Success;</span><br><span class="line">            &#125;</span><br><span class="line"></span><br><span class="line">            <span class="keyword">var</span> nextStep = <span class="number">0</span>;</span><br><span class="line">            <span class="keyword">if</span> (ctx.Continuation != <span class="literal">null</span>)</span><br><span class="line">            &#123;</span><br><span class="line">                <span class="comment">// Continuation</span></span><br><span class="line">                <span class="keyword">var</span> thisContinuation = ctx.Continuation;</span><br><span class="line"></span><br><span class="line">                ctx.Continuation = thisContinuation.SubContinuation;</span><br><span class="line"></span><br><span class="line">                <span class="keyword">var</span> ret = subStates[nextStep].Drive(ctx);</span><br><span class="line"></span><br><span class="line">                <span class="keyword">if</span> (ret == Result.Continue)</span><br><span class="line">                &#123;</span><br><span class="line">                    thisContinuation.SubContinuation = ctx.Continuation;</span><br><span class="line">                    ctx.Continuation = thisContinuation;</span><br><span class="line"></span><br><span class="line">                    <span class="keyword">return</span> Result.Continue;</span><br><span class="line">                &#125;</span><br><span class="line">                <span class="keyword">else</span> <span class="keyword">if</span> (ret == Result.Failure)</span><br><span class="line">                &#123;</span><br><span class="line">                    ctx.Continuation = <span class="literal">null</span>;</span><br><span class="line"></span><br><span class="line">                    <span class="keyword">return</span> Result.Failure;</span><br><span class="line">                &#125;</span><br><span class="line"></span><br><span class="line">                ctx.Continuation = <span class="literal">null</span>;</span><br><span class="line">                nextStep = thisContinuation.NextStep + <span class="number">1</span>;</span><br><span class="line">            &#125;</span><br><span class="line"></span><br><span class="line">            <span class="keyword">for</span> (; nextStep &lt; subStates.Count; nextStep++)</span><br><span class="line">            &#123;</span><br><span class="line">                <span class="keyword">var</span> ret = subStates[nextStep].Drive(ctx);</span><br><span class="line">                <span class="keyword">if</span> (ret == Result.Continue)</span><br><span class="line">                &#123;</span><br><span class="line">                    ctx.Continuation = <span class="keyword">new</span> Continuation()</span><br><span class="line">                    &#123;</span><br><span class="line">                        SubContinuation = ctx.Continuation,</span><br><span class="line">                        NextStep = nextStep,</span><br><span class="line">                    &#125;;</span><br><span class="line"></span><br><span class="line">                    <span class="keyword">return</span> Result.Continue;</span><br><span class="line">                &#125; </span><br><span class="line">                <span class="keyword">else</span> <span class="keyword">if</span> (ret == Result.Failure) </span><br><span class="line">                &#123;</span><br><span class="line">                    ctx.Continuation = <span class="literal">null</span>;</span><br><span class="line"></span><br><span class="line">                    <span class="keyword">return</span> Result.Failure;</span><br><span class="line">                &#125;</span><br><span class="line">            &#125;</span><br><span class="line"></span><br><span class="line">            ctx.Continuation = <span class="literal">null</span>;</span><br><span class="line"></span><br><span class="line">            <span class="keyword">return</span> Result.Success;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br></pre></td></tr></table></figure>
+
+<p>　　subStates是readonly的，在组合状态构造的一开始就确定了值。这样结构本身就是静态的，而上下文是动态的。不同的entity instance共用同一个树的instance。</p>
+<p>​    (最后这个理解起来比较吃力了)</p>
+
+        </div>
+
+        <blockquote class="post-copyright">
+    
+    <div class="content">
+        
+<span class="post-time">
+    最后更新时间：<time datetime="2019-04-13T08:10:00.618Z" itemprop="dateUpdated">2019-04-13 16:10:00</time>
+</span><br>
+
+
+        
+        这里可以写作者留言，标签和 hexo 中所有变量及辅助函数等均可调用，示例：<a href="/2019/04/01/%E6%B8%B8%E6%88%8FAI/%E6%B8%B8%E6%88%8FAI-%E7%8A%B6%E6%80%81%E6%9C%BA/" target="_blank" rel="external">https://bitzhangmo.github.io/2019/04/01/%E6%B8%B8%E6%88%8FAI/%E6%B8%B8%E6%88%8FAI-%E7%8A%B6%E6%80%81%E6%9C%BA/</a>
+        
+    </div>
+    
+    <footer>
+        <a href="https://bitzhangmo.github.io">
+            <img src="/img/avatar.jpg" alt="zhangMo">
+            zhangMo
+        </a>
+    </footer>
+</blockquote>
+
+        
+<div class="page-reward">
+    <a id="rewardBtn" href="javascript:;" target="_blank" rel="noopener" class="page-reward-btn waves-effect waves-circle waves-light">赏</a>
+</div>
+
+
+
+        <div class="post-footer">
+            
+	<ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/%E6%B8%B8%E6%88%8FAI/" rel="tag">游戏AI</a></li></ul>
+
+
+            
+<div class="page-share-wrap">
+    
+
+<div class="page-share" id="pageShare">
+    <ul class="reset share-icons">
+      <li>
+        <a class="weibo share-sns" target="_blank" href="http://service.weibo.com/share/share.php?url=https://bitzhangmo.github.io/2019/04/01/%E6%B8%B8%E6%88%8FAI/%E6%B8%B8%E6%88%8FAI-%E7%8A%B6%E6%80%81%E6%9C%BA/&title=《[游戏AI] 状态机》 — zhangMo Blog&pic=https://bitzhangmo.github.io/img/avatar.jpg" data-title="微博">
+          <i class="icon icon-weibo"></i>
+        </a>
+      </li>
+      <li>
+        <a class="weixin share-sns wxFab" href="javascript:;" target="_blank" rel="noopener" data-title="微信">
+          <i class="icon icon-weixin"></i>
+        </a>
+      </li>
+      <li>
+        <a class="qq share-sns" target="_blank" href="http://connect.qq.com/widget/shareqq/index.html?url=https://bitzhangmo.github.io/2019/04/01/%E6%B8%B8%E6%88%8FAI/%E6%B8%B8%E6%88%8FAI-%E7%8A%B6%E6%80%81%E6%9C%BA/&title=《[游戏AI] 状态机》 — zhangMo Blog&source=状态机的利与弊。" data-title=" QQ">
+          <i class="icon icon-qq"></i>
+        </a>
+      </li>
+      <li>
+        <a class="facebook share-sns" target="_blank" href="https://www.facebook.com/sharer/sharer.php?u=https://bitzhangmo.github.io/2019/04/01/%E6%B8%B8%E6%88%8FAI/%E6%B8%B8%E6%88%8FAI-%E7%8A%B6%E6%80%81%E6%9C%BA/" data-title=" Facebook">
+          <i class="icon icon-facebook"></i>
+        </a>
+      </li>
+      <li>
+        <a class="twitter share-sns" target="_blank" href="https://twitter.com/intent/tweet?text=《[游戏AI] 状态机》 — zhangMo Blog&url=https://bitzhangmo.github.io/2019/04/01/%E6%B8%B8%E6%88%8FAI/%E6%B8%B8%E6%88%8FAI-%E7%8A%B6%E6%80%81%E6%9C%BA/&via=https://bitzhangmo.github.io" data-title=" Twitter">
+          <i class="icon icon-twitter"></i>
+        </a>
+      </li>
+      <li>
+        <a class="google share-sns" target="_blank" href="https://plus.google.com/share?url=https://bitzhangmo.github.io/2019/04/01/%E6%B8%B8%E6%88%8FAI/%E6%B8%B8%E6%88%8FAI-%E7%8A%B6%E6%80%81%E6%9C%BA/" data-title=" Google+">
+          <i class="icon icon-google-plus"></i>
+        </a>
+      </li>
+    </ul>
+ </div>
+
+
+
+    <a href="javascript:;" target="_blank" rel="noopener" id="shareFab" class="page-share-fab waves-effect waves-circle">
+        <i class="icon icon-share-alt icon-lg"></i>
+    </a>
+</div>
+
+
+
+        </div>
+    </div>
+
+    
+<nav class="post-nav flex-row flex-justify-between">
+  
+    <div class="waves-block waves-effect prev">
+      <a href="/2019/04/11/Unity%E7%AC%94%E8%AE%B0/Unity-Unity%E4%B8%AD%E7%9A%84%E5%86%85%E5%AD%98%E6%B3%84%E6%BC%8F/" id="post-prev" class="post-nav-link">
+        <div class="tips"><i class="icon icon-angle-left icon-lg icon-pr"></i> Prev</div>
+        <h4 class="title">[Unity] Unity中的内存泄漏</h4>
+      </a>
+    </div>
+  
+
+  
+    <div class="waves-block waves-effect next">
+      <a href="/2019/03/26/Unity%E7%AC%94%E8%AE%B0/%E8%BD%AC-Unity-3D%E4%B8%AD%E7%9A%84%E5%86%85%E5%AD%98%E7%AE%A1%E7%90%86/" id="post-next" class="post-nav-link">
+        <div class="tips">Next <i class="icon icon-angle-right icon-lg icon-pl"></i></div>
+        <h4 class="title">[转] Unity 3D中的内存管理</h4>
+      </a>
+    </div>
+  
+</nav>
+
+
+
+    
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+</article>
+
+<div id="reward" class="page-modal reward-lay">
+    <a class="close" href="javascript:;" target="_blank" rel="noopener"><i class="icon icon-close"></i></a>
+    <h3 class="reward-title">
+        <i class="icon icon-quote-left"></i>
+        谢谢大爷~
+        <i class="icon icon-quote-right"></i>
+    </h3>
+    <div class="reward-content">
+        
+        <div class="reward-code">
+            <img id="rewardCode" src="/img/wechat.jpg" alt="打赏二维码">
+        </div>
+        
+        <label class="reward-toggle">
+            <input id="rewardToggle" type="checkbox" class="reward-toggle-check"
+                data-wechat="/img/wechat.jpg" data-alipay="/img/alipay.jpg">
+            <div class="reward-toggle-ctrol">
+                <span class="reward-toggle-item wechat">微信</span>
+                <span class="reward-toggle-label"></span>
+                <span class="reward-toggle-item alipay">支付宝</span>
+            </div>
+        </label>
+        
+    </div>
+</div>
+
+
+
+</div>
+
+        <footer class="footer">
+    <div class="top">
+        
+<p>
+    <span id="busuanzi_container_site_uv" style='display:none'>
+        站点总访客数：<span id="busuanzi_value_site_uv"></span>
+    </span>
+    <span id="busuanzi_container_site_pv" style='display:none'>
+        站点总访问量：<span id="busuanzi_value_site_pv"></span>
+    </span>
+</p>
+
+
+        <p>
+            
+            <span>博客内容遵循 <a rel="license noopener" href="https://creativecommons.org/licenses/by-nc-sa/4.0/deed.zh" target="_blank">知识共享 署名 - 非商业性 - 相同方式共享 4.0 国际协议</a></span>
+        </p>
+    </div>
+    <div class="bottom">
+        <p><span>zhangMo &copy; 2015 - 2019</span>
+            <span>
+                
+                Power by <a href="http://hexo.io/" target="_blank">Hexo</a> Theme <a href="https://github.com/yscoder/hexo-theme-indigo" target="_blank">indigo</a>
+            </span>
+        </p>
+    </div>
+</footer>
+
+    </main>
+    <div class="mask" id="mask"></div>
+<a href="javascript:;" target="_blank" rel="noopener" id="gotop" class="waves-effect waves-circle waves-light"><span class="icon icon-lg icon-chevron-up"></span></a>
+
+
+
+<div class="global-share" id="globalShare">
+    <ul class="reset share-icons">
+      <li>
+        <a class="weibo share-sns" target="_blank" href="http://service.weibo.com/share/share.php?url=https://bitzhangmo.github.io/2019/04/01/%E6%B8%B8%E6%88%8FAI/%E6%B8%B8%E6%88%8FAI-%E7%8A%B6%E6%80%81%E6%9C%BA/&title=《[游戏AI] 状态机》 — zhangMo Blog&pic=https://bitzhangmo.github.io/img/avatar.jpg" data-title="微博">
+          <i class="icon icon-weibo"></i>
+        </a>
+      </li>
+      <li>
+        <a class="weixin share-sns wxFab" href="javascript:;" target="_blank" rel="noopener" data-title="微信">
+          <i class="icon icon-weixin"></i>
+        </a>
+      </li>
+      <li>
+        <a class="qq share-sns" target="_blank" href="http://connect.qq.com/widget/shareqq/index.html?url=https://bitzhangmo.github.io/2019/04/01/%E6%B8%B8%E6%88%8FAI/%E6%B8%B8%E6%88%8FAI-%E7%8A%B6%E6%80%81%E6%9C%BA/&title=《[游戏AI] 状态机》 — zhangMo Blog&source=状态机的利与弊。" data-title=" QQ">
+          <i class="icon icon-qq"></i>
+        </a>
+      </li>
+      <li>
+        <a class="facebook share-sns" target="_blank" href="https://www.facebook.com/sharer/sharer.php?u=https://bitzhangmo.github.io/2019/04/01/%E6%B8%B8%E6%88%8FAI/%E6%B8%B8%E6%88%8FAI-%E7%8A%B6%E6%80%81%E6%9C%BA/" data-title=" Facebook">
+          <i class="icon icon-facebook"></i>
+        </a>
+      </li>
+      <li>
+        <a class="twitter share-sns" target="_blank" href="https://twitter.com/intent/tweet?text=《[游戏AI] 状态机》 — zhangMo Blog&url=https://bitzhangmo.github.io/2019/04/01/%E6%B8%B8%E6%88%8FAI/%E6%B8%B8%E6%88%8FAI-%E7%8A%B6%E6%80%81%E6%9C%BA/&via=https://bitzhangmo.github.io" data-title=" Twitter">
+          <i class="icon icon-twitter"></i>
+        </a>
+      </li>
+      <li>
+        <a class="google share-sns" target="_blank" href="https://plus.google.com/share?url=https://bitzhangmo.github.io/2019/04/01/%E6%B8%B8%E6%88%8FAI/%E6%B8%B8%E6%88%8FAI-%E7%8A%B6%E6%80%81%E6%9C%BA/" data-title=" Google+">
+          <i class="icon icon-google-plus"></i>
+        </a>
+      </li>
+    </ul>
+ </div>
+
+
+<div class="page-modal wx-share" id="wxShare">
+    <a class="close" href="javascript:;" target="_blank" rel="noopener"><i class="icon icon-close"></i></a>
+    <p>扫一扫，分享到微信</p>
+    <img src="//api.qrserver.com/v1/create-qr-code/?data=https://bitzhangmo.github.io/2019/04/01/%E6%B8%B8%E6%88%8FAI/%E6%B8%B8%E6%88%8FAI-%E7%8A%B6%E6%80%81%E6%9C%BA/" alt="微信分享二维码">
+</div>
+
+
+
+
+    <script src="//cdn.bootcss.com/node-waves/0.7.4/waves.min.js"></script>
+<script>
+var BLOG = { ROOT: '/', SHARE: true, REWARD: true };
+
+
+</script>
+
+<script src="//unpkg.com/hexo-theme-material-indigo@latest/js/main.min.js"></script>
+
+
+<div class="search-panel" id="search-panel">
+    <ul class="search-result" id="search-result"></ul>
+</div>
+<template id="search-tpl">
+<li class="item">
+    <a href="{path}" class="waves-block waves-effect">
+        <div class="title ellipsis" title="{title}">{title}</div>
+        <div class="flex-row flex-middle">
+            <div class="tags ellipsis">
+                {tags}
+            </div>
+            <time class="flex-col time">{date}</time>
+        </div>
+    </a>
+</li>
+</template>
+
+<script src="//unpkg.com/hexo-theme-material-indigo@latest/js/search.min.js" async></script>
+
+
+
+
+
+
+<script async src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+
+
+
+<script>
+(function() {
+    var OriginTitile = document.title, titleTime;
+    document.addEventListener('visibilitychange', function() {
+        if (document.hidden) {
+            document.title = '死鬼去哪里了！';
+            clearTimeout(titleTime);
+        } else {
+            document.title = '(つェ⊂)咦!又好了!';
+            titleTime = setTimeout(function() {
+                document.title = OriginTitile;
+            },2000);
+        }
+    });
+})();
+</script>
+
+
+
+</body>
+</html>

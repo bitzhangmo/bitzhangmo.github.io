@@ -1,0 +1,544 @@
+<!DOCTYPE html>
+<html>
+<head>
+    
+
+    
+
+    
+
+
+
+    <meta charset="utf-8">
+    
+    
+    
+    
+    <title>Lua与C交互相关 | zhangMo Blog</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+    
+    <meta name="theme-color" content="#3F51B5">
+    
+    
+    <meta name="keywords" content="Lua">
+    <meta name="description" content="C语言API总览。">
+<meta name="keywords" content="Lua">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Lua与C交互相关">
+<meta property="og:url" content="https:&#x2F;&#x2F;bitzhangmo.github.io&#x2F;2019&#x2F;08&#x2F;16&#x2F;Lua&#x2F;Lua%E4%B8%8EC%E4%BA%A4%E4%BA%92%E7%9B%B8%E5%85%B3&#x2F;index.html">
+<meta property="og:site_name" content="zhangMo Blog">
+<meta property="og:description" content="C语言API总览。">
+<meta property="og:locale" content="zh-CN">
+<meta property="og:updated_time" content="2019-08-17T07:59:01.306Z">
+<meta name="twitter:card" content="summary">
+    
+    <link rel="shortcut icon" href="/favicon.ico">
+    <link rel="stylesheet" href="//unpkg.com/hexo-theme-material-indigo@latest/css/style.css">
+    <script>window.lazyScripts=[]</script>
+
+    <!-- custom head -->
+    
+
+</head>
+
+<body>
+    <div id="loading" class="active"></div>
+
+    <aside id="menu" class="hide" >
+  <div class="inner flex-row-vertical">
+    <a href="javascript:;" target="_blank" rel="noopener" class="header-icon waves-effect waves-circle waves-light" id="menu-off">
+        <i class="icon icon-lg icon-close"></i>
+    </a>
+    <div class="brand-wrap" style="background-image:url(/img/brand.jpg)">
+      <div class="brand">
+        <a href="/" class="avatar waves-effect waves-circle waves-light">
+          <img src="/img/avatar.jpg">
+        </a>
+        <hgroup class="introduce">
+          <h5 class="nickname">zhangMo</h5>
+          <a href="mailto:634206017@qq.com" target="_blank" rel="noopener" title="634206017@qq.com" class="mail">634206017@qq.com</a>
+        </hgroup>
+      </div>
+    </div>
+    <div class="scroll-wrap flex-col">
+      <ul class="nav">
+        
+            <li class="waves-block waves-effect">
+              <a href="/"  >
+                <i class="icon icon-lg icon-home"></i>
+                主页
+              </a>
+            </li>
+        
+            <li class="waves-block waves-effect">
+              <a href="/archives"  >
+                <i class="icon icon-lg icon-archives"></i>
+                Archives
+              </a>
+            </li>
+        
+            <li class="waves-block waves-effect">
+              <a href="/tags"  >
+                <i class="icon icon-lg icon-tags"></i>
+                Tags
+              </a>
+            </li>
+        
+            <li class="waves-block waves-effect">
+              <a href="/categories"  >
+                <i class="icon icon-lg icon-th-list"></i>
+                Categories
+              </a>
+            </li>
+        
+            <li class="waves-block waves-effect">
+              <a href="https://github.com/yscoder" target="_blank" >
+                <i class="icon icon-lg icon-github"></i>
+                Github
+              </a>
+            </li>
+        
+            <li class="waves-block waves-effect">
+              <a href="http://www.weibo.com/ysweb" target="_blank" >
+                <i class="icon icon-lg icon-weibo"></i>
+                Weibo
+              </a>
+            </li>
+        
+            <li class="waves-block waves-effect">
+              <a href="/custom"  >
+                <i class="icon icon-lg icon-link"></i>
+                测试
+              </a>
+            </li>
+        
+      </ul>
+    </div>
+  </div>
+</aside>
+
+    <main id="main">
+        <header class="top-header" id="header">
+    <div class="flex-row">
+        <a href="javascript:;" target="_blank" rel="noopener" class="header-icon waves-effect waves-circle waves-light on" id="menu-toggle">
+          <i class="icon icon-lg icon-navicon"></i>
+        </a>
+        <div class="flex-col header-title ellipsis">Lua与C交互相关</div>
+        
+        <div class="search-wrap" id="search-wrap">
+            <a href="javascript:;" target="_blank" rel="noopener" class="header-icon waves-effect waves-circle waves-light" id="back">
+                <i class="icon icon-lg icon-chevron-left"></i>
+            </a>
+            <input type="text" id="key" class="search-input" autocomplete="off" placeholder="输入感兴趣的关键字">
+            <a href="javascript:;" target="_blank" rel="noopener" class="header-icon waves-effect waves-circle waves-light" id="search">
+                <i class="icon icon-lg icon-search"></i>
+            </a>
+        </div>
+        
+        
+        <a href="javascript:;" target="_blank" rel="noopener" class="header-icon waves-effect waves-circle waves-light" id="menuShare">
+            <i class="icon icon-lg icon-share-alt"></i>
+        </a>
+        
+    </div>
+</header>
+<header class="content-header post-header">
+
+    <div class="container fade-scale">
+        <h1 class="title">Lua与C交互相关</h1>
+        <h5 class="subtitle">
+            
+                <time datetime="2019-08-16T02:41:45.000Z" itemprop="datePublished" class="page-time">
+  2019-08-16
+</time>
+
+
+	<ul class="article-category-list"><li class="article-category-list-item"><a class="article-category-list-link" href="/categories/%E8%AF%BB%E4%B9%A6%E7%AC%94%E8%AE%B0/">读书笔记</a></li></ul>
+
+            
+        </h5>
+    </div>
+
+    
+
+
+</header>
+
+
+<div class="container body-wrap">
+    
+    <aside class="post-widget">
+        <nav class="post-toc-wrap post-toc-shrink" id="post-toc">
+            <h4>TOC</h4>
+            <ol class="post-toc"><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#一个简单的独立解释器："><span class="post-toc-number">1.</span> <span class="post-toc-text">一个简单的独立解释器：</span></a></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#栈："><span class="post-toc-number">2.</span> <span class="post-toc-text">栈：</span></a><ol class="post-toc-child"><li class="post-toc-item post-toc-level-4"><a class="post-toc-link" href="#压入元素："><span class="post-toc-number">2.1.</span> <span class="post-toc-text">压入元素：</span></a></li><li class="post-toc-item post-toc-level-4"><a class="post-toc-link" href="#查询元素："><span class="post-toc-number">2.2.</span> <span class="post-toc-text">查询元素：</span></a></li></ol></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#使用C-API进行错误处理："><span class="post-toc-number">3.</span> <span class="post-toc-text">使用C API进行错误处理：</span></a><ol class="post-toc-child"><li class="post-toc-item post-toc-level-4"><a class="post-toc-link" href="#处理应用程序中的错误："><span class="post-toc-number">3.1.</span> <span class="post-toc-text">处理应用程序中的错误：</span></a></li><li class="post-toc-item post-toc-level-4"><a class="post-toc-link" href="#处理库代码中的错误："><span class="post-toc-number">3.2.</span> <span class="post-toc-text">处理库代码中的错误：</span></a></li></ol></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#内存分配："><span class="post-toc-number">4.</span> <span class="post-toc-text">内存分配：</span></a></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#pcall："><span class="post-toc-number">5.</span> <span class="post-toc-text">pcall：</span></a></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#在Lua中调用C语言："><span class="post-toc-number">6.</span> <span class="post-toc-text">在Lua中调用C语言：</span></a></li></ol>
+        </nav>
+    </aside>
+
+
+<article id="post-Lua/Lua与C交互相关"
+  class="post-article article-type-post fade" itemprop="blogPost">
+
+    <div class="post-card">
+        <h1 class="post-card-title">Lua与C交互相关</h1>
+        <div class="post-meta">
+            <time class="post-time" title="2019-08-16 10:41:45" datetime="2019-08-16T02:41:45.000Z"  itemprop="datePublished">2019-08-16</time>
+
+            
+	<ul class="article-category-list"><li class="article-category-list-item"><a class="article-category-list-link" href="/categories/%E8%AF%BB%E4%B9%A6%E7%AC%94%E8%AE%B0/">读书笔记</a></li></ul>
+
+
+
+            
+<span id="busuanzi_container_page_pv" title="文章总阅读量" style='display:none'>
+    <i class="icon icon-eye icon-pr"></i><span id="busuanzi_value_page_pv"></span>
+</span>
+
+
+        </div>
+        <div class="post-content" id="post-content" itemprop="postContent">
+            <p>C语言API总览。</p>
+<a id="more"></a>
+
+<p>C语言和Lua语言的两种交互形式：</p>
+<ol>
+<li>C语言拥有控制权，而Lua语言被用作库，这种交互形式中的C代码被称为应用代码。</li>
+<li>Lua语言拥有控制权，而C语言被用作库，此时的C代码被称为库代码。</li>
+</ol>
+<p>应用代码和库代码都适用相同的API和Lua语言通信，这些API称为C API。</p>
+<h3 id="一个简单的独立解释器："><a href="#一个简单的独立解释器：" class="headerlink" title="一个简单的独立解释器："></a>一个简单的独立解释器：</h3><figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;stdio.h&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;string.h&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">"lua.h"</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">"lauxlib.h"</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">"lualib.h"</span></span></span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">main</span><span class="params">(<span class="keyword">void</span>)</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">  <span class="keyword">char</span> buff[<span class="number">256</span>];</span><br><span class="line">  <span class="keyword">int</span> error;</span><br><span class="line">  lua_State *L = luaL_newstate();				<span class="comment">/* 打开Lua */</span></span><br><span class="line">  luaL_openlibs(L);											<span class="comment">/* 打开标准库 */</span></span><br><span class="line">  </span><br><span class="line">  <span class="keyword">while</span>(fgets(buuff,<span class="keyword">sizeof</span>(buff),<span class="built_in">stdin</span>) != <span class="literal">NULL</span>)</span><br><span class="line">  &#123;</span><br><span class="line">    error = luaL_loadstring(L,buff) || lua_pcall(L,<span class="number">0</span>,<span class="number">0</span>,<span class="number">0</span>);</span><br><span class="line">    <span class="keyword">if</span>(error)</span><br><span class="line">    &#123;</span><br><span class="line">      <span class="built_in">fprintf</span>(<span class="built_in">stderr</span>,<span class="string">"%s\n"</span>,lua_tostring(L,<span class="number">-1</span>));</span><br><span class="line">      lua_pop(L,<span class="number">1</span>);											<span class="comment">/* 从栈中弹出错误信息 */</span></span><br><span class="line">    &#125;</span><br><span class="line">  &#125;</span><br><span class="line">  </span><br><span class="line">  lua_close(L);</span><br><span class="line">  <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>头文件lua.h声明了Lua提供的基础函数，其中包括创建新Lua环境的函数、调用Lua函数的函数、读写环境中的全局变量的函数，以及注册供Lua语言调用的新函数的函数，等等。其中声明的所有内容都有一个前缀lua_。</p>
+<p>头文件lauxlib.h声明了辅助库所提供的函数，其中所有的声明均以luaL_开头。</p>
+<p>头文件lualib.h中声明了用于打开这些库的函数。</p>
+<h3 id="栈："><a href="#栈：" class="headerlink" title="栈："></a>栈：</h3><p>Lua和C之间通信的主要组件是虚拟栈，几乎所有的API的调用都是在操作这个栈中的值，Lua和C之间所有的数据交换都是通过这个栈完成的，此外，还可以利用栈保存中间结果。</p>
+<p>为了解决<strong>动态类型和静态类型体系之间不匹配</strong>，以及<strong>自动内存管理和手动内存管理之间不匹配</strong>：Lua API中没有定义任何类似于lua_Value的类型，而是使用栈在Lua和C之间交换数据。栈中的每个元素都能保存Lua中任意类型的值。当我们想要从Lua中获取一个值时，只需调用Lua，Lua就会将指定的值压入栈中。当想要将一个值传给Lua时，首先要将这个值压入栈，然后调用Lua将其从栈中弹出即可。这需要每个C语言类型都有一个函数将其压入栈，还需要每个类型都有一个弹出的函数，但是避免了过多的组合，<strong>另外由于这个栈是Lua状态的一部分，因此垃圾收集器知道C语言正在使用哪些值。</strong></p>
+<h4 id="压入元素："><a href="#压入元素：" class="headerlink" title="压入元素："></a>压入元素：</h4><p>针对每一种能用C语言直接表示的Lua数据类型，C API中都有一个对应的压栈函数。</p>
+<p>对栈空间的检查可以使用int lua_checkstack(lua_State *L,int sz);这里，sz是我们所需的额外栈位置的数量，如果可能，函数 lua_checkstack 会增加栈的大小，以容纳所需的额外空间；否则该函数返回0。</p>
+<h4 id="查询元素："><a href="#查询元素：" class="headerlink" title="查询元素："></a>查询元素：</h4><p>第一个被压入栈的元素索引为1，第二个被压入的元素索引为2，依此类推。也可以使用负数索引来访问栈中的元素，栈顶的元素为-1，-2表示在它之前被压入栈中的元素。</p>
+<p>与Lua栈相关的函数游一系列，在此不做赘述。</p>
+<h3 id="使用C-API进行错误处理："><a href="#使用C-API进行错误处理：" class="headerlink" title="使用C API进行错误处理："></a>使用C API进行错误处理：</h3><h4 id="处理应用程序中的错误："><a href="#处理应用程序中的错误：" class="headerlink" title="处理应用程序中的错误："></a>处理应用程序中的错误：</h4><p>Lua语言通常通过长跳转来提示错误，但是如果没有相应的setjmp，解释器就无法进行长跳转。此时，API中的任何错误都会导致Lua调用紧急函数。当这个函数返回后，应用就会退出。</p>
+<p>要正确的处理应用代码中的错误，就必须通过Lua语言调用我们自己的代码，即在setjmp的上下文中运行代码。</p>
+<p>我们可以把C代码封装到一个函数F中，然后使用lua_pcall调用这个函数F，通过这种方式，我们的C代码会在保护模式下运行。即便发生内存分配失败，函数lua_pcall也会返回一个对应的错误码，使解释器能够保持一致的状态：</p>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">static</span> <span class="keyword">int</span> <span class="title">foo</span><span class="params">(lua_State *L)</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">	<span class="comment">//code to run in protected mode</span></span><br><span class="line">	<span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">secure_foo</span><span class="params">(lua_State *L)</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">	lua_pushcfunction(L,foo);</span><br><span class="line">	<span class="keyword">return</span> (lua_pcall(L,<span class="number">0</span>,<span class="number">0</span>,<span class="number">0</span>) == <span class="number">0</span>)</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>无论发生什么，调用secure_foo时都会返回一个布尔值，来表示foo执行是否成功。</p>
+<h4 id="处理库代码中的错误："><a href="#处理库代码中的错误：" class="headerlink" title="处理库代码中的错误："></a>处理库代码中的错误：</h4><p>当C语言库中的函数检测到错误时，只需简单的调用lua_error即可。</p>
+<h3 id="内存分配："><a href="#内存分配：" class="headerlink" title="内存分配："></a>内存分配：</h3><p>Lua语言核心对内存分配不进行任何假设，只会通过一个分配函数来分配和释放内存，当用户创建lua状态时必须提供该函数。</p>
+<p>luaL_newstate是一个用默认分配函数来创建Lua状态的辅助函数。该默认分配函数使用了来自C语言标准函数库的标准函数malloc-realloc-free，对于大多数应用程序来说已经够了，但是，要完全控制Lua的内存分配也很容易，使用原始的lua_newstate来创建我们自己的Lua状态即可：</p>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="function">lua_State *<span class="title">lua_newstate</span><span class="params">(lua_Alloc f,<span class="keyword">void</span> *ud)</span></span></span><br></pre></td></tr></table></figure>
+
+<p>该函数有两个参数：一个是分配函数，另一个是用户数据。用这种方式创建的Lua状态会通过调用f完成所有的内存分配和释放，甚至结构lua_State也是由f分配的。</p>
+<p>分配函数f必须满足lua_Alloc的类型声明：</p>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">typedef</span> <span class="keyword">void</span> *(*lua_Alloc)(<span class="keyword">void</span> *ud,						<span class="comment">// 为lua_newstate所提供的用户数据</span></span><br><span class="line">													 <span class="keyword">void</span> *ptr,						<span class="comment">// 正要被分配或者释放的块的地址</span></span><br><span class="line">													 <span class="keyword">size_t</span> osize,				<span class="comment">// 原始块的大小</span></span><br><span class="line">													 <span class="keyword">size_t</span> nsize);				<span class="comment">// 请求的块大小</span></span><br></pre></td></tr></table></figure>
+
+<p>如果ptr不是NULL，则lua会保证其之前被分配的大小就是osize。</p>
+<p>当nsize为0时，分配函数必须释放ptr指向的块并返回NULL，对应于所要求的大小为零的块。当ptr时NULL时，该函数必须分配并返回一个指定大小的块；如果无法分配指定的块，则必须返回NULL。</p>
+<h3 id="pcall："><a href="#pcall：" class="headerlink" title="pcall："></a>pcall：</h3><p>在调用函数lua_pcall时，第二个参数表示传递的参数数量，第三个参数是期望的结果数量，第四个参数代表错误处理函数。就像Lua语言的赋值一样，函数lua_pcall会根据所要求的数量来调整返回值的个数，即压入nil或丢弃多余的结果。在压入结果前，lua_pcall会把函数和其参数从栈中移除。当一个函数返回多个结果时，那么第一个结果最后被压入。</p>
+<h3 id="在Lua中调用C语言："><a href="#在Lua中调用C语言：" class="headerlink" title="在Lua中调用C语言："></a>在Lua中调用C语言：</h3><p>当Lua调用C函数时，我们必须注册该函数，即必须以一种恰当的方式为Lua提供该C函数的地址。Lua调用C函数时，也使用了一个与C语言调用Lua函数时相同类型的栈，C函数从栈中获取参数，并将结果压入栈中。</p>
+<p>这个栈不是一个全局结构；每个函数都有其私有的局部栈。当Lua调用一个C函数时，第一个参数总是位于这个局部栈中索引为1的位置。即使一个C函数调用了Lua代码，而且Lua代码又再次调用了同一个的C函数，这些调用每一个都只会看到本次调用自己的私有栈，其中索引为1的位置上就是第一个参数。</p>
+<p>所有在Lua中注册的函数都必须使用一个相同的原型，该原型就是定义在lua.h中的lua_CFunction：</p>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">typedef</span> <span class="title">int</span> <span class="params">(*lua_CFunction)</span><span class="params">(lua_State *L)</span></span></span><br></pre></td></tr></table></figure>
+
+<p>在Lua中，调用这个函数前，还必须通过lua_pushcfunction注册该函数。函数lua_pushcfunction会获取一个指向C函数的指针，然后在Lua中创建一个“function”类型，代表待注册的函数。一旦完成注册，C函数就可以像其他Lua函数一样行事了。</p>
+
+        </div>
+
+        <blockquote class="post-copyright">
+    
+    <div class="content">
+        
+<span class="post-time">
+    最后更新时间：<time datetime="2019-08-17T07:59:01.306Z" itemprop="dateUpdated">2019-08-17 15:59:01</time>
+</span><br>
+
+
+        
+        这里可以写作者留言，标签和 hexo 中所有变量及辅助函数等均可调用，示例：<a href="/2019/08/16/Lua/Lua%E4%B8%8EC%E4%BA%A4%E4%BA%92%E7%9B%B8%E5%85%B3/" target="_blank" rel="external">https://bitzhangmo.github.io/2019/08/16/Lua/Lua%E4%B8%8EC%E4%BA%A4%E4%BA%92%E7%9B%B8%E5%85%B3/</a>
+        
+    </div>
+    
+    <footer>
+        <a href="https://bitzhangmo.github.io">
+            <img src="/img/avatar.jpg" alt="zhangMo">
+            zhangMo
+        </a>
+    </footer>
+</blockquote>
+
+        
+<div class="page-reward">
+    <a id="rewardBtn" href="javascript:;" target="_blank" rel="noopener" class="page-reward-btn waves-effect waves-circle waves-light">赏</a>
+</div>
+
+
+
+        <div class="post-footer">
+            
+	<ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Lua/" rel="tag">Lua</a></li></ul>
+
+
+            
+<div class="page-share-wrap">
+    
+
+<div class="page-share" id="pageShare">
+    <ul class="reset share-icons">
+      <li>
+        <a class="weibo share-sns" target="_blank" href="http://service.weibo.com/share/share.php?url=https://bitzhangmo.github.io/2019/08/16/Lua/Lua%E4%B8%8EC%E4%BA%A4%E4%BA%92%E7%9B%B8%E5%85%B3/&title=《Lua与C交互相关》 — zhangMo Blog&pic=https://bitzhangmo.github.io/img/avatar.jpg" data-title="微博">
+          <i class="icon icon-weibo"></i>
+        </a>
+      </li>
+      <li>
+        <a class="weixin share-sns wxFab" href="javascript:;" target="_blank" rel="noopener" data-title="微信">
+          <i class="icon icon-weixin"></i>
+        </a>
+      </li>
+      <li>
+        <a class="qq share-sns" target="_blank" href="http://connect.qq.com/widget/shareqq/index.html?url=https://bitzhangmo.github.io/2019/08/16/Lua/Lua%E4%B8%8EC%E4%BA%A4%E4%BA%92%E7%9B%B8%E5%85%B3/&title=《Lua与C交互相关》 — zhangMo Blog&source=C语言API总览。" data-title=" QQ">
+          <i class="icon icon-qq"></i>
+        </a>
+      </li>
+      <li>
+        <a class="facebook share-sns" target="_blank" href="https://www.facebook.com/sharer/sharer.php?u=https://bitzhangmo.github.io/2019/08/16/Lua/Lua%E4%B8%8EC%E4%BA%A4%E4%BA%92%E7%9B%B8%E5%85%B3/" data-title=" Facebook">
+          <i class="icon icon-facebook"></i>
+        </a>
+      </li>
+      <li>
+        <a class="twitter share-sns" target="_blank" href="https://twitter.com/intent/tweet?text=《Lua与C交互相关》 — zhangMo Blog&url=https://bitzhangmo.github.io/2019/08/16/Lua/Lua%E4%B8%8EC%E4%BA%A4%E4%BA%92%E7%9B%B8%E5%85%B3/&via=https://bitzhangmo.github.io" data-title=" Twitter">
+          <i class="icon icon-twitter"></i>
+        </a>
+      </li>
+      <li>
+        <a class="google share-sns" target="_blank" href="https://plus.google.com/share?url=https://bitzhangmo.github.io/2019/08/16/Lua/Lua%E4%B8%8EC%E4%BA%A4%E4%BA%92%E7%9B%B8%E5%85%B3/" data-title=" Google+">
+          <i class="icon icon-google-plus"></i>
+        </a>
+      </li>
+    </ul>
+ </div>
+
+
+
+    <a href="javascript:;" target="_blank" rel="noopener" id="shareFab" class="page-share-fab waves-effect waves-circle">
+        <i class="icon icon-share-alt icon-lg"></i>
+    </a>
+</div>
+
+
+
+        </div>
+    </div>
+
+    
+<nav class="post-nav flex-row flex-justify-between">
+  
+    <div class="waves-block waves-effect prev">
+      <a href="/2019/08/21/Lua/Lua%E6%BA%90%E7%A0%81%E9%98%85%E8%AF%BB%EF%BC%9A%E8%99%9A%E6%8B%9F%E6%9C%BA%E6%A6%82%E8%BF%B0/" id="post-prev" class="post-nav-link">
+        <div class="tips"><i class="icon icon-angle-left icon-lg icon-pr"></i> Prev</div>
+        <h4 class="title">Lua源码阅读：虚拟机概述</h4>
+      </a>
+    </div>
+  
+
+  
+    <div class="waves-block waves-effect next">
+      <a href="/2019/08/12/Lua/Lua%E6%BA%90%E7%A0%81%E9%98%85%E8%AF%BB%EF%BC%9A%E5%9F%BA%E6%9C%AC%E6%95%B0%E6%8D%AE%E7%B1%BB%E5%9E%8BTable/" id="post-next" class="post-nav-link">
+        <div class="tips">Next <i class="icon icon-angle-right icon-lg icon-pl"></i></div>
+        <h4 class="title">Lua源码阅读：基本数据类型Table</h4>
+      </a>
+    </div>
+  
+</nav>
+
+
+
+    
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+</article>
+
+<div id="reward" class="page-modal reward-lay">
+    <a class="close" href="javascript:;" target="_blank" rel="noopener"><i class="icon icon-close"></i></a>
+    <h3 class="reward-title">
+        <i class="icon icon-quote-left"></i>
+        谢谢大爷~
+        <i class="icon icon-quote-right"></i>
+    </h3>
+    <div class="reward-content">
+        
+        <div class="reward-code">
+            <img id="rewardCode" src="/img/wechat.jpg" alt="打赏二维码">
+        </div>
+        
+        <label class="reward-toggle">
+            <input id="rewardToggle" type="checkbox" class="reward-toggle-check"
+                data-wechat="/img/wechat.jpg" data-alipay="/img/alipay.jpg">
+            <div class="reward-toggle-ctrol">
+                <span class="reward-toggle-item wechat">微信</span>
+                <span class="reward-toggle-label"></span>
+                <span class="reward-toggle-item alipay">支付宝</span>
+            </div>
+        </label>
+        
+    </div>
+</div>
+
+
+
+</div>
+
+        <footer class="footer">
+    <div class="top">
+        
+<p>
+    <span id="busuanzi_container_site_uv" style='display:none'>
+        站点总访客数：<span id="busuanzi_value_site_uv"></span>
+    </span>
+    <span id="busuanzi_container_site_pv" style='display:none'>
+        站点总访问量：<span id="busuanzi_value_site_pv"></span>
+    </span>
+</p>
+
+
+        <p>
+            
+            <span>博客内容遵循 <a rel="license noopener" href="https://creativecommons.org/licenses/by-nc-sa/4.0/deed.zh" target="_blank">知识共享 署名 - 非商业性 - 相同方式共享 4.0 国际协议</a></span>
+        </p>
+    </div>
+    <div class="bottom">
+        <p><span>zhangMo &copy; 2015 - 2019</span>
+            <span>
+                
+                Power by <a href="http://hexo.io/" target="_blank">Hexo</a> Theme <a href="https://github.com/yscoder/hexo-theme-indigo" target="_blank">indigo</a>
+            </span>
+        </p>
+    </div>
+</footer>
+
+    </main>
+    <div class="mask" id="mask"></div>
+<a href="javascript:;" target="_blank" rel="noopener" id="gotop" class="waves-effect waves-circle waves-light"><span class="icon icon-lg icon-chevron-up"></span></a>
+
+
+
+<div class="global-share" id="globalShare">
+    <ul class="reset share-icons">
+      <li>
+        <a class="weibo share-sns" target="_blank" href="http://service.weibo.com/share/share.php?url=https://bitzhangmo.github.io/2019/08/16/Lua/Lua%E4%B8%8EC%E4%BA%A4%E4%BA%92%E7%9B%B8%E5%85%B3/&title=《Lua与C交互相关》 — zhangMo Blog&pic=https://bitzhangmo.github.io/img/avatar.jpg" data-title="微博">
+          <i class="icon icon-weibo"></i>
+        </a>
+      </li>
+      <li>
+        <a class="weixin share-sns wxFab" href="javascript:;" target="_blank" rel="noopener" data-title="微信">
+          <i class="icon icon-weixin"></i>
+        </a>
+      </li>
+      <li>
+        <a class="qq share-sns" target="_blank" href="http://connect.qq.com/widget/shareqq/index.html?url=https://bitzhangmo.github.io/2019/08/16/Lua/Lua%E4%B8%8EC%E4%BA%A4%E4%BA%92%E7%9B%B8%E5%85%B3/&title=《Lua与C交互相关》 — zhangMo Blog&source=C语言API总览。" data-title=" QQ">
+          <i class="icon icon-qq"></i>
+        </a>
+      </li>
+      <li>
+        <a class="facebook share-sns" target="_blank" href="https://www.facebook.com/sharer/sharer.php?u=https://bitzhangmo.github.io/2019/08/16/Lua/Lua%E4%B8%8EC%E4%BA%A4%E4%BA%92%E7%9B%B8%E5%85%B3/" data-title=" Facebook">
+          <i class="icon icon-facebook"></i>
+        </a>
+      </li>
+      <li>
+        <a class="twitter share-sns" target="_blank" href="https://twitter.com/intent/tweet?text=《Lua与C交互相关》 — zhangMo Blog&url=https://bitzhangmo.github.io/2019/08/16/Lua/Lua%E4%B8%8EC%E4%BA%A4%E4%BA%92%E7%9B%B8%E5%85%B3/&via=https://bitzhangmo.github.io" data-title=" Twitter">
+          <i class="icon icon-twitter"></i>
+        </a>
+      </li>
+      <li>
+        <a class="google share-sns" target="_blank" href="https://plus.google.com/share?url=https://bitzhangmo.github.io/2019/08/16/Lua/Lua%E4%B8%8EC%E4%BA%A4%E4%BA%92%E7%9B%B8%E5%85%B3/" data-title=" Google+">
+          <i class="icon icon-google-plus"></i>
+        </a>
+      </li>
+    </ul>
+ </div>
+
+
+<div class="page-modal wx-share" id="wxShare">
+    <a class="close" href="javascript:;" target="_blank" rel="noopener"><i class="icon icon-close"></i></a>
+    <p>扫一扫，分享到微信</p>
+    <img src="//api.qrserver.com/v1/create-qr-code/?data=https://bitzhangmo.github.io/2019/08/16/Lua/Lua%E4%B8%8EC%E4%BA%A4%E4%BA%92%E7%9B%B8%E5%85%B3/" alt="微信分享二维码">
+</div>
+
+
+
+
+    <script src="//cdn.bootcss.com/node-waves/0.7.4/waves.min.js"></script>
+<script>
+var BLOG = { ROOT: '/', SHARE: true, REWARD: true };
+
+
+</script>
+
+<script src="//unpkg.com/hexo-theme-material-indigo@latest/js/main.min.js"></script>
+
+
+<div class="search-panel" id="search-panel">
+    <ul class="search-result" id="search-result"></ul>
+</div>
+<template id="search-tpl">
+<li class="item">
+    <a href="{path}" class="waves-block waves-effect">
+        <div class="title ellipsis" title="{title}">{title}</div>
+        <div class="flex-row flex-middle">
+            <div class="tags ellipsis">
+                {tags}
+            </div>
+            <time class="flex-col time">{date}</time>
+        </div>
+    </a>
+</li>
+</template>
+
+<script src="//unpkg.com/hexo-theme-material-indigo@latest/js/search.min.js" async></script>
+
+
+
+
+
+
+<script async src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+
+
+
+<script>
+(function() {
+    var OriginTitile = document.title, titleTime;
+    document.addEventListener('visibilitychange', function() {
+        if (document.hidden) {
+            document.title = '死鬼去哪里了！';
+            clearTimeout(titleTime);
+        } else {
+            document.title = '(つェ⊂)咦!又好了!';
+            titleTime = setTimeout(function() {
+                document.title = OriginTitile;
+            },2000);
+        }
+    });
+})();
+</script>
+
+
+
+</body>
+</html>

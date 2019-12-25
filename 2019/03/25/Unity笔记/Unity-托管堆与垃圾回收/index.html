@@ -1,0 +1,564 @@
+<!DOCTYPE html>
+<html>
+<head>
+    
+
+    
+
+    
+
+
+
+    <meta charset="utf-8">
+    
+    
+    
+    
+    <title>[Unity] 托管堆与垃圾回收 | zhangMo Blog</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+    
+    <meta name="theme-color" content="#3F51B5">
+    
+    
+    <meta name="keywords" content="Unity">
+    <meta name="description" content="有关Unity中的托管堆与垃圾回收。">
+<meta name="keywords" content="Unity">
+<meta property="og:type" content="article">
+<meta property="og:title" content="[Unity] 托管堆与垃圾回收">
+<meta property="og:url" content="https:&#x2F;&#x2F;bitzhangmo.github.io&#x2F;2019&#x2F;03&#x2F;25&#x2F;Unity%E7%AC%94%E8%AE%B0&#x2F;Unity-%E6%89%98%E7%AE%A1%E5%A0%86%E4%B8%8E%E5%9E%83%E5%9C%BE%E5%9B%9E%E6%94%B6&#x2F;index.html">
+<meta property="og:site_name" content="zhangMo Blog">
+<meta property="og:description" content="有关Unity中的托管堆与垃圾回收。">
+<meta property="og:locale" content="zh-CN">
+<meta property="og:image" content="https:&#x2F;&#x2F;wx3.sinaimg.cn&#x2F;mw690&#x2F;007CSzD7gy1g1f2klldndj30iz03ct8m.jpg">
+<meta property="og:image" content="https:&#x2F;&#x2F;wx4.sinaimg.cn&#x2F;mw690&#x2F;007CSzD7gy1g1f2klnzgmj30j2039jrc.jpg">
+<meta property="og:image" content="https:&#x2F;&#x2F;wx3.sinaimg.cn&#x2F;mw690&#x2F;007CSzD7gy1g1f2klo5urj30j704oglm.jpg">
+<meta property="og:updated_time" content="2019-03-25T09:01:37.549Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="https:&#x2F;&#x2F;wx3.sinaimg.cn&#x2F;mw690&#x2F;007CSzD7gy1g1f2klldndj30iz03ct8m.jpg">
+    
+    <link rel="shortcut icon" href="/favicon.ico">
+    <link rel="stylesheet" href="//unpkg.com/hexo-theme-material-indigo@latest/css/style.css">
+    <script>window.lazyScripts=[]</script>
+
+    <!-- custom head -->
+    
+
+</head>
+
+<body>
+    <div id="loading" class="active"></div>
+
+    <aside id="menu" class="hide" >
+  <div class="inner flex-row-vertical">
+    <a href="javascript:;" target="_blank" rel="noopener" class="header-icon waves-effect waves-circle waves-light" id="menu-off">
+        <i class="icon icon-lg icon-close"></i>
+    </a>
+    <div class="brand-wrap" style="background-image:url(/img/brand.jpg)">
+      <div class="brand">
+        <a href="/" class="avatar waves-effect waves-circle waves-light">
+          <img src="/img/avatar.jpg">
+        </a>
+        <hgroup class="introduce">
+          <h5 class="nickname">zhangMo</h5>
+          <a href="mailto:634206017@qq.com" target="_blank" rel="noopener" title="634206017@qq.com" class="mail">634206017@qq.com</a>
+        </hgroup>
+      </div>
+    </div>
+    <div class="scroll-wrap flex-col">
+      <ul class="nav">
+        
+            <li class="waves-block waves-effect">
+              <a href="/"  >
+                <i class="icon icon-lg icon-home"></i>
+                主页
+              </a>
+            </li>
+        
+            <li class="waves-block waves-effect">
+              <a href="/archives"  >
+                <i class="icon icon-lg icon-archives"></i>
+                Archives
+              </a>
+            </li>
+        
+            <li class="waves-block waves-effect">
+              <a href="/tags"  >
+                <i class="icon icon-lg icon-tags"></i>
+                Tags
+              </a>
+            </li>
+        
+            <li class="waves-block waves-effect">
+              <a href="/categories"  >
+                <i class="icon icon-lg icon-th-list"></i>
+                Categories
+              </a>
+            </li>
+        
+            <li class="waves-block waves-effect">
+              <a href="https://github.com/yscoder" target="_blank" >
+                <i class="icon icon-lg icon-github"></i>
+                Github
+              </a>
+            </li>
+        
+            <li class="waves-block waves-effect">
+              <a href="http://www.weibo.com/ysweb" target="_blank" >
+                <i class="icon icon-lg icon-weibo"></i>
+                Weibo
+              </a>
+            </li>
+        
+            <li class="waves-block waves-effect">
+              <a href="/custom"  >
+                <i class="icon icon-lg icon-link"></i>
+                测试
+              </a>
+            </li>
+        
+      </ul>
+    </div>
+  </div>
+</aside>
+
+    <main id="main">
+        <header class="top-header" id="header">
+    <div class="flex-row">
+        <a href="javascript:;" target="_blank" rel="noopener" class="header-icon waves-effect waves-circle waves-light on" id="menu-toggle">
+          <i class="icon icon-lg icon-navicon"></i>
+        </a>
+        <div class="flex-col header-title ellipsis">[Unity] 托管堆与垃圾回收</div>
+        
+        <div class="search-wrap" id="search-wrap">
+            <a href="javascript:;" target="_blank" rel="noopener" class="header-icon waves-effect waves-circle waves-light" id="back">
+                <i class="icon icon-lg icon-chevron-left"></i>
+            </a>
+            <input type="text" id="key" class="search-input" autocomplete="off" placeholder="输入感兴趣的关键字">
+            <a href="javascript:;" target="_blank" rel="noopener" class="header-icon waves-effect waves-circle waves-light" id="search">
+                <i class="icon icon-lg icon-search"></i>
+            </a>
+        </div>
+        
+        
+        <a href="javascript:;" target="_blank" rel="noopener" class="header-icon waves-effect waves-circle waves-light" id="menuShare">
+            <i class="icon icon-lg icon-share-alt"></i>
+        </a>
+        
+    </div>
+</header>
+<header class="content-header post-header">
+
+    <div class="container fade-scale">
+        <h1 class="title">[Unity] 托管堆与垃圾回收</h1>
+        <h5 class="subtitle">
+            
+                <time datetime="2019-03-25T07:14:16.000Z" itemprop="datePublished" class="page-time">
+  2019-03-25
+</time>
+
+
+	<ul class="article-category-list"><li class="article-category-list-item"><a class="article-category-list-link" href="/categories/%E8%AF%BB%E4%B9%A6%E7%AC%94%E8%AE%B0/">读书笔记</a></li></ul>
+
+            
+        </h5>
+    </div>
+
+    
+
+
+</header>
+
+
+<div class="container body-wrap">
+    
+    <aside class="post-widget">
+        <nav class="post-toc-wrap post-toc-shrink" id="post-toc">
+            <h4>TOC</h4>
+            <ol class="post-toc"><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#托管堆与垃圾回收"><span class="post-toc-number">1.</span> <span class="post-toc-text">托管堆与垃圾回收</span></a><ol class="post-toc-child"><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#托管堆："><span class="post-toc-number">1.1.</span> <span class="post-toc-text">托管堆：</span></a><ol class="post-toc-child"><li class="post-toc-item post-toc-level-4"><a class="post-toc-link" href="#堆的关键问题"><span class="post-toc-number">1.1.1.</span> <span class="post-toc-text">堆的关键问题</span></a></li></ol></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#了解自动内存管理："><span class="post-toc-number">1.2.</span> <span class="post-toc-text">了解自动内存管理：</span></a><ol class="post-toc-child"><li class="post-toc-item post-toc-level-4"><a class="post-toc-link" href="#分配和垃圾收集"><span class="post-toc-number">1.2.1.</span> <span class="post-toc-text">分配和垃圾收集</span></a></li><li class="post-toc-item post-toc-level-4"><a class="post-toc-link" href="#优化"><span class="post-toc-number">1.2.2.</span> <span class="post-toc-text">优化</span></a></li></ol></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#Unity中的垃圾回收："><span class="post-toc-number">1.3.</span> <span class="post-toc-text">Unity中的垃圾回收：</span></a><ol class="post-toc-child"><li class="post-toc-item post-toc-level-4"><a class="post-toc-link" href="#堆分配期间会发生什么？"><span class="post-toc-number">1.3.1.</span> <span class="post-toc-text">堆分配期间会发生什么？</span></a></li><li class="post-toc-item post-toc-level-4"><a class="post-toc-link" href="#垃圾收集期间会发生什么？"><span class="post-toc-number">1.3.2.</span> <span class="post-toc-text">垃圾收集期间会发生什么？</span></a></li><li class="post-toc-item post-toc-level-4"><a class="post-toc-link" href="#垃圾收集什么时候发生？"><span class="post-toc-number">1.3.3.</span> <span class="post-toc-text">垃圾收集什么时候发生？</span></a></li></ol></li></ol></li></ol>
+        </nav>
+    </aside>
+
+
+<article id="post-Unity笔记/Unity-托管堆与垃圾回收"
+  class="post-article article-type-post fade" itemprop="blogPost">
+
+    <div class="post-card">
+        <h1 class="post-card-title">[Unity] 托管堆与垃圾回收</h1>
+        <div class="post-meta">
+            <time class="post-time" title="2019-03-25 15:14:16" datetime="2019-03-25T07:14:16.000Z"  itemprop="datePublished">2019-03-25</time>
+
+            
+	<ul class="article-category-list"><li class="article-category-list-item"><a class="article-category-list-link" href="/categories/%E8%AF%BB%E4%B9%A6%E7%AC%94%E8%AE%B0/">读书笔记</a></li></ul>
+
+
+
+            
+<span id="busuanzi_container_page_pv" title="文章总阅读量" style='display:none'>
+    <i class="icon icon-eye icon-pr"></i><span id="busuanzi_value_page_pv"></span>
+</span>
+
+
+        </div>
+        <div class="post-content" id="post-content" itemprop="postContent">
+            <p>有关Unity中的托管堆与垃圾回收。</p>
+<a id="more"></a>
+
+<h2 id="托管堆与垃圾回收"><a href="#托管堆与垃圾回收" class="headerlink" title="托管堆与垃圾回收"></a>托管堆与垃圾回收</h2><h3 id="托管堆："><a href="#托管堆：" class="headerlink" title="托管堆："></a>托管堆：</h3><p>“托管堆”是一段内存，由项目脚本运行时（Mono或IL2CPP）的内存管理器自动管理。托管代码中创建的所有对象必须在托管堆上分配（<strong>注意：</strong>严格地说，必须在托管堆上分配所有非空引用类型对象和所有盒装值类型对象）。</p>
+<p><img src="https://wx3.sinaimg.cn/mw690/007CSzD7gy1g1f2klldndj30iz03ct8m.jpg" alt=""></p>
+<p>在上图中，白框表示分配给托管堆的内存量，其中的彩色框表示存储在托管堆内存空间中的数据值。当需要其他值时，将从托管堆中分配更多空间。</p>
+<p>垃圾收集器定期运行（<strong>注意：</strong>确切的时间与平台有关）。这会扫描堆上的所有对象，标记删除任何不再引用的对象。然后删除未引用的对象，释放内存。</p>
+<p>至关重要的是，Unity的垃圾收集 - 使用<a href="https://en.wikipedia.org/wiki/Boehm_garbage_collector" target="_blank" rel="noopener">Boehm GC算法</a> - 是非代数和非压缩的。“非世代”意味着GC在执行收集传递时必须扫描整个堆，因此其性能因堆扩展而降低。“非压缩”意味着内存中的对象不会被重新定位以便关闭对象之间的间隙。</p>
+<p><img src="https://wx4.sinaimg.cn/mw690/007CSzD7gy1g1f2klnzgmj30j2039jrc.jpg" alt=""></p>
+<p>上图显示了内存碎片的示例。释放对象时，将释放其内存。但是，释放的空间也<strong>不会</strong>成为“空闲内存”一家独大池的一部分。释放对象两侧的对象可能仍在使用中。因此，释放的空间是存储器的其他部分之间的“间隙”（该间隙由图中的红色圆圈表示）。因此，新释放的空间仅可用于存储与释放的对象相同或更小的数据。</p>
+<p>分配对象时，请记住该对象必须始终占用内存中的连续空间块。</p>
+<p>这导致了内存碎片的核心问题：虽然堆中可用的总空间量可能很大，但是该空间中的一些或全部可能在分配的对象之间存在小的“间隙”。在这种情况下，即使可能有足够的总空间来容纳某个分配，托管堆也找不到足够大的连续内存块来适应分配。</p>
+<p><img src="https://wx3.sinaimg.cn/mw690/007CSzD7gy1g1f2klo5urj30j704oglm.jpg" alt=""></p>
+<p>但是，如果分配了大对象并且没有足够的连续可用空间来容纳对象，则如上所述，Unity内存管理器执行两个操作。</p>
+<p>首先，如果还没有这样做，垃圾收集器就会运行。这会尝试释放足够的空间来完成分配请求。</p>
+<p>如果在GC运行后，仍然没有足够的连续空间来满足请求的内存量，则堆必须扩展。堆扩展的具体数量取决于平台; 但是，大多数Unity平台的大小都是托管堆的两倍。</p>
+<h4 id="堆的关键问题"><a href="#堆的关键问题" class="headerlink" title="堆的关键问题"></a>堆的关键问题</h4><p>托管堆扩展的核心问题有两个：</p>
+<ul>
+<li>Unity在扩展时不会经常释放分配给托管堆的内存页; 它乐观地保留了扩展堆，即使它的大部分是空的。这是为了防止在进一步发生大量分配时需要重新扩展堆。</li>
+<li>在大多数平台上，Unity最终将托管堆空部分使用的页面释放回操作系统。发生这种情况的间隔不能保证，不应该依赖。</li>
+<li>托管堆使用的地址空间永远不会返回给操作系统。</li>
+<li>对于32位程序，如果托管堆多次扩展和收缩，则可能导致地址空间耗尽。如果程序的可用内存地址空间已用尽，操作系统将终止该程序。</li>
+<li>对于64位程序，地址空间足够大，对于运行时间不超过人类平均寿命的程序来说，这种情况极不可能发生。</li>
+</ul>
+<h3 id="了解自动内存管理："><a href="#了解自动内存管理：" class="headerlink" title="了解自动内存管理："></a>了解自动内存管理：</h3><p>创建对象，字符串或数组时，存储它所需的内存是从称为<strong>堆</strong>的中央池分配的。当项目不再使用时，它曾经占用的内存可以被回收并用于其他内容。在过去，通常由程序员通过适当的函数调用显式地分配和释放这些堆内存块。如今，Unity的Mono引擎等运行时系统会自动为您管理内存。自动内存管理比显式分配/释放需要更少的编码工作，并且大大降低了内存泄漏的可能性（分配内存但从未随后释放的情况）。</p>
+<h4 id="分配和垃圾收集"><a href="#分配和垃圾收集" class="headerlink" title="分配和垃圾收集"></a>分配和垃圾收集</h4><p>内存管理器跟踪它知道未使用的堆中的区域。当请求新的存储器块时（例如，当实例化对象时），管理器选择一个未使用的区域，从该区域分配块，然后从已知的未使用空间中移除分配的存储器。后续请求以相同的方式处理，直到没有足够大的空闲区域来分配所需的块大小。此时极不可能从堆中分配的所有内存仍在使用中。只有存在可以找到它的引用变量时，才能访问堆上的引用项。如果对内存块的所有引用都消失了（即，引用变量已被重新分配，或者它们是现在超出范围的局部变量），则可以安全地重新分配它占用的内存。</p>
+<p>为了确定哪些堆块不再使用，内存管理器搜索所有当前活动的引用变量，并将它们称为“实时”的块标记。在搜索结束时，内存管理器认为实时块之间的任何空格都是空的，并且可以用于后续分配。由于显而易见的原因，定位和释放未使用的内存的过程称为垃圾收集（或简称GC）。</p>
+<h4 id="优化"><a href="#优化" class="headerlink" title="优化"></a>优化</h4><p>垃圾收集是自动的，对于程序员不可见，但在采集过程中实际需要的背后显著CPU时间的场景。如果使用正确，自动内存管理通常会等于或超过手动分配以获得整体性能。但是，程序员必须避免错误，这些错误会比必要时更频繁地触发收集器并在执行时引入暂停。</p>
+<h3 id="Unity中的垃圾回收："><a href="#Unity中的垃圾回收：" class="headerlink" title="Unity中的垃圾回收："></a>Unity中的垃圾回收：</h3><h4 id="堆分配期间会发生什么？"><a href="#堆分配期间会发生什么？" class="headerlink" title="堆分配期间会发生什么？"></a>堆分配期间会发生什么？</h4><p>堆分配比堆栈分配复杂得多。这是因为堆可用于存储长期和短期数据，以及许多不同类型和大小的数据。分配和解除分配并不总是以可预测的顺序发生，并且可能需要非常不同大小的存储器块。</p>
+<p>创建堆变量时，将执行以下步骤：</p>
+<ul>
+<li>首先，Unity必须检查堆中是否有足够的可用内存。如果堆中有足够的可用内存，则分配变量的内存。</li>
+<li>如果堆中没有足够的可用内存，Unity会尝试释放垃圾收集器，以释放未使用的堆内存。这可能是一个缓慢的操作。如果堆中现在有足够的可用内存，则会分配变量的内存。</li>
+<li>如果垃圾回收后堆中没有足够的可用内存，Unity会增加堆中的内存量。这可能是一个缓慢的操作。然后分配变量的内存。</li>
+</ul>
+<p>堆分配可能很慢，特别是如果垃圾收集器必须运行并且必须扩展堆。</p>
+<h4 id="垃圾收集期间会发生什么？"><a href="#垃圾收集期间会发生什么？" class="headerlink" title="垃圾收集期间会发生什么？"></a>垃圾收集期间会发生什么？</h4><p>当堆变量超出范围时，用于存储它的内存不会立即释放。只有在垃圾收集器运行时才会释放未使用的堆内存。</p>
+<p>每次垃圾收集器运行时，都会发生以下步骤：</p>
+<ul>
+<li>垃圾收集器检查堆上的每个对象。</li>
+<li>垃圾收集器搜索所有当前对象引用以确定堆上的对象是否仍在范围内。</li>
+<li>任何不再在范围内的对象都被标记为删除。</li>
+<li>将删除标记的对象，并将分配给它们的内存返回到堆中。</li>
+</ul>
+<p>垃圾收集可能是一项昂贵的操作。堆上的对象越多，它必须做的工作越多，代码中的对象引用越多，它必须做的工作就越多。</p>
+<h4 id="垃圾收集什么时候发生？"><a href="#垃圾收集什么时候发生？" class="headerlink" title="垃圾收集什么时候发生？"></a>垃圾收集什么时候发生？</h4><p>有三件事可能导致垃圾收集器运行：</p>
+<ul>
+<li>无论何时请求堆分配都无法使用堆中的可用内存来执行垃圾收集器。</li>
+<li>垃圾收集器会不时自动运行（尽管频率因平台而异）。</li>
+<li>垃圾收集器可以强制手动运行。</li>
+</ul>
+<p>垃圾收集可能是一个频繁的操作。每当无法从可用堆内存中实现堆分配时，就会触发垃圾收集器，这意味着频繁的堆分配和解除分配会导致频繁的垃圾回收。</p>
+<hr>
+<p>参考：</p>
+<ol>
+<li><a href="https://docs.unity3d.com/Manual/BestPracticeUnderstandingPerformanceInUnity4-1.html" target="_blank" rel="noopener">Understanding the managed heap</a>（理解托管堆）</li>
+<li><a href="https://docs.unity3d.com/Manual/UnderstandingAutomaticMemoryManagement.html" target="_blank" rel="noopener">Understanding Automatic Memory Management</a>(理解自动内存管理)</li>
+<li><a href="https://unity3d.com/de/learn/tutorials/topics/performance-optimization/optimizing-garbage-collection-unity-games?playlist=44069" target="_blank" rel="noopener">Optimizing garbage collection in Unity games</a>(在Unity游戏中优化垃圾回收)</li>
+<li><a href="https://en.wikipedia.org/wiki/Boehm_garbage_collector" target="_blank" rel="noopener">Boehm garbage collector</a></li>
+</ol>
+
+        </div>
+
+        <blockquote class="post-copyright">
+    
+    <div class="content">
+        
+<span class="post-time">
+    最后更新时间：<time datetime="2019-03-25T09:01:37.549Z" itemprop="dateUpdated">2019-03-25 17:01:37</time>
+</span><br>
+
+
+        
+        这里可以写作者留言，标签和 hexo 中所有变量及辅助函数等均可调用，示例：<a href="/2019/03/25/Unity%E7%AC%94%E8%AE%B0/Unity-%E6%89%98%E7%AE%A1%E5%A0%86%E4%B8%8E%E5%9E%83%E5%9C%BE%E5%9B%9E%E6%94%B6/" target="_blank" rel="external">https://bitzhangmo.github.io/2019/03/25/Unity%E7%AC%94%E8%AE%B0/Unity-%E6%89%98%E7%AE%A1%E5%A0%86%E4%B8%8E%E5%9E%83%E5%9C%BE%E5%9B%9E%E6%94%B6/</a>
+        
+    </div>
+    
+    <footer>
+        <a href="https://bitzhangmo.github.io">
+            <img src="/img/avatar.jpg" alt="zhangMo">
+            zhangMo
+        </a>
+    </footer>
+</blockquote>
+
+        
+<div class="page-reward">
+    <a id="rewardBtn" href="javascript:;" target="_blank" rel="noopener" class="page-reward-btn waves-effect waves-circle waves-light">赏</a>
+</div>
+
+
+
+        <div class="post-footer">
+            
+	<ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Unity/" rel="tag">Unity</a></li></ul>
+
+
+            
+<div class="page-share-wrap">
+    
+
+<div class="page-share" id="pageShare">
+    <ul class="reset share-icons">
+      <li>
+        <a class="weibo share-sns" target="_blank" href="http://service.weibo.com/share/share.php?url=https://bitzhangmo.github.io/2019/03/25/Unity%E7%AC%94%E8%AE%B0/Unity-%E6%89%98%E7%AE%A1%E5%A0%86%E4%B8%8E%E5%9E%83%E5%9C%BE%E5%9B%9E%E6%94%B6/&title=《[Unity] 托管堆与垃圾回收》 — zhangMo Blog&pic=https://bitzhangmo.github.io/img/avatar.jpg" data-title="微博">
+          <i class="icon icon-weibo"></i>
+        </a>
+      </li>
+      <li>
+        <a class="weixin share-sns wxFab" href="javascript:;" target="_blank" rel="noopener" data-title="微信">
+          <i class="icon icon-weixin"></i>
+        </a>
+      </li>
+      <li>
+        <a class="qq share-sns" target="_blank" href="http://connect.qq.com/widget/shareqq/index.html?url=https://bitzhangmo.github.io/2019/03/25/Unity%E7%AC%94%E8%AE%B0/Unity-%E6%89%98%E7%AE%A1%E5%A0%86%E4%B8%8E%E5%9E%83%E5%9C%BE%E5%9B%9E%E6%94%B6/&title=《[Unity] 托管堆与垃圾回收》 — zhangMo Blog&source=有关Unity中的托管堆与垃圾回收。" data-title=" QQ">
+          <i class="icon icon-qq"></i>
+        </a>
+      </li>
+      <li>
+        <a class="facebook share-sns" target="_blank" href="https://www.facebook.com/sharer/sharer.php?u=https://bitzhangmo.github.io/2019/03/25/Unity%E7%AC%94%E8%AE%B0/Unity-%E6%89%98%E7%AE%A1%E5%A0%86%E4%B8%8E%E5%9E%83%E5%9C%BE%E5%9B%9E%E6%94%B6/" data-title=" Facebook">
+          <i class="icon icon-facebook"></i>
+        </a>
+      </li>
+      <li>
+        <a class="twitter share-sns" target="_blank" href="https://twitter.com/intent/tweet?text=《[Unity] 托管堆与垃圾回收》 — zhangMo Blog&url=https://bitzhangmo.github.io/2019/03/25/Unity%E7%AC%94%E8%AE%B0/Unity-%E6%89%98%E7%AE%A1%E5%A0%86%E4%B8%8E%E5%9E%83%E5%9C%BE%E5%9B%9E%E6%94%B6/&via=https://bitzhangmo.github.io" data-title=" Twitter">
+          <i class="icon icon-twitter"></i>
+        </a>
+      </li>
+      <li>
+        <a class="google share-sns" target="_blank" href="https://plus.google.com/share?url=https://bitzhangmo.github.io/2019/03/25/Unity%E7%AC%94%E8%AE%B0/Unity-%E6%89%98%E7%AE%A1%E5%A0%86%E4%B8%8E%E5%9E%83%E5%9C%BE%E5%9B%9E%E6%94%B6/" data-title=" Google+">
+          <i class="icon icon-google-plus"></i>
+        </a>
+      </li>
+    </ul>
+ </div>
+
+
+
+    <a href="javascript:;" target="_blank" rel="noopener" id="shareFab" class="page-share-fab waves-effect waves-circle">
+        <i class="icon icon-share-alt icon-lg"></i>
+    </a>
+</div>
+
+
+
+        </div>
+    </div>
+
+    
+<nav class="post-nav flex-row flex-justify-between">
+  
+    <div class="waves-block waves-effect prev">
+      <a href="/2019/03/26/%E6%B8%B8%E6%88%8F%E5%BC%95%E6%93%8E/%E6%B8%B8%E6%88%8F%E5%BC%95%E6%93%8E%E6%9E%B6%E6%9E%84-%E7%AC%AC%E5%8D%81%E7%AB%A0%EF%BC%9A%E6%B8%B2%E6%9F%93%E5%BC%95%E6%93%8E/" id="post-prev" class="post-nav-link">
+        <div class="tips"><i class="icon icon-angle-left icon-lg icon-pr"></i> Prev</div>
+        <h4 class="title">[游戏引擎架构] 第十章：渲染引擎</h4>
+      </a>
+    </div>
+  
+
+  
+    <div class="waves-block waves-effect next">
+      <a href="/2019/03/25/Unity%E7%AC%94%E8%AE%B0/%E8%BD%AC-%E9%AA%A8%E9%AA%BC%E8%92%99%E7%9A%AE%E5%8A%A8%E7%94%BB-Skinned-Mesh-%E7%9A%84%E5%8E%9F%E7%90%86%E8%A7%A3%E6%9E%90/" id="post-next" class="post-nav-link">
+        <div class="tips">Next <i class="icon icon-angle-right icon-lg icon-pl"></i></div>
+        <h4 class="title">[转] 骨骼蒙皮动画(Skinned Mesh)的原理解析</h4>
+      </a>
+    </div>
+  
+</nav>
+
+
+
+    
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+</article>
+
+<div id="reward" class="page-modal reward-lay">
+    <a class="close" href="javascript:;" target="_blank" rel="noopener"><i class="icon icon-close"></i></a>
+    <h3 class="reward-title">
+        <i class="icon icon-quote-left"></i>
+        谢谢大爷~
+        <i class="icon icon-quote-right"></i>
+    </h3>
+    <div class="reward-content">
+        
+        <div class="reward-code">
+            <img id="rewardCode" src="/img/wechat.jpg" alt="打赏二维码">
+        </div>
+        
+        <label class="reward-toggle">
+            <input id="rewardToggle" type="checkbox" class="reward-toggle-check"
+                data-wechat="/img/wechat.jpg" data-alipay="/img/alipay.jpg">
+            <div class="reward-toggle-ctrol">
+                <span class="reward-toggle-item wechat">微信</span>
+                <span class="reward-toggle-label"></span>
+                <span class="reward-toggle-item alipay">支付宝</span>
+            </div>
+        </label>
+        
+    </div>
+</div>
+
+
+
+</div>
+
+        <footer class="footer">
+    <div class="top">
+        
+<p>
+    <span id="busuanzi_container_site_uv" style='display:none'>
+        站点总访客数：<span id="busuanzi_value_site_uv"></span>
+    </span>
+    <span id="busuanzi_container_site_pv" style='display:none'>
+        站点总访问量：<span id="busuanzi_value_site_pv"></span>
+    </span>
+</p>
+
+
+        <p>
+            
+            <span>博客内容遵循 <a rel="license noopener" href="https://creativecommons.org/licenses/by-nc-sa/4.0/deed.zh" target="_blank">知识共享 署名 - 非商业性 - 相同方式共享 4.0 国际协议</a></span>
+        </p>
+    </div>
+    <div class="bottom">
+        <p><span>zhangMo &copy; 2015 - 2019</span>
+            <span>
+                
+                Power by <a href="http://hexo.io/" target="_blank">Hexo</a> Theme <a href="https://github.com/yscoder/hexo-theme-indigo" target="_blank">indigo</a>
+            </span>
+        </p>
+    </div>
+</footer>
+
+    </main>
+    <div class="mask" id="mask"></div>
+<a href="javascript:;" target="_blank" rel="noopener" id="gotop" class="waves-effect waves-circle waves-light"><span class="icon icon-lg icon-chevron-up"></span></a>
+
+
+
+<div class="global-share" id="globalShare">
+    <ul class="reset share-icons">
+      <li>
+        <a class="weibo share-sns" target="_blank" href="http://service.weibo.com/share/share.php?url=https://bitzhangmo.github.io/2019/03/25/Unity%E7%AC%94%E8%AE%B0/Unity-%E6%89%98%E7%AE%A1%E5%A0%86%E4%B8%8E%E5%9E%83%E5%9C%BE%E5%9B%9E%E6%94%B6/&title=《[Unity] 托管堆与垃圾回收》 — zhangMo Blog&pic=https://bitzhangmo.github.io/img/avatar.jpg" data-title="微博">
+          <i class="icon icon-weibo"></i>
+        </a>
+      </li>
+      <li>
+        <a class="weixin share-sns wxFab" href="javascript:;" target="_blank" rel="noopener" data-title="微信">
+          <i class="icon icon-weixin"></i>
+        </a>
+      </li>
+      <li>
+        <a class="qq share-sns" target="_blank" href="http://connect.qq.com/widget/shareqq/index.html?url=https://bitzhangmo.github.io/2019/03/25/Unity%E7%AC%94%E8%AE%B0/Unity-%E6%89%98%E7%AE%A1%E5%A0%86%E4%B8%8E%E5%9E%83%E5%9C%BE%E5%9B%9E%E6%94%B6/&title=《[Unity] 托管堆与垃圾回收》 — zhangMo Blog&source=有关Unity中的托管堆与垃圾回收。" data-title=" QQ">
+          <i class="icon icon-qq"></i>
+        </a>
+      </li>
+      <li>
+        <a class="facebook share-sns" target="_blank" href="https://www.facebook.com/sharer/sharer.php?u=https://bitzhangmo.github.io/2019/03/25/Unity%E7%AC%94%E8%AE%B0/Unity-%E6%89%98%E7%AE%A1%E5%A0%86%E4%B8%8E%E5%9E%83%E5%9C%BE%E5%9B%9E%E6%94%B6/" data-title=" Facebook">
+          <i class="icon icon-facebook"></i>
+        </a>
+      </li>
+      <li>
+        <a class="twitter share-sns" target="_blank" href="https://twitter.com/intent/tweet?text=《[Unity] 托管堆与垃圾回收》 — zhangMo Blog&url=https://bitzhangmo.github.io/2019/03/25/Unity%E7%AC%94%E8%AE%B0/Unity-%E6%89%98%E7%AE%A1%E5%A0%86%E4%B8%8E%E5%9E%83%E5%9C%BE%E5%9B%9E%E6%94%B6/&via=https://bitzhangmo.github.io" data-title=" Twitter">
+          <i class="icon icon-twitter"></i>
+        </a>
+      </li>
+      <li>
+        <a class="google share-sns" target="_blank" href="https://plus.google.com/share?url=https://bitzhangmo.github.io/2019/03/25/Unity%E7%AC%94%E8%AE%B0/Unity-%E6%89%98%E7%AE%A1%E5%A0%86%E4%B8%8E%E5%9E%83%E5%9C%BE%E5%9B%9E%E6%94%B6/" data-title=" Google+">
+          <i class="icon icon-google-plus"></i>
+        </a>
+      </li>
+    </ul>
+ </div>
+
+
+<div class="page-modal wx-share" id="wxShare">
+    <a class="close" href="javascript:;" target="_blank" rel="noopener"><i class="icon icon-close"></i></a>
+    <p>扫一扫，分享到微信</p>
+    <img src="//api.qrserver.com/v1/create-qr-code/?data=https://bitzhangmo.github.io/2019/03/25/Unity%E7%AC%94%E8%AE%B0/Unity-%E6%89%98%E7%AE%A1%E5%A0%86%E4%B8%8E%E5%9E%83%E5%9C%BE%E5%9B%9E%E6%94%B6/" alt="微信分享二维码">
+</div>
+
+
+
+
+    <script src="//cdn.bootcss.com/node-waves/0.7.4/waves.min.js"></script>
+<script>
+var BLOG = { ROOT: '/', SHARE: true, REWARD: true };
+
+
+</script>
+
+<script src="//unpkg.com/hexo-theme-material-indigo@latest/js/main.min.js"></script>
+
+
+<div class="search-panel" id="search-panel">
+    <ul class="search-result" id="search-result"></ul>
+</div>
+<template id="search-tpl">
+<li class="item">
+    <a href="{path}" class="waves-block waves-effect">
+        <div class="title ellipsis" title="{title}">{title}</div>
+        <div class="flex-row flex-middle">
+            <div class="tags ellipsis">
+                {tags}
+            </div>
+            <time class="flex-col time">{date}</time>
+        </div>
+    </a>
+</li>
+</template>
+
+<script src="//unpkg.com/hexo-theme-material-indigo@latest/js/search.min.js" async></script>
+
+
+
+
+
+
+<script async src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+
+
+
+<script>
+(function() {
+    var OriginTitile = document.title, titleTime;
+    document.addEventListener('visibilitychange', function() {
+        if (document.hidden) {
+            document.title = '死鬼去哪里了！';
+            clearTimeout(titleTime);
+        } else {
+            document.title = '(つェ⊂)咦!又好了!';
+            titleTime = setTimeout(function() {
+                document.title = OriginTitile;
+            },2000);
+        }
+    });
+})();
+</script>
+
+
+
+</body>
+</html>

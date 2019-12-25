@@ -1,0 +1,586 @@
+<!DOCTYPE html>
+<html>
+<head>
+    
+
+    
+
+    
+
+
+
+    <meta charset="utf-8">
+    
+    
+    
+    
+    <title>[Unity] 在Unity中纹理图该是什么格式？ | zhangMo Blog</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+    
+    <meta name="theme-color" content="#3F51B5">
+    
+    
+    <meta name="keywords" content="Unity">
+    <meta name="description" content="一个在Windows下的png格式图，在Unity中存储为什么格式？">
+<meta name="keywords" content="Unity">
+<meta property="og:type" content="article">
+<meta property="og:title" content="[Unity] 在Unity中纹理图该是什么格式？">
+<meta property="og:url" content="https:&#x2F;&#x2F;bitzhangmo.github.io&#x2F;2019&#x2F;04&#x2F;17&#x2F;Unity%E7%AC%94%E8%AE%B0&#x2F;Unity-%E5%9C%A8Unity%E4%B8%AD%E7%BA%B9%E7%90%86%E5%9B%BE%E8%AF%A5%E6%98%AF%E4%BB%80%E4%B9%88%E6%A0%BC%E5%BC%8F%EF%BC%9F&#x2F;index.html">
+<meta property="og:site_name" content="zhangMo Blog">
+<meta property="og:description" content="一个在Windows下的png格式图，在Unity中存储为什么格式？">
+<meta property="og:locale" content="zh-CN">
+<meta property="og:image" content="http:&#x2F;&#x2F;wx4.sinaimg.cn&#x2F;large&#x2F;007CSzD7ly1g26isghucpj319j0cvwkf.jpg">
+<meta property="og:image" content="https:&#x2F;&#x2F;wx4.sinaimg.cn&#x2F;mw690&#x2F;007CSzD7ly1g26jfrkg89j30k00b241o.jpg">
+<meta property="og:updated_time" content="2019-04-18T05:48:46.142Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="http:&#x2F;&#x2F;wx4.sinaimg.cn&#x2F;large&#x2F;007CSzD7ly1g26isghucpj319j0cvwkf.jpg">
+    
+    <link rel="shortcut icon" href="/favicon.ico">
+    <link rel="stylesheet" href="//unpkg.com/hexo-theme-material-indigo@latest/css/style.css">
+    <script>window.lazyScripts=[]</script>
+
+    <!-- custom head -->
+    
+
+</head>
+
+<body>
+    <div id="loading" class="active"></div>
+
+    <aside id="menu" class="hide" >
+  <div class="inner flex-row-vertical">
+    <a href="javascript:;" target="_blank" rel="noopener" class="header-icon waves-effect waves-circle waves-light" id="menu-off">
+        <i class="icon icon-lg icon-close"></i>
+    </a>
+    <div class="brand-wrap" style="background-image:url(/img/brand.jpg)">
+      <div class="brand">
+        <a href="/" class="avatar waves-effect waves-circle waves-light">
+          <img src="/img/avatar.jpg">
+        </a>
+        <hgroup class="introduce">
+          <h5 class="nickname">zhangMo</h5>
+          <a href="mailto:634206017@qq.com" target="_blank" rel="noopener" title="634206017@qq.com" class="mail">634206017@qq.com</a>
+        </hgroup>
+      </div>
+    </div>
+    <div class="scroll-wrap flex-col">
+      <ul class="nav">
+        
+            <li class="waves-block waves-effect">
+              <a href="/"  >
+                <i class="icon icon-lg icon-home"></i>
+                主页
+              </a>
+            </li>
+        
+            <li class="waves-block waves-effect">
+              <a href="/archives"  >
+                <i class="icon icon-lg icon-archives"></i>
+                Archives
+              </a>
+            </li>
+        
+            <li class="waves-block waves-effect">
+              <a href="/tags"  >
+                <i class="icon icon-lg icon-tags"></i>
+                Tags
+              </a>
+            </li>
+        
+            <li class="waves-block waves-effect">
+              <a href="/categories"  >
+                <i class="icon icon-lg icon-th-list"></i>
+                Categories
+              </a>
+            </li>
+        
+            <li class="waves-block waves-effect">
+              <a href="https://github.com/yscoder" target="_blank" >
+                <i class="icon icon-lg icon-github"></i>
+                Github
+              </a>
+            </li>
+        
+            <li class="waves-block waves-effect">
+              <a href="http://www.weibo.com/ysweb" target="_blank" >
+                <i class="icon icon-lg icon-weibo"></i>
+                Weibo
+              </a>
+            </li>
+        
+            <li class="waves-block waves-effect">
+              <a href="/custom"  >
+                <i class="icon icon-lg icon-link"></i>
+                测试
+              </a>
+            </li>
+        
+      </ul>
+    </div>
+  </div>
+</aside>
+
+    <main id="main">
+        <header class="top-header" id="header">
+    <div class="flex-row">
+        <a href="javascript:;" target="_blank" rel="noopener" class="header-icon waves-effect waves-circle waves-light on" id="menu-toggle">
+          <i class="icon icon-lg icon-navicon"></i>
+        </a>
+        <div class="flex-col header-title ellipsis">[Unity] 在Unity中纹理图该是什么格式？</div>
+        
+        <div class="search-wrap" id="search-wrap">
+            <a href="javascript:;" target="_blank" rel="noopener" class="header-icon waves-effect waves-circle waves-light" id="back">
+                <i class="icon icon-lg icon-chevron-left"></i>
+            </a>
+            <input type="text" id="key" class="search-input" autocomplete="off" placeholder="输入感兴趣的关键字">
+            <a href="javascript:;" target="_blank" rel="noopener" class="header-icon waves-effect waves-circle waves-light" id="search">
+                <i class="icon icon-lg icon-search"></i>
+            </a>
+        </div>
+        
+        
+        <a href="javascript:;" target="_blank" rel="noopener" class="header-icon waves-effect waves-circle waves-light" id="menuShare">
+            <i class="icon icon-lg icon-share-alt"></i>
+        </a>
+        
+    </div>
+</header>
+<header class="content-header post-header">
+
+    <div class="container fade-scale">
+        <h1 class="title">[Unity] 在Unity中纹理图该是什么格式？</h1>
+        <h5 class="subtitle">
+            
+                <time datetime="2019-04-17T13:28:41.000Z" itemprop="datePublished" class="page-time">
+  2019-04-17
+</time>
+
+
+	<ul class="article-category-list"><li class="article-category-list-item"><a class="article-category-list-link" href="/categories/%E8%AF%BB%E4%B9%A6%E7%AC%94%E8%AE%B0/">读书笔记</a></li></ul>
+
+            
+        </h5>
+    </div>
+
+    
+
+
+</header>
+
+
+<div class="container body-wrap">
+    
+    <aside class="post-widget">
+        <nav class="post-toc-wrap post-toc-shrink" id="post-toc">
+            <h4>TOC</h4>
+            <ol class="post-toc"><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#Unity下的资源导入问题："><span class="post-toc-number">1.</span> <span class="post-toc-text">Unity下的资源导入问题：</span></a><ol class="post-toc-child"><li class="post-toc-item post-toc-level-4"><a class="post-toc-link" href="#拓展阅读："><span class="post-toc-number">1.1.</span> <span class="post-toc-text">拓展阅读：</span></a></li></ol></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#那么纹理有哪些压缩格式呢？"><span class="post-toc-number">2.</span> <span class="post-toc-text">那么纹理有哪些压缩格式呢？</span></a><ol class="post-toc-child"><li class="post-toc-item post-toc-level-4"><a class="post-toc-link" href="#桌面平台："><span class="post-toc-number">2.1.</span> <span class="post-toc-text">桌面平台：</span></a></li><li class="post-toc-item post-toc-level-4"><a class="post-toc-link" href="#Android："><span class="post-toc-number">2.2.</span> <span class="post-toc-text">Android：</span></a></li><li class="post-toc-item post-toc-level-4"><a class="post-toc-link" href="#IOS："><span class="post-toc-number">2.3.</span> <span class="post-toc-text">IOS：</span></a></li></ol></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#几种主要的压缩格式介绍："><span class="post-toc-number">3.</span> <span class="post-toc-text">几种主要的压缩格式介绍：</span></a><ol class="post-toc-child"><li class="post-toc-item post-toc-level-4"><a class="post-toc-link" href="#高清晰无压缩-RGBA32"><span class="post-toc-number">3.1.</span> <span class="post-toc-text">高清晰无压缩 - RGBA32</span></a></li><li class="post-toc-item post-toc-level-4"><a class="post-toc-link" href="#中清晰中压缩-RGBA16-Dithering"><span class="post-toc-number">3.2.</span> <span class="post-toc-text">中清晰中压缩 - RGBA16 + Dithering</span></a></li><li class="post-toc-item post-toc-level-4"><a class="post-toc-link" href="#RGB16"><span class="post-toc-number">3.3.</span> <span class="post-toc-text">RGB16</span></a></li><li class="post-toc-item post-toc-level-4"><a class="post-toc-link" href="#低清晰高压缩-ETC1-Alpha-PVRTC4"><span class="post-toc-number">3.4.</span> <span class="post-toc-text">低清晰高压缩 - ETC1+Alpha/PVRTC4</span></a></li></ol></li></ol>
+        </nav>
+    </aside>
+
+
+<article id="post-Unity笔记/Unity-在Unity中纹理图该是什么格式？"
+  class="post-article article-type-post fade" itemprop="blogPost">
+
+    <div class="post-card">
+        <h1 class="post-card-title">[Unity] 在Unity中纹理图该是什么格式？</h1>
+        <div class="post-meta">
+            <time class="post-time" title="2019-04-17 21:28:41" datetime="2019-04-17T13:28:41.000Z"  itemprop="datePublished">2019-04-17</time>
+
+            
+	<ul class="article-category-list"><li class="article-category-list-item"><a class="article-category-list-link" href="/categories/%E8%AF%BB%E4%B9%A6%E7%AC%94%E8%AE%B0/">读书笔记</a></li></ul>
+
+
+
+            
+<span id="busuanzi_container_page_pv" title="文章总阅读量" style='display:none'>
+    <i class="icon icon-eye icon-pr"></i><span id="busuanzi_value_page_pv"></span>
+</span>
+
+
+        </div>
+        <div class="post-content" id="post-content" itemprop="postContent">
+            <p>一个在Windows下的png格式图，在Unity中存储为什么格式？</p>
+<a id="more"></a>
+
+<h3 id="Unity下的资源导入问题："><a href="#Unity下的资源导入问题：" class="headerlink" title="Unity下的资源导入问题："></a>Unity下的资源导入问题：</h3><p>Unity会把我们放进去的外部资源转换成一种Unity内部格式的资源，这个过程就是资源导入。</p>
+<p>比如说在Windows下显示为png格式的图片，在Unity内部会根据平台的不同而设置成不同的<a href="https://docs.unity3d.com/ScriptReference/TextureImporterFormat.html" target="_blank" rel="noopener">压缩格式</a>。</p>
+<p>可以使用<a href="https://docs.unity3d.com/ScriptReference/AssetPostprocessor.html" target="_blank" rel="noopener">AssetPostProcessor</a>来对导入的资源进行规定化。</p>
+<p><strong>AssetPostProcessor</strong>是一个编辑器类，用来管理资源导入，当资源导入之前和之后都会发送通知，可以根据不同的资源类型，在导入之前和之后做不同的处理，来修改Unity内部资源格式。</p>
+<p>由于这是一个编辑器类，在UnityEditor命名空间下，所以在使用C#脚本时，需要在脚本前加上using UnityEditor引用，且放在工程目录下的Asset/Editor文件夹下。<br>一般我们通过修改这个类中<strong>OnPreprocessxxx</strong>和<strong>OnPostprocessxxx</strong>函数来修改资源数据和设置。<br>这两者的区别可以简单理解为：前者用来Inspector视图可见的选项，后者为不可见的。</p>
+<p>下面的脚本可以自动设置不同文件夹下贴图的压缩格式以及大小：</p>
+<figure class="highlight csharp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">using</span> UnityEditor;</span><br><span class="line"><span class="keyword">using</span> UnityEngine;</span><br><span class="line"></span><br><span class="line"><span class="keyword">public</span> <span class="keyword">class</span> <span class="title">Script_12_02</span> : <span class="title">AssetPostprocessor</span></span><br><span class="line">&#123;</span><br><span class="line">    <span class="function"><span class="keyword">void</span> <span class="title">OnPreprocessTexture</span>(<span class="params"></span>)</span></span><br><span class="line"><span class="function"></span>    &#123;</span><br><span class="line">        TextureImporter textureImporter = (TextureImporter)assetImporter;</span><br><span class="line"></span><br><span class="line">        <span class="keyword">if</span>(textureImporter.assetPath.Contains(<span class="string">"UI"</span>))</span><br><span class="line">        &#123;</span><br><span class="line">            textureImporter.textureType = TextureImporterType.Sprite;</span><br><span class="line">            textureImporter.mipmapEnabled = <span class="literal">false</span>;</span><br><span class="line"></span><br><span class="line">            <span class="comment">// 设置UI贴图在三个平台下的压缩格式以及大小</span></span><br><span class="line">            textureImporter.SetPlatformTextureSettings(<span class="string">"Standalone"</span>,<span class="number">2048</span>,TextureImporterFormat.RGBA32);</span><br><span class="line">            textureImporter.SetPlatformTextureSettings(<span class="string">"iPhone"</span>,<span class="number">2048</span>,TextureImporterFormat.RGBA32,<span class="number">100</span>,<span class="literal">true</span>);</span><br><span class="line">            textureImporter.SetPlatformTextureSettings(<span class="string">"Android"</span>,<span class="number">2048</span>,TextureImporterFormat.RGBA32,<span class="literal">true</span>);</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">else</span> <span class="keyword">if</span>(textureImporter.assetPath.Contains(<span class="string">"Texture"</span>))</span><br><span class="line">        &#123;</span><br><span class="line">            textureImporter.textureType = TextureImporterType.Default;</span><br><span class="line">            textureImporter.mipmapEnabled = <span class="literal">true</span>;</span><br><span class="line"></span><br><span class="line">            <span class="comment">// 设置模型贴图在三个平台下的压缩格式以及大小</span></span><br><span class="line">            textureImporter.SetPlatformTextureSettings(<span class="string">"Standalone"</span>,<span class="number">2048</span>,TextureImporterFormat.DXT5);</span><br><span class="line">            textureImporter.SetPlatformTextureSettings(<span class="string">"iPhone"</span>,<span class="number">2048</span>,TextureImporterFormat.ASTC_RGBA_4x4,<span class="number">100</span>,<span class="literal">true</span>);</span><br><span class="line">            textureImporter.SetPlatformTextureSettings(<span class="string">"Android"</span>,<span class="number">2048</span>,TextureImporterFormat.ETC_RGB4,<span class="literal">true</span>);</span><br><span class="line"></span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h4 id="拓展阅读："><a href="#拓展阅读：" class="headerlink" title="拓展阅读："></a>拓展阅读：</h4><p>为什么要进行纹理压缩：<a href="http://www.newhappy.com.cn/?p=907" target="_blank" rel="noopener">http://www.newhappy.com.cn/?p=907</a></p>
+<h3 id="那么纹理有哪些压缩格式呢？"><a href="#那么纹理有哪些压缩格式呢？" class="headerlink" title="那么纹理有哪些压缩格式呢？"></a>那么纹理有哪些压缩格式呢？</h3><h4 id="桌面平台："><a href="#桌面平台：" class="headerlink" title="桌面平台："></a>桌面平台：</h4><ul>
+<li>RGB Compressed DXT1 压缩的RGB纹理。这是最常见的漫反射纹理格式。4位/像素（32 KB 256x256）</li>
+<li>RGBA Compressed DXT5 压缩的RGBA纹理。这是漫反射和高光控制纹理的主要格式。1 字节/像素（64 KB 256x256）</li>
+<li>RGB 16 bit 65万颜色不带alpha。压缩的DXT格式使用较少的内存，通常会更好看。（128 KB 256x256）</li>
+<li>RGB 24 bit    真彩色不带alpha。（192 KB 256x256）</li>
+<li>Alpha 8 bit   高质量alpha通道，不带颜色。（64 KB 256x256）</li>
+<li>RGBA 16 bit   低质量真彩色。有16级红，绿，蓝和alpha。压缩的DXT5格式使用较少的内存，通常会更好看。（128 KB 256x256）</li>
+<li>RGBA 32 bit   高质量真彩色带alpha（256 KB 256x256），这个文件很大。大多数情况下</li>
+<li>DXT5提供足够的质量，文件大小要小得多。这个主要用于法线贴图，DXT压缩往往带有一个可见的质量损失。</li>
+</ul>
+<h4 id="Android："><a href="#Android：" class="headerlink" title="Android："></a>Android：</h4><ul>
+<li>RGB Compressed DXT1   压缩的RGB纹理。支持Nvidia Tegra。4位/像素（32 KB 256x256）</li>
+<li>RGBA Compressed DXT5  压缩的RGBA纹理。支持Nvidia Tegra。6位/像素（64 KB 256x256）</li>
+<li>RGB Compressed ETC 4 bits 压缩的RGB纹理。<strong>这是Android工程默认的纹理格式。</strong></li>
+<li>ETC1是OpenGL ES 2.0标准的一部分，并且支持所有的OpenGL ES 2.0 GPU，但它不支持Alpha。4位/像素（32 KB 256x256）</li>
+<li>RGB Compressed PVRTC 2 bits   压缩的RGB纹理。 支持Imagination PowerVR GPU。2位/像素（16 KB 256x256）</li>
+<li>RGBA Compressed PVRTC 2 bits  压缩的RGBA纹理。支持Imagination PowerVR GPU。2位/像素（16 KB 256x256）</li>
+<li>RGB Compressed PVRTC 4 bits   压缩的RGB纹理。 支持Imagination PowerVR GPU。4位/像素（32 KB 256x256）</li>
+<li>RGBA Compressed PVRTC 4 bits  压缩的RGBA纹理。 支持Imagination PowerVR GPU。4位/像素（32 KB 256x256）</li>
+<li>RGB Compressed ATC 4 bits 压缩的RGB纹理。 支持Qualcomm Snapdragon。4位/像素（32 KB 256x256）</li>
+<li>RGBA Compressed ATC 8 bits    压缩的RGB纹理。 支持Qualcomm Snapdragon。6位/像素（64 KB 256x256）</li>
+<li>RGB 16 bit    65万颜色不带alpha。比压缩的格式使用更多的内存，但更适用于UI或不带渐变的明快的纹理。128 KB 256x256</li>
+<li>RGB 24 bit    真彩色不带alpha。（192 KB 256x256）</li>
+<li>Alpha 8 bit   高质量alpha通道，不带颜色。（64 KB 256x256）</li>
+<li>RGBA 16 bit   低质量真彩色。默认压缩的纹理带有alpha通道（128 KB 256x256）</li>
+<li>RGBA 32 bit   真彩色带alpha - 这是高质量压缩的纹理带有alpha通道。（256 KB 256x256）</li>
+</ul>
+<h4 id="IOS："><a href="#IOS：" class="headerlink" title="IOS："></a>IOS：</h4><ul>
+<li>RGB Compressed PVRTC 4 bits</li>
+<li>PVRTC 4位，压缩的RGB纹理。这是最常见的漫反射纹理格式。4位/像素（32 KB 256x256）</li>
+<li>RGBA Compressed PVRTC 4 bits 压缩的RGBA纹理。这是漫反射和高光控制纹理的主要格式。4 位/像素（32 KB 256x256）</li>
+<li>RGB Compressed PVRTC 2 bits压缩的RGB纹理。 低质量格式，适用于漫反射纹理。2 位/像素（16 KB 256x256）</li>
+<li>RGBA Compressed PVRTC 2 bits   压缩的RGBA纹理。 低质量格式，适用于漫反射纹理和高光控制纹理。2 位/像素（16 KB 256x256）</li>
+<li>RGB Compressed DXT1    压缩的RGB纹理。 在iOS不支持此格式，但为桌面项目保持向后兼容性。</li>
+<li>RGBA Compressed DXT5   压缩的RGBA纹理。在iOS不支持此格式，但为桌面项目保持向后兼容性。</li>
+<li>RGB 16 bit     65万颜色不带alpha。比PVRTC格式使用更多的内存，但更适用于UI或不带渐变的明快的纹理。128 KB 256x256</li>
+<li>RGB 24 bit     真彩色不带alpha。（192 KB 256x256）</li>
+<li>Alpha 8 bit   高质量alpha通道，不带颜色。（64 KB 256x256）</li>
+<li>RGBA 16 bit    低质量真彩色。具有16级的红、绿、蓝和alpha。比PVRTC格式使用更多的内存，但如果需要精确的alpha通道，会更方便。（128 KB 256x256）</li>
+<li>RGBA 32 bit   真彩色带alpha - 这是最高质量。256KB 256x256，这个是很消耗性能的。大多数情况下，PVRTC格式提供足够的质量，但有更小的文件大小。</li>
+</ul>
+<p><img src="http://wx4.sinaimg.cn/large/007CSzD7ly1g26isghucpj319j0cvwkf.jpg" alt=""></p>
+<p>(图片来自：<strong>喵小逗@UWA问答社区</strong>)</p>
+<h3 id="几种主要的压缩格式介绍："><a href="#几种主要的压缩格式介绍：" class="headerlink" title="几种主要的压缩格式介绍："></a>几种主要的压缩格式介绍：</h3><h4 id="高清晰无压缩-RGBA32"><a href="#高清晰无压缩-RGBA32" class="headerlink" title="高清晰无压缩 - RGBA32"></a>高清晰无压缩 - RGBA32</h4><p>RGBA32等同于原图了，优点是清晰、与原图一致，缺点是内存占用十分大；对于一些美术要求最好清晰度的图片，是首选。</p>
+<p>要注意一些png图片，在硬盘中占用几KB，怎么在Unity中显示却变大？因为Unity显示的是Texture大小，是实际运行时占用内存的大小，而png却是一种压缩显示格式；可以这样理解，png类似于zip格式，是一个压缩文件，只不过在运行时会自动解压解析罢了。</p>
+<h4 id="中清晰中压缩-RGBA16-Dithering"><a href="#中清晰中压缩-RGBA16-Dithering" class="headerlink" title="中清晰中压缩 - RGBA16 + Dithering"></a>中清晰中压缩 - RGBA16 + Dithering</h4><p>Unity RGBA16，不抖动处理的渐变图片惨不忍睹</p>
+<p>既然叫RGBA16，自然就是RGBA32的阉割版。<br>对于一些采用渐变的图片，从RGBA32转换成RGBA16，能明显的看出颜色的层叠变化。</p>
+<p>采用Floyd Steinberg抖动处理后，除非放大，否则肉眼基本看不出区别</p>
+<p>RGBA16的优点，内存占用是RGBA32的1/2；搭配上Dithering抖动，在原尺寸下看清晰度一模一样；</p>
+<p>缺点，Unity原生不支持Dithering抖动，需要自己做工具对图片做处理；对于需要放大、拉伸的图片，Dithering抖动的支持不好，会有非常明显的颗粒感。</p>
+<h4 id="RGB16"><a href="#RGB16" class="headerlink" title="RGB16"></a>RGB16</h4><p>而RGB16，是主要针对一些，不带透明通道，同时长宽又不是2的次方的图片；对于这些图片，使用RGB16可以降低一半的内存，但是效果会略逊于RGB32。</p>
+<p>当然了，RGB16其实也是可以搭配抖动，也能提升显示效果；但同样的Dithering抖动对拉伸放大是不友好的。</p>
+<h4 id="低清晰高压缩-ETC1-Alpha-PVRTC4"><a href="#低清晰高压缩-ETC1-Alpha-PVRTC4" class="headerlink" title="低清晰高压缩 - ETC1+Alpha/PVRTC4"></a>低清晰高压缩 - ETC1+Alpha/PVRTC4</h4><p>很多初学者都会疑惑，为什么游戏开发中经常看到一些图片，需要设置成2的次方？<strong>因为像ETC1、PVRTC4等这类在内存中无需解压、直接被GPU支持的格式，占用内存极低，而且性能效率也是最好的</strong>。</p>
+<p>但是，相对RGBA32，还是能肉眼看出质量有所下降的。</p>
+<ol>
+<li><p>ETC1</p>
+<p>ETC1+Alpha一般应用在Android版的UI图集中，ETC1不带透明通道，所以需要外挂一张同样是ETC1格式的Alpha通道图。方法是，在原RGBA32的原图中，提取RGB生成第一张ETC1，再提取A通道，填充另一张ETC1的R通道；游戏运行时，Shader将两张ETC1图片进行混合。</p>
+</li>
+<li><p>PVRTC4</p>
+<p>PVRTC4在Unity中是直接支持的，不过要注意的细节是，它必须是二次方正方形；也就是说，长宽在二次方的同时，还必须要相等。</p>
+<p><img src="https://wx4.sinaimg.cn/mw690/007CSzD7ly1g26jfrkg89j30k00b241o.jpg" alt=""></p>
+<p>在项目中，尽可能是使用ETC1和PVRTV4等GPU直接支持的图片格式，不仅内存占用低、性能也更好；当出现质量不及格时，再逐步的提升压缩格式，来满足需要。</p>
+</li>
+</ol>
+<hr>
+<p>参考：</p>
+<ol>
+<li><a href="https://zhuanlan.zhihu.com/p/27438791" target="_blank" rel="noopener">Unity运用导入器规范资源格式和设置</a></li>
+<li><a href="https://www.jianshu.com/p/b9a6feb6d7b5" target="_blank" rel="noopener">Unity3D 图片纹理格式(作者：JumboWu)</a></li>
+<li><a href="https://zhuanlan.zhihu.com/p/25205686" target="_blank" rel="noopener">干货：Unity游戏开发图片纹理压缩方案</a></li>
+</ol>
+
+        </div>
+
+        <blockquote class="post-copyright">
+    
+    <div class="content">
+        
+<span class="post-time">
+    最后更新时间：<time datetime="2019-04-18T05:48:46.142Z" itemprop="dateUpdated">2019-04-18 13:48:46</time>
+</span><br>
+
+
+        
+        这里可以写作者留言，标签和 hexo 中所有变量及辅助函数等均可调用，示例：<a href="/2019/04/17/Unity%E7%AC%94%E8%AE%B0/Unity-%E5%9C%A8Unity%E4%B8%AD%E7%BA%B9%E7%90%86%E5%9B%BE%E8%AF%A5%E6%98%AF%E4%BB%80%E4%B9%88%E6%A0%BC%E5%BC%8F%EF%BC%9F/" target="_blank" rel="external">https://bitzhangmo.github.io/2019/04/17/Unity%E7%AC%94%E8%AE%B0/Unity-%E5%9C%A8Unity%E4%B8%AD%E7%BA%B9%E7%90%86%E5%9B%BE%E8%AF%A5%E6%98%AF%E4%BB%80%E4%B9%88%E6%A0%BC%E5%BC%8F%EF%BC%9F/</a>
+        
+    </div>
+    
+    <footer>
+        <a href="https://bitzhangmo.github.io">
+            <img src="/img/avatar.jpg" alt="zhangMo">
+            zhangMo
+        </a>
+    </footer>
+</blockquote>
+
+        
+<div class="page-reward">
+    <a id="rewardBtn" href="javascript:;" target="_blank" rel="noopener" class="page-reward-btn waves-effect waves-circle waves-light">赏</a>
+</div>
+
+
+
+        <div class="post-footer">
+            
+	<ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Unity/" rel="tag">Unity</a></li></ul>
+
+
+            
+<div class="page-share-wrap">
+    
+
+<div class="page-share" id="pageShare">
+    <ul class="reset share-icons">
+      <li>
+        <a class="weibo share-sns" target="_blank" href="http://service.weibo.com/share/share.php?url=https://bitzhangmo.github.io/2019/04/17/Unity%E7%AC%94%E8%AE%B0/Unity-%E5%9C%A8Unity%E4%B8%AD%E7%BA%B9%E7%90%86%E5%9B%BE%E8%AF%A5%E6%98%AF%E4%BB%80%E4%B9%88%E6%A0%BC%E5%BC%8F%EF%BC%9F/&title=《[Unity] 在Unity中纹理图该是什么格式？》 — zhangMo Blog&pic=https://bitzhangmo.github.io/img/avatar.jpg" data-title="微博">
+          <i class="icon icon-weibo"></i>
+        </a>
+      </li>
+      <li>
+        <a class="weixin share-sns wxFab" href="javascript:;" target="_blank" rel="noopener" data-title="微信">
+          <i class="icon icon-weixin"></i>
+        </a>
+      </li>
+      <li>
+        <a class="qq share-sns" target="_blank" href="http://connect.qq.com/widget/shareqq/index.html?url=https://bitzhangmo.github.io/2019/04/17/Unity%E7%AC%94%E8%AE%B0/Unity-%E5%9C%A8Unity%E4%B8%AD%E7%BA%B9%E7%90%86%E5%9B%BE%E8%AF%A5%E6%98%AF%E4%BB%80%E4%B9%88%E6%A0%BC%E5%BC%8F%EF%BC%9F/&title=《[Unity] 在Unity中纹理图该是什么格式？》 — zhangMo Blog&source=一个在Windows下的png格式图，在Unity中存储为什么格式？" data-title=" QQ">
+          <i class="icon icon-qq"></i>
+        </a>
+      </li>
+      <li>
+        <a class="facebook share-sns" target="_blank" href="https://www.facebook.com/sharer/sharer.php?u=https://bitzhangmo.github.io/2019/04/17/Unity%E7%AC%94%E8%AE%B0/Unity-%E5%9C%A8Unity%E4%B8%AD%E7%BA%B9%E7%90%86%E5%9B%BE%E8%AF%A5%E6%98%AF%E4%BB%80%E4%B9%88%E6%A0%BC%E5%BC%8F%EF%BC%9F/" data-title=" Facebook">
+          <i class="icon icon-facebook"></i>
+        </a>
+      </li>
+      <li>
+        <a class="twitter share-sns" target="_blank" href="https://twitter.com/intent/tweet?text=《[Unity] 在Unity中纹理图该是什么格式？》 — zhangMo Blog&url=https://bitzhangmo.github.io/2019/04/17/Unity%E7%AC%94%E8%AE%B0/Unity-%E5%9C%A8Unity%E4%B8%AD%E7%BA%B9%E7%90%86%E5%9B%BE%E8%AF%A5%E6%98%AF%E4%BB%80%E4%B9%88%E6%A0%BC%E5%BC%8F%EF%BC%9F/&via=https://bitzhangmo.github.io" data-title=" Twitter">
+          <i class="icon icon-twitter"></i>
+        </a>
+      </li>
+      <li>
+        <a class="google share-sns" target="_blank" href="https://plus.google.com/share?url=https://bitzhangmo.github.io/2019/04/17/Unity%E7%AC%94%E8%AE%B0/Unity-%E5%9C%A8Unity%E4%B8%AD%E7%BA%B9%E7%90%86%E5%9B%BE%E8%AF%A5%E6%98%AF%E4%BB%80%E4%B9%88%E6%A0%BC%E5%BC%8F%EF%BC%9F/" data-title=" Google+">
+          <i class="icon icon-google-plus"></i>
+        </a>
+      </li>
+    </ul>
+ </div>
+
+
+
+    <a href="javascript:;" target="_blank" rel="noopener" id="shareFab" class="page-share-fab waves-effect waves-circle">
+        <i class="icon icon-share-alt icon-lg"></i>
+    </a>
+</div>
+
+
+
+        </div>
+    </div>
+
+    
+<nav class="post-nav flex-row flex-justify-between">
+  
+    <div class="waves-block waves-effect prev">
+      <a href="/2019/04/18/Unity%E7%AC%94%E8%AE%B0/Unity3D-%E6%B8%B8%E6%88%8F%E5%BC%80%E5%8F%91-%E7%AC%AC%E4%B9%9D%E7%AB%A0-%E9%9D%99%E6%80%81%E5%AF%B9%E8%B1%A1/" id="post-prev" class="post-nav-link">
+        <div class="tips"><i class="icon icon-angle-left icon-lg icon-pr"></i> Prev</div>
+        <h4 class="title">[Unity3D 游戏开发] 第九章-静态对象</h4>
+      </a>
+    </div>
+  
+
+  
+    <div class="waves-block waves-effect next">
+      <a href="/2019/04/17/Unity%E7%AC%94%E8%AE%B0/Unity-%E7%94%9F%E5%91%BD%E5%91%A8%E6%9C%9F%E7%9B%B8%E5%85%B3/" id="post-next" class="post-nav-link">
+        <div class="tips">Next <i class="icon icon-angle-right icon-lg icon-pl"></i></div>
+        <h4 class="title">[Unity] 生命周期相关</h4>
+      </a>
+    </div>
+  
+</nav>
+
+
+
+    
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+</article>
+
+<div id="reward" class="page-modal reward-lay">
+    <a class="close" href="javascript:;" target="_blank" rel="noopener"><i class="icon icon-close"></i></a>
+    <h3 class="reward-title">
+        <i class="icon icon-quote-left"></i>
+        谢谢大爷~
+        <i class="icon icon-quote-right"></i>
+    </h3>
+    <div class="reward-content">
+        
+        <div class="reward-code">
+            <img id="rewardCode" src="/img/wechat.jpg" alt="打赏二维码">
+        </div>
+        
+        <label class="reward-toggle">
+            <input id="rewardToggle" type="checkbox" class="reward-toggle-check"
+                data-wechat="/img/wechat.jpg" data-alipay="/img/alipay.jpg">
+            <div class="reward-toggle-ctrol">
+                <span class="reward-toggle-item wechat">微信</span>
+                <span class="reward-toggle-label"></span>
+                <span class="reward-toggle-item alipay">支付宝</span>
+            </div>
+        </label>
+        
+    </div>
+</div>
+
+
+
+</div>
+
+        <footer class="footer">
+    <div class="top">
+        
+<p>
+    <span id="busuanzi_container_site_uv" style='display:none'>
+        站点总访客数：<span id="busuanzi_value_site_uv"></span>
+    </span>
+    <span id="busuanzi_container_site_pv" style='display:none'>
+        站点总访问量：<span id="busuanzi_value_site_pv"></span>
+    </span>
+</p>
+
+
+        <p>
+            
+            <span>博客内容遵循 <a rel="license noopener" href="https://creativecommons.org/licenses/by-nc-sa/4.0/deed.zh" target="_blank">知识共享 署名 - 非商业性 - 相同方式共享 4.0 国际协议</a></span>
+        </p>
+    </div>
+    <div class="bottom">
+        <p><span>zhangMo &copy; 2015 - 2019</span>
+            <span>
+                
+                Power by <a href="http://hexo.io/" target="_blank">Hexo</a> Theme <a href="https://github.com/yscoder/hexo-theme-indigo" target="_blank">indigo</a>
+            </span>
+        </p>
+    </div>
+</footer>
+
+    </main>
+    <div class="mask" id="mask"></div>
+<a href="javascript:;" target="_blank" rel="noopener" id="gotop" class="waves-effect waves-circle waves-light"><span class="icon icon-lg icon-chevron-up"></span></a>
+
+
+
+<div class="global-share" id="globalShare">
+    <ul class="reset share-icons">
+      <li>
+        <a class="weibo share-sns" target="_blank" href="http://service.weibo.com/share/share.php?url=https://bitzhangmo.github.io/2019/04/17/Unity%E7%AC%94%E8%AE%B0/Unity-%E5%9C%A8Unity%E4%B8%AD%E7%BA%B9%E7%90%86%E5%9B%BE%E8%AF%A5%E6%98%AF%E4%BB%80%E4%B9%88%E6%A0%BC%E5%BC%8F%EF%BC%9F/&title=《[Unity] 在Unity中纹理图该是什么格式？》 — zhangMo Blog&pic=https://bitzhangmo.github.io/img/avatar.jpg" data-title="微博">
+          <i class="icon icon-weibo"></i>
+        </a>
+      </li>
+      <li>
+        <a class="weixin share-sns wxFab" href="javascript:;" target="_blank" rel="noopener" data-title="微信">
+          <i class="icon icon-weixin"></i>
+        </a>
+      </li>
+      <li>
+        <a class="qq share-sns" target="_blank" href="http://connect.qq.com/widget/shareqq/index.html?url=https://bitzhangmo.github.io/2019/04/17/Unity%E7%AC%94%E8%AE%B0/Unity-%E5%9C%A8Unity%E4%B8%AD%E7%BA%B9%E7%90%86%E5%9B%BE%E8%AF%A5%E6%98%AF%E4%BB%80%E4%B9%88%E6%A0%BC%E5%BC%8F%EF%BC%9F/&title=《[Unity] 在Unity中纹理图该是什么格式？》 — zhangMo Blog&source=一个在Windows下的png格式图，在Unity中存储为什么格式？" data-title=" QQ">
+          <i class="icon icon-qq"></i>
+        </a>
+      </li>
+      <li>
+        <a class="facebook share-sns" target="_blank" href="https://www.facebook.com/sharer/sharer.php?u=https://bitzhangmo.github.io/2019/04/17/Unity%E7%AC%94%E8%AE%B0/Unity-%E5%9C%A8Unity%E4%B8%AD%E7%BA%B9%E7%90%86%E5%9B%BE%E8%AF%A5%E6%98%AF%E4%BB%80%E4%B9%88%E6%A0%BC%E5%BC%8F%EF%BC%9F/" data-title=" Facebook">
+          <i class="icon icon-facebook"></i>
+        </a>
+      </li>
+      <li>
+        <a class="twitter share-sns" target="_blank" href="https://twitter.com/intent/tweet?text=《[Unity] 在Unity中纹理图该是什么格式？》 — zhangMo Blog&url=https://bitzhangmo.github.io/2019/04/17/Unity%E7%AC%94%E8%AE%B0/Unity-%E5%9C%A8Unity%E4%B8%AD%E7%BA%B9%E7%90%86%E5%9B%BE%E8%AF%A5%E6%98%AF%E4%BB%80%E4%B9%88%E6%A0%BC%E5%BC%8F%EF%BC%9F/&via=https://bitzhangmo.github.io" data-title=" Twitter">
+          <i class="icon icon-twitter"></i>
+        </a>
+      </li>
+      <li>
+        <a class="google share-sns" target="_blank" href="https://plus.google.com/share?url=https://bitzhangmo.github.io/2019/04/17/Unity%E7%AC%94%E8%AE%B0/Unity-%E5%9C%A8Unity%E4%B8%AD%E7%BA%B9%E7%90%86%E5%9B%BE%E8%AF%A5%E6%98%AF%E4%BB%80%E4%B9%88%E6%A0%BC%E5%BC%8F%EF%BC%9F/" data-title=" Google+">
+          <i class="icon icon-google-plus"></i>
+        </a>
+      </li>
+    </ul>
+ </div>
+
+
+<div class="page-modal wx-share" id="wxShare">
+    <a class="close" href="javascript:;" target="_blank" rel="noopener"><i class="icon icon-close"></i></a>
+    <p>扫一扫，分享到微信</p>
+    <img src="//api.qrserver.com/v1/create-qr-code/?data=https://bitzhangmo.github.io/2019/04/17/Unity%E7%AC%94%E8%AE%B0/Unity-%E5%9C%A8Unity%E4%B8%AD%E7%BA%B9%E7%90%86%E5%9B%BE%E8%AF%A5%E6%98%AF%E4%BB%80%E4%B9%88%E6%A0%BC%E5%BC%8F%EF%BC%9F/" alt="微信分享二维码">
+</div>
+
+
+
+
+    <script src="//cdn.bootcss.com/node-waves/0.7.4/waves.min.js"></script>
+<script>
+var BLOG = { ROOT: '/', SHARE: true, REWARD: true };
+
+
+</script>
+
+<script src="//unpkg.com/hexo-theme-material-indigo@latest/js/main.min.js"></script>
+
+
+<div class="search-panel" id="search-panel">
+    <ul class="search-result" id="search-result"></ul>
+</div>
+<template id="search-tpl">
+<li class="item">
+    <a href="{path}" class="waves-block waves-effect">
+        <div class="title ellipsis" title="{title}">{title}</div>
+        <div class="flex-row flex-middle">
+            <div class="tags ellipsis">
+                {tags}
+            </div>
+            <time class="flex-col time">{date}</time>
+        </div>
+    </a>
+</li>
+</template>
+
+<script src="//unpkg.com/hexo-theme-material-indigo@latest/js/search.min.js" async></script>
+
+
+
+
+
+
+<script async src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+
+
+
+<script>
+(function() {
+    var OriginTitile = document.title, titleTime;
+    document.addEventListener('visibilitychange', function() {
+        if (document.hidden) {
+            document.title = '死鬼去哪里了！';
+            clearTimeout(titleTime);
+        } else {
+            document.title = '(つェ⊂)咦!又好了!';
+            titleTime = setTimeout(function() {
+                document.title = OriginTitile;
+            },2000);
+        }
+    });
+})();
+</script>
+
+
+
+</body>
+</html>
