@@ -1,27 +1,100 @@
 <!DOCTYPE html>
-<html>
+
+
+
+  
+
+
+<html class="theme-next muse use-motion" lang="zh-CN">
 <head>
-    
-
-    
-
-    
-
+  <meta charset="UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+<meta name="theme-color" content="#222">
 
 
-    <meta charset="utf-8">
+
+
+
+
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+  <link href="/lib/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css" />
+
+
+
+
+  
+  
+  
+  
+
+  
     
     
+  
+
+  
+
+  
+
+  
+
+  
+
+  
     
     
-    <title>[转] 浅谈Unity3D骨骼动画 | zhangMo Blog</title>
-    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-    
-    <meta name="theme-color" content="#3F51B5">
-    
-    
-    <meta name="keywords" content="Unity,动画,骨骼动画">
-    <meta name="description" content="浅谈Unity3D骨骼动画。">
+    <link href="//fonts.googleapis.com/css?family=Lato:300,300italic,400,400italic,700,700italic&subset=latin,latin-ext" rel="stylesheet" type="text/css">
+  
+
+
+
+
+
+
+<link href="/lib/font-awesome/css/font-awesome.min.css?v=4.6.2" rel="stylesheet" type="text/css" />
+
+<link href="/css/main.css?v=5.1.2" rel="stylesheet" type="text/css" />
+
+
+  <meta name="keywords" content="Unity,动画,骨骼动画," />
+
+
+
+
+
+
+
+
+  <link rel="shortcut icon" type="image/x-icon" href="/favicon.ico?v=5.1.2" />
+
+
+
+
+
+
+<meta name="description" content="浅谈Unity3D骨骼动画。">
 <meta name="keywords" content="Unity,动画,骨骼动画">
 <meta property="og:type" content="article">
 <meta property="og:title" content="[转] 浅谈Unity3D骨骼动画">
@@ -33,172 +106,253 @@
 <meta property="og:updated_time" content="2019-03-25T03:31:45.212Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:image" content="https:&#x2F;&#x2F;wx4.sinaimg.cn&#x2F;mw690&#x2F;007CSzD7gy1g1etxtba3qj30eu0dv74a.jpg">
-    
-    <link rel="shortcut icon" href="/favicon.ico">
-    <link rel="stylesheet" href="//unpkg.com/hexo-theme-material-indigo@latest/css/style.css">
-    <script>window.lazyScripts=[]</script>
 
-    <!-- custom head -->
-    
+
+
+<script type="text/javascript" id="hexo.configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/',
+    scheme: 'Muse',
+    sidebar: {"position":"left","display":"post","offset":12,"offset_float":12,"b2t":false,"scrollpercent":false,"onmobile":false},
+    fancybox: true,
+    tabs: true,
+    motion: true,
+    duoshuo: {
+      userId: '0',
+      author: 'Author'
+    },
+    algolia: {
+      applicationID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    }
+  };
+</script>
+
+
+
+  <link rel="canonical" href="https://bitzhangmo.github.io/2019/03/25/Unity笔记/转-浅谈Unity3D骨骼动画/"/>
+
+
+
+
+
+  <title>[转] 浅谈Unity3D骨骼动画 | zhangMo Blog</title>
+  
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 </head>
 
-<body>
-    <div id="loading" class="active"></div>
+<body itemscope itemtype="http://schema.org/WebPage" lang="zh-CN">
 
-    <aside id="menu" class="hide" >
-  <div class="inner flex-row-vertical">
-    <a href="javascript:;" target="_blank" rel="noopener" class="header-icon waves-effect waves-circle waves-light" id="menu-off">
-        <i class="icon icon-lg icon-close"></i>
-    </a>
-    <div class="brand-wrap" style="background-image:url(/img/brand.jpg)">
-      <div class="brand">
-        <a href="/" class="avatar waves-effect waves-circle waves-light">
-          <img src="/img/avatar.jpg">
-        </a>
-        <hgroup class="introduce">
-          <h5 class="nickname">zhangMo</h5>
-          <a href="mailto:634206017@qq.com" target="_blank" rel="noopener" title="634206017@qq.com" class="mail">634206017@qq.com</a>
-        </hgroup>
-      </div>
+  
+  
+    
+  
+
+  <div class="container sidebar-position-left page-post-detail ">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-wrapper">
+  <div class="site-meta ">
+    
+
+    <div class="custom-logo-site-title">
+      <a href="/"  class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">zhangMo Blog</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
     </div>
-    <div class="scroll-wrap flex-col">
-      <ul class="nav">
-        
-            <li class="waves-block waves-effect">
-              <a href="/"  >
-                <i class="icon icon-lg icon-home"></i>
-                主页
-              </a>
-            </li>
-        
-            <li class="waves-block waves-effect">
-              <a href="/archives"  >
-                <i class="icon icon-lg icon-archives"></i>
-                Archives
-              </a>
-            </li>
-        
-            <li class="waves-block waves-effect">
-              <a href="/tags"  >
-                <i class="icon icon-lg icon-tags"></i>
-                Tags
-              </a>
-            </li>
-        
-            <li class="waves-block waves-effect">
-              <a href="/categories"  >
-                <i class="icon icon-lg icon-th-list"></i>
-                Categories
-              </a>
-            </li>
-        
-            <li class="waves-block waves-effect">
-              <a href="https://github.com/yscoder" target="_blank" >
-                <i class="icon icon-lg icon-github"></i>
-                Github
-              </a>
-            </li>
-        
-            <li class="waves-block waves-effect">
-              <a href="http://www.weibo.com/ysweb" target="_blank" >
-                <i class="icon icon-lg icon-weibo"></i>
-                Weibo
-              </a>
-            </li>
-        
-            <li class="waves-block waves-effect">
-              <a href="/custom"  >
-                <i class="icon icon-lg icon-link"></i>
-                测试
-              </a>
-            </li>
-        
-      </ul>
-    </div>
+      
+        <p class="site-subtitle"></p>
+      
   </div>
-</aside>
 
-    <main id="main">
-        <header class="top-header" id="header">
-    <div class="flex-row">
-        <a href="javascript:;" target="_blank" rel="noopener" class="header-icon waves-effect waves-circle waves-light on" id="menu-toggle">
-          <i class="icon icon-lg icon-navicon"></i>
-        </a>
-        <div class="flex-col header-title ellipsis">[转] 浅谈Unity3D骨骼动画</div>
-        
-        <div class="search-wrap" id="search-wrap">
-            <a href="javascript:;" target="_blank" rel="noopener" class="header-icon waves-effect waves-circle waves-light" id="back">
-                <i class="icon icon-lg icon-chevron-left"></i>
-            </a>
-            <input type="text" id="key" class="search-input" autocomplete="off" placeholder="输入感兴趣的关键字">
-            <a href="javascript:;" target="_blank" rel="noopener" class="header-icon waves-effect waves-circle waves-light" id="search">
-                <i class="icon icon-lg icon-search"></i>
-            </a>
-        </div>
-        
-        
-        <a href="javascript:;" target="_blank" rel="noopener" class="header-icon waves-effect waves-circle waves-light" id="menuShare">
-            <i class="icon icon-lg icon-share-alt"></i>
-        </a>
-        
-    </div>
-</header>
-<header class="content-header post-header">
+  <div class="site-nav-toggle">
+    <button>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+    </button>
+  </div>
+</div>
 
-    <div class="container fade-scale">
-        <h1 class="title">[转] 浅谈Unity3D骨骼动画</h1>
-        <h5 class="subtitle">
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu">
+      
+        
+        <li class="menu-item menu-item-home">
+          <a href="/" rel="section">
             
-                <time datetime="2019-03-25T02:22:12.000Z" itemprop="datePublished" class="page-time">
-  2019-03-25
-</time>
-
-
-	<ul class="article-category-list"><li class="article-category-list-item"><a class="article-category-list-link" href="/categories/%E8%BD%AC%E8%BD%BD/">转载</a></li></ul>
-
+              <i class="menu-item-icon fa fa-fw fa-home"></i> <br />
             
-        </h5>
-    </div>
+            Home
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/archives/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-archive"></i> <br />
+            
+            Archives
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-tags">
+          <a href="/tags/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-tags"></i> <br />
+            
+            Tags
+          </a>
+        </li>
+      
 
+      
+    </ul>
+  
+
+  
+</nav>
+
+
+
+ </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
     
 
+  
 
-</header>
+  
+  
+  
 
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="https://bitzhangmo.github.io/2019/03/25/Unity%E7%AC%94%E8%AE%B0/%E8%BD%AC-%E6%B5%85%E8%B0%88Unity3D%E9%AA%A8%E9%AA%BC%E5%8A%A8%E7%94%BB/">
 
-<div class="container body-wrap">
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="zhangMo">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/avatar.gif">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="zhangMo Blog">
+    </span>
+
     
-    <aside class="post-widget">
-        <nav class="post-toc-wrap post-toc-shrink" id="post-toc">
-            <h4>TOC</h4>
-            <ol class="post-toc"><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#骨骼动画、关节动画、关键帧动画"><span class="post-toc-number">1.</span> <span class="post-toc-text">骨骼动画、关节动画、关键帧动画</span></a></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#骨骼动画原理分析"><span class="post-toc-number">2.</span> <span class="post-toc-text">骨骼动画原理分析</span></a><ol class="post-toc-child"><li class="post-toc-item post-toc-level-4"><a class="post-toc-link" href="#骨骼动画中的骨骼"><span class="post-toc-number">2.1.</span> <span class="post-toc-text">骨骼动画中的骨骼</span></a></li><li class="post-toc-item post-toc-level-4"><a class="post-toc-link" href="#骨骼动画中的蒙皮"><span class="post-toc-number">2.2.</span> <span class="post-toc-text">骨骼动画中的蒙皮</span></a><ol class="post-toc-child"><li class="post-toc-item post-toc-level-5"><a class="post-toc-link" href="#关于蒙皮的一种理解"><span class="post-toc-number">2.2.1.</span> <span class="post-toc-text">关于蒙皮的一种理解</span></a></li><li class="post-toc-item post-toc-level-5"><a class="post-toc-link" href="#关于蒙皮的新的理解-重点理解"><span class="post-toc-number">2.2.2.</span> <span class="post-toc-text">关于蒙皮的新的理解(重点理解)</span></a></li></ol></li></ol></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#Unity3D骨骼动画处理"><span class="post-toc-number">3.</span> <span class="post-toc-text">Unity3D骨骼动画处理</span></a></li></ol>
-        </nav>
-    </aside>
+      <header class="post-header">
 
+        
+        
+          <h1 class="post-title" itemprop="name headline">[转] 浅谈Unity3D骨骼动画</h1>
+        
 
-<article id="post-Unity笔记/转-浅谈Unity3D骨骼动画"
-  class="post-article article-type-post fade" itemprop="blogPost">
-
-    <div class="post-card">
-        <h1 class="post-card-title">[转] 浅谈Unity3D骨骼动画</h1>
         <div class="post-meta">
-            <time class="post-time" title="2019-03-25 10:22:12" datetime="2019-03-25T02:22:12.000Z"  itemprop="datePublished">2019-03-25</time>
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">Posted on</span>
+              
+              <time title="Post created" itemprop="dateCreated datePublished" datetime="2019-03-25T10:22:12+08:00">
+                2019-03-25
+              </time>
+            
 
             
-	<ul class="article-category-list"><li class="article-category-list-item"><a class="article-category-list-link" href="/categories/%E8%BD%AC%E8%BD%BD/">转载</a></li></ul>
-
-
 
             
-<span id="busuanzi_container_page_pv" title="文章总阅读量" style='display:none'>
-    <i class="icon icon-eye icon-pr"></i><span id="busuanzi_value_page_pv"></span>
-</span>
+          </span>
 
+          
+            <span class="post-category" >
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">In</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/%E8%BD%AC%E8%BD%BD/" itemprop="url" rel="index">
+                    <span itemprop="name">转载</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
 
         </div>
-        <div class="post-content" id="post-content" itemprop="postContent">
-            <p>浅谈Unity3D骨骼动画。</p>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <p>浅谈Unity3D骨骼动画。</p>
 <a id="more"></a>
 
 <p><strong>转载请标明出处</strong><a href="http://www.cnblogs.com/zblade/" target="_blank" rel="noopener">http://www.cnblogs.com/zblade/</a></p>
@@ -219,14 +373,7 @@
 <p>Vworld = Vmesh * BoneOffsetMatrix1 * CombineMatrix1 * W1 +Vmesh * BoneOffsetMatrix2 * CombineMatrix2 * W2 +…+ Vmesh * BoneOffsetMatrixn * CombineMatrixn * Wn</p>
 <p>其中BoneOffsetMatrix 和 CombineMatrix在下面的讲解中会详细讲解求解过程。</p>
 <h4 id="骨骼动画中的骨骼"><a href="#骨骼动画中的骨骼" class="headerlink" title="骨骼动画中的骨骼"></a>骨骼动画中的骨骼</h4><p>在我们常见的模型建模中，美术通常将模型设置成双手水平，双腿分立的类“大”字型。 为什么要用这样的方式？ 这与我们的模型的骨骼有一定的关系。通常模型骨骼数量都有一个限制（通常为30，下面会解释为什么受到限制），模型不可能为一根骨骼，如果为一根骨骼，那么模型的表现就会显得比较单一，想要表现出类似于人体的动画，一般都会有多个骨骼。对于每个骨骼，如何建立其组织关系，在建模的时候就进行了基本的设定。<strong>在完成建模后，在进行骨骼绑定的时候，通常美术会选择模型的盆骨做为模型的根骨骼。那么基于根骨骼，可以递推出各个骨骼相对于根骨的父子关系。通过骨骼所在的空间，其原点我们会选择两个脚之间的中点作为原点，这时候就会发现根骨骼并没有和原点重合，这时美术会构建一个Scene_Root做为额外的骨骼，其位置就为世界原点，而真正的根骨骼Bip01会作为Scene_Root的唯一子骨骼。</strong></p>
-<figure class="image-bubble">
-                <div class="img-lightbox">
-                    <div class="overlay"></div>
-                    <img src="https://wx4.sinaimg.cn/mw690/007CSzD7gy1g1etxtba3qj30eu0dv74a.jpg" alt="" title="">
-                </div>
-                <div class="image-caption"></div>
-            </figure>
-
+<p><img src="https://wx4.sinaimg.cn/mw690/007CSzD7gy1g1etxtba3qj30eu0dv74a.jpg" alt=""></p>
 <p><strong>基于根骨骼，我们可以递推出各个骨骼相对于根骨骼的父子转换矩阵，通常这样的矩阵转换为旋转矩阵，不存在平移和缩放</strong>，当然比如你的一个模型动画是拉长模型的身体（比如海贼王这种动画:D），那么你可以添加平移和缩放到变换矩阵中。此时对于整个模型就有了一个基本的直观的感受了，模型的具体动画，取决于模型的根骨骼，牵一发而动全身（这儿的牵一发是指模型的动画数据驱动），整个模型的运动会带动外面的mesh一起运动，就可以表现出整个模型的骨骼动画，这样，我们对于骨骼动画就有一个基本的理解。</p>
 <p>借用参考文1的说话，<strong>骨骼的本质，其实就是一个坐标空间，我们在做骨骼动画的时候，关键帧中包含的对骨骼的变换主要为旋转矩阵，所以对骨骼的变换就是对骨骼空间的旋转变换。说简单点，一个骨骼动画，带来的变换，首先作用在根骨骼上，影响根骨骼的坐标空间，然后递归的影响根骨的子骨骼，这样层层的递归影响，最后带来的就是整体骨骼变换。</strong>基于此，我们就可以理解关节的作用，<strong>关节就是骨骼自身空间的原点。而关节的位置由当前骨骼在其父节点骨骼空间中的位置来描述，围绕关节的旋转就是骨骼空间自身的旋转，这样变换就通过关节层层递归传递。</strong>用c++的表述，可以定义一个基本的骨骼类，主要包含自己的世界坐标中的位置，在父节点中的位置，其第一个子节点，其兄弟骨骼的指针，代码依据于文章1：</p>
 <figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Bone</span></span></span><br><span class="line"><span class="class">&#123;</span></span><br><span class="line">   Bone* m_pFirstChild;  </span><br><span class="line">   Bone* m_pSibling;</span><br><span class="line">   <span class="keyword">float</span> m_x, m_y, m_z;    <span class="comment">// pos in parents' space</span></span><br><span class="line">   <span class="keyword">float</span> m_wx, m_wy, m_wz; <span class="comment">// pos in world space</span></span><br><span class="line">  <span class="comment">//</span></span><br><span class="line">  <span class="keyword">public</span>:</span><br><span class="line">  Bone(<span class="keyword">float</span> x, <span class="keyword">float</span> y, <span class="keyword">float</span> z): m_pSibling(<span class="literal">NULL</span>),m_pFirstChild(<span class="literal">NULL</span>),m_pFather(<span class="literal">NULL</span>),m_x(x), m_y(y), m_z(z)&#123;&#125;</span><br><span class="line"></span><br><span class="line">  <span class="comment">//</span></span><br><span class="line">  <span class="function"><span class="keyword">void</span> <span class="title">SetFirstChild</span><span class="params">(Bone* pChild)</span></span></span><br><span class="line"><span class="function">  </span>&#123;</span><br><span class="line">      m_pFirstChild = pChild;</span><br><span class="line">      m_pFirstChild-&gt;m_pFather = <span class="keyword">this</span>;</span><br><span class="line">  &#125;</span><br><span class="line">   <span class="comment">//</span></span><br><span class="line">  <span class="function"><span class="keyword">void</span> <span class="title">SetSibling</span><span class="params">(Bone* pSibling)</span></span></span><br><span class="line"><span class="function">  </span>&#123;</span><br><span class="line">      m_pSibling = pSibling;</span><br><span class="line">      m_pSibling-&gt;m_pFather = m_pFather;</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
@@ -271,303 +418,360 @@
 
 <p>总结：综合整篇文章，对于骨骼动画有了一个较为详细的讲解，主要是参考两篇文章，我只是做了一个知识的搬运工，今儿就写到这儿，后面有更多的更新，会继续回来更改。</p>
 
-        </div>
-
-        <blockquote class="post-copyright">
-    
-    <div class="content">
-        
-<span class="post-time">
-    最后更新时间：<time datetime="2019-03-25T03:31:45.212Z" itemprop="dateUpdated">2019-03-25 11:31:45</time>
-</span><br>
-
-
-        
-        这里可以写作者留言，标签和 hexo 中所有变量及辅助函数等均可调用，示例：<a href="/2019/03/25/Unity%E7%AC%94%E8%AE%B0/%E8%BD%AC-%E6%B5%85%E8%B0%88Unity3D%E9%AA%A8%E9%AA%BC%E5%8A%A8%E7%94%BB/" target="_blank" rel="external">https://bitzhangmo.github.io/2019/03/25/Unity%E7%AC%94%E8%AE%B0/%E8%BD%AC-%E6%B5%85%E8%B0%88Unity3D%E9%AA%A8%E9%AA%BC%E5%8A%A8%E7%94%BB/</a>
-        
+      
     </div>
     
-    <footer>
-        <a href="https://bitzhangmo.github.io">
-            <img src="/img/avatar.jpg" alt="zhangMo">
-            zhangMo
-        </a>
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/Unity/" rel="tag"># Unity</a>
+          
+            <a href="/tags/%E5%8A%A8%E7%94%BB/" rel="tag"># 动画</a>
+          
+            <a href="/tags/%E9%AA%A8%E9%AA%BC%E5%8A%A8%E7%94%BB/" rel="tag"># 骨骼动画</a>
+          
+        </div>
+      
+
+      
+      
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2019/03/25/Unity%E7%AC%94%E8%AE%B0/Unity-%E5%8A%A8%E7%94%BB%E7%B3%BB%E7%BB%9F/" rel="next" title="[Unity] 动画系统">
+                <i class="fa fa-chevron-left"></i> [Unity] 动画系统
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+              <a href="/2019/03/25/Unity%E7%AC%94%E8%AE%B0/%E8%BD%AC-%E9%AA%A8%E9%AA%BC%E8%92%99%E7%9A%AE%E5%8A%A8%E7%94%BB-Skinned-Mesh-%E7%9A%84%E5%8E%9F%E7%90%86%E8%A7%A3%E6%9E%90/" rel="prev" title="[转] 骨骼蒙皮动画(Skinned Mesh)的原理解析">
+                [转] 骨骼蒙皮动画(Skinned Mesh)的原理解析 <i class="fa fa-chevron-right"></i>
+              </a>
+            
+          </div>
+        </div>
+      
+
+      
+      
     </footer>
-</blockquote>
-
-        
-<div class="page-reward">
-    <a id="rewardBtn" href="javascript:;" target="_blank" rel="noopener" class="page-reward-btn waves-effect waves-circle waves-light">赏</a>
-</div>
-
+  </div>
+  
+  
+  
+  </article>
 
 
-        <div class="post-footer">
-            
-	<ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Unity/" rel="tag">Unity</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/%E5%8A%A8%E7%94%BB/" rel="tag">动画</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/%E9%AA%A8%E9%AA%BC%E5%8A%A8%E7%94%BB/" rel="tag">骨骼动画</a></li></ul>
+
+    <div class="post-spread">
+      
+    </div>
+  </div>
 
 
-            
-<div class="page-share-wrap">
+          </div>
+          
+
+
+          
+  <div class="comments" id="comments">
     
-
-<div class="page-share" id="pageShare">
-    <ul class="reset share-icons">
-      <li>
-        <a class="weibo share-sns" target="_blank" href="http://service.weibo.com/share/share.php?url=https://bitzhangmo.github.io/2019/03/25/Unity%E7%AC%94%E8%AE%B0/%E8%BD%AC-%E6%B5%85%E8%B0%88Unity3D%E9%AA%A8%E9%AA%BC%E5%8A%A8%E7%94%BB/&title=《[转] 浅谈Unity3D骨骼动画》 — zhangMo Blog&pic=https://bitzhangmo.github.io/img/avatar.jpg" data-title="微博">
-          <i class="icon icon-weibo"></i>
-        </a>
-      </li>
-      <li>
-        <a class="weixin share-sns wxFab" href="javascript:;" target="_blank" rel="noopener" data-title="微信">
-          <i class="icon icon-weixin"></i>
-        </a>
-      </li>
-      <li>
-        <a class="qq share-sns" target="_blank" href="http://connect.qq.com/widget/shareqq/index.html?url=https://bitzhangmo.github.io/2019/03/25/Unity%E7%AC%94%E8%AE%B0/%E8%BD%AC-%E6%B5%85%E8%B0%88Unity3D%E9%AA%A8%E9%AA%BC%E5%8A%A8%E7%94%BB/&title=《[转] 浅谈Unity3D骨骼动画》 — zhangMo Blog&source=浅谈Unity3D骨骼动画。" data-title=" QQ">
-          <i class="icon icon-qq"></i>
-        </a>
-      </li>
-      <li>
-        <a class="facebook share-sns" target="_blank" href="https://www.facebook.com/sharer/sharer.php?u=https://bitzhangmo.github.io/2019/03/25/Unity%E7%AC%94%E8%AE%B0/%E8%BD%AC-%E6%B5%85%E8%B0%88Unity3D%E9%AA%A8%E9%AA%BC%E5%8A%A8%E7%94%BB/" data-title=" Facebook">
-          <i class="icon icon-facebook"></i>
-        </a>
-      </li>
-      <li>
-        <a class="twitter share-sns" target="_blank" href="https://twitter.com/intent/tweet?text=《[转] 浅谈Unity3D骨骼动画》 — zhangMo Blog&url=https://bitzhangmo.github.io/2019/03/25/Unity%E7%AC%94%E8%AE%B0/%E8%BD%AC-%E6%B5%85%E8%B0%88Unity3D%E9%AA%A8%E9%AA%BC%E5%8A%A8%E7%94%BB/&via=https://bitzhangmo.github.io" data-title=" Twitter">
-          <i class="icon icon-twitter"></i>
-        </a>
-      </li>
-      <li>
-        <a class="google share-sns" target="_blank" href="https://plus.google.com/share?url=https://bitzhangmo.github.io/2019/03/25/Unity%E7%AC%94%E8%AE%B0/%E8%BD%AC-%E6%B5%85%E8%B0%88Unity3D%E9%AA%A8%E9%AA%BC%E5%8A%A8%E7%94%BB/" data-title=" Google+">
-          <i class="icon icon-google-plus"></i>
-        </a>
-      </li>
-    </ul>
- </div>
-
-
-
-    <a href="javascript:;" target="_blank" rel="noopener" id="shareFab" class="page-share-fab waves-effect waves-circle">
-        <i class="icon icon-share-alt icon-lg"></i>
-    </a>
-</div>
-
+  </div>
 
 
         </div>
-    </div>
-
-    
-<nav class="post-nav flex-row flex-justify-between">
-  
-    <div class="waves-block waves-effect prev">
-      <a href="/2019/03/25/Unity%E7%AC%94%E8%AE%B0/%E8%BD%AC-%E9%AA%A8%E9%AA%BC%E8%92%99%E7%9A%AE%E5%8A%A8%E7%94%BB-Skinned-Mesh-%E7%9A%84%E5%8E%9F%E7%90%86%E8%A7%A3%E6%9E%90/" id="post-prev" class="post-nav-link">
-        <div class="tips"><i class="icon icon-angle-left icon-lg icon-pr"></i> Prev</div>
-        <h4 class="title">[转] 骨骼蒙皮动画(Skinned Mesh)的原理解析</h4>
-      </a>
-    </div>
-  
-
-  
-    <div class="waves-block waves-effect next">
-      <a href="/2019/03/25/Unity%E7%AC%94%E8%AE%B0/Unity-%E5%8A%A8%E7%94%BB%E7%B3%BB%E7%BB%9F/" id="post-next" class="post-nav-link">
-        <div class="tips">Next <i class="icon icon-angle-right icon-lg icon-pl"></i></div>
-        <h4 class="title">[Unity] 动画系统</h4>
-      </a>
-    </div>
-  
-</nav>
-
-
-
-    
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-</article>
-
-<div id="reward" class="page-modal reward-lay">
-    <a class="close" href="javascript:;" target="_blank" rel="noopener"><i class="icon icon-close"></i></a>
-    <h3 class="reward-title">
-        <i class="icon icon-quote-left"></i>
-        谢谢大爷~
-        <i class="icon icon-quote-right"></i>
-    </h3>
-    <div class="reward-content">
         
-        <div class="reward-code">
-            <img id="rewardCode" src="/img/wechat.jpg" alt="打赏二维码">
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap" >
+            Table of Contents
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview">
+            Overview
+          </li>
+        </ul>
+      
+
+      <section class="site-overview sidebar-panel">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+          <img class="site-author-image" itemprop="image"
+               src="/images/avatar.gif"
+               alt="zhangMo" />
+          <p class="site-author-name" itemprop="name">zhangMo</p>
+           
+              <p class="site-description motion-element" itemprop="description">T&S&A&G</p>
+          
         </div>
-        
-        <label class="reward-toggle">
-            <input id="rewardToggle" type="checkbox" class="reward-toggle-check"
-                data-wechat="/img/wechat.jpg" data-alipay="/img/alipay.jpg">
-            <div class="reward-toggle-ctrol">
-                <span class="reward-toggle-item wechat">微信</span>
-                <span class="reward-toggle-label"></span>
-                <span class="reward-toggle-item alipay">支付宝</span>
+        <nav class="site-state motion-element">
+
+          
+            <div class="site-state-item site-state-posts">
+              <a href="/archives/">
+                <span class="site-state-item-count">86</span>
+                <span class="site-state-item-name">posts</span>
+              </a>
             </div>
-        </label>
-        
-    </div>
-</div>
+          
 
-
-
-</div>
-
-        <footer class="footer">
-    <div class="top">
-        
-<p>
-    <span id="busuanzi_container_site_uv" style='display:none'>
-        站点总访客数：<span id="busuanzi_value_site_uv"></span>
-    </span>
-    <span id="busuanzi_container_site_pv" style='display:none'>
-        站点总访问量：<span id="busuanzi_value_site_pv"></span>
-    </span>
-</p>
-
-
-        <p>
+          
             
-            <span>博客内容遵循 <a rel="license noopener" href="https://creativecommons.org/licenses/by-nc-sa/4.0/deed.zh" target="_blank">知识共享 署名 - 非商业性 - 相同方式共享 4.0 国际协议</a></span>
-        </p>
-    </div>
-    <div class="bottom">
-        <p><span>zhangMo &copy; 2015 - 2019</span>
-            <span>
-                
-                Power by <a href="http://hexo.io/" target="_blank">Hexo</a> Theme <a href="https://github.com/yscoder/hexo-theme-indigo" target="_blank">indigo</a>
-            </span>
-        </p>
-    </div>
-</footer>
+            
+            <div class="site-state-item site-state-categories">
+              
+                <span class="site-state-item-count">10</span>
+                <span class="site-state-item-name">categories</span>
+              
+            </div>
+          
 
+          
+            
+            
+            <div class="site-state-item site-state-tags">
+              
+                <span class="site-state-item-count">34</span>
+                <span class="site-state-item-name">tags</span>
+              
+            </div>
+          
+
+        </nav>
+
+        
+
+        <div class="links-of-author motion-element">
+          
+        </div>
+
+        
+        
+
+        
+        
+
+        
+
+
+      </section>
+
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-3"><a class="nav-link" href="#骨骼动画、关节动画、关键帧动画"><span class="nav-number">1.</span> <span class="nav-text">骨骼动画、关节动画、关键帧动画</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#骨骼动画原理分析"><span class="nav-number">2.</span> <span class="nav-text">骨骼动画原理分析</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#骨骼动画中的骨骼"><span class="nav-number">2.1.</span> <span class="nav-text">骨骼动画中的骨骼</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#骨骼动画中的蒙皮"><span class="nav-number">2.2.</span> <span class="nav-text">骨骼动画中的蒙皮</span></a><ol class="nav-child"><li class="nav-item nav-level-5"><a class="nav-link" href="#关于蒙皮的一种理解"><span class="nav-number">2.2.1.</span> <span class="nav-text">关于蒙皮的一种理解</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#关于蒙皮的新的理解-重点理解"><span class="nav-number">2.2.2.</span> <span class="nav-text">关于蒙皮的新的理解(重点理解)</span></a></li></ol></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Unity3D骨骼动画处理"><span class="nav-number">3.</span> <span class="nav-text">Unity3D骨骼动画处理</span></a></li></ol></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
+      
+
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
     </main>
-    <div class="mask" id="mask"></div>
-<a href="javascript:;" target="_blank" rel="noopener" id="gotop" class="waves-effect waves-circle waves-light"><span class="icon icon-lg icon-chevron-up"></span></a>
 
-
-
-<div class="global-share" id="globalShare">
-    <ul class="reset share-icons">
-      <li>
-        <a class="weibo share-sns" target="_blank" href="http://service.weibo.com/share/share.php?url=https://bitzhangmo.github.io/2019/03/25/Unity%E7%AC%94%E8%AE%B0/%E8%BD%AC-%E6%B5%85%E8%B0%88Unity3D%E9%AA%A8%E9%AA%BC%E5%8A%A8%E7%94%BB/&title=《[转] 浅谈Unity3D骨骼动画》 — zhangMo Blog&pic=https://bitzhangmo.github.io/img/avatar.jpg" data-title="微博">
-          <i class="icon icon-weibo"></i>
-        </a>
-      </li>
-      <li>
-        <a class="weixin share-sns wxFab" href="javascript:;" target="_blank" rel="noopener" data-title="微信">
-          <i class="icon icon-weixin"></i>
-        </a>
-      </li>
-      <li>
-        <a class="qq share-sns" target="_blank" href="http://connect.qq.com/widget/shareqq/index.html?url=https://bitzhangmo.github.io/2019/03/25/Unity%E7%AC%94%E8%AE%B0/%E8%BD%AC-%E6%B5%85%E8%B0%88Unity3D%E9%AA%A8%E9%AA%BC%E5%8A%A8%E7%94%BB/&title=《[转] 浅谈Unity3D骨骼动画》 — zhangMo Blog&source=浅谈Unity3D骨骼动画。" data-title=" QQ">
-          <i class="icon icon-qq"></i>
-        </a>
-      </li>
-      <li>
-        <a class="facebook share-sns" target="_blank" href="https://www.facebook.com/sharer/sharer.php?u=https://bitzhangmo.github.io/2019/03/25/Unity%E7%AC%94%E8%AE%B0/%E8%BD%AC-%E6%B5%85%E8%B0%88Unity3D%E9%AA%A8%E9%AA%BC%E5%8A%A8%E7%94%BB/" data-title=" Facebook">
-          <i class="icon icon-facebook"></i>
-        </a>
-      </li>
-      <li>
-        <a class="twitter share-sns" target="_blank" href="https://twitter.com/intent/tweet?text=《[转] 浅谈Unity3D骨骼动画》 — zhangMo Blog&url=https://bitzhangmo.github.io/2019/03/25/Unity%E7%AC%94%E8%AE%B0/%E8%BD%AC-%E6%B5%85%E8%B0%88Unity3D%E9%AA%A8%E9%AA%BC%E5%8A%A8%E7%94%BB/&via=https://bitzhangmo.github.io" data-title=" Twitter">
-          <i class="icon icon-twitter"></i>
-        </a>
-      </li>
-      <li>
-        <a class="google share-sns" target="_blank" href="https://plus.google.com/share?url=https://bitzhangmo.github.io/2019/03/25/Unity%E7%AC%94%E8%AE%B0/%E8%BD%AC-%E6%B5%85%E8%B0%88Unity3D%E9%AA%A8%E9%AA%BC%E5%8A%A8%E7%94%BB/" data-title=" Google+">
-          <i class="icon icon-google-plus"></i>
-        </a>
-      </li>
-    </ul>
- </div>
-
-
-<div class="page-modal wx-share" id="wxShare">
-    <a class="close" href="javascript:;" target="_blank" rel="noopener"><i class="icon icon-close"></i></a>
-    <p>扫一扫，分享到微信</p>
-    <img src="//api.qrserver.com/v1/create-qr-code/?data=https://bitzhangmo.github.io/2019/03/25/Unity%E7%AC%94%E8%AE%B0/%E8%BD%AC-%E6%B5%85%E8%B0%88Unity3D%E9%AA%A8%E9%AA%BC%E5%8A%A8%E7%94%BB/" alt="微信分享二维码">
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright" >
+  
+  &copy; 
+  <span itemprop="copyrightYear">2019</span>
+  <span class="with-love">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">zhangMo</span>
 </div>
 
 
-
-
-    <script src="//cdn.bootcss.com/node-waves/0.7.4/waves.min.js"></script>
-<script>
-var BLOG = { ROOT: '/', SHARE: true, REWARD: true };
-
-
-</script>
-
-<script src="//unpkg.com/hexo-theme-material-indigo@latest/js/main.min.js"></script>
-
-
-<div class="search-panel" id="search-panel">
-    <ul class="search-result" id="search-result"></ul>
+<div class="powered-by">
+  Powered by <a class="theme-link" href="https://hexo.io" target="_blank" rel="noopener">Hexo</a>
 </div>
-<template id="search-tpl">
-<li class="item">
-    <a href="{path}" class="waves-block waves-effect">
-        <div class="title ellipsis" title="{title}">{title}</div>
-        <div class="flex-row flex-middle">
-            <div class="tags ellipsis">
-            </div>
-            <time class="flex-col time">{date}</time>
-        </div>
-    </a>
-</li>
-</template>
 
-<script src="//unpkg.com/hexo-theme-material-indigo@latest/js/search.min.js" async></script>
+<div class="theme-info">
+  Theme -
+  <a class="theme-link" href="https://github.com/iissnan/hexo-theme-next" target="_blank" rel="noopener">
+    NexT.Muse
+  </a>
+</div>
 
 
+        
 
+        
+      </div>
+    </footer>
 
+    
+      <div class="back-to-top">
+        <i class="fa fa-arrow-up"></i>
+        
+      </div>
+    
 
+  </div>
 
-<script async src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+  
 
-
-
-<script>
-(function() {
-    var OriginTitile = document.title, titleTime;
-    document.addEventListener('visibilitychange', function() {
-        if (document.hidden) {
-            document.title = '死鬼去哪里了！';
-            clearTimeout(titleTime);
-        } else {
-            document.title = '(つェ⊂)咦!又好了!';
-            titleTime = setTimeout(function() {
-                document.title = OriginTitile;
-            },2000);
-        }
-    });
-})();
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
 </script>
 
 
+
+
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  <script type="text/javascript" src="/lib/jquery/index.js?v=2.1.3"></script>
+
+  
+  <script type="text/javascript" src="/lib/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+
+  
+  <script type="text/javascript" src="/lib/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
+
+  
+  <script type="text/javascript" src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+
+  
+  <script type="text/javascript" src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+
+  
+  <script type="text/javascript" src="/lib/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=5.1.2"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=5.1.2"></script>
+
+
+
+  
+  
+
+  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.1.2"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.1.2"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.1.2"></script>
+
+
+
+  
+
+
+  
+
+
+
+
+	
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
 
 </body>
 </html>

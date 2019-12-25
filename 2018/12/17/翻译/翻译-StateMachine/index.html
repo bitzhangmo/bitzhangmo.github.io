@@ -1,27 +1,100 @@
 <!DOCTYPE html>
-<html>
+
+
+
+  
+
+
+<html class="theme-next muse use-motion" lang="zh-CN">
 <head>
-    
-
-    
-
-    
-
+  <meta charset="UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+<meta name="theme-color" content="#222">
 
 
-    <meta charset="utf-8">
+
+
+
+
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+  <link href="/lib/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css" />
+
+
+
+
+  
+  
+  
+  
+
+  
     
     
+  
+
+  
+
+  
+
+  
+
+  
+
+  
     
     
-    <title>[翻译] StateMachine | zhangMo Blog</title>
-    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-    
-    <meta name="theme-color" content="#3F51B5">
-    
-    
-    <meta name="keywords" content="Artificial Intelligence for Games">
-    <meta name="description" content="[TOC] 游戏中的状态机，分层状态机以及伪代码实现。">
+    <link href="//fonts.googleapis.com/css?family=Lato:300,300italic,400,400italic,700,700italic&subset=latin,latin-ext" rel="stylesheet" type="text/css">
+  
+
+
+
+
+
+
+<link href="/lib/font-awesome/css/font-awesome.min.css?v=4.6.2" rel="stylesheet" type="text/css" />
+
+<link href="/css/main.css?v=5.1.2" rel="stylesheet" type="text/css" />
+
+
+  <meta name="keywords" content="Artificial Intelligence for Games," />
+
+
+
+
+
+
+
+
+  <link rel="shortcut icon" type="image/x-icon" href="/favicon.ico?v=5.1.2" />
+
+
+
+
+
+
+<meta name="description" content="[TOC] 游戏中的状态机，分层状态机以及伪代码实现。">
 <meta name="keywords" content="Artificial Intelligence for Games">
 <meta property="og:type" content="article">
 <meta property="og:title" content="[翻译] StateMachine">
@@ -29,184 +102,255 @@
 <meta property="og:site_name" content="zhangMo Blog">
 <meta property="og:description" content="[TOC] 游戏中的状态机，分层状态机以及伪代码实现。">
 <meta property="og:locale" content="zh-CN">
-<meta property="og:image" content="https:&#x2F;&#x2F;bitzhangmo.github.io&#x2F;Users&#x2F;zhangmo&#x2F;Library&#x2F;Application">
-<meta property="og:image" content="https:&#x2F;&#x2F;bitzhangmo.github.io&#x2F;Users&#x2F;zhangmo&#x2F;Library&#x2F;Application">
-<meta property="og:image" content="https:&#x2F;&#x2F;bitzhangmo.github.io&#x2F;Users&#x2F;zhangmo&#x2F;Library&#x2F;Application">
-<meta property="og:image" content="https:&#x2F;&#x2F;bitzhangmo.github.io&#x2F;Users&#x2F;zhangmo&#x2F;Library&#x2F;Application">
-<meta property="og:image" content="https:&#x2F;&#x2F;bitzhangmo.github.io&#x2F;Users&#x2F;zhangmo&#x2F;Library&#x2F;Application">
-<meta property="og:image" content="https:&#x2F;&#x2F;bitzhangmo.github.io&#x2F;Users&#x2F;zhangmo&#x2F;Library&#x2F;Application">
-<meta property="og:image" content="https:&#x2F;&#x2F;bitzhangmo.github.io&#x2F;Users&#x2F;zhangmo&#x2F;Library&#x2F;Application">
-<meta property="og:image" content="https:&#x2F;&#x2F;bitzhangmo.github.io&#x2F;Users&#x2F;zhangmo&#x2F;Library&#x2F;Application">
-<meta property="og:image" content="https:&#x2F;&#x2F;bitzhangmo.github.io&#x2F;Users&#x2F;zhangmo&#x2F;Library&#x2F;Application">
 <meta property="og:updated_time" content="2018-12-17T07:49:14.762Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:image" content="https:&#x2F;&#x2F;bitzhangmo.github.io&#x2F;Users&#x2F;zhangmo&#x2F;Library&#x2F;Application">
-    
-    <link rel="shortcut icon" href="/favicon.ico">
-    <link rel="stylesheet" href="//unpkg.com/hexo-theme-material-indigo@latest/css/style.css">
-    <script>window.lazyScripts=[]</script>
 
-    <!-- custom head -->
-    
+
+
+<script type="text/javascript" id="hexo.configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/',
+    scheme: 'Muse',
+    sidebar: {"position":"left","display":"post","offset":12,"offset_float":12,"b2t":false,"scrollpercent":false,"onmobile":false},
+    fancybox: true,
+    tabs: true,
+    motion: true,
+    duoshuo: {
+      userId: '0',
+      author: 'Author'
+    },
+    algolia: {
+      applicationID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    }
+  };
+</script>
+
+
+
+  <link rel="canonical" href="https://bitzhangmo.github.io/2018/12/17/翻译/翻译-StateMachine/"/>
+
+
+
+
+
+  <title>[翻译] StateMachine | zhangMo Blog</title>
+  
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 </head>
 
-<body>
-    <div id="loading" class="active"></div>
+<body itemscope itemtype="http://schema.org/WebPage" lang="zh-CN">
 
-    <aside id="menu" class="hide" >
-  <div class="inner flex-row-vertical">
-    <a href="javascript:;" target="_blank" rel="noopener" class="header-icon waves-effect waves-circle waves-light" id="menu-off">
-        <i class="icon icon-lg icon-close"></i>
-    </a>
-    <div class="brand-wrap" style="background-image:url(/img/brand.jpg)">
-      <div class="brand">
-        <a href="/" class="avatar waves-effect waves-circle waves-light">
-          <img src="/img/avatar.jpg">
-        </a>
-        <hgroup class="introduce">
-          <h5 class="nickname">zhangMo</h5>
-          <a href="mailto:634206017@qq.com" target="_blank" rel="noopener" title="634206017@qq.com" class="mail">634206017@qq.com</a>
-        </hgroup>
-      </div>
+  
+  
+    
+  
+
+  <div class="container sidebar-position-left page-post-detail ">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-wrapper">
+  <div class="site-meta ">
+    
+
+    <div class="custom-logo-site-title">
+      <a href="/"  class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">zhangMo Blog</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
     </div>
-    <div class="scroll-wrap flex-col">
-      <ul class="nav">
-        
-            <li class="waves-block waves-effect">
-              <a href="/"  >
-                <i class="icon icon-lg icon-home"></i>
-                主页
-              </a>
-            </li>
-        
-            <li class="waves-block waves-effect">
-              <a href="/archives"  >
-                <i class="icon icon-lg icon-archives"></i>
-                Archives
-              </a>
-            </li>
-        
-            <li class="waves-block waves-effect">
-              <a href="/tags"  >
-                <i class="icon icon-lg icon-tags"></i>
-                Tags
-              </a>
-            </li>
-        
-            <li class="waves-block waves-effect">
-              <a href="/categories"  >
-                <i class="icon icon-lg icon-th-list"></i>
-                Categories
-              </a>
-            </li>
-        
-            <li class="waves-block waves-effect">
-              <a href="https://github.com/yscoder" target="_blank" >
-                <i class="icon icon-lg icon-github"></i>
-                Github
-              </a>
-            </li>
-        
-            <li class="waves-block waves-effect">
-              <a href="http://www.weibo.com/ysweb" target="_blank" >
-                <i class="icon icon-lg icon-weibo"></i>
-                Weibo
-              </a>
-            </li>
-        
-            <li class="waves-block waves-effect">
-              <a href="/custom"  >
-                <i class="icon icon-lg icon-link"></i>
-                测试
-              </a>
-            </li>
-        
-      </ul>
-    </div>
+      
+        <p class="site-subtitle"></p>
+      
   </div>
-</aside>
 
-    <main id="main">
-        <header class="top-header" id="header">
-    <div class="flex-row">
-        <a href="javascript:;" target="_blank" rel="noopener" class="header-icon waves-effect waves-circle waves-light on" id="menu-toggle">
-          <i class="icon icon-lg icon-navicon"></i>
-        </a>
-        <div class="flex-col header-title ellipsis">[翻译] StateMachine</div>
-        
-        <div class="search-wrap" id="search-wrap">
-            <a href="javascript:;" target="_blank" rel="noopener" class="header-icon waves-effect waves-circle waves-light" id="back">
-                <i class="icon icon-lg icon-chevron-left"></i>
-            </a>
-            <input type="text" id="key" class="search-input" autocomplete="off" placeholder="输入感兴趣的关键字">
-            <a href="javascript:;" target="_blank" rel="noopener" class="header-icon waves-effect waves-circle waves-light" id="search">
-                <i class="icon icon-lg icon-search"></i>
-            </a>
-        </div>
-        
-        
-        <a href="javascript:;" target="_blank" rel="noopener" class="header-icon waves-effect waves-circle waves-light" id="menuShare">
-            <i class="icon icon-lg icon-share-alt"></i>
-        </a>
-        
-    </div>
-</header>
-<header class="content-header post-header">
+  <div class="site-nav-toggle">
+    <button>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+    </button>
+  </div>
+</div>
 
-    <div class="container fade-scale">
-        <h1 class="title">[翻译] StateMachine</h1>
-        <h5 class="subtitle">
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu">
+      
+        
+        <li class="menu-item menu-item-home">
+          <a href="/" rel="section">
             
-                <time datetime="2018-12-17T07:29:26.000Z" itemprop="datePublished" class="page-time">
-  2018-12-17
-</time>
-
-
-	<ul class="article-category-list"><li class="article-category-list-item"><a class="article-category-list-link" href="/categories/%E7%BF%BB%E8%AF%91/">翻译</a></li></ul>
-
+              <i class="menu-item-icon fa fa-fw fa-home"></i> <br />
             
-        </h5>
-    </div>
+            Home
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/archives/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-archive"></i> <br />
+            
+            Archives
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-tags">
+          <a href="/tags/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-tags"></i> <br />
+            
+            Tags
+          </a>
+        </li>
+      
 
+      
+    </ul>
+  
+
+  
+</nav>
+
+
+
+ </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
     
 
+  
 
-</header>
+  
+  
+  
 
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="https://bitzhangmo.github.io/2018/12/17/%E7%BF%BB%E8%AF%91/%E7%BF%BB%E8%AF%91-StateMachine/">
 
-<div class="container body-wrap">
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="zhangMo">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/avatar.gif">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="zhangMo Blog">
+    </span>
+
     
-    <aside class="post-widget">
-        <nav class="post-toc-wrap post-toc-shrink" id="post-toc">
-            <h4>TOC</h4>
-            <ol class="post-toc"><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#Chapter-5-Decision-Making"><span class="post-toc-number">1.</span> <span class="post-toc-text">Chapter 5 Decision Making</span></a><ol class="post-toc-child"><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#5-3-STATE-MACHINES：状态机"><span class="post-toc-number">1.1.</span> <span class="post-toc-text">5.3 STATE MACHINES：状态机</span></a><ol class="post-toc-child"><li class="post-toc-item post-toc-level-5"><a class="post-toc-link" href="#A-Basic-State-Machine-：一个基本状态机"><span class="post-toc-number">1.1.0.1.</span> <span class="post-toc-text">A Basic State Machine ：一个基本状态机</span></a></li><li class="post-toc-item post-toc-level-5"><a class="post-toc-link" href="#Finite-State-Machines-：有限状态机"><span class="post-toc-number">1.1.0.2.</span> <span class="post-toc-text">Finite State Machines ：有限状态机</span></a></li><li class="post-toc-item post-toc-level-5"><a class="post-toc-link" href="#The-Game-FSM-：游戏中的有限状态机"><span class="post-toc-number">1.1.0.3.</span> <span class="post-toc-text">The Game FSM ：游戏中的有限状态机</span></a></li></ol></li><li class="post-toc-item post-toc-level-4"><a class="post-toc-link" href="#5-3-1-THE-PROBLEM-：问题"><span class="post-toc-number">1.1.1.</span> <span class="post-toc-text">5.3.1 THE PROBLEM ：问题</span></a></li><li class="post-toc-item post-toc-level-4"><a class="post-toc-link" href="#5-3-2-THE-ALGORITHM-：算法"><span class="post-toc-number">1.1.2.</span> <span class="post-toc-text">5.3.2 THE ALGORITHM ：算法</span></a></li><li class="post-toc-item post-toc-level-4"><a class="post-toc-link" href="#5-3-3-PSEUDO-CODE-：伪代码实现"><span class="post-toc-number">1.1.3.</span> <span class="post-toc-text">5.3.3 PSEUDO-CODE ：伪代码实现</span></a></li><li class="post-toc-item post-toc-level-4"><a class="post-toc-link" href="#5-3-4-DATA-STRUCTURES-AND-INTERFACES-：数据结构与接口"><span class="post-toc-number">1.1.4.</span> <span class="post-toc-text">5.3.4 DATA STRUCTURES AND INTERFACES ：数据结构与接口</span></a><ol class="post-toc-child"><li class="post-toc-item post-toc-level-5"><a class="post-toc-link" href="#Transition-Implementation-：实现转换"><span class="post-toc-number">1.1.4.1.</span> <span class="post-toc-text">Transition Implementation ：实现转换</span></a></li><li class="post-toc-item post-toc-level-5"><a class="post-toc-link" href="#Weaknesses-：缺点"><span class="post-toc-number">1.1.4.2.</span> <span class="post-toc-text">Weaknesses ：缺点</span></a></li></ol></li><li class="post-toc-item post-toc-level-4"><a class="post-toc-link" href="#5-3-6-PERFORMANCE-：开销"><span class="post-toc-number">1.1.5.</span> <span class="post-toc-text">5.3.6 PERFORMANCE ：开销</span></a></li><li class="post-toc-item post-toc-level-4"><a class="post-toc-link" href="#5-3-7-IMPLEMENTATION-NOTES-：实现的一些说明"><span class="post-toc-number">1.1.6.</span> <span class="post-toc-text">5.3.7 IMPLEMENTATION NOTES ：实现的一些说明</span></a></li><li class="post-toc-item post-toc-level-4"><a class="post-toc-link" href="#5-3-8-HARD-CODED-FSM-：FSM的硬编码问题"><span class="post-toc-number">1.1.7.</span> <span class="post-toc-text">5.3.8 HARD-CODED FSM ：FSM的硬编码问题</span></a><ol class="post-toc-child"><li class="post-toc-item post-toc-level-5"><a class="post-toc-link" href="#Pseudo-Code-：伪代码"><span class="post-toc-number">1.1.7.1.</span> <span class="post-toc-text">Pseudo-Code ：伪代码</span></a></li><li class="post-toc-item post-toc-level-5"><a class="post-toc-link" href="#Performance-：开销"><span class="post-toc-number">1.1.7.2.</span> <span class="post-toc-text">Performance ：开销</span></a></li><li class="post-toc-item post-toc-level-5"><a class="post-toc-link" href="#Weaknesses-：缺点-1"><span class="post-toc-number">1.1.7.3.</span> <span class="post-toc-text">Weaknesses ：缺点</span></a></li></ol></li><li class="post-toc-item post-toc-level-4"><a class="post-toc-link" href="#5-3-9-HIERARCHICAL-STATE-MACHINES：分层状态机"><span class="post-toc-number">1.1.8.</span> <span class="post-toc-text">5.3.9 HIERARCHICAL STATE MACHINES：分层状态机</span></a><ol class="post-toc-child"><li class="post-toc-item post-toc-level-5"><a class="post-toc-link" href="#The-Problem-：问题"><span class="post-toc-number">1.1.8.1.</span> <span class="post-toc-text">The Problem ：问题</span></a><ol class="post-toc-child"><li class="post-toc-item post-toc-level-6"><a class="post-toc-link" href="#The-Algorithm-：算法"><span class="post-toc-number">1.1.8.1.1.</span> <span class="post-toc-text">The Algorithm ：算法</span></a></li></ol></li><li class="post-toc-item post-toc-level-5"><a class="post-toc-link" href="#Examples-：例子"><span class="post-toc-number">1.1.8.2.</span> <span class="post-toc-text">Examples ：例子</span></a></li><li class="post-toc-item post-toc-level-5"><a class="post-toc-link" href="#Pseudo-Code-：伪代码-1"><span class="post-toc-number">1.1.8.3.</span> <span class="post-toc-text">Pseudo-Code ：伪代码</span></a></li><li class="post-toc-item post-toc-level-5"><a class="post-toc-link" href="#Implementation-Notes：实现说明"><span class="post-toc-number">1.1.8.4.</span> <span class="post-toc-text">Implementation Notes：实现说明</span></a></li><li class="post-toc-item post-toc-level-5"><a class="post-toc-link" href="#Performance-：开销-1"><span class="post-toc-number">1.1.8.5.</span> <span class="post-toc-text">Performance ：开销</span></a></li></ol></li><li class="post-toc-item post-toc-level-4"><a class="post-toc-link" href="#5-3-10-COMBINING-DECISION-TREES-AND-STATE-MACHINES-：决策树与状态机的结合"><span class="post-toc-number">1.1.9.</span> <span class="post-toc-text">5.3.10 COMBINING DECISION TREES AND STATE MACHINES ：决策树与状态机的结合</span></a><ol class="post-toc-child"><li class="post-toc-item post-toc-level-5"><a class="post-toc-link" href="#Pseudo-Code-：伪代码-2"><span class="post-toc-number">1.1.9.1.</span> <span class="post-toc-text">Pseudo-Code ：伪代码</span></a></li><li class="post-toc-item post-toc-level-5"><a class="post-toc-link" href="#Implementation：实现"><span class="post-toc-number">1.1.9.2.</span> <span class="post-toc-text">Implementation：实现</span></a></li></ol></li></ol></li></ol></li></ol>
-        </nav>
-    </aside>
+      <header class="post-header">
 
+        
+        
+          <h1 class="post-title" itemprop="name headline">[翻译] StateMachine</h1>
+        
 
-<article id="post-翻译/翻译-StateMachine"
-  class="post-article article-type-post fade" itemprop="blogPost">
-
-    <div class="post-card">
-        <h1 class="post-card-title">[翻译] StateMachine</h1>
         <div class="post-meta">
-            <time class="post-time" title="2018-12-17 15:29:26" datetime="2018-12-17T07:29:26.000Z"  itemprop="datePublished">2018-12-17</time>
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">Posted on</span>
+              
+              <time title="Post created" itemprop="dateCreated datePublished" datetime="2018-12-17T15:29:26+08:00">
+                2018-12-17
+              </time>
+            
 
             
-	<ul class="article-category-list"><li class="article-category-list-item"><a class="article-category-list-link" href="/categories/%E7%BF%BB%E8%AF%91/">翻译</a></li></ul>
-
-
 
             
-<span id="busuanzi_container_page_pv" title="文章总阅读量" style='display:none'>
-    <i class="icon icon-eye icon-pr"></i><span id="busuanzi_value_page_pv"></span>
-</span>
+          </span>
 
+          
+            <span class="post-category" >
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">In</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/%E7%BF%BB%E8%AF%91/" itemprop="url" rel="index">
+                    <span itemprop="name">翻译</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
 
         </div>
-        <div class="post-content" id="post-content" itemprop="postContent">
-            <p>[TOC]</p>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <p>[TOC]</p>
 <p>游戏中的状态机，分层状态机以及伪代码实现。</p>
 <a id="more"></a>
 
@@ -228,14 +372,7 @@
 <p>本章中的状态机图表基于UML状态图表格式，这是整个软件工程中使用的标准符号。状态显示为弯角框。过渡是箭头线，由触发它们的条件标记。条件包含在方括号中。</p>
 <p>The solid circle in Figure 5.13 has only one transition without a trigger condition. The transition points to the initial state that will be entered when the state machine is first run. </p>
 <p>图5.13中的实心圆只有一个没有触发条件的转换。转换指向首次运行状态机时将进入的初始状态。</p>
-<figure class="image-bubble">
-                <div class="img-lightbox">
-                    <div class="overlay"></div>
-                    <img src="/Users/zhangmo/Library/Application" alt="image-20181122004651145" title="Support/typora-user-images/image-20181122004651145.png">
-                </div>
-                <div class="image-caption">Support/typora-user-images/image-20181122004651145.png</div>
-            </figure>
-
+<p>![image-20181122004651145](/Users/zhangmo/Library/Application Support/typora-user-images/image-20181122004651145.png)</p>
 <p>You won’t need an in-depth understanding of UML to understand this chapter. If you want to find out more about UML, I’d recommend Pilone [2005]. </p>
 <p>您不需要深入了解UML来理解本章。如果你想了解更多关于UML的信息，我推荐<em>Pilone [2005]</em>。</p>
 <p>In a decision tree the same set of decisions is always used, and any action can be reached through the tree. In a state machine only transitions from the current state are considered, so not every action can be reached. </p>
@@ -340,14 +477,7 @@
 <p>就其本身而言，一台状态机是一种强大的工具，但表达某些行为可能很困难。一个常见的例子是“警报行为”。</p>
 <p>Imagine a service robot that moves around a facility cleaning the floors. It has a state machine allowing it to do this. It might search around for objects that have been dropped, pick one up when it finds it, and carry it off to the trash compactor. This can be simply implemented using a normal state machine (see Figure 5.14). </p>
 <p>想象一下一个机器人在清洁地板的设施周围移动。 它有一个状态机允许它这样做。 它可能会搜索掉落的物体，找到它时拾取一个物体，然后将它带到垃圾压缩机。 这可以使用普通状态机简单地实现（参见图5.14）。</p>
-<figure class="image-bubble">
-                <div class="img-lightbox">
-                    <div class="overlay"></div>
-                    <img src="/Users/zhangmo/Library/Application" alt="image-20181121110155364" title="Support/typora-user-images/image-20181121110155364.png">
-                </div>
-                <div class="image-caption">Support/typora-user-images/image-20181121110155364.png</div>
-            </figure>
-
+<p>![image-20181121110155364](/Users/zhangmo/Library/Application Support/typora-user-images/image-20181121110155364.png)</p>
 <p>Unfortunately, the robot can run low on power, whereupon it has to scurry off to the nearest electrical point and get recharged. Regardless of what it is doing at the time, it needs to stop, and when it is fully charged again, it needs to pick up where it left off. The recharging periods could allow the player to sneak by unnoticed, for example, or allow the player to disable all electricity to the area and thereby disable the robot. </p>
 <p>不幸的是，机器人的能源不是无限的，因此它必须赶到最近的电气点并进行充电。 不管它当时在做什么，它需要停止。当它再次充满电时，它需要从它停止的地方开始。 例如，充电时段可允许玩家不加注意地潜行，或允许玩家禁用该区域的所有电力，从而禁用机器人。（注：游戏场景模拟）</p>
 <p>This is an alarm mechanism: something that interrupts normal behavior to respond to something important. Representing this in a state machine leads to a dou- bling in the number of states. </p>
@@ -358,24 +488,10 @@
 <p>我们可以将它分成几个，而不是将所有逻辑组合到一个状态机中。 每个报警机制都有自己的状态机以及原始行为。 它们按层次结构排列，因此仅当较高级别的状态机未响应其警报时才考虑下一个状态机。</p>
 <p>Figure 5.15 shows one alarm mechanism and corresponds exactly to the diagram above. </p>
 <p>图5.15显示了一种报警机制，与上图完全一致。</p>
-<figure class="image-bubble">
-                <div class="img-lightbox">
-                    <div class="overlay"></div>
-                    <img src="/Users/zhangmo/Library/Application" alt="image-20181121111241030" title="Support/typora-user-images/image-20181121111241030.png">
-                </div>
-                <div class="image-caption">Support/typora-user-images/image-20181121111241030.png</div>
-            </figure>
-
+<p>![image-20181121111241030](/Users/zhangmo/Library/Application Support/typora-user-images/image-20181121111241030.png)</p>
 <p>We will nest one state machine inside another to indicate a hierarchical state ma- chine (Figure 5.16). The solid circle again represents the start state of the machine. When a composite state is first entered, the circle with H* inside it indicates which sub-state should be entered. </p>
 <p>我们将一个状态机嵌套在另一个状态机中以指示分层状态机（图5.16）。 实心圆圈再次表示机器的启动状态。 首次输入复合状态时，其中带有H *的圆圈表示应输入哪个子状态。</p>
-<figure class="image-bubble">
-                <div class="img-lightbox">
-                    <div class="overlay"></div>
-                    <img src="/Users/zhangmo/Library/Application" alt="image-20181121111547584" title="Support/typora-user-images/image-20181121111547584.png">
-                </div>
-                <div class="image-caption">Support/typora-user-images/image-20181121111547584.png</div>
-            </figure>
-
+<p>![image-20181121111547584](/Users/zhangmo/Library/Application Support/typora-user-images/image-20181121111547584.png)</p>
 <p>If the composite state has already been entered, then the previous sub-state is returned to. The H* node is called the “history state” for this reason. </p>
 <p>如果已经输入复合状态，则返回先前的子状态。 由于这个原因，H *节点被称为“历史状态”。</p>
 <p>The details of why there’s an asterisk after the H, and some of the other vagaries of the UML state chart diagram, are beyond the scope of this chapter. Refer back to Pilone [2005] for more details. </p>
@@ -390,14 +506,7 @@
 <p>虽然这会导致稍微丑陋的代码，但它会实现我们的场景。 但是，大多数分层状态机支持层次结构级别之间的转换，为此我们需要更复杂的算法。</p>
 <p>For example, let’s expand our robot so that it can do something useful if there are no objects to collect. It makes sense that it will use the opportunity to go and recharge, rather than standing around waiting for its battery to go flat. The new state machine is shown in Figure 5.17. </p>
 <p>例如，让我们扩展我们的机器人，以便在没有要收集的对象时它可以做一些有用的事情。 这是有意义的，它会利用这个机会去充电，而不是站在那里等待电池电量消失。 新的状态机如图5.17所示。</p>
-<figure class="image-bubble">
-                <div class="img-lightbox">
-                    <div class="overlay"></div>
-                    <img src="/Users/zhangmo/Library/Application" alt="image-20181121112706544" title="Support/typora-user-images/image-20181121112706544.png">
-                </div>
-                <div class="image-caption">Support/typora-user-images/image-20181121112706544.png</div>
-            </figure>
-
+<p>![image-20181121112706544](/Users/zhangmo/Library/Application Support/typora-user-images/image-20181121112706544.png)</p>
 <p>Notice that we’ve added one more transition: from the “Search” state right out into the “Refuel” state. This transition is triggered when there are no objects to collect. Because we transitioned directly out of this state, the inner state machine no longer has any state. When the robot has refuelled and the alarm system transitions back to cleaning, the robot will not have a record of where to pick up from, so it must start the state machine again from its initial node (“Search”). </p>
 <p>请注意，我们又添加了一个转换：从“搜索”状态直接进入“加油”状态。 没有要收集的对象时会触发此转换。 因为我们直接从这个状态转换，内部状态机不再具有任何状态。 当机器人加满了油并且报警系统转换回清洁时，机器人将无法记录从哪里取货，因此它必须从其初始节点（“搜索”）再次启动状态机。</p>
 <h5 id="The-Problem-：问题"><a href="#The-Problem-：问题" class="headerlink" title="The Problem ：问题"></a>The Problem ：问题</h5><p>We’d like an implementation of a state machine system that supports hierarchical state machines. We’d also like transitions that pass between different layers of the machine. </p>
@@ -408,14 +517,7 @@
 <p>系统的第一部分返回当前状态。 结果是状态列表，从层次结构的最高到最低。 状态机要求其当前状态返回其层次结构。 如果状态是终端状态，则返回自身; 否则，它返回自身并从其当前状态向其添加状态层次结构。</p>
 <p>In Figure 5.18 the current state is [State L, State A]. </p>
 <p>在图5.18中，当前状态是[状态L，状态A]。</p>
-<figure class="image-bubble">
-                <div class="img-lightbox">
-                    <div class="overlay"></div>
-                    <img src="/Users/zhangmo/Library/Application" alt="image-20181121113748202" title="Support/typora-user-images/image-20181121113748202.png">
-                </div>
-                <div class="image-caption">Support/typora-user-images/image-20181121113748202.png</div>
-            </figure>
-
+<p>![image-20181121113748202](/Users/zhangmo/Library/Application Support/typora-user-images/image-20181121113748202.png)</p>
 <p>The second part of the hierarchical state machine is its update. In the original state machine we assumed that each state machine started off in its initial state. Because the state machine always transitioned from one state to another, there was never any need to check if there was no state. State machines in a hierarchy can be in no state; they may have a cross hierarchy transition. The first stage of the update, then, is to check if the state machine has a state. If not, it should enter its initial state. </p>
 <p>分层状态机的第二部分是它的更新。 在原始状态机中，我们假设每个状态机在其初始状态下启动。 因为状态机总是从一个状态转换到另一个状态，所以从来没有必要检查是否没有状态。 <strong>层次结构中的状态机可以处于无状态; 他们可能有一个跨层次的过渡。 然后，更新的第一阶段是检查状态机是否具有状态。 如果没有，它应该进入其初始状态。</strong></p>
 <p>Next, we check if the current state has a transition it wants to execute. Transitions at higher levels in the hierarchy always take priority, and the transitions of sub-states will not be considered if the super-state has one that triggers. </p>
@@ -444,14 +546,7 @@
 <p>幸运的是，这种算法至少与实现一样难以解释。 为了了解它的工作原理和原因，让我们来看一个例子。</p>
 <h5 id="Examples-：例子"><a href="#Examples-：例子" class="headerlink" title="Examples ：例子"></a>Examples ：例子</h5><p>Figure 5.19 shows a hierarchical state machine that we will use as an example.</p>
 <p>图5.19显示了我们将用作示例的分层状态机。</p>
-<figure class="image-bubble">
-                <div class="img-lightbox">
-                    <div class="overlay"></div>
-                    <img src="/Users/zhangmo/Library/Application" alt="image-20181121133703875" title="Support/typora-user-images/image-20181121133703875.png">
-                </div>
-                <div class="image-caption">Support/typora-user-images/image-20181121133703875.png</div>
-            </figure>
-
+<p>![image-20181121133703875](/Users/zhangmo/Library/Application Support/typora-user-images/image-20181121133703875.png)</p>
 <p>To clarify the actions returned for each example, we will say S-entry is the set of entry actions for state S, similarly S-active and S-exit for active and exit actions. In transitions we use the same format 1-actions for the actions associated with transi- tion 1. </p>
 <p>为了阐明每个示例返回的操作，我们将说S-entry是状态S的入口操作集，类似于活动和退出操作的S-active和S-exit。 在转换中，我们对与转换1相关的操作使用相同的格式1动作。</p>
 <p>These examples can appear confusing if you skim them through. If you’re having trouble with the algorithm, I urge you to follow through step by step with both the diagram above and the pseudo-code from the next section. </p>
@@ -506,14 +601,7 @@
 <p>我们可以通过用状态替换状态转换的方式来组合这两种方法决策树。树的叶子，而不是像以前那样的动作，是向新状态的过渡。</p>
 <p>A simple state machine might look like Figure 5.20. </p>
 <p>一个简单的状态机可能如图5.20所示。</p>
-<figure class="image-bubble">
-                <div class="img-lightbox">
-                    <div class="overlay"></div>
-                    <img src="/Users/zhangmo/Library/Application" alt="image-20181122004826206" title="Support/typora-user-images/image-20181122004826206.png">
-                </div>
-                <div class="image-caption">Support/typora-user-images/image-20181122004826206.png</div>
-            </figure>
-
+<p>![image-20181122004826206](/Users/zhangmo/Library/Application Support/typora-user-images/image-20181122004826206.png)</p>
 <p>The diamond symbol is also part of the UML state chart diagram format, repre- senting a decision. In UML there is no differentiation between decisions and transi- tions, and the decisions themselves are usually not labelled. </p>
 <p>In this book I’ve labelled the decisions with the test that they perform, which is clearer for our needs. </p>
 <p>菱形符号也是UML状态图表格式的一部分，代表了一个决定。在UML中，决策和转换之间没有区别，决策本身通常没有标记。</p>
@@ -522,14 +610,7 @@
 <p>当处于“警报”状态时，哨兵只有一个可能的过渡：通过决策树。它可以快速确定哨兵是否可以看到玩家。如果哨兵无法看到该玩家，则转换结束并且不会达到新的状态。如果哨兵能够看到玩家，则决策树根据玩家的距离做出选择。根据此选择的结果，可能会达到两种不同的状态：“提升警报”或“防御”。只有在进一步测试（与玩家的距离）通过后才能达到后者。</p>
 <p>To implement the same state machine without the decision nodes, the state ma- chine in Figure 5.21 would be required. Note that now we have two very complex con- ditions and both have to evaluate the same information (distance to the player and distance to the alarm point). If the condition involved a time-consuming algorithm (such as the line of sight test in our example), then the decision tree implementation<br>would be significantly faster.</p>
 <p>要在没有决策节点的情况下实现相同的状态机，将需要图5.21中的状态机。请注意，现在我们有两个非常复杂的条件，两者都必须评估相同的信息（到播放器的距离和到报警点的距离）。如果条件涉及耗时的算法（例如我们示例中的视线测试），那么决策树实现将明显更快。</p>
-<figure class="image-bubble">
-                <div class="img-lightbox">
-                    <div class="overlay"></div>
-                    <img src="/Users/zhangmo/Library/Application" alt="image-20181122004853810" title="Support/typora-user-images/image-20181122004853810.png">
-                </div>
-                <div class="image-caption">Support/typora-user-images/image-20181122004853810.png</div>
-            </figure>
-
+<p>![image-20181122004853810](/Users/zhangmo/Library/Application Support/typora-user-images/image-20181122004853810.png)</p>
 <h5 id="Pseudo-Code-：伪代码-2"><a href="#Pseudo-Code-：伪代码-2" class="headerlink" title="Pseudo-Code ：伪代码"></a>Pseudo-Code ：伪代码</h5><p>We can incorporate a decision tree into the state machine framework we’ve developed so far. </p>
 <p>我们可以将决策树合并到我们迄今为止开发的状态机框架中。</p>
 <p>The decision tree, as before, consists of DecisionTreeNodes. These may be decisions (using the same Decision class as before) or TargetStates (which replace the Action class in the basic decision tree). TargetStates hold the state to transition to and can contain actions. As before, if a branch of the decision tree should lead to no result, then we can have some null value at the leaf of the tree. </p>
@@ -540,305 +621,356 @@
 <p>然后我们可以构建支持的Transition接口的实现这些决策树。它有以下算法：</p>
 <h5 id="Implementation：实现"><a href="#Implementation：实现" class="headerlink" title="Implementation：实现"></a>Implementation：实现</h5><p>As before, this implementation relies heavily on polymorphic methods in an object- oriented framework. The corresponding performance overhead may be unacceptable in some cases where lots of transitions or decisions are being considered.<br>和以前一样，这种实现在很大程度上依赖于面向对象框架中的多态方法。在考虑大量转换或决策的某些情况下，相应的性能开销可能是不可接受的。</p>
 
-        </div>
-
-        <blockquote class="post-copyright">
-    
-    <div class="content">
-        
-<span class="post-time">
-    最后更新时间：<time datetime="2018-12-17T07:49:14.762Z" itemprop="dateUpdated">2018-12-17 15:49:14</time>
-</span><br>
-
-
-        
-        这里可以写作者留言，标签和 hexo 中所有变量及辅助函数等均可调用，示例：<a href="/2018/12/17/%E7%BF%BB%E8%AF%91/%E7%BF%BB%E8%AF%91-StateMachine/" target="_blank" rel="external">https://bitzhangmo.github.io/2018/12/17/%E7%BF%BB%E8%AF%91/%E7%BF%BB%E8%AF%91-StateMachine/</a>
-        
+      
     </div>
     
-    <footer>
-        <a href="https://bitzhangmo.github.io">
-            <img src="/img/avatar.jpg" alt="zhangMo">
-            zhangMo
-        </a>
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/Artificial-Intelligence-for-Games/" rel="tag"># Artificial Intelligence for Games</a>
+          
+        </div>
+      
+
+      
+      
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2018/10/22/Unity%E7%AC%94%E8%AE%B0/unity-shader-%E9%80%8F%E6%98%8E%E6%95%88%E6%9E%9C/" rel="next" title="unity shader 透明效果">
+                <i class="fa fa-chevron-left"></i> unity shader 透明效果
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+              <a href="/2018/12/17/%E5%BC%80%E5%8F%91%E7%AC%94%E8%AE%B0/indlecamp-GameJam-%E5%BC%80%E5%8F%91%E7%AC%94%E8%AE%B0/" rel="prev" title="indlecamp GameJam 开发笔记">
+                indlecamp GameJam 开发笔记 <i class="fa fa-chevron-right"></i>
+              </a>
+            
+          </div>
+        </div>
+      
+
+      
+      
     </footer>
-</blockquote>
-
-        
-<div class="page-reward">
-    <a id="rewardBtn" href="javascript:;" target="_blank" rel="noopener" class="page-reward-btn waves-effect waves-circle waves-light">赏</a>
-</div>
-
+  </div>
+  
+  
+  
+  </article>
 
 
-        <div class="post-footer">
-            
-	<ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Artificial-Intelligence-for-Games/" rel="tag">Artificial Intelligence for Games</a></li></ul>
+
+    <div class="post-spread">
+      
+    </div>
+  </div>
 
 
-            
-<div class="page-share-wrap">
+          </div>
+          
+
+
+          
+  <div class="comments" id="comments">
     
-
-<div class="page-share" id="pageShare">
-    <ul class="reset share-icons">
-      <li>
-        <a class="weibo share-sns" target="_blank" href="http://service.weibo.com/share/share.php?url=https://bitzhangmo.github.io/2018/12/17/%E7%BF%BB%E8%AF%91/%E7%BF%BB%E8%AF%91-StateMachine/&title=《[翻译] StateMachine》 — zhangMo Blog&pic=https://bitzhangmo.github.io/img/avatar.jpg" data-title="微博">
-          <i class="icon icon-weibo"></i>
-        </a>
-      </li>
-      <li>
-        <a class="weixin share-sns wxFab" href="javascript:;" target="_blank" rel="noopener" data-title="微信">
-          <i class="icon icon-weixin"></i>
-        </a>
-      </li>
-      <li>
-        <a class="qq share-sns" target="_blank" href="http://connect.qq.com/widget/shareqq/index.html?url=https://bitzhangmo.github.io/2018/12/17/%E7%BF%BB%E8%AF%91/%E7%BF%BB%E8%AF%91-StateMachine/&title=《[翻译] StateMachine》 — zhangMo Blog&source=[TOC]
-游戏中的状态机，分层状态机以及伪代码实现。" data-title=" QQ">
-          <i class="icon icon-qq"></i>
-        </a>
-      </li>
-      <li>
-        <a class="facebook share-sns" target="_blank" href="https://www.facebook.com/sharer/sharer.php?u=https://bitzhangmo.github.io/2018/12/17/%E7%BF%BB%E8%AF%91/%E7%BF%BB%E8%AF%91-StateMachine/" data-title=" Facebook">
-          <i class="icon icon-facebook"></i>
-        </a>
-      </li>
-      <li>
-        <a class="twitter share-sns" target="_blank" href="https://twitter.com/intent/tweet?text=《[翻译] StateMachine》 — zhangMo Blog&url=https://bitzhangmo.github.io/2018/12/17/%E7%BF%BB%E8%AF%91/%E7%BF%BB%E8%AF%91-StateMachine/&via=https://bitzhangmo.github.io" data-title=" Twitter">
-          <i class="icon icon-twitter"></i>
-        </a>
-      </li>
-      <li>
-        <a class="google share-sns" target="_blank" href="https://plus.google.com/share?url=https://bitzhangmo.github.io/2018/12/17/%E7%BF%BB%E8%AF%91/%E7%BF%BB%E8%AF%91-StateMachine/" data-title=" Google+">
-          <i class="icon icon-google-plus"></i>
-        </a>
-      </li>
-    </ul>
- </div>
-
-
-
-    <a href="javascript:;" target="_blank" rel="noopener" id="shareFab" class="page-share-fab waves-effect waves-circle">
-        <i class="icon icon-share-alt icon-lg"></i>
-    </a>
-</div>
-
+  </div>
 
 
         </div>
-    </div>
-
-    
-<nav class="post-nav flex-row flex-justify-between">
-  
-    <div class="waves-block waves-effect prev">
-      <a href="/2018/12/17/%E5%BC%80%E5%8F%91%E7%AC%94%E8%AE%B0/indlecamp-GameJam-%E5%BC%80%E5%8F%91%E7%AC%94%E8%AE%B0/" id="post-prev" class="post-nav-link">
-        <div class="tips"><i class="icon icon-angle-left icon-lg icon-pr"></i> Prev</div>
-        <h4 class="title">indlecamp GameJam 开发笔记</h4>
-      </a>
-    </div>
-  
-
-  
-    <div class="waves-block waves-effect next">
-      <a href="/2018/10/22/Unity%E7%AC%94%E8%AE%B0/unity-shader-%E9%80%8F%E6%98%8E%E6%95%88%E6%9E%9C/" id="post-next" class="post-nav-link">
-        <div class="tips">Next <i class="icon icon-angle-right icon-lg icon-pl"></i></div>
-        <h4 class="title">unity shader 透明效果</h4>
-      </a>
-    </div>
-  
-</nav>
-
-
-
-    
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-</article>
-
-<div id="reward" class="page-modal reward-lay">
-    <a class="close" href="javascript:;" target="_blank" rel="noopener"><i class="icon icon-close"></i></a>
-    <h3 class="reward-title">
-        <i class="icon icon-quote-left"></i>
-        谢谢大爷~
-        <i class="icon icon-quote-right"></i>
-    </h3>
-    <div class="reward-content">
         
-        <div class="reward-code">
-            <img id="rewardCode" src="/img/wechat.jpg" alt="打赏二维码">
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap" >
+            Table of Contents
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview">
+            Overview
+          </li>
+        </ul>
+      
+
+      <section class="site-overview sidebar-panel">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+          <img class="site-author-image" itemprop="image"
+               src="/images/avatar.gif"
+               alt="zhangMo" />
+          <p class="site-author-name" itemprop="name">zhangMo</p>
+           
+              <p class="site-description motion-element" itemprop="description">T&S&A&G</p>
+          
         </div>
-        
-        <label class="reward-toggle">
-            <input id="rewardToggle" type="checkbox" class="reward-toggle-check"
-                data-wechat="/img/wechat.jpg" data-alipay="/img/alipay.jpg">
-            <div class="reward-toggle-ctrol">
-                <span class="reward-toggle-item wechat">微信</span>
-                <span class="reward-toggle-label"></span>
-                <span class="reward-toggle-item alipay">支付宝</span>
+        <nav class="site-state motion-element">
+
+          
+            <div class="site-state-item site-state-posts">
+              <a href="/archives/">
+                <span class="site-state-item-count">86</span>
+                <span class="site-state-item-name">posts</span>
+              </a>
             </div>
-        </label>
-        
-    </div>
-</div>
+          
 
-
-
-</div>
-
-        <footer class="footer">
-    <div class="top">
-        
-<p>
-    <span id="busuanzi_container_site_uv" style='display:none'>
-        站点总访客数：<span id="busuanzi_value_site_uv"></span>
-    </span>
-    <span id="busuanzi_container_site_pv" style='display:none'>
-        站点总访问量：<span id="busuanzi_value_site_pv"></span>
-    </span>
-</p>
-
-
-        <p>
+          
             
-            <span>博客内容遵循 <a rel="license noopener" href="https://creativecommons.org/licenses/by-nc-sa/4.0/deed.zh" target="_blank">知识共享 署名 - 非商业性 - 相同方式共享 4.0 国际协议</a></span>
-        </p>
-    </div>
-    <div class="bottom">
-        <p><span>zhangMo &copy; 2015 - 2019</span>
-            <span>
-                
-                Power by <a href="http://hexo.io/" target="_blank">Hexo</a> Theme <a href="https://github.com/yscoder/hexo-theme-indigo" target="_blank">indigo</a>
-            </span>
-        </p>
-    </div>
-</footer>
+            
+            <div class="site-state-item site-state-categories">
+              
+                <span class="site-state-item-count">10</span>
+                <span class="site-state-item-name">categories</span>
+              
+            </div>
+          
 
+          
+            
+            
+            <div class="site-state-item site-state-tags">
+              
+                <span class="site-state-item-count">34</span>
+                <span class="site-state-item-name">tags</span>
+              
+            </div>
+          
+
+        </nav>
+
+        
+
+        <div class="links-of-author motion-element">
+          
+        </div>
+
+        
+        
+
+        
+        
+
+        
+
+
+      </section>
+
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#Chapter-5-Decision-Making"><span class="nav-number">1.</span> <span class="nav-text">Chapter 5 Decision Making</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#5-3-STATE-MACHINES：状态机"><span class="nav-number">1.1.</span> <span class="nav-text">5.3 STATE MACHINES：状态机</span></a><ol class="nav-child"><li class="nav-item nav-level-5"><a class="nav-link" href="#A-Basic-State-Machine-：一个基本状态机"><span class="nav-number">1.1.0.1.</span> <span class="nav-text">A Basic State Machine ：一个基本状态机</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#Finite-State-Machines-：有限状态机"><span class="nav-number">1.1.0.2.</span> <span class="nav-text">Finite State Machines ：有限状态机</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#The-Game-FSM-：游戏中的有限状态机"><span class="nav-number">1.1.0.3.</span> <span class="nav-text">The Game FSM ：游戏中的有限状态机</span></a></li></ol></li><li class="nav-item nav-level-4"><a class="nav-link" href="#5-3-1-THE-PROBLEM-：问题"><span class="nav-number">1.1.1.</span> <span class="nav-text">5.3.1 THE PROBLEM ：问题</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#5-3-2-THE-ALGORITHM-：算法"><span class="nav-number">1.1.2.</span> <span class="nav-text">5.3.2 THE ALGORITHM ：算法</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#5-3-3-PSEUDO-CODE-：伪代码实现"><span class="nav-number">1.1.3.</span> <span class="nav-text">5.3.3 PSEUDO-CODE ：伪代码实现</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#5-3-4-DATA-STRUCTURES-AND-INTERFACES-：数据结构与接口"><span class="nav-number">1.1.4.</span> <span class="nav-text">5.3.4 DATA STRUCTURES AND INTERFACES ：数据结构与接口</span></a><ol class="nav-child"><li class="nav-item nav-level-5"><a class="nav-link" href="#Transition-Implementation-：实现转换"><span class="nav-number">1.1.4.1.</span> <span class="nav-text">Transition Implementation ：实现转换</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#Weaknesses-：缺点"><span class="nav-number">1.1.4.2.</span> <span class="nav-text">Weaknesses ：缺点</span></a></li></ol></li><li class="nav-item nav-level-4"><a class="nav-link" href="#5-3-6-PERFORMANCE-：开销"><span class="nav-number">1.1.5.</span> <span class="nav-text">5.3.6 PERFORMANCE ：开销</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#5-3-7-IMPLEMENTATION-NOTES-：实现的一些说明"><span class="nav-number">1.1.6.</span> <span class="nav-text">5.3.7 IMPLEMENTATION NOTES ：实现的一些说明</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#5-3-8-HARD-CODED-FSM-：FSM的硬编码问题"><span class="nav-number">1.1.7.</span> <span class="nav-text">5.3.8 HARD-CODED FSM ：FSM的硬编码问题</span></a><ol class="nav-child"><li class="nav-item nav-level-5"><a class="nav-link" href="#Pseudo-Code-：伪代码"><span class="nav-number">1.1.7.1.</span> <span class="nav-text">Pseudo-Code ：伪代码</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#Performance-：开销"><span class="nav-number">1.1.7.2.</span> <span class="nav-text">Performance ：开销</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#Weaknesses-：缺点-1"><span class="nav-number">1.1.7.3.</span> <span class="nav-text">Weaknesses ：缺点</span></a></li></ol></li><li class="nav-item nav-level-4"><a class="nav-link" href="#5-3-9-HIERARCHICAL-STATE-MACHINES：分层状态机"><span class="nav-number">1.1.8.</span> <span class="nav-text">5.3.9 HIERARCHICAL STATE MACHINES：分层状态机</span></a><ol class="nav-child"><li class="nav-item nav-level-5"><a class="nav-link" href="#The-Problem-：问题"><span class="nav-number">1.1.8.1.</span> <span class="nav-text">The Problem ：问题</span></a><ol class="nav-child"><li class="nav-item nav-level-6"><a class="nav-link" href="#The-Algorithm-：算法"><span class="nav-number">1.1.8.1.1.</span> <span class="nav-text">The Algorithm ：算法</span></a></li></ol></li><li class="nav-item nav-level-5"><a class="nav-link" href="#Examples-：例子"><span class="nav-number">1.1.8.2.</span> <span class="nav-text">Examples ：例子</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#Pseudo-Code-：伪代码-1"><span class="nav-number">1.1.8.3.</span> <span class="nav-text">Pseudo-Code ：伪代码</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#Implementation-Notes：实现说明"><span class="nav-number">1.1.8.4.</span> <span class="nav-text">Implementation Notes：实现说明</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#Performance-：开销-1"><span class="nav-number">1.1.8.5.</span> <span class="nav-text">Performance ：开销</span></a></li></ol></li><li class="nav-item nav-level-4"><a class="nav-link" href="#5-3-10-COMBINING-DECISION-TREES-AND-STATE-MACHINES-：决策树与状态机的结合"><span class="nav-number">1.1.9.</span> <span class="nav-text">5.3.10 COMBINING DECISION TREES AND STATE MACHINES ：决策树与状态机的结合</span></a><ol class="nav-child"><li class="nav-item nav-level-5"><a class="nav-link" href="#Pseudo-Code-：伪代码-2"><span class="nav-number">1.1.9.1.</span> <span class="nav-text">Pseudo-Code ：伪代码</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#Implementation：实现"><span class="nav-number">1.1.9.2.</span> <span class="nav-text">Implementation：实现</span></a></li></ol></li></ol></li></ol></li></ol></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
+      
+
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
     </main>
-    <div class="mask" id="mask"></div>
-<a href="javascript:;" target="_blank" rel="noopener" id="gotop" class="waves-effect waves-circle waves-light"><span class="icon icon-lg icon-chevron-up"></span></a>
 
-
-
-<div class="global-share" id="globalShare">
-    <ul class="reset share-icons">
-      <li>
-        <a class="weibo share-sns" target="_blank" href="http://service.weibo.com/share/share.php?url=https://bitzhangmo.github.io/2018/12/17/%E7%BF%BB%E8%AF%91/%E7%BF%BB%E8%AF%91-StateMachine/&title=《[翻译] StateMachine》 — zhangMo Blog&pic=https://bitzhangmo.github.io/img/avatar.jpg" data-title="微博">
-          <i class="icon icon-weibo"></i>
-        </a>
-      </li>
-      <li>
-        <a class="weixin share-sns wxFab" href="javascript:;" target="_blank" rel="noopener" data-title="微信">
-          <i class="icon icon-weixin"></i>
-        </a>
-      </li>
-      <li>
-        <a class="qq share-sns" target="_blank" href="http://connect.qq.com/widget/shareqq/index.html?url=https://bitzhangmo.github.io/2018/12/17/%E7%BF%BB%E8%AF%91/%E7%BF%BB%E8%AF%91-StateMachine/&title=《[翻译] StateMachine》 — zhangMo Blog&source=[TOC]
-游戏中的状态机，分层状态机以及伪代码实现。" data-title=" QQ">
-          <i class="icon icon-qq"></i>
-        </a>
-      </li>
-      <li>
-        <a class="facebook share-sns" target="_blank" href="https://www.facebook.com/sharer/sharer.php?u=https://bitzhangmo.github.io/2018/12/17/%E7%BF%BB%E8%AF%91/%E7%BF%BB%E8%AF%91-StateMachine/" data-title=" Facebook">
-          <i class="icon icon-facebook"></i>
-        </a>
-      </li>
-      <li>
-        <a class="twitter share-sns" target="_blank" href="https://twitter.com/intent/tweet?text=《[翻译] StateMachine》 — zhangMo Blog&url=https://bitzhangmo.github.io/2018/12/17/%E7%BF%BB%E8%AF%91/%E7%BF%BB%E8%AF%91-StateMachine/&via=https://bitzhangmo.github.io" data-title=" Twitter">
-          <i class="icon icon-twitter"></i>
-        </a>
-      </li>
-      <li>
-        <a class="google share-sns" target="_blank" href="https://plus.google.com/share?url=https://bitzhangmo.github.io/2018/12/17/%E7%BF%BB%E8%AF%91/%E7%BF%BB%E8%AF%91-StateMachine/" data-title=" Google+">
-          <i class="icon icon-google-plus"></i>
-        </a>
-      </li>
-    </ul>
- </div>
-
-
-<div class="page-modal wx-share" id="wxShare">
-    <a class="close" href="javascript:;" target="_blank" rel="noopener"><i class="icon icon-close"></i></a>
-    <p>扫一扫，分享到微信</p>
-    <img src="//api.qrserver.com/v1/create-qr-code/?data=https://bitzhangmo.github.io/2018/12/17/%E7%BF%BB%E8%AF%91/%E7%BF%BB%E8%AF%91-StateMachine/" alt="微信分享二维码">
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright" >
+  
+  &copy; 
+  <span itemprop="copyrightYear">2019</span>
+  <span class="with-love">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">zhangMo</span>
 </div>
 
 
-
-
-    <script src="//cdn.bootcss.com/node-waves/0.7.4/waves.min.js"></script>
-<script>
-var BLOG = { ROOT: '/', SHARE: true, REWARD: true };
-
-
-</script>
-
-<script src="//unpkg.com/hexo-theme-material-indigo@latest/js/main.min.js"></script>
-
-
-<div class="search-panel" id="search-panel">
-    <ul class="search-result" id="search-result"></ul>
+<div class="powered-by">
+  Powered by <a class="theme-link" href="https://hexo.io" target="_blank" rel="noopener">Hexo</a>
 </div>
-<template id="search-tpl">
-<li class="item">
-    <a href="{path}" class="waves-block waves-effect">
-        <div class="title ellipsis" title="{title}">{title}</div>
-        <div class="flex-row flex-middle">
-            <div class="tags ellipsis">
-            </div>
-            <time class="flex-col time">{date}</time>
-        </div>
-    </a>
-</li>
-</template>
 
-<script src="//unpkg.com/hexo-theme-material-indigo@latest/js/search.min.js" async></script>
+<div class="theme-info">
+  Theme -
+  <a class="theme-link" href="https://github.com/iissnan/hexo-theme-next" target="_blank" rel="noopener">
+    NexT.Muse
+  </a>
+</div>
 
 
+        
 
+        
+      </div>
+    </footer>
 
+    
+      <div class="back-to-top">
+        <i class="fa fa-arrow-up"></i>
+        
+      </div>
+    
 
+  </div>
 
-<script async src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+  
 
-
-
-<script>
-(function() {
-    var OriginTitile = document.title, titleTime;
-    document.addEventListener('visibilitychange', function() {
-        if (document.hidden) {
-            document.title = '死鬼去哪里了！';
-            clearTimeout(titleTime);
-        } else {
-            document.title = '(つェ⊂)咦!又好了!';
-            titleTime = setTimeout(function() {
-                document.title = OriginTitile;
-            },2000);
-        }
-    });
-})();
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
 </script>
 
 
+
+
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  <script type="text/javascript" src="/lib/jquery/index.js?v=2.1.3"></script>
+
+  
+  <script type="text/javascript" src="/lib/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+
+  
+  <script type="text/javascript" src="/lib/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
+
+  
+  <script type="text/javascript" src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+
+  
+  <script type="text/javascript" src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+
+  
+  <script type="text/javascript" src="/lib/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=5.1.2"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=5.1.2"></script>
+
+
+
+  
+  
+
+  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.1.2"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.1.2"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.1.2"></script>
+
+
+
+  
+
+
+  
+
+
+
+
+	
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
 
 </body>
 </html>
