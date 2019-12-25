@@ -1,0 +1,316 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  
+
+  
+  <title>[图形学] 经典光照模型 | zhangMo Blog</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+  <meta name="description" content="Lambert模型，Phong模型，Blinn-Phong模型，全局光照模型">
+<meta name="keywords" content="图形学">
+<meta property="og:type" content="article">
+<meta property="og:title" content="[图形学] 经典光照模型">
+<meta property="og:url" content="https:&#x2F;&#x2F;bitzhangmo.github.io&#x2F;2018&#x2F;12&#x2F;20&#x2F;%E8%AE%A1%E7%AE%97%E6%9C%BA%E5%9B%BE%E5%BD%A2%E5%AD%A6&#x2F;%E5%9B%BE%E5%BD%A2%E5%AD%A6-%E7%BB%8F%E5%85%B8%E5%85%89%E7%85%A7%E6%A8%A1%E5%9E%8B&#x2F;index.html">
+<meta property="og:site_name" content="zhangMo Blog">
+<meta property="og:description" content="Lambert模型，Phong模型，Blinn-Phong模型，全局光照模型">
+<meta property="og:locale" content="en">
+<meta property="og:updated_time" content="2019-03-27T00:56:16.379Z">
+<meta name="twitter:card" content="summary">
+  
+    <link rel="alternate" href="/atom.xml" title="zhangMo Blog" type="application/atom+xml">
+  
+  
+    <link rel="icon" href="/favicon.png">
+  
+  
+    <link href="//fonts.googleapis.com/css?family=Source+Code+Pro" rel="stylesheet" type="text/css">
+  
+  <link rel="stylesheet" href="/css/style.css">
+</head>
+
+<body>
+  <div id="container">
+    <div id="wrap">
+      <header id="header">
+  <div id="banner"></div>
+  <div id="header-outer" class="outer">
+    <div id="header-title" class="inner">
+      <h1 id="logo-wrap">
+        <a href="/" id="logo">zhangMo Blog</a>
+      </h1>
+      
+    </div>
+    <div id="header-inner" class="inner">
+      <nav id="main-nav">
+        <a id="main-nav-toggle" class="nav-icon"></a>
+        
+          <a class="main-nav-link" href="/">Home</a>
+        
+          <a class="main-nav-link" href="/archives">Archives</a>
+        
+      </nav>
+      <nav id="sub-nav">
+        
+          <a id="nav-rss-link" class="nav-icon" href="/atom.xml" title="RSS Feed"></a>
+        
+        <a id="nav-search-btn" class="nav-icon" title="Search"></a>
+      </nav>
+      <div id="search-form-wrap">
+        <form action="//google.com/search" method="get" accept-charset="UTF-8" class="search-form"><input type="search" name="q" class="search-form-input" placeholder="Search"><button type="submit" class="search-form-submit">&#xF002;</button><input type="hidden" name="sitesearch" value="https://bitzhangmo.github.io"></form>
+      </div>
+    </div>
+  </div>
+</header>
+      <div class="outer">
+        <section id="main"><article id="post-计算机图形学/图形学-经典光照模型" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/2018/12/20/%E8%AE%A1%E7%AE%97%E6%9C%BA%E5%9B%BE%E5%BD%A2%E5%AD%A6/%E5%9B%BE%E5%BD%A2%E5%AD%A6-%E7%BB%8F%E5%85%B8%E5%85%89%E7%85%A7%E6%A8%A1%E5%9E%8B/" class="article-date">
+  <time datetime="2018-12-20T14:57:02.000Z" itemprop="datePublished">2018-12-20</time>
+</a>
+    
+  <div class="article-category">
+    <a class="article-category-link" href="/categories/%E8%AF%BB%E4%B9%A6%E7%AC%94%E8%AE%B0/">读书笔记</a>
+  </div>
+
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 class="article-title" itemprop="name">
+      [图形学] 经典光照模型
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <p>Lambert模型，Phong模型，Blinn-Phong模型，全局光照模型</p>
+<a id="more"></a>
+
+<h3 id="光源："><a href="#光源：" class="headerlink" title="光源："></a>光源：</h3><ul>
+<li>环境光(Ambient Light)：从物体表面所产生的反射光的统一照明，称为环境光或背景光(计算机图形学第二版 389 页)。通常我们认为<strong>理想的环境光</strong>具有如下特性：<strong>没有空间或方向性；在所有方向上和所有物体表面上投射的环境光强度是统一的恒定值。</strong></li>
+<li>环境光是对光照现象的最简单抽象，局限性很大。<strong>它仅能描述光线在空间中无方向并均匀散布时的状态。</strong>真实的情况是：光线通常都有方向。点光源是发光体的最简单的模型，光线由光源出发向四周发散。还有一种是平行光，即光线都从同一个方向照射。通过模拟方向光和物体表面的交互模式，可以渲染出具有高真实感(明暗变化、镜面反射等)的三维场景。</li>
+</ul>
+<h3 id="漫反射与-Lambert-模型："><a href="#漫反射与-Lambert-模型：" class="headerlink" title="漫反射与 Lambert 模型："></a>漫反射与 Lambert 模型：</h3><h4 id="定义："><a href="#定义：" class="headerlink" title="定义："></a>定义：</h4><ol>
+<li>漫反射：粗糙的物体表面向各个方向<strong>等强度</strong>地反射光，这种<strong>等同地向各个方向散射的现象</strong>称为光的漫反射(diffuse reflection)。</li>
+<li>产生光的漫反射现象的物体表面称为理想漫反射体，也称为<strong>朗伯(Lambert)反射体</strong>。</li>
+</ol>
+<h4 id="仅暴露在环境光下："><a href="#仅暴露在环境光下：" class="headerlink" title="仅暴露在环境光下："></a>仅暴露在环境光下：</h4><p>对于仅暴露在环境光下的朗伯反射体，可以用公式1表示某点处漫反射的光强：</p>
+<p>公式1：$I_{ambdiff} = K_dI_a$</p>
+<p>其中$I_a$表示环境光强度(简称光强)，$K_d (0&lt; K_d &lt;1)$为材质对环境光的反射系数，$I_{ambdiff}$ 是漫反射体与环境光交互反射的光强。 </p>
+<p>即使一个理想的漫反射体在所有方向上具有等量的反射光线，但是表面光强还依赖于光线的入射方向(方向光)。例如，入射光方向垂直的表面与入射光方向成斜角的表面相比，其光强要大的多。这种现象可以用 Lambert 定律进行数学上的量化。</p>
+<h4 id="Lambert-定律"><a href="#Lambert-定律" class="headerlink" title="Lambert 定律"></a>Lambert 定律</h4><p><strong>当方向光照射到朗伯反射体上时，漫反射光的光强与入射光的方向和入射点表面法向夹角的余弦成正比。</strong></p>
+<ul>
+<li><p>Lambert漫反射模型：</p>
+<p>公式2：$I_{ldiff} = k_dI_lcosθ$</p>
+<p>$I_l$ 是点光源强度，$θ$ 是入射光方向与顶点法线的夹角，称为入射 $(0≤θ≤90°)$，$I_{ldiff}$ 是漫反射体与方向光交互反射的光强。入射角为零时，说明光线垂直于物体表面，漫反射光强最大;90°时光线与物体表面平行，物体接收不到任何光线。 </p>
+<p>若 N 为顶点单位法向量，L 表示从顶点指向光源的单位向量(注意，是由顶点指向光源，不要弄反了)，则cosθ 等价于N 与L的点积。所以公式2可以表示为公式3:</p>
+<p>公式3：$I_{ldiff} = k_dI_l(N·L)$</p>
+</li>
+<li><p>Lambert光照模型：结合环境光与漫反射模型</p>
+<p>$I_{diff} = I_{ambdiff} + I_{ldiff} = K_dI_a + k_dI_l(N·L)$</p>
+<p>在实际应用中，为了防止点积结果为负值，需要用max函数对其进行筛选。</p>
+</li>
+</ul>
+<h4 id="Unity-Shader实现漫反射光照模型："><a href="#Unity-Shader实现漫反射光照模型：" class="headerlink" title="Unity Shader实现漫反射光照模型："></a>Unity Shader实现漫反射光照模型：</h4><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br></pre></td><td class="code"><pre><span class="line">// 仅为核心实现</span><br><span class="line">Properties&#123;</span><br><span class="line">	// 属性，用于存储我们想得到并控制的漫反射颜色</span><br><span class="line">    _Diffuse(&quot;Diffuse&quot;,Color) = (1,1,1,1)</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">SubShader&#123;</span><br><span class="line">    Pass&#123;</span><br><span class="line">        Tags&#123;&quot;LightMode&quot; = &quot;ForwardBase&quot;&#125;</span><br><span class="line">    &#125;</span><br><span class="line">    </span><br><span class="line">    CGPROGRAM</span><br><span class="line">    #pragma vertex vert</span><br><span class="line">    #pragma fragment frag</span><br><span class="line">    </span><br><span class="line">    #include &quot;Lighting.cginc&quot;</span><br><span class="line">    </span><br><span class="line">    fixed4 _Diffuse;</span><br><span class="line">    </span><br><span class="line">    struct a2v&#123;</span><br><span class="line">        float4 vertex : POSITION;</span><br><span class="line">        // 模型顶点的法线信息</span><br><span class="line">        float3 normal : NORMAL;</span><br><span class="line">    &#125;;</span><br><span class="line">    </span><br><span class="line">    struct v2f&#123;</span><br><span class="line">        float4 pos : SV_POSITION;</span><br><span class="line">        fixed3 color : COLOR;</span><br><span class="line">    &#125;</span><br><span class="line">    </span><br><span class="line">    v2f vert(a2v v)</span><br><span class="line">    &#123;</span><br><span class="line">        v2f o;</span><br><span class="line">        // 将顶点位置从模型空间转换到裁剪空间</span><br><span class="line">        o.pos = mul(UNITY_MATRIX_MVP,v.vertex);</span><br><span class="line">        </span><br><span class="line">        // 内置环境光</span><br><span class="line">        fixed3 ambient = UNITY_LIGHTMODEL_AMBIENT.xyz;</span><br><span class="line">        // 将法线转换到世界空间下与光源方向做点积(只有在同一坐标空间下的点积才有意义)</span><br><span class="line">        fixed3 worldNormal = normalize(mul(v.normal,(float3x3)_World2Object))</span><br><span class="line">		fixed3 worldLight = normalize(_WorldSpaceLightPos0.xyz);</span><br><span class="line">        // 即上述I_diff模型公式</span><br><span class="line">        fixed diffuse = _LightColor0.rgb * _Diffuse.rgb * saturate(dot(worldNormal,worldLight));</span><br><span class="line">        </span><br><span class="line">        o.color = ambient + diffuse;</span><br><span class="line">        </span><br><span class="line">        return o;</span><br><span class="line">    &#125;</span><br><span class="line">    </span><br><span class="line">    fixed4 frag(v2f i):SV_Target&#123;</span><br><span class="line">        return fixed4(i.color,1.0);</span><br><span class="line">    &#125;</span><br><span class="line">    </span><br><span class="line">    Fallback &quot;Diffuse&quot;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+
+
+<h3 id="半兰伯特（Half-Lambert）光照模型："><a href="#半兰伯特（Half-Lambert）光照模型：" class="headerlink" title="半兰伯特（Half Lambert）光照模型："></a>半兰伯特（Half Lambert）光照模型：</h3><p>$I_{diffuse} = (I_{light}·k_{diffuse})(α(n·l)+β)$</p>
+<p>对点积结果进行一个α倍的缩放与大小为β的偏移。通过这样的方式，我们可以将点积的结果从[-1,1]映射到[0,1]范围内，对于模型的背光面，兰伯特光照模型将统一映射到0处，而半兰伯特光照模型中，背光面也可以有明暗变化，不同的点积结果将会映射到不同的值上。</p>
+<h4 id="Unity-Shader-实现半兰伯特模型："><a href="#Unity-Shader-实现半兰伯特模型：" class="headerlink" title="Unity Shader 实现半兰伯特模型："></a>Unity Shader 实现半兰伯特模型：</h4><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line">// ...环境光照与上大致相同</span><br><span class="line">fixed4 frag(v2f i):SV_Target&#123;</span><br><span class="line">    ...</span><br><span class="line">    </span><br><span class="line">    // Compute diffuse term</span><br><span class="line">    fixed halfLambert  = dot(worldNormal,worldLightDir) * 0.5 + 0.5;</span><br><span class="line">    fixed3 diffuse = _LightColor0.rgb * _Diffuse.rgb * halfLambert;</span><br><span class="line">    </span><br><span class="line">    fixed3 color = ambient + diffuse;</span><br><span class="line">    </span><br><span class="line">    return fixed4(color,1.0);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h3 id="镜面反射与-Phong-模型："><a href="#镜面反射与-Phong-模型：" class="headerlink" title="镜面反射与 Phong 模型："></a>镜面反射与 Phong 模型：</h3><h4 id="定义：-1"><a href="#定义：-1" class="headerlink" title="定义："></a>定义：</h4><ul>
+<li>镜面反射：一个光滑物体被光照射时，可以在某个方向上看到很强的反射光，这是因为在接近镜面反射角的一个区域内，反射了入射光的全部或绝大部分光强，该现象称为<strong>镜面反射</strong>。</li>
+<li>phong模型：Phong Bui Tuong 提出一个计算镜面反射光强的经验模型，称为phong模型，认为<strong>镜面反射的光强与反射光线和视线的夹角相关。</strong></li>
+</ul>
+<h4 id="Phong模型的数学表达："><a href="#Phong模型的数学表达：" class="headerlink" title="Phong模型的数学表达："></a>Phong模型的数学表达：</h4><p>$I_{spec} = k_sI_l（V·R）^{n_s}$</p>
+<p><strong>$k_s$ 为材质的镜面反射系数，$n_s$ 是高光指数，$V$ 表示从顶点到视点的观察方向， $R$ 代表反射光方向。</strong></p>
+<p>高光指数反映了物体表面的光泽程度。${n_s}$越大，反射光越集中，当偏离反射方向时，光线衰减的越厉害，只有当视线方向与反射光线方向非常接近时才能看到镜面反射的高光现象，此时，镜面反射光将会在反射方向附近形成亮且小的光斑；$n_s $越小，表示物体越粗糙，反射光分散，观察到的光斑区域小，强度弱。 </p>
+<p>反射光的方向$R$可以通过入射光方向$L$(从顶点指向光源)和物体法向量 $N$ 求出: </p>
+<p>$R+L = (2N·L)N$</p>
+<p>故：$R = (2N·L)N-L$</p>
+<h4 id="Unity-Shader实现Phong模型："><a href="#Unity-Shader实现Phong模型：" class="headerlink" title="Unity Shader实现Phong模型："></a>Unity Shader实现Phong模型：</h4><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br></pre></td><td class="code"><pre><span class="line">// ...仅给出核心实现代码</span><br><span class="line">v2f vert(a2v v)&#123;</span><br><span class="line">    v2f o;</span><br><span class="line">    o.pos = mul(UNITY_MATRIX_MVP,v.vertex);</span><br><span class="line">    </span><br><span class="line">    fixed3 ambient = UNITY_LIGHTMODEL_AMBIENT.xyz;</span><br><span class="line">    </span><br><span class="line">    fixed3 worldNormal = normalize(mul(v.normal,(float3x3)_World2Object));</span><br><span class="line">    fixed3 worldLightDir = normalize(_WorldSpaceLightPos0.xyz);</span><br><span class="line">    </span><br><span class="line">    fixed3 diffuse = _LightColor0.rgb * _Diffuse.rgb * saturate(dot(worldNormal,worldLightDir));</span><br><span class="line">    </span><br><span class="line">    fixed3 reflectDir = normalize(reflect(-worldLightDir,worldNormal));</span><br><span class="line">    </span><br><span class="line">    fixed3 viewDir = normalize(_WorldSpaceCameraPos.xyz - mul(_Object2World,v.vertex).xyz);</span><br><span class="line">    </span><br><span class="line">    fixed3 specular = _LightColor.rgb * _Specular.rgb * pow(saturate(dot(reflectDir,viewDir)),_Gloss);</span><br><span class="line">    </span><br><span class="line">    o.color = ambient + diffuse + specular;</span><br><span class="line">    </span><br><span class="line">    return o;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+
+
+<h3 id="Blinn-Phong-光照模型："><a href="#Blinn-Phong-光照模型：" class="headerlink" title="Blinn-Phong 光照模型："></a>Blinn-Phong 光照模型：</h3><h4 id="定义：-2"><a href="#定义：-2" class="headerlink" title="定义："></a>定义：</h4><ul>
+<li>Blinn-Phong 光照模型：又称为 Blinn-phong 反射模型(Blinn–Phong reflectionmodel)或者 phong 修正模型(modified Phong reflection model)和传统 phong 光照模型相比，Blinn-phong 光照模型混合了 Lambert 的漫射部分和标准的高光，渲染效果有时比 Phong 高光更柔和、更平滑，此外它在速度上相当快，因此成为许多 CG 软件中的默认光照渲染方法。</li>
+</ul>
+<h4 id="Blinn-Phong模型的数学表达："><a href="#Blinn-Phong模型的数学表达：" class="headerlink" title="Blinn-Phong模型的数学表达："></a>Blinn-Phong模型的数学表达：</h4><p>phong 光照模型中，必须计算$V • R$ 的值，其中 $R$ 为反射光线方向单位向量，$V$ 为视线方向单位向量，但是在 Blinn-phong 光照模型中，用 $N • H$ 的值取代了$V • R$ 。Blinn-phong 光照模型公式为:</p>
+<p>$I_{spec} = k_sI_l(N·H)^{n_s}$</p>
+<p>其中 N 是入射点的单位法向量， $H$是“光入射方向 $L$ 和视点方向$V$ 的中间向量”，通常也称之为半角向量。注意:半角向量被广泛用于各类光照模型，原因不但在于半角向量蕴含的信息价值，也在于计算半角向量是一件简单、耗时不多的工作。 </p>
+<p>$H = {L+V}/{|L+V|}$</p>
+<p>通常情况下，使用 Blinn-phong 光照模型渲染的效果和 phong 模型渲染的效果没有太大的区别，有些艺术工作者认为 phong 光照模型比 blinn-phong 更加真实，实际上也是如此。Blinn-phong 渲染效果要更加柔和一些，Blinn-phong 光照模型省去了计算反射光线方向向量的两个乘法运算，速度更快。由于 Blinn-phong和 phong 模型的唯一区别一个使用半角向量，一个使用反射光方向向量。</p>
+<h4 id="Unity-Shader-实现Blinn-Phong模型："><a href="#Unity-Shader-实现Blinn-Phong模型：" class="headerlink" title="Unity Shader 实现Blinn-Phong模型："></a>Unity Shader 实现Blinn-Phong模型：</h4><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line">// ...</span><br><span class="line"></span><br><span class="line">fixed4 frag(v2f i):SV_Target&#123;</span><br><span class="line">    ...</span><br><span class="line">    </span><br><span class="line">    fixed3 viewDir = normalize(_WorldSpaceCameraPos.xyz - i.worldPos.xyz);</span><br><span class="line">    fixed3 halfDir = normalize(worldLightDir + viewDir);</span><br><span class="line">    </span><br><span class="line">    fixed3 specular = _LightColor0.rgb * _Specular.rgb * pow(max(0,dot(worldNormal,halfDir)),_Gloss);</span><br><span class="line">    </span><br><span class="line">    return fixed4(ambient + diffuse + specular,1.0);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+
+
+<h3 id="全局光照模型与-Rendering-Equation："><a href="#全局光照模型与-Rendering-Equation：" class="headerlink" title="全局光照模型与 Rendering Equation："></a>全局光照模型与 Rendering Equation：</h3><h4 id="数学表达："><a href="#数学表达：" class="headerlink" title="数学表达："></a>数学表达：</h4><p>$L_o (x, w_o ) = L_e (x, w_o ) + ∫ f_r (x, w_i , w_o )L_i (x, w_i )(n • w_i )dw_i$</p>
+<p>$x$表示入射点，$L_o (x, w_o ) $即从物体表面$x$点，沿方向$w_o$反射的光强；$L_e (x, w_o )$表示从物体表面$x$以方向$w_o$发射出去的光强，该值仅对自发光体有效；$ f_r (x, w_i , w_o )$为入射光线方向为$w_i$，照射到点x上，然后从$w_o$方向发射出去的<a href="https://en.wikipedia.org/wiki/Bidirectional_reflectance_distribution_function" target="_blank" rel="noopener">BRDF</a>值；$L_i (x, w_i )$为入射方向为$w_i$，照射到点$x$上的入射光强；$n$表示点$x$处的法向量。<strong>然后对入射方向进行积分（因为光线入射的方向是四面八方的，积分的意义是对每个方向进行一遍计算后进行相加），计算的结果就是“从观察方向上看到的辐射率”。</strong></p>
+<p>该公式基于物理光学，对观察方向上的辐射率进行了本质上的量化，前面所讲的漫反射光照模型以及phong高光模型其实<strong>是公式在单一光源，特定BRDF下的推导。</strong></p>
+<ul>
+<li><p>对于单个点光源照射到不会自发光的物体上，公式可以简化为：</p>
+<p>$L_o (x, w_o ) =  f_r (x, w_i , w_o )L_i (x, w_i )(n • w_i )$</p>
+</li>
+<li><p>对于漫反射表面，公式可以写成：</p>
+<p>$L_o (x, w_o ) = I_{diff}+ f_r (x, w_i , w_o )L_i (x, w_i )(n • w_i )$</p>
+</li>
+<li><p>对于phong高光而言：</p>
+<p>$f_{rs}(x,w_i,w_o)=k_s(n·h)^{n_s}/n·w_i$</p>
+</li>
+</ul>
+<h3 id="参考书目："><a href="#参考书目：" class="headerlink" title="参考书目："></a>参考书目：</h3><ul>
+<li>《Unity Shader入门精要》冯乐乐</li>
+<li>《GPU 编程与CG 语言之阳春白雪下里巴人》康玉之</li>
+</ul>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="https://bitzhangmo.github.io/2018/12/20/%E8%AE%A1%E7%AE%97%E6%9C%BA%E5%9B%BE%E5%BD%A2%E5%AD%A6/%E5%9B%BE%E5%BD%A2%E5%AD%A6-%E7%BB%8F%E5%85%B8%E5%85%89%E7%85%A7%E6%A8%A1%E5%9E%8B/" data-id="ck4kn9zns0069v37keyvuher3" class="article-share-link">Share</a>
+      
+      
+  <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/%E5%9B%BE%E5%BD%A2%E5%AD%A6/" rel="tag">图形学</a></li></ul>
+
+    </footer>
+  </div>
+  
+    
+<nav id="article-nav">
+  
+    <a href="/2018/12/24/Unity%E7%AC%94%E8%AE%B0/Unity-%E6%B8%B2%E6%9F%93%E8%B7%AF%E5%BE%84%E4%B8%8E%E5%85%89%E6%BA%90/" id="article-nav-newer" class="article-nav-link-wrap">
+      <strong class="article-nav-caption">Newer</strong>
+      <div class="article-nav-title">
+        
+          [Unity] 渲染路径与光源
+        
+      </div>
+    </a>
+  
+  
+    <a href="/2018/12/20/%E7%BF%BB%E8%AF%91/%E7%BF%BB%E8%AF%91-CineMachine%E7%94%A8%E6%88%B7%E6%89%8B%E5%86%8C%EF%BC%880%EF%BC%89/" id="article-nav-older" class="article-nav-link-wrap">
+      <strong class="article-nav-caption">Older</strong>
+      <div class="article-nav-title">[翻译] CineMachine用户手册（0）</div>
+    </a>
+  
+</nav>
+
+  
+</article>
+
+</section>
+        
+          <aside id="sidebar">
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Categories</h3>
+    <div class="widget">
+      <ul class="category-list"><li class="category-list-item"><a class="category-list-link" href="/categories/Lua/">Lua</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/Unity/">Unity</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E5%BC%80%E5%8F%91%E7%AC%94%E8%AE%B0/">开发笔记</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E6%96%87%E5%AD%97/">文字</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E6%BA%90%E7%A0%81%E9%98%85%E8%AF%BB/">源码阅读</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E7%BF%BB%E8%AF%91/">翻译</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E8%AE%A1%E7%AE%97%E6%9C%BA%E5%9B%BE%E5%BD%A2%E5%AD%A6/">计算机图形学</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E8%AF%BB%E4%B9%A6%E7%AC%94%E8%AE%B0/">读书笔记</a><ul class="category-list-child"><li class="category-list-item"><a class="category-list-link" href="/categories/%E8%AF%BB%E4%B9%A6%E7%AC%94%E8%AE%B0/%E8%AE%BE%E8%AE%A1%E6%A8%A1%E5%BC%8F/">设计模式</a></li></ul></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E8%BD%AC%E8%BD%BD/">转载</a></li></ul>
+    </div>
+  </div>
+
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Tags</h3>
+    <div class="widget">
+      <ul class="tag-list" itemprop="keywords"><li class="tag-list-item"><a class="tag-list-link" href="/tags/Artificial-Intelligence-for-Games/" rel="tag">Artificial Intelligence for Games</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Astar/" rel="tag">Astar</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/C/" rel="tag">C++</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/CineMachine/" rel="tag">CineMachine</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Excel/" rel="tag">Excel</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/FPS/" rel="tag">FPS</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Lua/" rel="tag">Lua</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/OpenGL/" rel="tag">OpenGL</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Shader/" rel="tag">Shader</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Unity/" rel="tag">Unity</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Unity3D-%E6%B8%B8%E6%88%8F%E5%BC%80%E5%8F%91/" rel="tag">Unity3D 游戏开发</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/UnityShader/" rel="tag">UnityShader</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Unreal/" rel="tag">Unreal</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Unreal-Engine4/" rel="tag">Unreal Engine4</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Unreal4/" rel="tag">Unreal4</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/unity%E5%AD%A6%E4%B9%A0/" rel="tag">unity学习</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E5%85%89%E7%BA%BF%E8%BF%BD%E8%B8%AA/" rel="tag">光线追踪</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E5%88%9B%E5%BB%BA%E5%9E%8B%E6%A8%A1%E5%BC%8F/" rel="tag">创建型模式</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E5%8A%A8%E7%94%BB/" rel="tag">动画</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E5%9B%BE%E5%BD%A2%E5%AD%A6/" rel="tag">图形学</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E5%B7%A5%E5%85%B7/" rel="tag">工具</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E6%8F%92%E4%BB%B6/" rel="tag">插件</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E6%B8%B8%E6%88%8FAI/" rel="tag">游戏AI</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E6%B8%B8%E6%88%8F%E5%BC%95%E6%93%8E/" rel="tag">游戏引擎</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E7%81%B5%E6%84%9F/" rel="tag">灵感</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E7%AE%97%E6%B3%95/" rel="tag">算法</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E7%BB%93%E6%9E%84%E5%9E%8B%E6%A8%A1%E5%BC%8F/" rel="tag">结构型模式</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E8%A1%8C%E4%B8%BA%E5%9E%8B%E6%A8%A1%E5%BC%8F/" rel="tag">行为型模式</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E8%AE%A1%E7%AE%97%E6%9C%BA%E5%9B%BE%E5%BD%A2%E5%AD%A6/" rel="tag">计算机图形学</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%BD%91%E7%BB%9C/" rel="tag">计算机网络</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E8%AE%BE%E8%AE%A1%E6%A8%A1%E5%BC%8F/" rel="tag">设计模式</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E9%9A%8F%E7%AC%94/" rel="tag">随笔</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E9%9D%A2%E8%AF%95/" rel="tag">面试</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E9%AA%A8%E9%AA%BC%E5%8A%A8%E7%94%BB/" rel="tag">骨骼动画</a></li></ul>
+    </div>
+  </div>
+
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Tag Cloud</h3>
+    <div class="widget tagcloud">
+      <a href="/tags/Artificial-Intelligence-for-Games/" style="font-size: 10px;">Artificial Intelligence for Games</a> <a href="/tags/Astar/" style="font-size: 10px;">Astar</a> <a href="/tags/C/" style="font-size: 10px;">C++</a> <a href="/tags/CineMachine/" style="font-size: 10px;">CineMachine</a> <a href="/tags/Excel/" style="font-size: 10px;">Excel</a> <a href="/tags/FPS/" style="font-size: 10px;">FPS</a> <a href="/tags/Lua/" style="font-size: 18px;">Lua</a> <a href="/tags/OpenGL/" style="font-size: 12px;">OpenGL</a> <a href="/tags/Shader/" style="font-size: 16px;">Shader</a> <a href="/tags/Unity/" style="font-size: 20px;">Unity</a> <a href="/tags/Unity3D-%E6%B8%B8%E6%88%8F%E5%BC%80%E5%8F%91/" style="font-size: 12px;">Unity3D 游戏开发</a> <a href="/tags/UnityShader/" style="font-size: 10px;">UnityShader</a> <a href="/tags/Unreal/" style="font-size: 10px;">Unreal</a> <a href="/tags/Unreal-Engine4/" style="font-size: 10px;">Unreal Engine4</a> <a href="/tags/Unreal4/" style="font-size: 10px;">Unreal4</a> <a href="/tags/unity%E5%AD%A6%E4%B9%A0/" style="font-size: 10px;">unity学习</a> <a href="/tags/%E5%85%89%E7%BA%BF%E8%BF%BD%E8%B8%AA/" style="font-size: 10px;">光线追踪</a> <a href="/tags/%E5%88%9B%E5%BB%BA%E5%9E%8B%E6%A8%A1%E5%BC%8F/" style="font-size: 12px;">创建型模式</a> <a href="/tags/%E5%8A%A8%E7%94%BB/" style="font-size: 12px;">动画</a> <a href="/tags/%E5%9B%BE%E5%BD%A2%E5%AD%A6/" style="font-size: 10px;">图形学</a> <a href="/tags/%E5%B7%A5%E5%85%B7/" style="font-size: 10px;">工具</a> <a href="/tags/%E6%8F%92%E4%BB%B6/" style="font-size: 10px;">插件</a> <a href="/tags/%E6%B8%B8%E6%88%8FAI/" style="font-size: 10px;">游戏AI</a> <a href="/tags/%E6%B8%B8%E6%88%8F%E5%BC%95%E6%93%8E/" style="font-size: 10px;">游戏引擎</a> <a href="/tags/%E7%81%B5%E6%84%9F/" style="font-size: 10px;">灵感</a> <a href="/tags/%E7%AE%97%E6%B3%95/" style="font-size: 10px;">算法</a> <a href="/tags/%E7%BB%93%E6%9E%84%E5%9E%8B%E6%A8%A1%E5%BC%8F/" style="font-size: 10px;">结构型模式</a> <a href="/tags/%E8%A1%8C%E4%B8%BA%E5%9E%8B%E6%A8%A1%E5%BC%8F/" style="font-size: 12px;">行为型模式</a> <a href="/tags/%E8%AE%A1%E7%AE%97%E6%9C%BA%E5%9B%BE%E5%BD%A2%E5%AD%A6/" style="font-size: 14px;">计算机图形学</a> <a href="/tags/%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%BD%91%E7%BB%9C/" style="font-size: 14px;">计算机网络</a> <a href="/tags/%E8%AE%BE%E8%AE%A1%E6%A8%A1%E5%BC%8F/" style="font-size: 16px;">设计模式</a> <a href="/tags/%E9%9A%8F%E7%AC%94/" style="font-size: 10px;">随笔</a> <a href="/tags/%E9%9D%A2%E8%AF%95/" style="font-size: 10px;">面试</a> <a href="/tags/%E9%AA%A8%E9%AA%BC%E5%8A%A8%E7%94%BB/" style="font-size: 12px;">骨骼动画</a>
+    </div>
+  </div>
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Archives</h3>
+    <div class="widget">
+      <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2019/12/">December 2019</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2019/10/">October 2019</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2019/09/">September 2019</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2019/08/">August 2019</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2019/07/">July 2019</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2019/05/">May 2019</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2019/04/">April 2019</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2019/03/">March 2019</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2019/02/">February 2019</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2019/01/">January 2019</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/12/">December 2018</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/10/">October 2018</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/07/">July 2018</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/06/">June 2018</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/05/">May 2018</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/04/">April 2018</a></li></ul>
+    </div>
+  </div>
+
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Recent Posts</h3>
+    <div class="widget">
+      <ul>
+        
+          <li>
+            <a href="/2019/12/18/%E9%9A%8F%E7%AC%94/Ludum-Dare-%E5%8E%86%E5%B1%8A%E4%B8%BB%E9%A2%98/">Ludum Dare 历届主题</a>
+          </li>
+        
+          <li>
+            <a href="/2019/10/05/%E9%9A%8F%E7%AC%94/%E6%90%AC%E7%93%A6%E5%B7%A5%E9%85%8D%E7%BD%AE%E8%AE%B0%E5%BD%95/">搬瓦工配置记录</a>
+          </li>
+        
+          <li>
+            <a href="/2019/09/24/%E7%BF%BB%E8%AF%91/%E7%BF%BB%E8%AF%91-Integrating-Lua/">[翻译]Integrating Lua</a>
+          </li>
+        
+          <li>
+            <a href="/2019/09/11/OpenGL%E7%AC%94%E8%AE%B0/Mac%E4%B8%8B%E9%85%8D%E7%BD%AEOpenGL%E7%8E%AF%E5%A2%83/">Mac下配置OpenGL环境</a>
+          </li>
+        
+          <li>
+            <a href="/2019/08/30/Unreal4%E7%AC%94%E8%AE%B0/Unreal%E6%8F%92%E4%BB%B6%E5%AD%A6%E4%B9%A0%EF%BC%9A%E5%AE%9E%E4%BE%8B%E6%BA%90%E7%A0%81%E9%98%85%E8%AF%BB/">Unreal插件学习：实例源码阅读</a>
+          </li>
+        
+      </ul>
+    </div>
+  </div>
+
+  
+</aside>
+        
+      </div>
+      <footer id="footer">
+  
+  <div class="outer">
+    <div id="footer-info" class="inner">
+      &copy; 2019 zhangMo<br>
+      Powered by <a href="http://hexo.io/" target="_blank">Hexo</a>
+    </div>
+  </div>
+</footer>
+    </div>
+    <nav id="mobile-nav">
+  
+    <a href="/" class="mobile-nav-link">Home</a>
+  
+    <a href="/archives" class="mobile-nav-link">Archives</a>
+  
+</nav>
+    
+
+<script src="//ajax.googleapis.com/ajax/libs/jquery/2.0.3/jquery.min.js"></script>
+
+
+  <link rel="stylesheet" href="/fancybox/jquery.fancybox.css">
+  <script src="/fancybox/jquery.fancybox.pack.js"></script>
+
+
+<script src="/js/script.js"></script>
+
+
+
+  </div>
+</body>
+</html>

@@ -1,0 +1,314 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  
+
+  
+  <title>&lt;RayTracing In Weekend&gt;读书笔记 | zhangMo Blog</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+  <meta name="description" content="关于RayTracing In A Weekend一书的实现细节。">
+<meta name="keywords" content="计算机图形学,光线追踪">
+<meta property="og:type" content="article">
+<meta property="og:title" content="&lt;RayTracing In Weekend&gt;读书笔记">
+<meta property="og:url" content="https:&#x2F;&#x2F;bitzhangmo.github.io&#x2F;2019&#x2F;07&#x2F;29&#x2F;%E8%AE%A1%E7%AE%97%E6%9C%BA%E5%9B%BE%E5%BD%A2%E5%AD%A6&#x2F;RayTracing-In-Weekend-%E8%AF%BB%E4%B9%A6%E7%AC%94%E8%AE%B0&#x2F;index.html">
+<meta property="og:site_name" content="zhangMo Blog">
+<meta property="og:description" content="关于RayTracing In A Weekend一书的实现细节。">
+<meta property="og:locale" content="en">
+<meta property="og:image" content="https:&#x2F;&#x2F;i.loli.net&#x2F;2019&#x2F;07&#x2F;29&#x2F;5d3e5c2ac5cfc71862.png">
+<meta property="og:updated_time" content="2019-07-29T03:38:53.011Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="https:&#x2F;&#x2F;i.loli.net&#x2F;2019&#x2F;07&#x2F;29&#x2F;5d3e5c2ac5cfc71862.png">
+  
+    <link rel="alternate" href="/atom.xml" title="zhangMo Blog" type="application/atom+xml">
+  
+  
+    <link rel="icon" href="/favicon.png">
+  
+  
+    <link href="//fonts.googleapis.com/css?family=Source+Code+Pro" rel="stylesheet" type="text/css">
+  
+  <link rel="stylesheet" href="/css/style.css">
+</head>
+
+<body>
+  <div id="container">
+    <div id="wrap">
+      <header id="header">
+  <div id="banner"></div>
+  <div id="header-outer" class="outer">
+    <div id="header-title" class="inner">
+      <h1 id="logo-wrap">
+        <a href="/" id="logo">zhangMo Blog</a>
+      </h1>
+      
+    </div>
+    <div id="header-inner" class="inner">
+      <nav id="main-nav">
+        <a id="main-nav-toggle" class="nav-icon"></a>
+        
+          <a class="main-nav-link" href="/">Home</a>
+        
+          <a class="main-nav-link" href="/archives">Archives</a>
+        
+      </nav>
+      <nav id="sub-nav">
+        
+          <a id="nav-rss-link" class="nav-icon" href="/atom.xml" title="RSS Feed"></a>
+        
+        <a id="nav-search-btn" class="nav-icon" title="Search"></a>
+      </nav>
+      <div id="search-form-wrap">
+        <form action="//google.com/search" method="get" accept-charset="UTF-8" class="search-form"><input type="search" name="q" class="search-form-input" placeholder="Search"><button type="submit" class="search-form-submit">&#xF002;</button><input type="hidden" name="sitesearch" value="https://bitzhangmo.github.io"></form>
+      </div>
+    </div>
+  </div>
+</header>
+      <div class="outer">
+        <section id="main"><article id="post-计算机图形学/RayTracing-In-Weekend-读书笔记" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/2019/07/29/%E8%AE%A1%E7%AE%97%E6%9C%BA%E5%9B%BE%E5%BD%A2%E5%AD%A6/RayTracing-In-Weekend-%E8%AF%BB%E4%B9%A6%E7%AC%94%E8%AE%B0/" class="article-date">
+  <time datetime="2019-07-29T02:23:13.000Z" itemprop="datePublished">2019-07-29</time>
+</a>
+    
+  <div class="article-category">
+    <a class="article-category-link" href="/categories/%E8%AE%A1%E7%AE%97%E6%9C%BA%E5%9B%BE%E5%BD%A2%E5%AD%A6/">计算机图形学</a>
+  </div>
+
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 class="article-title" itemprop="name">
+      &lt;RayTracing In Weekend&gt;读书笔记
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <p>关于RayTracing In A Weekend一书的实现细节。</p>
+<a id="more"></a>
+
+<h3 id="Chapter1：Output-an-Image"><a href="#Chapter1：Output-an-Image" class="headerlink" title="Chapter1：Output an Image"></a>Chapter1：Output an Image</h3><p>下载一个ppm软件，我下载的是<a href="https://www.xnview.com/en/" target="_blank" rel="noopener">XnView</a>。</p>
+<p>第一章里面给出的代码并不完整，如果想得到PPM格式的文件的话，需要在代码里加入写入txt文件的代码：</p>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">"pch.h"</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;iostream&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;fstream&gt;</span></span></span><br><span class="line"></span><br><span class="line"><span class="keyword">using</span> <span class="keyword">namespace</span> <span class="built_in">std</span>;</span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">main</span><span class="params">()</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">	<span class="keyword">int</span> nx = <span class="number">200</span>;</span><br><span class="line">	<span class="keyword">int</span> ny = <span class="number">100</span>;</span><br><span class="line"></span><br><span class="line">	<span class="function">ofstream <span class="title">outfile</span><span class="params">(<span class="string">".\\result\\FirstPicture.txt"</span>, ios_base::out)</span></span>;</span><br><span class="line">	outfile &lt;&lt; <span class="string">"P3\n"</span> &lt;&lt; nx &lt;&lt; <span class="string">" "</span> &lt;&lt; ny &lt;&lt; <span class="string">"\n255\n"</span>;</span><br><span class="line">	<span class="keyword">for</span> (<span class="keyword">int</span> j = ny - <span class="number">1</span>; j &gt;= <span class="number">0</span>; j--)</span><br><span class="line">	&#123;</span><br><span class="line">		<span class="keyword">for</span> (<span class="keyword">int</span> i = <span class="number">0</span>; i &lt; nx; i++)</span><br><span class="line">		&#123;</span><br><span class="line">			<span class="keyword">float</span> r = <span class="keyword">float</span>(i) / <span class="keyword">float</span>(nx);</span><br><span class="line">			<span class="keyword">float</span> g = <span class="keyword">float</span>(j) / <span class="keyword">float</span>(ny);</span><br><span class="line">			<span class="keyword">float</span> b = <span class="number">0.2</span>;</span><br><span class="line">			<span class="keyword">int</span> ir = <span class="keyword">int</span>(<span class="number">255.99</span>*r);</span><br><span class="line">			<span class="keyword">int</span> ig = <span class="keyword">int</span>(<span class="number">255.99</span>*g);</span><br><span class="line">			<span class="keyword">int</span> ib = <span class="keyword">int</span>(<span class="number">255.99</span>*b);</span><br><span class="line">			outfile &lt;&lt; ir &lt;&lt; <span class="string">" "</span> &lt;&lt; ig &lt;&lt; <span class="string">" "</span> &lt;&lt; ib &lt;&lt; <span class="string">"\n"</span>;</span><br><span class="line">			<span class="built_in">std</span>::<span class="built_in">cout</span> &lt;&lt; ir &lt;&lt; <span class="string">" "</span> &lt;&lt; ig &lt;&lt; <span class="string">" "</span> &lt;&lt; ib &lt;&lt; <span class="string">"\n"</span>;</span><br><span class="line">		&#125;</span><br><span class="line">	&#125;</span><br><span class="line"></span><br><span class="line">	<span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>在VmView中可以看到对应的图片：</p>
+<p><img src="https://i.loli.net/2019/07/29/5d3e5c2ac5cfc71862.png" alt=""></p>
+<h3 id="Chapter2：The-vec3-class"><a href="#Chapter2：The-vec3-class" class="headerlink" title="Chapter2：The vec3 class"></a>Chapter2：The vec3 class</h3><p>重载了一组关于vec3的运算符。</p>
+<p>包括向量间的加减乘除、向量与标量的加减乘除、向量的叉积点积等。</p>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">inline</span> <span class="keyword">float</span> <span class="title">dot</span><span class="params">(<span class="keyword">const</span> vec3 &amp;v1, <span class="keyword">const</span> vec3 &amp;v2)</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">	<span class="keyword">return</span> v1.e[<span class="number">0</span>] * v2.e[<span class="number">0</span>] + v1.e[<span class="number">1</span>] * v2.e[<span class="number">1</span>] + v1.e[<span class="number">2</span>] * v2.e[<span class="number">2</span>];</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">inline</span> vec3 <span class="title">cross</span><span class="params">(<span class="keyword">const</span> vec3 &amp;v1, <span class="keyword">const</span> vec3 &amp;v2)</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">	<span class="keyword">return</span> vec3((v1.e[<span class="number">1</span>] * v2.e[<span class="number">2</span>] - v1.e[<span class="number">2</span>] * v2.e[<span class="number">1</span>]),</span><br><span class="line">		(-(v1.e[<span class="number">0</span>] * v2.e[<span class="number">2</span>] - v1.e[<span class="number">2</span>] * v2.e[<span class="number">0</span>])),</span><br><span class="line">		(v1.e[<span class="number">0</span>] * v2.e[<span class="number">1</span>] - v1.e[<span class="number">1</span>] * v2.e[<span class="number">0</span>]));</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h3 id="Chapter3：Rays-a-simple-camera-and-background"><a href="#Chapter3：Rays-a-simple-camera-and-background" class="headerlink" title="Chapter3：Rays,a simple camera, and background"></a>Chapter3：Rays,a simple camera, and background</h3><p>定义了射线类，并定义了三个函数，分别返回原点、方向以及射线本身。射线本身由一个Vec3表示。</p>
+<h3 id="Chapter4"><a href="#Chapter4" class="headerlink" title="Chapter4:"></a>Chapter4:</h3><p>在运行的代码中加入了一个检测与球体相交的函数，这个函数可以从2D中射线与圆的相交检测函数出发去理解。</p>
+<p>后面会将其抽离到单独的头文件中。</p>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">bool</span> sphere :: hit(<span class="keyword">const</span> ray&amp; r, <span class="keyword">float</span> t_min, <span class="keyword">float</span> t_max, hit_record&amp; rec)<span class="keyword">const</span> &#123;</span><br><span class="line">	vec3 oc = r.origin() - center;</span><br><span class="line">	</span><br><span class="line">	<span class="keyword">float</span> a = dot(r.direction(), r.direction());</span><br><span class="line">	<span class="keyword">float</span> b = dot(oc, r.direction());</span><br><span class="line">	<span class="keyword">float</span> c = dot(oc, oc) - radius * radius;</span><br><span class="line"></span><br><span class="line">	<span class="keyword">float</span> discriminant = b * b - a * c;</span><br><span class="line">	<span class="keyword">if</span> (discriminant &gt; <span class="number">0</span>)</span><br><span class="line">	&#123;</span><br><span class="line">		<span class="keyword">float</span> temp = (-b - <span class="built_in">sqrt</span>(b*b - a * c)) / a;</span><br><span class="line">		<span class="keyword">if</span> (temp &lt; t_max &amp;&amp; temp &gt; t_min)</span><br><span class="line">		&#123;</span><br><span class="line">			rec.t = temp;</span><br><span class="line">			rec.p = r.point_at_parameter(rec.t);</span><br><span class="line">			rec.normal = (rec.p - center) / radius;</span><br><span class="line">			<span class="keyword">return</span> <span class="literal">true</span>;</span><br><span class="line">		&#125;</span><br><span class="line">		temp = (-b + <span class="built_in">sqrt</span>(b*b - a * c)) / a;</span><br><span class="line">		<span class="keyword">if</span> (temp&lt;t_max &amp;&amp; temp&gt;t_min)</span><br><span class="line">		&#123;</span><br><span class="line">			rec.t = temp;</span><br><span class="line">			rec.p = r.point_at_parameter(rec.t);</span><br><span class="line">			rec.normal = (rec.p - center) / radius;</span><br><span class="line">			<span class="keyword">return</span> <span class="literal">true</span>;</span><br><span class="line">		&#125;</span><br><span class="line">	&#125;</span><br><span class="line">	<span class="keyword">return</span> <span class="literal">false</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h3 id="Chapter5：Surface-normals-and-multiple-objects"><a href="#Chapter5：Surface-normals-and-multiple-objects" class="headerlink" title="Chapter5：Surface normals and multiple objects."></a>Chapter5：Surface normals and multiple objects.</h3><p>加入了对法线方向的运算，并将对应的射线检测函数抽离到了对应的头文件中。</p>
+<p>从球心到球上某点的向量即为该点的法线方向。</p>
+<p>另外定义了一个类，用来计算并存储距离射线命中物体的一组点中距离射线原点最近的一个点。</p>
+<h3 id="Chapter6：Antialasing"><a href="#Chapter6：Antialasing" class="headerlink" title="Chapter6：Antialasing"></a>Chapter6：Antialasing</h3><p>题目意为抗锯齿。</p>
+<p>这里的做法是在每个以像素点为中心，向外距离为1的范围内采样n次，将n个采样的值进行平均即为该点最终的像素值。</p>
+<p>在数字图像处理中类似的方式被称为均值滤波。</p>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="function">vec3 <span class="title">col</span><span class="params">(<span class="number">0</span>, <span class="number">0</span>, <span class="number">0</span>)</span></span>;</span><br><span class="line"><span class="keyword">for</span> (<span class="keyword">int</span> s = <span class="number">0</span>; s &lt; ns; s++)</span><br><span class="line">&#123;</span><br><span class="line">	<span class="keyword">float</span> <span class="built_in">random</span> = rand() % (<span class="number">100</span>) / (<span class="keyword">float</span>)(<span class="number">100</span>);</span><br><span class="line">	<span class="keyword">float</span> u = <span class="keyword">float</span>(i + <span class="built_in">random</span>) / <span class="keyword">float</span>(nx);</span><br><span class="line">	<span class="keyword">float</span> v = <span class="keyword">float</span>(j + <span class="built_in">random</span>) / <span class="keyword">float</span>(ny);</span><br><span class="line">	ray r = cam.get_ray(u, v);</span><br><span class="line">	vec3 p = r.point_at_parameter(<span class="number">2.0</span>);</span><br><span class="line">	col += color(r, world);</span><br><span class="line">&#125;</span><br><span class="line">col /= <span class="keyword">float</span>(ns);</span><br></pre></td></tr></table></figure>
+
+<h3 id="Chapter7：Diffuse-Materials"><a href="#Chapter7：Diffuse-Materials" class="headerlink" title="Chapter7：Diffuse Materials"></a>Chapter7：Diffuse Materials</h3><p>题目名为漫反射材质。</p>
+<blockquote>
+<p>Pick a random point s from the unit radius sphere that is tangent to the hitpoint, and send a ray from the hitpoint p to the random point s. That sphere has center (p+N):</p>
+<p>从与命中点相切的单位半径球中选择一个随机点s，并将一条射线从命中点射向随机点s。球心为（p+N）</p>
+</blockquote>
+<p>这里的做法是将反射方向加上一个随机的方向作为漫反射的方向。</p>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br></pre></td><td class="code"><pre><span class="line"><span class="function">vec3 <span class="title">random_in_unit_sphere</span><span class="params">()</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">	vec3 p;</span><br><span class="line">	<span class="keyword">do</span> &#123;</span><br><span class="line">		<span class="keyword">float</span> random0 = rand() % (<span class="number">100</span>) / (<span class="keyword">float</span>)(<span class="number">100</span>);</span><br><span class="line">		<span class="keyword">float</span> random1 = rand() % (<span class="number">100</span>) / (<span class="keyword">float</span>)(<span class="number">100</span>);</span><br><span class="line">		<span class="keyword">float</span> random2 = rand() % (<span class="number">100</span>) / (<span class="keyword">float</span>)(<span class="number">100</span>);</span><br><span class="line">		p = <span class="number">2.0</span>*vec3(random0, random1, random2) - vec3(<span class="number">1</span>, <span class="number">1</span>, <span class="number">1</span>);</span><br><span class="line">	&#125; <span class="keyword">while</span> (p.squared_length() &gt;= <span class="number">1.0</span>);</span><br><span class="line">	</span><br><span class="line">	<span class="keyword">return</span> p;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function">vec3 <span class="title">color</span><span class="params">(<span class="keyword">const</span> ray&amp; r, hitable *world)</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">	hit_record rec;</span><br><span class="line">	<span class="keyword">if</span> (world-&gt;hit(r, <span class="number">0.001</span>, (numeric_limits&lt;<span class="keyword">float</span>&gt;::<span class="built_in">max</span>)(), rec))</span><br><span class="line">	&#123;</span><br><span class="line">		vec3 target = rec.p + rec.normal + random_in_unit_sphere();</span><br><span class="line">		<span class="keyword">return</span> <span class="number">0.5</span>*color(ray(rec.p,target - rec.p), world);</span><br><span class="line">	&#125;</span><br><span class="line">	<span class="keyword">else</span></span><br><span class="line">	&#123;</span><br><span class="line">		vec3 unit_direction = unit_vector(r.direction());</span><br><span class="line">		<span class="keyword">float</span> t = <span class="number">0.5</span>*(unit_direction.y() + <span class="number">1.0</span>);</span><br><span class="line">		<span class="keyword">return</span> (<span class="number">1.0</span> - t)*vec3(<span class="number">1.0</span>, <span class="number">1.0</span>, <span class="number">1.0</span>) + t * vec3(<span class="number">0.5</span>, <span class="number">0.7</span>, <span class="number">1.0</span>);</span><br><span class="line">	&#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h3 id="Chapter8：Metal"><a href="#Chapter8：Metal" class="headerlink" title="Chapter8：Metal"></a>Chapter8：Metal</h3><p>第八章加上了简单的材质。</p>
+<p>我们定义了一个简单的朗伯反射的类用来描述这一材质：理想的“遮罩”或漫反射表面的属性。无论观察者的视角如何，朗伯表面对观察者的表观亮度都是相同的。</p>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="meta-keyword">ifndef</span> LANBERTIANH</span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">define</span> LANBERTIANH</span></span><br><span class="line"></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">"material.h"</span></span></span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">lambertian</span> :</span><span class="keyword">public</span> material</span><br><span class="line">&#123;</span><br><span class="line"><span class="keyword">public</span>:</span><br><span class="line">	lambertian(<span class="keyword">const</span> vec3&amp; a):albedo(a)&#123;&#125;</span><br><span class="line">	<span class="function"><span class="keyword">virtual</span> <span class="keyword">bool</span> <span class="title">scatter</span><span class="params">(<span class="keyword">const</span> ray&amp; r_in, <span class="keyword">const</span> hit_record&amp; rec, vec3&amp; attenuation, ray&amp; scattered)</span><span class="keyword">const</span></span>;</span><br><span class="line">	vec3 albedo;</span><br><span class="line">&#125;;</span><br><span class="line"></span><br><span class="line"><span class="function">vec3 <span class="title">random_in_unit_sphere</span><span class="params">()</span> </span>&#123;</span><br><span class="line">	vec3 p;</span><br><span class="line">	<span class="keyword">do</span> &#123;</span><br><span class="line">		<span class="keyword">float</span> random0 = rand() % (<span class="number">100</span>) / (<span class="keyword">float</span>)(<span class="number">100</span>);</span><br><span class="line">		<span class="keyword">float</span> random1 = rand() % (<span class="number">100</span>) / (<span class="keyword">float</span>)(<span class="number">100</span>);</span><br><span class="line">		<span class="keyword">float</span> random2 = rand() % (<span class="number">100</span>) / (<span class="keyword">float</span>)(<span class="number">100</span>);</span><br><span class="line">		p = <span class="number">2.0</span>*vec3(random0, random1, random2) - vec3(<span class="number">1</span>, <span class="number">1</span>, <span class="number">1</span>);</span><br><span class="line">	&#125; <span class="keyword">while</span> (p.squared_length() &gt;= <span class="number">1.0</span>);</span><br><span class="line">	<span class="keyword">return</span> p;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="keyword">bool</span> lambertian::scatter(<span class="keyword">const</span> ray&amp; r_in, <span class="keyword">const</span> hit_record&amp; rec, vec3&amp; attenuation, ray&amp; scattered) <span class="keyword">const</span> &#123;</span><br><span class="line">	vec3 target = rec.p + rec.normal + random_in_unit_sphere();</span><br><span class="line">	scattered = ray(rec.p, target - rec.p);</span><br><span class="line">	attenuation = albedo;</span><br><span class="line">	<span class="keyword">return</span> <span class="literal">true</span>;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="meta">#<span class="meta-keyword">endif</span> <span class="comment">// !LANBERTIANH</span></span></span><br></pre></td></tr></table></figure>
+
+<p>注意原书给出的随机函数没有找到对应的引用，所以在这份代码中用rand()代替。</p>
+<p>另外原书还定义了一个镜面反射类，这个类的反射函数参考初中物理。</p>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="function">vec3 <span class="title">reflect</span><span class="params">(<span class="keyword">const</span> vec3&amp; v, <span class="keyword">const</span> vec3&amp; n)</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">	<span class="keyword">return</span> v - <span class="number">2</span> * dot(v, n)*n;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>在本章的最后我们添加了一个模糊的参数，这个模糊的参数使得反射光线的方向有着一定量的偏移。</p>
+<h3 id="Chapter9：Dielectrics"><a href="#Chapter9：Dielectrics" class="headerlink" title="Chapter9：Dielectrics"></a>Chapter9：Dielectrics</h3><p>这一章的标题为电解质，实际上想说明的内容包括玻璃、水这种透明的可以折射光线的材质：</p>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">bool</span> <span class="title">refract</span><span class="params">(<span class="keyword">const</span> vec3&amp; v, <span class="keyword">const</span> vec3&amp; n, <span class="keyword">float</span> ni_over_nt, vec3&amp; refracted)</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">	vec3 uv = unit_vector(v);</span><br><span class="line">	<span class="keyword">float</span> dt = dot(uv, n);</span><br><span class="line">	<span class="keyword">float</span> discriminant = <span class="number">1.0</span> - ni_over_nt * ni_over_nt*(<span class="number">1</span> - dt * dt);</span><br><span class="line">	<span class="keyword">if</span> (discriminant &gt; <span class="number">0</span>)</span><br><span class="line">	&#123;</span><br><span class="line">		refracted = ni_over_nt * (uv - n * dt) - n * <span class="built_in">sqrt</span>(discriminant);</span><br><span class="line">		<span class="keyword">return</span> <span class="literal">true</span>;</span><br><span class="line">	&#125;</span><br><span class="line">	<span class="keyword">else</span> <span class="keyword">return</span> <span class="literal">false</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>注意，这里的情况判断包括一种全反射的情况。</p>
+<p>关于折射的公式请参考：<a href="[https://zh.wikipedia.org/wiki/%E6%96%AF%E6%B6%85%E5%B0%94%E5%AE%9A%E5%BE%8B](https://zh.wikipedia.org/wiki/斯涅尔定律)">斯涅尔定律</a></p>
+<h3 id="Chapter10：Positionable-camera"><a href="#Chapter10：Positionable-camera" class="headerlink" title="Chapter10：Positionable camera"></a>Chapter10：Positionable camera</h3><p>在第十章，我们定义了一个具有透视功能的相机用于观察场景。</p>
+<p>参数包括位置，观察方向，fov等。</p>
+<h3 id="Chapter11：Defocus-Blur"><a href="#Chapter11：Defocus-Blur" class="headerlink" title="Chapter11：Defocus Blur"></a>Chapter11：Defocus Blur</h3><p>题目的翻译为散焦模糊，在相机的头文件中加入了一个因光圈与焦距导致成像模糊的功能。</p>
+<h3 id="Chapter12："><a href="#Chapter12：" class="headerlink" title="Chapter12："></a>Chapter12：</h3><p>第十二章算是一个总结与引导，描述了接下来要处理的一些细节：</p>
+<blockquote>
+<p>You now have a cool ray tracer! What next? </p>
+<ol>
+<li>Lights. You can do this explicitly, by sending shadow rays to lights. Or it can be done implicitly by making some objects emit light, </li>
+<li>biasing scattered rays toward them, and then downweighting those rays to cancel out the bias. Both work. I am in the minority in favoring the latter approach. </li>
+<li>Triangles. Most cool models are in triangle form. The model I/O is the worst and almost everybody tries to get somebody else’s code to do this. </li>
+<li>Surface textures. This lets you paste images on like wall paper. Pretty easy and a good thing to do. </li>
+<li>Solid textures. Ken Perlin has his code online. Andrew Kensler has some very cool info at his blog. </li>
+<li>Volumes and media. Cool stuff and will challenge your software architecture. I favor making volumes have the hitable interface and probabilistically have intersections based on density. Your rendering code doesn’t even have to know it has volumes with that method. </li>
+<li>Parallelism. Run N copies of your code on N cores with different random seeds. Average the N runs. This averaging can also be done hierarchically where N/2 pairs can be averaged to get N/4 images, and pairs of those can be averaged. That method of parallelism should extend well into the thousands of cores with very little coding. </li>
+</ol>
+<p>Have fun, and please send me your cool images! </p>
+</blockquote>
+<p>你现在是一个很酷的Ray Tracer了，那么接下来呢？</p>
+<ol>
+<li>灯：您可以通过向灯光发送阴影光线来明确地执行此操作。或者它可以通过使一些物体发光来隐式地完成。</li>
+<li>将散射光线偏向它们，然后减轻这些光线以抵消偏差。两者都有效。我是为数不多的喜欢后一种做法的人。</li>
+<li>三角形：最酷的模型是三角形的。模型I/O是最糟糕的，几乎每个人都试图复制别人的代码来做到这一点（I/O）。</li>
+<li>表面纹理。这样可以将纹理像墙纸一样贴到物体上。非常简单，也是一件值得去做的好事。</li>
+<li>坚固的纹理。 Ken Perlin在线提供他的代码。 Andrew Kensler在他的博客上有一些非常酷的信息。</li>
+<li>卷和媒体。很酷的东西，将挑战您的软件架构。我赞成使卷具有可调整的界面，并且概率上具有基于密度的交叉点。您的呈现代码甚至不必知道它具有该方法的卷。（这里我猜是卷积？存疑。）</li>
+<li>并行。使用不同的随机种子在N个核心上运行N个代码副本。平均N次运行。这种平均也可以分层次地完成，其中N / 2对可以被平均以获得N / 4个图像，并且可以对这些图像的对进行平均。这种并行方法应该可以很好地扩展到数千个内核中。</li>
+</ol>
+<p>享受你的乐趣，请将你很酷的图像发送给我吧～</p>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="https://bitzhangmo.github.io/2019/07/29/%E8%AE%A1%E7%AE%97%E6%9C%BA%E5%9B%BE%E5%BD%A2%E5%AD%A6/RayTracing-In-Weekend-%E8%AF%BB%E4%B9%A6%E7%AC%94%E8%AE%B0/" data-id="ck4kn9znt006cv37kffp9h7of" class="article-share-link">Share</a>
+      
+      
+  <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/%E5%85%89%E7%BA%BF%E8%BF%BD%E8%B8%AA/" rel="tag">光线追踪</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/%E8%AE%A1%E7%AE%97%E6%9C%BA%E5%9B%BE%E5%BD%A2%E5%AD%A6/" rel="tag">计算机图形学</a></li></ul>
+
+    </footer>
+  </div>
+  
+    
+<nav id="article-nav">
+  
+    <a href="/2019/07/29/%E5%BC%80%E5%8F%91%E7%AC%94%E8%AE%B0/First-Person-Shooter-FPS-With-Unreal-Engine-4-%E5%BC%80%E5%8F%91%E7%AC%94%E8%AE%B0%EF%BC%880%EF%BC%89/" id="article-nav-newer" class="article-nav-link-wrap">
+      <strong class="article-nav-caption">Newer</strong>
+      <div class="article-nav-title">
+        
+          First Person Shooter (FPS) With Unreal Engine 4 开发笔记（0）
+        
+      </div>
+    </a>
+  
+  
+    <a href="/2019/07/23/Lua/Lua%E4%B8%AD%E7%9A%84%E6%B7%B1%E6%8B%B7%E8%B4%9D%E4%B8%8E%E6%B5%85%E6%8B%B7%E8%B4%9D/" id="article-nav-older" class="article-nav-link-wrap">
+      <strong class="article-nav-caption">Older</strong>
+      <div class="article-nav-title">Lua中的深拷贝与浅拷贝</div>
+    </a>
+  
+</nav>
+
+  
+</article>
+
+</section>
+        
+          <aside id="sidebar">
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Categories</h3>
+    <div class="widget">
+      <ul class="category-list"><li class="category-list-item"><a class="category-list-link" href="/categories/Lua/">Lua</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/Unity/">Unity</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E5%BC%80%E5%8F%91%E7%AC%94%E8%AE%B0/">开发笔记</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E6%96%87%E5%AD%97/">文字</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E6%BA%90%E7%A0%81%E9%98%85%E8%AF%BB/">源码阅读</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E7%BF%BB%E8%AF%91/">翻译</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E8%AE%A1%E7%AE%97%E6%9C%BA%E5%9B%BE%E5%BD%A2%E5%AD%A6/">计算机图形学</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E8%AF%BB%E4%B9%A6%E7%AC%94%E8%AE%B0/">读书笔记</a><ul class="category-list-child"><li class="category-list-item"><a class="category-list-link" href="/categories/%E8%AF%BB%E4%B9%A6%E7%AC%94%E8%AE%B0/%E8%AE%BE%E8%AE%A1%E6%A8%A1%E5%BC%8F/">设计模式</a></li></ul></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E8%BD%AC%E8%BD%BD/">转载</a></li></ul>
+    </div>
+  </div>
+
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Tags</h3>
+    <div class="widget">
+      <ul class="tag-list" itemprop="keywords"><li class="tag-list-item"><a class="tag-list-link" href="/tags/Artificial-Intelligence-for-Games/" rel="tag">Artificial Intelligence for Games</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Astar/" rel="tag">Astar</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/C/" rel="tag">C++</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/CineMachine/" rel="tag">CineMachine</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Excel/" rel="tag">Excel</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/FPS/" rel="tag">FPS</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Lua/" rel="tag">Lua</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/OpenGL/" rel="tag">OpenGL</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Shader/" rel="tag">Shader</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Unity/" rel="tag">Unity</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Unity3D-%E6%B8%B8%E6%88%8F%E5%BC%80%E5%8F%91/" rel="tag">Unity3D 游戏开发</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/UnityShader/" rel="tag">UnityShader</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Unreal/" rel="tag">Unreal</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Unreal-Engine4/" rel="tag">Unreal Engine4</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Unreal4/" rel="tag">Unreal4</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/unity%E5%AD%A6%E4%B9%A0/" rel="tag">unity学习</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E5%85%89%E7%BA%BF%E8%BF%BD%E8%B8%AA/" rel="tag">光线追踪</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E5%88%9B%E5%BB%BA%E5%9E%8B%E6%A8%A1%E5%BC%8F/" rel="tag">创建型模式</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E5%8A%A8%E7%94%BB/" rel="tag">动画</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E5%9B%BE%E5%BD%A2%E5%AD%A6/" rel="tag">图形学</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E5%B7%A5%E5%85%B7/" rel="tag">工具</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E6%8F%92%E4%BB%B6/" rel="tag">插件</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E6%B8%B8%E6%88%8FAI/" rel="tag">游戏AI</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E6%B8%B8%E6%88%8F%E5%BC%95%E6%93%8E/" rel="tag">游戏引擎</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E7%81%B5%E6%84%9F/" rel="tag">灵感</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E7%AE%97%E6%B3%95/" rel="tag">算法</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E7%BB%93%E6%9E%84%E5%9E%8B%E6%A8%A1%E5%BC%8F/" rel="tag">结构型模式</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E8%A1%8C%E4%B8%BA%E5%9E%8B%E6%A8%A1%E5%BC%8F/" rel="tag">行为型模式</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E8%AE%A1%E7%AE%97%E6%9C%BA%E5%9B%BE%E5%BD%A2%E5%AD%A6/" rel="tag">计算机图形学</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%BD%91%E7%BB%9C/" rel="tag">计算机网络</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E8%AE%BE%E8%AE%A1%E6%A8%A1%E5%BC%8F/" rel="tag">设计模式</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E9%9A%8F%E7%AC%94/" rel="tag">随笔</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E9%9D%A2%E8%AF%95/" rel="tag">面试</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E9%AA%A8%E9%AA%BC%E5%8A%A8%E7%94%BB/" rel="tag">骨骼动画</a></li></ul>
+    </div>
+  </div>
+
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Tag Cloud</h3>
+    <div class="widget tagcloud">
+      <a href="/tags/Artificial-Intelligence-for-Games/" style="font-size: 10px;">Artificial Intelligence for Games</a> <a href="/tags/Astar/" style="font-size: 10px;">Astar</a> <a href="/tags/C/" style="font-size: 10px;">C++</a> <a href="/tags/CineMachine/" style="font-size: 10px;">CineMachine</a> <a href="/tags/Excel/" style="font-size: 10px;">Excel</a> <a href="/tags/FPS/" style="font-size: 10px;">FPS</a> <a href="/tags/Lua/" style="font-size: 18px;">Lua</a> <a href="/tags/OpenGL/" style="font-size: 12px;">OpenGL</a> <a href="/tags/Shader/" style="font-size: 16px;">Shader</a> <a href="/tags/Unity/" style="font-size: 20px;">Unity</a> <a href="/tags/Unity3D-%E6%B8%B8%E6%88%8F%E5%BC%80%E5%8F%91/" style="font-size: 12px;">Unity3D 游戏开发</a> <a href="/tags/UnityShader/" style="font-size: 10px;">UnityShader</a> <a href="/tags/Unreal/" style="font-size: 10px;">Unreal</a> <a href="/tags/Unreal-Engine4/" style="font-size: 10px;">Unreal Engine4</a> <a href="/tags/Unreal4/" style="font-size: 10px;">Unreal4</a> <a href="/tags/unity%E5%AD%A6%E4%B9%A0/" style="font-size: 10px;">unity学习</a> <a href="/tags/%E5%85%89%E7%BA%BF%E8%BF%BD%E8%B8%AA/" style="font-size: 10px;">光线追踪</a> <a href="/tags/%E5%88%9B%E5%BB%BA%E5%9E%8B%E6%A8%A1%E5%BC%8F/" style="font-size: 12px;">创建型模式</a> <a href="/tags/%E5%8A%A8%E7%94%BB/" style="font-size: 12px;">动画</a> <a href="/tags/%E5%9B%BE%E5%BD%A2%E5%AD%A6/" style="font-size: 10px;">图形学</a> <a href="/tags/%E5%B7%A5%E5%85%B7/" style="font-size: 10px;">工具</a> <a href="/tags/%E6%8F%92%E4%BB%B6/" style="font-size: 10px;">插件</a> <a href="/tags/%E6%B8%B8%E6%88%8FAI/" style="font-size: 10px;">游戏AI</a> <a href="/tags/%E6%B8%B8%E6%88%8F%E5%BC%95%E6%93%8E/" style="font-size: 10px;">游戏引擎</a> <a href="/tags/%E7%81%B5%E6%84%9F/" style="font-size: 10px;">灵感</a> <a href="/tags/%E7%AE%97%E6%B3%95/" style="font-size: 10px;">算法</a> <a href="/tags/%E7%BB%93%E6%9E%84%E5%9E%8B%E6%A8%A1%E5%BC%8F/" style="font-size: 10px;">结构型模式</a> <a href="/tags/%E8%A1%8C%E4%B8%BA%E5%9E%8B%E6%A8%A1%E5%BC%8F/" style="font-size: 12px;">行为型模式</a> <a href="/tags/%E8%AE%A1%E7%AE%97%E6%9C%BA%E5%9B%BE%E5%BD%A2%E5%AD%A6/" style="font-size: 14px;">计算机图形学</a> <a href="/tags/%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%BD%91%E7%BB%9C/" style="font-size: 14px;">计算机网络</a> <a href="/tags/%E8%AE%BE%E8%AE%A1%E6%A8%A1%E5%BC%8F/" style="font-size: 16px;">设计模式</a> <a href="/tags/%E9%9A%8F%E7%AC%94/" style="font-size: 10px;">随笔</a> <a href="/tags/%E9%9D%A2%E8%AF%95/" style="font-size: 10px;">面试</a> <a href="/tags/%E9%AA%A8%E9%AA%BC%E5%8A%A8%E7%94%BB/" style="font-size: 12px;">骨骼动画</a>
+    </div>
+  </div>
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Archives</h3>
+    <div class="widget">
+      <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2019/12/">December 2019</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2019/10/">October 2019</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2019/09/">September 2019</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2019/08/">August 2019</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2019/07/">July 2019</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2019/05/">May 2019</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2019/04/">April 2019</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2019/03/">March 2019</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2019/02/">February 2019</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2019/01/">January 2019</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/12/">December 2018</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/10/">October 2018</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/07/">July 2018</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/06/">June 2018</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/05/">May 2018</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/04/">April 2018</a></li></ul>
+    </div>
+  </div>
+
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Recent Posts</h3>
+    <div class="widget">
+      <ul>
+        
+          <li>
+            <a href="/2019/12/18/%E9%9A%8F%E7%AC%94/Ludum-Dare-%E5%8E%86%E5%B1%8A%E4%B8%BB%E9%A2%98/">Ludum Dare 历届主题</a>
+          </li>
+        
+          <li>
+            <a href="/2019/10/05/%E9%9A%8F%E7%AC%94/%E6%90%AC%E7%93%A6%E5%B7%A5%E9%85%8D%E7%BD%AE%E8%AE%B0%E5%BD%95/">搬瓦工配置记录</a>
+          </li>
+        
+          <li>
+            <a href="/2019/09/24/%E7%BF%BB%E8%AF%91/%E7%BF%BB%E8%AF%91-Integrating-Lua/">[翻译]Integrating Lua</a>
+          </li>
+        
+          <li>
+            <a href="/2019/09/11/OpenGL%E7%AC%94%E8%AE%B0/Mac%E4%B8%8B%E9%85%8D%E7%BD%AEOpenGL%E7%8E%AF%E5%A2%83/">Mac下配置OpenGL环境</a>
+          </li>
+        
+          <li>
+            <a href="/2019/08/30/Unreal4%E7%AC%94%E8%AE%B0/Unreal%E6%8F%92%E4%BB%B6%E5%AD%A6%E4%B9%A0%EF%BC%9A%E5%AE%9E%E4%BE%8B%E6%BA%90%E7%A0%81%E9%98%85%E8%AF%BB/">Unreal插件学习：实例源码阅读</a>
+          </li>
+        
+      </ul>
+    </div>
+  </div>
+
+  
+</aside>
+        
+      </div>
+      <footer id="footer">
+  
+  <div class="outer">
+    <div id="footer-info" class="inner">
+      &copy; 2019 zhangMo<br>
+      Powered by <a href="http://hexo.io/" target="_blank">Hexo</a>
+    </div>
+  </div>
+</footer>
+    </div>
+    <nav id="mobile-nav">
+  
+    <a href="/" class="mobile-nav-link">Home</a>
+  
+    <a href="/archives" class="mobile-nav-link">Archives</a>
+  
+</nav>
+    
+
+<script src="//ajax.googleapis.com/ajax/libs/jquery/2.0.3/jquery.min.js"></script>
+
+
+  <link rel="stylesheet" href="/fancybox/jquery.fancybox.css">
+  <script src="/fancybox/jquery.fancybox.pack.js"></script>
+
+
+<script src="/js/script.js"></script>
+
+
+
+  </div>
+</body>
+</html>
