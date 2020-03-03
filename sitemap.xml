@@ -2,6 +2,20 @@
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
   
   <url>
+    <loc>https://bitzhangmo.github.io/categories/index.html</loc>
+    
+    <lastmod>2020-03-03T08:21:39.009Z</lastmod>
+    
+  </url>
+  
+  <url>
+    <loc>https://bitzhangmo.github.io/tags/index.html</loc>
+    
+    <lastmod>2020-03-03T08:20:57.472Z</lastmod>
+    
+  </url>
+  
+  <url>
     <loc>https://bitzhangmo.github.io/search/index.html</loc>
     
     <lastmod>2020-03-03T08:15:51.180Z</lastmod>
@@ -26,20 +40,6 @@
     <loc>https://bitzhangmo.github.io/about/index.html</loc>
     
     <lastmod>2019-09-30T12:50:01.476Z</lastmod>
-    
-  </url>
-  
-  <url>
-    <loc>https://bitzhangmo.github.io/categories/index.html</loc>
-    
-    <lastmod>2019-09-30T12:49:51.664Z</lastmod>
-    
-  </url>
-  
-  <url>
-    <loc>https://bitzhangmo.github.io/tags/index.html</loc>
-    
-    <lastmod>2019-09-30T11:28:36.088Z</lastmod>
     
   </url>
   
