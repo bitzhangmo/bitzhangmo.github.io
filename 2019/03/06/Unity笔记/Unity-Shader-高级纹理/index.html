@@ -1,42 +1,44 @@
 <!DOCTYPE html>
 <html lang=zh>
-<head>
+<head><meta name="generator" content="Hexo 3.9.0">
     <!-- so meta -->
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="HandheldFriendly" content="True">
-    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1" />
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
     <meta name="description" content="立方体纹理实现环境映射，渲染纹理以及程序纹理。">
 <meta name="keywords" content="Unity,Shader">
 <meta property="og:type" content="article">
 <meta property="og:title" content="Unity Shader 高级纹理">
-<meta property="og:url" content="https:&#x2F;&#x2F;bitzhangmo.github.io&#x2F;2019&#x2F;03&#x2F;06&#x2F;Unity%E7%AC%94%E8%AE%B0&#x2F;Unity-Shader-%E9%AB%98%E7%BA%A7%E7%BA%B9%E7%90%86&#x2F;index.html">
+<meta property="og:url" content="https://bitzhangmo.github.io/2019/03/06/Unity笔记/Unity-Shader-高级纹理/index.html">
 <meta property="og:site_name" content="zhangMo Blog">
 <meta property="og:description" content="立方体纹理实现环境映射，渲染纹理以及程序纹理。">
 <meta property="og:locale" content="zh-CN">
-<meta property="og:image" content="http:&#x2F;&#x2F;wx1.sinaimg.cn&#x2F;large&#x2F;007CSzD7ly1g0t8sl0d3wj30xy0ds40t.jpg">
-<meta property="og:image" content="http:&#x2F;&#x2F;wx2.sinaimg.cn&#x2F;large&#x2F;007CSzD7ly1g0t8slp4plj30wo0k8tbp.jpg">
-<meta property="og:image" content="http:&#x2F;&#x2F;wx2.sinaimg.cn&#x2F;large&#x2F;007CSzD7ly1g0t8slq83rj31dq0najwk.jpg">
-<meta property="og:image" content="http:&#x2F;&#x2F;wx2.sinaimg.cn&#x2F;large&#x2F;007CSzD7ly1g0t8sp2vrmj311g0ngnpd.jpg">
-<meta property="og:image" content="http:&#x2F;&#x2F;wx2.sinaimg.cn&#x2F;large&#x2F;007CSzD7ly1g0t8skzstpj30wc0dg415.jpg">
-<meta property="og:image" content="http:&#x2F;&#x2F;wx3.sinaimg.cn&#x2F;large&#x2F;007CSzD7ly1g0t8sl2tlfj31eo0j2why.jpg">
-<meta property="og:image" content="http:&#x2F;&#x2F;wx1.sinaimg.cn&#x2F;large&#x2F;007CSzD7ly1g0t8sl7aofj31e00osafb.jpg">
-<meta property="og:image" content="http:&#x2F;&#x2F;wx1.sinaimg.cn&#x2F;large&#x2F;007CSzD7ly1g0t8soqgjlj31140nekjl.jpg">
-<meta property="og:image" content="http:&#x2F;&#x2F;wx1.sinaimg.cn&#x2F;large&#x2F;007CSzD7ly1g0tc4wsuy7j30uq0703zr.jpg">
-<meta property="og:image" content="http:&#x2F;&#x2F;wx4.sinaimg.cn&#x2F;large&#x2F;007CSzD7ly1g0tc4x14fbj30w60ggdip.jpg">
-<meta property="og:image" content="http:&#x2F;&#x2F;wx3.sinaimg.cn&#x2F;large&#x2F;007CSzD7ly1g0tc4wwnuyj31hs0pmjxc.jpg">
-<meta property="og:image" content="http:&#x2F;&#x2F;wx1.sinaimg.cn&#x2F;large&#x2F;007CSzD7ly1g0tbxvzex5j31kj0u0hdt.jpg">
-<meta property="og:image" content="http:&#x2F;&#x2F;wx3.sinaimg.cn&#x2F;large&#x2F;007CSzD7ly1g0tbxy03h1j31kj0u04qp.jpg">
-<meta property="og:image" content="http:&#x2F;&#x2F;wx4.sinaimg.cn&#x2F;large&#x2F;007CSzD7ly1g0tbxxuq17j31kb0u04qp.jpg">
-<meta property="og:image" content="http:&#x2F;&#x2F;wx2.sinaimg.cn&#x2F;large&#x2F;007CSzD7ly1g0u3epqe2pj30ww0gctc4.jpg">
-<meta property="og:image" content="http:&#x2F;&#x2F;wx2.sinaimg.cn&#x2F;large&#x2F;007CSzD7ly1g0u3epclb3j30wy07u0ub.jpg">
-<meta property="og:image" content="http:&#x2F;&#x2F;wx4.sinaimg.cn&#x2F;large&#x2F;007CSzD7ly1g0u3epcdbzj30jy0eiwgd.jpg">
-<meta property="og:image" content="http:&#x2F;&#x2F;wx1.sinaimg.cn&#x2F;large&#x2F;007CSzD7ly1g0u3epwq01j316y0r2wkk.jpg">
-<meta property="og:image" content="http:&#x2F;&#x2F;wx2.sinaimg.cn&#x2F;large&#x2F;007CSzD7ly1g0u3eq1kppj31fi0sawle.jpg">
-<meta property="og:image" content="http:&#x2F;&#x2F;wx3.sinaimg.cn&#x2F;large&#x2F;007CSzD7ly1g0u3etapk7j31ji0u04qq.jpg">
+<meta property="og:image" content="http://wx1.sinaimg.cn/large/007CSzD7ly1g0t8sl0d3wj30xy0ds40t.jpg">
+<meta property="og:image" content="http://wx2.sinaimg.cn/large/007CSzD7ly1g0t8slp4plj30wo0k8tbp.jpg">
+<meta property="og:image" content="http://wx2.sinaimg.cn/large/007CSzD7ly1g0t8slq83rj31dq0najwk.jpg">
+<meta property="og:image" content="http://wx2.sinaimg.cn/large/007CSzD7ly1g0t8sp2vrmj311g0ngnpd.jpg">
+<meta property="og:image" content="http://wx2.sinaimg.cn/large/007CSzD7ly1g0t8skzstpj30wc0dg415.jpg">
+<meta property="og:image" content="http://wx3.sinaimg.cn/large/007CSzD7ly1g0t8sl2tlfj31eo0j2why.jpg">
+<meta property="og:image" content="http://wx1.sinaimg.cn/large/007CSzD7ly1g0t8sl7aofj31e00osafb.jpg">
+<meta property="og:image" content="http://wx1.sinaimg.cn/large/007CSzD7ly1g0t8soqgjlj31140nekjl.jpg">
+<meta property="og:image" content="http://wx1.sinaimg.cn/large/007CSzD7ly1g0tc4wsuy7j30uq0703zr.jpg">
+<meta property="og:image" content="http://wx4.sinaimg.cn/large/007CSzD7ly1g0tc4x14fbj30w60ggdip.jpg">
+<meta property="og:image" content="http://wx3.sinaimg.cn/large/007CSzD7ly1g0tc4wwnuyj31hs0pmjxc.jpg">
+<meta property="og:image" content="http://wx1.sinaimg.cn/large/007CSzD7ly1g0tbxvzex5j31kj0u0hdt.jpg">
+<meta property="og:image" content="http://wx3.sinaimg.cn/large/007CSzD7ly1g0tbxy03h1j31kj0u04qp.jpg">
+<meta property="og:image" content="http://wx4.sinaimg.cn/large/007CSzD7ly1g0tbxxuq17j31kb0u04qp.jpg">
+<meta property="og:image" content="http://wx2.sinaimg.cn/large/007CSzD7ly1g0u3epqe2pj30ww0gctc4.jpg">
+<meta property="og:image" content="http://wx2.sinaimg.cn/large/007CSzD7ly1g0u3epclb3j30wy07u0ub.jpg">
+<meta property="og:image" content="http://wx4.sinaimg.cn/large/007CSzD7ly1g0u3epcdbzj30jy0eiwgd.jpg">
+<meta property="og:image" content="http://wx1.sinaimg.cn/large/007CSzD7ly1g0u3epwq01j316y0r2wkk.jpg">
+<meta property="og:image" content="http://wx2.sinaimg.cn/large/007CSzD7ly1g0u3eq1kppj31fi0sawle.jpg">
+<meta property="og:image" content="http://wx3.sinaimg.cn/large/007CSzD7ly1g0u3etapk7j31ji0u04qq.jpg">
 <meta property="og:updated_time" content="2019-03-07T07:50:30.915Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:image" content="http:&#x2F;&#x2F;wx1.sinaimg.cn&#x2F;large&#x2F;007CSzD7ly1g0t8sl0d3wj30xy0ds40t.jpg">
+<meta name="twitter:title" content="Unity Shader 高级纹理">
+<meta name="twitter:description" content="立方体纹理实现环境映射，渲染纹理以及程序纹理。">
+<meta name="twitter:image" content="http://wx1.sinaimg.cn/large/007CSzD7ly1g0t8sl0d3wj30xy0ds40t.jpg">
     
     
         
@@ -84,7 +86,7 @@
          
           <li><a href="/archives/">归档</a></li>
          
-          <li><a href="/projects_url">项目</a></li>
+          <li><a href="/search/">搜索</a></li>
         
       </ul>
     </span>
@@ -92,10 +94,10 @@
     <span id="actions">
       <ul>
         
-        <li><a class="icon" href="/2019/03/08/Unity%E7%AC%94%E8%AE%B0/Unity-Shader-%E5%B1%8F%E5%B9%95%E5%90%8E%E5%A4%84%E7%90%86%E6%95%88%E6%9E%9C/"><i class="fas fa-chevron-left" aria-hidden="true" onmouseover="$('#i-prev').toggle();" onmouseout="$('#i-prev').toggle();"></i></a></li>
+        <li><a class="icon" href="/2019/03/08/Unity笔记/Unity-Shader-屏幕后处理效果/"><i class="fas fa-chevron-left" aria-hidden="true" onmouseover="$('#i-prev').toggle();" onmouseout="$('#i-prev').toggle();"></i></a></li>
         
         
-        <li><a class="icon" href="/2019/03/05/Unity%E7%AC%94%E8%AE%B0/Unity-UGUI-%E6%BA%90%E7%A0%81%E5%AD%A6%E4%B9%A0-Button/"><i class="fas fa-chevron-right" aria-hidden="true" onmouseover="$('#i-next').toggle();" onmouseout="$('#i-next').toggle();"></i></a></li>
+        <li><a class="icon" href="/2019/03/05/Unity笔记/Unity-UGUI-源码学习-Button/"><i class="fas fa-chevron-right" aria-hidden="true" onmouseover="$('#i-next').toggle();" onmouseout="$('#i-next').toggle();"></i></a></li>
         
         <li><a class="icon" href="#" onclick="$('html, body').animate({ scrollTop: 0 }, 'fast');"><i class="fas fa-chevron-up" aria-hidden="true" onmouseover="$('#i-top').toggle();" onmouseout="$('#i-top').toggle();"></i></a></li>
         <li><a class="icon" href="#"><i class="fas fa-share-alt" aria-hidden="true" onmouseover="$('#i-share').toggle();" onmouseout="$('#i-share').toggle();" onclick="$('#share').toggle();return false;"></i></a></li>
@@ -108,17 +110,17 @@
     <br/>
     <div id="share" style="display: none">
       <ul>
-  <li><a class="icon" href="http://www.facebook.com/sharer.php?u=https://bitzhangmo.github.io/2019/03/06/Unity%E7%AC%94%E8%AE%B0/Unity-Shader-%E9%AB%98%E7%BA%A7%E7%BA%B9%E7%90%86/" target="_blank" rel="noopener"><i class="fab fa-facebook " aria-hidden="true"></i></a></li>
-  <li><a class="icon" href="https://twitter.com/share?url=https://bitzhangmo.github.io/2019/03/06/Unity%E7%AC%94%E8%AE%B0/Unity-Shader-%E9%AB%98%E7%BA%A7%E7%BA%B9%E7%90%86/&text=Unity Shader 高级纹理" target="_blank" rel="noopener"><i class="fab fa-twitter " aria-hidden="true"></i></a></li>
-  <li><a class="icon" href="http://www.linkedin.com/shareArticle?url=https://bitzhangmo.github.io/2019/03/06/Unity%E7%AC%94%E8%AE%B0/Unity-Shader-%E9%AB%98%E7%BA%A7%E7%BA%B9%E7%90%86/&title=Unity Shader 高级纹理" target="_blank" rel="noopener"><i class="fab fa-linkedin " aria-hidden="true"></i></a></li>
-  <li><a class="icon" href="https://pinterest.com/pin/create/bookmarklet/?url=https://bitzhangmo.github.io/2019/03/06/Unity%E7%AC%94%E8%AE%B0/Unity-Shader-%E9%AB%98%E7%BA%A7%E7%BA%B9%E7%90%86/&is_video=false&description=Unity Shader 高级纹理" target="_blank" rel="noopener"><i class="fab fa-pinterest " aria-hidden="true"></i></a></li>
-  <li><a class="icon" href="mailto:?subject=Unity Shader 高级纹理&body=Check out this article: https://bitzhangmo.github.io/2019/03/06/Unity%E7%AC%94%E8%AE%B0/Unity-Shader-%E9%AB%98%E7%BA%A7%E7%BA%B9%E7%90%86/"><i class="fas fa-envelope " aria-hidden="true"></i></a></li>
-  <li><a class="icon" href="https://getpocket.com/save?url=https://bitzhangmo.github.io/2019/03/06/Unity%E7%AC%94%E8%AE%B0/Unity-Shader-%E9%AB%98%E7%BA%A7%E7%BA%B9%E7%90%86/&title=Unity Shader 高级纹理" target="_blank" rel="noopener"><i class="fab fa-get-pocket " aria-hidden="true"></i></a></li>
-  <li><a class="icon" href="http://reddit.com/submit?url=https://bitzhangmo.github.io/2019/03/06/Unity%E7%AC%94%E8%AE%B0/Unity-Shader-%E9%AB%98%E7%BA%A7%E7%BA%B9%E7%90%86/&title=Unity Shader 高级纹理" target="_blank" rel="noopener"><i class="fab fa-reddit " aria-hidden="true"></i></a></li>
-  <li><a class="icon" href="http://www.stumbleupon.com/submit?url=https://bitzhangmo.github.io/2019/03/06/Unity%E7%AC%94%E8%AE%B0/Unity-Shader-%E9%AB%98%E7%BA%A7%E7%BA%B9%E7%90%86/&title=Unity Shader 高级纹理" target="_blank" rel="noopener"><i class="fab fa-stumbleupon " aria-hidden="true"></i></a></li>
-  <li><a class="icon" href="http://digg.com/submit?url=https://bitzhangmo.github.io/2019/03/06/Unity%E7%AC%94%E8%AE%B0/Unity-Shader-%E9%AB%98%E7%BA%A7%E7%BA%B9%E7%90%86/&title=Unity Shader 高级纹理" target="_blank" rel="noopener"><i class="fab fa-digg " aria-hidden="true"></i></a></li>
-  <li><a class="icon" href="http://www.tumblr.com/share/link?url=https://bitzhangmo.github.io/2019/03/06/Unity%E7%AC%94%E8%AE%B0/Unity-Shader-%E9%AB%98%E7%BA%A7%E7%BA%B9%E7%90%86/&name=Unity Shader 高级纹理&description=&lt;p&gt;立方体纹理实现环境映射，渲染纹理以及程序纹理。&lt;/p&gt;" target="_blank" rel="noopener"><i class="fab fa-tumblr " aria-hidden="true"></i></a></li>
-  <li><a class="icon" href="https://news.ycombinator.com/submitlink?u=https://bitzhangmo.github.io/2019/03/06/Unity%E7%AC%94%E8%AE%B0/Unity-Shader-%E9%AB%98%E7%BA%A7%E7%BA%B9%E7%90%86/&t=Unity Shader 高级纹理" target="_blank" rel="noopener"><i class="fab fa-hacker-news " aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="http://www.facebook.com/sharer.php?u=https://bitzhangmo.github.io/2019/03/06/Unity笔记/Unity-Shader-高级纹理/"><i class="fab fa-facebook " aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="https://twitter.com/share?url=https://bitzhangmo.github.io/2019/03/06/Unity笔记/Unity-Shader-高级纹理/&text=Unity Shader 高级纹理"><i class="fab fa-twitter " aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="http://www.linkedin.com/shareArticle?url=https://bitzhangmo.github.io/2019/03/06/Unity笔记/Unity-Shader-高级纹理/&title=Unity Shader 高级纹理"><i class="fab fa-linkedin " aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="https://pinterest.com/pin/create/bookmarklet/?url=https://bitzhangmo.github.io/2019/03/06/Unity笔记/Unity-Shader-高级纹理/&is_video=false&description=Unity Shader 高级纹理"><i class="fab fa-pinterest " aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="mailto:?subject=Unity Shader 高级纹理&body=Check out this article: https://bitzhangmo.github.io/2019/03/06/Unity笔记/Unity-Shader-高级纹理/"><i class="fas fa-envelope " aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="https://getpocket.com/save?url=https://bitzhangmo.github.io/2019/03/06/Unity笔记/Unity-Shader-高级纹理/&title=Unity Shader 高级纹理"><i class="fab fa-get-pocket " aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="http://reddit.com/submit?url=https://bitzhangmo.github.io/2019/03/06/Unity笔记/Unity-Shader-高级纹理/&title=Unity Shader 高级纹理"><i class="fab fa-reddit " aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="http://www.stumbleupon.com/submit?url=https://bitzhangmo.github.io/2019/03/06/Unity笔记/Unity-Shader-高级纹理/&title=Unity Shader 高级纹理"><i class="fab fa-stumbleupon " aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="http://digg.com/submit?url=https://bitzhangmo.github.io/2019/03/06/Unity笔记/Unity-Shader-高级纹理/&title=Unity Shader 高级纹理"><i class="fab fa-digg " aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="http://www.tumblr.com/share/link?url=https://bitzhangmo.github.io/2019/03/06/Unity笔记/Unity-Shader-高级纹理/&name=Unity Shader 高级纹理&description=&lt;p&gt;立方体纹理实现环境映射，渲染纹理以及程序纹理。&lt;/p&gt;"><i class="fab fa-tumblr " aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="https://news.ycombinator.com/submitlink?u=https://bitzhangmo.github.io/2019/03/06/Unity笔记/Unity-Shader-高级纹理/&t=Unity Shader 高级纹理"><i class="fab fa-hacker-news " aria-hidden="true"></i></a></li>
 </ul>
 
     </div>
@@ -163,7 +165,7 @@
       
     <div class="article-tag">
         <i class="fas fa-tag"></i>
-        <a class="tag-link" href="/tags/Shader/" rel="tag">Shader</a>, <a class="tag-link" href="/tags/Unity/" rel="tag">Unity</a>
+        <a class="tag-link" href="/tags/Shader/">Shader</a>, <a class="tag-link" href="/tags/Unity/">Unity</a>
     </div>
 
 
@@ -174,7 +176,6 @@
   <div class="content" itemprop="articleBody">
     <p>立方体纹理实现环境映射，渲染纹理以及程序纹理。</p>
 <a id="more"></a>
-
 <h3 id="立方体纹理："><a href="#立方体纹理：" class="headerlink" title="立方体纹理："></a>立方体纹理：</h3><h4 id="定义："><a href="#定义：" class="headerlink" title="定义："></a>定义：</h4><p>立方体纹理是环境映射的一种实现方式。环境映射可以模拟物体周围的环境，使用了环境映射的物体可以看起来像是镀了金属一样反射出周围的环境。</p>
 <h4 id="采样方式"><a href="#采样方式" class="headerlink" title="采样方式"></a>采样方式</h4><p>正方体纹理一共包含了6张图像，这些图像对应了一个立方体的6个面。立方体的每个面表示沿着世界空间下的轴向观察所得来的图像。<strong>对立方体纹理采样需要我们提供一个三维的纹理坐标，这个三维纹理坐标表示了我们在世界空间下的一个3D方向。这个方向矢量从立方体的中心出发，当它向外部延伸时就会和立方体的6个纹理之一发生相交，而采样得到的结果就是由该交点计算而来的。</strong></p>
 <h4 id="优点与缺点："><a href="#优点与缺点：" class="headerlink" title="优点与缺点："></a>优点与缺点：</h4><ul>
@@ -196,11 +197,11 @@
 </blockquote>
 <ol>
 <li><p>首先，声明需要用到的属性：</p>
-<p> <img src="http://wx1.sinaimg.cn/large/007CSzD7ly1g0t8sl0d3wj30xy0ds40t.jpg" alt=""></p>
+<p> <img src="http://wx1.sinaimg.cn/large/007CSzD7ly1g0t8sl0d3wj30xy0ds40t.jpg" alt></p>
 </li>
 <li><p>在顶点着色器中计算该顶点处的反射方向，根据CG的<a href="https://developer.download.nvidia.cn/cg/reflect.html" target="_blank" rel="noopener">reflect</a>函数来实现：</p>
 <p>物体反射到摄像机中的光线方向，可以由光路可逆的原则来反向求得。可以计算视角方向关于顶点法线的反射方向来求得入射光线的方向。</p>
-<p><img src="http://wx2.sinaimg.cn/large/007CSzD7ly1g0t8slp4plj30wo0k8tbp.jpg" alt=""></p>
+<p><img src="http://wx2.sinaimg.cn/large/007CSzD7ly1g0t8slp4plj30wo0k8tbp.jpg" alt></p>
 <p>(TRANSFER_SHADOW参见以前的博客：（此处应有链接）)</p>
 </li>
 <li><p>在片元着色器中，利用反射方向来对立方体纹理采样：</p>
@@ -209,13 +210,12 @@
 </li>
 <li><p>然后使用<strong>_ReflectAmount</strong>来混合<strong>漫反射颜色</strong>和<strong>反射颜色</strong>，并和<strong>环境光</strong>照相加后返回。</p>
 </li>
-<li><p>可以在片元着色器中计算反射方向，这样效果更好，但是差别不大；处于性能考虑，我们选择在顶点着色器中计算反射方向。</p>
-</li>
+<li>可以在片元着色器中计算反射方向，这样效果更好，但是差别不大；处于性能考虑，我们选择在顶点着色器中计算反射方向。</li>
 </ul>
-<p><img src="http://wx2.sinaimg.cn/large/007CSzD7ly1g0t8slq83rj31dq0najwk.jpg" alt=""></p>
+<p><img src="http://wx2.sinaimg.cn/large/007CSzD7ly1g0t8slq83rj31dq0najwk.jpg" alt></p>
 </li>
 <li><p>效果：</p>
-<p><img src="http://wx2.sinaimg.cn/large/007CSzD7ly1g0t8sp2vrmj311g0ngnpd.jpg" alt=""></p>
+<p><img src="http://wx2.sinaimg.cn/large/007CSzD7ly1g0t8sp2vrmj311g0ngnpd.jpg" alt></p>
 </li>
 </ol>
 <h4 id="折射效果："><a href="#折射效果：" class="headerlink" title="折射效果："></a>折射效果：</h4><blockquote>
@@ -226,19 +226,19 @@
 </blockquote>
 <ol>
 <li><p>声明属性：</p>
-<p><img src="http://wx2.sinaimg.cn/large/007CSzD7ly1g0t8skzstpj30wc0dg415.jpg" alt=""></p>
+<p><img src="http://wx2.sinaimg.cn/large/007CSzD7ly1g0t8skzstpj30wc0dg415.jpg" alt></p>
 </li>
 <li><p>使用CG的<a href="https://developer.download.nvidia.cn/cg/reflect.html" target="_blank" rel="noopener">refract</a>函数来计算折射方向。</p>
 <p>第一个参数是入射光线的方向，必须是归一化后的矢量；第二个参数是表面法线，法线方向同样需要是归一化的；第三个参数是入射光线所在介质的折射率与折射光线所在介质的折射率之间的比值。返回计算而得的折射方向，它的模则等于入射光线的模。</p>
-<p><img src="http://wx3.sinaimg.cn/large/007CSzD7ly1g0t8sl2tlfj31eo0j2why.jpg" alt=""></p>
+<p><img src="http://wx3.sinaimg.cn/large/007CSzD7ly1g0t8sl2tlfj31eo0j2why.jpg" alt></p>
 </li>
 <li><p>在片元着色器中使用折射方向对立方体纹理进行采样：</p>
-<p><img src="http://wx1.sinaimg.cn/large/007CSzD7ly1g0t8sl7aofj31e00osafb.jpg" alt=""></p>
+<p><img src="http://wx1.sinaimg.cn/large/007CSzD7ly1g0t8sl7aofj31e00osafb.jpg" alt></p>
 </li>
 <li><p>最后使用_RefractAmount来混合漫反射和折射颜色，并和环境光照相加后返回。</p>
 </li>
 <li><p>效果：</p>
-<p><img src="http://wx1.sinaimg.cn/large/007CSzD7ly1g0t8soqgjlj31140nekjl.jpg" alt=""></p>
+<p><img src="http://wx1.sinaimg.cn/large/007CSzD7ly1g0t8soqgjlj31140nekjl.jpg" alt></p>
 </li>
 </ol>
 <h4 id="菲涅尔反射："><a href="#菲涅尔反射：" class="headerlink" title="菲涅尔反射："></a>菲涅尔反射：</h4><blockquote>
@@ -259,21 +259,21 @@
 </ul>
 </li>
 <li><p>定义属性：_FresnelScale属性用于调整菲涅尔反射</p>
-<p><img src="http://wx1.sinaimg.cn/large/007CSzD7ly1g0tc4wsuy7j30uq0703zr.jpg" alt=""></p>
+<p><img src="http://wx1.sinaimg.cn/large/007CSzD7ly1g0tc4wsuy7j30uq0703zr.jpg" alt></p>
 </li>
 <li><p>在顶点着色器中计算世界空间下的法线方向、视角方向和反射方向：</p>
-<p><img src="http://wx4.sinaimg.cn/large/007CSzD7ly1g0tc4x14fbj30w60ggdip.jpg" alt=""></p>
+<p><img src="http://wx4.sinaimg.cn/large/007CSzD7ly1g0tc4x14fbj30w60ggdip.jpg" alt></p>
 </li>
 <li><p>在片元着色器中计算菲涅尔反射，并使用结果值混合漫反射光照和反射光照：</p>
-<p><img src="http://wx3.sinaimg.cn/large/007CSzD7ly1g0tc4wwnuyj31hs0pmjxc.jpg" alt=""></p>
+<p><img src="http://wx3.sinaimg.cn/large/007CSzD7ly1g0tc4wwnuyj31hs0pmjxc.jpg" alt></p>
 </li>
 <li><p>效果：</p>
 <p>当_FresnelScale为1时：</p>
-<p><img src="http://wx1.sinaimg.cn/large/007CSzD7ly1g0tbxvzex5j31kj0u0hdt.jpg" alt=""></p>
+<p><img src="http://wx1.sinaimg.cn/large/007CSzD7ly1g0tbxvzex5j31kj0u0hdt.jpg" alt></p>
 <p>为0.5时：</p>
-<p><img src="http://wx3.sinaimg.cn/large/007CSzD7ly1g0tbxy03h1j31kj0u04qp.jpg" alt=""></p>
+<p><img src="http://wx3.sinaimg.cn/large/007CSzD7ly1g0tbxy03h1j31kj0u04qp.jpg" alt></p>
 <p>为0时：</p>
-<p><img src="http://wx4.sinaimg.cn/large/007CSzD7ly1g0tbxxuq17j31kb0u04qp.jpg" alt=""></p>
+<p><img src="http://wx4.sinaimg.cn/large/007CSzD7ly1g0tbxxuq17j31kb0u04qp.jpg" alt></p>
 </li>
 </ol>
 <h3 id="渲染纹理："><a href="#渲染纹理：" class="headerlink" title="渲染纹理："></a>渲染纹理：</h3><h4 id="镜子效果的实现："><a href="#镜子效果的实现：" class="headerlink" title="镜子效果的实现："></a>镜子效果的实现：</h4><h4 id="玻璃效果的实现："><a href="#玻璃效果的实现：" class="headerlink" title="玻璃效果的实现："></a>玻璃效果的实现：</h4><p>我们可以<strong>使用GrabPass来完成获取屏幕图像的目的。</strong>在Shader中定义了一个GrabPass后，Unity会把当前屏幕的图像绘制在一张纹理中，以便在后续的Pass中访问。与简单的透明混合不同，使用GrabPass可以让我们对物体后面的图像进行更复杂的处理，例如使用法线来模拟折射效果，而不是简单的与原屏幕颜色进行混合。</p>
@@ -283,16 +283,16 @@
 <p>首先使用一张<strong>法线纹理</strong>来修改模型的法线信息，然后使用<strong>反射</strong>方法，<strong>通过一个Cubemap来模拟玻璃的反射</strong>，而在模拟折射时，<strong>使用了GrabPass获取玻璃后面的屏幕图像</strong>，并<strong>使用切线空间下的法线对屏幕纹理坐标偏移</strong>后，再<strong>对屏幕图像进行采样</strong>来模拟近似的折射效果。</p>
 </li>
 <li><p>声明属性：</p>
-<p><img src="http://wx2.sinaimg.cn/large/007CSzD7ly1g0u3epqe2pj30ww0gctc4.jpg" alt=""></p>
+<p><img src="http://wx2.sinaimg.cn/large/007CSzD7ly1g0u3epqe2pj30ww0gctc4.jpg" alt></p>
 </li>
 <li><p>定义相应的渲染队列</p>
-<p><img src="http://wx2.sinaimg.cn/large/007CSzD7ly1g0u3epclb3j30wy07u0ub.jpg" alt=""></p>
+<p><img src="http://wx2.sinaimg.cn/large/007CSzD7ly1g0u3epclb3j30wy07u0ub.jpg" alt></p>
 </li>
 <li><p>定义变量：</p>
-<p><img src="http://wx4.sinaimg.cn/large/007CSzD7ly1g0u3epcdbzj30jy0eiwgd.jpg" alt=""></p>
+<p><img src="http://wx4.sinaimg.cn/large/007CSzD7ly1g0u3epcdbzj30jy0eiwgd.jpg" alt></p>
 </li>
 <li><p>定义顶点着色器阶段：</p>
-<p><img src="http://wx1.sinaimg.cn/large/007CSzD7ly1g0u3epwq01j316y0r2wkk.jpg" alt=""></p>
+<p><img src="http://wx1.sinaimg.cn/large/007CSzD7ly1g0u3epwq01j316y0r2wkk.jpg" alt></p>
 <ul>
 <li>先进行必要的顶点坐标变换。</li>
 <li>调用内置的ComputeGrabScreenPos函数来得到对应被抓取的屏幕图像的采样坐标。</li>
@@ -302,7 +302,7 @@
 </ul>
 </li>
 <li><p>定义片元着色器：</p>
-<p><img src="http://wx2.sinaimg.cn/large/007CSzD7ly1g0u3eq1kppj31fi0sawle.jpg" alt=""></p>
+<p><img src="http://wx2.sinaimg.cn/large/007CSzD7ly1g0u3eq1kppj31fi0sawle.jpg" alt></p>
 <ul>
 <li>通过世界坐标得到该片元对应的视角方向。</li>
 <li>对法线纹理进行采样，得到切线空间下的法线方向。</li>
@@ -314,7 +314,7 @@
 </ul>
 </li>
 <li><p>效果：</p>
-<p><img src="http://wx3.sinaimg.cn/large/007CSzD7ly1g0u3etapk7j31ji0u04qq.jpg" alt=""></p>
+<p><img src="http://wx3.sinaimg.cn/large/007CSzD7ly1g0u3etapk7j31ji0u04qq.jpg" alt></p>
 </li>
 </ol>
 <ul>
@@ -344,7 +344,7 @@
          
           <li><a href="/archives/">归档</a></li>
          
-          <li><a href="/projects_url">项目</a></li>
+          <li><a href="/search/">搜索</a></li>
         
       </ul>
     </div>
@@ -355,17 +355,17 @@
 
     <div id="share-footer" style="display: none">
       <ul>
-  <li><a class="icon" href="http://www.facebook.com/sharer.php?u=https://bitzhangmo.github.io/2019/03/06/Unity%E7%AC%94%E8%AE%B0/Unity-Shader-%E9%AB%98%E7%BA%A7%E7%BA%B9%E7%90%86/" target="_blank" rel="noopener"><i class="fab fa-facebook fa-lg" aria-hidden="true"></i></a></li>
-  <li><a class="icon" href="https://twitter.com/share?url=https://bitzhangmo.github.io/2019/03/06/Unity%E7%AC%94%E8%AE%B0/Unity-Shader-%E9%AB%98%E7%BA%A7%E7%BA%B9%E7%90%86/&text=Unity Shader 高级纹理" target="_blank" rel="noopener"><i class="fab fa-twitter fa-lg" aria-hidden="true"></i></a></li>
-  <li><a class="icon" href="http://www.linkedin.com/shareArticle?url=https://bitzhangmo.github.io/2019/03/06/Unity%E7%AC%94%E8%AE%B0/Unity-Shader-%E9%AB%98%E7%BA%A7%E7%BA%B9%E7%90%86/&title=Unity Shader 高级纹理" target="_blank" rel="noopener"><i class="fab fa-linkedin fa-lg" aria-hidden="true"></i></a></li>
-  <li><a class="icon" href="https://pinterest.com/pin/create/bookmarklet/?url=https://bitzhangmo.github.io/2019/03/06/Unity%E7%AC%94%E8%AE%B0/Unity-Shader-%E9%AB%98%E7%BA%A7%E7%BA%B9%E7%90%86/&is_video=false&description=Unity Shader 高级纹理" target="_blank" rel="noopener"><i class="fab fa-pinterest fa-lg" aria-hidden="true"></i></a></li>
-  <li><a class="icon" href="mailto:?subject=Unity Shader 高级纹理&body=Check out this article: https://bitzhangmo.github.io/2019/03/06/Unity%E7%AC%94%E8%AE%B0/Unity-Shader-%E9%AB%98%E7%BA%A7%E7%BA%B9%E7%90%86/"><i class="fas fa-envelope fa-lg" aria-hidden="true"></i></a></li>
-  <li><a class="icon" href="https://getpocket.com/save?url=https://bitzhangmo.github.io/2019/03/06/Unity%E7%AC%94%E8%AE%B0/Unity-Shader-%E9%AB%98%E7%BA%A7%E7%BA%B9%E7%90%86/&title=Unity Shader 高级纹理" target="_blank" rel="noopener"><i class="fab fa-get-pocket fa-lg" aria-hidden="true"></i></a></li>
-  <li><a class="icon" href="http://reddit.com/submit?url=https://bitzhangmo.github.io/2019/03/06/Unity%E7%AC%94%E8%AE%B0/Unity-Shader-%E9%AB%98%E7%BA%A7%E7%BA%B9%E7%90%86/&title=Unity Shader 高级纹理" target="_blank" rel="noopener"><i class="fab fa-reddit fa-lg" aria-hidden="true"></i></a></li>
-  <li><a class="icon" href="http://www.stumbleupon.com/submit?url=https://bitzhangmo.github.io/2019/03/06/Unity%E7%AC%94%E8%AE%B0/Unity-Shader-%E9%AB%98%E7%BA%A7%E7%BA%B9%E7%90%86/&title=Unity Shader 高级纹理" target="_blank" rel="noopener"><i class="fab fa-stumbleupon fa-lg" aria-hidden="true"></i></a></li>
-  <li><a class="icon" href="http://digg.com/submit?url=https://bitzhangmo.github.io/2019/03/06/Unity%E7%AC%94%E8%AE%B0/Unity-Shader-%E9%AB%98%E7%BA%A7%E7%BA%B9%E7%90%86/&title=Unity Shader 高级纹理" target="_blank" rel="noopener"><i class="fab fa-digg fa-lg" aria-hidden="true"></i></a></li>
-  <li><a class="icon" href="http://www.tumblr.com/share/link?url=https://bitzhangmo.github.io/2019/03/06/Unity%E7%AC%94%E8%AE%B0/Unity-Shader-%E9%AB%98%E7%BA%A7%E7%BA%B9%E7%90%86/&name=Unity Shader 高级纹理&description=&lt;p&gt;立方体纹理实现环境映射，渲染纹理以及程序纹理。&lt;/p&gt;" target="_blank" rel="noopener"><i class="fab fa-tumblr fa-lg" aria-hidden="true"></i></a></li>
-  <li><a class="icon" href="https://news.ycombinator.com/submitlink?u=https://bitzhangmo.github.io/2019/03/06/Unity%E7%AC%94%E8%AE%B0/Unity-Shader-%E9%AB%98%E7%BA%A7%E7%BA%B9%E7%90%86/&t=Unity Shader 高级纹理" target="_blank" rel="noopener"><i class="fab fa-hacker-news fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="http://www.facebook.com/sharer.php?u=https://bitzhangmo.github.io/2019/03/06/Unity笔记/Unity-Shader-高级纹理/"><i class="fab fa-facebook fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="https://twitter.com/share?url=https://bitzhangmo.github.io/2019/03/06/Unity笔记/Unity-Shader-高级纹理/&text=Unity Shader 高级纹理"><i class="fab fa-twitter fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="http://www.linkedin.com/shareArticle?url=https://bitzhangmo.github.io/2019/03/06/Unity笔记/Unity-Shader-高级纹理/&title=Unity Shader 高级纹理"><i class="fab fa-linkedin fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="https://pinterest.com/pin/create/bookmarklet/?url=https://bitzhangmo.github.io/2019/03/06/Unity笔记/Unity-Shader-高级纹理/&is_video=false&description=Unity Shader 高级纹理"><i class="fab fa-pinterest fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="mailto:?subject=Unity Shader 高级纹理&body=Check out this article: https://bitzhangmo.github.io/2019/03/06/Unity笔记/Unity-Shader-高级纹理/"><i class="fas fa-envelope fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="https://getpocket.com/save?url=https://bitzhangmo.github.io/2019/03/06/Unity笔记/Unity-Shader-高级纹理/&title=Unity Shader 高级纹理"><i class="fab fa-get-pocket fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="http://reddit.com/submit?url=https://bitzhangmo.github.io/2019/03/06/Unity笔记/Unity-Shader-高级纹理/&title=Unity Shader 高级纹理"><i class="fab fa-reddit fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="http://www.stumbleupon.com/submit?url=https://bitzhangmo.github.io/2019/03/06/Unity笔记/Unity-Shader-高级纹理/&title=Unity Shader 高级纹理"><i class="fab fa-stumbleupon fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="http://digg.com/submit?url=https://bitzhangmo.github.io/2019/03/06/Unity笔记/Unity-Shader-高级纹理/&title=Unity Shader 高级纹理"><i class="fab fa-digg fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="http://www.tumblr.com/share/link?url=https://bitzhangmo.github.io/2019/03/06/Unity笔记/Unity-Shader-高级纹理/&name=Unity Shader 高级纹理&description=&lt;p&gt;立方体纹理实现环境映射，渲染纹理以及程序纹理。&lt;/p&gt;"><i class="fab fa-tumblr fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="https://news.ycombinator.com/submitlink?u=https://bitzhangmo.github.io/2019/03/06/Unity笔记/Unity-Shader-高级纹理/&t=Unity Shader 高级纹理"><i class="fab fa-hacker-news fa-lg" aria-hidden="true"></i></a></li>
 </ul>
 
     </div>
@@ -395,7 +395,7 @@
          
           <li><a href="/archives/">归档</a></li>
          
-          <li><a href="/projects_url">项目</a></li>
+          <li><a href="/search/">搜索</a></li>
         
       </ul>
     </nav>
@@ -443,5 +443,5 @@
 <!-- Disqus Comments -->
 
 
-</body>
+<script src="/live2dw/lib/L2Dwidget.min.js?bd2294fafea3389ee458f1d9be5a2157"></script><script>L2Dwidget.init({"pluginRootPath":"live2dw/","pluginJsPath":"lib/","pluginModelPath":"assets/","tagMode":false,"debug":false,"model":{"jsonPath":"/live2dw/assets/hijiki.model.json"},"display":{"position":"left","width":100,"height":200},"mobile":{"show":false},"log":false});</script></body>
 </html>

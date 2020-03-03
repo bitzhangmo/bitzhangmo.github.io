@@ -1,21 +1,23 @@
 <!DOCTYPE html>
 <html lang=zh>
-<head>
+<head><meta name="generator" content="Hexo 3.9.0">
     <!-- so meta -->
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="HandheldFriendly" content="True">
-    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1" />
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
     <meta name="description" content="CineMachine用户手册翻译的第一部分：安装并开始，以及一些相机组件的属性介绍。">
 <meta name="keywords" content="CineMachine">
 <meta property="og:type" content="article">
 <meta property="og:title" content="[翻译] CineMachine用户手册（0）">
-<meta property="og:url" content="https:&#x2F;&#x2F;bitzhangmo.github.io&#x2F;2018&#x2F;12&#x2F;20&#x2F;%E7%BF%BB%E8%AF%91&#x2F;%E7%BF%BB%E8%AF%91-CineMachine%E7%94%A8%E6%88%B7%E6%89%8B%E5%86%8C%EF%BC%880%EF%BC%89&#x2F;index.html">
+<meta property="og:url" content="https://bitzhangmo.github.io/2018/12/20/翻译/翻译-CineMachine用户手册（0）/index.html">
 <meta property="og:site_name" content="zhangMo Blog">
 <meta property="og:description" content="CineMachine用户手册翻译的第一部分：安装并开始，以及一些相机组件的属性介绍。">
 <meta property="og:locale" content="zh-CN">
 <meta property="og:updated_time" content="2018-12-20T14:47:42.057Z">
 <meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="[翻译] CineMachine用户手册（0）">
+<meta name="twitter:description" content="CineMachine用户手册翻译的第一部分：安装并开始，以及一些相机组件的属性介绍。">
     
     
         
@@ -63,7 +65,7 @@
          
           <li><a href="/archives/">归档</a></li>
          
-          <li><a href="/projects_url">项目</a></li>
+          <li><a href="/search/">搜索</a></li>
         
       </ul>
     </span>
@@ -71,10 +73,10 @@
     <span id="actions">
       <ul>
         
-        <li><a class="icon" href="/2018/12/20/%E8%AE%A1%E7%AE%97%E6%9C%BA%E5%9B%BE%E5%BD%A2%E5%AD%A6/%E5%9B%BE%E5%BD%A2%E5%AD%A6-%E7%BB%8F%E5%85%B8%E5%85%89%E7%85%A7%E6%A8%A1%E5%9E%8B/"><i class="fas fa-chevron-left" aria-hidden="true" onmouseover="$('#i-prev').toggle();" onmouseout="$('#i-prev').toggle();"></i></a></li>
+        <li><a class="icon" href="/2018/12/20/计算机图形学/图形学-经典光照模型/"><i class="fas fa-chevron-left" aria-hidden="true" onmouseover="$('#i-prev').toggle();" onmouseout="$('#i-prev').toggle();"></i></a></li>
         
         
-        <li><a class="icon" href="/2018/12/17/%E5%BC%80%E5%8F%91%E7%AC%94%E8%AE%B0/indlecamp-GameJam-%E5%BC%80%E5%8F%91%E7%AC%94%E8%AE%B0/"><i class="fas fa-chevron-right" aria-hidden="true" onmouseover="$('#i-next').toggle();" onmouseout="$('#i-next').toggle();"></i></a></li>
+        <li><a class="icon" href="/2018/12/17/开发笔记/indlecamp-GameJam-开发笔记/"><i class="fas fa-chevron-right" aria-hidden="true" onmouseover="$('#i-next').toggle();" onmouseout="$('#i-next').toggle();"></i></a></li>
         
         <li><a class="icon" href="#" onclick="$('html, body').animate({ scrollTop: 0 }, 'fast');"><i class="fas fa-chevron-up" aria-hidden="true" onmouseover="$('#i-top').toggle();" onmouseout="$('#i-top').toggle();"></i></a></li>
         <li><a class="icon" href="#"><i class="fas fa-share-alt" aria-hidden="true" onmouseover="$('#i-share').toggle();" onmouseout="$('#i-share').toggle();" onclick="$('#share').toggle();return false;"></i></a></li>
@@ -87,17 +89,17 @@
     <br/>
     <div id="share" style="display: none">
       <ul>
-  <li><a class="icon" href="http://www.facebook.com/sharer.php?u=https://bitzhangmo.github.io/2018/12/20/%E7%BF%BB%E8%AF%91/%E7%BF%BB%E8%AF%91-CineMachine%E7%94%A8%E6%88%B7%E6%89%8B%E5%86%8C%EF%BC%880%EF%BC%89/" target="_blank" rel="noopener"><i class="fab fa-facebook " aria-hidden="true"></i></a></li>
-  <li><a class="icon" href="https://twitter.com/share?url=https://bitzhangmo.github.io/2018/12/20/%E7%BF%BB%E8%AF%91/%E7%BF%BB%E8%AF%91-CineMachine%E7%94%A8%E6%88%B7%E6%89%8B%E5%86%8C%EF%BC%880%EF%BC%89/&text=[翻译] CineMachine用户手册（0）" target="_blank" rel="noopener"><i class="fab fa-twitter " aria-hidden="true"></i></a></li>
-  <li><a class="icon" href="http://www.linkedin.com/shareArticle?url=https://bitzhangmo.github.io/2018/12/20/%E7%BF%BB%E8%AF%91/%E7%BF%BB%E8%AF%91-CineMachine%E7%94%A8%E6%88%B7%E6%89%8B%E5%86%8C%EF%BC%880%EF%BC%89/&title=[翻译] CineMachine用户手册（0）" target="_blank" rel="noopener"><i class="fab fa-linkedin " aria-hidden="true"></i></a></li>
-  <li><a class="icon" href="https://pinterest.com/pin/create/bookmarklet/?url=https://bitzhangmo.github.io/2018/12/20/%E7%BF%BB%E8%AF%91/%E7%BF%BB%E8%AF%91-CineMachine%E7%94%A8%E6%88%B7%E6%89%8B%E5%86%8C%EF%BC%880%EF%BC%89/&is_video=false&description=[翻译] CineMachine用户手册（0）" target="_blank" rel="noopener"><i class="fab fa-pinterest " aria-hidden="true"></i></a></li>
-  <li><a class="icon" href="mailto:?subject=[翻译] CineMachine用户手册（0）&body=Check out this article: https://bitzhangmo.github.io/2018/12/20/%E7%BF%BB%E8%AF%91/%E7%BF%BB%E8%AF%91-CineMachine%E7%94%A8%E6%88%B7%E6%89%8B%E5%86%8C%EF%BC%880%EF%BC%89/"><i class="fas fa-envelope " aria-hidden="true"></i></a></li>
-  <li><a class="icon" href="https://getpocket.com/save?url=https://bitzhangmo.github.io/2018/12/20/%E7%BF%BB%E8%AF%91/%E7%BF%BB%E8%AF%91-CineMachine%E7%94%A8%E6%88%B7%E6%89%8B%E5%86%8C%EF%BC%880%EF%BC%89/&title=[翻译] CineMachine用户手册（0）" target="_blank" rel="noopener"><i class="fab fa-get-pocket " aria-hidden="true"></i></a></li>
-  <li><a class="icon" href="http://reddit.com/submit?url=https://bitzhangmo.github.io/2018/12/20/%E7%BF%BB%E8%AF%91/%E7%BF%BB%E8%AF%91-CineMachine%E7%94%A8%E6%88%B7%E6%89%8B%E5%86%8C%EF%BC%880%EF%BC%89/&title=[翻译] CineMachine用户手册（0）" target="_blank" rel="noopener"><i class="fab fa-reddit " aria-hidden="true"></i></a></li>
-  <li><a class="icon" href="http://www.stumbleupon.com/submit?url=https://bitzhangmo.github.io/2018/12/20/%E7%BF%BB%E8%AF%91/%E7%BF%BB%E8%AF%91-CineMachine%E7%94%A8%E6%88%B7%E6%89%8B%E5%86%8C%EF%BC%880%EF%BC%89/&title=[翻译] CineMachine用户手册（0）" target="_blank" rel="noopener"><i class="fab fa-stumbleupon " aria-hidden="true"></i></a></li>
-  <li><a class="icon" href="http://digg.com/submit?url=https://bitzhangmo.github.io/2018/12/20/%E7%BF%BB%E8%AF%91/%E7%BF%BB%E8%AF%91-CineMachine%E7%94%A8%E6%88%B7%E6%89%8B%E5%86%8C%EF%BC%880%EF%BC%89/&title=[翻译] CineMachine用户手册（0）" target="_blank" rel="noopener"><i class="fab fa-digg " aria-hidden="true"></i></a></li>
-  <li><a class="icon" href="http://www.tumblr.com/share/link?url=https://bitzhangmo.github.io/2018/12/20/%E7%BF%BB%E8%AF%91/%E7%BF%BB%E8%AF%91-CineMachine%E7%94%A8%E6%88%B7%E6%89%8B%E5%86%8C%EF%BC%880%EF%BC%89/&name=[翻译] CineMachine用户手册（0）&description=&lt;p&gt;CineMachine用户手册翻译的第一部分：安装并开始，以及一些相机组件的属性介绍。&lt;/p&gt;" target="_blank" rel="noopener"><i class="fab fa-tumblr " aria-hidden="true"></i></a></li>
-  <li><a class="icon" href="https://news.ycombinator.com/submitlink?u=https://bitzhangmo.github.io/2018/12/20/%E7%BF%BB%E8%AF%91/%E7%BF%BB%E8%AF%91-CineMachine%E7%94%A8%E6%88%B7%E6%89%8B%E5%86%8C%EF%BC%880%EF%BC%89/&t=[翻译] CineMachine用户手册（0）" target="_blank" rel="noopener"><i class="fab fa-hacker-news " aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="http://www.facebook.com/sharer.php?u=https://bitzhangmo.github.io/2018/12/20/翻译/翻译-CineMachine用户手册（0）/"><i class="fab fa-facebook " aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="https://twitter.com/share?url=https://bitzhangmo.github.io/2018/12/20/翻译/翻译-CineMachine用户手册（0）/&text=[翻译] CineMachine用户手册（0）"><i class="fab fa-twitter " aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="http://www.linkedin.com/shareArticle?url=https://bitzhangmo.github.io/2018/12/20/翻译/翻译-CineMachine用户手册（0）/&title=[翻译] CineMachine用户手册（0）"><i class="fab fa-linkedin " aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="https://pinterest.com/pin/create/bookmarklet/?url=https://bitzhangmo.github.io/2018/12/20/翻译/翻译-CineMachine用户手册（0）/&is_video=false&description=[翻译] CineMachine用户手册（0）"><i class="fab fa-pinterest " aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="mailto:?subject=[翻译] CineMachine用户手册（0）&body=Check out this article: https://bitzhangmo.github.io/2018/12/20/翻译/翻译-CineMachine用户手册（0）/"><i class="fas fa-envelope " aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="https://getpocket.com/save?url=https://bitzhangmo.github.io/2018/12/20/翻译/翻译-CineMachine用户手册（0）/&title=[翻译] CineMachine用户手册（0）"><i class="fab fa-get-pocket " aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="http://reddit.com/submit?url=https://bitzhangmo.github.io/2018/12/20/翻译/翻译-CineMachine用户手册（0）/&title=[翻译] CineMachine用户手册（0）"><i class="fab fa-reddit " aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="http://www.stumbleupon.com/submit?url=https://bitzhangmo.github.io/2018/12/20/翻译/翻译-CineMachine用户手册（0）/&title=[翻译] CineMachine用户手册（0）"><i class="fab fa-stumbleupon " aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="http://digg.com/submit?url=https://bitzhangmo.github.io/2018/12/20/翻译/翻译-CineMachine用户手册（0）/&title=[翻译] CineMachine用户手册（0）"><i class="fab fa-digg " aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="http://www.tumblr.com/share/link?url=https://bitzhangmo.github.io/2018/12/20/翻译/翻译-CineMachine用户手册（0）/&name=[翻译] CineMachine用户手册（0）&description=&lt;p&gt;CineMachine用户手册翻译的第一部分：安装并开始，以及一些相机组件的属性介绍。&lt;/p&gt;"><i class="fab fa-tumblr " aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="https://news.ycombinator.com/submitlink?u=https://bitzhangmo.github.io/2018/12/20/翻译/翻译-CineMachine用户手册（0）/&t=[翻译] CineMachine用户手册（0）"><i class="fab fa-hacker-news " aria-hidden="true"></i></a></li>
 </ul>
 
     </div>
@@ -135,14 +137,14 @@
       
     <div class="article-category">
         <i class="fas fa-archive"></i>
-        <a class="category-link" href="/categories/%E7%BF%BB%E8%AF%91/">翻译</a>
+        <a class="category-link" href="/categories/翻译/">翻译</a>
     </div>
 
 
       
     <div class="article-tag">
         <i class="fas fa-tag"></i>
-        <a class="tag-link" href="/tags/CineMachine/" rel="tag">CineMachine</a>
+        <a class="tag-link" href="/tags/CineMachine/">CineMachine</a>
     </div>
 
 
@@ -153,7 +155,6 @@
   <div class="content" itemprop="articleBody">
     <p>CineMachine用户手册翻译的第一部分：安装并开始，以及一些相机组件的属性介绍。</p>
 <a id="more"></a>
-
 <p>[TOC]</p>
 <h4 id="What-is-Cinemachine-什么是Cinemachine？"><a href="#What-is-Cinemachine-什么是Cinemachine？" class="headerlink" title="What  is  Cinemachine? : 什么是Cinemachine？"></a>What  is  Cinemachine? : 什么是Cinemachine？</h4><p>Cinemachine  is  a  suite  of  ‘smart’  procedural  modules  which  allow  you  to  define  the  shot  and<br>they’ll  dynamically  follow  your  direction.   Setup  shots  which  track  and  compose  motion  in<br>realtime,  like  AI  camera  operators.   The  procedural  nature  makes  them  bug-resistant  as  they<br>always  work  to  make  the  shot  based  on  your  direction.  That’s  great  for  gameplay,  but  they’re<br>also  amazingly  fast  for  cutscenes.   Change  an  animation,  a  vehicle  speed,  ground  terrain  -<br>whatever  -  and  Cinemachine  will  dynamically  make  the  shot.   You  can  use  really  telephoto<br>lenses  and  not  have  to  update  the  cutscene  if  things  change .</p>
 <p>Cinemachine是一套“智能”程序模块，可以让你定义镜头并且他们会动态地按照你的指示行事。如同一个AI相机操作员般，实时地设置跟踪和组成运动的镜头。程序性质使它们像它们一样具有抗病性<br>总是根据你的方向努力拍摄。这对于游戏玩法来说非常棒，并且它们在过场动画的表现也出人意料的快。<br>改变动画、车速、地面地形或者无论什么效果——Cinemachine都将动态拍摄。你可以使用真正的长焦镜头，如果事情发生变化，不必更新过场动画。</p>
@@ -338,6 +339,7 @@
 <p>In  order  to  be  driven  by  a  virtual  camera,  the  Unity  Camera  must  have  a  CinemachineBrain behaviour,  which  will  select  the  most  eligible  virtual  camera  based  on  its  priority  or  on  other criteria,  and  will  manage  blending. </p>
 <p>Unity Camera可以由场景中的任何虚拟摄像头驱动。 游戏逻辑可以通过基于游戏逻辑操纵虚拟相机的启用标志及其优先级来选择虚拟相机来实现。</p>
 <p>为了由虚拟摄像头驱动，Unity Camera必须具有CinemachineBrain行为，该行为将根据其优先级或其他标准选择最符合条件的虚拟摄像机，并将管理混合。</p>
+<div class="table-container">
 <table>
 <thead>
 <tr>
@@ -346,7 +348,8 @@
 <th>Description</th>
 </tr>
 </thead>
-<tbody><tr>
+<tbody>
+<tr>
 <td>Look At</td>
 <td>Transform</td>
 <td>The  object  that  the  camera  wants  to  look  at  (the  Aim  target).  If this  is null,  then  the  vcam’s  Transform  orientation  will  define  the camera’s orientation.</td>
@@ -366,7 +369,10 @@
 <td>Int32</td>
 <td>The  priority  will  determine  which  camera  becomes  active  based on  the  state  of  other  cameras  and  this  camera.  Higher number shave  greater  priority.</td>
 </tr>
-</tbody></table>
+</tbody>
+</table>
+</div>
+<div class="table-container">
 <table>
 <thead>
 <tr>
@@ -375,7 +381,8 @@
 <th>描述</th>
 </tr>
 </thead>
-<tbody><tr>
+<tbody>
+<tr>
 <td>LookAt</td>
 <td>Transform</td>
 <td>相机想要查看的对象（Aim 目标）。 如果为null，则vcam的Transform方向将定义摄像机的方向。</td>
@@ -395,9 +402,12 @@
 <td>Int32</td>
 <td>优先级将根据其他摄像机和本摄像机的状态确定哪个摄像机变为活动状态。 数字越大，优先级越高。</td>
 </tr>
-</tbody></table>
+</tbody>
+</table>
+</div>
 <h5 id="LensSettings"><a href="#LensSettings" class="headerlink" title="LensSettings"></a>LensSettings</h5><p>Describes the FOV and clip planes for a camera. This generally mirrors the Unity Camera’s lens settings, and will be used to drive the Unity camera when the vcam is active.</p>
 <p>描述摄像机的FOV和剪裁平面。 这通常反映了Unity Camera的镜头设置，并将在vcam处于活动状态时用于驱动Unity相机。</p>
+<div class="table-container">
 <table>
 <thead>
 <tr>
@@ -406,7 +416,8 @@
 <th>Description</th>
 </tr>
 </thead>
-<tbody><tr>
+<tbody>
+<tr>
 <td>Field Of View</td>
 <td>Single</td>
 <td>This is the camera view in vertical degrees. For cinematic people, a 50mm lens on a super-35mm sensor would equal a 19.6 degree FOV.</td>
@@ -431,7 +442,10 @@
 <td>Single</td>
 <td>Camera Z roll, or tilt, in degrees.</td>
 </tr>
-</tbody></table>
+</tbody>
+</table>
+</div>
+<div class="table-container">
 <table>
 <thead>
 <tr>
@@ -440,7 +454,8 @@
 <th>描述</th>
 </tr>
 </thead>
-<tbody><tr>
+<tbody>
+<tr>
 <td>视野</td>
 <td>Single</td>
 <td>这是垂直度的摄像机视图。 对于电影人来说，超35mm传感器上的50mm镜头等于19.6度FOV。</td>
@@ -465,7 +480,9 @@
 <td>Single</td>
 <td>相机Z以度为单位滚动或倾斜。</td>
 </tr>
-</tbody></table>
+</tbody>
+</table>
+</div>
 <h5 id="CinemachineComposer-："><a href="#CinemachineComposer-：" class="headerlink" title="CinemachineComposer ："></a>CinemachineComposer ：</h5><p>This is a CinemachineComponent in the Aim section of the component pipeline. Its job is to aim the camera at the vcam’s LookAt target object, with configurable offsets, damping, and composition rules. </p>
 <p>The composer does not change the camera’s position. It will only pan and tilt the camera where it is, in order to get the desired framing. To move the camera, you have to use the virtual camera’s Body section. </p>
 <p>The vcam’s LookAt target is the Composer’s target. Common Composer targets: include bones on a character like the upper spine or head bone, vehicles, or dummy objects which are controlled or animated programmatically. </p>
@@ -478,6 +495,7 @@
 <p>一旦你设置了vcam的LookAt目标并跟踪某些东西，你需要定义你想要它在屏幕上的位置以及你想要相机跟踪它的积极程度。两个控件定义了延迟程度或相机跟随主体的紧密程度：</p>
 <p><strong>水平/垂直软阻尼</strong>：将这些值设置为零意味着摄像机将硬跟踪主体，上方的蓝色区域将作为锁定摄像机移动的刚性障碍，以使目标保持在这些值内。设置较大的将允许目标“挤压”到蓝色区域，给你一些非常好的相机重量和滞后。这就是真正的相机操作员所做的！垂直和水平值是分开的，因此您可以让相机从左到右更加挤压，或者跟随上下更紧，等等。</p>
 <p><strong>SoftZone / DeadZone</strong>：调整这些以定义主体在屏幕上的位置。这些控件非常通用。蓝色区域是基于您具有多少水平/垂直阻尼的“柔软”区域，红色区域定义了摄像机始终跟踪主体的“无通过”限制。打开柔和区域以在中间创建“死区”允许您使屏幕区域免受目标运动的影响，这对于像动画周期这样的事情很方便，如果它只是移动一点点的话，你可能不希望摄像机跟踪目标。</p>
+<div class="table-container">
 <table>
 <thead>
 <tr>
@@ -486,7 +504,8 @@
 <th>Description</th>
 </tr>
 </thead>
-<tbody><tr>
+<tbody>
+<tr>
 <td>Tracked Object Offset</td>
 <td>Vector3</td>
 <td>Target offset from the target object’s center in target-local space. Use this to fine-tune the tracking target position when the desired area is not the tracked object’s center.</td>
@@ -544,9 +563,12 @@
 <tr>
 <td>Bias Y</td>
 <td>Single</td>
-<td>A non-zero bias will move the target position vertically away from<br/>the center of the soft zone.</td>
+<td>A non-zero bias will move the target position vertically away from<br>the center of the soft zone.</td>
 </tr>
-</tbody></table>
+</tbody>
+</table>
+</div>
+<div class="table-container">
 <table>
 <thead>
 <tr>
@@ -555,7 +577,8 @@
 <th>描述</th>
 </tr>
 </thead>
-<tbody><tr>
+<tbody>
+<tr>
 <td>跟踪对象偏移</td>
 <td>Vector3</td>
 <td>目标对象在目标 - 本地空间中心的目标偏移量。 当所需区域不是被跟踪对象的中心时，使用此选项微调跟踪目标位置。</td>
@@ -615,7 +638,9 @@
 <td>Single</td>
 <td>非零偏差将使目标位置垂直移动远离软区域的中心。</td>
 </tr>
-</tbody></table>
+</tbody>
+</table>
+</div>
 <h5 id="CinemachineTransposer"><a href="#CinemachineTransposer" class="headerlink" title="CinemachineTransposer"></a>CinemachineTransposer</h5><p>This is a CinemachineComponent in the Body section of the component pipeline. Its job is to position the camera in a fixed relationship to the vcam’s Follow target object, with offsets and damping. </p>
 <p>The Transposer will only change the camera’s position in space. It will not re-orient or otherwise aim the camera. To to that, you need to instruct the vcam in the Aim section of its pipeline. </p>
 <p>Transposer is a component which mounts a camera to any object. It has a number of advantages over just putting the camera under the object you want to have the camera follow. Hood Cam, Door Cam, POV Cam, Missile Cam - if you want to mount the camera to something, use Transposer. </p>
@@ -656,6 +681,7 @@
 </ul>
 <p>These different modes do incredibly different things, so try them out and one should work well for whatever your requirements are. The ‘Door Cam’ or ‘Hood Cam’ ideas would use L ocal Space Locked To Target. </p>
 <p>这些不同的模式做了非常不同的事情，所以尝试一下，某个应该适合你的要求。 “监视器”或“固定在遮光罩上的镜头”的想法应使用Local Space Locked To Target。</p>
+<div class="table-container">
 <table>
 <thead>
 <tr>
@@ -664,7 +690,8 @@
 <th>Description</th>
 </tr>
 </thead>
-<tbody><tr>
+<tbody>
+<tr>
 <td>Binding Mode</td>
 <td>BindingMode</td>
 <td>The coordinate space to use when interpreting the offset from the target. This is also used to set the camera’s Up vector, which will be maintained when aiming the camera. Possible Values:</td>
@@ -734,7 +761,10 @@
 <td>Single</td>
 <td>How aggressively the camera tries to track the target rotation’s Z angle. Small numbers are more responsive. Larger numbers give a more heavy slowly responding camera.</td>
 </tr>
-</tbody></table>
+</tbody>
+</table>
+</div>
+<div class="table-container">
 <table>
 <thead>
 <tr>
@@ -743,7 +773,8 @@
 <th>描述</th>
 </tr>
 </thead>
-<tbody><tr>
+<tbody>
+<tr>
 <td>绑定模式</td>
 <td>绑定模式</td>
 <td>解释目标偏移时使用的坐标空间。 这也用于设置相机的向上矢量，瞄准相机时将保持该矢量。 可能的值：</td>
@@ -813,7 +844,9 @@
 <td>Single</td>
 <td>相机如何积极地尝试跟踪目标旋转的Z角度。 小数字响应更快。 较大的数字给出了一个更加沉重的慢响应相机。</td>
 </tr>
-</tbody></table>
+</tbody>
+</table>
+</div>
 <h5 id="Cinemachine-BasicMultiChannelPerlin"><a href="#Cinemachine-BasicMultiChannelPerlin" class="headerlink" title="Cinemachine BasicMultiChannelPerlin"></a>Cinemachine BasicMultiChannelPerlin</h5><h5 id="NoiseSettings"><a href="#NoiseSettings" class="headerlink" title="NoiseSettings"></a>NoiseSettings</h5><h5 id="NoiseSettings-NoiseParams"><a href="#NoiseSettings-NoiseParams" class="headerlink" title="NoiseSettings.NoiseParams"></a>NoiseSettings.NoiseParams</h5><h5 id="NoiseSettings-Transform-NoiseParams"><a href="#NoiseSettings-Transform-NoiseParams" class="headerlink" title="NoiseSettings.Transform NoiseParams"></a>NoiseSettings.Transform NoiseParams</h5>
   </div>
 </article>
@@ -833,7 +866,7 @@
          
           <li><a href="/archives/">归档</a></li>
          
-          <li><a href="/projects_url">项目</a></li>
+          <li><a href="/search/">搜索</a></li>
         
       </ul>
     </div>
@@ -844,17 +877,17 @@
 
     <div id="share-footer" style="display: none">
       <ul>
-  <li><a class="icon" href="http://www.facebook.com/sharer.php?u=https://bitzhangmo.github.io/2018/12/20/%E7%BF%BB%E8%AF%91/%E7%BF%BB%E8%AF%91-CineMachine%E7%94%A8%E6%88%B7%E6%89%8B%E5%86%8C%EF%BC%880%EF%BC%89/" target="_blank" rel="noopener"><i class="fab fa-facebook fa-lg" aria-hidden="true"></i></a></li>
-  <li><a class="icon" href="https://twitter.com/share?url=https://bitzhangmo.github.io/2018/12/20/%E7%BF%BB%E8%AF%91/%E7%BF%BB%E8%AF%91-CineMachine%E7%94%A8%E6%88%B7%E6%89%8B%E5%86%8C%EF%BC%880%EF%BC%89/&text=[翻译] CineMachine用户手册（0）" target="_blank" rel="noopener"><i class="fab fa-twitter fa-lg" aria-hidden="true"></i></a></li>
-  <li><a class="icon" href="http://www.linkedin.com/shareArticle?url=https://bitzhangmo.github.io/2018/12/20/%E7%BF%BB%E8%AF%91/%E7%BF%BB%E8%AF%91-CineMachine%E7%94%A8%E6%88%B7%E6%89%8B%E5%86%8C%EF%BC%880%EF%BC%89/&title=[翻译] CineMachine用户手册（0）" target="_blank" rel="noopener"><i class="fab fa-linkedin fa-lg" aria-hidden="true"></i></a></li>
-  <li><a class="icon" href="https://pinterest.com/pin/create/bookmarklet/?url=https://bitzhangmo.github.io/2018/12/20/%E7%BF%BB%E8%AF%91/%E7%BF%BB%E8%AF%91-CineMachine%E7%94%A8%E6%88%B7%E6%89%8B%E5%86%8C%EF%BC%880%EF%BC%89/&is_video=false&description=[翻译] CineMachine用户手册（0）" target="_blank" rel="noopener"><i class="fab fa-pinterest fa-lg" aria-hidden="true"></i></a></li>
-  <li><a class="icon" href="mailto:?subject=[翻译] CineMachine用户手册（0）&body=Check out this article: https://bitzhangmo.github.io/2018/12/20/%E7%BF%BB%E8%AF%91/%E7%BF%BB%E8%AF%91-CineMachine%E7%94%A8%E6%88%B7%E6%89%8B%E5%86%8C%EF%BC%880%EF%BC%89/"><i class="fas fa-envelope fa-lg" aria-hidden="true"></i></a></li>
-  <li><a class="icon" href="https://getpocket.com/save?url=https://bitzhangmo.github.io/2018/12/20/%E7%BF%BB%E8%AF%91/%E7%BF%BB%E8%AF%91-CineMachine%E7%94%A8%E6%88%B7%E6%89%8B%E5%86%8C%EF%BC%880%EF%BC%89/&title=[翻译] CineMachine用户手册（0）" target="_blank" rel="noopener"><i class="fab fa-get-pocket fa-lg" aria-hidden="true"></i></a></li>
-  <li><a class="icon" href="http://reddit.com/submit?url=https://bitzhangmo.github.io/2018/12/20/%E7%BF%BB%E8%AF%91/%E7%BF%BB%E8%AF%91-CineMachine%E7%94%A8%E6%88%B7%E6%89%8B%E5%86%8C%EF%BC%880%EF%BC%89/&title=[翻译] CineMachine用户手册（0）" target="_blank" rel="noopener"><i class="fab fa-reddit fa-lg" aria-hidden="true"></i></a></li>
-  <li><a class="icon" href="http://www.stumbleupon.com/submit?url=https://bitzhangmo.github.io/2018/12/20/%E7%BF%BB%E8%AF%91/%E7%BF%BB%E8%AF%91-CineMachine%E7%94%A8%E6%88%B7%E6%89%8B%E5%86%8C%EF%BC%880%EF%BC%89/&title=[翻译] CineMachine用户手册（0）" target="_blank" rel="noopener"><i class="fab fa-stumbleupon fa-lg" aria-hidden="true"></i></a></li>
-  <li><a class="icon" href="http://digg.com/submit?url=https://bitzhangmo.github.io/2018/12/20/%E7%BF%BB%E8%AF%91/%E7%BF%BB%E8%AF%91-CineMachine%E7%94%A8%E6%88%B7%E6%89%8B%E5%86%8C%EF%BC%880%EF%BC%89/&title=[翻译] CineMachine用户手册（0）" target="_blank" rel="noopener"><i class="fab fa-digg fa-lg" aria-hidden="true"></i></a></li>
-  <li><a class="icon" href="http://www.tumblr.com/share/link?url=https://bitzhangmo.github.io/2018/12/20/%E7%BF%BB%E8%AF%91/%E7%BF%BB%E8%AF%91-CineMachine%E7%94%A8%E6%88%B7%E6%89%8B%E5%86%8C%EF%BC%880%EF%BC%89/&name=[翻译] CineMachine用户手册（0）&description=&lt;p&gt;CineMachine用户手册翻译的第一部分：安装并开始，以及一些相机组件的属性介绍。&lt;/p&gt;" target="_blank" rel="noopener"><i class="fab fa-tumblr fa-lg" aria-hidden="true"></i></a></li>
-  <li><a class="icon" href="https://news.ycombinator.com/submitlink?u=https://bitzhangmo.github.io/2018/12/20/%E7%BF%BB%E8%AF%91/%E7%BF%BB%E8%AF%91-CineMachine%E7%94%A8%E6%88%B7%E6%89%8B%E5%86%8C%EF%BC%880%EF%BC%89/&t=[翻译] CineMachine用户手册（0）" target="_blank" rel="noopener"><i class="fab fa-hacker-news fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="http://www.facebook.com/sharer.php?u=https://bitzhangmo.github.io/2018/12/20/翻译/翻译-CineMachine用户手册（0）/"><i class="fab fa-facebook fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="https://twitter.com/share?url=https://bitzhangmo.github.io/2018/12/20/翻译/翻译-CineMachine用户手册（0）/&text=[翻译] CineMachine用户手册（0）"><i class="fab fa-twitter fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="http://www.linkedin.com/shareArticle?url=https://bitzhangmo.github.io/2018/12/20/翻译/翻译-CineMachine用户手册（0）/&title=[翻译] CineMachine用户手册（0）"><i class="fab fa-linkedin fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="https://pinterest.com/pin/create/bookmarklet/?url=https://bitzhangmo.github.io/2018/12/20/翻译/翻译-CineMachine用户手册（0）/&is_video=false&description=[翻译] CineMachine用户手册（0）"><i class="fab fa-pinterest fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="mailto:?subject=[翻译] CineMachine用户手册（0）&body=Check out this article: https://bitzhangmo.github.io/2018/12/20/翻译/翻译-CineMachine用户手册（0）/"><i class="fas fa-envelope fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="https://getpocket.com/save?url=https://bitzhangmo.github.io/2018/12/20/翻译/翻译-CineMachine用户手册（0）/&title=[翻译] CineMachine用户手册（0）"><i class="fab fa-get-pocket fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="http://reddit.com/submit?url=https://bitzhangmo.github.io/2018/12/20/翻译/翻译-CineMachine用户手册（0）/&title=[翻译] CineMachine用户手册（0）"><i class="fab fa-reddit fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="http://www.stumbleupon.com/submit?url=https://bitzhangmo.github.io/2018/12/20/翻译/翻译-CineMachine用户手册（0）/&title=[翻译] CineMachine用户手册（0）"><i class="fab fa-stumbleupon fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="http://digg.com/submit?url=https://bitzhangmo.github.io/2018/12/20/翻译/翻译-CineMachine用户手册（0）/&title=[翻译] CineMachine用户手册（0）"><i class="fab fa-digg fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="http://www.tumblr.com/share/link?url=https://bitzhangmo.github.io/2018/12/20/翻译/翻译-CineMachine用户手册（0）/&name=[翻译] CineMachine用户手册（0）&description=&lt;p&gt;CineMachine用户手册翻译的第一部分：安装并开始，以及一些相机组件的属性介绍。&lt;/p&gt;"><i class="fab fa-tumblr fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="https://news.ycombinator.com/submitlink?u=https://bitzhangmo.github.io/2018/12/20/翻译/翻译-CineMachine用户手册（0）/&t=[翻译] CineMachine用户手册（0）"><i class="fab fa-hacker-news fa-lg" aria-hidden="true"></i></a></li>
 </ul>
 
     </div>
@@ -884,7 +917,7 @@
          
           <li><a href="/archives/">归档</a></li>
          
-          <li><a href="/projects_url">项目</a></li>
+          <li><a href="/search/">搜索</a></li>
         
       </ul>
     </nav>
@@ -932,5 +965,5 @@
 <!-- Disqus Comments -->
 
 
-</body>
+<script src="/live2dw/lib/L2Dwidget.min.js?bd2294fafea3389ee458f1d9be5a2157"></script><script>L2Dwidget.init({"pluginRootPath":"live2dw/","pluginJsPath":"lib/","pluginModelPath":"assets/","tagMode":false,"debug":false,"model":{"jsonPath":"/live2dw/assets/hijiki.model.json"},"display":{"position":"left","width":100,"height":200},"mobile":{"show":false},"log":false});</script></body>
 </html>

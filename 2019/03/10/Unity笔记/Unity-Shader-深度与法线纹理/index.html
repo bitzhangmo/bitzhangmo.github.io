@@ -1,23 +1,25 @@
 <!DOCTYPE html>
 <html lang=zh>
-<head>
+<head><meta name="generator" content="Hexo 3.9.0">
     <!-- so meta -->
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="HandheldFriendly" content="True">
-    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1" />
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
     <meta name="description" content="Unity Shader 深度与法线纹理：运动模糊，全局雾效和边缘检测">
 <meta name="keywords" content="Unity,Shader">
 <meta property="og:type" content="article">
 <meta property="og:title" content="Unity Shader 深度与法线纹理">
-<meta property="og:url" content="https:&#x2F;&#x2F;bitzhangmo.github.io&#x2F;2019&#x2F;03&#x2F;10&#x2F;Unity%E7%AC%94%E8%AE%B0&#x2F;Unity-Shader-%E6%B7%B1%E5%BA%A6%E4%B8%8E%E6%B3%95%E7%BA%BF%E7%BA%B9%E7%90%86&#x2F;index.html">
+<meta property="og:url" content="https://bitzhangmo.github.io/2019/03/10/Unity笔记/Unity-Shader-深度与法线纹理/index.html">
 <meta property="og:site_name" content="zhangMo Blog">
 <meta property="og:description" content="Unity Shader 深度与法线纹理：运动模糊，全局雾效和边缘检测">
 <meta property="og:locale" content="zh-CN">
-<meta property="og:image" content="https:&#x2F;&#x2F;learnopengl-cn.github.io&#x2F;img&#x2F;05&#x2F;04&#x2F;normal_mapping_normal_map.png">
+<meta property="og:image" content="https://learnopengl-cn.github.io/img/05/04/normal_mapping_normal_map.png">
 <meta property="og:updated_time" content="2019-04-09T11:14:06.263Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:image" content="https:&#x2F;&#x2F;learnopengl-cn.github.io&#x2F;img&#x2F;05&#x2F;04&#x2F;normal_mapping_normal_map.png">
+<meta name="twitter:title" content="Unity Shader 深度与法线纹理">
+<meta name="twitter:description" content="Unity Shader 深度与法线纹理：运动模糊，全局雾效和边缘检测">
+<meta name="twitter:image" content="https://learnopengl-cn.github.io/img/05/04/normal_mapping_normal_map.png">
     
     
         
@@ -65,7 +67,7 @@
          
           <li><a href="/archives/">归档</a></li>
          
-          <li><a href="/projects_url">项目</a></li>
+          <li><a href="/search/">搜索</a></li>
         
       </ul>
     </span>
@@ -73,10 +75,10 @@
     <span id="actions">
       <ul>
         
-        <li><a class="icon" href="/2019/03/10/Unity%E7%AC%94%E8%AE%B0/Unity-Shader-%E9%9D%9E%E7%9C%9F%E5%AE%9E%E6%84%9F%E6%B8%B2%E6%9F%93/"><i class="fas fa-chevron-left" aria-hidden="true" onmouseover="$('#i-prev').toggle();" onmouseout="$('#i-prev').toggle();"></i></a></li>
+        <li><a class="icon" href="/2019/03/10/Unity笔记/Unity-Shader-非真实感渲染/"><i class="fas fa-chevron-left" aria-hidden="true" onmouseover="$('#i-prev').toggle();" onmouseout="$('#i-prev').toggle();"></i></a></li>
         
         
-        <li><a class="icon" href="/2019/03/08/Unity%E7%AC%94%E8%AE%B0/Unity-Shader-%E5%B1%8F%E5%B9%95%E5%90%8E%E5%A4%84%E7%90%86%E6%95%88%E6%9E%9C/"><i class="fas fa-chevron-right" aria-hidden="true" onmouseover="$('#i-next').toggle();" onmouseout="$('#i-next').toggle();"></i></a></li>
+        <li><a class="icon" href="/2019/03/08/Unity笔记/Unity-Shader-屏幕后处理效果/"><i class="fas fa-chevron-right" aria-hidden="true" onmouseover="$('#i-next').toggle();" onmouseout="$('#i-next').toggle();"></i></a></li>
         
         <li><a class="icon" href="#" onclick="$('html, body').animate({ scrollTop: 0 }, 'fast');"><i class="fas fa-chevron-up" aria-hidden="true" onmouseover="$('#i-top').toggle();" onmouseout="$('#i-top').toggle();"></i></a></li>
         <li><a class="icon" href="#"><i class="fas fa-share-alt" aria-hidden="true" onmouseover="$('#i-share').toggle();" onmouseout="$('#i-share').toggle();" onclick="$('#share').toggle();return false;"></i></a></li>
@@ -89,17 +91,17 @@
     <br/>
     <div id="share" style="display: none">
       <ul>
-  <li><a class="icon" href="http://www.facebook.com/sharer.php?u=https://bitzhangmo.github.io/2019/03/10/Unity%E7%AC%94%E8%AE%B0/Unity-Shader-%E6%B7%B1%E5%BA%A6%E4%B8%8E%E6%B3%95%E7%BA%BF%E7%BA%B9%E7%90%86/" target="_blank" rel="noopener"><i class="fab fa-facebook " aria-hidden="true"></i></a></li>
-  <li><a class="icon" href="https://twitter.com/share?url=https://bitzhangmo.github.io/2019/03/10/Unity%E7%AC%94%E8%AE%B0/Unity-Shader-%E6%B7%B1%E5%BA%A6%E4%B8%8E%E6%B3%95%E7%BA%BF%E7%BA%B9%E7%90%86/&text=Unity Shader 深度与法线纹理" target="_blank" rel="noopener"><i class="fab fa-twitter " aria-hidden="true"></i></a></li>
-  <li><a class="icon" href="http://www.linkedin.com/shareArticle?url=https://bitzhangmo.github.io/2019/03/10/Unity%E7%AC%94%E8%AE%B0/Unity-Shader-%E6%B7%B1%E5%BA%A6%E4%B8%8E%E6%B3%95%E7%BA%BF%E7%BA%B9%E7%90%86/&title=Unity Shader 深度与法线纹理" target="_blank" rel="noopener"><i class="fab fa-linkedin " aria-hidden="true"></i></a></li>
-  <li><a class="icon" href="https://pinterest.com/pin/create/bookmarklet/?url=https://bitzhangmo.github.io/2019/03/10/Unity%E7%AC%94%E8%AE%B0/Unity-Shader-%E6%B7%B1%E5%BA%A6%E4%B8%8E%E6%B3%95%E7%BA%BF%E7%BA%B9%E7%90%86/&is_video=false&description=Unity Shader 深度与法线纹理" target="_blank" rel="noopener"><i class="fab fa-pinterest " aria-hidden="true"></i></a></li>
-  <li><a class="icon" href="mailto:?subject=Unity Shader 深度与法线纹理&body=Check out this article: https://bitzhangmo.github.io/2019/03/10/Unity%E7%AC%94%E8%AE%B0/Unity-Shader-%E6%B7%B1%E5%BA%A6%E4%B8%8E%E6%B3%95%E7%BA%BF%E7%BA%B9%E7%90%86/"><i class="fas fa-envelope " aria-hidden="true"></i></a></li>
-  <li><a class="icon" href="https://getpocket.com/save?url=https://bitzhangmo.github.io/2019/03/10/Unity%E7%AC%94%E8%AE%B0/Unity-Shader-%E6%B7%B1%E5%BA%A6%E4%B8%8E%E6%B3%95%E7%BA%BF%E7%BA%B9%E7%90%86/&title=Unity Shader 深度与法线纹理" target="_blank" rel="noopener"><i class="fab fa-get-pocket " aria-hidden="true"></i></a></li>
-  <li><a class="icon" href="http://reddit.com/submit?url=https://bitzhangmo.github.io/2019/03/10/Unity%E7%AC%94%E8%AE%B0/Unity-Shader-%E6%B7%B1%E5%BA%A6%E4%B8%8E%E6%B3%95%E7%BA%BF%E7%BA%B9%E7%90%86/&title=Unity Shader 深度与法线纹理" target="_blank" rel="noopener"><i class="fab fa-reddit " aria-hidden="true"></i></a></li>
-  <li><a class="icon" href="http://www.stumbleupon.com/submit?url=https://bitzhangmo.github.io/2019/03/10/Unity%E7%AC%94%E8%AE%B0/Unity-Shader-%E6%B7%B1%E5%BA%A6%E4%B8%8E%E6%B3%95%E7%BA%BF%E7%BA%B9%E7%90%86/&title=Unity Shader 深度与法线纹理" target="_blank" rel="noopener"><i class="fab fa-stumbleupon " aria-hidden="true"></i></a></li>
-  <li><a class="icon" href="http://digg.com/submit?url=https://bitzhangmo.github.io/2019/03/10/Unity%E7%AC%94%E8%AE%B0/Unity-Shader-%E6%B7%B1%E5%BA%A6%E4%B8%8E%E6%B3%95%E7%BA%BF%E7%BA%B9%E7%90%86/&title=Unity Shader 深度与法线纹理" target="_blank" rel="noopener"><i class="fab fa-digg " aria-hidden="true"></i></a></li>
-  <li><a class="icon" href="http://www.tumblr.com/share/link?url=https://bitzhangmo.github.io/2019/03/10/Unity%E7%AC%94%E8%AE%B0/Unity-Shader-%E6%B7%B1%E5%BA%A6%E4%B8%8E%E6%B3%95%E7%BA%BF%E7%BA%B9%E7%90%86/&name=Unity Shader 深度与法线纹理&description=&lt;p&gt;Unity Shader 深度与法线纹理：运动模糊，全局雾效和边缘检测&lt;/p&gt;" target="_blank" rel="noopener"><i class="fab fa-tumblr " aria-hidden="true"></i></a></li>
-  <li><a class="icon" href="https://news.ycombinator.com/submitlink?u=https://bitzhangmo.github.io/2019/03/10/Unity%E7%AC%94%E8%AE%B0/Unity-Shader-%E6%B7%B1%E5%BA%A6%E4%B8%8E%E6%B3%95%E7%BA%BF%E7%BA%B9%E7%90%86/&t=Unity Shader 深度与法线纹理" target="_blank" rel="noopener"><i class="fab fa-hacker-news " aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="http://www.facebook.com/sharer.php?u=https://bitzhangmo.github.io/2019/03/10/Unity笔记/Unity-Shader-深度与法线纹理/"><i class="fab fa-facebook " aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="https://twitter.com/share?url=https://bitzhangmo.github.io/2019/03/10/Unity笔记/Unity-Shader-深度与法线纹理/&text=Unity Shader 深度与法线纹理"><i class="fab fa-twitter " aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="http://www.linkedin.com/shareArticle?url=https://bitzhangmo.github.io/2019/03/10/Unity笔记/Unity-Shader-深度与法线纹理/&title=Unity Shader 深度与法线纹理"><i class="fab fa-linkedin " aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="https://pinterest.com/pin/create/bookmarklet/?url=https://bitzhangmo.github.io/2019/03/10/Unity笔记/Unity-Shader-深度与法线纹理/&is_video=false&description=Unity Shader 深度与法线纹理"><i class="fab fa-pinterest " aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="mailto:?subject=Unity Shader 深度与法线纹理&body=Check out this article: https://bitzhangmo.github.io/2019/03/10/Unity笔记/Unity-Shader-深度与法线纹理/"><i class="fas fa-envelope " aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="https://getpocket.com/save?url=https://bitzhangmo.github.io/2019/03/10/Unity笔记/Unity-Shader-深度与法线纹理/&title=Unity Shader 深度与法线纹理"><i class="fab fa-get-pocket " aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="http://reddit.com/submit?url=https://bitzhangmo.github.io/2019/03/10/Unity笔记/Unity-Shader-深度与法线纹理/&title=Unity Shader 深度与法线纹理"><i class="fab fa-reddit " aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="http://www.stumbleupon.com/submit?url=https://bitzhangmo.github.io/2019/03/10/Unity笔记/Unity-Shader-深度与法线纹理/&title=Unity Shader 深度与法线纹理"><i class="fab fa-stumbleupon " aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="http://digg.com/submit?url=https://bitzhangmo.github.io/2019/03/10/Unity笔记/Unity-Shader-深度与法线纹理/&title=Unity Shader 深度与法线纹理"><i class="fab fa-digg " aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="http://www.tumblr.com/share/link?url=https://bitzhangmo.github.io/2019/03/10/Unity笔记/Unity-Shader-深度与法线纹理/&name=Unity Shader 深度与法线纹理&description=&lt;p&gt;Unity Shader 深度与法线纹理：运动模糊，全局雾效和边缘检测&lt;/p&gt;"><i class="fab fa-tumblr " aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="https://news.ycombinator.com/submitlink?u=https://bitzhangmo.github.io/2019/03/10/Unity笔记/Unity-Shader-深度与法线纹理/&t=Unity Shader 深度与法线纹理"><i class="fab fa-hacker-news " aria-hidden="true"></i></a></li>
 </ul>
 
     </div>
@@ -144,7 +146,7 @@
       
     <div class="article-tag">
         <i class="fas fa-tag"></i>
-        <a class="tag-link" href="/tags/Shader/" rel="tag">Shader</a>, <a class="tag-link" href="/tags/Unity/" rel="tag">Unity</a>
+        <a class="tag-link" href="/tags/Shader/">Shader</a>, <a class="tag-link" href="/tags/Unity/">Unity</a>
     </div>
 
 
@@ -155,14 +157,13 @@
   <div class="content" itemprop="articleBody">
     <p>Unity Shader 深度与法线纹理：运动模糊，全局雾效和边缘检测</p>
 <a id="more"></a>
-
 <h3 id="获取深度和法线纹理"><a href="#获取深度和法线纹理" class="headerlink" title="获取深度和法线纹理"></a>获取深度和法线纹理</h3><h4 id="原理："><a href="#原理：" class="headerlink" title="原理："></a>原理：</h4><p><strong>法线纹理实际上是一张渲染纹理</strong>，只不过里面存储的像素值不是颜色值，而是一个高精度的<strong>深度值</strong>。由于被储存在一张纹理中，深度纹理里的深度值范围是[0,1]，而且通常是非线性分布的。</p>
 <p>这些深度值来自于<strong>顶点变换后</strong>得到的<strong>归一化的设备坐标</strong>（Normalized Device Coordinates，NDC）。</p>
 <p>一个模型要绘制到屏幕上，需要把它的顶点从模型空间变换到齐次裁剪空间下，这是通过在顶点着色器中乘以MVP变换矩阵得到的；在变换的最后一步，我们需要使用一个投影矩阵来变换顶点。如果是透视投影类型的摄像机，这个投影矩阵就是非线性的。</p>
 <p>在得到NDC后，深度纹理中的像素值可以很方便的计算得到了，这些深度值对应了NDC中顶点坐标的z分量的值，由于NDC中z分量的范围在[-1,1]，为了使其可以存到深度纹理中，要进行一次映射：d = 0.5*z(ndc) + 0.5</p>
 <blockquote>
 <p>由于法线向量是个几何工具，而纹理通常只用于储存颜色信息，用纹理储存法线向量不是非常直接。如果你想一想，就会知道纹理中的颜色向量用r、g、b元素代表一个3D向量。类似的我们也可以将法线向量的x、y、z元素储存到纹理中，代替颜色的r、g、b元素。法线向量的范围在-1到1之间，所以我们先要将其映射到0到1的范围。</p>
-<p><img src="https://learnopengl-cn.github.io/img/05/04/normal_mapping_normal_map.png" alt=""></p>
+<p><img src="https://learnopengl-cn.github.io/img/05/04/normal_mapping_normal_map.png" alt></p>
 <p>这会是一种偏蓝色调的纹理（你在网上找到的几乎所有法线贴图都是这样的）。这是因为所有法线的指向都偏向z轴（0, 0, 1）这是一种偏蓝的颜色。法线向量从z轴方向也向其他方向轻微偏移，颜色也就发生了轻微变化，这样看起来便有了一种深度。例如，你可以看到在每个砖块的顶部，颜色倾向于偏绿，这是因为砖块的顶部的法线偏向于指向正y轴方向（0, 1, 0），这样它就是绿色的了。</p>
 </blockquote>
 <h4 id="Unity如何得到深度纹理："><a href="#Unity如何得到深度纹理：" class="headerlink" title="Unity如何得到深度纹理："></a>Unity如何得到深度纹理：</h4><p>深度纹理可以直接来自于真正的深度缓存，也可以是由一个单独的Pass渲染而得，这取决于使用的渲染路径与硬件。</p>
@@ -196,7 +197,7 @@
          
           <li><a href="/archives/">归档</a></li>
          
-          <li><a href="/projects_url">项目</a></li>
+          <li><a href="/search/">搜索</a></li>
         
       </ul>
     </div>
@@ -207,17 +208,17 @@
 
     <div id="share-footer" style="display: none">
       <ul>
-  <li><a class="icon" href="http://www.facebook.com/sharer.php?u=https://bitzhangmo.github.io/2019/03/10/Unity%E7%AC%94%E8%AE%B0/Unity-Shader-%E6%B7%B1%E5%BA%A6%E4%B8%8E%E6%B3%95%E7%BA%BF%E7%BA%B9%E7%90%86/" target="_blank" rel="noopener"><i class="fab fa-facebook fa-lg" aria-hidden="true"></i></a></li>
-  <li><a class="icon" href="https://twitter.com/share?url=https://bitzhangmo.github.io/2019/03/10/Unity%E7%AC%94%E8%AE%B0/Unity-Shader-%E6%B7%B1%E5%BA%A6%E4%B8%8E%E6%B3%95%E7%BA%BF%E7%BA%B9%E7%90%86/&text=Unity Shader 深度与法线纹理" target="_blank" rel="noopener"><i class="fab fa-twitter fa-lg" aria-hidden="true"></i></a></li>
-  <li><a class="icon" href="http://www.linkedin.com/shareArticle?url=https://bitzhangmo.github.io/2019/03/10/Unity%E7%AC%94%E8%AE%B0/Unity-Shader-%E6%B7%B1%E5%BA%A6%E4%B8%8E%E6%B3%95%E7%BA%BF%E7%BA%B9%E7%90%86/&title=Unity Shader 深度与法线纹理" target="_blank" rel="noopener"><i class="fab fa-linkedin fa-lg" aria-hidden="true"></i></a></li>
-  <li><a class="icon" href="https://pinterest.com/pin/create/bookmarklet/?url=https://bitzhangmo.github.io/2019/03/10/Unity%E7%AC%94%E8%AE%B0/Unity-Shader-%E6%B7%B1%E5%BA%A6%E4%B8%8E%E6%B3%95%E7%BA%BF%E7%BA%B9%E7%90%86/&is_video=false&description=Unity Shader 深度与法线纹理" target="_blank" rel="noopener"><i class="fab fa-pinterest fa-lg" aria-hidden="true"></i></a></li>
-  <li><a class="icon" href="mailto:?subject=Unity Shader 深度与法线纹理&body=Check out this article: https://bitzhangmo.github.io/2019/03/10/Unity%E7%AC%94%E8%AE%B0/Unity-Shader-%E6%B7%B1%E5%BA%A6%E4%B8%8E%E6%B3%95%E7%BA%BF%E7%BA%B9%E7%90%86/"><i class="fas fa-envelope fa-lg" aria-hidden="true"></i></a></li>
-  <li><a class="icon" href="https://getpocket.com/save?url=https://bitzhangmo.github.io/2019/03/10/Unity%E7%AC%94%E8%AE%B0/Unity-Shader-%E6%B7%B1%E5%BA%A6%E4%B8%8E%E6%B3%95%E7%BA%BF%E7%BA%B9%E7%90%86/&title=Unity Shader 深度与法线纹理" target="_blank" rel="noopener"><i class="fab fa-get-pocket fa-lg" aria-hidden="true"></i></a></li>
-  <li><a class="icon" href="http://reddit.com/submit?url=https://bitzhangmo.github.io/2019/03/10/Unity%E7%AC%94%E8%AE%B0/Unity-Shader-%E6%B7%B1%E5%BA%A6%E4%B8%8E%E6%B3%95%E7%BA%BF%E7%BA%B9%E7%90%86/&title=Unity Shader 深度与法线纹理" target="_blank" rel="noopener"><i class="fab fa-reddit fa-lg" aria-hidden="true"></i></a></li>
-  <li><a class="icon" href="http://www.stumbleupon.com/submit?url=https://bitzhangmo.github.io/2019/03/10/Unity%E7%AC%94%E8%AE%B0/Unity-Shader-%E6%B7%B1%E5%BA%A6%E4%B8%8E%E6%B3%95%E7%BA%BF%E7%BA%B9%E7%90%86/&title=Unity Shader 深度与法线纹理" target="_blank" rel="noopener"><i class="fab fa-stumbleupon fa-lg" aria-hidden="true"></i></a></li>
-  <li><a class="icon" href="http://digg.com/submit?url=https://bitzhangmo.github.io/2019/03/10/Unity%E7%AC%94%E8%AE%B0/Unity-Shader-%E6%B7%B1%E5%BA%A6%E4%B8%8E%E6%B3%95%E7%BA%BF%E7%BA%B9%E7%90%86/&title=Unity Shader 深度与法线纹理" target="_blank" rel="noopener"><i class="fab fa-digg fa-lg" aria-hidden="true"></i></a></li>
-  <li><a class="icon" href="http://www.tumblr.com/share/link?url=https://bitzhangmo.github.io/2019/03/10/Unity%E7%AC%94%E8%AE%B0/Unity-Shader-%E6%B7%B1%E5%BA%A6%E4%B8%8E%E6%B3%95%E7%BA%BF%E7%BA%B9%E7%90%86/&name=Unity Shader 深度与法线纹理&description=&lt;p&gt;Unity Shader 深度与法线纹理：运动模糊，全局雾效和边缘检测&lt;/p&gt;" target="_blank" rel="noopener"><i class="fab fa-tumblr fa-lg" aria-hidden="true"></i></a></li>
-  <li><a class="icon" href="https://news.ycombinator.com/submitlink?u=https://bitzhangmo.github.io/2019/03/10/Unity%E7%AC%94%E8%AE%B0/Unity-Shader-%E6%B7%B1%E5%BA%A6%E4%B8%8E%E6%B3%95%E7%BA%BF%E7%BA%B9%E7%90%86/&t=Unity Shader 深度与法线纹理" target="_blank" rel="noopener"><i class="fab fa-hacker-news fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="http://www.facebook.com/sharer.php?u=https://bitzhangmo.github.io/2019/03/10/Unity笔记/Unity-Shader-深度与法线纹理/"><i class="fab fa-facebook fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="https://twitter.com/share?url=https://bitzhangmo.github.io/2019/03/10/Unity笔记/Unity-Shader-深度与法线纹理/&text=Unity Shader 深度与法线纹理"><i class="fab fa-twitter fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="http://www.linkedin.com/shareArticle?url=https://bitzhangmo.github.io/2019/03/10/Unity笔记/Unity-Shader-深度与法线纹理/&title=Unity Shader 深度与法线纹理"><i class="fab fa-linkedin fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="https://pinterest.com/pin/create/bookmarklet/?url=https://bitzhangmo.github.io/2019/03/10/Unity笔记/Unity-Shader-深度与法线纹理/&is_video=false&description=Unity Shader 深度与法线纹理"><i class="fab fa-pinterest fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="mailto:?subject=Unity Shader 深度与法线纹理&body=Check out this article: https://bitzhangmo.github.io/2019/03/10/Unity笔记/Unity-Shader-深度与法线纹理/"><i class="fas fa-envelope fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="https://getpocket.com/save?url=https://bitzhangmo.github.io/2019/03/10/Unity笔记/Unity-Shader-深度与法线纹理/&title=Unity Shader 深度与法线纹理"><i class="fab fa-get-pocket fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="http://reddit.com/submit?url=https://bitzhangmo.github.io/2019/03/10/Unity笔记/Unity-Shader-深度与法线纹理/&title=Unity Shader 深度与法线纹理"><i class="fab fa-reddit fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="http://www.stumbleupon.com/submit?url=https://bitzhangmo.github.io/2019/03/10/Unity笔记/Unity-Shader-深度与法线纹理/&title=Unity Shader 深度与法线纹理"><i class="fab fa-stumbleupon fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="http://digg.com/submit?url=https://bitzhangmo.github.io/2019/03/10/Unity笔记/Unity-Shader-深度与法线纹理/&title=Unity Shader 深度与法线纹理"><i class="fab fa-digg fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="http://www.tumblr.com/share/link?url=https://bitzhangmo.github.io/2019/03/10/Unity笔记/Unity-Shader-深度与法线纹理/&name=Unity Shader 深度与法线纹理&description=&lt;p&gt;Unity Shader 深度与法线纹理：运动模糊，全局雾效和边缘检测&lt;/p&gt;"><i class="fab fa-tumblr fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="https://news.ycombinator.com/submitlink?u=https://bitzhangmo.github.io/2019/03/10/Unity笔记/Unity-Shader-深度与法线纹理/&t=Unity Shader 深度与法线纹理"><i class="fab fa-hacker-news fa-lg" aria-hidden="true"></i></a></li>
 </ul>
 
     </div>
@@ -247,7 +248,7 @@
          
           <li><a href="/archives/">归档</a></li>
          
-          <li><a href="/projects_url">项目</a></li>
+          <li><a href="/search/">搜索</a></li>
         
       </ul>
     </nav>
@@ -295,5 +296,5 @@
 <!-- Disqus Comments -->
 
 
-</body>
+<script src="/live2dw/lib/L2Dwidget.min.js?bd2294fafea3389ee458f1d9be5a2157"></script><script>L2Dwidget.init({"pluginRootPath":"live2dw/","pluginJsPath":"lib/","pluginModelPath":"assets/","tagMode":false,"debug":false,"model":{"jsonPath":"/live2dw/assets/hijiki.model.json"},"display":{"position":"left","width":100,"height":200},"mobile":{"show":false},"log":false});</script></body>
 </html>

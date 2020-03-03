@@ -1,21 +1,23 @@
 <!DOCTYPE html>
 <html lang=zh>
-<head>
+<head><meta name="generator" content="Hexo 3.9.0">
     <!-- so meta -->
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="HandheldFriendly" content="True">
-    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1" />
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
     <meta name="description" content="Lua标准库中定义的一些函数及其实现方式。">
 <meta name="keywords" content="Lua">
 <meta property="og:type" content="article">
 <meta property="og:title" content="Lua源码阅读：标准库">
-<meta property="og:url" content="https:&#x2F;&#x2F;bitzhangmo.github.io&#x2F;2019&#x2F;08&#x2F;06&#x2F;Lua&#x2F;Lua%E6%BA%90%E7%A0%81%E9%98%85%E8%AF%BB%EF%BC%9A%E6%A0%87%E5%87%86%E5%BA%93&#x2F;index.html">
+<meta property="og:url" content="https://bitzhangmo.github.io/2019/08/06/Lua/Lua源码阅读：标准库/index.html">
 <meta property="og:site_name" content="zhangMo Blog">
 <meta property="og:description" content="Lua标准库中定义的一些函数及其实现方式。">
 <meta property="og:locale" content="zh-CN">
 <meta property="og:updated_time" content="2019-08-07T02:27:44.414Z">
 <meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="Lua源码阅读：标准库">
+<meta name="twitter:description" content="Lua标准库中定义的一些函数及其实现方式。">
     
     
         
@@ -63,7 +65,7 @@
          
           <li><a href="/archives/">归档</a></li>
          
-          <li><a href="/projects_url">项目</a></li>
+          <li><a href="/search/">搜索</a></li>
         
       </ul>
     </span>
@@ -71,10 +73,10 @@
     <span id="actions">
       <ul>
         
-        <li><a class="icon" href="/2019/08/06/Lua/Lua%E6%BA%90%E7%A0%81%E9%98%85%E8%AF%BB%EF%BC%9A%E5%9F%BA%E6%9C%AC%E6%95%B0%E6%8D%AE%E7%B1%BB%E5%9E%8B/"><i class="fas fa-chevron-left" aria-hidden="true" onmouseover="$('#i-prev').toggle();" onmouseout="$('#i-prev').toggle();"></i></a></li>
+        <li><a class="icon" href="/2019/08/06/Lua/Lua源码阅读：基本数据类型/"><i class="fas fa-chevron-left" aria-hidden="true" onmouseover="$('#i-prev').toggle();" onmouseout="$('#i-prev').toggle();"></i></a></li>
         
         
-        <li><a class="icon" href="/2019/08/05/Lua/Lua%E6%BA%90%E7%A0%81%E9%98%85%E8%AF%BB%EF%BC%9A%E7%9B%AE%E5%BD%95%E5%8F%8A%E6%A8%A1%E5%9D%97%E7%BB%93%E6%9E%84/"><i class="fas fa-chevron-right" aria-hidden="true" onmouseover="$('#i-next').toggle();" onmouseout="$('#i-next').toggle();"></i></a></li>
+        <li><a class="icon" href="/2019/08/05/Lua/Lua源码阅读：目录及模块结构/"><i class="fas fa-chevron-right" aria-hidden="true" onmouseover="$('#i-next').toggle();" onmouseout="$('#i-next').toggle();"></i></a></li>
         
         <li><a class="icon" href="#" onclick="$('html, body').animate({ scrollTop: 0 }, 'fast');"><i class="fas fa-chevron-up" aria-hidden="true" onmouseover="$('#i-top').toggle();" onmouseout="$('#i-top').toggle();"></i></a></li>
         <li><a class="icon" href="#"><i class="fas fa-share-alt" aria-hidden="true" onmouseover="$('#i-share').toggle();" onmouseout="$('#i-share').toggle();" onclick="$('#share').toggle();return false;"></i></a></li>
@@ -87,17 +89,17 @@
     <br/>
     <div id="share" style="display: none">
       <ul>
-  <li><a class="icon" href="http://www.facebook.com/sharer.php?u=https://bitzhangmo.github.io/2019/08/06/Lua/Lua%E6%BA%90%E7%A0%81%E9%98%85%E8%AF%BB%EF%BC%9A%E6%A0%87%E5%87%86%E5%BA%93/" target="_blank" rel="noopener"><i class="fab fa-facebook " aria-hidden="true"></i></a></li>
-  <li><a class="icon" href="https://twitter.com/share?url=https://bitzhangmo.github.io/2019/08/06/Lua/Lua%E6%BA%90%E7%A0%81%E9%98%85%E8%AF%BB%EF%BC%9A%E6%A0%87%E5%87%86%E5%BA%93/&text=Lua源码阅读：标准库" target="_blank" rel="noopener"><i class="fab fa-twitter " aria-hidden="true"></i></a></li>
-  <li><a class="icon" href="http://www.linkedin.com/shareArticle?url=https://bitzhangmo.github.io/2019/08/06/Lua/Lua%E6%BA%90%E7%A0%81%E9%98%85%E8%AF%BB%EF%BC%9A%E6%A0%87%E5%87%86%E5%BA%93/&title=Lua源码阅读：标准库" target="_blank" rel="noopener"><i class="fab fa-linkedin " aria-hidden="true"></i></a></li>
-  <li><a class="icon" href="https://pinterest.com/pin/create/bookmarklet/?url=https://bitzhangmo.github.io/2019/08/06/Lua/Lua%E6%BA%90%E7%A0%81%E9%98%85%E8%AF%BB%EF%BC%9A%E6%A0%87%E5%87%86%E5%BA%93/&is_video=false&description=Lua源码阅读：标准库" target="_blank" rel="noopener"><i class="fab fa-pinterest " aria-hidden="true"></i></a></li>
-  <li><a class="icon" href="mailto:?subject=Lua源码阅读：标准库&body=Check out this article: https://bitzhangmo.github.io/2019/08/06/Lua/Lua%E6%BA%90%E7%A0%81%E9%98%85%E8%AF%BB%EF%BC%9A%E6%A0%87%E5%87%86%E5%BA%93/"><i class="fas fa-envelope " aria-hidden="true"></i></a></li>
-  <li><a class="icon" href="https://getpocket.com/save?url=https://bitzhangmo.github.io/2019/08/06/Lua/Lua%E6%BA%90%E7%A0%81%E9%98%85%E8%AF%BB%EF%BC%9A%E6%A0%87%E5%87%86%E5%BA%93/&title=Lua源码阅读：标准库" target="_blank" rel="noopener"><i class="fab fa-get-pocket " aria-hidden="true"></i></a></li>
-  <li><a class="icon" href="http://reddit.com/submit?url=https://bitzhangmo.github.io/2019/08/06/Lua/Lua%E6%BA%90%E7%A0%81%E9%98%85%E8%AF%BB%EF%BC%9A%E6%A0%87%E5%87%86%E5%BA%93/&title=Lua源码阅读：标准库" target="_blank" rel="noopener"><i class="fab fa-reddit " aria-hidden="true"></i></a></li>
-  <li><a class="icon" href="http://www.stumbleupon.com/submit?url=https://bitzhangmo.github.io/2019/08/06/Lua/Lua%E6%BA%90%E7%A0%81%E9%98%85%E8%AF%BB%EF%BC%9A%E6%A0%87%E5%87%86%E5%BA%93/&title=Lua源码阅读：标准库" target="_blank" rel="noopener"><i class="fab fa-stumbleupon " aria-hidden="true"></i></a></li>
-  <li><a class="icon" href="http://digg.com/submit?url=https://bitzhangmo.github.io/2019/08/06/Lua/Lua%E6%BA%90%E7%A0%81%E9%98%85%E8%AF%BB%EF%BC%9A%E6%A0%87%E5%87%86%E5%BA%93/&title=Lua源码阅读：标准库" target="_blank" rel="noopener"><i class="fab fa-digg " aria-hidden="true"></i></a></li>
-  <li><a class="icon" href="http://www.tumblr.com/share/link?url=https://bitzhangmo.github.io/2019/08/06/Lua/Lua%E6%BA%90%E7%A0%81%E9%98%85%E8%AF%BB%EF%BC%9A%E6%A0%87%E5%87%86%E5%BA%93/&name=Lua源码阅读：标准库&description=&lt;p&gt;Lua标准库中定义的一些函数及其实现方式。&lt;/p&gt;" target="_blank" rel="noopener"><i class="fab fa-tumblr " aria-hidden="true"></i></a></li>
-  <li><a class="icon" href="https://news.ycombinator.com/submitlink?u=https://bitzhangmo.github.io/2019/08/06/Lua/Lua%E6%BA%90%E7%A0%81%E9%98%85%E8%AF%BB%EF%BC%9A%E6%A0%87%E5%87%86%E5%BA%93/&t=Lua源码阅读：标准库" target="_blank" rel="noopener"><i class="fab fa-hacker-news " aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="http://www.facebook.com/sharer.php?u=https://bitzhangmo.github.io/2019/08/06/Lua/Lua源码阅读：标准库/"><i class="fab fa-facebook " aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="https://twitter.com/share?url=https://bitzhangmo.github.io/2019/08/06/Lua/Lua源码阅读：标准库/&text=Lua源码阅读：标准库"><i class="fab fa-twitter " aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="http://www.linkedin.com/shareArticle?url=https://bitzhangmo.github.io/2019/08/06/Lua/Lua源码阅读：标准库/&title=Lua源码阅读：标准库"><i class="fab fa-linkedin " aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="https://pinterest.com/pin/create/bookmarklet/?url=https://bitzhangmo.github.io/2019/08/06/Lua/Lua源码阅读：标准库/&is_video=false&description=Lua源码阅读：标准库"><i class="fab fa-pinterest " aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="mailto:?subject=Lua源码阅读：标准库&body=Check out this article: https://bitzhangmo.github.io/2019/08/06/Lua/Lua源码阅读：标准库/"><i class="fas fa-envelope " aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="https://getpocket.com/save?url=https://bitzhangmo.github.io/2019/08/06/Lua/Lua源码阅读：标准库/&title=Lua源码阅读：标准库"><i class="fab fa-get-pocket " aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="http://reddit.com/submit?url=https://bitzhangmo.github.io/2019/08/06/Lua/Lua源码阅读：标准库/&title=Lua源码阅读：标准库"><i class="fab fa-reddit " aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="http://www.stumbleupon.com/submit?url=https://bitzhangmo.github.io/2019/08/06/Lua/Lua源码阅读：标准库/&title=Lua源码阅读：标准库"><i class="fab fa-stumbleupon " aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="http://digg.com/submit?url=https://bitzhangmo.github.io/2019/08/06/Lua/Lua源码阅读：标准库/&title=Lua源码阅读：标准库"><i class="fab fa-digg " aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="http://www.tumblr.com/share/link?url=https://bitzhangmo.github.io/2019/08/06/Lua/Lua源码阅读：标准库/&name=Lua源码阅读：标准库&description=&lt;p&gt;Lua标准库中定义的一些函数及其实现方式。&lt;/p&gt;"><i class="fab fa-tumblr " aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="https://news.ycombinator.com/submitlink?u=https://bitzhangmo.github.io/2019/08/06/Lua/Lua源码阅读：标准库/&t=Lua源码阅读：标准库"><i class="fab fa-hacker-news " aria-hidden="true"></i></a></li>
 </ul>
 
     </div>
@@ -135,14 +137,14 @@
       
     <div class="article-category">
         <i class="fas fa-archive"></i>
-        <a class="category-link" href="/categories/%E6%BA%90%E7%A0%81%E9%98%85%E8%AF%BB/">源码阅读</a>
+        <a class="category-link" href="/categories/源码阅读/">源码阅读</a>
     </div>
 
 
       
     <div class="article-tag">
         <i class="fas fa-tag"></i>
-        <a class="tag-link" href="/tags/Lua/" rel="tag">Lua</a>
+        <a class="tag-link" href="/tags/Lua/">Lua</a>
     </div>
 
 
@@ -153,18 +155,14 @@
   <div class="content" itemprop="articleBody">
     <p>Lua标准库中定义的一些函数及其实现方式。</p>
 <a id="more"></a>
-
 <h2 id="lmathlib-c"><a href="#lmathlib-c" class="headerlink" title="lmathlib.c"></a>lmathlib.c</h2><p>从一个简单的math.Abs()函数开始：</p>
 <figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">static</span> <span class="keyword">int</span> <span class="title">math_abs</span> <span class="params">(lua_State *L)</span> </span>&#123;</span><br><span class="line">  <span class="keyword">if</span> (lua_isinteger(L, <span class="number">1</span>)) &#123;</span><br><span class="line">    lua_Integer n = lua_tointeger(L, <span class="number">1</span>);</span><br><span class="line">    <span class="keyword">if</span> (n &lt; <span class="number">0</span>) n = (lua_Integer)(<span class="number">0u</span> - n);</span><br><span class="line">    lua_pushinteger(L, n);</span><br><span class="line">  &#125;</span><br><span class="line">  <span class="keyword">else</span></span><br><span class="line">    lua_pushnumber(L, l_mathop(<span class="built_in">fabs</span>)(luaL_checknumber(L, <span class="number">1</span>)));</span><br><span class="line">  <span class="keyword">return</span> <span class="number">1</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
 <p>首先，先检查传入的值是否是int类型，这里调用了lapi.c中的lua_isinteger函数，检查传入值的TValue原始类型标签是否是LUA_TNUMINT，这部分的检查在lObject.h中定义的函数完成，同时数据类型LUA_TNUMINT也在lObject.h中定义：</p>
 <figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">/* Variant tags for numbers */</span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">define</span> LUA_TNUMFLT	(LUA_TNUMBER | (0 &lt;&lt; 4))  <span class="comment">/* float numbers */</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">define</span> LUA_TNUMINT	(LUA_TNUMBER | (1 &lt;&lt; 4))  <span class="comment">/* integer numbers */</span></span></span><br><span class="line"></span><br><span class="line"><span class="comment">// lObject.h</span></span><br></pre></td></tr></table></figure>
-
 <p>如果传入的值的<strong>TValue</strong>是int类型的（传入的值是lua_state类型的），调用lua_tointeger将传入的值转换为int类型（实际上是lua_Integer类型，其最根源是longlong类型的，在luaconf.h中定义），将其赋给n，如果n小于零，则用一个unsigned 0减去它，将其置为正数，最后将n存入到TValue中，将其存放在lua_state的栈顶。</p>
 <p>如果不是int类型的，则检查其是否是一个number类型的值，如果是一个number则调用fabs，将其push栈，否则返回一个错误提示。</p>
 <h2 id="lstrlib-c"><a href="#lstrlib-c" class="headerlink" title="lstrlib.c"></a>lstrlib.c</h2><p>strlib中一部分是关于字符串的操作函数，一部分是关于模式匹配的函数，先挑选一个Reverse函数进行分析：</p>
 <figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">static</span> <span class="keyword">int</span> <span class="title">str_reverse</span> <span class="params">(lua_State *L)</span> </span>&#123;</span><br><span class="line">  <span class="keyword">size_t</span> l, i;</span><br><span class="line">  luaL_Buffer b;</span><br><span class="line">  <span class="keyword">const</span> <span class="keyword">char</span> *s = luaL_checklstring(L, <span class="number">1</span>, &amp;l);</span><br><span class="line">  <span class="keyword">char</span> *p = luaL_buffinitsize(L, &amp;b, l);</span><br><span class="line">  <span class="keyword">for</span> (i = <span class="number">0</span>; i &lt; l; i++)</span><br><span class="line">    p[i] = s[l - i - <span class="number">1</span>];</span><br><span class="line">  luaL_pushresultsize(&amp;b, l);</span><br><span class="line">  <span class="keyword">return</span> <span class="number">1</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
 <p>简单来说就是利用一个指针（index）来对字符数组进行逆序的赋值，从数组s中获取赋值给数组p。</p>
 
   </div>
@@ -185,7 +183,7 @@
          
           <li><a href="/archives/">归档</a></li>
          
-          <li><a href="/projects_url">项目</a></li>
+          <li><a href="/search/">搜索</a></li>
         
       </ul>
     </div>
@@ -196,17 +194,17 @@
 
     <div id="share-footer" style="display: none">
       <ul>
-  <li><a class="icon" href="http://www.facebook.com/sharer.php?u=https://bitzhangmo.github.io/2019/08/06/Lua/Lua%E6%BA%90%E7%A0%81%E9%98%85%E8%AF%BB%EF%BC%9A%E6%A0%87%E5%87%86%E5%BA%93/" target="_blank" rel="noopener"><i class="fab fa-facebook fa-lg" aria-hidden="true"></i></a></li>
-  <li><a class="icon" href="https://twitter.com/share?url=https://bitzhangmo.github.io/2019/08/06/Lua/Lua%E6%BA%90%E7%A0%81%E9%98%85%E8%AF%BB%EF%BC%9A%E6%A0%87%E5%87%86%E5%BA%93/&text=Lua源码阅读：标准库" target="_blank" rel="noopener"><i class="fab fa-twitter fa-lg" aria-hidden="true"></i></a></li>
-  <li><a class="icon" href="http://www.linkedin.com/shareArticle?url=https://bitzhangmo.github.io/2019/08/06/Lua/Lua%E6%BA%90%E7%A0%81%E9%98%85%E8%AF%BB%EF%BC%9A%E6%A0%87%E5%87%86%E5%BA%93/&title=Lua源码阅读：标准库" target="_blank" rel="noopener"><i class="fab fa-linkedin fa-lg" aria-hidden="true"></i></a></li>
-  <li><a class="icon" href="https://pinterest.com/pin/create/bookmarklet/?url=https://bitzhangmo.github.io/2019/08/06/Lua/Lua%E6%BA%90%E7%A0%81%E9%98%85%E8%AF%BB%EF%BC%9A%E6%A0%87%E5%87%86%E5%BA%93/&is_video=false&description=Lua源码阅读：标准库" target="_blank" rel="noopener"><i class="fab fa-pinterest fa-lg" aria-hidden="true"></i></a></li>
-  <li><a class="icon" href="mailto:?subject=Lua源码阅读：标准库&body=Check out this article: https://bitzhangmo.github.io/2019/08/06/Lua/Lua%E6%BA%90%E7%A0%81%E9%98%85%E8%AF%BB%EF%BC%9A%E6%A0%87%E5%87%86%E5%BA%93/"><i class="fas fa-envelope fa-lg" aria-hidden="true"></i></a></li>
-  <li><a class="icon" href="https://getpocket.com/save?url=https://bitzhangmo.github.io/2019/08/06/Lua/Lua%E6%BA%90%E7%A0%81%E9%98%85%E8%AF%BB%EF%BC%9A%E6%A0%87%E5%87%86%E5%BA%93/&title=Lua源码阅读：标准库" target="_blank" rel="noopener"><i class="fab fa-get-pocket fa-lg" aria-hidden="true"></i></a></li>
-  <li><a class="icon" href="http://reddit.com/submit?url=https://bitzhangmo.github.io/2019/08/06/Lua/Lua%E6%BA%90%E7%A0%81%E9%98%85%E8%AF%BB%EF%BC%9A%E6%A0%87%E5%87%86%E5%BA%93/&title=Lua源码阅读：标准库" target="_blank" rel="noopener"><i class="fab fa-reddit fa-lg" aria-hidden="true"></i></a></li>
-  <li><a class="icon" href="http://www.stumbleupon.com/submit?url=https://bitzhangmo.github.io/2019/08/06/Lua/Lua%E6%BA%90%E7%A0%81%E9%98%85%E8%AF%BB%EF%BC%9A%E6%A0%87%E5%87%86%E5%BA%93/&title=Lua源码阅读：标准库" target="_blank" rel="noopener"><i class="fab fa-stumbleupon fa-lg" aria-hidden="true"></i></a></li>
-  <li><a class="icon" href="http://digg.com/submit?url=https://bitzhangmo.github.io/2019/08/06/Lua/Lua%E6%BA%90%E7%A0%81%E9%98%85%E8%AF%BB%EF%BC%9A%E6%A0%87%E5%87%86%E5%BA%93/&title=Lua源码阅读：标准库" target="_blank" rel="noopener"><i class="fab fa-digg fa-lg" aria-hidden="true"></i></a></li>
-  <li><a class="icon" href="http://www.tumblr.com/share/link?url=https://bitzhangmo.github.io/2019/08/06/Lua/Lua%E6%BA%90%E7%A0%81%E9%98%85%E8%AF%BB%EF%BC%9A%E6%A0%87%E5%87%86%E5%BA%93/&name=Lua源码阅读：标准库&description=&lt;p&gt;Lua标准库中定义的一些函数及其实现方式。&lt;/p&gt;" target="_blank" rel="noopener"><i class="fab fa-tumblr fa-lg" aria-hidden="true"></i></a></li>
-  <li><a class="icon" href="https://news.ycombinator.com/submitlink?u=https://bitzhangmo.github.io/2019/08/06/Lua/Lua%E6%BA%90%E7%A0%81%E9%98%85%E8%AF%BB%EF%BC%9A%E6%A0%87%E5%87%86%E5%BA%93/&t=Lua源码阅读：标准库" target="_blank" rel="noopener"><i class="fab fa-hacker-news fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="http://www.facebook.com/sharer.php?u=https://bitzhangmo.github.io/2019/08/06/Lua/Lua源码阅读：标准库/"><i class="fab fa-facebook fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="https://twitter.com/share?url=https://bitzhangmo.github.io/2019/08/06/Lua/Lua源码阅读：标准库/&text=Lua源码阅读：标准库"><i class="fab fa-twitter fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="http://www.linkedin.com/shareArticle?url=https://bitzhangmo.github.io/2019/08/06/Lua/Lua源码阅读：标准库/&title=Lua源码阅读：标准库"><i class="fab fa-linkedin fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="https://pinterest.com/pin/create/bookmarklet/?url=https://bitzhangmo.github.io/2019/08/06/Lua/Lua源码阅读：标准库/&is_video=false&description=Lua源码阅读：标准库"><i class="fab fa-pinterest fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="mailto:?subject=Lua源码阅读：标准库&body=Check out this article: https://bitzhangmo.github.io/2019/08/06/Lua/Lua源码阅读：标准库/"><i class="fas fa-envelope fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="https://getpocket.com/save?url=https://bitzhangmo.github.io/2019/08/06/Lua/Lua源码阅读：标准库/&title=Lua源码阅读：标准库"><i class="fab fa-get-pocket fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="http://reddit.com/submit?url=https://bitzhangmo.github.io/2019/08/06/Lua/Lua源码阅读：标准库/&title=Lua源码阅读：标准库"><i class="fab fa-reddit fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="http://www.stumbleupon.com/submit?url=https://bitzhangmo.github.io/2019/08/06/Lua/Lua源码阅读：标准库/&title=Lua源码阅读：标准库"><i class="fab fa-stumbleupon fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="http://digg.com/submit?url=https://bitzhangmo.github.io/2019/08/06/Lua/Lua源码阅读：标准库/&title=Lua源码阅读：标准库"><i class="fab fa-digg fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="http://www.tumblr.com/share/link?url=https://bitzhangmo.github.io/2019/08/06/Lua/Lua源码阅读：标准库/&name=Lua源码阅读：标准库&description=&lt;p&gt;Lua标准库中定义的一些函数及其实现方式。&lt;/p&gt;"><i class="fab fa-tumblr fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="https://news.ycombinator.com/submitlink?u=https://bitzhangmo.github.io/2019/08/06/Lua/Lua源码阅读：标准库/&t=Lua源码阅读：标准库"><i class="fab fa-hacker-news fa-lg" aria-hidden="true"></i></a></li>
 </ul>
 
     </div>
@@ -236,7 +234,7 @@
          
           <li><a href="/archives/">归档</a></li>
          
-          <li><a href="/projects_url">项目</a></li>
+          <li><a href="/search/">搜索</a></li>
         
       </ul>
     </nav>
@@ -284,5 +282,5 @@
 <!-- Disqus Comments -->
 
 
-</body>
+<script src="/live2dw/lib/L2Dwidget.min.js?bd2294fafea3389ee458f1d9be5a2157"></script><script>L2Dwidget.init({"pluginRootPath":"live2dw/","pluginJsPath":"lib/","pluginModelPath":"assets/","tagMode":false,"debug":false,"model":{"jsonPath":"/live2dw/assets/hijiki.model.json"},"display":{"position":"left","width":100,"height":200},"mobile":{"show":false},"log":false});</script></body>
 </html>

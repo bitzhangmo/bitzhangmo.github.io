@@ -1,21 +1,23 @@
 <!DOCTYPE html>
 <html lang=zh>
-<head>
+<head><meta name="generator" content="Hexo 3.9.0">
     <!-- so meta -->
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="HandheldFriendly" content="True">
-    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1" />
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
     <meta name="description" content="Lua中的函数。">
 <meta name="keywords" content="Lua">
 <meta property="og:type" content="article">
 <meta property="og:title" content="Lua程序设计（3）">
-<meta property="og:url" content="https:&#x2F;&#x2F;bitzhangmo.github.io&#x2F;2019&#x2F;05&#x2F;20&#x2F;Lua&#x2F;Lua%E7%A8%8B%E5%BA%8F%E8%AE%BE%E8%AE%A1%EF%BC%883%EF%BC%89&#x2F;index.html">
+<meta property="og:url" content="https://bitzhangmo.github.io/2019/05/20/Lua/Lua程序设计（3）/index.html">
 <meta property="og:site_name" content="zhangMo Blog">
 <meta property="og:description" content="Lua中的函数。">
 <meta property="og:locale" content="zh-CN">
 <meta property="og:updated_time" content="2019-06-24T11:18:07.300Z">
 <meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="Lua程序设计（3）">
+<meta name="twitter:description" content="Lua中的函数。">
     
     
         
@@ -63,7 +65,7 @@
          
           <li><a href="/archives/">归档</a></li>
          
-          <li><a href="/projects_url">项目</a></li>
+          <li><a href="/search/">搜索</a></li>
         
       </ul>
     </span>
@@ -71,10 +73,10 @@
     <span id="actions">
       <ul>
         
-        <li><a class="icon" href="/2019/05/21/Lua/Lua%E7%A8%8B%E5%BA%8F%E8%AE%BE%E8%AE%A1%EF%BC%884%EF%BC%89/"><i class="fas fa-chevron-left" aria-hidden="true" onmouseover="$('#i-prev').toggle();" onmouseout="$('#i-prev').toggle();"></i></a></li>
+        <li><a class="icon" href="/2019/05/21/Lua/Lua程序设计（4）/"><i class="fas fa-chevron-left" aria-hidden="true" onmouseover="$('#i-prev').toggle();" onmouseout="$('#i-prev').toggle();"></i></a></li>
         
         
-        <li><a class="icon" href="/2019/05/16/Lua/Lua%E7%A8%8B%E5%BA%8F%E8%AE%BE%E8%AE%A1%EF%BC%882%EF%BC%89/"><i class="fas fa-chevron-right" aria-hidden="true" onmouseover="$('#i-next').toggle();" onmouseout="$('#i-next').toggle();"></i></a></li>
+        <li><a class="icon" href="/2019/05/16/Lua/Lua程序设计（2）/"><i class="fas fa-chevron-right" aria-hidden="true" onmouseover="$('#i-next').toggle();" onmouseout="$('#i-next').toggle();"></i></a></li>
         
         <li><a class="icon" href="#" onclick="$('html, body').animate({ scrollTop: 0 }, 'fast');"><i class="fas fa-chevron-up" aria-hidden="true" onmouseover="$('#i-top').toggle();" onmouseout="$('#i-top').toggle();"></i></a></li>
         <li><a class="icon" href="#"><i class="fas fa-share-alt" aria-hidden="true" onmouseover="$('#i-share').toggle();" onmouseout="$('#i-share').toggle();" onclick="$('#share').toggle();return false;"></i></a></li>
@@ -87,17 +89,17 @@
     <br/>
     <div id="share" style="display: none">
       <ul>
-  <li><a class="icon" href="http://www.facebook.com/sharer.php?u=https://bitzhangmo.github.io/2019/05/20/Lua/Lua%E7%A8%8B%E5%BA%8F%E8%AE%BE%E8%AE%A1%EF%BC%883%EF%BC%89/" target="_blank" rel="noopener"><i class="fab fa-facebook " aria-hidden="true"></i></a></li>
-  <li><a class="icon" href="https://twitter.com/share?url=https://bitzhangmo.github.io/2019/05/20/Lua/Lua%E7%A8%8B%E5%BA%8F%E8%AE%BE%E8%AE%A1%EF%BC%883%EF%BC%89/&text=Lua程序设计（3）" target="_blank" rel="noopener"><i class="fab fa-twitter " aria-hidden="true"></i></a></li>
-  <li><a class="icon" href="http://www.linkedin.com/shareArticle?url=https://bitzhangmo.github.io/2019/05/20/Lua/Lua%E7%A8%8B%E5%BA%8F%E8%AE%BE%E8%AE%A1%EF%BC%883%EF%BC%89/&title=Lua程序设计（3）" target="_blank" rel="noopener"><i class="fab fa-linkedin " aria-hidden="true"></i></a></li>
-  <li><a class="icon" href="https://pinterest.com/pin/create/bookmarklet/?url=https://bitzhangmo.github.io/2019/05/20/Lua/Lua%E7%A8%8B%E5%BA%8F%E8%AE%BE%E8%AE%A1%EF%BC%883%EF%BC%89/&is_video=false&description=Lua程序设计（3）" target="_blank" rel="noopener"><i class="fab fa-pinterest " aria-hidden="true"></i></a></li>
-  <li><a class="icon" href="mailto:?subject=Lua程序设计（3）&body=Check out this article: https://bitzhangmo.github.io/2019/05/20/Lua/Lua%E7%A8%8B%E5%BA%8F%E8%AE%BE%E8%AE%A1%EF%BC%883%EF%BC%89/"><i class="fas fa-envelope " aria-hidden="true"></i></a></li>
-  <li><a class="icon" href="https://getpocket.com/save?url=https://bitzhangmo.github.io/2019/05/20/Lua/Lua%E7%A8%8B%E5%BA%8F%E8%AE%BE%E8%AE%A1%EF%BC%883%EF%BC%89/&title=Lua程序设计（3）" target="_blank" rel="noopener"><i class="fab fa-get-pocket " aria-hidden="true"></i></a></li>
-  <li><a class="icon" href="http://reddit.com/submit?url=https://bitzhangmo.github.io/2019/05/20/Lua/Lua%E7%A8%8B%E5%BA%8F%E8%AE%BE%E8%AE%A1%EF%BC%883%EF%BC%89/&title=Lua程序设计（3）" target="_blank" rel="noopener"><i class="fab fa-reddit " aria-hidden="true"></i></a></li>
-  <li><a class="icon" href="http://www.stumbleupon.com/submit?url=https://bitzhangmo.github.io/2019/05/20/Lua/Lua%E7%A8%8B%E5%BA%8F%E8%AE%BE%E8%AE%A1%EF%BC%883%EF%BC%89/&title=Lua程序设计（3）" target="_blank" rel="noopener"><i class="fab fa-stumbleupon " aria-hidden="true"></i></a></li>
-  <li><a class="icon" href="http://digg.com/submit?url=https://bitzhangmo.github.io/2019/05/20/Lua/Lua%E7%A8%8B%E5%BA%8F%E8%AE%BE%E8%AE%A1%EF%BC%883%EF%BC%89/&title=Lua程序设计（3）" target="_blank" rel="noopener"><i class="fab fa-digg " aria-hidden="true"></i></a></li>
-  <li><a class="icon" href="http://www.tumblr.com/share/link?url=https://bitzhangmo.github.io/2019/05/20/Lua/Lua%E7%A8%8B%E5%BA%8F%E8%AE%BE%E8%AE%A1%EF%BC%883%EF%BC%89/&name=Lua程序设计（3）&description=&lt;p&gt;Lua中的函数。&lt;/p&gt;" target="_blank" rel="noopener"><i class="fab fa-tumblr " aria-hidden="true"></i></a></li>
-  <li><a class="icon" href="https://news.ycombinator.com/submitlink?u=https://bitzhangmo.github.io/2019/05/20/Lua/Lua%E7%A8%8B%E5%BA%8F%E8%AE%BE%E8%AE%A1%EF%BC%883%EF%BC%89/&t=Lua程序设计（3）" target="_blank" rel="noopener"><i class="fab fa-hacker-news " aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="http://www.facebook.com/sharer.php?u=https://bitzhangmo.github.io/2019/05/20/Lua/Lua程序设计（3）/"><i class="fab fa-facebook " aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="https://twitter.com/share?url=https://bitzhangmo.github.io/2019/05/20/Lua/Lua程序设计（3）/&text=Lua程序设计（3）"><i class="fab fa-twitter " aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="http://www.linkedin.com/shareArticle?url=https://bitzhangmo.github.io/2019/05/20/Lua/Lua程序设计（3）/&title=Lua程序设计（3）"><i class="fab fa-linkedin " aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="https://pinterest.com/pin/create/bookmarklet/?url=https://bitzhangmo.github.io/2019/05/20/Lua/Lua程序设计（3）/&is_video=false&description=Lua程序设计（3）"><i class="fab fa-pinterest " aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="mailto:?subject=Lua程序设计（3）&body=Check out this article: https://bitzhangmo.github.io/2019/05/20/Lua/Lua程序设计（3）/"><i class="fas fa-envelope " aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="https://getpocket.com/save?url=https://bitzhangmo.github.io/2019/05/20/Lua/Lua程序设计（3）/&title=Lua程序设计（3）"><i class="fab fa-get-pocket " aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="http://reddit.com/submit?url=https://bitzhangmo.github.io/2019/05/20/Lua/Lua程序设计（3）/&title=Lua程序设计（3）"><i class="fab fa-reddit " aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="http://www.stumbleupon.com/submit?url=https://bitzhangmo.github.io/2019/05/20/Lua/Lua程序设计（3）/&title=Lua程序设计（3）"><i class="fab fa-stumbleupon " aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="http://digg.com/submit?url=https://bitzhangmo.github.io/2019/05/20/Lua/Lua程序设计（3）/&title=Lua程序设计（3）"><i class="fab fa-digg " aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="http://www.tumblr.com/share/link?url=https://bitzhangmo.github.io/2019/05/20/Lua/Lua程序设计（3）/&name=Lua程序设计（3）&description=&lt;p&gt;Lua中的函数。&lt;/p&gt;"><i class="fab fa-tumblr " aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="https://news.ycombinator.com/submitlink?u=https://bitzhangmo.github.io/2019/05/20/Lua/Lua程序设计（3）/&t=Lua程序设计（3）"><i class="fab fa-hacker-news " aria-hidden="true"></i></a></li>
 </ul>
 
     </div>
@@ -135,14 +137,14 @@
       
     <div class="article-category">
         <i class="fas fa-archive"></i>
-        <a class="category-link" href="/categories/%E8%AF%BB%E4%B9%A6%E7%AC%94%E8%AE%B0/">读书笔记</a>
+        <a class="category-link" href="/categories/读书笔记/">读书笔记</a>
     </div>
 
 
       
     <div class="article-tag">
         <i class="fas fa-tag"></i>
-        <a class="tag-link" href="/tags/Lua/" rel="tag">Lua</a>
+        <a class="tag-link" href="/tags/Lua/">Lua</a>
     </div>
 
 
@@ -153,11 +155,9 @@
   <div class="content" itemprop="articleBody">
     <p>Lua中的函数。</p>
 <a id="more"></a>
-
 <h3 id="函数"><a href="#函数" class="headerlink" title="函数"></a>函数</h3><p>在Lua语言中，函数是对语句和表达式进行抽象的主要方式。函数调用时都需要使用一对圆括号把参数列表扩起来，无论函数需不需要参数。<strong>当函数只有一个参数，且该参数是字符串常量或表构造器的时候，括号是可选的。</strong></p>
 <p>一例：</p>
 <figure class="highlight lua"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">add</span> <span class="params">(a)</span></span></span><br><span class="line">	<span class="keyword">local</span> sum = <span class="number">0</span></span><br><span class="line">	<span class="keyword">for</span> i = <span class="number">1</span>,#a <span class="keyword">do</span></span><br><span class="line">		sum = sum + a[i]</span><br><span class="line">	<span class="keyword">end</span></span><br><span class="line">	<span class="keyword">return</span> sum</span><br><span class="line"><span class="keyword">end</span></span><br></pre></td></tr></table></figure>
-
 <p>调用函数时使用的参数个数可以与定义函数时使用的参数个数不一致。Lua语言会通过抛弃多余参数和将不足的参数设为nil的方式来调整参数的个数。</p>
 <h3 id="多返回值"><a href="#多返回值" class="headerlink" title="多返回值"></a>多返回值</h3><p>Lua编写的函数可以返回多个结果，只需要在return关键字后列出所有要返回的值即可。</p>
 <ul>
@@ -168,7 +168,6 @@
 </ul>
 <h3 id="可变长参数函数"><a href="#可变长参数函数" class="headerlink" title="可变长参数函数"></a>可变长参数函数</h3><p>Lua语言中的函数可以是可变长参数函数，即可以支持数量可变的参数。</p>
 <figure class="highlight lua"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">add</span> <span class="params">(...)</span></span></span><br><span class="line">	<span class="keyword">local</span> s = <span class="number">0</span></span><br><span class="line">	<span class="keyword">for</span> _, v <span class="keyword">in</span> <span class="built_in">ipairs</span>&#123;...&#125; <span class="keyword">do</span></span><br><span class="line">		s = s + v</span><br><span class="line">	<span class="keyword">end</span></span><br><span class="line">	<span class="keyword">return</span> s</span><br><span class="line"><span class="keyword">end</span></span><br></pre></td></tr></table></figure>
-
 <p>参数列表中的三个点(…)表示该函数的参数是可变长的。当这个函数被调用时，Lua内部会把它的所有参数收集起来，我们把这些被收集起来的参数称为函数的额外参数。当函数要访问这些参数时仍需用到三个点，但不同的是此时这三个点时作为一个表达式来使用的。在上例中，表达式<code>{…}</code>的结果是一个由所有可变长参数组成的列表，该函数会遍历该列表来累加其中的元素。</p>
 <p>我们将三个点组成的表达式称为<strong>可变长参数表达式</strong>，其行为类似于一个具有多个返回值的函数，返回的是当前函数的所有可变长参数。</p>
 <h4 id="遍历可变长参数"><a href="#遍历可变长参数" class="headerlink" title="遍历可变长参数"></a>遍历可变长参数</h4><p>要遍历可变长参数，函数可以使用表达式<code>{...}</code>将可变长参数放在一个表中，就像add示例中所做的那样。不过在某些情况下，如果可变长参数重包含无效的nil，那么<code>{...}</code>获得的表可能不再是一个有效的序列，此时可以使用<code>table.pack</code>将表达式中的所有参数放在一个表中返回，这个表还有一个保存了参数个数的额外字段”n”。</p>
@@ -176,16 +175,12 @@
 <h3 id="函数table-unpack"><a href="#函数table-unpack" class="headerlink" title="函数table.unpack"></a>函数table.unpack</h3><p>多重返回值还涉及一个特殊的函数table.unpack，该函数的参数是一个数组，返回值为数组内的所有元素。</p>
 <p>unpack函数的重要用途之一体现在<strong>泛型调用</strong>机制中，泛型调用机制允许我们动态的调用具有任意参数的任意函数。如果我们想通过数组a传入可变的参数来调用函数f：</p>
 <figure class="highlight lua"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">f(<span class="built_in">table</span>.<span class="built_in">unpack</span>(a))</span><br></pre></td></tr></table></figure>
-
 <p>unpack会返回a中所有的元素，而这些元素又被用作f的参数：</p>
 <figure class="highlight lua"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">print</span>(<span class="built_in">string</span>.<span class="built_in">find</span>(<span class="string">"hello"</span>,<span class="string">"ll"</span>))</span><br></pre></td></tr></table></figure>
-
 <p>可以使用以下的代码动态地构造一个等价的调用：</p>
 <figure class="highlight lua"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">f = <span class="built_in">string</span>.<span class="built_in">find</span></span><br><span class="line">a = &#123;<span class="string">"hello"</span>,<span class="string">"ll"</span>&#125;</span><br><span class="line"></span><br><span class="line"><span class="built_in">print</span>(f(<span class="built_in">table</span>.<span class="built_in">unpack</span>(a)))</span><br></pre></td></tr></table></figure>
-
 <p>unpack可以显式的限制返回元素的范围：</p>
 <figure class="highlight lua"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">print</span>(<span class="built_in">table</span>.<span class="built_in">unpack</span>(&#123;<span class="string">"Sun"</span>,<span class="string">"Mon"</span>,<span class="string">"Tue"</span>,<span class="string">"Wed"</span>&#125;,<span class="number">2</span>,<span class="number">3</span>))</span><br><span class="line">&gt; Mon Tue</span><br></pre></td></tr></table></figure>
-
 <h3 id="正确的尾调用"><a href="#正确的尾调用" class="headerlink" title="正确的尾调用"></a>正确的尾调用</h3><p>为调用是被当作函数调用使用的跳转。<strong>当一个函数的最后一个动作是调用另一个函数而没有再进行其他工作时，就形成了尾调用</strong>。</p>
 <p>当被调用的函数执行结束后，程序就不再需要返回最初的调用者，因此，在尾调用之后，程序也就不需要在调用栈中保存有关调用函数的任何信息，当g返回时，程序的执行路径会直接返回到调用f的位置。由于尾调用不会使用栈空间，所以一个程序中能够嵌套的尾调用的数量是无限的。</p>
 <p><strong>在Lua语言中，只有形如return func(args)的调用才是尾调用。</strong></p>
@@ -208,7 +203,7 @@
          
           <li><a href="/archives/">归档</a></li>
          
-          <li><a href="/projects_url">项目</a></li>
+          <li><a href="/search/">搜索</a></li>
         
       </ul>
     </div>
@@ -219,17 +214,17 @@
 
     <div id="share-footer" style="display: none">
       <ul>
-  <li><a class="icon" href="http://www.facebook.com/sharer.php?u=https://bitzhangmo.github.io/2019/05/20/Lua/Lua%E7%A8%8B%E5%BA%8F%E8%AE%BE%E8%AE%A1%EF%BC%883%EF%BC%89/" target="_blank" rel="noopener"><i class="fab fa-facebook fa-lg" aria-hidden="true"></i></a></li>
-  <li><a class="icon" href="https://twitter.com/share?url=https://bitzhangmo.github.io/2019/05/20/Lua/Lua%E7%A8%8B%E5%BA%8F%E8%AE%BE%E8%AE%A1%EF%BC%883%EF%BC%89/&text=Lua程序设计（3）" target="_blank" rel="noopener"><i class="fab fa-twitter fa-lg" aria-hidden="true"></i></a></li>
-  <li><a class="icon" href="http://www.linkedin.com/shareArticle?url=https://bitzhangmo.github.io/2019/05/20/Lua/Lua%E7%A8%8B%E5%BA%8F%E8%AE%BE%E8%AE%A1%EF%BC%883%EF%BC%89/&title=Lua程序设计（3）" target="_blank" rel="noopener"><i class="fab fa-linkedin fa-lg" aria-hidden="true"></i></a></li>
-  <li><a class="icon" href="https://pinterest.com/pin/create/bookmarklet/?url=https://bitzhangmo.github.io/2019/05/20/Lua/Lua%E7%A8%8B%E5%BA%8F%E8%AE%BE%E8%AE%A1%EF%BC%883%EF%BC%89/&is_video=false&description=Lua程序设计（3）" target="_blank" rel="noopener"><i class="fab fa-pinterest fa-lg" aria-hidden="true"></i></a></li>
-  <li><a class="icon" href="mailto:?subject=Lua程序设计（3）&body=Check out this article: https://bitzhangmo.github.io/2019/05/20/Lua/Lua%E7%A8%8B%E5%BA%8F%E8%AE%BE%E8%AE%A1%EF%BC%883%EF%BC%89/"><i class="fas fa-envelope fa-lg" aria-hidden="true"></i></a></li>
-  <li><a class="icon" href="https://getpocket.com/save?url=https://bitzhangmo.github.io/2019/05/20/Lua/Lua%E7%A8%8B%E5%BA%8F%E8%AE%BE%E8%AE%A1%EF%BC%883%EF%BC%89/&title=Lua程序设计（3）" target="_blank" rel="noopener"><i class="fab fa-get-pocket fa-lg" aria-hidden="true"></i></a></li>
-  <li><a class="icon" href="http://reddit.com/submit?url=https://bitzhangmo.github.io/2019/05/20/Lua/Lua%E7%A8%8B%E5%BA%8F%E8%AE%BE%E8%AE%A1%EF%BC%883%EF%BC%89/&title=Lua程序设计（3）" target="_blank" rel="noopener"><i class="fab fa-reddit fa-lg" aria-hidden="true"></i></a></li>
-  <li><a class="icon" href="http://www.stumbleupon.com/submit?url=https://bitzhangmo.github.io/2019/05/20/Lua/Lua%E7%A8%8B%E5%BA%8F%E8%AE%BE%E8%AE%A1%EF%BC%883%EF%BC%89/&title=Lua程序设计（3）" target="_blank" rel="noopener"><i class="fab fa-stumbleupon fa-lg" aria-hidden="true"></i></a></li>
-  <li><a class="icon" href="http://digg.com/submit?url=https://bitzhangmo.github.io/2019/05/20/Lua/Lua%E7%A8%8B%E5%BA%8F%E8%AE%BE%E8%AE%A1%EF%BC%883%EF%BC%89/&title=Lua程序设计（3）" target="_blank" rel="noopener"><i class="fab fa-digg fa-lg" aria-hidden="true"></i></a></li>
-  <li><a class="icon" href="http://www.tumblr.com/share/link?url=https://bitzhangmo.github.io/2019/05/20/Lua/Lua%E7%A8%8B%E5%BA%8F%E8%AE%BE%E8%AE%A1%EF%BC%883%EF%BC%89/&name=Lua程序设计（3）&description=&lt;p&gt;Lua中的函数。&lt;/p&gt;" target="_blank" rel="noopener"><i class="fab fa-tumblr fa-lg" aria-hidden="true"></i></a></li>
-  <li><a class="icon" href="https://news.ycombinator.com/submitlink?u=https://bitzhangmo.github.io/2019/05/20/Lua/Lua%E7%A8%8B%E5%BA%8F%E8%AE%BE%E8%AE%A1%EF%BC%883%EF%BC%89/&t=Lua程序设计（3）" target="_blank" rel="noopener"><i class="fab fa-hacker-news fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="http://www.facebook.com/sharer.php?u=https://bitzhangmo.github.io/2019/05/20/Lua/Lua程序设计（3）/"><i class="fab fa-facebook fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="https://twitter.com/share?url=https://bitzhangmo.github.io/2019/05/20/Lua/Lua程序设计（3）/&text=Lua程序设计（3）"><i class="fab fa-twitter fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="http://www.linkedin.com/shareArticle?url=https://bitzhangmo.github.io/2019/05/20/Lua/Lua程序设计（3）/&title=Lua程序设计（3）"><i class="fab fa-linkedin fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="https://pinterest.com/pin/create/bookmarklet/?url=https://bitzhangmo.github.io/2019/05/20/Lua/Lua程序设计（3）/&is_video=false&description=Lua程序设计（3）"><i class="fab fa-pinterest fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="mailto:?subject=Lua程序设计（3）&body=Check out this article: https://bitzhangmo.github.io/2019/05/20/Lua/Lua程序设计（3）/"><i class="fas fa-envelope fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="https://getpocket.com/save?url=https://bitzhangmo.github.io/2019/05/20/Lua/Lua程序设计（3）/&title=Lua程序设计（3）"><i class="fab fa-get-pocket fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="http://reddit.com/submit?url=https://bitzhangmo.github.io/2019/05/20/Lua/Lua程序设计（3）/&title=Lua程序设计（3）"><i class="fab fa-reddit fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="http://www.stumbleupon.com/submit?url=https://bitzhangmo.github.io/2019/05/20/Lua/Lua程序设计（3）/&title=Lua程序设计（3）"><i class="fab fa-stumbleupon fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="http://digg.com/submit?url=https://bitzhangmo.github.io/2019/05/20/Lua/Lua程序设计（3）/&title=Lua程序设计（3）"><i class="fab fa-digg fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="http://www.tumblr.com/share/link?url=https://bitzhangmo.github.io/2019/05/20/Lua/Lua程序设计（3）/&name=Lua程序设计（3）&description=&lt;p&gt;Lua中的函数。&lt;/p&gt;"><i class="fab fa-tumblr fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="https://news.ycombinator.com/submitlink?u=https://bitzhangmo.github.io/2019/05/20/Lua/Lua程序设计（3）/&t=Lua程序设计（3）"><i class="fab fa-hacker-news fa-lg" aria-hidden="true"></i></a></li>
 </ul>
 
     </div>
@@ -259,7 +254,7 @@
          
           <li><a href="/archives/">归档</a></li>
          
-          <li><a href="/projects_url">项目</a></li>
+          <li><a href="/search/">搜索</a></li>
         
       </ul>
     </nav>
@@ -307,5 +302,5 @@
 <!-- Disqus Comments -->
 
 
-</body>
+<script src="/live2dw/lib/L2Dwidget.min.js?bd2294fafea3389ee458f1d9be5a2157"></script><script>L2Dwidget.init({"pluginRootPath":"live2dw/","pluginJsPath":"lib/","pluginModelPath":"assets/","tagMode":false,"debug":false,"model":{"jsonPath":"/live2dw/assets/hijiki.model.json"},"display":{"position":"left","width":100,"height":200},"mobile":{"show":false},"log":false});</script></body>
 </html>

@@ -1,23 +1,25 @@
 <!DOCTYPE html>
 <html lang=zh>
-<head>
+<head><meta name="generator" content="Hexo 3.9.0">
     <!-- so meta -->
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="HandheldFriendly" content="True">
-    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1" />
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
     <meta name="description" content="生命周期相关。">
 <meta name="keywords" content="Unity">
 <meta property="og:type" content="article">
 <meta property="og:title" content="[Unity] 生命周期相关">
-<meta property="og:url" content="https:&#x2F;&#x2F;bitzhangmo.github.io&#x2F;2019&#x2F;04&#x2F;17&#x2F;Unity%E7%AC%94%E8%AE%B0&#x2F;Unity-%E7%94%9F%E5%91%BD%E5%91%A8%E6%9C%9F%E7%9B%B8%E5%85%B3&#x2F;index.html">
+<meta property="og:url" content="https://bitzhangmo.github.io/2019/04/17/Unity笔记/Unity-生命周期相关/index.html">
 <meta property="og:site_name" content="zhangMo Blog">
 <meta property="og:description" content="生命周期相关。">
 <meta property="og:locale" content="zh-CN">
-<meta property="og:image" content="https:&#x2F;&#x2F;docs.unity3d.com&#x2F;uploads&#x2F;Main&#x2F;monobehaviour_flowchart.svg">
+<meta property="og:image" content="https://docs.unity3d.com/uploads/Main/monobehaviour_flowchart.svg">
 <meta property="og:updated_time" content="2019-04-24T13:00:41.494Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:image" content="https:&#x2F;&#x2F;docs.unity3d.com&#x2F;uploads&#x2F;Main&#x2F;monobehaviour_flowchart.svg">
+<meta name="twitter:title" content="[Unity] 生命周期相关">
+<meta name="twitter:description" content="生命周期相关。">
+<meta name="twitter:image" content="https://docs.unity3d.com/uploads/Main/monobehaviour_flowchart.svg">
     
     
         
@@ -65,7 +67,7 @@
          
           <li><a href="/archives/">归档</a></li>
          
-          <li><a href="/projects_url">项目</a></li>
+          <li><a href="/search/">搜索</a></li>
         
       </ul>
     </span>
@@ -73,10 +75,10 @@
     <span id="actions">
       <ul>
         
-        <li><a class="icon" href="/2019/04/17/Unity%E7%AC%94%E8%AE%B0/Unity-%E5%9C%A8Unity%E4%B8%AD%E7%BA%B9%E7%90%86%E5%9B%BE%E8%AF%A5%E6%98%AF%E4%BB%80%E4%B9%88%E6%A0%BC%E5%BC%8F%EF%BC%9F/"><i class="fas fa-chevron-left" aria-hidden="true" onmouseover="$('#i-prev').toggle();" onmouseout="$('#i-prev').toggle();"></i></a></li>
+        <li><a class="icon" href="/2019/04/17/Unity笔记/Unity-在Unity中纹理图该是什么格式？/"><i class="fas fa-chevron-left" aria-hidden="true" onmouseover="$('#i-prev').toggle();" onmouseout="$('#i-prev').toggle();"></i></a></li>
         
         
-        <li><a class="icon" href="/2019/04/12/%E5%BC%80%E5%8F%91%E7%AC%94%E8%AE%B0/Demo-%E4%B8%80%E4%B8%AA%E5%8F%AF%E8%A7%86%E5%8C%96%E5%AF%BB%E8%B7%AFProject/"><i class="fas fa-chevron-right" aria-hidden="true" onmouseover="$('#i-next').toggle();" onmouseout="$('#i-next').toggle();"></i></a></li>
+        <li><a class="icon" href="/2019/04/12/开发笔记/Demo-一个可视化寻路Project/"><i class="fas fa-chevron-right" aria-hidden="true" onmouseover="$('#i-next').toggle();" onmouseout="$('#i-next').toggle();"></i></a></li>
         
         <li><a class="icon" href="#" onclick="$('html, body').animate({ scrollTop: 0 }, 'fast');"><i class="fas fa-chevron-up" aria-hidden="true" onmouseover="$('#i-top').toggle();" onmouseout="$('#i-top').toggle();"></i></a></li>
         <li><a class="icon" href="#"><i class="fas fa-share-alt" aria-hidden="true" onmouseover="$('#i-share').toggle();" onmouseout="$('#i-share').toggle();" onclick="$('#share').toggle();return false;"></i></a></li>
@@ -89,17 +91,17 @@
     <br/>
     <div id="share" style="display: none">
       <ul>
-  <li><a class="icon" href="http://www.facebook.com/sharer.php?u=https://bitzhangmo.github.io/2019/04/17/Unity%E7%AC%94%E8%AE%B0/Unity-%E7%94%9F%E5%91%BD%E5%91%A8%E6%9C%9F%E7%9B%B8%E5%85%B3/" target="_blank" rel="noopener"><i class="fab fa-facebook " aria-hidden="true"></i></a></li>
-  <li><a class="icon" href="https://twitter.com/share?url=https://bitzhangmo.github.io/2019/04/17/Unity%E7%AC%94%E8%AE%B0/Unity-%E7%94%9F%E5%91%BD%E5%91%A8%E6%9C%9F%E7%9B%B8%E5%85%B3/&text=[Unity] 生命周期相关" target="_blank" rel="noopener"><i class="fab fa-twitter " aria-hidden="true"></i></a></li>
-  <li><a class="icon" href="http://www.linkedin.com/shareArticle?url=https://bitzhangmo.github.io/2019/04/17/Unity%E7%AC%94%E8%AE%B0/Unity-%E7%94%9F%E5%91%BD%E5%91%A8%E6%9C%9F%E7%9B%B8%E5%85%B3/&title=[Unity] 生命周期相关" target="_blank" rel="noopener"><i class="fab fa-linkedin " aria-hidden="true"></i></a></li>
-  <li><a class="icon" href="https://pinterest.com/pin/create/bookmarklet/?url=https://bitzhangmo.github.io/2019/04/17/Unity%E7%AC%94%E8%AE%B0/Unity-%E7%94%9F%E5%91%BD%E5%91%A8%E6%9C%9F%E7%9B%B8%E5%85%B3/&is_video=false&description=[Unity] 生命周期相关" target="_blank" rel="noopener"><i class="fab fa-pinterest " aria-hidden="true"></i></a></li>
-  <li><a class="icon" href="mailto:?subject=[Unity] 生命周期相关&body=Check out this article: https://bitzhangmo.github.io/2019/04/17/Unity%E7%AC%94%E8%AE%B0/Unity-%E7%94%9F%E5%91%BD%E5%91%A8%E6%9C%9F%E7%9B%B8%E5%85%B3/"><i class="fas fa-envelope " aria-hidden="true"></i></a></li>
-  <li><a class="icon" href="https://getpocket.com/save?url=https://bitzhangmo.github.io/2019/04/17/Unity%E7%AC%94%E8%AE%B0/Unity-%E7%94%9F%E5%91%BD%E5%91%A8%E6%9C%9F%E7%9B%B8%E5%85%B3/&title=[Unity] 生命周期相关" target="_blank" rel="noopener"><i class="fab fa-get-pocket " aria-hidden="true"></i></a></li>
-  <li><a class="icon" href="http://reddit.com/submit?url=https://bitzhangmo.github.io/2019/04/17/Unity%E7%AC%94%E8%AE%B0/Unity-%E7%94%9F%E5%91%BD%E5%91%A8%E6%9C%9F%E7%9B%B8%E5%85%B3/&title=[Unity] 生命周期相关" target="_blank" rel="noopener"><i class="fab fa-reddit " aria-hidden="true"></i></a></li>
-  <li><a class="icon" href="http://www.stumbleupon.com/submit?url=https://bitzhangmo.github.io/2019/04/17/Unity%E7%AC%94%E8%AE%B0/Unity-%E7%94%9F%E5%91%BD%E5%91%A8%E6%9C%9F%E7%9B%B8%E5%85%B3/&title=[Unity] 生命周期相关" target="_blank" rel="noopener"><i class="fab fa-stumbleupon " aria-hidden="true"></i></a></li>
-  <li><a class="icon" href="http://digg.com/submit?url=https://bitzhangmo.github.io/2019/04/17/Unity%E7%AC%94%E8%AE%B0/Unity-%E7%94%9F%E5%91%BD%E5%91%A8%E6%9C%9F%E7%9B%B8%E5%85%B3/&title=[Unity] 生命周期相关" target="_blank" rel="noopener"><i class="fab fa-digg " aria-hidden="true"></i></a></li>
-  <li><a class="icon" href="http://www.tumblr.com/share/link?url=https://bitzhangmo.github.io/2019/04/17/Unity%E7%AC%94%E8%AE%B0/Unity-%E7%94%9F%E5%91%BD%E5%91%A8%E6%9C%9F%E7%9B%B8%E5%85%B3/&name=[Unity] 生命周期相关&description=&lt;p&gt;生命周期相关。&lt;/p&gt;" target="_blank" rel="noopener"><i class="fab fa-tumblr " aria-hidden="true"></i></a></li>
-  <li><a class="icon" href="https://news.ycombinator.com/submitlink?u=https://bitzhangmo.github.io/2019/04/17/Unity%E7%AC%94%E8%AE%B0/Unity-%E7%94%9F%E5%91%BD%E5%91%A8%E6%9C%9F%E7%9B%B8%E5%85%B3/&t=[Unity] 生命周期相关" target="_blank" rel="noopener"><i class="fab fa-hacker-news " aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="http://www.facebook.com/sharer.php?u=https://bitzhangmo.github.io/2019/04/17/Unity笔记/Unity-生命周期相关/"><i class="fab fa-facebook " aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="https://twitter.com/share?url=https://bitzhangmo.github.io/2019/04/17/Unity笔记/Unity-生命周期相关/&text=[Unity] 生命周期相关"><i class="fab fa-twitter " aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="http://www.linkedin.com/shareArticle?url=https://bitzhangmo.github.io/2019/04/17/Unity笔记/Unity-生命周期相关/&title=[Unity] 生命周期相关"><i class="fab fa-linkedin " aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="https://pinterest.com/pin/create/bookmarklet/?url=https://bitzhangmo.github.io/2019/04/17/Unity笔记/Unity-生命周期相关/&is_video=false&description=[Unity] 生命周期相关"><i class="fab fa-pinterest " aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="mailto:?subject=[Unity] 生命周期相关&body=Check out this article: https://bitzhangmo.github.io/2019/04/17/Unity笔记/Unity-生命周期相关/"><i class="fas fa-envelope " aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="https://getpocket.com/save?url=https://bitzhangmo.github.io/2019/04/17/Unity笔记/Unity-生命周期相关/&title=[Unity] 生命周期相关"><i class="fab fa-get-pocket " aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="http://reddit.com/submit?url=https://bitzhangmo.github.io/2019/04/17/Unity笔记/Unity-生命周期相关/&title=[Unity] 生命周期相关"><i class="fab fa-reddit " aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="http://www.stumbleupon.com/submit?url=https://bitzhangmo.github.io/2019/04/17/Unity笔记/Unity-生命周期相关/&title=[Unity] 生命周期相关"><i class="fab fa-stumbleupon " aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="http://digg.com/submit?url=https://bitzhangmo.github.io/2019/04/17/Unity笔记/Unity-生命周期相关/&title=[Unity] 生命周期相关"><i class="fab fa-digg " aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="http://www.tumblr.com/share/link?url=https://bitzhangmo.github.io/2019/04/17/Unity笔记/Unity-生命周期相关/&name=[Unity] 生命周期相关&description=&lt;p&gt;生命周期相关。&lt;/p&gt;"><i class="fab fa-tumblr " aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="https://news.ycombinator.com/submitlink?u=https://bitzhangmo.github.io/2019/04/17/Unity笔记/Unity-生命周期相关/&t=[Unity] 生命周期相关"><i class="fab fa-hacker-news " aria-hidden="true"></i></a></li>
 </ul>
 
     </div>
@@ -137,14 +139,14 @@
       
     <div class="article-category">
         <i class="fas fa-archive"></i>
-        <a class="category-link" href="/categories/%E8%AF%BB%E4%B9%A6%E7%AC%94%E8%AE%B0/">读书笔记</a>
+        <a class="category-link" href="/categories/读书笔记/">读书笔记</a>
     </div>
 
 
       
     <div class="article-tag">
         <i class="fas fa-tag"></i>
-        <a class="tag-link" href="/tags/Unity/" rel="tag">Unity</a>
+        <a class="tag-link" href="/tags/Unity/">Unity</a>
     </div>
 
 
@@ -155,9 +157,8 @@
   <div class="content" itemprop="articleBody">
     <p>生命周期相关。</p>
 <a id="more"></a>
-
 <h3 id="脚本的生命周期："><a href="#脚本的生命周期：" class="headerlink" title="脚本的生命周期："></a>脚本的生命周期：</h3><p>Unity脚本有一套完整的生命周期，脚本需要挂在任意游戏对象上，并且同一个游戏对象可以挂不同的脚本，各脚本执行自己的生命周期，它们可以互相组合并且互不干预。生命周期中的所有方法都是Unity系统自己回调的，不需要手动调用，主要有编辑脚本、初始化、物理碰撞事件、更新回调、渲染和销毁等。学习脚本的生命周期之前，我们不得不引用文档中非常经典的一张图，它完整的描述了脚本的生命周期：</p>
-<p><img src="https://docs.unity3d.com/uploads/Main/monobehaviour_flowchart.svg" alt=""></p>
+<p><img src="https://docs.unity3d.com/uploads/Main/monobehaviour_flowchart.svg" alt></p>
 <h4 id="第一个场景加载："><a href="#第一个场景加载：" class="headerlink" title="第一个场景加载："></a>第一个场景加载：</h4><p>这些函数将在场景开始加载时调用。(场景中的每个物体仅调用一次)</p>
 <ul>
 <li><strong>Awake</strong>：这个方法总是在在任何开始方法之前调用(可以理解成最先调用吧？)，并且在一个prefab<strong>刚被实例化后</strong>就调用。(如果一个游戏物体在开始时是不活跃的(inactive)则将不会调用awake函数，直到其变为活跃。)</li>
@@ -230,7 +231,7 @@
          
           <li><a href="/archives/">归档</a></li>
          
-          <li><a href="/projects_url">项目</a></li>
+          <li><a href="/search/">搜索</a></li>
         
       </ul>
     </div>
@@ -241,17 +242,17 @@
 
     <div id="share-footer" style="display: none">
       <ul>
-  <li><a class="icon" href="http://www.facebook.com/sharer.php?u=https://bitzhangmo.github.io/2019/04/17/Unity%E7%AC%94%E8%AE%B0/Unity-%E7%94%9F%E5%91%BD%E5%91%A8%E6%9C%9F%E7%9B%B8%E5%85%B3/" target="_blank" rel="noopener"><i class="fab fa-facebook fa-lg" aria-hidden="true"></i></a></li>
-  <li><a class="icon" href="https://twitter.com/share?url=https://bitzhangmo.github.io/2019/04/17/Unity%E7%AC%94%E8%AE%B0/Unity-%E7%94%9F%E5%91%BD%E5%91%A8%E6%9C%9F%E7%9B%B8%E5%85%B3/&text=[Unity] 生命周期相关" target="_blank" rel="noopener"><i class="fab fa-twitter fa-lg" aria-hidden="true"></i></a></li>
-  <li><a class="icon" href="http://www.linkedin.com/shareArticle?url=https://bitzhangmo.github.io/2019/04/17/Unity%E7%AC%94%E8%AE%B0/Unity-%E7%94%9F%E5%91%BD%E5%91%A8%E6%9C%9F%E7%9B%B8%E5%85%B3/&title=[Unity] 生命周期相关" target="_blank" rel="noopener"><i class="fab fa-linkedin fa-lg" aria-hidden="true"></i></a></li>
-  <li><a class="icon" href="https://pinterest.com/pin/create/bookmarklet/?url=https://bitzhangmo.github.io/2019/04/17/Unity%E7%AC%94%E8%AE%B0/Unity-%E7%94%9F%E5%91%BD%E5%91%A8%E6%9C%9F%E7%9B%B8%E5%85%B3/&is_video=false&description=[Unity] 生命周期相关" target="_blank" rel="noopener"><i class="fab fa-pinterest fa-lg" aria-hidden="true"></i></a></li>
-  <li><a class="icon" href="mailto:?subject=[Unity] 生命周期相关&body=Check out this article: https://bitzhangmo.github.io/2019/04/17/Unity%E7%AC%94%E8%AE%B0/Unity-%E7%94%9F%E5%91%BD%E5%91%A8%E6%9C%9F%E7%9B%B8%E5%85%B3/"><i class="fas fa-envelope fa-lg" aria-hidden="true"></i></a></li>
-  <li><a class="icon" href="https://getpocket.com/save?url=https://bitzhangmo.github.io/2019/04/17/Unity%E7%AC%94%E8%AE%B0/Unity-%E7%94%9F%E5%91%BD%E5%91%A8%E6%9C%9F%E7%9B%B8%E5%85%B3/&title=[Unity] 生命周期相关" target="_blank" rel="noopener"><i class="fab fa-get-pocket fa-lg" aria-hidden="true"></i></a></li>
-  <li><a class="icon" href="http://reddit.com/submit?url=https://bitzhangmo.github.io/2019/04/17/Unity%E7%AC%94%E8%AE%B0/Unity-%E7%94%9F%E5%91%BD%E5%91%A8%E6%9C%9F%E7%9B%B8%E5%85%B3/&title=[Unity] 生命周期相关" target="_blank" rel="noopener"><i class="fab fa-reddit fa-lg" aria-hidden="true"></i></a></li>
-  <li><a class="icon" href="http://www.stumbleupon.com/submit?url=https://bitzhangmo.github.io/2019/04/17/Unity%E7%AC%94%E8%AE%B0/Unity-%E7%94%9F%E5%91%BD%E5%91%A8%E6%9C%9F%E7%9B%B8%E5%85%B3/&title=[Unity] 生命周期相关" target="_blank" rel="noopener"><i class="fab fa-stumbleupon fa-lg" aria-hidden="true"></i></a></li>
-  <li><a class="icon" href="http://digg.com/submit?url=https://bitzhangmo.github.io/2019/04/17/Unity%E7%AC%94%E8%AE%B0/Unity-%E7%94%9F%E5%91%BD%E5%91%A8%E6%9C%9F%E7%9B%B8%E5%85%B3/&title=[Unity] 生命周期相关" target="_blank" rel="noopener"><i class="fab fa-digg fa-lg" aria-hidden="true"></i></a></li>
-  <li><a class="icon" href="http://www.tumblr.com/share/link?url=https://bitzhangmo.github.io/2019/04/17/Unity%E7%AC%94%E8%AE%B0/Unity-%E7%94%9F%E5%91%BD%E5%91%A8%E6%9C%9F%E7%9B%B8%E5%85%B3/&name=[Unity] 生命周期相关&description=&lt;p&gt;生命周期相关。&lt;/p&gt;" target="_blank" rel="noopener"><i class="fab fa-tumblr fa-lg" aria-hidden="true"></i></a></li>
-  <li><a class="icon" href="https://news.ycombinator.com/submitlink?u=https://bitzhangmo.github.io/2019/04/17/Unity%E7%AC%94%E8%AE%B0/Unity-%E7%94%9F%E5%91%BD%E5%91%A8%E6%9C%9F%E7%9B%B8%E5%85%B3/&t=[Unity] 生命周期相关" target="_blank" rel="noopener"><i class="fab fa-hacker-news fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="http://www.facebook.com/sharer.php?u=https://bitzhangmo.github.io/2019/04/17/Unity笔记/Unity-生命周期相关/"><i class="fab fa-facebook fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="https://twitter.com/share?url=https://bitzhangmo.github.io/2019/04/17/Unity笔记/Unity-生命周期相关/&text=[Unity] 生命周期相关"><i class="fab fa-twitter fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="http://www.linkedin.com/shareArticle?url=https://bitzhangmo.github.io/2019/04/17/Unity笔记/Unity-生命周期相关/&title=[Unity] 生命周期相关"><i class="fab fa-linkedin fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="https://pinterest.com/pin/create/bookmarklet/?url=https://bitzhangmo.github.io/2019/04/17/Unity笔记/Unity-生命周期相关/&is_video=false&description=[Unity] 生命周期相关"><i class="fab fa-pinterest fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="mailto:?subject=[Unity] 生命周期相关&body=Check out this article: https://bitzhangmo.github.io/2019/04/17/Unity笔记/Unity-生命周期相关/"><i class="fas fa-envelope fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="https://getpocket.com/save?url=https://bitzhangmo.github.io/2019/04/17/Unity笔记/Unity-生命周期相关/&title=[Unity] 生命周期相关"><i class="fab fa-get-pocket fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="http://reddit.com/submit?url=https://bitzhangmo.github.io/2019/04/17/Unity笔记/Unity-生命周期相关/&title=[Unity] 生命周期相关"><i class="fab fa-reddit fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="http://www.stumbleupon.com/submit?url=https://bitzhangmo.github.io/2019/04/17/Unity笔记/Unity-生命周期相关/&title=[Unity] 生命周期相关"><i class="fab fa-stumbleupon fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="http://digg.com/submit?url=https://bitzhangmo.github.io/2019/04/17/Unity笔记/Unity-生命周期相关/&title=[Unity] 生命周期相关"><i class="fab fa-digg fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="http://www.tumblr.com/share/link?url=https://bitzhangmo.github.io/2019/04/17/Unity笔记/Unity-生命周期相关/&name=[Unity] 生命周期相关&description=&lt;p&gt;生命周期相关。&lt;/p&gt;"><i class="fab fa-tumblr fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="https://news.ycombinator.com/submitlink?u=https://bitzhangmo.github.io/2019/04/17/Unity笔记/Unity-生命周期相关/&t=[Unity] 生命周期相关"><i class="fab fa-hacker-news fa-lg" aria-hidden="true"></i></a></li>
 </ul>
 
     </div>
@@ -281,7 +282,7 @@
          
           <li><a href="/archives/">归档</a></li>
          
-          <li><a href="/projects_url">项目</a></li>
+          <li><a href="/search/">搜索</a></li>
         
       </ul>
     </nav>
@@ -329,5 +330,5 @@
 <!-- Disqus Comments -->
 
 
-</body>
+<script src="/live2dw/lib/L2Dwidget.min.js?bd2294fafea3389ee458f1d9be5a2157"></script><script>L2Dwidget.init({"pluginRootPath":"live2dw/","pluginJsPath":"lib/","pluginModelPath":"assets/","tagMode":false,"debug":false,"model":{"jsonPath":"/live2dw/assets/hijiki.model.json"},"display":{"position":"left","width":100,"height":200},"mobile":{"show":false},"log":false});</script></body>
 </html>

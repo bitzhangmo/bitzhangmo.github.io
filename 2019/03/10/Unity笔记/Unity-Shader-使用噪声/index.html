@@ -1,29 +1,31 @@
 <!DOCTYPE html>
 <html lang=zh>
-<head>
+<head><meta name="generator" content="Hexo 3.9.0">
     <!-- so meta -->
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="HandheldFriendly" content="True">
-    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1" />
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
     <meta name="description" content="消融效果、水波效果、全局雾效。">
 <meta name="keywords" content="Unity,Shader">
 <meta property="og:type" content="article">
 <meta property="og:title" content="Unity Shader 使用噪声">
-<meta property="og:url" content="https:&#x2F;&#x2F;bitzhangmo.github.io&#x2F;2019&#x2F;03&#x2F;10&#x2F;Unity%E7%AC%94%E8%AE%B0&#x2F;Unity-Shader-%E4%BD%BF%E7%94%A8%E5%99%AA%E5%A3%B0&#x2F;index.html">
+<meta property="og:url" content="https://bitzhangmo.github.io/2019/03/10/Unity笔记/Unity-Shader-使用噪声/index.html">
 <meta property="og:site_name" content="zhangMo Blog">
 <meta property="og:description" content="消融效果、水波效果、全局雾效。">
 <meta property="og:locale" content="zh-CN">
-<meta property="og:image" content="https:&#x2F;&#x2F;wx3.sinaimg.cn&#x2F;mw690&#x2F;007CSzD7ly1g0yn0oximmj313k0s6qso.jpg">
-<meta property="og:image" content="https:&#x2F;&#x2F;wx2.sinaimg.cn&#x2F;mw690&#x2F;007CSzD7ly1g0yn0ofirkj30yo0igdjv.jpg">
-<meta property="og:image" content="https:&#x2F;&#x2F;wx4.sinaimg.cn&#x2F;mw690&#x2F;007CSzD7ly1g0yn0o52rtj30ww0jy76n.jpg">
-<meta property="og:image" content="https:&#x2F;&#x2F;wx4.sinaimg.cn&#x2F;mw690&#x2F;007CSzD7ly1g0yn0o8u6rj30x60r4dko.jpg">
-<meta property="og:image" content="https:&#x2F;&#x2F;wx4.sinaimg.cn&#x2F;mw690&#x2F;007CSzD7ly1g0yn0oqz2xj31100u0gv7.jpg">
-<meta property="og:image" content="https:&#x2F;&#x2F;wx4.sinaimg.cn&#x2F;mw690&#x2F;007CSzD7ly1g0yn0o0y8xj30lq0d4mya.jpg">
-<meta property="og:image" content="https:&#x2F;&#x2F;wx3.sinaimg.cn&#x2F;mw690&#x2F;007CSzD7ly1g0yn0o4ipcj30t80n8acq.jpg">
+<meta property="og:image" content="https://wx3.sinaimg.cn/mw690/007CSzD7ly1g0yn0oximmj313k0s6qso.jpg">
+<meta property="og:image" content="https://wx2.sinaimg.cn/mw690/007CSzD7ly1g0yn0ofirkj30yo0igdjv.jpg">
+<meta property="og:image" content="https://wx4.sinaimg.cn/mw690/007CSzD7ly1g0yn0o52rtj30ww0jy76n.jpg">
+<meta property="og:image" content="https://wx4.sinaimg.cn/mw690/007CSzD7ly1g0yn0o8u6rj30x60r4dko.jpg">
+<meta property="og:image" content="https://wx4.sinaimg.cn/mw690/007CSzD7ly1g0yn0oqz2xj31100u0gv7.jpg">
+<meta property="og:image" content="https://wx4.sinaimg.cn/mw690/007CSzD7ly1g0yn0o0y8xj30lq0d4mya.jpg">
+<meta property="og:image" content="https://wx3.sinaimg.cn/mw690/007CSzD7ly1g0yn0o4ipcj30t80n8acq.jpg">
 <meta property="og:updated_time" content="2019-04-17T06:21:36.552Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:image" content="https:&#x2F;&#x2F;wx3.sinaimg.cn&#x2F;mw690&#x2F;007CSzD7ly1g0yn0oximmj313k0s6qso.jpg">
+<meta name="twitter:title" content="Unity Shader 使用噪声">
+<meta name="twitter:description" content="消融效果、水波效果、全局雾效。">
+<meta name="twitter:image" content="https://wx3.sinaimg.cn/mw690/007CSzD7ly1g0yn0oximmj313k0s6qso.jpg">
     
     
         
@@ -71,7 +73,7 @@
          
           <li><a href="/archives/">归档</a></li>
          
-          <li><a href="/projects_url">项目</a></li>
+          <li><a href="/search/">搜索</a></li>
         
       </ul>
     </span>
@@ -79,10 +81,10 @@
     <span id="actions">
       <ul>
         
-        <li><a class="icon" href="/2019/03/11/Unity%E7%AC%94%E8%AE%B0/Unity%E4%B8%AD%E7%9A%84%E6%B8%B2%E6%9F%93%E4%BC%98%E5%8C%96%E6%8A%80%E6%9C%AF/"><i class="fas fa-chevron-left" aria-hidden="true" onmouseover="$('#i-prev').toggle();" onmouseout="$('#i-prev').toggle();"></i></a></li>
+        <li><a class="icon" href="/2019/03/11/Unity笔记/Unity中的渲染优化技术/"><i class="fas fa-chevron-left" aria-hidden="true" onmouseover="$('#i-prev').toggle();" onmouseout="$('#i-prev').toggle();"></i></a></li>
         
         
-        <li><a class="icon" href="/2019/03/10/Unity%E7%AC%94%E8%AE%B0/Unity-Shader-%E9%9D%9E%E7%9C%9F%E5%AE%9E%E6%84%9F%E6%B8%B2%E6%9F%93/"><i class="fas fa-chevron-right" aria-hidden="true" onmouseover="$('#i-next').toggle();" onmouseout="$('#i-next').toggle();"></i></a></li>
+        <li><a class="icon" href="/2019/03/10/Unity笔记/Unity-Shader-非真实感渲染/"><i class="fas fa-chevron-right" aria-hidden="true" onmouseover="$('#i-next').toggle();" onmouseout="$('#i-next').toggle();"></i></a></li>
         
         <li><a class="icon" href="#" onclick="$('html, body').animate({ scrollTop: 0 }, 'fast');"><i class="fas fa-chevron-up" aria-hidden="true" onmouseover="$('#i-top').toggle();" onmouseout="$('#i-top').toggle();"></i></a></li>
         <li><a class="icon" href="#"><i class="fas fa-share-alt" aria-hidden="true" onmouseover="$('#i-share').toggle();" onmouseout="$('#i-share').toggle();" onclick="$('#share').toggle();return false;"></i></a></li>
@@ -95,17 +97,17 @@
     <br/>
     <div id="share" style="display: none">
       <ul>
-  <li><a class="icon" href="http://www.facebook.com/sharer.php?u=https://bitzhangmo.github.io/2019/03/10/Unity%E7%AC%94%E8%AE%B0/Unity-Shader-%E4%BD%BF%E7%94%A8%E5%99%AA%E5%A3%B0/" target="_blank" rel="noopener"><i class="fab fa-facebook " aria-hidden="true"></i></a></li>
-  <li><a class="icon" href="https://twitter.com/share?url=https://bitzhangmo.github.io/2019/03/10/Unity%E7%AC%94%E8%AE%B0/Unity-Shader-%E4%BD%BF%E7%94%A8%E5%99%AA%E5%A3%B0/&text=Unity Shader 使用噪声" target="_blank" rel="noopener"><i class="fab fa-twitter " aria-hidden="true"></i></a></li>
-  <li><a class="icon" href="http://www.linkedin.com/shareArticle?url=https://bitzhangmo.github.io/2019/03/10/Unity%E7%AC%94%E8%AE%B0/Unity-Shader-%E4%BD%BF%E7%94%A8%E5%99%AA%E5%A3%B0/&title=Unity Shader 使用噪声" target="_blank" rel="noopener"><i class="fab fa-linkedin " aria-hidden="true"></i></a></li>
-  <li><a class="icon" href="https://pinterest.com/pin/create/bookmarklet/?url=https://bitzhangmo.github.io/2019/03/10/Unity%E7%AC%94%E8%AE%B0/Unity-Shader-%E4%BD%BF%E7%94%A8%E5%99%AA%E5%A3%B0/&is_video=false&description=Unity Shader 使用噪声" target="_blank" rel="noopener"><i class="fab fa-pinterest " aria-hidden="true"></i></a></li>
-  <li><a class="icon" href="mailto:?subject=Unity Shader 使用噪声&body=Check out this article: https://bitzhangmo.github.io/2019/03/10/Unity%E7%AC%94%E8%AE%B0/Unity-Shader-%E4%BD%BF%E7%94%A8%E5%99%AA%E5%A3%B0/"><i class="fas fa-envelope " aria-hidden="true"></i></a></li>
-  <li><a class="icon" href="https://getpocket.com/save?url=https://bitzhangmo.github.io/2019/03/10/Unity%E7%AC%94%E8%AE%B0/Unity-Shader-%E4%BD%BF%E7%94%A8%E5%99%AA%E5%A3%B0/&title=Unity Shader 使用噪声" target="_blank" rel="noopener"><i class="fab fa-get-pocket " aria-hidden="true"></i></a></li>
-  <li><a class="icon" href="http://reddit.com/submit?url=https://bitzhangmo.github.io/2019/03/10/Unity%E7%AC%94%E8%AE%B0/Unity-Shader-%E4%BD%BF%E7%94%A8%E5%99%AA%E5%A3%B0/&title=Unity Shader 使用噪声" target="_blank" rel="noopener"><i class="fab fa-reddit " aria-hidden="true"></i></a></li>
-  <li><a class="icon" href="http://www.stumbleupon.com/submit?url=https://bitzhangmo.github.io/2019/03/10/Unity%E7%AC%94%E8%AE%B0/Unity-Shader-%E4%BD%BF%E7%94%A8%E5%99%AA%E5%A3%B0/&title=Unity Shader 使用噪声" target="_blank" rel="noopener"><i class="fab fa-stumbleupon " aria-hidden="true"></i></a></li>
-  <li><a class="icon" href="http://digg.com/submit?url=https://bitzhangmo.github.io/2019/03/10/Unity%E7%AC%94%E8%AE%B0/Unity-Shader-%E4%BD%BF%E7%94%A8%E5%99%AA%E5%A3%B0/&title=Unity Shader 使用噪声" target="_blank" rel="noopener"><i class="fab fa-digg " aria-hidden="true"></i></a></li>
-  <li><a class="icon" href="http://www.tumblr.com/share/link?url=https://bitzhangmo.github.io/2019/03/10/Unity%E7%AC%94%E8%AE%B0/Unity-Shader-%E4%BD%BF%E7%94%A8%E5%99%AA%E5%A3%B0/&name=Unity Shader 使用噪声&description=&lt;p&gt;消融效果、水波效果、全局雾效。&lt;/p&gt;" target="_blank" rel="noopener"><i class="fab fa-tumblr " aria-hidden="true"></i></a></li>
-  <li><a class="icon" href="https://news.ycombinator.com/submitlink?u=https://bitzhangmo.github.io/2019/03/10/Unity%E7%AC%94%E8%AE%B0/Unity-Shader-%E4%BD%BF%E7%94%A8%E5%99%AA%E5%A3%B0/&t=Unity Shader 使用噪声" target="_blank" rel="noopener"><i class="fab fa-hacker-news " aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="http://www.facebook.com/sharer.php?u=https://bitzhangmo.github.io/2019/03/10/Unity笔记/Unity-Shader-使用噪声/"><i class="fab fa-facebook " aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="https://twitter.com/share?url=https://bitzhangmo.github.io/2019/03/10/Unity笔记/Unity-Shader-使用噪声/&text=Unity Shader 使用噪声"><i class="fab fa-twitter " aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="http://www.linkedin.com/shareArticle?url=https://bitzhangmo.github.io/2019/03/10/Unity笔记/Unity-Shader-使用噪声/&title=Unity Shader 使用噪声"><i class="fab fa-linkedin " aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="https://pinterest.com/pin/create/bookmarklet/?url=https://bitzhangmo.github.io/2019/03/10/Unity笔记/Unity-Shader-使用噪声/&is_video=false&description=Unity Shader 使用噪声"><i class="fab fa-pinterest " aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="mailto:?subject=Unity Shader 使用噪声&body=Check out this article: https://bitzhangmo.github.io/2019/03/10/Unity笔记/Unity-Shader-使用噪声/"><i class="fas fa-envelope " aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="https://getpocket.com/save?url=https://bitzhangmo.github.io/2019/03/10/Unity笔记/Unity-Shader-使用噪声/&title=Unity Shader 使用噪声"><i class="fab fa-get-pocket " aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="http://reddit.com/submit?url=https://bitzhangmo.github.io/2019/03/10/Unity笔记/Unity-Shader-使用噪声/&title=Unity Shader 使用噪声"><i class="fab fa-reddit " aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="http://www.stumbleupon.com/submit?url=https://bitzhangmo.github.io/2019/03/10/Unity笔记/Unity-Shader-使用噪声/&title=Unity Shader 使用噪声"><i class="fab fa-stumbleupon " aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="http://digg.com/submit?url=https://bitzhangmo.github.io/2019/03/10/Unity笔记/Unity-Shader-使用噪声/&title=Unity Shader 使用噪声"><i class="fab fa-digg " aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="http://www.tumblr.com/share/link?url=https://bitzhangmo.github.io/2019/03/10/Unity笔记/Unity-Shader-使用噪声/&name=Unity Shader 使用噪声&description=&lt;p&gt;消融效果、水波效果、全局雾效。&lt;/p&gt;"><i class="fab fa-tumblr " aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="https://news.ycombinator.com/submitlink?u=https://bitzhangmo.github.io/2019/03/10/Unity笔记/Unity-Shader-使用噪声/&t=Unity Shader 使用噪声"><i class="fab fa-hacker-news " aria-hidden="true"></i></a></li>
 </ul>
 
     </div>
@@ -150,7 +152,7 @@
       
     <div class="article-tag">
         <i class="fas fa-tag"></i>
-        <a class="tag-link" href="/tags/Shader/" rel="tag">Shader</a>, <a class="tag-link" href="/tags/Unity/" rel="tag">Unity</a>
+        <a class="tag-link" href="/tags/Shader/">Shader</a>, <a class="tag-link" href="/tags/Unity/">Unity</a>
     </div>
 
 
@@ -161,10 +163,9 @@
   <div class="content" itemprop="articleBody">
     <p>消融效果、水波效果、全局雾效。</p>
 <a id="more"></a>
-
 <h3 id="消融效果的实现："><a href="#消融效果的实现：" class="headerlink" title="消融效果的实现："></a>消融效果的实现：</h3><p>通过噪声纹理采样与设置好的消融属性相减，将算得结果小于0的像素剔除。对于剩下的像素进行正常的光照计算，然后在设定好的宽度范围内对两种溶解颜色进行插值，再将混合得到的颜色与环境光和漫反射光照混合输出。</p>
 <p>后面还需要加一个用于处理阴影的Pass，否则已经消融的部分会投射影子。</p>
-<p><img src="https://wx3.sinaimg.cn/mw690/007CSzD7ly1g0yn0oximmj313k0s6qso.jpg" alt=""></p>
+<p><img src="https://wx3.sinaimg.cn/mw690/007CSzD7ly1g0yn0oximmj313k0s6qso.jpg" alt></p>
 <h4 id="定义属性："><a href="#定义属性：" class="headerlink" title="定义属性："></a>定义属性：</h4><p><img src="https://wx2.sinaimg.cn/mw690/007CSzD7ly1g0yn0ofirkj30yo0igdjv.jpg" alt="消融的属性"></p>
 <h4 id="定义消融需要的Pass："><a href="#定义消融需要的Pass：" class="headerlink" title="定义消融需要的Pass："></a>定义消融需要的Pass：</h4><p>为了得到正确的光照，我们设置了Pass的LightMode和multi_compile_fwdbase的编译指令。</p>
 <p>我们使用Cull off来关闭Shader的<strong>面片剔除</strong>，来使得其正面和背面都会被渲染。</p>
@@ -177,7 +178,7 @@
 <li>计算烧焦颜色：在宽度为<code>_LineWidth</code>的范围内模拟一个烧焦的颜色变化，使用smoothstep来计算混合系数（当t为1时，表明该像素位于消融的边界处；当t为0时，表明该像素为正常的模型颜色），插值用来模拟一个烧焦效果：使用t来混合两种火焰颜色。同样使用step函数来保证剔除。</li>
 </ul>
 <h4 id="自定义投射阴影的Pass："><a href="#自定义投射阴影的Pass：" class="headerlink" title="自定义投射阴影的Pass："></a>自定义投射阴影的Pass：</h4><p><img src="https://wx4.sinaimg.cn/mw690/007CSzD7ly1g0yn0o0y8xj30lq0d4mya.jpg" alt="自定义投射阴影的Pass"></p>
-<p><img src="https://wx3.sinaimg.cn/mw690/007CSzD7ly1g0yn0o4ipcj30t80n8acq.jpg" alt=""></p>
+<p><img src="https://wx3.sinaimg.cn/mw690/007CSzD7ly1g0yn0o4ipcj30t80n8acq.jpg" alt></p>
 <p>同样使用clip函数来剔除片元，然后使用内置宏<code>SHADOW_CASTER_FRAGMENT()</code>来完成阴影投射，将结果输出到深度图和阴影映射纹理中。</p>
 <h3 id="水波效果："><a href="#水波效果：" class="headerlink" title="水波效果："></a>水波效果：</h3><h3 id="全局雾效："><a href="#全局雾效：" class="headerlink" title="全局雾效："></a>全局雾效：</h3><h3 id="生成噪声："><a href="#生成噪声：" class="headerlink" title="生成噪声："></a>生成噪声：</h3><p><strong>噪声是怎么生成的</strong>：<a href="https://blog.csdn.net/candycat1992/article/details/50346469" target="_blank" rel="noopener">https://blog.csdn.net/candycat1992/article/details/50346469</a></p>
 <ul>
@@ -213,7 +214,7 @@
          
           <li><a href="/archives/">归档</a></li>
          
-          <li><a href="/projects_url">项目</a></li>
+          <li><a href="/search/">搜索</a></li>
         
       </ul>
     </div>
@@ -224,17 +225,17 @@
 
     <div id="share-footer" style="display: none">
       <ul>
-  <li><a class="icon" href="http://www.facebook.com/sharer.php?u=https://bitzhangmo.github.io/2019/03/10/Unity%E7%AC%94%E8%AE%B0/Unity-Shader-%E4%BD%BF%E7%94%A8%E5%99%AA%E5%A3%B0/" target="_blank" rel="noopener"><i class="fab fa-facebook fa-lg" aria-hidden="true"></i></a></li>
-  <li><a class="icon" href="https://twitter.com/share?url=https://bitzhangmo.github.io/2019/03/10/Unity%E7%AC%94%E8%AE%B0/Unity-Shader-%E4%BD%BF%E7%94%A8%E5%99%AA%E5%A3%B0/&text=Unity Shader 使用噪声" target="_blank" rel="noopener"><i class="fab fa-twitter fa-lg" aria-hidden="true"></i></a></li>
-  <li><a class="icon" href="http://www.linkedin.com/shareArticle?url=https://bitzhangmo.github.io/2019/03/10/Unity%E7%AC%94%E8%AE%B0/Unity-Shader-%E4%BD%BF%E7%94%A8%E5%99%AA%E5%A3%B0/&title=Unity Shader 使用噪声" target="_blank" rel="noopener"><i class="fab fa-linkedin fa-lg" aria-hidden="true"></i></a></li>
-  <li><a class="icon" href="https://pinterest.com/pin/create/bookmarklet/?url=https://bitzhangmo.github.io/2019/03/10/Unity%E7%AC%94%E8%AE%B0/Unity-Shader-%E4%BD%BF%E7%94%A8%E5%99%AA%E5%A3%B0/&is_video=false&description=Unity Shader 使用噪声" target="_blank" rel="noopener"><i class="fab fa-pinterest fa-lg" aria-hidden="true"></i></a></li>
-  <li><a class="icon" href="mailto:?subject=Unity Shader 使用噪声&body=Check out this article: https://bitzhangmo.github.io/2019/03/10/Unity%E7%AC%94%E8%AE%B0/Unity-Shader-%E4%BD%BF%E7%94%A8%E5%99%AA%E5%A3%B0/"><i class="fas fa-envelope fa-lg" aria-hidden="true"></i></a></li>
-  <li><a class="icon" href="https://getpocket.com/save?url=https://bitzhangmo.github.io/2019/03/10/Unity%E7%AC%94%E8%AE%B0/Unity-Shader-%E4%BD%BF%E7%94%A8%E5%99%AA%E5%A3%B0/&title=Unity Shader 使用噪声" target="_blank" rel="noopener"><i class="fab fa-get-pocket fa-lg" aria-hidden="true"></i></a></li>
-  <li><a class="icon" href="http://reddit.com/submit?url=https://bitzhangmo.github.io/2019/03/10/Unity%E7%AC%94%E8%AE%B0/Unity-Shader-%E4%BD%BF%E7%94%A8%E5%99%AA%E5%A3%B0/&title=Unity Shader 使用噪声" target="_blank" rel="noopener"><i class="fab fa-reddit fa-lg" aria-hidden="true"></i></a></li>
-  <li><a class="icon" href="http://www.stumbleupon.com/submit?url=https://bitzhangmo.github.io/2019/03/10/Unity%E7%AC%94%E8%AE%B0/Unity-Shader-%E4%BD%BF%E7%94%A8%E5%99%AA%E5%A3%B0/&title=Unity Shader 使用噪声" target="_blank" rel="noopener"><i class="fab fa-stumbleupon fa-lg" aria-hidden="true"></i></a></li>
-  <li><a class="icon" href="http://digg.com/submit?url=https://bitzhangmo.github.io/2019/03/10/Unity%E7%AC%94%E8%AE%B0/Unity-Shader-%E4%BD%BF%E7%94%A8%E5%99%AA%E5%A3%B0/&title=Unity Shader 使用噪声" target="_blank" rel="noopener"><i class="fab fa-digg fa-lg" aria-hidden="true"></i></a></li>
-  <li><a class="icon" href="http://www.tumblr.com/share/link?url=https://bitzhangmo.github.io/2019/03/10/Unity%E7%AC%94%E8%AE%B0/Unity-Shader-%E4%BD%BF%E7%94%A8%E5%99%AA%E5%A3%B0/&name=Unity Shader 使用噪声&description=&lt;p&gt;消融效果、水波效果、全局雾效。&lt;/p&gt;" target="_blank" rel="noopener"><i class="fab fa-tumblr fa-lg" aria-hidden="true"></i></a></li>
-  <li><a class="icon" href="https://news.ycombinator.com/submitlink?u=https://bitzhangmo.github.io/2019/03/10/Unity%E7%AC%94%E8%AE%B0/Unity-Shader-%E4%BD%BF%E7%94%A8%E5%99%AA%E5%A3%B0/&t=Unity Shader 使用噪声" target="_blank" rel="noopener"><i class="fab fa-hacker-news fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="http://www.facebook.com/sharer.php?u=https://bitzhangmo.github.io/2019/03/10/Unity笔记/Unity-Shader-使用噪声/"><i class="fab fa-facebook fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="https://twitter.com/share?url=https://bitzhangmo.github.io/2019/03/10/Unity笔记/Unity-Shader-使用噪声/&text=Unity Shader 使用噪声"><i class="fab fa-twitter fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="http://www.linkedin.com/shareArticle?url=https://bitzhangmo.github.io/2019/03/10/Unity笔记/Unity-Shader-使用噪声/&title=Unity Shader 使用噪声"><i class="fab fa-linkedin fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="https://pinterest.com/pin/create/bookmarklet/?url=https://bitzhangmo.github.io/2019/03/10/Unity笔记/Unity-Shader-使用噪声/&is_video=false&description=Unity Shader 使用噪声"><i class="fab fa-pinterest fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="mailto:?subject=Unity Shader 使用噪声&body=Check out this article: https://bitzhangmo.github.io/2019/03/10/Unity笔记/Unity-Shader-使用噪声/"><i class="fas fa-envelope fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="https://getpocket.com/save?url=https://bitzhangmo.github.io/2019/03/10/Unity笔记/Unity-Shader-使用噪声/&title=Unity Shader 使用噪声"><i class="fab fa-get-pocket fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="http://reddit.com/submit?url=https://bitzhangmo.github.io/2019/03/10/Unity笔记/Unity-Shader-使用噪声/&title=Unity Shader 使用噪声"><i class="fab fa-reddit fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="http://www.stumbleupon.com/submit?url=https://bitzhangmo.github.io/2019/03/10/Unity笔记/Unity-Shader-使用噪声/&title=Unity Shader 使用噪声"><i class="fab fa-stumbleupon fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="http://digg.com/submit?url=https://bitzhangmo.github.io/2019/03/10/Unity笔记/Unity-Shader-使用噪声/&title=Unity Shader 使用噪声"><i class="fab fa-digg fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="http://www.tumblr.com/share/link?url=https://bitzhangmo.github.io/2019/03/10/Unity笔记/Unity-Shader-使用噪声/&name=Unity Shader 使用噪声&description=&lt;p&gt;消融效果、水波效果、全局雾效。&lt;/p&gt;"><i class="fab fa-tumblr fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="https://news.ycombinator.com/submitlink?u=https://bitzhangmo.github.io/2019/03/10/Unity笔记/Unity-Shader-使用噪声/&t=Unity Shader 使用噪声"><i class="fab fa-hacker-news fa-lg" aria-hidden="true"></i></a></li>
 </ul>
 
     </div>
@@ -264,7 +265,7 @@
          
           <li><a href="/archives/">归档</a></li>
          
-          <li><a href="/projects_url">项目</a></li>
+          <li><a href="/search/">搜索</a></li>
         
       </ul>
     </nav>
@@ -312,5 +313,5 @@
 <!-- Disqus Comments -->
 
 
-</body>
+<script src="/live2dw/lib/L2Dwidget.min.js?bd2294fafea3389ee458f1d9be5a2157"></script><script>L2Dwidget.init({"pluginRootPath":"live2dw/","pluginJsPath":"lib/","pluginModelPath":"assets/","tagMode":false,"debug":false,"model":{"jsonPath":"/live2dw/assets/hijiki.model.json"},"display":{"position":"left","width":100,"height":200},"mobile":{"show":false},"log":false});</script></body>
 </html>

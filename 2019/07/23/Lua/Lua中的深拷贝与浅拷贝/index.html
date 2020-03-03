@@ -1,21 +1,23 @@
 <!DOCTYPE html>
 <html lang=zh>
-<head>
+<head><meta name="generator" content="Hexo 3.9.0">
     <!-- so meta -->
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="HandheldFriendly" content="True">
-    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1" />
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
     <meta name="description" content="有关深拷贝、浅拷贝在Lua中的一系列事情。">
 <meta name="keywords" content="Lua">
 <meta property="og:type" content="article">
 <meta property="og:title" content="Lua中的深拷贝与浅拷贝">
-<meta property="og:url" content="https:&#x2F;&#x2F;bitzhangmo.github.io&#x2F;2019&#x2F;07&#x2F;23&#x2F;Lua&#x2F;Lua%E4%B8%AD%E7%9A%84%E6%B7%B1%E6%8B%B7%E8%B4%9D%E4%B8%8E%E6%B5%85%E6%8B%B7%E8%B4%9D&#x2F;index.html">
+<meta property="og:url" content="https://bitzhangmo.github.io/2019/07/23/Lua/Lua中的深拷贝与浅拷贝/index.html">
 <meta property="og:site_name" content="zhangMo Blog">
 <meta property="og:description" content="有关深拷贝、浅拷贝在Lua中的一系列事情。">
 <meta property="og:locale" content="zh-CN">
 <meta property="og:updated_time" content="2019-07-23T12:41:28.900Z">
 <meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="Lua中的深拷贝与浅拷贝">
+<meta name="twitter:description" content="有关深拷贝、浅拷贝在Lua中的一系列事情。">
     
     
         
@@ -63,7 +65,7 @@
          
           <li><a href="/archives/">归档</a></li>
          
-          <li><a href="/projects_url">项目</a></li>
+          <li><a href="/search/">搜索</a></li>
         
       </ul>
     </span>
@@ -71,10 +73,10 @@
     <span id="actions">
       <ul>
         
-        <li><a class="icon" href="/2019/07/29/%E8%AE%A1%E7%AE%97%E6%9C%BA%E5%9B%BE%E5%BD%A2%E5%AD%A6/RayTracing-In-Weekend-%E8%AF%BB%E4%B9%A6%E7%AC%94%E8%AE%B0/"><i class="fas fa-chevron-left" aria-hidden="true" onmouseover="$('#i-prev').toggle();" onmouseout="$('#i-prev').toggle();"></i></a></li>
+        <li><a class="icon" href="/2019/07/29/计算机图形学/RayTracing-In-Weekend-读书笔记/"><i class="fas fa-chevron-left" aria-hidden="true" onmouseover="$('#i-prev').toggle();" onmouseout="$('#i-prev').toggle();"></i></a></li>
         
         
-        <li><a class="icon" href="/2019/07/05/Lua/Lua%E8%BF%AD%E4%BB%A3%E5%99%A8%E5%92%8C%E8%8C%83%E5%9E%8Bfor/"><i class="fas fa-chevron-right" aria-hidden="true" onmouseover="$('#i-next').toggle();" onmouseout="$('#i-next').toggle();"></i></a></li>
+        <li><a class="icon" href="/2019/07/05/Lua/Lua迭代器和范型for/"><i class="fas fa-chevron-right" aria-hidden="true" onmouseover="$('#i-next').toggle();" onmouseout="$('#i-next').toggle();"></i></a></li>
         
         <li><a class="icon" href="#" onclick="$('html, body').animate({ scrollTop: 0 }, 'fast');"><i class="fas fa-chevron-up" aria-hidden="true" onmouseover="$('#i-top').toggle();" onmouseout="$('#i-top').toggle();"></i></a></li>
         <li><a class="icon" href="#"><i class="fas fa-share-alt" aria-hidden="true" onmouseover="$('#i-share').toggle();" onmouseout="$('#i-share').toggle();" onclick="$('#share').toggle();return false;"></i></a></li>
@@ -87,17 +89,17 @@
     <br/>
     <div id="share" style="display: none">
       <ul>
-  <li><a class="icon" href="http://www.facebook.com/sharer.php?u=https://bitzhangmo.github.io/2019/07/23/Lua/Lua%E4%B8%AD%E7%9A%84%E6%B7%B1%E6%8B%B7%E8%B4%9D%E4%B8%8E%E6%B5%85%E6%8B%B7%E8%B4%9D/" target="_blank" rel="noopener"><i class="fab fa-facebook " aria-hidden="true"></i></a></li>
-  <li><a class="icon" href="https://twitter.com/share?url=https://bitzhangmo.github.io/2019/07/23/Lua/Lua%E4%B8%AD%E7%9A%84%E6%B7%B1%E6%8B%B7%E8%B4%9D%E4%B8%8E%E6%B5%85%E6%8B%B7%E8%B4%9D/&text=Lua中的深拷贝与浅拷贝" target="_blank" rel="noopener"><i class="fab fa-twitter " aria-hidden="true"></i></a></li>
-  <li><a class="icon" href="http://www.linkedin.com/shareArticle?url=https://bitzhangmo.github.io/2019/07/23/Lua/Lua%E4%B8%AD%E7%9A%84%E6%B7%B1%E6%8B%B7%E8%B4%9D%E4%B8%8E%E6%B5%85%E6%8B%B7%E8%B4%9D/&title=Lua中的深拷贝与浅拷贝" target="_blank" rel="noopener"><i class="fab fa-linkedin " aria-hidden="true"></i></a></li>
-  <li><a class="icon" href="https://pinterest.com/pin/create/bookmarklet/?url=https://bitzhangmo.github.io/2019/07/23/Lua/Lua%E4%B8%AD%E7%9A%84%E6%B7%B1%E6%8B%B7%E8%B4%9D%E4%B8%8E%E6%B5%85%E6%8B%B7%E8%B4%9D/&is_video=false&description=Lua中的深拷贝与浅拷贝" target="_blank" rel="noopener"><i class="fab fa-pinterest " aria-hidden="true"></i></a></li>
-  <li><a class="icon" href="mailto:?subject=Lua中的深拷贝与浅拷贝&body=Check out this article: https://bitzhangmo.github.io/2019/07/23/Lua/Lua%E4%B8%AD%E7%9A%84%E6%B7%B1%E6%8B%B7%E8%B4%9D%E4%B8%8E%E6%B5%85%E6%8B%B7%E8%B4%9D/"><i class="fas fa-envelope " aria-hidden="true"></i></a></li>
-  <li><a class="icon" href="https://getpocket.com/save?url=https://bitzhangmo.github.io/2019/07/23/Lua/Lua%E4%B8%AD%E7%9A%84%E6%B7%B1%E6%8B%B7%E8%B4%9D%E4%B8%8E%E6%B5%85%E6%8B%B7%E8%B4%9D/&title=Lua中的深拷贝与浅拷贝" target="_blank" rel="noopener"><i class="fab fa-get-pocket " aria-hidden="true"></i></a></li>
-  <li><a class="icon" href="http://reddit.com/submit?url=https://bitzhangmo.github.io/2019/07/23/Lua/Lua%E4%B8%AD%E7%9A%84%E6%B7%B1%E6%8B%B7%E8%B4%9D%E4%B8%8E%E6%B5%85%E6%8B%B7%E8%B4%9D/&title=Lua中的深拷贝与浅拷贝" target="_blank" rel="noopener"><i class="fab fa-reddit " aria-hidden="true"></i></a></li>
-  <li><a class="icon" href="http://www.stumbleupon.com/submit?url=https://bitzhangmo.github.io/2019/07/23/Lua/Lua%E4%B8%AD%E7%9A%84%E6%B7%B1%E6%8B%B7%E8%B4%9D%E4%B8%8E%E6%B5%85%E6%8B%B7%E8%B4%9D/&title=Lua中的深拷贝与浅拷贝" target="_blank" rel="noopener"><i class="fab fa-stumbleupon " aria-hidden="true"></i></a></li>
-  <li><a class="icon" href="http://digg.com/submit?url=https://bitzhangmo.github.io/2019/07/23/Lua/Lua%E4%B8%AD%E7%9A%84%E6%B7%B1%E6%8B%B7%E8%B4%9D%E4%B8%8E%E6%B5%85%E6%8B%B7%E8%B4%9D/&title=Lua中的深拷贝与浅拷贝" target="_blank" rel="noopener"><i class="fab fa-digg " aria-hidden="true"></i></a></li>
-  <li><a class="icon" href="http://www.tumblr.com/share/link?url=https://bitzhangmo.github.io/2019/07/23/Lua/Lua%E4%B8%AD%E7%9A%84%E6%B7%B1%E6%8B%B7%E8%B4%9D%E4%B8%8E%E6%B5%85%E6%8B%B7%E8%B4%9D/&name=Lua中的深拷贝与浅拷贝&description=&lt;p&gt;有关深拷贝、浅拷贝在Lua中的一系列事情。&lt;/p&gt;" target="_blank" rel="noopener"><i class="fab fa-tumblr " aria-hidden="true"></i></a></li>
-  <li><a class="icon" href="https://news.ycombinator.com/submitlink?u=https://bitzhangmo.github.io/2019/07/23/Lua/Lua%E4%B8%AD%E7%9A%84%E6%B7%B1%E6%8B%B7%E8%B4%9D%E4%B8%8E%E6%B5%85%E6%8B%B7%E8%B4%9D/&t=Lua中的深拷贝与浅拷贝" target="_blank" rel="noopener"><i class="fab fa-hacker-news " aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="http://www.facebook.com/sharer.php?u=https://bitzhangmo.github.io/2019/07/23/Lua/Lua中的深拷贝与浅拷贝/"><i class="fab fa-facebook " aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="https://twitter.com/share?url=https://bitzhangmo.github.io/2019/07/23/Lua/Lua中的深拷贝与浅拷贝/&text=Lua中的深拷贝与浅拷贝"><i class="fab fa-twitter " aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="http://www.linkedin.com/shareArticle?url=https://bitzhangmo.github.io/2019/07/23/Lua/Lua中的深拷贝与浅拷贝/&title=Lua中的深拷贝与浅拷贝"><i class="fab fa-linkedin " aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="https://pinterest.com/pin/create/bookmarklet/?url=https://bitzhangmo.github.io/2019/07/23/Lua/Lua中的深拷贝与浅拷贝/&is_video=false&description=Lua中的深拷贝与浅拷贝"><i class="fab fa-pinterest " aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="mailto:?subject=Lua中的深拷贝与浅拷贝&body=Check out this article: https://bitzhangmo.github.io/2019/07/23/Lua/Lua中的深拷贝与浅拷贝/"><i class="fas fa-envelope " aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="https://getpocket.com/save?url=https://bitzhangmo.github.io/2019/07/23/Lua/Lua中的深拷贝与浅拷贝/&title=Lua中的深拷贝与浅拷贝"><i class="fab fa-get-pocket " aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="http://reddit.com/submit?url=https://bitzhangmo.github.io/2019/07/23/Lua/Lua中的深拷贝与浅拷贝/&title=Lua中的深拷贝与浅拷贝"><i class="fab fa-reddit " aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="http://www.stumbleupon.com/submit?url=https://bitzhangmo.github.io/2019/07/23/Lua/Lua中的深拷贝与浅拷贝/&title=Lua中的深拷贝与浅拷贝"><i class="fab fa-stumbleupon " aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="http://digg.com/submit?url=https://bitzhangmo.github.io/2019/07/23/Lua/Lua中的深拷贝与浅拷贝/&title=Lua中的深拷贝与浅拷贝"><i class="fab fa-digg " aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="http://www.tumblr.com/share/link?url=https://bitzhangmo.github.io/2019/07/23/Lua/Lua中的深拷贝与浅拷贝/&name=Lua中的深拷贝与浅拷贝&description=&lt;p&gt;有关深拷贝、浅拷贝在Lua中的一系列事情。&lt;/p&gt;"><i class="fab fa-tumblr " aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="https://news.ycombinator.com/submitlink?u=https://bitzhangmo.github.io/2019/07/23/Lua/Lua中的深拷贝与浅拷贝/&t=Lua中的深拷贝与浅拷贝"><i class="fab fa-hacker-news " aria-hidden="true"></i></a></li>
 </ul>
 
     </div>
@@ -135,14 +137,14 @@
       
     <div class="article-category">
         <i class="fas fa-archive"></i>
-        <a class="category-link" href="/categories/%E5%BC%80%E5%8F%91%E7%AC%94%E8%AE%B0/">开发笔记</a>
+        <a class="category-link" href="/categories/开发笔记/">开发笔记</a>
     </div>
 
 
       
     <div class="article-tag">
         <i class="fas fa-tag"></i>
-        <a class="tag-link" href="/tags/Lua/" rel="tag">Lua</a>
+        <a class="tag-link" href="/tags/Lua/">Lua</a>
     </div>
 
 
@@ -153,7 +155,6 @@
   <div class="content" itemprop="articleBody">
     <p>有关深拷贝、浅拷贝在Lua中的一系列事情。</p>
 <a id="more"></a>
-
 <h3 id="为什么要写深拷贝："><a href="#为什么要写深拷贝：" class="headerlink" title="为什么要写深拷贝："></a>为什么要写深拷贝：</h3><p>在《Lua程序设计（第四版）》第五章开头，作者描述了表的性质：</p>
 <blockquote>
 <p>可以认为，表是一种动态分配的对象，程序只能操作指向表的引用（或指针）。除此之外，Lua语言不会进行隐藏的拷贝（hidden copies）或创建新的表。</p>
@@ -161,25 +162,19 @@
 <p>已经描述的很清楚了，对于表的操作，Lua语言不会进行深拷贝（即Lua语言拷贝的是对象的引用而非整个对象本身。）</p>
 <p>先看一下Lua的源码：</p>
 <figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="function">Table *<span class="title">luaH_new</span> <span class="params">(lua_State *L)</span> </span>&#123;</span><br><span class="line">  GCObject *o = luaC_newobj(L, LUA_TTABLE, <span class="keyword">sizeof</span>(Table));</span><br><span class="line">  Table *t = gco2t(o);</span><br><span class="line">  t-&gt;metatable = <span class="literal">NULL</span>;</span><br><span class="line">  t-&gt;flags = cast_byte(~<span class="number">0</span>);</span><br><span class="line">  t-&gt;<span class="built_in">array</span> = <span class="literal">NULL</span>;</span><br><span class="line">  t-&gt;sizearray = <span class="number">0</span>;</span><br><span class="line">  setnodevector(L, t, <span class="number">0</span>);</span><br><span class="line">  <span class="keyword">return</span> t;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
 <p>当生成一个Table时，会返回一个Table类型的指针（t），可以看出，如果在Lua中进行表的赋值的话，实际上是将一个表的指针赋给了另一个变量，而这两个量指向的是同一个地址，也就是说，这次赋值并没有创造出一个新的副本出来，而只是给原来的变量起了一个别名。</p>
 <figure class="highlight lua"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line">table1 = &#123;<span class="number">1</span>,<span class="number">2</span>,<span class="number">3</span>&#125;</span><br><span class="line">table2 = table1</span><br><span class="line"><span class="built_in">table</span>.<span class="built_in">insert</span>(table1,<span class="number">4</span>)</span><br><span class="line"></span><br><span class="line"><span class="keyword">for</span> i,v <span class="keyword">in</span> <span class="built_in">ipairs</span>(table2) <span class="keyword">do</span></span><br><span class="line">    <span class="built_in">print</span>(v)</span><br><span class="line"><span class="keyword">end</span></span><br><span class="line"></span><br><span class="line">&gt;&gt; 	<span class="number">1</span></span><br><span class="line">		<span class="number">2</span></span><br><span class="line">		<span class="number">3</span></span><br><span class="line">		<span class="number">4</span></span><br></pre></td></tr></table></figure>
-
 <p>如果要复制出一份独立的表，该怎么写呢？</p>
 <h3 id="深拷贝与浅拷贝："><a href="#深拷贝与浅拷贝：" class="headerlink" title="深拷贝与浅拷贝："></a>深拷贝与浅拷贝：</h3><h4 id="深拷贝（DeepCopy）："><a href="#深拷贝（DeepCopy）：" class="headerlink" title="深拷贝（DeepCopy）："></a>深拷贝（DeepCopy）：</h4><p>拷贝整个对象本身，在上例的Lua代码中，如果table2对table1进行深拷贝，则改变table1不会同时改变table2，即table2是table1完全独立的一份复制。</p>
 <h4 id="深拷贝的实现方式："><a href="#深拷贝的实现方式：" class="headerlink" title="深拷贝的实现方式："></a>深拷贝的实现方式：</h4><p>具体讲解可以参考wiki上的这一篇：<a href="http://lua-users.org/wiki/CopyTable" target="_blank" rel="noopener">CopyTable</a></p>
 <h5 id="一种快速但不怎么好的实现："><a href="#一种快速但不怎么好的实现：" class="headerlink" title="一种快速但不怎么好的实现："></a>一种快速但不怎么好的实现：</h5><p>这个版本的clone使用到了标准库中的unpack函数，这个函数会返回列表中的元素。</p>
 <figure class="highlight lua"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">function</span>  <span class="title">table.clone</span>（<span class="title">org</span>）</span></span><br><span class="line"><span class="function">   <span class="title">return</span> &#123; <span class="title">table.unpack</span>（<span class="title">org</span>）&#125;</span></span><br><span class="line"><span class="function"><span class="title">end</span></span></span><br><span class="line"><span class="function"></span></span><br><span class="line"><span class="function"><span class="title">local</span> <span class="title">abc</span> = &#123;5,12,1&#125;</span></span><br><span class="line"><span class="function"><span class="title">local</span> <span class="title">def</span> = <span class="title">table.clone</span>（<span class="title">abc</span>）</span></span><br><span class="line"><span class="function"><span class="title">table.sort</span>（<span class="title">def</span>）</span></span><br><span class="line"><span class="function"><span class="title">print</span>（<span class="title">abc</span> [2]，<span class="title">def</span> [2]）-  12 5</span></span><br></pre></td></tr></table></figure>
-
 <h5 id="Shallow-Copy："><a href="#Shallow-Copy：" class="headerlink" title="Shallow Copy："></a>Shallow Copy：</h5><p>这个实现很简单，但是有一些缺陷：它只复制了顶层的值，没有对更加深层的元素、元表和特殊类型（如userdata或coroutines）进行处理，它也容易受到__pairs元方法的影响。</p>
 <figure class="highlight lua"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">shallowcopy</span><span class="params">(orig)</span></span></span><br><span class="line">    <span class="keyword">local</span> orig_type = <span class="built_in">type</span>(orig)</span><br><span class="line">    <span class="keyword">local</span> copy</span><br><span class="line">    <span class="keyword">if</span> orig_type == <span class="string">'table'</span> <span class="keyword">then</span></span><br><span class="line">        copy = &#123;&#125;</span><br><span class="line">        <span class="keyword">for</span> orig_key, orig_value <span class="keyword">in</span> <span class="built_in">pairs</span>(orig) <span class="keyword">do</span></span><br><span class="line">            copy[orig_key] = orig_value</span><br><span class="line">        <span class="keyword">end</span></span><br><span class="line">    <span class="keyword">else</span> <span class="comment">-- number, string, boolean, etc</span></span><br><span class="line">        copy = orig</span><br><span class="line">    <span class="keyword">end</span></span><br><span class="line">    <span class="keyword">return</span> copy</span><br><span class="line"><span class="keyword">end</span></span><br></pre></td></tr></table></figure>
-
 <h5 id="Deep-Copy："><a href="#Deep-Copy：" class="headerlink" title="Deep Copy："></a>Deep Copy：</h5><p>这个版本的实现可以复制所有层级的元素，是一个简单的递归实现，并且会将原表的元表复制一份到新表的元表中。</p>
 <figure class="highlight lua"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">deepcopy</span><span class="params">(orig)</span></span></span><br><span class="line">    <span class="keyword">local</span> orig_type = <span class="built_in">type</span>(orig)</span><br><span class="line">    <span class="keyword">local</span> copy</span><br><span class="line">    <span class="keyword">if</span> orig_type == <span class="string">'table'</span> <span class="keyword">then</span></span><br><span class="line">        copy = &#123;&#125;</span><br><span class="line">        <span class="keyword">for</span> orig_key, orig_value <span class="keyword">in</span> <span class="built_in">next</span>, orig, <span class="literal">nil</span> <span class="keyword">do</span></span><br><span class="line">            copy[deepcopy(orig_key)] = deepcopy(orig_value)</span><br><span class="line">        <span class="keyword">end</span></span><br><span class="line">        <span class="built_in">setmetatable</span>(copy, deepcopy(<span class="built_in">getmetatable</span>(orig)))</span><br><span class="line">    <span class="keyword">else</span> <span class="comment">-- number, string, boolean, etc</span></span><br><span class="line">        copy = orig</span><br><span class="line">    <span class="keyword">end</span></span><br><span class="line">    <span class="keyword">return</span> copy</span><br><span class="line"><span class="keyword">end</span></span><br></pre></td></tr></table></figure>
-
 <p>将表的拷贝存储在copies中，由原始的表索引，这是通过创建已复制的表的哈希表并将其作为第二个参数提供给deepcopy函数来完成的。</p>
 <figure class="highlight lua"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">-- Save copied tables in `copies`, indexed by original table.</span></span><br><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">deepcopy</span><span class="params">(orig, copies)</span></span></span><br><span class="line">    copies = copies <span class="keyword">or</span> &#123;&#125;</span><br><span class="line">    <span class="keyword">local</span> orig_type = <span class="built_in">type</span>(orig)</span><br><span class="line">    <span class="keyword">local</span> copy</span><br><span class="line">    <span class="keyword">if</span> orig_type == <span class="string">'table'</span> <span class="keyword">then</span></span><br><span class="line">        <span class="keyword">if</span> copies[orig] <span class="keyword">then</span></span><br><span class="line">            copy = copies[orig]</span><br><span class="line">        <span class="keyword">else</span></span><br><span class="line">            copy = &#123;&#125;</span><br><span class="line">            <span class="keyword">for</span> orig_key, orig_value <span class="keyword">in</span> <span class="built_in">next</span>, orig, <span class="literal">nil</span> <span class="keyword">do</span></span><br><span class="line">                copy[deepcopy(orig_key, copies)] = deepcopy(orig_value, copies)</span><br><span class="line">            <span class="keyword">end</span></span><br><span class="line">            copies[orig] = copy</span><br><span class="line">            <span class="built_in">setmetatable</span>(copy, deepcopy(<span class="built_in">getmetatable</span>(orig), copies))</span><br><span class="line">        <span class="keyword">end</span></span><br><span class="line">    <span class="keyword">else</span> <span class="comment">-- number, string, boolean, etc</span></span><br><span class="line">        copy = orig</span><br><span class="line">    <span class="keyword">end</span></span><br><span class="line">    <span class="keyword">return</span> copy</span><br><span class="line"><span class="keyword">end</span></span><br></pre></td></tr></table></figure>
-
 
   </div>
 </article>
@@ -199,7 +194,7 @@
          
           <li><a href="/archives/">归档</a></li>
          
-          <li><a href="/projects_url">项目</a></li>
+          <li><a href="/search/">搜索</a></li>
         
       </ul>
     </div>
@@ -210,17 +205,17 @@
 
     <div id="share-footer" style="display: none">
       <ul>
-  <li><a class="icon" href="http://www.facebook.com/sharer.php?u=https://bitzhangmo.github.io/2019/07/23/Lua/Lua%E4%B8%AD%E7%9A%84%E6%B7%B1%E6%8B%B7%E8%B4%9D%E4%B8%8E%E6%B5%85%E6%8B%B7%E8%B4%9D/" target="_blank" rel="noopener"><i class="fab fa-facebook fa-lg" aria-hidden="true"></i></a></li>
-  <li><a class="icon" href="https://twitter.com/share?url=https://bitzhangmo.github.io/2019/07/23/Lua/Lua%E4%B8%AD%E7%9A%84%E6%B7%B1%E6%8B%B7%E8%B4%9D%E4%B8%8E%E6%B5%85%E6%8B%B7%E8%B4%9D/&text=Lua中的深拷贝与浅拷贝" target="_blank" rel="noopener"><i class="fab fa-twitter fa-lg" aria-hidden="true"></i></a></li>
-  <li><a class="icon" href="http://www.linkedin.com/shareArticle?url=https://bitzhangmo.github.io/2019/07/23/Lua/Lua%E4%B8%AD%E7%9A%84%E6%B7%B1%E6%8B%B7%E8%B4%9D%E4%B8%8E%E6%B5%85%E6%8B%B7%E8%B4%9D/&title=Lua中的深拷贝与浅拷贝" target="_blank" rel="noopener"><i class="fab fa-linkedin fa-lg" aria-hidden="true"></i></a></li>
-  <li><a class="icon" href="https://pinterest.com/pin/create/bookmarklet/?url=https://bitzhangmo.github.io/2019/07/23/Lua/Lua%E4%B8%AD%E7%9A%84%E6%B7%B1%E6%8B%B7%E8%B4%9D%E4%B8%8E%E6%B5%85%E6%8B%B7%E8%B4%9D/&is_video=false&description=Lua中的深拷贝与浅拷贝" target="_blank" rel="noopener"><i class="fab fa-pinterest fa-lg" aria-hidden="true"></i></a></li>
-  <li><a class="icon" href="mailto:?subject=Lua中的深拷贝与浅拷贝&body=Check out this article: https://bitzhangmo.github.io/2019/07/23/Lua/Lua%E4%B8%AD%E7%9A%84%E6%B7%B1%E6%8B%B7%E8%B4%9D%E4%B8%8E%E6%B5%85%E6%8B%B7%E8%B4%9D/"><i class="fas fa-envelope fa-lg" aria-hidden="true"></i></a></li>
-  <li><a class="icon" href="https://getpocket.com/save?url=https://bitzhangmo.github.io/2019/07/23/Lua/Lua%E4%B8%AD%E7%9A%84%E6%B7%B1%E6%8B%B7%E8%B4%9D%E4%B8%8E%E6%B5%85%E6%8B%B7%E8%B4%9D/&title=Lua中的深拷贝与浅拷贝" target="_blank" rel="noopener"><i class="fab fa-get-pocket fa-lg" aria-hidden="true"></i></a></li>
-  <li><a class="icon" href="http://reddit.com/submit?url=https://bitzhangmo.github.io/2019/07/23/Lua/Lua%E4%B8%AD%E7%9A%84%E6%B7%B1%E6%8B%B7%E8%B4%9D%E4%B8%8E%E6%B5%85%E6%8B%B7%E8%B4%9D/&title=Lua中的深拷贝与浅拷贝" target="_blank" rel="noopener"><i class="fab fa-reddit fa-lg" aria-hidden="true"></i></a></li>
-  <li><a class="icon" href="http://www.stumbleupon.com/submit?url=https://bitzhangmo.github.io/2019/07/23/Lua/Lua%E4%B8%AD%E7%9A%84%E6%B7%B1%E6%8B%B7%E8%B4%9D%E4%B8%8E%E6%B5%85%E6%8B%B7%E8%B4%9D/&title=Lua中的深拷贝与浅拷贝" target="_blank" rel="noopener"><i class="fab fa-stumbleupon fa-lg" aria-hidden="true"></i></a></li>
-  <li><a class="icon" href="http://digg.com/submit?url=https://bitzhangmo.github.io/2019/07/23/Lua/Lua%E4%B8%AD%E7%9A%84%E6%B7%B1%E6%8B%B7%E8%B4%9D%E4%B8%8E%E6%B5%85%E6%8B%B7%E8%B4%9D/&title=Lua中的深拷贝与浅拷贝" target="_blank" rel="noopener"><i class="fab fa-digg fa-lg" aria-hidden="true"></i></a></li>
-  <li><a class="icon" href="http://www.tumblr.com/share/link?url=https://bitzhangmo.github.io/2019/07/23/Lua/Lua%E4%B8%AD%E7%9A%84%E6%B7%B1%E6%8B%B7%E8%B4%9D%E4%B8%8E%E6%B5%85%E6%8B%B7%E8%B4%9D/&name=Lua中的深拷贝与浅拷贝&description=&lt;p&gt;有关深拷贝、浅拷贝在Lua中的一系列事情。&lt;/p&gt;" target="_blank" rel="noopener"><i class="fab fa-tumblr fa-lg" aria-hidden="true"></i></a></li>
-  <li><a class="icon" href="https://news.ycombinator.com/submitlink?u=https://bitzhangmo.github.io/2019/07/23/Lua/Lua%E4%B8%AD%E7%9A%84%E6%B7%B1%E6%8B%B7%E8%B4%9D%E4%B8%8E%E6%B5%85%E6%8B%B7%E8%B4%9D/&t=Lua中的深拷贝与浅拷贝" target="_blank" rel="noopener"><i class="fab fa-hacker-news fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="http://www.facebook.com/sharer.php?u=https://bitzhangmo.github.io/2019/07/23/Lua/Lua中的深拷贝与浅拷贝/"><i class="fab fa-facebook fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="https://twitter.com/share?url=https://bitzhangmo.github.io/2019/07/23/Lua/Lua中的深拷贝与浅拷贝/&text=Lua中的深拷贝与浅拷贝"><i class="fab fa-twitter fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="http://www.linkedin.com/shareArticle?url=https://bitzhangmo.github.io/2019/07/23/Lua/Lua中的深拷贝与浅拷贝/&title=Lua中的深拷贝与浅拷贝"><i class="fab fa-linkedin fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="https://pinterest.com/pin/create/bookmarklet/?url=https://bitzhangmo.github.io/2019/07/23/Lua/Lua中的深拷贝与浅拷贝/&is_video=false&description=Lua中的深拷贝与浅拷贝"><i class="fab fa-pinterest fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="mailto:?subject=Lua中的深拷贝与浅拷贝&body=Check out this article: https://bitzhangmo.github.io/2019/07/23/Lua/Lua中的深拷贝与浅拷贝/"><i class="fas fa-envelope fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="https://getpocket.com/save?url=https://bitzhangmo.github.io/2019/07/23/Lua/Lua中的深拷贝与浅拷贝/&title=Lua中的深拷贝与浅拷贝"><i class="fab fa-get-pocket fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="http://reddit.com/submit?url=https://bitzhangmo.github.io/2019/07/23/Lua/Lua中的深拷贝与浅拷贝/&title=Lua中的深拷贝与浅拷贝"><i class="fab fa-reddit fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="http://www.stumbleupon.com/submit?url=https://bitzhangmo.github.io/2019/07/23/Lua/Lua中的深拷贝与浅拷贝/&title=Lua中的深拷贝与浅拷贝"><i class="fab fa-stumbleupon fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="http://digg.com/submit?url=https://bitzhangmo.github.io/2019/07/23/Lua/Lua中的深拷贝与浅拷贝/&title=Lua中的深拷贝与浅拷贝"><i class="fab fa-digg fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="http://www.tumblr.com/share/link?url=https://bitzhangmo.github.io/2019/07/23/Lua/Lua中的深拷贝与浅拷贝/&name=Lua中的深拷贝与浅拷贝&description=&lt;p&gt;有关深拷贝、浅拷贝在Lua中的一系列事情。&lt;/p&gt;"><i class="fab fa-tumblr fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="https://news.ycombinator.com/submitlink?u=https://bitzhangmo.github.io/2019/07/23/Lua/Lua中的深拷贝与浅拷贝/&t=Lua中的深拷贝与浅拷贝"><i class="fab fa-hacker-news fa-lg" aria-hidden="true"></i></a></li>
 </ul>
 
     </div>
@@ -250,7 +245,7 @@
          
           <li><a href="/archives/">归档</a></li>
          
-          <li><a href="/projects_url">项目</a></li>
+          <li><a href="/search/">搜索</a></li>
         
       </ul>
     </nav>
@@ -298,5 +293,5 @@
 <!-- Disqus Comments -->
 
 
-</body>
+<script src="/live2dw/lib/L2Dwidget.min.js?bd2294fafea3389ee458f1d9be5a2157"></script><script>L2Dwidget.init({"pluginRootPath":"live2dw/","pluginJsPath":"lib/","pluginModelPath":"assets/","tagMode":false,"debug":false,"model":{"jsonPath":"/live2dw/assets/hijiki.model.json"},"display":{"position":"left","width":100,"height":200},"mobile":{"show":false},"log":false});</script></body>
 </html>

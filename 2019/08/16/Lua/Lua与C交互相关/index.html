@@ -1,21 +1,23 @@
 <!DOCTYPE html>
 <html lang=zh>
-<head>
+<head><meta name="generator" content="Hexo 3.9.0">
     <!-- so meta -->
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="HandheldFriendly" content="True">
-    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1" />
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
     <meta name="description" content="C语言API总览。">
 <meta name="keywords" content="Lua">
 <meta property="og:type" content="article">
 <meta property="og:title" content="Lua与C交互相关">
-<meta property="og:url" content="https:&#x2F;&#x2F;bitzhangmo.github.io&#x2F;2019&#x2F;08&#x2F;16&#x2F;Lua&#x2F;Lua%E4%B8%8EC%E4%BA%A4%E4%BA%92%E7%9B%B8%E5%85%B3&#x2F;index.html">
+<meta property="og:url" content="https://bitzhangmo.github.io/2019/08/16/Lua/Lua与C交互相关/index.html">
 <meta property="og:site_name" content="zhangMo Blog">
 <meta property="og:description" content="C语言API总览。">
 <meta property="og:locale" content="zh-CN">
 <meta property="og:updated_time" content="2019-08-17T07:59:01.306Z">
 <meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="Lua与C交互相关">
+<meta name="twitter:description" content="C语言API总览。">
     
     
         
@@ -63,7 +65,7 @@
          
           <li><a href="/archives/">归档</a></li>
          
-          <li><a href="/projects_url">项目</a></li>
+          <li><a href="/search/">搜索</a></li>
         
       </ul>
     </span>
@@ -71,10 +73,10 @@
     <span id="actions">
       <ul>
         
-        <li><a class="icon" href="/2019/08/21/Lua/Lua%E6%BA%90%E7%A0%81%E9%98%85%E8%AF%BB%EF%BC%9A%E8%99%9A%E6%8B%9F%E6%9C%BA%E6%A6%82%E8%BF%B0/"><i class="fas fa-chevron-left" aria-hidden="true" onmouseover="$('#i-prev').toggle();" onmouseout="$('#i-prev').toggle();"></i></a></li>
+        <li><a class="icon" href="/2019/08/21/Lua/Lua源码阅读：虚拟机概述/"><i class="fas fa-chevron-left" aria-hidden="true" onmouseover="$('#i-prev').toggle();" onmouseout="$('#i-prev').toggle();"></i></a></li>
         
         
-        <li><a class="icon" href="/2019/08/12/Lua/Lua%E6%BA%90%E7%A0%81%E9%98%85%E8%AF%BB%EF%BC%9A%E5%9F%BA%E6%9C%AC%E6%95%B0%E6%8D%AE%E7%B1%BB%E5%9E%8BTable/"><i class="fas fa-chevron-right" aria-hidden="true" onmouseover="$('#i-next').toggle();" onmouseout="$('#i-next').toggle();"></i></a></li>
+        <li><a class="icon" href="/2019/08/12/Lua/Lua源码阅读：基本数据类型Table/"><i class="fas fa-chevron-right" aria-hidden="true" onmouseover="$('#i-next').toggle();" onmouseout="$('#i-next').toggle();"></i></a></li>
         
         <li><a class="icon" href="#" onclick="$('html, body').animate({ scrollTop: 0 }, 'fast');"><i class="fas fa-chevron-up" aria-hidden="true" onmouseover="$('#i-top').toggle();" onmouseout="$('#i-top').toggle();"></i></a></li>
         <li><a class="icon" href="#"><i class="fas fa-share-alt" aria-hidden="true" onmouseover="$('#i-share').toggle();" onmouseout="$('#i-share').toggle();" onclick="$('#share').toggle();return false;"></i></a></li>
@@ -87,17 +89,17 @@
     <br/>
     <div id="share" style="display: none">
       <ul>
-  <li><a class="icon" href="http://www.facebook.com/sharer.php?u=https://bitzhangmo.github.io/2019/08/16/Lua/Lua%E4%B8%8EC%E4%BA%A4%E4%BA%92%E7%9B%B8%E5%85%B3/" target="_blank" rel="noopener"><i class="fab fa-facebook " aria-hidden="true"></i></a></li>
-  <li><a class="icon" href="https://twitter.com/share?url=https://bitzhangmo.github.io/2019/08/16/Lua/Lua%E4%B8%8EC%E4%BA%A4%E4%BA%92%E7%9B%B8%E5%85%B3/&text=Lua与C交互相关" target="_blank" rel="noopener"><i class="fab fa-twitter " aria-hidden="true"></i></a></li>
-  <li><a class="icon" href="http://www.linkedin.com/shareArticle?url=https://bitzhangmo.github.io/2019/08/16/Lua/Lua%E4%B8%8EC%E4%BA%A4%E4%BA%92%E7%9B%B8%E5%85%B3/&title=Lua与C交互相关" target="_blank" rel="noopener"><i class="fab fa-linkedin " aria-hidden="true"></i></a></li>
-  <li><a class="icon" href="https://pinterest.com/pin/create/bookmarklet/?url=https://bitzhangmo.github.io/2019/08/16/Lua/Lua%E4%B8%8EC%E4%BA%A4%E4%BA%92%E7%9B%B8%E5%85%B3/&is_video=false&description=Lua与C交互相关" target="_blank" rel="noopener"><i class="fab fa-pinterest " aria-hidden="true"></i></a></li>
-  <li><a class="icon" href="mailto:?subject=Lua与C交互相关&body=Check out this article: https://bitzhangmo.github.io/2019/08/16/Lua/Lua%E4%B8%8EC%E4%BA%A4%E4%BA%92%E7%9B%B8%E5%85%B3/"><i class="fas fa-envelope " aria-hidden="true"></i></a></li>
-  <li><a class="icon" href="https://getpocket.com/save?url=https://bitzhangmo.github.io/2019/08/16/Lua/Lua%E4%B8%8EC%E4%BA%A4%E4%BA%92%E7%9B%B8%E5%85%B3/&title=Lua与C交互相关" target="_blank" rel="noopener"><i class="fab fa-get-pocket " aria-hidden="true"></i></a></li>
-  <li><a class="icon" href="http://reddit.com/submit?url=https://bitzhangmo.github.io/2019/08/16/Lua/Lua%E4%B8%8EC%E4%BA%A4%E4%BA%92%E7%9B%B8%E5%85%B3/&title=Lua与C交互相关" target="_blank" rel="noopener"><i class="fab fa-reddit " aria-hidden="true"></i></a></li>
-  <li><a class="icon" href="http://www.stumbleupon.com/submit?url=https://bitzhangmo.github.io/2019/08/16/Lua/Lua%E4%B8%8EC%E4%BA%A4%E4%BA%92%E7%9B%B8%E5%85%B3/&title=Lua与C交互相关" target="_blank" rel="noopener"><i class="fab fa-stumbleupon " aria-hidden="true"></i></a></li>
-  <li><a class="icon" href="http://digg.com/submit?url=https://bitzhangmo.github.io/2019/08/16/Lua/Lua%E4%B8%8EC%E4%BA%A4%E4%BA%92%E7%9B%B8%E5%85%B3/&title=Lua与C交互相关" target="_blank" rel="noopener"><i class="fab fa-digg " aria-hidden="true"></i></a></li>
-  <li><a class="icon" href="http://www.tumblr.com/share/link?url=https://bitzhangmo.github.io/2019/08/16/Lua/Lua%E4%B8%8EC%E4%BA%A4%E4%BA%92%E7%9B%B8%E5%85%B3/&name=Lua与C交互相关&description=&lt;p&gt;C语言API总览。&lt;/p&gt;" target="_blank" rel="noopener"><i class="fab fa-tumblr " aria-hidden="true"></i></a></li>
-  <li><a class="icon" href="https://news.ycombinator.com/submitlink?u=https://bitzhangmo.github.io/2019/08/16/Lua/Lua%E4%B8%8EC%E4%BA%A4%E4%BA%92%E7%9B%B8%E5%85%B3/&t=Lua与C交互相关" target="_blank" rel="noopener"><i class="fab fa-hacker-news " aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="http://www.facebook.com/sharer.php?u=https://bitzhangmo.github.io/2019/08/16/Lua/Lua与C交互相关/"><i class="fab fa-facebook " aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="https://twitter.com/share?url=https://bitzhangmo.github.io/2019/08/16/Lua/Lua与C交互相关/&text=Lua与C交互相关"><i class="fab fa-twitter " aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="http://www.linkedin.com/shareArticle?url=https://bitzhangmo.github.io/2019/08/16/Lua/Lua与C交互相关/&title=Lua与C交互相关"><i class="fab fa-linkedin " aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="https://pinterest.com/pin/create/bookmarklet/?url=https://bitzhangmo.github.io/2019/08/16/Lua/Lua与C交互相关/&is_video=false&description=Lua与C交互相关"><i class="fab fa-pinterest " aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="mailto:?subject=Lua与C交互相关&body=Check out this article: https://bitzhangmo.github.io/2019/08/16/Lua/Lua与C交互相关/"><i class="fas fa-envelope " aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="https://getpocket.com/save?url=https://bitzhangmo.github.io/2019/08/16/Lua/Lua与C交互相关/&title=Lua与C交互相关"><i class="fab fa-get-pocket " aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="http://reddit.com/submit?url=https://bitzhangmo.github.io/2019/08/16/Lua/Lua与C交互相关/&title=Lua与C交互相关"><i class="fab fa-reddit " aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="http://www.stumbleupon.com/submit?url=https://bitzhangmo.github.io/2019/08/16/Lua/Lua与C交互相关/&title=Lua与C交互相关"><i class="fab fa-stumbleupon " aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="http://digg.com/submit?url=https://bitzhangmo.github.io/2019/08/16/Lua/Lua与C交互相关/&title=Lua与C交互相关"><i class="fab fa-digg " aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="http://www.tumblr.com/share/link?url=https://bitzhangmo.github.io/2019/08/16/Lua/Lua与C交互相关/&name=Lua与C交互相关&description=&lt;p&gt;C语言API总览。&lt;/p&gt;"><i class="fab fa-tumblr " aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="https://news.ycombinator.com/submitlink?u=https://bitzhangmo.github.io/2019/08/16/Lua/Lua与C交互相关/&t=Lua与C交互相关"><i class="fab fa-hacker-news " aria-hidden="true"></i></a></li>
 </ul>
 
     </div>
@@ -135,14 +137,14 @@
       
     <div class="article-category">
         <i class="fas fa-archive"></i>
-        <a class="category-link" href="/categories/%E8%AF%BB%E4%B9%A6%E7%AC%94%E8%AE%B0/">读书笔记</a>
+        <a class="category-link" href="/categories/读书笔记/">读书笔记</a>
     </div>
 
 
       
     <div class="article-tag">
         <i class="fas fa-tag"></i>
-        <a class="tag-link" href="/tags/Lua/" rel="tag">Lua</a>
+        <a class="tag-link" href="/tags/Lua/">Lua</a>
     </div>
 
 
@@ -153,7 +155,6 @@
   <div class="content" itemprop="articleBody">
     <p>C语言API总览。</p>
 <a id="more"></a>
-
 <p>C语言和Lua语言的两种交互形式：</p>
 <ol>
 <li>C语言拥有控制权，而Lua语言被用作库，这种交互形式中的C代码被称为应用代码。</li>
@@ -161,7 +162,6 @@
 </ol>
 <p>应用代码和库代码都适用相同的API和Lua语言通信，这些API称为C API。</p>
 <h3 id="一个简单的独立解释器："><a href="#一个简单的独立解释器：" class="headerlink" title="一个简单的独立解释器："></a>一个简单的独立解释器：</h3><figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;stdio.h&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;string.h&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">"lua.h"</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">"lauxlib.h"</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">"lualib.h"</span></span></span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">main</span><span class="params">(<span class="keyword">void</span>)</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">  <span class="keyword">char</span> buff[<span class="number">256</span>];</span><br><span class="line">  <span class="keyword">int</span> error;</span><br><span class="line">  lua_State *L = luaL_newstate();				<span class="comment">/* 打开Lua */</span></span><br><span class="line">  luaL_openlibs(L);											<span class="comment">/* 打开标准库 */</span></span><br><span class="line">  </span><br><span class="line">  <span class="keyword">while</span>(fgets(buuff,<span class="keyword">sizeof</span>(buff),<span class="built_in">stdin</span>) != <span class="literal">NULL</span>)</span><br><span class="line">  &#123;</span><br><span class="line">    error = luaL_loadstring(L,buff) || lua_pcall(L,<span class="number">0</span>,<span class="number">0</span>,<span class="number">0</span>);</span><br><span class="line">    <span class="keyword">if</span>(error)</span><br><span class="line">    &#123;</span><br><span class="line">      <span class="built_in">fprintf</span>(<span class="built_in">stderr</span>,<span class="string">"%s\n"</span>,lua_tostring(L,<span class="number">-1</span>));</span><br><span class="line">      lua_pop(L,<span class="number">1</span>);											<span class="comment">/* 从栈中弹出错误信息 */</span></span><br><span class="line">    &#125;</span><br><span class="line">  &#125;</span><br><span class="line">  </span><br><span class="line">  lua_close(L);</span><br><span class="line">  <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
 <p>头文件lua.h声明了Lua提供的基础函数，其中包括创建新Lua环境的函数、调用Lua函数的函数、读写环境中的全局变量的函数，以及注册供Lua语言调用的新函数的函数，等等。其中声明的所有内容都有一个前缀lua_。</p>
 <p>头文件lauxlib.h声明了辅助库所提供的函数，其中所有的声明均以luaL_开头。</p>
 <p>头文件lualib.h中声明了用于打开这些库的函数。</p>
@@ -175,17 +175,14 @@
 <p>要正确的处理应用代码中的错误，就必须通过Lua语言调用我们自己的代码，即在setjmp的上下文中运行代码。</p>
 <p>我们可以把C代码封装到一个函数F中，然后使用lua_pcall调用这个函数F，通过这种方式，我们的C代码会在保护模式下运行。即便发生内存分配失败，函数lua_pcall也会返回一个对应的错误码，使解释器能够保持一致的状态：</p>
 <figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">static</span> <span class="keyword">int</span> <span class="title">foo</span><span class="params">(lua_State *L)</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">	<span class="comment">//code to run in protected mode</span></span><br><span class="line">	<span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">secure_foo</span><span class="params">(lua_State *L)</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">	lua_pushcfunction(L,foo);</span><br><span class="line">	<span class="keyword">return</span> (lua_pcall(L,<span class="number">0</span>,<span class="number">0</span>,<span class="number">0</span>) == <span class="number">0</span>)</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
 <p>无论发生什么，调用secure_foo时都会返回一个布尔值，来表示foo执行是否成功。</p>
 <h4 id="处理库代码中的错误："><a href="#处理库代码中的错误：" class="headerlink" title="处理库代码中的错误："></a>处理库代码中的错误：</h4><p>当C语言库中的函数检测到错误时，只需简单的调用lua_error即可。</p>
 <h3 id="内存分配："><a href="#内存分配：" class="headerlink" title="内存分配："></a>内存分配：</h3><p>Lua语言核心对内存分配不进行任何假设，只会通过一个分配函数来分配和释放内存，当用户创建lua状态时必须提供该函数。</p>
 <p>luaL_newstate是一个用默认分配函数来创建Lua状态的辅助函数。该默认分配函数使用了来自C语言标准函数库的标准函数malloc-realloc-free，对于大多数应用程序来说已经够了，但是，要完全控制Lua的内存分配也很容易，使用原始的lua_newstate来创建我们自己的Lua状态即可：</p>
 <figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="function">lua_State *<span class="title">lua_newstate</span><span class="params">(lua_Alloc f,<span class="keyword">void</span> *ud)</span></span></span><br></pre></td></tr></table></figure>
-
 <p>该函数有两个参数：一个是分配函数，另一个是用户数据。用这种方式创建的Lua状态会通过调用f完成所有的内存分配和释放，甚至结构lua_State也是由f分配的。</p>
 <p>分配函数f必须满足lua_Alloc的类型声明：</p>
 <figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">typedef</span> <span class="keyword">void</span> *(*lua_Alloc)(<span class="keyword">void</span> *ud,						<span class="comment">// 为lua_newstate所提供的用户数据</span></span><br><span class="line">													 <span class="keyword">void</span> *ptr,						<span class="comment">// 正要被分配或者释放的块的地址</span></span><br><span class="line">													 <span class="keyword">size_t</span> osize,				<span class="comment">// 原始块的大小</span></span><br><span class="line">													 <span class="keyword">size_t</span> nsize);				<span class="comment">// 请求的块大小</span></span><br></pre></td></tr></table></figure>
-
 <p>如果ptr不是NULL，则lua会保证其之前被分配的大小就是osize。</p>
 <p>当nsize为0时，分配函数必须释放ptr指向的块并返回NULL，对应于所要求的大小为零的块。当ptr时NULL时，该函数必须分配并返回一个指定大小的块；如果无法分配指定的块，则必须返回NULL。</p>
 <h3 id="pcall："><a href="#pcall：" class="headerlink" title="pcall："></a>pcall：</h3><p>在调用函数lua_pcall时，第二个参数表示传递的参数数量，第三个参数是期望的结果数量，第四个参数代表错误处理函数。就像Lua语言的赋值一样，函数lua_pcall会根据所要求的数量来调整返回值的个数，即压入nil或丢弃多余的结果。在压入结果前，lua_pcall会把函数和其参数从栈中移除。当一个函数返回多个结果时，那么第一个结果最后被压入。</p>
@@ -193,7 +190,6 @@
 <p>这个栈不是一个全局结构；每个函数都有其私有的局部栈。当Lua调用一个C函数时，第一个参数总是位于这个局部栈中索引为1的位置。即使一个C函数调用了Lua代码，而且Lua代码又再次调用了同一个的C函数，这些调用每一个都只会看到本次调用自己的私有栈，其中索引为1的位置上就是第一个参数。</p>
 <p>所有在Lua中注册的函数都必须使用一个相同的原型，该原型就是定义在lua.h中的lua_CFunction：</p>
 <figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">typedef</span> <span class="title">int</span> <span class="params">(*lua_CFunction)</span><span class="params">(lua_State *L)</span></span></span><br></pre></td></tr></table></figure>
-
 <p>在Lua中，调用这个函数前，还必须通过lua_pushcfunction注册该函数。函数lua_pushcfunction会获取一个指向C函数的指针，然后在Lua中创建一个“function”类型，代表待注册的函数。一旦完成注册，C函数就可以像其他Lua函数一样行事了。</p>
 
   </div>
@@ -214,7 +210,7 @@
          
           <li><a href="/archives/">归档</a></li>
          
-          <li><a href="/projects_url">项目</a></li>
+          <li><a href="/search/">搜索</a></li>
         
       </ul>
     </div>
@@ -225,17 +221,17 @@
 
     <div id="share-footer" style="display: none">
       <ul>
-  <li><a class="icon" href="http://www.facebook.com/sharer.php?u=https://bitzhangmo.github.io/2019/08/16/Lua/Lua%E4%B8%8EC%E4%BA%A4%E4%BA%92%E7%9B%B8%E5%85%B3/" target="_blank" rel="noopener"><i class="fab fa-facebook fa-lg" aria-hidden="true"></i></a></li>
-  <li><a class="icon" href="https://twitter.com/share?url=https://bitzhangmo.github.io/2019/08/16/Lua/Lua%E4%B8%8EC%E4%BA%A4%E4%BA%92%E7%9B%B8%E5%85%B3/&text=Lua与C交互相关" target="_blank" rel="noopener"><i class="fab fa-twitter fa-lg" aria-hidden="true"></i></a></li>
-  <li><a class="icon" href="http://www.linkedin.com/shareArticle?url=https://bitzhangmo.github.io/2019/08/16/Lua/Lua%E4%B8%8EC%E4%BA%A4%E4%BA%92%E7%9B%B8%E5%85%B3/&title=Lua与C交互相关" target="_blank" rel="noopener"><i class="fab fa-linkedin fa-lg" aria-hidden="true"></i></a></li>
-  <li><a class="icon" href="https://pinterest.com/pin/create/bookmarklet/?url=https://bitzhangmo.github.io/2019/08/16/Lua/Lua%E4%B8%8EC%E4%BA%A4%E4%BA%92%E7%9B%B8%E5%85%B3/&is_video=false&description=Lua与C交互相关" target="_blank" rel="noopener"><i class="fab fa-pinterest fa-lg" aria-hidden="true"></i></a></li>
-  <li><a class="icon" href="mailto:?subject=Lua与C交互相关&body=Check out this article: https://bitzhangmo.github.io/2019/08/16/Lua/Lua%E4%B8%8EC%E4%BA%A4%E4%BA%92%E7%9B%B8%E5%85%B3/"><i class="fas fa-envelope fa-lg" aria-hidden="true"></i></a></li>
-  <li><a class="icon" href="https://getpocket.com/save?url=https://bitzhangmo.github.io/2019/08/16/Lua/Lua%E4%B8%8EC%E4%BA%A4%E4%BA%92%E7%9B%B8%E5%85%B3/&title=Lua与C交互相关" target="_blank" rel="noopener"><i class="fab fa-get-pocket fa-lg" aria-hidden="true"></i></a></li>
-  <li><a class="icon" href="http://reddit.com/submit?url=https://bitzhangmo.github.io/2019/08/16/Lua/Lua%E4%B8%8EC%E4%BA%A4%E4%BA%92%E7%9B%B8%E5%85%B3/&title=Lua与C交互相关" target="_blank" rel="noopener"><i class="fab fa-reddit fa-lg" aria-hidden="true"></i></a></li>
-  <li><a class="icon" href="http://www.stumbleupon.com/submit?url=https://bitzhangmo.github.io/2019/08/16/Lua/Lua%E4%B8%8EC%E4%BA%A4%E4%BA%92%E7%9B%B8%E5%85%B3/&title=Lua与C交互相关" target="_blank" rel="noopener"><i class="fab fa-stumbleupon fa-lg" aria-hidden="true"></i></a></li>
-  <li><a class="icon" href="http://digg.com/submit?url=https://bitzhangmo.github.io/2019/08/16/Lua/Lua%E4%B8%8EC%E4%BA%A4%E4%BA%92%E7%9B%B8%E5%85%B3/&title=Lua与C交互相关" target="_blank" rel="noopener"><i class="fab fa-digg fa-lg" aria-hidden="true"></i></a></li>
-  <li><a class="icon" href="http://www.tumblr.com/share/link?url=https://bitzhangmo.github.io/2019/08/16/Lua/Lua%E4%B8%8EC%E4%BA%A4%E4%BA%92%E7%9B%B8%E5%85%B3/&name=Lua与C交互相关&description=&lt;p&gt;C语言API总览。&lt;/p&gt;" target="_blank" rel="noopener"><i class="fab fa-tumblr fa-lg" aria-hidden="true"></i></a></li>
-  <li><a class="icon" href="https://news.ycombinator.com/submitlink?u=https://bitzhangmo.github.io/2019/08/16/Lua/Lua%E4%B8%8EC%E4%BA%A4%E4%BA%92%E7%9B%B8%E5%85%B3/&t=Lua与C交互相关" target="_blank" rel="noopener"><i class="fab fa-hacker-news fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="http://www.facebook.com/sharer.php?u=https://bitzhangmo.github.io/2019/08/16/Lua/Lua与C交互相关/"><i class="fab fa-facebook fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="https://twitter.com/share?url=https://bitzhangmo.github.io/2019/08/16/Lua/Lua与C交互相关/&text=Lua与C交互相关"><i class="fab fa-twitter fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="http://www.linkedin.com/shareArticle?url=https://bitzhangmo.github.io/2019/08/16/Lua/Lua与C交互相关/&title=Lua与C交互相关"><i class="fab fa-linkedin fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="https://pinterest.com/pin/create/bookmarklet/?url=https://bitzhangmo.github.io/2019/08/16/Lua/Lua与C交互相关/&is_video=false&description=Lua与C交互相关"><i class="fab fa-pinterest fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="mailto:?subject=Lua与C交互相关&body=Check out this article: https://bitzhangmo.github.io/2019/08/16/Lua/Lua与C交互相关/"><i class="fas fa-envelope fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="https://getpocket.com/save?url=https://bitzhangmo.github.io/2019/08/16/Lua/Lua与C交互相关/&title=Lua与C交互相关"><i class="fab fa-get-pocket fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="http://reddit.com/submit?url=https://bitzhangmo.github.io/2019/08/16/Lua/Lua与C交互相关/&title=Lua与C交互相关"><i class="fab fa-reddit fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="http://www.stumbleupon.com/submit?url=https://bitzhangmo.github.io/2019/08/16/Lua/Lua与C交互相关/&title=Lua与C交互相关"><i class="fab fa-stumbleupon fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="http://digg.com/submit?url=https://bitzhangmo.github.io/2019/08/16/Lua/Lua与C交互相关/&title=Lua与C交互相关"><i class="fab fa-digg fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="http://www.tumblr.com/share/link?url=https://bitzhangmo.github.io/2019/08/16/Lua/Lua与C交互相关/&name=Lua与C交互相关&description=&lt;p&gt;C语言API总览。&lt;/p&gt;"><i class="fab fa-tumblr fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="https://news.ycombinator.com/submitlink?u=https://bitzhangmo.github.io/2019/08/16/Lua/Lua与C交互相关/&t=Lua与C交互相关"><i class="fab fa-hacker-news fa-lg" aria-hidden="true"></i></a></li>
 </ul>
 
     </div>
@@ -265,7 +261,7 @@
          
           <li><a href="/archives/">归档</a></li>
          
-          <li><a href="/projects_url">项目</a></li>
+          <li><a href="/search/">搜索</a></li>
         
       </ul>
     </nav>
@@ -313,5 +309,5 @@
 <!-- Disqus Comments -->
 
 
-</body>
+<script src="/live2dw/lib/L2Dwidget.min.js?bd2294fafea3389ee458f1d9be5a2157"></script><script>L2Dwidget.init({"pluginRootPath":"live2dw/","pluginJsPath":"lib/","pluginModelPath":"assets/","tagMode":false,"debug":false,"model":{"jsonPath":"/live2dw/assets/hijiki.model.json"},"display":{"position":"left","width":100,"height":200},"mobile":{"show":false},"log":false});</script></body>
 </html>

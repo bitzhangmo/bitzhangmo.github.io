@@ -1,25 +1,27 @@
 <!DOCTYPE html>
 <html lang=zh>
-<head>
+<head><meta name="generator" content="Hexo 3.9.0">
     <!-- so meta -->
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="HandheldFriendly" content="True">
-    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1" />
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
     <meta name="description" content="简单工厂模式、工厂方法模式、抽象工厂模式。">
 <meta name="keywords" content="设计模式,创建型模式">
 <meta property="og:type" content="article">
 <meta property="og:title" content="游戏编程模式：工厂模式">
-<meta property="og:url" content="https:&#x2F;&#x2F;bitzhangmo.github.io&#x2F;2019&#x2F;03&#x2F;15&#x2F;%E8%AE%BE%E8%AE%A1%E6%A8%A1%E5%BC%8F&#x2F;%E6%B8%B8%E6%88%8F%E7%BC%96%E7%A8%8B%E6%A8%A1%E5%BC%8F%EF%BC%9A%E5%B7%A5%E5%8E%82%E6%A8%A1%E5%BC%8F&#x2F;index.html">
+<meta property="og:url" content="https://bitzhangmo.github.io/2019/03/15/设计模式/游戏编程模式：工厂模式/index.html">
 <meta property="og:site_name" content="zhangMo Blog">
 <meta property="og:description" content="简单工厂模式、工厂方法模式、抽象工厂模式。">
 <meta property="og:locale" content="zh-CN">
-<meta property="og:image" content="https:&#x2F;&#x2F;design-patterns.readthedocs.io&#x2F;zh_CN&#x2F;latest&#x2F;_images&#x2F;SimpleFactory.jpg">
-<meta property="og:image" content="https:&#x2F;&#x2F;design-patterns.readthedocs.io&#x2F;zh_CN&#x2F;latest&#x2F;_images&#x2F;FactoryMethod.jpg">
-<meta property="og:image" content="https:&#x2F;&#x2F;design-patterns.readthedocs.io&#x2F;zh_CN&#x2F;latest&#x2F;_images&#x2F;AbatractFactory.jpg">
+<meta property="og:image" content="https://design-patterns.readthedocs.io/zh_CN/latest/_images/SimpleFactory.jpg">
+<meta property="og:image" content="https://design-patterns.readthedocs.io/zh_CN/latest/_images/FactoryMethod.jpg">
+<meta property="og:image" content="https://design-patterns.readthedocs.io/zh_CN/latest/_images/AbatractFactory.jpg">
 <meta property="og:updated_time" content="2019-04-13T02:54:45.911Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:image" content="https:&#x2F;&#x2F;design-patterns.readthedocs.io&#x2F;zh_CN&#x2F;latest&#x2F;_images&#x2F;SimpleFactory.jpg">
+<meta name="twitter:title" content="游戏编程模式：工厂模式">
+<meta name="twitter:description" content="简单工厂模式、工厂方法模式、抽象工厂模式。">
+<meta name="twitter:image" content="https://design-patterns.readthedocs.io/zh_CN/latest/_images/SimpleFactory.jpg">
     
     
         
@@ -67,7 +69,7 @@
          
           <li><a href="/archives/">归档</a></li>
          
-          <li><a href="/projects_url">项目</a></li>
+          <li><a href="/search/">搜索</a></li>
         
       </ul>
     </span>
@@ -75,10 +77,10 @@
     <span id="actions">
       <ul>
         
-        <li><a class="icon" href="/2019/03/15/%E8%AE%BE%E8%AE%A1%E6%A8%A1%E5%BC%8F/%E6%B8%B8%E6%88%8F%E7%BC%96%E7%A8%8B%E6%A8%A1%E5%BC%8F%EF%BC%9A%E7%BB%84%E4%BB%B6%E6%A8%A1%E5%BC%8F/"><i class="fas fa-chevron-left" aria-hidden="true" onmouseover="$('#i-prev').toggle();" onmouseout="$('#i-prev').toggle();"></i></a></li>
+        <li><a class="icon" href="/2019/03/15/设计模式/游戏编程模式：组件模式/"><i class="fas fa-chevron-left" aria-hidden="true" onmouseover="$('#i-prev').toggle();" onmouseout="$('#i-prev').toggle();"></i></a></li>
         
         
-        <li><a class="icon" href="/2019/03/11/%E9%9A%8F%E7%AC%94/%E9%9D%A2%E8%AF%95%E7%9B%B8%E5%85%B3%E9%97%AE%E9%A2%98%E6%B1%87%E6%80%BB/"><i class="fas fa-chevron-right" aria-hidden="true" onmouseover="$('#i-next').toggle();" onmouseout="$('#i-next').toggle();"></i></a></li>
+        <li><a class="icon" href="/2019/03/11/随笔/面试相关问题汇总/"><i class="fas fa-chevron-right" aria-hidden="true" onmouseover="$('#i-next').toggle();" onmouseout="$('#i-next').toggle();"></i></a></li>
         
         <li><a class="icon" href="#" onclick="$('html, body').animate({ scrollTop: 0 }, 'fast');"><i class="fas fa-chevron-up" aria-hidden="true" onmouseover="$('#i-top').toggle();" onmouseout="$('#i-top').toggle();"></i></a></li>
         <li><a class="icon" href="#"><i class="fas fa-share-alt" aria-hidden="true" onmouseover="$('#i-share').toggle();" onmouseout="$('#i-share').toggle();" onclick="$('#share').toggle();return false;"></i></a></li>
@@ -91,17 +93,17 @@
     <br/>
     <div id="share" style="display: none">
       <ul>
-  <li><a class="icon" href="http://www.facebook.com/sharer.php?u=https://bitzhangmo.github.io/2019/03/15/%E8%AE%BE%E8%AE%A1%E6%A8%A1%E5%BC%8F/%E6%B8%B8%E6%88%8F%E7%BC%96%E7%A8%8B%E6%A8%A1%E5%BC%8F%EF%BC%9A%E5%B7%A5%E5%8E%82%E6%A8%A1%E5%BC%8F/" target="_blank" rel="noopener"><i class="fab fa-facebook " aria-hidden="true"></i></a></li>
-  <li><a class="icon" href="https://twitter.com/share?url=https://bitzhangmo.github.io/2019/03/15/%E8%AE%BE%E8%AE%A1%E6%A8%A1%E5%BC%8F/%E6%B8%B8%E6%88%8F%E7%BC%96%E7%A8%8B%E6%A8%A1%E5%BC%8F%EF%BC%9A%E5%B7%A5%E5%8E%82%E6%A8%A1%E5%BC%8F/&text=游戏编程模式：工厂模式" target="_blank" rel="noopener"><i class="fab fa-twitter " aria-hidden="true"></i></a></li>
-  <li><a class="icon" href="http://www.linkedin.com/shareArticle?url=https://bitzhangmo.github.io/2019/03/15/%E8%AE%BE%E8%AE%A1%E6%A8%A1%E5%BC%8F/%E6%B8%B8%E6%88%8F%E7%BC%96%E7%A8%8B%E6%A8%A1%E5%BC%8F%EF%BC%9A%E5%B7%A5%E5%8E%82%E6%A8%A1%E5%BC%8F/&title=游戏编程模式：工厂模式" target="_blank" rel="noopener"><i class="fab fa-linkedin " aria-hidden="true"></i></a></li>
-  <li><a class="icon" href="https://pinterest.com/pin/create/bookmarklet/?url=https://bitzhangmo.github.io/2019/03/15/%E8%AE%BE%E8%AE%A1%E6%A8%A1%E5%BC%8F/%E6%B8%B8%E6%88%8F%E7%BC%96%E7%A8%8B%E6%A8%A1%E5%BC%8F%EF%BC%9A%E5%B7%A5%E5%8E%82%E6%A8%A1%E5%BC%8F/&is_video=false&description=游戏编程模式：工厂模式" target="_blank" rel="noopener"><i class="fab fa-pinterest " aria-hidden="true"></i></a></li>
-  <li><a class="icon" href="mailto:?subject=游戏编程模式：工厂模式&body=Check out this article: https://bitzhangmo.github.io/2019/03/15/%E8%AE%BE%E8%AE%A1%E6%A8%A1%E5%BC%8F/%E6%B8%B8%E6%88%8F%E7%BC%96%E7%A8%8B%E6%A8%A1%E5%BC%8F%EF%BC%9A%E5%B7%A5%E5%8E%82%E6%A8%A1%E5%BC%8F/"><i class="fas fa-envelope " aria-hidden="true"></i></a></li>
-  <li><a class="icon" href="https://getpocket.com/save?url=https://bitzhangmo.github.io/2019/03/15/%E8%AE%BE%E8%AE%A1%E6%A8%A1%E5%BC%8F/%E6%B8%B8%E6%88%8F%E7%BC%96%E7%A8%8B%E6%A8%A1%E5%BC%8F%EF%BC%9A%E5%B7%A5%E5%8E%82%E6%A8%A1%E5%BC%8F/&title=游戏编程模式：工厂模式" target="_blank" rel="noopener"><i class="fab fa-get-pocket " aria-hidden="true"></i></a></li>
-  <li><a class="icon" href="http://reddit.com/submit?url=https://bitzhangmo.github.io/2019/03/15/%E8%AE%BE%E8%AE%A1%E6%A8%A1%E5%BC%8F/%E6%B8%B8%E6%88%8F%E7%BC%96%E7%A8%8B%E6%A8%A1%E5%BC%8F%EF%BC%9A%E5%B7%A5%E5%8E%82%E6%A8%A1%E5%BC%8F/&title=游戏编程模式：工厂模式" target="_blank" rel="noopener"><i class="fab fa-reddit " aria-hidden="true"></i></a></li>
-  <li><a class="icon" href="http://www.stumbleupon.com/submit?url=https://bitzhangmo.github.io/2019/03/15/%E8%AE%BE%E8%AE%A1%E6%A8%A1%E5%BC%8F/%E6%B8%B8%E6%88%8F%E7%BC%96%E7%A8%8B%E6%A8%A1%E5%BC%8F%EF%BC%9A%E5%B7%A5%E5%8E%82%E6%A8%A1%E5%BC%8F/&title=游戏编程模式：工厂模式" target="_blank" rel="noopener"><i class="fab fa-stumbleupon " aria-hidden="true"></i></a></li>
-  <li><a class="icon" href="http://digg.com/submit?url=https://bitzhangmo.github.io/2019/03/15/%E8%AE%BE%E8%AE%A1%E6%A8%A1%E5%BC%8F/%E6%B8%B8%E6%88%8F%E7%BC%96%E7%A8%8B%E6%A8%A1%E5%BC%8F%EF%BC%9A%E5%B7%A5%E5%8E%82%E6%A8%A1%E5%BC%8F/&title=游戏编程模式：工厂模式" target="_blank" rel="noopener"><i class="fab fa-digg " aria-hidden="true"></i></a></li>
-  <li><a class="icon" href="http://www.tumblr.com/share/link?url=https://bitzhangmo.github.io/2019/03/15/%E8%AE%BE%E8%AE%A1%E6%A8%A1%E5%BC%8F/%E6%B8%B8%E6%88%8F%E7%BC%96%E7%A8%8B%E6%A8%A1%E5%BC%8F%EF%BC%9A%E5%B7%A5%E5%8E%82%E6%A8%A1%E5%BC%8F/&name=游戏编程模式：工厂模式&description=&lt;p&gt;简单工厂模式、工厂方法模式、抽象工厂模式。&lt;/p&gt;" target="_blank" rel="noopener"><i class="fab fa-tumblr " aria-hidden="true"></i></a></li>
-  <li><a class="icon" href="https://news.ycombinator.com/submitlink?u=https://bitzhangmo.github.io/2019/03/15/%E8%AE%BE%E8%AE%A1%E6%A8%A1%E5%BC%8F/%E6%B8%B8%E6%88%8F%E7%BC%96%E7%A8%8B%E6%A8%A1%E5%BC%8F%EF%BC%9A%E5%B7%A5%E5%8E%82%E6%A8%A1%E5%BC%8F/&t=游戏编程模式：工厂模式" target="_blank" rel="noopener"><i class="fab fa-hacker-news " aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="http://www.facebook.com/sharer.php?u=https://bitzhangmo.github.io/2019/03/15/设计模式/游戏编程模式：工厂模式/"><i class="fab fa-facebook " aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="https://twitter.com/share?url=https://bitzhangmo.github.io/2019/03/15/设计模式/游戏编程模式：工厂模式/&text=游戏编程模式：工厂模式"><i class="fab fa-twitter " aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="http://www.linkedin.com/shareArticle?url=https://bitzhangmo.github.io/2019/03/15/设计模式/游戏编程模式：工厂模式/&title=游戏编程模式：工厂模式"><i class="fab fa-linkedin " aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="https://pinterest.com/pin/create/bookmarklet/?url=https://bitzhangmo.github.io/2019/03/15/设计模式/游戏编程模式：工厂模式/&is_video=false&description=游戏编程模式：工厂模式"><i class="fab fa-pinterest " aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="mailto:?subject=游戏编程模式：工厂模式&body=Check out this article: https://bitzhangmo.github.io/2019/03/15/设计模式/游戏编程模式：工厂模式/"><i class="fas fa-envelope " aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="https://getpocket.com/save?url=https://bitzhangmo.github.io/2019/03/15/设计模式/游戏编程模式：工厂模式/&title=游戏编程模式：工厂模式"><i class="fab fa-get-pocket " aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="http://reddit.com/submit?url=https://bitzhangmo.github.io/2019/03/15/设计模式/游戏编程模式：工厂模式/&title=游戏编程模式：工厂模式"><i class="fab fa-reddit " aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="http://www.stumbleupon.com/submit?url=https://bitzhangmo.github.io/2019/03/15/设计模式/游戏编程模式：工厂模式/&title=游戏编程模式：工厂模式"><i class="fab fa-stumbleupon " aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="http://digg.com/submit?url=https://bitzhangmo.github.io/2019/03/15/设计模式/游戏编程模式：工厂模式/&title=游戏编程模式：工厂模式"><i class="fab fa-digg " aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="http://www.tumblr.com/share/link?url=https://bitzhangmo.github.io/2019/03/15/设计模式/游戏编程模式：工厂模式/&name=游戏编程模式：工厂模式&description=&lt;p&gt;简单工厂模式、工厂方法模式、抽象工厂模式。&lt;/p&gt;"><i class="fab fa-tumblr " aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="https://news.ycombinator.com/submitlink?u=https://bitzhangmo.github.io/2019/03/15/设计模式/游戏编程模式：工厂模式/&t=游戏编程模式：工厂模式"><i class="fab fa-hacker-news " aria-hidden="true"></i></a></li>
 </ul>
 
     </div>
@@ -139,14 +141,14 @@
       
     <div class="article-category">
         <i class="fas fa-archive"></i>
-        <a class="category-link" href="/categories/%E8%AF%BB%E4%B9%A6%E7%AC%94%E8%AE%B0/">读书笔记</a> › <a class="category-link" href="/categories/%E8%AF%BB%E4%B9%A6%E7%AC%94%E8%AE%B0/%E8%AE%BE%E8%AE%A1%E6%A8%A1%E5%BC%8F/">设计模式</a>
+        <a class="category-link" href="/categories/读书笔记/">读书笔记</a> › <a class="category-link" href="/categories/读书笔记/设计模式/">设计模式</a>
     </div>
 
 
       
     <div class="article-tag">
         <i class="fas fa-tag"></i>
-        <a class="tag-link" href="/tags/%E5%88%9B%E5%BB%BA%E5%9E%8B%E6%A8%A1%E5%BC%8F/" rel="tag">创建型模式</a>, <a class="tag-link" href="/tags/%E8%AE%BE%E8%AE%A1%E6%A8%A1%E5%BC%8F/" rel="tag">设计模式</a>
+        <a class="tag-link" href="/tags/创建型模式/">创建型模式</a>, <a class="tag-link" href="/tags/设计模式/">设计模式</a>
     </div>
 
 
@@ -157,7 +159,6 @@
   <div class="content" itemprop="articleBody">
     <p>简单工厂模式、工厂方法模式、抽象工厂模式。</p>
 <a id="more"></a>
-
 <h2 id="简单工厂模式"><a href="#简单工厂模式" class="headerlink" title="简单工厂模式"></a>简单工厂模式</h2><h3 id="模式动机"><a href="#模式动机" class="headerlink" title="模式动机"></a>模式动机</h3><p>考虑一个简单的软件应用场景，一个软件系统可以提供多个外观不同的按钮（如圆形按钮、矩形按钮、菱形按钮等）， 这些按钮都源自同一个基类，不过在继承基类后不同的子类修改了部分属性从而使得它们可以呈现不同的外观，如果我们<strong>希望在使用这些按钮时，不需要知道这些具体按钮类的名字，只需要知道表示该按钮类的一个参数，并提供一个调用方便的方法，把该参数传入方法即可返回一个相应的按钮对象，</strong>此时，就可以使用简单工厂模式。</p>
 <h3 id="模式定义"><a href="#模式定义" class="headerlink" title="模式定义"></a>模式定义</h3><p>简单工厂模式(Simple Factory Pattern)：又称为静态工厂方法(Static Factory Method)模式，它属于类创建型模式。<strong>在简单工厂模式中，可以根据参数的不同返回不同类的实例。简单工厂模式专门定义一个类来负责创建其他类的实例，被创建的实例通常都具有共同的父类。</strong></p>
 <h3 id="模式结构"><a href="#模式结构" class="headerlink" title="模式结构"></a>模式结构</h3><p>简单工厂模式包含如下角色：</p>
@@ -172,7 +173,7 @@
 <p><strong>具体产品角色是创建目标，所有创建的对象都充当这个角色的某个具体类的实例。</strong></p>
 </li>
 </ul>
-<p><img src="https://design-patterns.readthedocs.io/zh_CN/latest/_images/SimpleFactory.jpg" alt=""></p>
+<p><img src="https://design-patterns.readthedocs.io/zh_CN/latest/_images/SimpleFactory.jpg" alt></p>
 <h3 id="模式分析"><a href="#模式分析" class="headerlink" title="模式分析"></a>模式分析</h3><ul>
 <li>将对象的创建和对象本身业务分离可以降低系统的耦合度，使得两者修改起来相对容易。</li>
 <li>在调用工厂类的工厂方法时，由于工厂方法时静态方法，使用起来很方便，可通过类名直接调用，而且只需要传入一个参数即可。在实际开发中，还可以在调用时将传入的参数保存在XML等格式的配置文件中，修改参数时无须修改任何源代码。</li>
@@ -202,7 +203,7 @@
 <li>Factory：抽象工厂</li>
 <li>ConcreteFactory：具体工厂</li>
 </ul>
-<p><img src="https://design-patterns.readthedocs.io/zh_CN/latest/_images/FactoryMethod.jpg" alt=""></p>
+<p><img src="https://design-patterns.readthedocs.io/zh_CN/latest/_images/FactoryMethod.jpg" alt></p>
 <h3 id="模式分析-1"><a href="#模式分析-1" class="headerlink" title="模式分析"></a>模式分析</h3><p>工厂方法模式是简单工厂模式的<strong>进一步抽象和推广。</strong>由于使用了面向对象的多态性，工厂方法模式保持了简单工厂模式的优点，而且克服了它的缺点。<strong>在工厂方法模式中，核心的工厂类不再负责所有产品的创建，而是将具体创建工作交给子类去做。这个核心类仅仅负责给出具体工厂必须实现的接口，而不负责哪一个产品类被实例化这种细节，这使得工厂方法模式可以允许系统在不修改工厂角色的情况下引进新产品。</strong></p>
 <h3 id="优缺点-1"><a href="#优缺点-1" class="headerlink" title="优缺点"></a>优缺点</h3><h4 id="优点-1"><a href="#优点-1" class="headerlink" title="优点"></a>优点</h4><ul>
 <li><p>在工厂方法模式中，工厂方法用来创建客户所需要的产品，同时还向客户隐藏了哪种具体产品类将被实例化这一细节，<strong>用户只需要关心所需产品对应的工厂，无须关心创建细节，甚至无须知道具体产品类的类名。</strong></p>
@@ -243,8 +244,6 @@
 <h3 id="模式定义-2"><a href="#模式定义-2" class="headerlink" title="模式定义"></a>模式定义</h3><p>抽象工厂模式(Abstract Factory Pattern)：<strong>提供一个创建一系列相关或相互依赖对象的接口，而无须指定它们具体的类。</strong>抽象工厂模式又称为Kit模式，属于对象创建型模式。</p>
 <blockquote>
 <p>就是对一组具有<strong>相同主题</strong>的工厂进行<strong>封装</strong>（维基百科解释的很到位）；</p>
-</blockquote>
-<blockquote>
 <p>例如：生产一台PC机，使用工厂方法模式的话，一般会有cpu工厂，内存工厂，显卡工厂…但是使用抽象工厂模式的话，只有一个工厂就是PC工厂，但是一个PC工厂涵盖了cpu工厂，内存工厂，显卡工厂等要做的所有事；</p>
 </blockquote>
 <h3 id="模式结构-2"><a href="#模式结构-2" class="headerlink" title="模式结构"></a>模式结构</h3><ul>
@@ -253,7 +252,7 @@
 <li>AbstractProduct：抽象产品</li>
 <li>Product：具体产品</li>
 </ul>
-<p><img src="https://design-patterns.readthedocs.io/zh_CN/latest/_images/AbatractFactory.jpg" alt=""></p>
+<p><img src="https://design-patterns.readthedocs.io/zh_CN/latest/_images/AbatractFactory.jpg" alt></p>
 <h3 id="优缺点-2"><a href="#优缺点-2" class="headerlink" title="优缺点"></a>优缺点</h3><h4 id="优点-2"><a href="#优点-2" class="headerlink" title="优点"></a>优点</h4><ul>
 <li><strong>抽象工厂模式隔离了具体类的生成，使得客户并不需要知道什么被创建。由于这种隔离，更换一个具体工厂就变得相对容易。所有的具体工厂都实现了抽象工厂中定义的那些公共接口，因此只需改变具体工厂的实例，就可以在某种程度上改变整个软件系统的行为。</strong>另外，应用抽象工厂模式可以实现高内聚低耦合的设计目的，因此抽象工厂模式得到了广泛的应用。</li>
 <li><strong>当一个产品族中的多个对象被设计成一起工作时，它能够保证客户端始终只使用同一个产品族中的对象。</strong>这对一些需要根据当前环境来决定其行为的软件系统来说，是一种非常实用的设计模式。</li>
@@ -288,7 +287,7 @@
          
           <li><a href="/archives/">归档</a></li>
          
-          <li><a href="/projects_url">项目</a></li>
+          <li><a href="/search/">搜索</a></li>
         
       </ul>
     </div>
@@ -299,17 +298,17 @@
 
     <div id="share-footer" style="display: none">
       <ul>
-  <li><a class="icon" href="http://www.facebook.com/sharer.php?u=https://bitzhangmo.github.io/2019/03/15/%E8%AE%BE%E8%AE%A1%E6%A8%A1%E5%BC%8F/%E6%B8%B8%E6%88%8F%E7%BC%96%E7%A8%8B%E6%A8%A1%E5%BC%8F%EF%BC%9A%E5%B7%A5%E5%8E%82%E6%A8%A1%E5%BC%8F/" target="_blank" rel="noopener"><i class="fab fa-facebook fa-lg" aria-hidden="true"></i></a></li>
-  <li><a class="icon" href="https://twitter.com/share?url=https://bitzhangmo.github.io/2019/03/15/%E8%AE%BE%E8%AE%A1%E6%A8%A1%E5%BC%8F/%E6%B8%B8%E6%88%8F%E7%BC%96%E7%A8%8B%E6%A8%A1%E5%BC%8F%EF%BC%9A%E5%B7%A5%E5%8E%82%E6%A8%A1%E5%BC%8F/&text=游戏编程模式：工厂模式" target="_blank" rel="noopener"><i class="fab fa-twitter fa-lg" aria-hidden="true"></i></a></li>
-  <li><a class="icon" href="http://www.linkedin.com/shareArticle?url=https://bitzhangmo.github.io/2019/03/15/%E8%AE%BE%E8%AE%A1%E6%A8%A1%E5%BC%8F/%E6%B8%B8%E6%88%8F%E7%BC%96%E7%A8%8B%E6%A8%A1%E5%BC%8F%EF%BC%9A%E5%B7%A5%E5%8E%82%E6%A8%A1%E5%BC%8F/&title=游戏编程模式：工厂模式" target="_blank" rel="noopener"><i class="fab fa-linkedin fa-lg" aria-hidden="true"></i></a></li>
-  <li><a class="icon" href="https://pinterest.com/pin/create/bookmarklet/?url=https://bitzhangmo.github.io/2019/03/15/%E8%AE%BE%E8%AE%A1%E6%A8%A1%E5%BC%8F/%E6%B8%B8%E6%88%8F%E7%BC%96%E7%A8%8B%E6%A8%A1%E5%BC%8F%EF%BC%9A%E5%B7%A5%E5%8E%82%E6%A8%A1%E5%BC%8F/&is_video=false&description=游戏编程模式：工厂模式" target="_blank" rel="noopener"><i class="fab fa-pinterest fa-lg" aria-hidden="true"></i></a></li>
-  <li><a class="icon" href="mailto:?subject=游戏编程模式：工厂模式&body=Check out this article: https://bitzhangmo.github.io/2019/03/15/%E8%AE%BE%E8%AE%A1%E6%A8%A1%E5%BC%8F/%E6%B8%B8%E6%88%8F%E7%BC%96%E7%A8%8B%E6%A8%A1%E5%BC%8F%EF%BC%9A%E5%B7%A5%E5%8E%82%E6%A8%A1%E5%BC%8F/"><i class="fas fa-envelope fa-lg" aria-hidden="true"></i></a></li>
-  <li><a class="icon" href="https://getpocket.com/save?url=https://bitzhangmo.github.io/2019/03/15/%E8%AE%BE%E8%AE%A1%E6%A8%A1%E5%BC%8F/%E6%B8%B8%E6%88%8F%E7%BC%96%E7%A8%8B%E6%A8%A1%E5%BC%8F%EF%BC%9A%E5%B7%A5%E5%8E%82%E6%A8%A1%E5%BC%8F/&title=游戏编程模式：工厂模式" target="_blank" rel="noopener"><i class="fab fa-get-pocket fa-lg" aria-hidden="true"></i></a></li>
-  <li><a class="icon" href="http://reddit.com/submit?url=https://bitzhangmo.github.io/2019/03/15/%E8%AE%BE%E8%AE%A1%E6%A8%A1%E5%BC%8F/%E6%B8%B8%E6%88%8F%E7%BC%96%E7%A8%8B%E6%A8%A1%E5%BC%8F%EF%BC%9A%E5%B7%A5%E5%8E%82%E6%A8%A1%E5%BC%8F/&title=游戏编程模式：工厂模式" target="_blank" rel="noopener"><i class="fab fa-reddit fa-lg" aria-hidden="true"></i></a></li>
-  <li><a class="icon" href="http://www.stumbleupon.com/submit?url=https://bitzhangmo.github.io/2019/03/15/%E8%AE%BE%E8%AE%A1%E6%A8%A1%E5%BC%8F/%E6%B8%B8%E6%88%8F%E7%BC%96%E7%A8%8B%E6%A8%A1%E5%BC%8F%EF%BC%9A%E5%B7%A5%E5%8E%82%E6%A8%A1%E5%BC%8F/&title=游戏编程模式：工厂模式" target="_blank" rel="noopener"><i class="fab fa-stumbleupon fa-lg" aria-hidden="true"></i></a></li>
-  <li><a class="icon" href="http://digg.com/submit?url=https://bitzhangmo.github.io/2019/03/15/%E8%AE%BE%E8%AE%A1%E6%A8%A1%E5%BC%8F/%E6%B8%B8%E6%88%8F%E7%BC%96%E7%A8%8B%E6%A8%A1%E5%BC%8F%EF%BC%9A%E5%B7%A5%E5%8E%82%E6%A8%A1%E5%BC%8F/&title=游戏编程模式：工厂模式" target="_blank" rel="noopener"><i class="fab fa-digg fa-lg" aria-hidden="true"></i></a></li>
-  <li><a class="icon" href="http://www.tumblr.com/share/link?url=https://bitzhangmo.github.io/2019/03/15/%E8%AE%BE%E8%AE%A1%E6%A8%A1%E5%BC%8F/%E6%B8%B8%E6%88%8F%E7%BC%96%E7%A8%8B%E6%A8%A1%E5%BC%8F%EF%BC%9A%E5%B7%A5%E5%8E%82%E6%A8%A1%E5%BC%8F/&name=游戏编程模式：工厂模式&description=&lt;p&gt;简单工厂模式、工厂方法模式、抽象工厂模式。&lt;/p&gt;" target="_blank" rel="noopener"><i class="fab fa-tumblr fa-lg" aria-hidden="true"></i></a></li>
-  <li><a class="icon" href="https://news.ycombinator.com/submitlink?u=https://bitzhangmo.github.io/2019/03/15/%E8%AE%BE%E8%AE%A1%E6%A8%A1%E5%BC%8F/%E6%B8%B8%E6%88%8F%E7%BC%96%E7%A8%8B%E6%A8%A1%E5%BC%8F%EF%BC%9A%E5%B7%A5%E5%8E%82%E6%A8%A1%E5%BC%8F/&t=游戏编程模式：工厂模式" target="_blank" rel="noopener"><i class="fab fa-hacker-news fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="http://www.facebook.com/sharer.php?u=https://bitzhangmo.github.io/2019/03/15/设计模式/游戏编程模式：工厂模式/"><i class="fab fa-facebook fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="https://twitter.com/share?url=https://bitzhangmo.github.io/2019/03/15/设计模式/游戏编程模式：工厂模式/&text=游戏编程模式：工厂模式"><i class="fab fa-twitter fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="http://www.linkedin.com/shareArticle?url=https://bitzhangmo.github.io/2019/03/15/设计模式/游戏编程模式：工厂模式/&title=游戏编程模式：工厂模式"><i class="fab fa-linkedin fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="https://pinterest.com/pin/create/bookmarklet/?url=https://bitzhangmo.github.io/2019/03/15/设计模式/游戏编程模式：工厂模式/&is_video=false&description=游戏编程模式：工厂模式"><i class="fab fa-pinterest fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="mailto:?subject=游戏编程模式：工厂模式&body=Check out this article: https://bitzhangmo.github.io/2019/03/15/设计模式/游戏编程模式：工厂模式/"><i class="fas fa-envelope fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="https://getpocket.com/save?url=https://bitzhangmo.github.io/2019/03/15/设计模式/游戏编程模式：工厂模式/&title=游戏编程模式：工厂模式"><i class="fab fa-get-pocket fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="http://reddit.com/submit?url=https://bitzhangmo.github.io/2019/03/15/设计模式/游戏编程模式：工厂模式/&title=游戏编程模式：工厂模式"><i class="fab fa-reddit fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="http://www.stumbleupon.com/submit?url=https://bitzhangmo.github.io/2019/03/15/设计模式/游戏编程模式：工厂模式/&title=游戏编程模式：工厂模式"><i class="fab fa-stumbleupon fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="http://digg.com/submit?url=https://bitzhangmo.github.io/2019/03/15/设计模式/游戏编程模式：工厂模式/&title=游戏编程模式：工厂模式"><i class="fab fa-digg fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="http://www.tumblr.com/share/link?url=https://bitzhangmo.github.io/2019/03/15/设计模式/游戏编程模式：工厂模式/&name=游戏编程模式：工厂模式&description=&lt;p&gt;简单工厂模式、工厂方法模式、抽象工厂模式。&lt;/p&gt;"><i class="fab fa-tumblr fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="https://news.ycombinator.com/submitlink?u=https://bitzhangmo.github.io/2019/03/15/设计模式/游戏编程模式：工厂模式/&t=游戏编程模式：工厂模式"><i class="fab fa-hacker-news fa-lg" aria-hidden="true"></i></a></li>
 </ul>
 
     </div>
@@ -339,7 +338,7 @@
          
           <li><a href="/archives/">归档</a></li>
          
-          <li><a href="/projects_url">项目</a></li>
+          <li><a href="/search/">搜索</a></li>
         
       </ul>
     </nav>
@@ -387,5 +386,5 @@
 <!-- Disqus Comments -->
 
 
-</body>
+<script src="/live2dw/lib/L2Dwidget.min.js?bd2294fafea3389ee458f1d9be5a2157"></script><script>L2Dwidget.init({"pluginRootPath":"live2dw/","pluginJsPath":"lib/","pluginModelPath":"assets/","tagMode":false,"debug":false,"model":{"jsonPath":"/live2dw/assets/hijiki.model.json"},"display":{"position":"left","width":100,"height":200},"mobile":{"show":false},"log":false});</script></body>
 </html>

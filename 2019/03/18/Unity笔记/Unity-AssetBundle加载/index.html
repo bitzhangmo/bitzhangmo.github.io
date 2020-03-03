@@ -1,21 +1,23 @@
 <!DOCTYPE html>
 <html lang=zh>
-<head>
+<head><meta name="generator" content="Hexo 3.9.0">
     <!-- so meta -->
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="HandheldFriendly" content="True">
-    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1" />
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
     <meta name="description" content="Unity AssetBundle加载。">
 <meta name="keywords" content="Unity">
 <meta property="og:type" content="article">
 <meta property="og:title" content="Unity AssetBundle加载">
-<meta property="og:url" content="https:&#x2F;&#x2F;bitzhangmo.github.io&#x2F;2019&#x2F;03&#x2F;18&#x2F;Unity%E7%AC%94%E8%AE%B0&#x2F;Unity-AssetBundle%E5%8A%A0%E8%BD%BD&#x2F;index.html">
+<meta property="og:url" content="https://bitzhangmo.github.io/2019/03/18/Unity笔记/Unity-AssetBundle加载/index.html">
 <meta property="og:site_name" content="zhangMo Blog">
 <meta property="og:description" content="Unity AssetBundle加载。">
 <meta property="og:locale" content="zh-CN">
 <meta property="og:updated_time" content="2019-03-18T13:11:36.291Z">
 <meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="Unity AssetBundle加载">
+<meta name="twitter:description" content="Unity AssetBundle加载。">
     
     
         
@@ -63,7 +65,7 @@
          
           <li><a href="/archives/">归档</a></li>
          
-          <li><a href="/projects_url">项目</a></li>
+          <li><a href="/search/">搜索</a></li>
         
       </ul>
     </span>
@@ -71,10 +73,10 @@
     <span id="actions">
       <ul>
         
-        <li><a class="icon" href="/2019/03/22/Unity%E7%AC%94%E8%AE%B0/Unity-%E8%B5%84%E6%BA%90%E5%8A%A0%E8%BD%BD%E4%B8%8E%E4%BC%98%E5%8C%96/"><i class="fas fa-chevron-left" aria-hidden="true" onmouseover="$('#i-prev').toggle();" onmouseout="$('#i-prev').toggle();"></i></a></li>
+        <li><a class="icon" href="/2019/03/22/Unity笔记/Unity-资源加载与优化/"><i class="fas fa-chevron-left" aria-hidden="true" onmouseover="$('#i-prev').toggle();" onmouseout="$('#i-prev').toggle();"></i></a></li>
         
         
-        <li><a class="icon" href="/2019/03/18/Unity%E7%AC%94%E8%AE%B0/Unity-Shader%E4%B8%AD%E7%9A%84%E6%B5%8B%E8%AF%95/"><i class="fas fa-chevron-right" aria-hidden="true" onmouseover="$('#i-next').toggle();" onmouseout="$('#i-next').toggle();"></i></a></li>
+        <li><a class="icon" href="/2019/03/18/Unity笔记/Unity-Shader中的测试/"><i class="fas fa-chevron-right" aria-hidden="true" onmouseover="$('#i-next').toggle();" onmouseout="$('#i-next').toggle();"></i></a></li>
         
         <li><a class="icon" href="#" onclick="$('html, body').animate({ scrollTop: 0 }, 'fast');"><i class="fas fa-chevron-up" aria-hidden="true" onmouseover="$('#i-top').toggle();" onmouseout="$('#i-top').toggle();"></i></a></li>
         <li><a class="icon" href="#"><i class="fas fa-share-alt" aria-hidden="true" onmouseover="$('#i-share').toggle();" onmouseout="$('#i-share').toggle();" onclick="$('#share').toggle();return false;"></i></a></li>
@@ -87,17 +89,17 @@
     <br/>
     <div id="share" style="display: none">
       <ul>
-  <li><a class="icon" href="http://www.facebook.com/sharer.php?u=https://bitzhangmo.github.io/2019/03/18/Unity%E7%AC%94%E8%AE%B0/Unity-AssetBundle%E5%8A%A0%E8%BD%BD/" target="_blank" rel="noopener"><i class="fab fa-facebook " aria-hidden="true"></i></a></li>
-  <li><a class="icon" href="https://twitter.com/share?url=https://bitzhangmo.github.io/2019/03/18/Unity%E7%AC%94%E8%AE%B0/Unity-AssetBundle%E5%8A%A0%E8%BD%BD/&text=Unity AssetBundle加载" target="_blank" rel="noopener"><i class="fab fa-twitter " aria-hidden="true"></i></a></li>
-  <li><a class="icon" href="http://www.linkedin.com/shareArticle?url=https://bitzhangmo.github.io/2019/03/18/Unity%E7%AC%94%E8%AE%B0/Unity-AssetBundle%E5%8A%A0%E8%BD%BD/&title=Unity AssetBundle加载" target="_blank" rel="noopener"><i class="fab fa-linkedin " aria-hidden="true"></i></a></li>
-  <li><a class="icon" href="https://pinterest.com/pin/create/bookmarklet/?url=https://bitzhangmo.github.io/2019/03/18/Unity%E7%AC%94%E8%AE%B0/Unity-AssetBundle%E5%8A%A0%E8%BD%BD/&is_video=false&description=Unity AssetBundle加载" target="_blank" rel="noopener"><i class="fab fa-pinterest " aria-hidden="true"></i></a></li>
-  <li><a class="icon" href="mailto:?subject=Unity AssetBundle加载&body=Check out this article: https://bitzhangmo.github.io/2019/03/18/Unity%E7%AC%94%E8%AE%B0/Unity-AssetBundle%E5%8A%A0%E8%BD%BD/"><i class="fas fa-envelope " aria-hidden="true"></i></a></li>
-  <li><a class="icon" href="https://getpocket.com/save?url=https://bitzhangmo.github.io/2019/03/18/Unity%E7%AC%94%E8%AE%B0/Unity-AssetBundle%E5%8A%A0%E8%BD%BD/&title=Unity AssetBundle加载" target="_blank" rel="noopener"><i class="fab fa-get-pocket " aria-hidden="true"></i></a></li>
-  <li><a class="icon" href="http://reddit.com/submit?url=https://bitzhangmo.github.io/2019/03/18/Unity%E7%AC%94%E8%AE%B0/Unity-AssetBundle%E5%8A%A0%E8%BD%BD/&title=Unity AssetBundle加载" target="_blank" rel="noopener"><i class="fab fa-reddit " aria-hidden="true"></i></a></li>
-  <li><a class="icon" href="http://www.stumbleupon.com/submit?url=https://bitzhangmo.github.io/2019/03/18/Unity%E7%AC%94%E8%AE%B0/Unity-AssetBundle%E5%8A%A0%E8%BD%BD/&title=Unity AssetBundle加载" target="_blank" rel="noopener"><i class="fab fa-stumbleupon " aria-hidden="true"></i></a></li>
-  <li><a class="icon" href="http://digg.com/submit?url=https://bitzhangmo.github.io/2019/03/18/Unity%E7%AC%94%E8%AE%B0/Unity-AssetBundle%E5%8A%A0%E8%BD%BD/&title=Unity AssetBundle加载" target="_blank" rel="noopener"><i class="fab fa-digg " aria-hidden="true"></i></a></li>
-  <li><a class="icon" href="http://www.tumblr.com/share/link?url=https://bitzhangmo.github.io/2019/03/18/Unity%E7%AC%94%E8%AE%B0/Unity-AssetBundle%E5%8A%A0%E8%BD%BD/&name=Unity AssetBundle加载&description=&lt;p&gt;Unity AssetBundle加载。&lt;/p&gt;" target="_blank" rel="noopener"><i class="fab fa-tumblr " aria-hidden="true"></i></a></li>
-  <li><a class="icon" href="https://news.ycombinator.com/submitlink?u=https://bitzhangmo.github.io/2019/03/18/Unity%E7%AC%94%E8%AE%B0/Unity-AssetBundle%E5%8A%A0%E8%BD%BD/&t=Unity AssetBundle加载" target="_blank" rel="noopener"><i class="fab fa-hacker-news " aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="http://www.facebook.com/sharer.php?u=https://bitzhangmo.github.io/2019/03/18/Unity笔记/Unity-AssetBundle加载/"><i class="fab fa-facebook " aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="https://twitter.com/share?url=https://bitzhangmo.github.io/2019/03/18/Unity笔记/Unity-AssetBundle加载/&text=Unity AssetBundle加载"><i class="fab fa-twitter " aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="http://www.linkedin.com/shareArticle?url=https://bitzhangmo.github.io/2019/03/18/Unity笔记/Unity-AssetBundle加载/&title=Unity AssetBundle加载"><i class="fab fa-linkedin " aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="https://pinterest.com/pin/create/bookmarklet/?url=https://bitzhangmo.github.io/2019/03/18/Unity笔记/Unity-AssetBundle加载/&is_video=false&description=Unity AssetBundle加载"><i class="fab fa-pinterest " aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="mailto:?subject=Unity AssetBundle加载&body=Check out this article: https://bitzhangmo.github.io/2019/03/18/Unity笔记/Unity-AssetBundle加载/"><i class="fas fa-envelope " aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="https://getpocket.com/save?url=https://bitzhangmo.github.io/2019/03/18/Unity笔记/Unity-AssetBundle加载/&title=Unity AssetBundle加载"><i class="fab fa-get-pocket " aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="http://reddit.com/submit?url=https://bitzhangmo.github.io/2019/03/18/Unity笔记/Unity-AssetBundle加载/&title=Unity AssetBundle加载"><i class="fab fa-reddit " aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="http://www.stumbleupon.com/submit?url=https://bitzhangmo.github.io/2019/03/18/Unity笔记/Unity-AssetBundle加载/&title=Unity AssetBundle加载"><i class="fab fa-stumbleupon " aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="http://digg.com/submit?url=https://bitzhangmo.github.io/2019/03/18/Unity笔记/Unity-AssetBundle加载/&title=Unity AssetBundle加载"><i class="fab fa-digg " aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="http://www.tumblr.com/share/link?url=https://bitzhangmo.github.io/2019/03/18/Unity笔记/Unity-AssetBundle加载/&name=Unity AssetBundle加载&description=&lt;p&gt;Unity AssetBundle加载。&lt;/p&gt;"><i class="fab fa-tumblr " aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="https://news.ycombinator.com/submitlink?u=https://bitzhangmo.github.io/2019/03/18/Unity笔记/Unity-AssetBundle加载/&t=Unity AssetBundle加载"><i class="fab fa-hacker-news " aria-hidden="true"></i></a></li>
 </ul>
 
     </div>
@@ -135,14 +137,14 @@
       
     <div class="article-category">
         <i class="fas fa-archive"></i>
-        <a class="category-link" href="/categories/%E8%AF%BB%E4%B9%A6%E7%AC%94%E8%AE%B0/">读书笔记</a>
+        <a class="category-link" href="/categories/读书笔记/">读书笔记</a>
     </div>
 
 
       
     <div class="article-tag">
         <i class="fas fa-tag"></i>
-        <a class="tag-link" href="/tags/Unity/" rel="tag">Unity</a>
+        <a class="tag-link" href="/tags/Unity/">Unity</a>
     </div>
 
 
@@ -153,7 +155,6 @@
   <div class="content" itemprop="articleBody">
     <p>Unity AssetBundle加载。</p>
 <a id="more"></a>
-
 
   </div>
 </article>
@@ -173,7 +174,7 @@
          
           <li><a href="/archives/">归档</a></li>
          
-          <li><a href="/projects_url">项目</a></li>
+          <li><a href="/search/">搜索</a></li>
         
       </ul>
     </div>
@@ -184,17 +185,17 @@
 
     <div id="share-footer" style="display: none">
       <ul>
-  <li><a class="icon" href="http://www.facebook.com/sharer.php?u=https://bitzhangmo.github.io/2019/03/18/Unity%E7%AC%94%E8%AE%B0/Unity-AssetBundle%E5%8A%A0%E8%BD%BD/" target="_blank" rel="noopener"><i class="fab fa-facebook fa-lg" aria-hidden="true"></i></a></li>
-  <li><a class="icon" href="https://twitter.com/share?url=https://bitzhangmo.github.io/2019/03/18/Unity%E7%AC%94%E8%AE%B0/Unity-AssetBundle%E5%8A%A0%E8%BD%BD/&text=Unity AssetBundle加载" target="_blank" rel="noopener"><i class="fab fa-twitter fa-lg" aria-hidden="true"></i></a></li>
-  <li><a class="icon" href="http://www.linkedin.com/shareArticle?url=https://bitzhangmo.github.io/2019/03/18/Unity%E7%AC%94%E8%AE%B0/Unity-AssetBundle%E5%8A%A0%E8%BD%BD/&title=Unity AssetBundle加载" target="_blank" rel="noopener"><i class="fab fa-linkedin fa-lg" aria-hidden="true"></i></a></li>
-  <li><a class="icon" href="https://pinterest.com/pin/create/bookmarklet/?url=https://bitzhangmo.github.io/2019/03/18/Unity%E7%AC%94%E8%AE%B0/Unity-AssetBundle%E5%8A%A0%E8%BD%BD/&is_video=false&description=Unity AssetBundle加载" target="_blank" rel="noopener"><i class="fab fa-pinterest fa-lg" aria-hidden="true"></i></a></li>
-  <li><a class="icon" href="mailto:?subject=Unity AssetBundle加载&body=Check out this article: https://bitzhangmo.github.io/2019/03/18/Unity%E7%AC%94%E8%AE%B0/Unity-AssetBundle%E5%8A%A0%E8%BD%BD/"><i class="fas fa-envelope fa-lg" aria-hidden="true"></i></a></li>
-  <li><a class="icon" href="https://getpocket.com/save?url=https://bitzhangmo.github.io/2019/03/18/Unity%E7%AC%94%E8%AE%B0/Unity-AssetBundle%E5%8A%A0%E8%BD%BD/&title=Unity AssetBundle加载" target="_blank" rel="noopener"><i class="fab fa-get-pocket fa-lg" aria-hidden="true"></i></a></li>
-  <li><a class="icon" href="http://reddit.com/submit?url=https://bitzhangmo.github.io/2019/03/18/Unity%E7%AC%94%E8%AE%B0/Unity-AssetBundle%E5%8A%A0%E8%BD%BD/&title=Unity AssetBundle加载" target="_blank" rel="noopener"><i class="fab fa-reddit fa-lg" aria-hidden="true"></i></a></li>
-  <li><a class="icon" href="http://www.stumbleupon.com/submit?url=https://bitzhangmo.github.io/2019/03/18/Unity%E7%AC%94%E8%AE%B0/Unity-AssetBundle%E5%8A%A0%E8%BD%BD/&title=Unity AssetBundle加载" target="_blank" rel="noopener"><i class="fab fa-stumbleupon fa-lg" aria-hidden="true"></i></a></li>
-  <li><a class="icon" href="http://digg.com/submit?url=https://bitzhangmo.github.io/2019/03/18/Unity%E7%AC%94%E8%AE%B0/Unity-AssetBundle%E5%8A%A0%E8%BD%BD/&title=Unity AssetBundle加载" target="_blank" rel="noopener"><i class="fab fa-digg fa-lg" aria-hidden="true"></i></a></li>
-  <li><a class="icon" href="http://www.tumblr.com/share/link?url=https://bitzhangmo.github.io/2019/03/18/Unity%E7%AC%94%E8%AE%B0/Unity-AssetBundle%E5%8A%A0%E8%BD%BD/&name=Unity AssetBundle加载&description=&lt;p&gt;Unity AssetBundle加载。&lt;/p&gt;" target="_blank" rel="noopener"><i class="fab fa-tumblr fa-lg" aria-hidden="true"></i></a></li>
-  <li><a class="icon" href="https://news.ycombinator.com/submitlink?u=https://bitzhangmo.github.io/2019/03/18/Unity%E7%AC%94%E8%AE%B0/Unity-AssetBundle%E5%8A%A0%E8%BD%BD/&t=Unity AssetBundle加载" target="_blank" rel="noopener"><i class="fab fa-hacker-news fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="http://www.facebook.com/sharer.php?u=https://bitzhangmo.github.io/2019/03/18/Unity笔记/Unity-AssetBundle加载/"><i class="fab fa-facebook fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="https://twitter.com/share?url=https://bitzhangmo.github.io/2019/03/18/Unity笔记/Unity-AssetBundle加载/&text=Unity AssetBundle加载"><i class="fab fa-twitter fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="http://www.linkedin.com/shareArticle?url=https://bitzhangmo.github.io/2019/03/18/Unity笔记/Unity-AssetBundle加载/&title=Unity AssetBundle加载"><i class="fab fa-linkedin fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="https://pinterest.com/pin/create/bookmarklet/?url=https://bitzhangmo.github.io/2019/03/18/Unity笔记/Unity-AssetBundle加载/&is_video=false&description=Unity AssetBundle加载"><i class="fab fa-pinterest fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="mailto:?subject=Unity AssetBundle加载&body=Check out this article: https://bitzhangmo.github.io/2019/03/18/Unity笔记/Unity-AssetBundle加载/"><i class="fas fa-envelope fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="https://getpocket.com/save?url=https://bitzhangmo.github.io/2019/03/18/Unity笔记/Unity-AssetBundle加载/&title=Unity AssetBundle加载"><i class="fab fa-get-pocket fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="http://reddit.com/submit?url=https://bitzhangmo.github.io/2019/03/18/Unity笔记/Unity-AssetBundle加载/&title=Unity AssetBundle加载"><i class="fab fa-reddit fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="http://www.stumbleupon.com/submit?url=https://bitzhangmo.github.io/2019/03/18/Unity笔记/Unity-AssetBundle加载/&title=Unity AssetBundle加载"><i class="fab fa-stumbleupon fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="http://digg.com/submit?url=https://bitzhangmo.github.io/2019/03/18/Unity笔记/Unity-AssetBundle加载/&title=Unity AssetBundle加载"><i class="fab fa-digg fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="http://www.tumblr.com/share/link?url=https://bitzhangmo.github.io/2019/03/18/Unity笔记/Unity-AssetBundle加载/&name=Unity AssetBundle加载&description=&lt;p&gt;Unity AssetBundle加载。&lt;/p&gt;"><i class="fab fa-tumblr fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="https://news.ycombinator.com/submitlink?u=https://bitzhangmo.github.io/2019/03/18/Unity笔记/Unity-AssetBundle加载/&t=Unity AssetBundle加载"><i class="fab fa-hacker-news fa-lg" aria-hidden="true"></i></a></li>
 </ul>
 
     </div>
@@ -224,7 +225,7 @@
          
           <li><a href="/archives/">归档</a></li>
          
-          <li><a href="/projects_url">项目</a></li>
+          <li><a href="/search/">搜索</a></li>
         
       </ul>
     </nav>
@@ -272,5 +273,5 @@
 <!-- Disqus Comments -->
 
 
-</body>
+<script src="/live2dw/lib/L2Dwidget.min.js?bd2294fafea3389ee458f1d9be5a2157"></script><script>L2Dwidget.init({"pluginRootPath":"live2dw/","pluginJsPath":"lib/","pluginModelPath":"assets/","tagMode":false,"debug":false,"model":{"jsonPath":"/live2dw/assets/hijiki.model.json"},"display":{"position":"left","width":100,"height":200},"mobile":{"show":false},"log":false});</script></body>
 </html>

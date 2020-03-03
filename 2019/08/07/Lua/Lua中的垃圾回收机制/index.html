@@ -1,21 +1,23 @@
 <!DOCTYPE html>
 <html lang=zh>
-<head>
+<head><meta name="generator" content="Hexo 3.9.0">
     <!-- so meta -->
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="HandheldFriendly" content="True">
-    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1" />
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
     <meta name="description" content="Lua中的垃圾回收机制：弱引用表，析构器和函数collectgarbage">
 <meta name="keywords" content="Lua">
 <meta property="og:type" content="article">
 <meta property="og:title" content="Lua中的垃圾回收机制">
-<meta property="og:url" content="https:&#x2F;&#x2F;bitzhangmo.github.io&#x2F;2019&#x2F;08&#x2F;07&#x2F;Lua&#x2F;Lua%E4%B8%AD%E7%9A%84%E5%9E%83%E5%9C%BE%E5%9B%9E%E6%94%B6%E6%9C%BA%E5%88%B6&#x2F;index.html">
+<meta property="og:url" content="https://bitzhangmo.github.io/2019/08/07/Lua/Lua中的垃圾回收机制/index.html">
 <meta property="og:site_name" content="zhangMo Blog">
 <meta property="og:description" content="Lua中的垃圾回收机制：弱引用表，析构器和函数collectgarbage">
 <meta property="og:locale" content="zh-CN">
 <meta property="og:updated_time" content="2019-08-08T06:45:57.432Z">
 <meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="Lua中的垃圾回收机制">
+<meta name="twitter:description" content="Lua中的垃圾回收机制：弱引用表，析构器和函数collectgarbage">
     
     
         
@@ -63,7 +65,7 @@
          
           <li><a href="/archives/">归档</a></li>
          
-          <li><a href="/projects_url">项目</a></li>
+          <li><a href="/search/">搜索</a></li>
         
       </ul>
     </span>
@@ -71,10 +73,10 @@
     <span id="actions">
       <ul>
         
-        <li><a class="icon" href="/2019/08/08/Lua/Lua%E6%BA%90%E7%A0%81%E9%98%85%E8%AF%BB%EF%BC%9A%E5%9F%BA%E6%9C%AC%E6%95%B0%E6%8D%AE%E7%B1%BB%E5%9E%8BString/"><i class="fas fa-chevron-left" aria-hidden="true" onmouseover="$('#i-prev').toggle();" onmouseout="$('#i-prev').toggle();"></i></a></li>
+        <li><a class="icon" href="/2019/08/08/Lua/Lua源码阅读：基本数据类型String/"><i class="fas fa-chevron-left" aria-hidden="true" onmouseover="$('#i-prev').toggle();" onmouseout="$('#i-prev').toggle();"></i></a></li>
         
         
-        <li><a class="icon" href="/2019/08/07/Lua/Lua%E7%A8%8B%E5%BA%8F%E8%AE%BE%E8%AE%A1%EF%BC%886%EF%BC%89/"><i class="fas fa-chevron-right" aria-hidden="true" onmouseover="$('#i-next').toggle();" onmouseout="$('#i-next').toggle();"></i></a></li>
+        <li><a class="icon" href="/2019/08/07/Lua/Lua程序设计（6）/"><i class="fas fa-chevron-right" aria-hidden="true" onmouseover="$('#i-next').toggle();" onmouseout="$('#i-next').toggle();"></i></a></li>
         
         <li><a class="icon" href="#" onclick="$('html, body').animate({ scrollTop: 0 }, 'fast');"><i class="fas fa-chevron-up" aria-hidden="true" onmouseover="$('#i-top').toggle();" onmouseout="$('#i-top').toggle();"></i></a></li>
         <li><a class="icon" href="#"><i class="fas fa-share-alt" aria-hidden="true" onmouseover="$('#i-share').toggle();" onmouseout="$('#i-share').toggle();" onclick="$('#share').toggle();return false;"></i></a></li>
@@ -87,17 +89,17 @@
     <br/>
     <div id="share" style="display: none">
       <ul>
-  <li><a class="icon" href="http://www.facebook.com/sharer.php?u=https://bitzhangmo.github.io/2019/08/07/Lua/Lua%E4%B8%AD%E7%9A%84%E5%9E%83%E5%9C%BE%E5%9B%9E%E6%94%B6%E6%9C%BA%E5%88%B6/" target="_blank" rel="noopener"><i class="fab fa-facebook " aria-hidden="true"></i></a></li>
-  <li><a class="icon" href="https://twitter.com/share?url=https://bitzhangmo.github.io/2019/08/07/Lua/Lua%E4%B8%AD%E7%9A%84%E5%9E%83%E5%9C%BE%E5%9B%9E%E6%94%B6%E6%9C%BA%E5%88%B6/&text=Lua中的垃圾回收机制" target="_blank" rel="noopener"><i class="fab fa-twitter " aria-hidden="true"></i></a></li>
-  <li><a class="icon" href="http://www.linkedin.com/shareArticle?url=https://bitzhangmo.github.io/2019/08/07/Lua/Lua%E4%B8%AD%E7%9A%84%E5%9E%83%E5%9C%BE%E5%9B%9E%E6%94%B6%E6%9C%BA%E5%88%B6/&title=Lua中的垃圾回收机制" target="_blank" rel="noopener"><i class="fab fa-linkedin " aria-hidden="true"></i></a></li>
-  <li><a class="icon" href="https://pinterest.com/pin/create/bookmarklet/?url=https://bitzhangmo.github.io/2019/08/07/Lua/Lua%E4%B8%AD%E7%9A%84%E5%9E%83%E5%9C%BE%E5%9B%9E%E6%94%B6%E6%9C%BA%E5%88%B6/&is_video=false&description=Lua中的垃圾回收机制" target="_blank" rel="noopener"><i class="fab fa-pinterest " aria-hidden="true"></i></a></li>
-  <li><a class="icon" href="mailto:?subject=Lua中的垃圾回收机制&body=Check out this article: https://bitzhangmo.github.io/2019/08/07/Lua/Lua%E4%B8%AD%E7%9A%84%E5%9E%83%E5%9C%BE%E5%9B%9E%E6%94%B6%E6%9C%BA%E5%88%B6/"><i class="fas fa-envelope " aria-hidden="true"></i></a></li>
-  <li><a class="icon" href="https://getpocket.com/save?url=https://bitzhangmo.github.io/2019/08/07/Lua/Lua%E4%B8%AD%E7%9A%84%E5%9E%83%E5%9C%BE%E5%9B%9E%E6%94%B6%E6%9C%BA%E5%88%B6/&title=Lua中的垃圾回收机制" target="_blank" rel="noopener"><i class="fab fa-get-pocket " aria-hidden="true"></i></a></li>
-  <li><a class="icon" href="http://reddit.com/submit?url=https://bitzhangmo.github.io/2019/08/07/Lua/Lua%E4%B8%AD%E7%9A%84%E5%9E%83%E5%9C%BE%E5%9B%9E%E6%94%B6%E6%9C%BA%E5%88%B6/&title=Lua中的垃圾回收机制" target="_blank" rel="noopener"><i class="fab fa-reddit " aria-hidden="true"></i></a></li>
-  <li><a class="icon" href="http://www.stumbleupon.com/submit?url=https://bitzhangmo.github.io/2019/08/07/Lua/Lua%E4%B8%AD%E7%9A%84%E5%9E%83%E5%9C%BE%E5%9B%9E%E6%94%B6%E6%9C%BA%E5%88%B6/&title=Lua中的垃圾回收机制" target="_blank" rel="noopener"><i class="fab fa-stumbleupon " aria-hidden="true"></i></a></li>
-  <li><a class="icon" href="http://digg.com/submit?url=https://bitzhangmo.github.io/2019/08/07/Lua/Lua%E4%B8%AD%E7%9A%84%E5%9E%83%E5%9C%BE%E5%9B%9E%E6%94%B6%E6%9C%BA%E5%88%B6/&title=Lua中的垃圾回收机制" target="_blank" rel="noopener"><i class="fab fa-digg " aria-hidden="true"></i></a></li>
-  <li><a class="icon" href="http://www.tumblr.com/share/link?url=https://bitzhangmo.github.io/2019/08/07/Lua/Lua%E4%B8%AD%E7%9A%84%E5%9E%83%E5%9C%BE%E5%9B%9E%E6%94%B6%E6%9C%BA%E5%88%B6/&name=Lua中的垃圾回收机制&description=&lt;p&gt;Lua中的垃圾回收机制：弱引用表，析构器和函数collectgarbage&lt;/p&gt;" target="_blank" rel="noopener"><i class="fab fa-tumblr " aria-hidden="true"></i></a></li>
-  <li><a class="icon" href="https://news.ycombinator.com/submitlink?u=https://bitzhangmo.github.io/2019/08/07/Lua/Lua%E4%B8%AD%E7%9A%84%E5%9E%83%E5%9C%BE%E5%9B%9E%E6%94%B6%E6%9C%BA%E5%88%B6/&t=Lua中的垃圾回收机制" target="_blank" rel="noopener"><i class="fab fa-hacker-news " aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="http://www.facebook.com/sharer.php?u=https://bitzhangmo.github.io/2019/08/07/Lua/Lua中的垃圾回收机制/"><i class="fab fa-facebook " aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="https://twitter.com/share?url=https://bitzhangmo.github.io/2019/08/07/Lua/Lua中的垃圾回收机制/&text=Lua中的垃圾回收机制"><i class="fab fa-twitter " aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="http://www.linkedin.com/shareArticle?url=https://bitzhangmo.github.io/2019/08/07/Lua/Lua中的垃圾回收机制/&title=Lua中的垃圾回收机制"><i class="fab fa-linkedin " aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="https://pinterest.com/pin/create/bookmarklet/?url=https://bitzhangmo.github.io/2019/08/07/Lua/Lua中的垃圾回收机制/&is_video=false&description=Lua中的垃圾回收机制"><i class="fab fa-pinterest " aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="mailto:?subject=Lua中的垃圾回收机制&body=Check out this article: https://bitzhangmo.github.io/2019/08/07/Lua/Lua中的垃圾回收机制/"><i class="fas fa-envelope " aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="https://getpocket.com/save?url=https://bitzhangmo.github.io/2019/08/07/Lua/Lua中的垃圾回收机制/&title=Lua中的垃圾回收机制"><i class="fab fa-get-pocket " aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="http://reddit.com/submit?url=https://bitzhangmo.github.io/2019/08/07/Lua/Lua中的垃圾回收机制/&title=Lua中的垃圾回收机制"><i class="fab fa-reddit " aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="http://www.stumbleupon.com/submit?url=https://bitzhangmo.github.io/2019/08/07/Lua/Lua中的垃圾回收机制/&title=Lua中的垃圾回收机制"><i class="fab fa-stumbleupon " aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="http://digg.com/submit?url=https://bitzhangmo.github.io/2019/08/07/Lua/Lua中的垃圾回收机制/&title=Lua中的垃圾回收机制"><i class="fab fa-digg " aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="http://www.tumblr.com/share/link?url=https://bitzhangmo.github.io/2019/08/07/Lua/Lua中的垃圾回收机制/&name=Lua中的垃圾回收机制&description=&lt;p&gt;Lua中的垃圾回收机制：弱引用表，析构器和函数collectgarbage&lt;/p&gt;"><i class="fab fa-tumblr " aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="https://news.ycombinator.com/submitlink?u=https://bitzhangmo.github.io/2019/08/07/Lua/Lua中的垃圾回收机制/&t=Lua中的垃圾回收机制"><i class="fab fa-hacker-news " aria-hidden="true"></i></a></li>
 </ul>
 
     </div>
@@ -135,14 +137,14 @@
       
     <div class="article-category">
         <i class="fas fa-archive"></i>
-        <a class="category-link" href="/categories/%E8%AF%BB%E4%B9%A6%E7%AC%94%E8%AE%B0/">读书笔记</a>
+        <a class="category-link" href="/categories/读书笔记/">读书笔记</a>
     </div>
 
 
       
     <div class="article-tag">
         <i class="fas fa-tag"></i>
-        <a class="tag-link" href="/tags/Lua/" rel="tag">Lua</a>
+        <a class="tag-link" href="/tags/Lua/">Lua</a>
     </div>
 
 
@@ -153,7 +155,6 @@
   <div class="content" itemprop="articleBody">
     <p>Lua中的垃圾回收机制：弱引用表，析构器和函数collectgarbage</p>
 <a id="more"></a>
-
 <h3 id="垃圾收集："><a href="#垃圾收集：" class="headerlink" title="垃圾收集："></a>垃圾收集：</h3><p>Lua语言使用自动内存管理，程序可以创建对象（表，闭包等），但却没有函数来删除对象。Lua语言通过垃圾收集自动的删除成为垃圾的对象。</p>
 <p>弱引用表，析构器和函数<code>collectgarbage</code>是在Lua语言中用来辅助垃圾收集器的主要机制。弱引用表允许收集Lua语言中还可以被程序访问的对象；析构器允许收集不在垃圾收集器直接控制下的外部对象；函数collectgarbage则允许我们控制垃圾收集器的步长。</p>
 <h4 id="弱引用表："><a href="#弱引用表：" class="headerlink" title="弱引用表："></a>弱引用表：</h4><p>垃圾收集器不能猜测我们认为哪些是垃圾，程序不会再用到的、存储在全局变量中的对象，对于Lua语言来说不是垃圾，需要我们的代码将这些对象所在的位置赋为nil，以便这些位置不会锁定可释放的对象。</p>
@@ -166,7 +167,6 @@
 <h4 id="析构器："><a href="#析构器：" class="headerlink" title="析构器："></a>析构器：</h4><p>析构器是一个与对象关联的函数，当该对象即将被回收时该函数会被调用。</p>
 <p>Lua语言通过元方法__gc实现析构器：</p>
 <figure class="highlight lua"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">o = &#123;x = <span class="string">"hi"</span>&#125;</span><br><span class="line"><span class="built_in">setmetatable</span>(o,&#123;<span class="built_in">__gc</span> = <span class="function"><span class="keyword">function</span><span class="params">(o)</span></span> <span class="built_in">print</span>(o.x) <span class="keyword">end</span>&#125;)</span><br><span class="line">o = <span class="literal">nil</span></span><br><span class="line"><span class="built_in">collectgarbage</span>()  <span class="comment">--&gt; hi</span></span><br></pre></td></tr></table></figure>
-
 <p>通过给对象设置一个具有非空__gc元方法的元表，就可以将一个对象标记为需要进行析构处理，如果不标记对象，那么对象就不会被析构。</p>
 <p>当垃圾收集器在同一个周期中析构多个对象时，它会按照对象被标记为需要析构处理的顺序<strong>逆序</strong>调用这些对象的析构器。</p>
 <p>析构器的另一个特点是<strong>复苏</strong>：当一个析构器被调用时，它的参数是正在被析构的对象。因此，这个对象会至少在析构期间重新变成活跃的，这叫做“临时复苏”；在析构器执行期间，我们无法阻止析构器把该对象存储在全局变量中，使得该对象在析构器返回后仍然可访问，这称为“永久复苏”。</p>
@@ -203,7 +203,7 @@
          
           <li><a href="/archives/">归档</a></li>
          
-          <li><a href="/projects_url">项目</a></li>
+          <li><a href="/search/">搜索</a></li>
         
       </ul>
     </div>
@@ -214,17 +214,17 @@
 
     <div id="share-footer" style="display: none">
       <ul>
-  <li><a class="icon" href="http://www.facebook.com/sharer.php?u=https://bitzhangmo.github.io/2019/08/07/Lua/Lua%E4%B8%AD%E7%9A%84%E5%9E%83%E5%9C%BE%E5%9B%9E%E6%94%B6%E6%9C%BA%E5%88%B6/" target="_blank" rel="noopener"><i class="fab fa-facebook fa-lg" aria-hidden="true"></i></a></li>
-  <li><a class="icon" href="https://twitter.com/share?url=https://bitzhangmo.github.io/2019/08/07/Lua/Lua%E4%B8%AD%E7%9A%84%E5%9E%83%E5%9C%BE%E5%9B%9E%E6%94%B6%E6%9C%BA%E5%88%B6/&text=Lua中的垃圾回收机制" target="_blank" rel="noopener"><i class="fab fa-twitter fa-lg" aria-hidden="true"></i></a></li>
-  <li><a class="icon" href="http://www.linkedin.com/shareArticle?url=https://bitzhangmo.github.io/2019/08/07/Lua/Lua%E4%B8%AD%E7%9A%84%E5%9E%83%E5%9C%BE%E5%9B%9E%E6%94%B6%E6%9C%BA%E5%88%B6/&title=Lua中的垃圾回收机制" target="_blank" rel="noopener"><i class="fab fa-linkedin fa-lg" aria-hidden="true"></i></a></li>
-  <li><a class="icon" href="https://pinterest.com/pin/create/bookmarklet/?url=https://bitzhangmo.github.io/2019/08/07/Lua/Lua%E4%B8%AD%E7%9A%84%E5%9E%83%E5%9C%BE%E5%9B%9E%E6%94%B6%E6%9C%BA%E5%88%B6/&is_video=false&description=Lua中的垃圾回收机制" target="_blank" rel="noopener"><i class="fab fa-pinterest fa-lg" aria-hidden="true"></i></a></li>
-  <li><a class="icon" href="mailto:?subject=Lua中的垃圾回收机制&body=Check out this article: https://bitzhangmo.github.io/2019/08/07/Lua/Lua%E4%B8%AD%E7%9A%84%E5%9E%83%E5%9C%BE%E5%9B%9E%E6%94%B6%E6%9C%BA%E5%88%B6/"><i class="fas fa-envelope fa-lg" aria-hidden="true"></i></a></li>
-  <li><a class="icon" href="https://getpocket.com/save?url=https://bitzhangmo.github.io/2019/08/07/Lua/Lua%E4%B8%AD%E7%9A%84%E5%9E%83%E5%9C%BE%E5%9B%9E%E6%94%B6%E6%9C%BA%E5%88%B6/&title=Lua中的垃圾回收机制" target="_blank" rel="noopener"><i class="fab fa-get-pocket fa-lg" aria-hidden="true"></i></a></li>
-  <li><a class="icon" href="http://reddit.com/submit?url=https://bitzhangmo.github.io/2019/08/07/Lua/Lua%E4%B8%AD%E7%9A%84%E5%9E%83%E5%9C%BE%E5%9B%9E%E6%94%B6%E6%9C%BA%E5%88%B6/&title=Lua中的垃圾回收机制" target="_blank" rel="noopener"><i class="fab fa-reddit fa-lg" aria-hidden="true"></i></a></li>
-  <li><a class="icon" href="http://www.stumbleupon.com/submit?url=https://bitzhangmo.github.io/2019/08/07/Lua/Lua%E4%B8%AD%E7%9A%84%E5%9E%83%E5%9C%BE%E5%9B%9E%E6%94%B6%E6%9C%BA%E5%88%B6/&title=Lua中的垃圾回收机制" target="_blank" rel="noopener"><i class="fab fa-stumbleupon fa-lg" aria-hidden="true"></i></a></li>
-  <li><a class="icon" href="http://digg.com/submit?url=https://bitzhangmo.github.io/2019/08/07/Lua/Lua%E4%B8%AD%E7%9A%84%E5%9E%83%E5%9C%BE%E5%9B%9E%E6%94%B6%E6%9C%BA%E5%88%B6/&title=Lua中的垃圾回收机制" target="_blank" rel="noopener"><i class="fab fa-digg fa-lg" aria-hidden="true"></i></a></li>
-  <li><a class="icon" href="http://www.tumblr.com/share/link?url=https://bitzhangmo.github.io/2019/08/07/Lua/Lua%E4%B8%AD%E7%9A%84%E5%9E%83%E5%9C%BE%E5%9B%9E%E6%94%B6%E6%9C%BA%E5%88%B6/&name=Lua中的垃圾回收机制&description=&lt;p&gt;Lua中的垃圾回收机制：弱引用表，析构器和函数collectgarbage&lt;/p&gt;" target="_blank" rel="noopener"><i class="fab fa-tumblr fa-lg" aria-hidden="true"></i></a></li>
-  <li><a class="icon" href="https://news.ycombinator.com/submitlink?u=https://bitzhangmo.github.io/2019/08/07/Lua/Lua%E4%B8%AD%E7%9A%84%E5%9E%83%E5%9C%BE%E5%9B%9E%E6%94%B6%E6%9C%BA%E5%88%B6/&t=Lua中的垃圾回收机制" target="_blank" rel="noopener"><i class="fab fa-hacker-news fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="http://www.facebook.com/sharer.php?u=https://bitzhangmo.github.io/2019/08/07/Lua/Lua中的垃圾回收机制/"><i class="fab fa-facebook fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="https://twitter.com/share?url=https://bitzhangmo.github.io/2019/08/07/Lua/Lua中的垃圾回收机制/&text=Lua中的垃圾回收机制"><i class="fab fa-twitter fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="http://www.linkedin.com/shareArticle?url=https://bitzhangmo.github.io/2019/08/07/Lua/Lua中的垃圾回收机制/&title=Lua中的垃圾回收机制"><i class="fab fa-linkedin fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="https://pinterest.com/pin/create/bookmarklet/?url=https://bitzhangmo.github.io/2019/08/07/Lua/Lua中的垃圾回收机制/&is_video=false&description=Lua中的垃圾回收机制"><i class="fab fa-pinterest fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="mailto:?subject=Lua中的垃圾回收机制&body=Check out this article: https://bitzhangmo.github.io/2019/08/07/Lua/Lua中的垃圾回收机制/"><i class="fas fa-envelope fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="https://getpocket.com/save?url=https://bitzhangmo.github.io/2019/08/07/Lua/Lua中的垃圾回收机制/&title=Lua中的垃圾回收机制"><i class="fab fa-get-pocket fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="http://reddit.com/submit?url=https://bitzhangmo.github.io/2019/08/07/Lua/Lua中的垃圾回收机制/&title=Lua中的垃圾回收机制"><i class="fab fa-reddit fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="http://www.stumbleupon.com/submit?url=https://bitzhangmo.github.io/2019/08/07/Lua/Lua中的垃圾回收机制/&title=Lua中的垃圾回收机制"><i class="fab fa-stumbleupon fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="http://digg.com/submit?url=https://bitzhangmo.github.io/2019/08/07/Lua/Lua中的垃圾回收机制/&title=Lua中的垃圾回收机制"><i class="fab fa-digg fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="http://www.tumblr.com/share/link?url=https://bitzhangmo.github.io/2019/08/07/Lua/Lua中的垃圾回收机制/&name=Lua中的垃圾回收机制&description=&lt;p&gt;Lua中的垃圾回收机制：弱引用表，析构器和函数collectgarbage&lt;/p&gt;"><i class="fab fa-tumblr fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="https://news.ycombinator.com/submitlink?u=https://bitzhangmo.github.io/2019/08/07/Lua/Lua中的垃圾回收机制/&t=Lua中的垃圾回收机制"><i class="fab fa-hacker-news fa-lg" aria-hidden="true"></i></a></li>
 </ul>
 
     </div>
@@ -254,7 +254,7 @@
          
           <li><a href="/archives/">归档</a></li>
          
-          <li><a href="/projects_url">项目</a></li>
+          <li><a href="/search/">搜索</a></li>
         
       </ul>
     </nav>
@@ -302,5 +302,5 @@
 <!-- Disqus Comments -->
 
 
-</body>
+<script src="/live2dw/lib/L2Dwidget.min.js?bd2294fafea3389ee458f1d9be5a2157"></script><script>L2Dwidget.init({"pluginRootPath":"live2dw/","pluginJsPath":"lib/","pluginModelPath":"assets/","tagMode":false,"debug":false,"model":{"jsonPath":"/live2dw/assets/hijiki.model.json"},"display":{"position":"left","width":100,"height":200},"mobile":{"show":false},"log":false});</script></body>
 </html>

@@ -1,21 +1,23 @@
 <!DOCTYPE html>
 <html lang=zh>
-<head>
+<head><meta name="generator" content="Hexo 3.9.0">
     <!-- so meta -->
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="HandheldFriendly" content="True">
-    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1" />
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
     <meta name="description" content="Lua中的数据结构：数组、链表、队列等">
 <meta name="keywords" content="Lua">
 <meta property="og:type" content="article">
 <meta property="og:title" content="Lua程序设计（6）">
-<meta property="og:url" content="https:&#x2F;&#x2F;bitzhangmo.github.io&#x2F;2019&#x2F;08&#x2F;07&#x2F;Lua&#x2F;Lua%E7%A8%8B%E5%BA%8F%E8%AE%BE%E8%AE%A1%EF%BC%886%EF%BC%89&#x2F;index.html">
+<meta property="og:url" content="https://bitzhangmo.github.io/2019/08/07/Lua/Lua程序设计（6）/index.html">
 <meta property="og:site_name" content="zhangMo Blog">
 <meta property="og:description" content="Lua中的数据结构：数组、链表、队列等">
 <meta property="og:locale" content="zh-CN">
 <meta property="og:updated_time" content="2019-08-07T03:01:42.653Z">
 <meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="Lua程序设计（6）">
+<meta name="twitter:description" content="Lua中的数据结构：数组、链表、队列等">
     
     
         
@@ -63,7 +65,7 @@
          
           <li><a href="/archives/">归档</a></li>
          
-          <li><a href="/projects_url">项目</a></li>
+          <li><a href="/search/">搜索</a></li>
         
       </ul>
     </span>
@@ -71,10 +73,10 @@
     <span id="actions">
       <ul>
         
-        <li><a class="icon" href="/2019/08/07/Lua/Lua%E4%B8%AD%E7%9A%84%E5%9E%83%E5%9C%BE%E5%9B%9E%E6%94%B6%E6%9C%BA%E5%88%B6/"><i class="fas fa-chevron-left" aria-hidden="true" onmouseover="$('#i-prev').toggle();" onmouseout="$('#i-prev').toggle();"></i></a></li>
+        <li><a class="icon" href="/2019/08/07/Lua/Lua中的垃圾回收机制/"><i class="fas fa-chevron-left" aria-hidden="true" onmouseover="$('#i-prev').toggle();" onmouseout="$('#i-prev').toggle();"></i></a></li>
         
         
-        <li><a class="icon" href="/2019/08/06/Lua/Lua%E6%BA%90%E7%A0%81%E9%98%85%E8%AF%BB%EF%BC%9AC-API/"><i class="fas fa-chevron-right" aria-hidden="true" onmouseover="$('#i-next').toggle();" onmouseout="$('#i-next').toggle();"></i></a></li>
+        <li><a class="icon" href="/2019/08/06/Lua/Lua源码阅读：C-API/"><i class="fas fa-chevron-right" aria-hidden="true" onmouseover="$('#i-next').toggle();" onmouseout="$('#i-next').toggle();"></i></a></li>
         
         <li><a class="icon" href="#" onclick="$('html, body').animate({ scrollTop: 0 }, 'fast');"><i class="fas fa-chevron-up" aria-hidden="true" onmouseover="$('#i-top').toggle();" onmouseout="$('#i-top').toggle();"></i></a></li>
         <li><a class="icon" href="#"><i class="fas fa-share-alt" aria-hidden="true" onmouseover="$('#i-share').toggle();" onmouseout="$('#i-share').toggle();" onclick="$('#share').toggle();return false;"></i></a></li>
@@ -87,17 +89,17 @@
     <br/>
     <div id="share" style="display: none">
       <ul>
-  <li><a class="icon" href="http://www.facebook.com/sharer.php?u=https://bitzhangmo.github.io/2019/08/07/Lua/Lua%E7%A8%8B%E5%BA%8F%E8%AE%BE%E8%AE%A1%EF%BC%886%EF%BC%89/" target="_blank" rel="noopener"><i class="fab fa-facebook " aria-hidden="true"></i></a></li>
-  <li><a class="icon" href="https://twitter.com/share?url=https://bitzhangmo.github.io/2019/08/07/Lua/Lua%E7%A8%8B%E5%BA%8F%E8%AE%BE%E8%AE%A1%EF%BC%886%EF%BC%89/&text=Lua程序设计（6）" target="_blank" rel="noopener"><i class="fab fa-twitter " aria-hidden="true"></i></a></li>
-  <li><a class="icon" href="http://www.linkedin.com/shareArticle?url=https://bitzhangmo.github.io/2019/08/07/Lua/Lua%E7%A8%8B%E5%BA%8F%E8%AE%BE%E8%AE%A1%EF%BC%886%EF%BC%89/&title=Lua程序设计（6）" target="_blank" rel="noopener"><i class="fab fa-linkedin " aria-hidden="true"></i></a></li>
-  <li><a class="icon" href="https://pinterest.com/pin/create/bookmarklet/?url=https://bitzhangmo.github.io/2019/08/07/Lua/Lua%E7%A8%8B%E5%BA%8F%E8%AE%BE%E8%AE%A1%EF%BC%886%EF%BC%89/&is_video=false&description=Lua程序设计（6）" target="_blank" rel="noopener"><i class="fab fa-pinterest " aria-hidden="true"></i></a></li>
-  <li><a class="icon" href="mailto:?subject=Lua程序设计（6）&body=Check out this article: https://bitzhangmo.github.io/2019/08/07/Lua/Lua%E7%A8%8B%E5%BA%8F%E8%AE%BE%E8%AE%A1%EF%BC%886%EF%BC%89/"><i class="fas fa-envelope " aria-hidden="true"></i></a></li>
-  <li><a class="icon" href="https://getpocket.com/save?url=https://bitzhangmo.github.io/2019/08/07/Lua/Lua%E7%A8%8B%E5%BA%8F%E8%AE%BE%E8%AE%A1%EF%BC%886%EF%BC%89/&title=Lua程序设计（6）" target="_blank" rel="noopener"><i class="fab fa-get-pocket " aria-hidden="true"></i></a></li>
-  <li><a class="icon" href="http://reddit.com/submit?url=https://bitzhangmo.github.io/2019/08/07/Lua/Lua%E7%A8%8B%E5%BA%8F%E8%AE%BE%E8%AE%A1%EF%BC%886%EF%BC%89/&title=Lua程序设计（6）" target="_blank" rel="noopener"><i class="fab fa-reddit " aria-hidden="true"></i></a></li>
-  <li><a class="icon" href="http://www.stumbleupon.com/submit?url=https://bitzhangmo.github.io/2019/08/07/Lua/Lua%E7%A8%8B%E5%BA%8F%E8%AE%BE%E8%AE%A1%EF%BC%886%EF%BC%89/&title=Lua程序设计（6）" target="_blank" rel="noopener"><i class="fab fa-stumbleupon " aria-hidden="true"></i></a></li>
-  <li><a class="icon" href="http://digg.com/submit?url=https://bitzhangmo.github.io/2019/08/07/Lua/Lua%E7%A8%8B%E5%BA%8F%E8%AE%BE%E8%AE%A1%EF%BC%886%EF%BC%89/&title=Lua程序设计（6）" target="_blank" rel="noopener"><i class="fab fa-digg " aria-hidden="true"></i></a></li>
-  <li><a class="icon" href="http://www.tumblr.com/share/link?url=https://bitzhangmo.github.io/2019/08/07/Lua/Lua%E7%A8%8B%E5%BA%8F%E8%AE%BE%E8%AE%A1%EF%BC%886%EF%BC%89/&name=Lua程序设计（6）&description=&lt;p&gt;Lua中的数据结构：数组、链表、队列等&lt;/p&gt;" target="_blank" rel="noopener"><i class="fab fa-tumblr " aria-hidden="true"></i></a></li>
-  <li><a class="icon" href="https://news.ycombinator.com/submitlink?u=https://bitzhangmo.github.io/2019/08/07/Lua/Lua%E7%A8%8B%E5%BA%8F%E8%AE%BE%E8%AE%A1%EF%BC%886%EF%BC%89/&t=Lua程序设计（6）" target="_blank" rel="noopener"><i class="fab fa-hacker-news " aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="http://www.facebook.com/sharer.php?u=https://bitzhangmo.github.io/2019/08/07/Lua/Lua程序设计（6）/"><i class="fab fa-facebook " aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="https://twitter.com/share?url=https://bitzhangmo.github.io/2019/08/07/Lua/Lua程序设计（6）/&text=Lua程序设计（6）"><i class="fab fa-twitter " aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="http://www.linkedin.com/shareArticle?url=https://bitzhangmo.github.io/2019/08/07/Lua/Lua程序设计（6）/&title=Lua程序设计（6）"><i class="fab fa-linkedin " aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="https://pinterest.com/pin/create/bookmarklet/?url=https://bitzhangmo.github.io/2019/08/07/Lua/Lua程序设计（6）/&is_video=false&description=Lua程序设计（6）"><i class="fab fa-pinterest " aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="mailto:?subject=Lua程序设计（6）&body=Check out this article: https://bitzhangmo.github.io/2019/08/07/Lua/Lua程序设计（6）/"><i class="fas fa-envelope " aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="https://getpocket.com/save?url=https://bitzhangmo.github.io/2019/08/07/Lua/Lua程序设计（6）/&title=Lua程序设计（6）"><i class="fab fa-get-pocket " aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="http://reddit.com/submit?url=https://bitzhangmo.github.io/2019/08/07/Lua/Lua程序设计（6）/&title=Lua程序设计（6）"><i class="fab fa-reddit " aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="http://www.stumbleupon.com/submit?url=https://bitzhangmo.github.io/2019/08/07/Lua/Lua程序设计（6）/&title=Lua程序设计（6）"><i class="fab fa-stumbleupon " aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="http://digg.com/submit?url=https://bitzhangmo.github.io/2019/08/07/Lua/Lua程序设计（6）/&title=Lua程序设计（6）"><i class="fab fa-digg " aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="http://www.tumblr.com/share/link?url=https://bitzhangmo.github.io/2019/08/07/Lua/Lua程序设计（6）/&name=Lua程序设计（6）&description=&lt;p&gt;Lua中的数据结构：数组、链表、队列等&lt;/p&gt;"><i class="fab fa-tumblr " aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="https://news.ycombinator.com/submitlink?u=https://bitzhangmo.github.io/2019/08/07/Lua/Lua程序设计（6）/&t=Lua程序设计（6）"><i class="fab fa-hacker-news " aria-hidden="true"></i></a></li>
 </ul>
 
     </div>
@@ -135,14 +137,14 @@
       
     <div class="article-category">
         <i class="fas fa-archive"></i>
-        <a class="category-link" href="/categories/%E8%AF%BB%E4%B9%A6%E7%AC%94%E8%AE%B0/">读书笔记</a>
+        <a class="category-link" href="/categories/读书笔记/">读书笔记</a>
     </div>
 
 
       
     <div class="article-tag">
         <i class="fas fa-tag"></i>
-        <a class="tag-link" href="/tags/Lua/" rel="tag">Lua</a>
+        <a class="tag-link" href="/tags/Lua/">Lua</a>
     </div>
 
 
@@ -153,22 +155,18 @@
   <div class="content" itemprop="articleBody">
     <p>Lua中的数据结构：数组、链表、队列等</p>
 <a id="more"></a>
-
 <h3 id="数组："><a href="#数组：" class="headerlink" title="数组："></a>数组：</h3><p>在Lua语言中使用整数来索引表就可以实现数组，因此数组的大小不用非得是固定的，而是可以按需增长的。</p>
 <p>在Lua语言中一般以1作为数组的起始索引。</p>
 <h3 id="矩阵及多维数组："><a href="#矩阵及多维数组：" class="headerlink" title="矩阵及多维数组："></a>矩阵及多维数组：</h3><h4 id="使用一个不规则数组："><a href="#使用一个不规则数组：" class="headerlink" title="使用一个不规则数组："></a>使用一个不规则数组：</h4><p>即数组的数组，一个所有元素均是另一个表的表。</p>
 <p>这种矩阵在创建时必须显式的创建每一行，一方面更加具体，另一方面增加了更多的灵活性。</p>
 <h4 id="将两个索引合并为一个："><a href="#将两个索引合并为一个：" class="headerlink" title="将两个索引合并为一个："></a>将两个索引合并为一个：</h4><p>我们通过将第一个索引乘以一个合适的常量再加上第二个索引来实现这种效果，在这种方式下，我们可以使用以下的代码来创建一个全0元素的N*M矩阵：</p>
 <figure class="highlight lua"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">local</span> mt = &#123;&#125;</span><br><span class="line"><span class="keyword">for</span> i = <span class="number">1</span>,N <span class="keyword">do</span></span><br><span class="line">	<span class="keyword">local</span> aux = (i - <span class="number">1</span>) * M</span><br><span class="line">	<span class="keyword">for</span> j = <span class="number">1</span>,M <span class="keyword">do</span></span><br><span class="line">		mt[aux + j] = <span class="number">0</span></span><br><span class="line">	<span class="keyword">end</span></span><br><span class="line"><span class="keyword">end</span></span><br></pre></td></tr></table></figure>
-
 <h3 id="链表："><a href="#链表：" class="headerlink" title="链表："></a>链表：</h3><p>我们可以把每个节点用一个表来表示，链接则为一个包含指向其他表的引用的简单表字段：</p>
 <p>根结点：<code>list = nil</code></p>
 <p>在表头插入一个值为v的元素：</p>
 <figure class="highlight lua"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">list = &#123;<span class="built_in">next</span> = list,value = v&#125;</span><br></pre></td></tr></table></figure>
-
 <p>遍历链表：</p>
 <figure class="highlight lua"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">local</span> l = list</span><br><span class="line"><span class="keyword">while</span> l <span class="keyword">do</span></span><br><span class="line">	visit l.value</span><br><span class="line">	l = l.<span class="built_in">next</span></span><br><span class="line"><span class="keyword">end</span></span><br></pre></td></tr></table></figure>
-
 <h3 id="队列及双端队列："><a href="#队列及双端队列：" class="headerlink" title="队列及双端队列："></a>队列及双端队列：</h3><p>一种简单的方法是使用table标准库中的函数insert和remove，不过这种移动对于较大的结构来说开销很大。</p>
 <p>一种更高效的实现是使用两个索引，一个指向第一个元素，另一个指向最后一个元素，这样就可以以O(1)时间复杂度同时在首尾两端插入或删除元素了。</p>
 
@@ -190,7 +188,7 @@
          
           <li><a href="/archives/">归档</a></li>
          
-          <li><a href="/projects_url">项目</a></li>
+          <li><a href="/search/">搜索</a></li>
         
       </ul>
     </div>
@@ -201,17 +199,17 @@
 
     <div id="share-footer" style="display: none">
       <ul>
-  <li><a class="icon" href="http://www.facebook.com/sharer.php?u=https://bitzhangmo.github.io/2019/08/07/Lua/Lua%E7%A8%8B%E5%BA%8F%E8%AE%BE%E8%AE%A1%EF%BC%886%EF%BC%89/" target="_blank" rel="noopener"><i class="fab fa-facebook fa-lg" aria-hidden="true"></i></a></li>
-  <li><a class="icon" href="https://twitter.com/share?url=https://bitzhangmo.github.io/2019/08/07/Lua/Lua%E7%A8%8B%E5%BA%8F%E8%AE%BE%E8%AE%A1%EF%BC%886%EF%BC%89/&text=Lua程序设计（6）" target="_blank" rel="noopener"><i class="fab fa-twitter fa-lg" aria-hidden="true"></i></a></li>
-  <li><a class="icon" href="http://www.linkedin.com/shareArticle?url=https://bitzhangmo.github.io/2019/08/07/Lua/Lua%E7%A8%8B%E5%BA%8F%E8%AE%BE%E8%AE%A1%EF%BC%886%EF%BC%89/&title=Lua程序设计（6）" target="_blank" rel="noopener"><i class="fab fa-linkedin fa-lg" aria-hidden="true"></i></a></li>
-  <li><a class="icon" href="https://pinterest.com/pin/create/bookmarklet/?url=https://bitzhangmo.github.io/2019/08/07/Lua/Lua%E7%A8%8B%E5%BA%8F%E8%AE%BE%E8%AE%A1%EF%BC%886%EF%BC%89/&is_video=false&description=Lua程序设计（6）" target="_blank" rel="noopener"><i class="fab fa-pinterest fa-lg" aria-hidden="true"></i></a></li>
-  <li><a class="icon" href="mailto:?subject=Lua程序设计（6）&body=Check out this article: https://bitzhangmo.github.io/2019/08/07/Lua/Lua%E7%A8%8B%E5%BA%8F%E8%AE%BE%E8%AE%A1%EF%BC%886%EF%BC%89/"><i class="fas fa-envelope fa-lg" aria-hidden="true"></i></a></li>
-  <li><a class="icon" href="https://getpocket.com/save?url=https://bitzhangmo.github.io/2019/08/07/Lua/Lua%E7%A8%8B%E5%BA%8F%E8%AE%BE%E8%AE%A1%EF%BC%886%EF%BC%89/&title=Lua程序设计（6）" target="_blank" rel="noopener"><i class="fab fa-get-pocket fa-lg" aria-hidden="true"></i></a></li>
-  <li><a class="icon" href="http://reddit.com/submit?url=https://bitzhangmo.github.io/2019/08/07/Lua/Lua%E7%A8%8B%E5%BA%8F%E8%AE%BE%E8%AE%A1%EF%BC%886%EF%BC%89/&title=Lua程序设计（6）" target="_blank" rel="noopener"><i class="fab fa-reddit fa-lg" aria-hidden="true"></i></a></li>
-  <li><a class="icon" href="http://www.stumbleupon.com/submit?url=https://bitzhangmo.github.io/2019/08/07/Lua/Lua%E7%A8%8B%E5%BA%8F%E8%AE%BE%E8%AE%A1%EF%BC%886%EF%BC%89/&title=Lua程序设计（6）" target="_blank" rel="noopener"><i class="fab fa-stumbleupon fa-lg" aria-hidden="true"></i></a></li>
-  <li><a class="icon" href="http://digg.com/submit?url=https://bitzhangmo.github.io/2019/08/07/Lua/Lua%E7%A8%8B%E5%BA%8F%E8%AE%BE%E8%AE%A1%EF%BC%886%EF%BC%89/&title=Lua程序设计（6）" target="_blank" rel="noopener"><i class="fab fa-digg fa-lg" aria-hidden="true"></i></a></li>
-  <li><a class="icon" href="http://www.tumblr.com/share/link?url=https://bitzhangmo.github.io/2019/08/07/Lua/Lua%E7%A8%8B%E5%BA%8F%E8%AE%BE%E8%AE%A1%EF%BC%886%EF%BC%89/&name=Lua程序设计（6）&description=&lt;p&gt;Lua中的数据结构：数组、链表、队列等&lt;/p&gt;" target="_blank" rel="noopener"><i class="fab fa-tumblr fa-lg" aria-hidden="true"></i></a></li>
-  <li><a class="icon" href="https://news.ycombinator.com/submitlink?u=https://bitzhangmo.github.io/2019/08/07/Lua/Lua%E7%A8%8B%E5%BA%8F%E8%AE%BE%E8%AE%A1%EF%BC%886%EF%BC%89/&t=Lua程序设计（6）" target="_blank" rel="noopener"><i class="fab fa-hacker-news fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="http://www.facebook.com/sharer.php?u=https://bitzhangmo.github.io/2019/08/07/Lua/Lua程序设计（6）/"><i class="fab fa-facebook fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="https://twitter.com/share?url=https://bitzhangmo.github.io/2019/08/07/Lua/Lua程序设计（6）/&text=Lua程序设计（6）"><i class="fab fa-twitter fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="http://www.linkedin.com/shareArticle?url=https://bitzhangmo.github.io/2019/08/07/Lua/Lua程序设计（6）/&title=Lua程序设计（6）"><i class="fab fa-linkedin fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="https://pinterest.com/pin/create/bookmarklet/?url=https://bitzhangmo.github.io/2019/08/07/Lua/Lua程序设计（6）/&is_video=false&description=Lua程序设计（6）"><i class="fab fa-pinterest fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="mailto:?subject=Lua程序设计（6）&body=Check out this article: https://bitzhangmo.github.io/2019/08/07/Lua/Lua程序设计（6）/"><i class="fas fa-envelope fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="https://getpocket.com/save?url=https://bitzhangmo.github.io/2019/08/07/Lua/Lua程序设计（6）/&title=Lua程序设计（6）"><i class="fab fa-get-pocket fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="http://reddit.com/submit?url=https://bitzhangmo.github.io/2019/08/07/Lua/Lua程序设计（6）/&title=Lua程序设计（6）"><i class="fab fa-reddit fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="http://www.stumbleupon.com/submit?url=https://bitzhangmo.github.io/2019/08/07/Lua/Lua程序设计（6）/&title=Lua程序设计（6）"><i class="fab fa-stumbleupon fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="http://digg.com/submit?url=https://bitzhangmo.github.io/2019/08/07/Lua/Lua程序设计（6）/&title=Lua程序设计（6）"><i class="fab fa-digg fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="http://www.tumblr.com/share/link?url=https://bitzhangmo.github.io/2019/08/07/Lua/Lua程序设计（6）/&name=Lua程序设计（6）&description=&lt;p&gt;Lua中的数据结构：数组、链表、队列等&lt;/p&gt;"><i class="fab fa-tumblr fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="https://news.ycombinator.com/submitlink?u=https://bitzhangmo.github.io/2019/08/07/Lua/Lua程序设计（6）/&t=Lua程序设计（6）"><i class="fab fa-hacker-news fa-lg" aria-hidden="true"></i></a></li>
 </ul>
 
     </div>
@@ -241,7 +239,7 @@
          
           <li><a href="/archives/">归档</a></li>
          
-          <li><a href="/projects_url">项目</a></li>
+          <li><a href="/search/">搜索</a></li>
         
       </ul>
     </nav>
@@ -289,5 +287,5 @@
 <!-- Disqus Comments -->
 
 
-</body>
+<script src="/live2dw/lib/L2Dwidget.min.js?bd2294fafea3389ee458f1d9be5a2157"></script><script>L2Dwidget.init({"pluginRootPath":"live2dw/","pluginJsPath":"lib/","pluginModelPath":"assets/","tagMode":false,"debug":false,"model":{"jsonPath":"/live2dw/assets/hijiki.model.json"},"display":{"position":"left","width":100,"height":200},"mobile":{"show":false},"log":false});</script></body>
 </html>

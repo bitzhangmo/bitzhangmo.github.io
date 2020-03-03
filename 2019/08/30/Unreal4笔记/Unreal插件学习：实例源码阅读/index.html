@@ -1,25 +1,27 @@
 <!DOCTYPE html>
 <html lang=zh>
-<head>
+<head><meta name="generator" content="Hexo 3.9.0">
     <!-- so meta -->
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="HandheldFriendly" content="True">
-    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1" />
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
     <meta name="description" content="从阅读一个小规模的插件源码开始学习Unreal插件写作。">
 <meta name="keywords" content="Unreal Engine4,C++,插件">
 <meta property="og:type" content="article">
 <meta property="og:title" content="Unreal插件学习：实例源码阅读">
-<meta property="og:url" content="https:&#x2F;&#x2F;bitzhangmo.github.io&#x2F;2019&#x2F;08&#x2F;30&#x2F;Unreal4%E7%AC%94%E8%AE%B0&#x2F;Unreal%E6%8F%92%E4%BB%B6%E5%AD%A6%E4%B9%A0%EF%BC%9A%E5%AE%9E%E4%BE%8B%E6%BA%90%E7%A0%81%E9%98%85%E8%AF%BB&#x2F;index.html">
+<meta property="og:url" content="https://bitzhangmo.github.io/2019/08/30/Unreal4笔记/Unreal插件学习：实例源码阅读/index.html">
 <meta property="og:site_name" content="zhangMo Blog">
 <meta property="og:description" content="从阅读一个小规模的插件源码开始学习Unreal插件写作。">
 <meta property="og:locale" content="zh-CN">
-<meta property="og:image" content="https:&#x2F;&#x2F;i.loli.net&#x2F;2019&#x2F;08&#x2F;30&#x2F;35AM6XHZTr4jiv2.png">
-<meta property="og:image" content="https:&#x2F;&#x2F;i.loli.net&#x2F;2019&#x2F;09&#x2F;02&#x2F;FrEsioX7OA3ZCwQ.png">
-<meta property="og:image" content="https:&#x2F;&#x2F;i.loli.net&#x2F;2019&#x2F;09&#x2F;02&#x2F;3BxPVA14S5aC8Hk.png">
+<meta property="og:image" content="https://i.loli.net/2019/08/30/35AM6XHZTr4jiv2.png">
+<meta property="og:image" content="https://i.loli.net/2019/09/02/FrEsioX7OA3ZCwQ.png">
+<meta property="og:image" content="https://i.loli.net/2019/09/02/3BxPVA14S5aC8Hk.png">
 <meta property="og:updated_time" content="2019-09-02T13:05:50.637Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:image" content="https:&#x2F;&#x2F;i.loli.net&#x2F;2019&#x2F;08&#x2F;30&#x2F;35AM6XHZTr4jiv2.png">
+<meta name="twitter:title" content="Unreal插件学习：实例源码阅读">
+<meta name="twitter:description" content="从阅读一个小规模的插件源码开始学习Unreal插件写作。">
+<meta name="twitter:image" content="https://i.loli.net/2019/08/30/35AM6XHZTr4jiv2.png">
     
     
         
@@ -67,7 +69,7 @@
          
           <li><a href="/archives/">归档</a></li>
          
-          <li><a href="/projects_url">项目</a></li>
+          <li><a href="/search/">搜索</a></li>
         
       </ul>
     </span>
@@ -75,10 +77,10 @@
     <span id="actions">
       <ul>
         
-        <li><a class="icon" href="/2019/09/11/OpenGL%E7%AC%94%E8%AE%B0/Mac%E4%B8%8B%E9%85%8D%E7%BD%AEOpenGL%E7%8E%AF%E5%A2%83/"><i class="fas fa-chevron-left" aria-hidden="true" onmouseover="$('#i-prev').toggle();" onmouseout="$('#i-prev').toggle();"></i></a></li>
+        <li><a class="icon" href="/2019/09/11/OpenGL笔记/Mac下配置OpenGL环境/"><i class="fas fa-chevron-left" aria-hidden="true" onmouseover="$('#i-prev').toggle();" onmouseout="$('#i-prev').toggle();"></i></a></li>
         
         
-        <li><a class="icon" href="/2019/08/26/Lua/Lua%E6%BA%90%E7%A0%81%E9%98%85%E8%AF%BB%EF%BC%9A%E8%A1%A8%E6%93%8D%E4%BD%9C%E7%9A%84%E6%8C%87%E4%BB%A4/"><i class="fas fa-chevron-right" aria-hidden="true" onmouseover="$('#i-next').toggle();" onmouseout="$('#i-next').toggle();"></i></a></li>
+        <li><a class="icon" href="/2019/08/26/Lua/Lua源码阅读：表操作的指令/"><i class="fas fa-chevron-right" aria-hidden="true" onmouseover="$('#i-next').toggle();" onmouseout="$('#i-next').toggle();"></i></a></li>
         
         <li><a class="icon" href="#" onclick="$('html, body').animate({ scrollTop: 0 }, 'fast');"><i class="fas fa-chevron-up" aria-hidden="true" onmouseover="$('#i-top').toggle();" onmouseout="$('#i-top').toggle();"></i></a></li>
         <li><a class="icon" href="#"><i class="fas fa-share-alt" aria-hidden="true" onmouseover="$('#i-share').toggle();" onmouseout="$('#i-share').toggle();" onclick="$('#share').toggle();return false;"></i></a></li>
@@ -91,17 +93,17 @@
     <br/>
     <div id="share" style="display: none">
       <ul>
-  <li><a class="icon" href="http://www.facebook.com/sharer.php?u=https://bitzhangmo.github.io/2019/08/30/Unreal4%E7%AC%94%E8%AE%B0/Unreal%E6%8F%92%E4%BB%B6%E5%AD%A6%E4%B9%A0%EF%BC%9A%E5%AE%9E%E4%BE%8B%E6%BA%90%E7%A0%81%E9%98%85%E8%AF%BB/" target="_blank" rel="noopener"><i class="fab fa-facebook " aria-hidden="true"></i></a></li>
-  <li><a class="icon" href="https://twitter.com/share?url=https://bitzhangmo.github.io/2019/08/30/Unreal4%E7%AC%94%E8%AE%B0/Unreal%E6%8F%92%E4%BB%B6%E5%AD%A6%E4%B9%A0%EF%BC%9A%E5%AE%9E%E4%BE%8B%E6%BA%90%E7%A0%81%E9%98%85%E8%AF%BB/&text=Unreal插件学习：实例源码阅读" target="_blank" rel="noopener"><i class="fab fa-twitter " aria-hidden="true"></i></a></li>
-  <li><a class="icon" href="http://www.linkedin.com/shareArticle?url=https://bitzhangmo.github.io/2019/08/30/Unreal4%E7%AC%94%E8%AE%B0/Unreal%E6%8F%92%E4%BB%B6%E5%AD%A6%E4%B9%A0%EF%BC%9A%E5%AE%9E%E4%BE%8B%E6%BA%90%E7%A0%81%E9%98%85%E8%AF%BB/&title=Unreal插件学习：实例源码阅读" target="_blank" rel="noopener"><i class="fab fa-linkedin " aria-hidden="true"></i></a></li>
-  <li><a class="icon" href="https://pinterest.com/pin/create/bookmarklet/?url=https://bitzhangmo.github.io/2019/08/30/Unreal4%E7%AC%94%E8%AE%B0/Unreal%E6%8F%92%E4%BB%B6%E5%AD%A6%E4%B9%A0%EF%BC%9A%E5%AE%9E%E4%BE%8B%E6%BA%90%E7%A0%81%E9%98%85%E8%AF%BB/&is_video=false&description=Unreal插件学习：实例源码阅读" target="_blank" rel="noopener"><i class="fab fa-pinterest " aria-hidden="true"></i></a></li>
-  <li><a class="icon" href="mailto:?subject=Unreal插件学习：实例源码阅读&body=Check out this article: https://bitzhangmo.github.io/2019/08/30/Unreal4%E7%AC%94%E8%AE%B0/Unreal%E6%8F%92%E4%BB%B6%E5%AD%A6%E4%B9%A0%EF%BC%9A%E5%AE%9E%E4%BE%8B%E6%BA%90%E7%A0%81%E9%98%85%E8%AF%BB/"><i class="fas fa-envelope " aria-hidden="true"></i></a></li>
-  <li><a class="icon" href="https://getpocket.com/save?url=https://bitzhangmo.github.io/2019/08/30/Unreal4%E7%AC%94%E8%AE%B0/Unreal%E6%8F%92%E4%BB%B6%E5%AD%A6%E4%B9%A0%EF%BC%9A%E5%AE%9E%E4%BE%8B%E6%BA%90%E7%A0%81%E9%98%85%E8%AF%BB/&title=Unreal插件学习：实例源码阅读" target="_blank" rel="noopener"><i class="fab fa-get-pocket " aria-hidden="true"></i></a></li>
-  <li><a class="icon" href="http://reddit.com/submit?url=https://bitzhangmo.github.io/2019/08/30/Unreal4%E7%AC%94%E8%AE%B0/Unreal%E6%8F%92%E4%BB%B6%E5%AD%A6%E4%B9%A0%EF%BC%9A%E5%AE%9E%E4%BE%8B%E6%BA%90%E7%A0%81%E9%98%85%E8%AF%BB/&title=Unreal插件学习：实例源码阅读" target="_blank" rel="noopener"><i class="fab fa-reddit " aria-hidden="true"></i></a></li>
-  <li><a class="icon" href="http://www.stumbleupon.com/submit?url=https://bitzhangmo.github.io/2019/08/30/Unreal4%E7%AC%94%E8%AE%B0/Unreal%E6%8F%92%E4%BB%B6%E5%AD%A6%E4%B9%A0%EF%BC%9A%E5%AE%9E%E4%BE%8B%E6%BA%90%E7%A0%81%E9%98%85%E8%AF%BB/&title=Unreal插件学习：实例源码阅读" target="_blank" rel="noopener"><i class="fab fa-stumbleupon " aria-hidden="true"></i></a></li>
-  <li><a class="icon" href="http://digg.com/submit?url=https://bitzhangmo.github.io/2019/08/30/Unreal4%E7%AC%94%E8%AE%B0/Unreal%E6%8F%92%E4%BB%B6%E5%AD%A6%E4%B9%A0%EF%BC%9A%E5%AE%9E%E4%BE%8B%E6%BA%90%E7%A0%81%E9%98%85%E8%AF%BB/&title=Unreal插件学习：实例源码阅读" target="_blank" rel="noopener"><i class="fab fa-digg " aria-hidden="true"></i></a></li>
-  <li><a class="icon" href="http://www.tumblr.com/share/link?url=https://bitzhangmo.github.io/2019/08/30/Unreal4%E7%AC%94%E8%AE%B0/Unreal%E6%8F%92%E4%BB%B6%E5%AD%A6%E4%B9%A0%EF%BC%9A%E5%AE%9E%E4%BE%8B%E6%BA%90%E7%A0%81%E9%98%85%E8%AF%BB/&name=Unreal插件学习：实例源码阅读&description=&lt;p&gt;从阅读一个小规模的插件源码开始学习Unreal插件写作。&lt;/p&gt;" target="_blank" rel="noopener"><i class="fab fa-tumblr " aria-hidden="true"></i></a></li>
-  <li><a class="icon" href="https://news.ycombinator.com/submitlink?u=https://bitzhangmo.github.io/2019/08/30/Unreal4%E7%AC%94%E8%AE%B0/Unreal%E6%8F%92%E4%BB%B6%E5%AD%A6%E4%B9%A0%EF%BC%9A%E5%AE%9E%E4%BE%8B%E6%BA%90%E7%A0%81%E9%98%85%E8%AF%BB/&t=Unreal插件学习：实例源码阅读" target="_blank" rel="noopener"><i class="fab fa-hacker-news " aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="http://www.facebook.com/sharer.php?u=https://bitzhangmo.github.io/2019/08/30/Unreal4笔记/Unreal插件学习：实例源码阅读/"><i class="fab fa-facebook " aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="https://twitter.com/share?url=https://bitzhangmo.github.io/2019/08/30/Unreal4笔记/Unreal插件学习：实例源码阅读/&text=Unreal插件学习：实例源码阅读"><i class="fab fa-twitter " aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="http://www.linkedin.com/shareArticle?url=https://bitzhangmo.github.io/2019/08/30/Unreal4笔记/Unreal插件学习：实例源码阅读/&title=Unreal插件学习：实例源码阅读"><i class="fab fa-linkedin " aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="https://pinterest.com/pin/create/bookmarklet/?url=https://bitzhangmo.github.io/2019/08/30/Unreal4笔记/Unreal插件学习：实例源码阅读/&is_video=false&description=Unreal插件学习：实例源码阅读"><i class="fab fa-pinterest " aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="mailto:?subject=Unreal插件学习：实例源码阅读&body=Check out this article: https://bitzhangmo.github.io/2019/08/30/Unreal4笔记/Unreal插件学习：实例源码阅读/"><i class="fas fa-envelope " aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="https://getpocket.com/save?url=https://bitzhangmo.github.io/2019/08/30/Unreal4笔记/Unreal插件学习：实例源码阅读/&title=Unreal插件学习：实例源码阅读"><i class="fab fa-get-pocket " aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="http://reddit.com/submit?url=https://bitzhangmo.github.io/2019/08/30/Unreal4笔记/Unreal插件学习：实例源码阅读/&title=Unreal插件学习：实例源码阅读"><i class="fab fa-reddit " aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="http://www.stumbleupon.com/submit?url=https://bitzhangmo.github.io/2019/08/30/Unreal4笔记/Unreal插件学习：实例源码阅读/&title=Unreal插件学习：实例源码阅读"><i class="fab fa-stumbleupon " aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="http://digg.com/submit?url=https://bitzhangmo.github.io/2019/08/30/Unreal4笔记/Unreal插件学习：实例源码阅读/&title=Unreal插件学习：实例源码阅读"><i class="fab fa-digg " aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="http://www.tumblr.com/share/link?url=https://bitzhangmo.github.io/2019/08/30/Unreal4笔记/Unreal插件学习：实例源码阅读/&name=Unreal插件学习：实例源码阅读&description=&lt;p&gt;从阅读一个小规模的插件源码开始学习Unreal插件写作。&lt;/p&gt;"><i class="fab fa-tumblr " aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="https://news.ycombinator.com/submitlink?u=https://bitzhangmo.github.io/2019/08/30/Unreal4笔记/Unreal插件学习：实例源码阅读/&t=Unreal插件学习：实例源码阅读"><i class="fab fa-hacker-news " aria-hidden="true"></i></a></li>
 </ul>
 
     </div>
@@ -139,14 +141,14 @@
       
     <div class="article-category">
         <i class="fas fa-archive"></i>
-        <a class="category-link" href="/categories/%E6%BA%90%E7%A0%81%E9%98%85%E8%AF%BB/">源码阅读</a>
+        <a class="category-link" href="/categories/源码阅读/">源码阅读</a>
     </div>
 
 
       
     <div class="article-tag">
         <i class="fas fa-tag"></i>
-        <a class="tag-link" href="/tags/C/" rel="tag">C++</a>, <a class="tag-link" href="/tags/Unreal-Engine4/" rel="tag">Unreal Engine4</a>, <a class="tag-link" href="/tags/%E6%8F%92%E4%BB%B6/" rel="tag">插件</a>
+        <a class="tag-link" href="/tags/C/">C++</a>, <a class="tag-link" href="/tags/Unreal-Engine4/">Unreal Engine4</a>, <a class="tag-link" href="/tags/插件/">插件</a>
     </div>
 
 
@@ -157,11 +159,9 @@
   <div class="content" itemprop="articleBody">
     <p>从阅读一个小规模的插件源码开始学习Unreal插件写作。</p>
 <a id="more"></a>
-
 <h3 id="源码地址："><a href="#源码地址：" class="headerlink" title="源码地址："></a>源码地址：</h3><p><a href="https://github.com/ue4plugins/TextAsset" target="_blank" rel="noopener">TextAsset</a></p>
 <p>主要功能就是在Unreal编辑器中创建一个TextAsset格式的文本文件，并提供对这个文本文件中的内容进行反转的功能。</p>
 <h3 id="代码结构："><a href="#代码结构：" class="headerlink" title="代码结构："></a>代码结构：</h3><figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></td><td class="code"><pre><span class="line">TextAsset</span><br><span class="line">	|-Binaries</span><br><span class="line">	|-Docs</span><br><span class="line">	|-Intermediate</span><br><span class="line">	|-Resources</span><br><span class="line">	|-Source</span><br><span class="line">	| |-TextAsset</span><br><span class="line">	| | |-Private</span><br><span class="line">	| | |-Public</span><br><span class="line">  | |-TextAssetEditor</span><br><span class="line">  | | |-Private</span><br><span class="line">  | | | |-AssetTools</span><br><span class="line">  | | | |-Factories</span><br><span class="line">  | | | |-Shared</span><br><span class="line">  | | | |-Styles</span><br><span class="line">  | | | |-Toolkits</span><br><span class="line">  | | | |-Widgets</span><br><span class="line">  |-TextAsset.uplugin</span><br></pre></td></tr></table></figure>
-
 <p><img src="https://i.loli.net/2019/08/30/35AM6XHZTr4jiv2.png" alt="TextAsset.png"></p>
 <h4 id="描述符文件TextAsset-uplugin："><a href="#描述符文件TextAsset-uplugin：" class="headerlink" title="描述符文件TextAsset.uplugin："></a>描述符文件TextAsset.uplugin：</h4><p>前面的内容都是一些插件的基本属性，包括版本，引擎版本，开发者等等；最后一个Modules字段定义了两个模块：一个是<strong>运行时加载（Runtime）</strong>的TextAsset模块，一个是<strong>编辑器模块（Editor）</strong>TextAssetEditor。</p>
 <h4 id="TextAsset："><a href="#TextAsset：" class="headerlink" title="TextAsset："></a>TextAsset：</h4><ul>
@@ -212,7 +212,6 @@
 <li><p>STextAssetEditor.cpp</p>
 <p>这个类继承自SCompoundWidget，保存了编辑器的Slate格式：</p>
 <figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">void</span> STextAssetEditor::Construct(<span class="keyword">const</span> FArguments&amp; InArgs, UTextAsset* InTextAsset, <span class="keyword">const</span> TSharedRef&lt;ISlateStyle&gt;&amp; InStyle)</span><br><span class="line">&#123;</span><br><span class="line">	TextAsset = InTextAsset;</span><br><span class="line"></span><br><span class="line">	<span class="keyword">auto</span> Settings = GetDefault&lt;UTextAssetEditorSettings&gt;();</span><br><span class="line"></span><br><span class="line">	ChildSlot</span><br><span class="line">	[</span><br><span class="line">		SNew(SVerticalBox)</span><br><span class="line"></span><br><span class="line">		+ SVerticalBox::Slot()</span><br><span class="line">			.FillHeight(<span class="number">1.0f</span>)</span><br><span class="line">			[</span><br><span class="line">				SAssignNew(EditableTextBox, SMultiLineEditableTextBox)</span><br><span class="line">					.BackgroundColor((Settings != <span class="literal">nullptr</span>) ? Settings-&gt;BackgroundColor : FLinearColor::White)</span><br><span class="line">					.Font((Settings != <span class="literal">nullptr</span>) ? Settings-&gt;Font : FSlateFontInfo())</span><br><span class="line">					.ForegroundColor((Settings != <span class="literal">nullptr</span>) ? Settings-&gt;ForegroundColor : FLinearColor::Black)</span><br><span class="line">					.Margin((Settings != <span class="literal">nullptr</span>) ? Settings-&gt;Margin : <span class="number">4.0f</span>)</span><br><span class="line">					.OnTextChanged(<span class="keyword">this</span>, &amp;STextAssetEditor::HandleEditableTextBoxTextChanged)</span><br><span class="line">					.OnTextCommitted(<span class="keyword">this</span>, &amp;STextAssetEditor::HandleEditableTextBoxTextCommitted)</span><br><span class="line">					.Text(TextAsset-&gt;Text)</span><br><span class="line">				</span><br><span class="line">			]</span><br><span class="line">	];</span><br><span class="line"></span><br><span class="line">	FCoreUObjectDelegates::OnObjectPropertyChanged.AddSP(<span class="keyword">this</span>, &amp;STextAssetEditor::HandleTextAssetPropertyChanged);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
 <p>包括一系列设置，以及回调函数的注册等。</p>
 </li>
 </ul>
@@ -235,7 +234,7 @@
          
           <li><a href="/archives/">归档</a></li>
          
-          <li><a href="/projects_url">项目</a></li>
+          <li><a href="/search/">搜索</a></li>
         
       </ul>
     </div>
@@ -246,17 +245,17 @@
 
     <div id="share-footer" style="display: none">
       <ul>
-  <li><a class="icon" href="http://www.facebook.com/sharer.php?u=https://bitzhangmo.github.io/2019/08/30/Unreal4%E7%AC%94%E8%AE%B0/Unreal%E6%8F%92%E4%BB%B6%E5%AD%A6%E4%B9%A0%EF%BC%9A%E5%AE%9E%E4%BE%8B%E6%BA%90%E7%A0%81%E9%98%85%E8%AF%BB/" target="_blank" rel="noopener"><i class="fab fa-facebook fa-lg" aria-hidden="true"></i></a></li>
-  <li><a class="icon" href="https://twitter.com/share?url=https://bitzhangmo.github.io/2019/08/30/Unreal4%E7%AC%94%E8%AE%B0/Unreal%E6%8F%92%E4%BB%B6%E5%AD%A6%E4%B9%A0%EF%BC%9A%E5%AE%9E%E4%BE%8B%E6%BA%90%E7%A0%81%E9%98%85%E8%AF%BB/&text=Unreal插件学习：实例源码阅读" target="_blank" rel="noopener"><i class="fab fa-twitter fa-lg" aria-hidden="true"></i></a></li>
-  <li><a class="icon" href="http://www.linkedin.com/shareArticle?url=https://bitzhangmo.github.io/2019/08/30/Unreal4%E7%AC%94%E8%AE%B0/Unreal%E6%8F%92%E4%BB%B6%E5%AD%A6%E4%B9%A0%EF%BC%9A%E5%AE%9E%E4%BE%8B%E6%BA%90%E7%A0%81%E9%98%85%E8%AF%BB/&title=Unreal插件学习：实例源码阅读" target="_blank" rel="noopener"><i class="fab fa-linkedin fa-lg" aria-hidden="true"></i></a></li>
-  <li><a class="icon" href="https://pinterest.com/pin/create/bookmarklet/?url=https://bitzhangmo.github.io/2019/08/30/Unreal4%E7%AC%94%E8%AE%B0/Unreal%E6%8F%92%E4%BB%B6%E5%AD%A6%E4%B9%A0%EF%BC%9A%E5%AE%9E%E4%BE%8B%E6%BA%90%E7%A0%81%E9%98%85%E8%AF%BB/&is_video=false&description=Unreal插件学习：实例源码阅读" target="_blank" rel="noopener"><i class="fab fa-pinterest fa-lg" aria-hidden="true"></i></a></li>
-  <li><a class="icon" href="mailto:?subject=Unreal插件学习：实例源码阅读&body=Check out this article: https://bitzhangmo.github.io/2019/08/30/Unreal4%E7%AC%94%E8%AE%B0/Unreal%E6%8F%92%E4%BB%B6%E5%AD%A6%E4%B9%A0%EF%BC%9A%E5%AE%9E%E4%BE%8B%E6%BA%90%E7%A0%81%E9%98%85%E8%AF%BB/"><i class="fas fa-envelope fa-lg" aria-hidden="true"></i></a></li>
-  <li><a class="icon" href="https://getpocket.com/save?url=https://bitzhangmo.github.io/2019/08/30/Unreal4%E7%AC%94%E8%AE%B0/Unreal%E6%8F%92%E4%BB%B6%E5%AD%A6%E4%B9%A0%EF%BC%9A%E5%AE%9E%E4%BE%8B%E6%BA%90%E7%A0%81%E9%98%85%E8%AF%BB/&title=Unreal插件学习：实例源码阅读" target="_blank" rel="noopener"><i class="fab fa-get-pocket fa-lg" aria-hidden="true"></i></a></li>
-  <li><a class="icon" href="http://reddit.com/submit?url=https://bitzhangmo.github.io/2019/08/30/Unreal4%E7%AC%94%E8%AE%B0/Unreal%E6%8F%92%E4%BB%B6%E5%AD%A6%E4%B9%A0%EF%BC%9A%E5%AE%9E%E4%BE%8B%E6%BA%90%E7%A0%81%E9%98%85%E8%AF%BB/&title=Unreal插件学习：实例源码阅读" target="_blank" rel="noopener"><i class="fab fa-reddit fa-lg" aria-hidden="true"></i></a></li>
-  <li><a class="icon" href="http://www.stumbleupon.com/submit?url=https://bitzhangmo.github.io/2019/08/30/Unreal4%E7%AC%94%E8%AE%B0/Unreal%E6%8F%92%E4%BB%B6%E5%AD%A6%E4%B9%A0%EF%BC%9A%E5%AE%9E%E4%BE%8B%E6%BA%90%E7%A0%81%E9%98%85%E8%AF%BB/&title=Unreal插件学习：实例源码阅读" target="_blank" rel="noopener"><i class="fab fa-stumbleupon fa-lg" aria-hidden="true"></i></a></li>
-  <li><a class="icon" href="http://digg.com/submit?url=https://bitzhangmo.github.io/2019/08/30/Unreal4%E7%AC%94%E8%AE%B0/Unreal%E6%8F%92%E4%BB%B6%E5%AD%A6%E4%B9%A0%EF%BC%9A%E5%AE%9E%E4%BE%8B%E6%BA%90%E7%A0%81%E9%98%85%E8%AF%BB/&title=Unreal插件学习：实例源码阅读" target="_blank" rel="noopener"><i class="fab fa-digg fa-lg" aria-hidden="true"></i></a></li>
-  <li><a class="icon" href="http://www.tumblr.com/share/link?url=https://bitzhangmo.github.io/2019/08/30/Unreal4%E7%AC%94%E8%AE%B0/Unreal%E6%8F%92%E4%BB%B6%E5%AD%A6%E4%B9%A0%EF%BC%9A%E5%AE%9E%E4%BE%8B%E6%BA%90%E7%A0%81%E9%98%85%E8%AF%BB/&name=Unreal插件学习：实例源码阅读&description=&lt;p&gt;从阅读一个小规模的插件源码开始学习Unreal插件写作。&lt;/p&gt;" target="_blank" rel="noopener"><i class="fab fa-tumblr fa-lg" aria-hidden="true"></i></a></li>
-  <li><a class="icon" href="https://news.ycombinator.com/submitlink?u=https://bitzhangmo.github.io/2019/08/30/Unreal4%E7%AC%94%E8%AE%B0/Unreal%E6%8F%92%E4%BB%B6%E5%AD%A6%E4%B9%A0%EF%BC%9A%E5%AE%9E%E4%BE%8B%E6%BA%90%E7%A0%81%E9%98%85%E8%AF%BB/&t=Unreal插件学习：实例源码阅读" target="_blank" rel="noopener"><i class="fab fa-hacker-news fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="http://www.facebook.com/sharer.php?u=https://bitzhangmo.github.io/2019/08/30/Unreal4笔记/Unreal插件学习：实例源码阅读/"><i class="fab fa-facebook fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="https://twitter.com/share?url=https://bitzhangmo.github.io/2019/08/30/Unreal4笔记/Unreal插件学习：实例源码阅读/&text=Unreal插件学习：实例源码阅读"><i class="fab fa-twitter fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="http://www.linkedin.com/shareArticle?url=https://bitzhangmo.github.io/2019/08/30/Unreal4笔记/Unreal插件学习：实例源码阅读/&title=Unreal插件学习：实例源码阅读"><i class="fab fa-linkedin fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="https://pinterest.com/pin/create/bookmarklet/?url=https://bitzhangmo.github.io/2019/08/30/Unreal4笔记/Unreal插件学习：实例源码阅读/&is_video=false&description=Unreal插件学习：实例源码阅读"><i class="fab fa-pinterest fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="mailto:?subject=Unreal插件学习：实例源码阅读&body=Check out this article: https://bitzhangmo.github.io/2019/08/30/Unreal4笔记/Unreal插件学习：实例源码阅读/"><i class="fas fa-envelope fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="https://getpocket.com/save?url=https://bitzhangmo.github.io/2019/08/30/Unreal4笔记/Unreal插件学习：实例源码阅读/&title=Unreal插件学习：实例源码阅读"><i class="fab fa-get-pocket fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="http://reddit.com/submit?url=https://bitzhangmo.github.io/2019/08/30/Unreal4笔记/Unreal插件学习：实例源码阅读/&title=Unreal插件学习：实例源码阅读"><i class="fab fa-reddit fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="http://www.stumbleupon.com/submit?url=https://bitzhangmo.github.io/2019/08/30/Unreal4笔记/Unreal插件学习：实例源码阅读/&title=Unreal插件学习：实例源码阅读"><i class="fab fa-stumbleupon fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="http://digg.com/submit?url=https://bitzhangmo.github.io/2019/08/30/Unreal4笔记/Unreal插件学习：实例源码阅读/&title=Unreal插件学习：实例源码阅读"><i class="fab fa-digg fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="http://www.tumblr.com/share/link?url=https://bitzhangmo.github.io/2019/08/30/Unreal4笔记/Unreal插件学习：实例源码阅读/&name=Unreal插件学习：实例源码阅读&description=&lt;p&gt;从阅读一个小规模的插件源码开始学习Unreal插件写作。&lt;/p&gt;"><i class="fab fa-tumblr fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="https://news.ycombinator.com/submitlink?u=https://bitzhangmo.github.io/2019/08/30/Unreal4笔记/Unreal插件学习：实例源码阅读/&t=Unreal插件学习：实例源码阅读"><i class="fab fa-hacker-news fa-lg" aria-hidden="true"></i></a></li>
 </ul>
 
     </div>
@@ -286,7 +285,7 @@
          
           <li><a href="/archives/">归档</a></li>
          
-          <li><a href="/projects_url">项目</a></li>
+          <li><a href="/search/">搜索</a></li>
         
       </ul>
     </nav>
@@ -334,5 +333,5 @@
 <!-- Disqus Comments -->
 
 
-</body>
+<script src="/live2dw/lib/L2Dwidget.min.js?bd2294fafea3389ee458f1d9be5a2157"></script><script>L2Dwidget.init({"pluginRootPath":"live2dw/","pluginJsPath":"lib/","pluginModelPath":"assets/","tagMode":false,"debug":false,"model":{"jsonPath":"/live2dw/assets/hijiki.model.json"},"display":{"position":"left","width":100,"height":200},"mobile":{"show":false},"log":false});</script></body>
 </html>

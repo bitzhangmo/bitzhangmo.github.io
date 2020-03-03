@@ -1,21 +1,23 @@
 <!DOCTYPE html>
 <html lang=zh>
-<head>
+<head><meta name="generator" content="Hexo 3.9.0">
     <!-- so meta -->
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="HandheldFriendly" content="True">
-    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1" />
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
     <meta name="description" content="Unity 3D中的内存管理">
 <meta name="keywords" content="Unity">
 <meta property="og:type" content="article">
 <meta property="og:title" content="[转] Unity 3D中的内存管理">
-<meta property="og:url" content="https:&#x2F;&#x2F;bitzhangmo.github.io&#x2F;2019&#x2F;03&#x2F;26&#x2F;Unity%E7%AC%94%E8%AE%B0&#x2F;%E8%BD%AC-Unity-3D%E4%B8%AD%E7%9A%84%E5%86%85%E5%AD%98%E7%AE%A1%E7%90%86&#x2F;index.html">
+<meta property="og:url" content="https://bitzhangmo.github.io/2019/03/26/Unity笔记/转-Unity-3D中的内存管理/index.html">
 <meta property="og:site_name" content="zhangMo Blog">
 <meta property="og:description" content="Unity 3D中的内存管理">
 <meta property="og:locale" content="zh-CN">
 <meta property="og:updated_time" content="2019-04-10T08:00:47.169Z">
 <meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="[转] Unity 3D中的内存管理">
+<meta name="twitter:description" content="Unity 3D中的内存管理">
     
     
         
@@ -63,7 +65,7 @@
          
           <li><a href="/archives/">归档</a></li>
          
-          <li><a href="/projects_url">项目</a></li>
+          <li><a href="/search/">搜索</a></li>
         
       </ul>
     </span>
@@ -71,10 +73,10 @@
     <span id="actions">
       <ul>
         
-        <li><a class="icon" href="/2019/04/01/%E6%B8%B8%E6%88%8FAI/%E6%B8%B8%E6%88%8FAI-%E7%8A%B6%E6%80%81%E6%9C%BA/"><i class="fas fa-chevron-left" aria-hidden="true" onmouseover="$('#i-prev').toggle();" onmouseout="$('#i-prev').toggle();"></i></a></li>
+        <li><a class="icon" href="/2019/04/01/游戏AI/游戏AI-状态机/"><i class="fas fa-chevron-left" aria-hidden="true" onmouseover="$('#i-prev').toggle();" onmouseout="$('#i-prev').toggle();"></i></a></li>
         
         
-        <li><a class="icon" href="/2019/03/26/%E6%B8%B8%E6%88%8F%E5%BC%95%E6%93%8E/%E6%B8%B8%E6%88%8F%E5%BC%95%E6%93%8E%E6%9E%B6%E6%9E%84-%E7%AC%AC%E5%8D%81%E7%AB%A0%EF%BC%9A%E6%B8%B2%E6%9F%93%E5%BC%95%E6%93%8E/"><i class="fas fa-chevron-right" aria-hidden="true" onmouseover="$('#i-next').toggle();" onmouseout="$('#i-next').toggle();"></i></a></li>
+        <li><a class="icon" href="/2019/03/26/游戏引擎/游戏引擎架构-第十章：渲染引擎/"><i class="fas fa-chevron-right" aria-hidden="true" onmouseover="$('#i-next').toggle();" onmouseout="$('#i-next').toggle();"></i></a></li>
         
         <li><a class="icon" href="#" onclick="$('html, body').animate({ scrollTop: 0 }, 'fast');"><i class="fas fa-chevron-up" aria-hidden="true" onmouseover="$('#i-top').toggle();" onmouseout="$('#i-top').toggle();"></i></a></li>
         <li><a class="icon" href="#"><i class="fas fa-share-alt" aria-hidden="true" onmouseover="$('#i-share').toggle();" onmouseout="$('#i-share').toggle();" onclick="$('#share').toggle();return false;"></i></a></li>
@@ -87,17 +89,17 @@
     <br/>
     <div id="share" style="display: none">
       <ul>
-  <li><a class="icon" href="http://www.facebook.com/sharer.php?u=https://bitzhangmo.github.io/2019/03/26/Unity%E7%AC%94%E8%AE%B0/%E8%BD%AC-Unity-3D%E4%B8%AD%E7%9A%84%E5%86%85%E5%AD%98%E7%AE%A1%E7%90%86/" target="_blank" rel="noopener"><i class="fab fa-facebook " aria-hidden="true"></i></a></li>
-  <li><a class="icon" href="https://twitter.com/share?url=https://bitzhangmo.github.io/2019/03/26/Unity%E7%AC%94%E8%AE%B0/%E8%BD%AC-Unity-3D%E4%B8%AD%E7%9A%84%E5%86%85%E5%AD%98%E7%AE%A1%E7%90%86/&text=[转] Unity 3D中的内存管理" target="_blank" rel="noopener"><i class="fab fa-twitter " aria-hidden="true"></i></a></li>
-  <li><a class="icon" href="http://www.linkedin.com/shareArticle?url=https://bitzhangmo.github.io/2019/03/26/Unity%E7%AC%94%E8%AE%B0/%E8%BD%AC-Unity-3D%E4%B8%AD%E7%9A%84%E5%86%85%E5%AD%98%E7%AE%A1%E7%90%86/&title=[转] Unity 3D中的内存管理" target="_blank" rel="noopener"><i class="fab fa-linkedin " aria-hidden="true"></i></a></li>
-  <li><a class="icon" href="https://pinterest.com/pin/create/bookmarklet/?url=https://bitzhangmo.github.io/2019/03/26/Unity%E7%AC%94%E8%AE%B0/%E8%BD%AC-Unity-3D%E4%B8%AD%E7%9A%84%E5%86%85%E5%AD%98%E7%AE%A1%E7%90%86/&is_video=false&description=[转] Unity 3D中的内存管理" target="_blank" rel="noopener"><i class="fab fa-pinterest " aria-hidden="true"></i></a></li>
-  <li><a class="icon" href="mailto:?subject=[转] Unity 3D中的内存管理&body=Check out this article: https://bitzhangmo.github.io/2019/03/26/Unity%E7%AC%94%E8%AE%B0/%E8%BD%AC-Unity-3D%E4%B8%AD%E7%9A%84%E5%86%85%E5%AD%98%E7%AE%A1%E7%90%86/"><i class="fas fa-envelope " aria-hidden="true"></i></a></li>
-  <li><a class="icon" href="https://getpocket.com/save?url=https://bitzhangmo.github.io/2019/03/26/Unity%E7%AC%94%E8%AE%B0/%E8%BD%AC-Unity-3D%E4%B8%AD%E7%9A%84%E5%86%85%E5%AD%98%E7%AE%A1%E7%90%86/&title=[转] Unity 3D中的内存管理" target="_blank" rel="noopener"><i class="fab fa-get-pocket " aria-hidden="true"></i></a></li>
-  <li><a class="icon" href="http://reddit.com/submit?url=https://bitzhangmo.github.io/2019/03/26/Unity%E7%AC%94%E8%AE%B0/%E8%BD%AC-Unity-3D%E4%B8%AD%E7%9A%84%E5%86%85%E5%AD%98%E7%AE%A1%E7%90%86/&title=[转] Unity 3D中的内存管理" target="_blank" rel="noopener"><i class="fab fa-reddit " aria-hidden="true"></i></a></li>
-  <li><a class="icon" href="http://www.stumbleupon.com/submit?url=https://bitzhangmo.github.io/2019/03/26/Unity%E7%AC%94%E8%AE%B0/%E8%BD%AC-Unity-3D%E4%B8%AD%E7%9A%84%E5%86%85%E5%AD%98%E7%AE%A1%E7%90%86/&title=[转] Unity 3D中的内存管理" target="_blank" rel="noopener"><i class="fab fa-stumbleupon " aria-hidden="true"></i></a></li>
-  <li><a class="icon" href="http://digg.com/submit?url=https://bitzhangmo.github.io/2019/03/26/Unity%E7%AC%94%E8%AE%B0/%E8%BD%AC-Unity-3D%E4%B8%AD%E7%9A%84%E5%86%85%E5%AD%98%E7%AE%A1%E7%90%86/&title=[转] Unity 3D中的内存管理" target="_blank" rel="noopener"><i class="fab fa-digg " aria-hidden="true"></i></a></li>
-  <li><a class="icon" href="http://www.tumblr.com/share/link?url=https://bitzhangmo.github.io/2019/03/26/Unity%E7%AC%94%E8%AE%B0/%E8%BD%AC-Unity-3D%E4%B8%AD%E7%9A%84%E5%86%85%E5%AD%98%E7%AE%A1%E7%90%86/&name=[转] Unity 3D中的内存管理&description=&lt;p&gt;Unity 3D中的内存管理&lt;/p&gt;" target="_blank" rel="noopener"><i class="fab fa-tumblr " aria-hidden="true"></i></a></li>
-  <li><a class="icon" href="https://news.ycombinator.com/submitlink?u=https://bitzhangmo.github.io/2019/03/26/Unity%E7%AC%94%E8%AE%B0/%E8%BD%AC-Unity-3D%E4%B8%AD%E7%9A%84%E5%86%85%E5%AD%98%E7%AE%A1%E7%90%86/&t=[转] Unity 3D中的内存管理" target="_blank" rel="noopener"><i class="fab fa-hacker-news " aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="http://www.facebook.com/sharer.php?u=https://bitzhangmo.github.io/2019/03/26/Unity笔记/转-Unity-3D中的内存管理/"><i class="fab fa-facebook " aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="https://twitter.com/share?url=https://bitzhangmo.github.io/2019/03/26/Unity笔记/转-Unity-3D中的内存管理/&text=[转] Unity 3D中的内存管理"><i class="fab fa-twitter " aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="http://www.linkedin.com/shareArticle?url=https://bitzhangmo.github.io/2019/03/26/Unity笔记/转-Unity-3D中的内存管理/&title=[转] Unity 3D中的内存管理"><i class="fab fa-linkedin " aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="https://pinterest.com/pin/create/bookmarklet/?url=https://bitzhangmo.github.io/2019/03/26/Unity笔记/转-Unity-3D中的内存管理/&is_video=false&description=[转] Unity 3D中的内存管理"><i class="fab fa-pinterest " aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="mailto:?subject=[转] Unity 3D中的内存管理&body=Check out this article: https://bitzhangmo.github.io/2019/03/26/Unity笔记/转-Unity-3D中的内存管理/"><i class="fas fa-envelope " aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="https://getpocket.com/save?url=https://bitzhangmo.github.io/2019/03/26/Unity笔记/转-Unity-3D中的内存管理/&title=[转] Unity 3D中的内存管理"><i class="fab fa-get-pocket " aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="http://reddit.com/submit?url=https://bitzhangmo.github.io/2019/03/26/Unity笔记/转-Unity-3D中的内存管理/&title=[转] Unity 3D中的内存管理"><i class="fab fa-reddit " aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="http://www.stumbleupon.com/submit?url=https://bitzhangmo.github.io/2019/03/26/Unity笔记/转-Unity-3D中的内存管理/&title=[转] Unity 3D中的内存管理"><i class="fab fa-stumbleupon " aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="http://digg.com/submit?url=https://bitzhangmo.github.io/2019/03/26/Unity笔记/转-Unity-3D中的内存管理/&title=[转] Unity 3D中的内存管理"><i class="fab fa-digg " aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="http://www.tumblr.com/share/link?url=https://bitzhangmo.github.io/2019/03/26/Unity笔记/转-Unity-3D中的内存管理/&name=[转] Unity 3D中的内存管理&description=&lt;p&gt;Unity 3D中的内存管理&lt;/p&gt;"><i class="fab fa-tumblr " aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="https://news.ycombinator.com/submitlink?u=https://bitzhangmo.github.io/2019/03/26/Unity笔记/转-Unity-3D中的内存管理/&t=[转] Unity 3D中的内存管理"><i class="fab fa-hacker-news " aria-hidden="true"></i></a></li>
 </ul>
 
     </div>
@@ -135,14 +137,14 @@
       
     <div class="article-category">
         <i class="fas fa-archive"></i>
-        <a class="category-link" href="/categories/%E8%BD%AC%E8%BD%BD/">转载</a>
+        <a class="category-link" href="/categories/转载/">转载</a>
     </div>
 
 
       
     <div class="article-tag">
         <i class="fas fa-tag"></i>
-        <a class="tag-link" href="/tags/Unity/" rel="tag">Unity</a>
+        <a class="tag-link" href="/tags/Unity/">Unity</a>
     </div>
 
 
@@ -153,7 +155,6 @@
   <div class="content" itemprop="articleBody">
     <p>Unity 3D中的内存管理</p>
 <a id="more"></a>
-
 <p>本文欢迎转载，但烦请保留此行出处信息：<a href="http://www.onevcat.com/2012/11/memory-in-unity3d/" target="_blank" rel="noopener">http://www.onevcat.com/2012/11/memory-in-unity3d/</a></p>
 <p>Unity3D在内存占用上一直被人诟病，特别是对于面向移动设备的游戏开发，动辄内存占用飙上一两百兆，导致内存资源耗尽，从而被系统强退造成极差的体验。类似这种情况并不少见，但是绝大部分都是可以避免的。虽然理论上Unity的内存管理系统应当为开发者分忧解难，让大家投身到更有意义的事情中去，但是对于Unity对内存的管理方式，官方文档中并没有太多的说明，基本需要依靠自己摸索。最近在接手的项目中存在严重的内存问题，在参照文档和Unity Answer众多猜测和证实之后，稍微总结了下Unity中的内存的分配和管理的基本方式，在此共享。</p>
 <p>虽然Unity标榜自己的内存使用全都是“Managed Memory”，但是事实上你必须正确地使用内存，以保证回收机制正确运行。如果没有做应当做的事情，那么场景和代码很有可能造成很多非必要内存的占用，这也是很多Unity开发者抱怨内存占用太大的原因。接下来我会介绍Unity使用内存的种类，以及相应每个种类的优化和使用的技巧。遵循使用原则，可以让非必要资源尽快得到释放，从而降低内存占用。</p>
@@ -197,7 +198,7 @@
          
           <li><a href="/archives/">归档</a></li>
          
-          <li><a href="/projects_url">项目</a></li>
+          <li><a href="/search/">搜索</a></li>
         
       </ul>
     </div>
@@ -208,17 +209,17 @@
 
     <div id="share-footer" style="display: none">
       <ul>
-  <li><a class="icon" href="http://www.facebook.com/sharer.php?u=https://bitzhangmo.github.io/2019/03/26/Unity%E7%AC%94%E8%AE%B0/%E8%BD%AC-Unity-3D%E4%B8%AD%E7%9A%84%E5%86%85%E5%AD%98%E7%AE%A1%E7%90%86/" target="_blank" rel="noopener"><i class="fab fa-facebook fa-lg" aria-hidden="true"></i></a></li>
-  <li><a class="icon" href="https://twitter.com/share?url=https://bitzhangmo.github.io/2019/03/26/Unity%E7%AC%94%E8%AE%B0/%E8%BD%AC-Unity-3D%E4%B8%AD%E7%9A%84%E5%86%85%E5%AD%98%E7%AE%A1%E7%90%86/&text=[转] Unity 3D中的内存管理" target="_blank" rel="noopener"><i class="fab fa-twitter fa-lg" aria-hidden="true"></i></a></li>
-  <li><a class="icon" href="http://www.linkedin.com/shareArticle?url=https://bitzhangmo.github.io/2019/03/26/Unity%E7%AC%94%E8%AE%B0/%E8%BD%AC-Unity-3D%E4%B8%AD%E7%9A%84%E5%86%85%E5%AD%98%E7%AE%A1%E7%90%86/&title=[转] Unity 3D中的内存管理" target="_blank" rel="noopener"><i class="fab fa-linkedin fa-lg" aria-hidden="true"></i></a></li>
-  <li><a class="icon" href="https://pinterest.com/pin/create/bookmarklet/?url=https://bitzhangmo.github.io/2019/03/26/Unity%E7%AC%94%E8%AE%B0/%E8%BD%AC-Unity-3D%E4%B8%AD%E7%9A%84%E5%86%85%E5%AD%98%E7%AE%A1%E7%90%86/&is_video=false&description=[转] Unity 3D中的内存管理" target="_blank" rel="noopener"><i class="fab fa-pinterest fa-lg" aria-hidden="true"></i></a></li>
-  <li><a class="icon" href="mailto:?subject=[转] Unity 3D中的内存管理&body=Check out this article: https://bitzhangmo.github.io/2019/03/26/Unity%E7%AC%94%E8%AE%B0/%E8%BD%AC-Unity-3D%E4%B8%AD%E7%9A%84%E5%86%85%E5%AD%98%E7%AE%A1%E7%90%86/"><i class="fas fa-envelope fa-lg" aria-hidden="true"></i></a></li>
-  <li><a class="icon" href="https://getpocket.com/save?url=https://bitzhangmo.github.io/2019/03/26/Unity%E7%AC%94%E8%AE%B0/%E8%BD%AC-Unity-3D%E4%B8%AD%E7%9A%84%E5%86%85%E5%AD%98%E7%AE%A1%E7%90%86/&title=[转] Unity 3D中的内存管理" target="_blank" rel="noopener"><i class="fab fa-get-pocket fa-lg" aria-hidden="true"></i></a></li>
-  <li><a class="icon" href="http://reddit.com/submit?url=https://bitzhangmo.github.io/2019/03/26/Unity%E7%AC%94%E8%AE%B0/%E8%BD%AC-Unity-3D%E4%B8%AD%E7%9A%84%E5%86%85%E5%AD%98%E7%AE%A1%E7%90%86/&title=[转] Unity 3D中的内存管理" target="_blank" rel="noopener"><i class="fab fa-reddit fa-lg" aria-hidden="true"></i></a></li>
-  <li><a class="icon" href="http://www.stumbleupon.com/submit?url=https://bitzhangmo.github.io/2019/03/26/Unity%E7%AC%94%E8%AE%B0/%E8%BD%AC-Unity-3D%E4%B8%AD%E7%9A%84%E5%86%85%E5%AD%98%E7%AE%A1%E7%90%86/&title=[转] Unity 3D中的内存管理" target="_blank" rel="noopener"><i class="fab fa-stumbleupon fa-lg" aria-hidden="true"></i></a></li>
-  <li><a class="icon" href="http://digg.com/submit?url=https://bitzhangmo.github.io/2019/03/26/Unity%E7%AC%94%E8%AE%B0/%E8%BD%AC-Unity-3D%E4%B8%AD%E7%9A%84%E5%86%85%E5%AD%98%E7%AE%A1%E7%90%86/&title=[转] Unity 3D中的内存管理" target="_blank" rel="noopener"><i class="fab fa-digg fa-lg" aria-hidden="true"></i></a></li>
-  <li><a class="icon" href="http://www.tumblr.com/share/link?url=https://bitzhangmo.github.io/2019/03/26/Unity%E7%AC%94%E8%AE%B0/%E8%BD%AC-Unity-3D%E4%B8%AD%E7%9A%84%E5%86%85%E5%AD%98%E7%AE%A1%E7%90%86/&name=[转] Unity 3D中的内存管理&description=&lt;p&gt;Unity 3D中的内存管理&lt;/p&gt;" target="_blank" rel="noopener"><i class="fab fa-tumblr fa-lg" aria-hidden="true"></i></a></li>
-  <li><a class="icon" href="https://news.ycombinator.com/submitlink?u=https://bitzhangmo.github.io/2019/03/26/Unity%E7%AC%94%E8%AE%B0/%E8%BD%AC-Unity-3D%E4%B8%AD%E7%9A%84%E5%86%85%E5%AD%98%E7%AE%A1%E7%90%86/&t=[转] Unity 3D中的内存管理" target="_blank" rel="noopener"><i class="fab fa-hacker-news fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="http://www.facebook.com/sharer.php?u=https://bitzhangmo.github.io/2019/03/26/Unity笔记/转-Unity-3D中的内存管理/"><i class="fab fa-facebook fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="https://twitter.com/share?url=https://bitzhangmo.github.io/2019/03/26/Unity笔记/转-Unity-3D中的内存管理/&text=[转] Unity 3D中的内存管理"><i class="fab fa-twitter fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="http://www.linkedin.com/shareArticle?url=https://bitzhangmo.github.io/2019/03/26/Unity笔记/转-Unity-3D中的内存管理/&title=[转] Unity 3D中的内存管理"><i class="fab fa-linkedin fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="https://pinterest.com/pin/create/bookmarklet/?url=https://bitzhangmo.github.io/2019/03/26/Unity笔记/转-Unity-3D中的内存管理/&is_video=false&description=[转] Unity 3D中的内存管理"><i class="fab fa-pinterest fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="mailto:?subject=[转] Unity 3D中的内存管理&body=Check out this article: https://bitzhangmo.github.io/2019/03/26/Unity笔记/转-Unity-3D中的内存管理/"><i class="fas fa-envelope fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="https://getpocket.com/save?url=https://bitzhangmo.github.io/2019/03/26/Unity笔记/转-Unity-3D中的内存管理/&title=[转] Unity 3D中的内存管理"><i class="fab fa-get-pocket fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="http://reddit.com/submit?url=https://bitzhangmo.github.io/2019/03/26/Unity笔记/转-Unity-3D中的内存管理/&title=[转] Unity 3D中的内存管理"><i class="fab fa-reddit fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="http://www.stumbleupon.com/submit?url=https://bitzhangmo.github.io/2019/03/26/Unity笔记/转-Unity-3D中的内存管理/&title=[转] Unity 3D中的内存管理"><i class="fab fa-stumbleupon fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="http://digg.com/submit?url=https://bitzhangmo.github.io/2019/03/26/Unity笔记/转-Unity-3D中的内存管理/&title=[转] Unity 3D中的内存管理"><i class="fab fa-digg fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="http://www.tumblr.com/share/link?url=https://bitzhangmo.github.io/2019/03/26/Unity笔记/转-Unity-3D中的内存管理/&name=[转] Unity 3D中的内存管理&description=&lt;p&gt;Unity 3D中的内存管理&lt;/p&gt;"><i class="fab fa-tumblr fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="https://news.ycombinator.com/submitlink?u=https://bitzhangmo.github.io/2019/03/26/Unity笔记/转-Unity-3D中的内存管理/&t=[转] Unity 3D中的内存管理"><i class="fab fa-hacker-news fa-lg" aria-hidden="true"></i></a></li>
 </ul>
 
     </div>
@@ -248,7 +249,7 @@
          
           <li><a href="/archives/">归档</a></li>
          
-          <li><a href="/projects_url">项目</a></li>
+          <li><a href="/search/">搜索</a></li>
         
       </ul>
     </nav>
@@ -296,5 +297,5 @@
 <!-- Disqus Comments -->
 
 
-</body>
+<script src="/live2dw/lib/L2Dwidget.min.js?bd2294fafea3389ee458f1d9be5a2157"></script><script>L2Dwidget.init({"pluginRootPath":"live2dw/","pluginJsPath":"lib/","pluginModelPath":"assets/","tagMode":false,"debug":false,"model":{"jsonPath":"/live2dw/assets/hijiki.model.json"},"display":{"position":"left","width":100,"height":200},"mobile":{"show":false},"log":false});</script></body>
 </html>

@@ -1,25 +1,27 @@
 <!DOCTYPE html>
 <html lang=zh>
-<head>
+<head><meta name="generator" content="Hexo 3.9.0">
     <!-- so meta -->
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="HandheldFriendly" content="True">
-    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1" />
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
     <meta name="description" content="有关Unity中的托管堆与垃圾回收。">
 <meta name="keywords" content="Unity">
 <meta property="og:type" content="article">
 <meta property="og:title" content="[Unity] 托管堆与垃圾回收">
-<meta property="og:url" content="https:&#x2F;&#x2F;bitzhangmo.github.io&#x2F;2019&#x2F;03&#x2F;25&#x2F;Unity%E7%AC%94%E8%AE%B0&#x2F;Unity-%E6%89%98%E7%AE%A1%E5%A0%86%E4%B8%8E%E5%9E%83%E5%9C%BE%E5%9B%9E%E6%94%B6&#x2F;index.html">
+<meta property="og:url" content="https://bitzhangmo.github.io/2019/03/25/Unity笔记/Unity-托管堆与垃圾回收/index.html">
 <meta property="og:site_name" content="zhangMo Blog">
 <meta property="og:description" content="有关Unity中的托管堆与垃圾回收。">
 <meta property="og:locale" content="zh-CN">
-<meta property="og:image" content="https:&#x2F;&#x2F;wx3.sinaimg.cn&#x2F;mw690&#x2F;007CSzD7gy1g1f2klldndj30iz03ct8m.jpg">
-<meta property="og:image" content="https:&#x2F;&#x2F;wx4.sinaimg.cn&#x2F;mw690&#x2F;007CSzD7gy1g1f2klnzgmj30j2039jrc.jpg">
-<meta property="og:image" content="https:&#x2F;&#x2F;wx3.sinaimg.cn&#x2F;mw690&#x2F;007CSzD7gy1g1f2klo5urj30j704oglm.jpg">
+<meta property="og:image" content="https://wx3.sinaimg.cn/mw690/007CSzD7gy1g1f2klldndj30iz03ct8m.jpg">
+<meta property="og:image" content="https://wx4.sinaimg.cn/mw690/007CSzD7gy1g1f2klnzgmj30j2039jrc.jpg">
+<meta property="og:image" content="https://wx3.sinaimg.cn/mw690/007CSzD7gy1g1f2klo5urj30j704oglm.jpg">
 <meta property="og:updated_time" content="2019-03-25T09:01:37.549Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:image" content="https:&#x2F;&#x2F;wx3.sinaimg.cn&#x2F;mw690&#x2F;007CSzD7gy1g1f2klldndj30iz03ct8m.jpg">
+<meta name="twitter:title" content="[Unity] 托管堆与垃圾回收">
+<meta name="twitter:description" content="有关Unity中的托管堆与垃圾回收。">
+<meta name="twitter:image" content="https://wx3.sinaimg.cn/mw690/007CSzD7gy1g1f2klldndj30iz03ct8m.jpg">
     
     
         
@@ -67,7 +69,7 @@
          
           <li><a href="/archives/">归档</a></li>
          
-          <li><a href="/projects_url">项目</a></li>
+          <li><a href="/search/">搜索</a></li>
         
       </ul>
     </span>
@@ -75,10 +77,10 @@
     <span id="actions">
       <ul>
         
-        <li><a class="icon" href="/2019/03/26/%E6%B8%B8%E6%88%8F%E5%BC%95%E6%93%8E/%E6%B8%B8%E6%88%8F%E5%BC%95%E6%93%8E%E6%9E%B6%E6%9E%84-%E7%AC%AC%E5%8D%81%E7%AB%A0%EF%BC%9A%E6%B8%B2%E6%9F%93%E5%BC%95%E6%93%8E/"><i class="fas fa-chevron-left" aria-hidden="true" onmouseover="$('#i-prev').toggle();" onmouseout="$('#i-prev').toggle();"></i></a></li>
+        <li><a class="icon" href="/2019/03/26/游戏引擎/游戏引擎架构-第十章：渲染引擎/"><i class="fas fa-chevron-left" aria-hidden="true" onmouseover="$('#i-prev').toggle();" onmouseout="$('#i-prev').toggle();"></i></a></li>
         
         
-        <li><a class="icon" href="/2019/03/25/Unity%E7%AC%94%E8%AE%B0/%E8%BD%AC-%E9%AA%A8%E9%AA%BC%E8%92%99%E7%9A%AE%E5%8A%A8%E7%94%BB-Skinned-Mesh-%E7%9A%84%E5%8E%9F%E7%90%86%E8%A7%A3%E6%9E%90/"><i class="fas fa-chevron-right" aria-hidden="true" onmouseover="$('#i-next').toggle();" onmouseout="$('#i-next').toggle();"></i></a></li>
+        <li><a class="icon" href="/2019/03/25/Unity笔记/转-骨骼蒙皮动画-Skinned-Mesh-的原理解析/"><i class="fas fa-chevron-right" aria-hidden="true" onmouseover="$('#i-next').toggle();" onmouseout="$('#i-next').toggle();"></i></a></li>
         
         <li><a class="icon" href="#" onclick="$('html, body').animate({ scrollTop: 0 }, 'fast');"><i class="fas fa-chevron-up" aria-hidden="true" onmouseover="$('#i-top').toggle();" onmouseout="$('#i-top').toggle();"></i></a></li>
         <li><a class="icon" href="#"><i class="fas fa-share-alt" aria-hidden="true" onmouseover="$('#i-share').toggle();" onmouseout="$('#i-share').toggle();" onclick="$('#share').toggle();return false;"></i></a></li>
@@ -91,17 +93,17 @@
     <br/>
     <div id="share" style="display: none">
       <ul>
-  <li><a class="icon" href="http://www.facebook.com/sharer.php?u=https://bitzhangmo.github.io/2019/03/25/Unity%E7%AC%94%E8%AE%B0/Unity-%E6%89%98%E7%AE%A1%E5%A0%86%E4%B8%8E%E5%9E%83%E5%9C%BE%E5%9B%9E%E6%94%B6/" target="_blank" rel="noopener"><i class="fab fa-facebook " aria-hidden="true"></i></a></li>
-  <li><a class="icon" href="https://twitter.com/share?url=https://bitzhangmo.github.io/2019/03/25/Unity%E7%AC%94%E8%AE%B0/Unity-%E6%89%98%E7%AE%A1%E5%A0%86%E4%B8%8E%E5%9E%83%E5%9C%BE%E5%9B%9E%E6%94%B6/&text=[Unity] 托管堆与垃圾回收" target="_blank" rel="noopener"><i class="fab fa-twitter " aria-hidden="true"></i></a></li>
-  <li><a class="icon" href="http://www.linkedin.com/shareArticle?url=https://bitzhangmo.github.io/2019/03/25/Unity%E7%AC%94%E8%AE%B0/Unity-%E6%89%98%E7%AE%A1%E5%A0%86%E4%B8%8E%E5%9E%83%E5%9C%BE%E5%9B%9E%E6%94%B6/&title=[Unity] 托管堆与垃圾回收" target="_blank" rel="noopener"><i class="fab fa-linkedin " aria-hidden="true"></i></a></li>
-  <li><a class="icon" href="https://pinterest.com/pin/create/bookmarklet/?url=https://bitzhangmo.github.io/2019/03/25/Unity%E7%AC%94%E8%AE%B0/Unity-%E6%89%98%E7%AE%A1%E5%A0%86%E4%B8%8E%E5%9E%83%E5%9C%BE%E5%9B%9E%E6%94%B6/&is_video=false&description=[Unity] 托管堆与垃圾回收" target="_blank" rel="noopener"><i class="fab fa-pinterest " aria-hidden="true"></i></a></li>
-  <li><a class="icon" href="mailto:?subject=[Unity] 托管堆与垃圾回收&body=Check out this article: https://bitzhangmo.github.io/2019/03/25/Unity%E7%AC%94%E8%AE%B0/Unity-%E6%89%98%E7%AE%A1%E5%A0%86%E4%B8%8E%E5%9E%83%E5%9C%BE%E5%9B%9E%E6%94%B6/"><i class="fas fa-envelope " aria-hidden="true"></i></a></li>
-  <li><a class="icon" href="https://getpocket.com/save?url=https://bitzhangmo.github.io/2019/03/25/Unity%E7%AC%94%E8%AE%B0/Unity-%E6%89%98%E7%AE%A1%E5%A0%86%E4%B8%8E%E5%9E%83%E5%9C%BE%E5%9B%9E%E6%94%B6/&title=[Unity] 托管堆与垃圾回收" target="_blank" rel="noopener"><i class="fab fa-get-pocket " aria-hidden="true"></i></a></li>
-  <li><a class="icon" href="http://reddit.com/submit?url=https://bitzhangmo.github.io/2019/03/25/Unity%E7%AC%94%E8%AE%B0/Unity-%E6%89%98%E7%AE%A1%E5%A0%86%E4%B8%8E%E5%9E%83%E5%9C%BE%E5%9B%9E%E6%94%B6/&title=[Unity] 托管堆与垃圾回收" target="_blank" rel="noopener"><i class="fab fa-reddit " aria-hidden="true"></i></a></li>
-  <li><a class="icon" href="http://www.stumbleupon.com/submit?url=https://bitzhangmo.github.io/2019/03/25/Unity%E7%AC%94%E8%AE%B0/Unity-%E6%89%98%E7%AE%A1%E5%A0%86%E4%B8%8E%E5%9E%83%E5%9C%BE%E5%9B%9E%E6%94%B6/&title=[Unity] 托管堆与垃圾回收" target="_blank" rel="noopener"><i class="fab fa-stumbleupon " aria-hidden="true"></i></a></li>
-  <li><a class="icon" href="http://digg.com/submit?url=https://bitzhangmo.github.io/2019/03/25/Unity%E7%AC%94%E8%AE%B0/Unity-%E6%89%98%E7%AE%A1%E5%A0%86%E4%B8%8E%E5%9E%83%E5%9C%BE%E5%9B%9E%E6%94%B6/&title=[Unity] 托管堆与垃圾回收" target="_blank" rel="noopener"><i class="fab fa-digg " aria-hidden="true"></i></a></li>
-  <li><a class="icon" href="http://www.tumblr.com/share/link?url=https://bitzhangmo.github.io/2019/03/25/Unity%E7%AC%94%E8%AE%B0/Unity-%E6%89%98%E7%AE%A1%E5%A0%86%E4%B8%8E%E5%9E%83%E5%9C%BE%E5%9B%9E%E6%94%B6/&name=[Unity] 托管堆与垃圾回收&description=&lt;p&gt;有关Unity中的托管堆与垃圾回收。&lt;/p&gt;" target="_blank" rel="noopener"><i class="fab fa-tumblr " aria-hidden="true"></i></a></li>
-  <li><a class="icon" href="https://news.ycombinator.com/submitlink?u=https://bitzhangmo.github.io/2019/03/25/Unity%E7%AC%94%E8%AE%B0/Unity-%E6%89%98%E7%AE%A1%E5%A0%86%E4%B8%8E%E5%9E%83%E5%9C%BE%E5%9B%9E%E6%94%B6/&t=[Unity] 托管堆与垃圾回收" target="_blank" rel="noopener"><i class="fab fa-hacker-news " aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="http://www.facebook.com/sharer.php?u=https://bitzhangmo.github.io/2019/03/25/Unity笔记/Unity-托管堆与垃圾回收/"><i class="fab fa-facebook " aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="https://twitter.com/share?url=https://bitzhangmo.github.io/2019/03/25/Unity笔记/Unity-托管堆与垃圾回收/&text=[Unity] 托管堆与垃圾回收"><i class="fab fa-twitter " aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="http://www.linkedin.com/shareArticle?url=https://bitzhangmo.github.io/2019/03/25/Unity笔记/Unity-托管堆与垃圾回收/&title=[Unity] 托管堆与垃圾回收"><i class="fab fa-linkedin " aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="https://pinterest.com/pin/create/bookmarklet/?url=https://bitzhangmo.github.io/2019/03/25/Unity笔记/Unity-托管堆与垃圾回收/&is_video=false&description=[Unity] 托管堆与垃圾回收"><i class="fab fa-pinterest " aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="mailto:?subject=[Unity] 托管堆与垃圾回收&body=Check out this article: https://bitzhangmo.github.io/2019/03/25/Unity笔记/Unity-托管堆与垃圾回收/"><i class="fas fa-envelope " aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="https://getpocket.com/save?url=https://bitzhangmo.github.io/2019/03/25/Unity笔记/Unity-托管堆与垃圾回收/&title=[Unity] 托管堆与垃圾回收"><i class="fab fa-get-pocket " aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="http://reddit.com/submit?url=https://bitzhangmo.github.io/2019/03/25/Unity笔记/Unity-托管堆与垃圾回收/&title=[Unity] 托管堆与垃圾回收"><i class="fab fa-reddit " aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="http://www.stumbleupon.com/submit?url=https://bitzhangmo.github.io/2019/03/25/Unity笔记/Unity-托管堆与垃圾回收/&title=[Unity] 托管堆与垃圾回收"><i class="fab fa-stumbleupon " aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="http://digg.com/submit?url=https://bitzhangmo.github.io/2019/03/25/Unity笔记/Unity-托管堆与垃圾回收/&title=[Unity] 托管堆与垃圾回收"><i class="fab fa-digg " aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="http://www.tumblr.com/share/link?url=https://bitzhangmo.github.io/2019/03/25/Unity笔记/Unity-托管堆与垃圾回收/&name=[Unity] 托管堆与垃圾回收&description=&lt;p&gt;有关Unity中的托管堆与垃圾回收。&lt;/p&gt;"><i class="fab fa-tumblr " aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="https://news.ycombinator.com/submitlink?u=https://bitzhangmo.github.io/2019/03/25/Unity笔记/Unity-托管堆与垃圾回收/&t=[Unity] 托管堆与垃圾回收"><i class="fab fa-hacker-news " aria-hidden="true"></i></a></li>
 </ul>
 
     </div>
@@ -139,14 +141,14 @@
       
     <div class="article-category">
         <i class="fas fa-archive"></i>
-        <a class="category-link" href="/categories/%E8%AF%BB%E4%B9%A6%E7%AC%94%E8%AE%B0/">读书笔记</a>
+        <a class="category-link" href="/categories/读书笔记/">读书笔记</a>
     </div>
 
 
       
     <div class="article-tag">
         <i class="fas fa-tag"></i>
-        <a class="tag-link" href="/tags/Unity/" rel="tag">Unity</a>
+        <a class="tag-link" href="/tags/Unity/">Unity</a>
     </div>
 
 
@@ -157,17 +159,16 @@
   <div class="content" itemprop="articleBody">
     <p>有关Unity中的托管堆与垃圾回收。</p>
 <a id="more"></a>
-
 <h2 id="托管堆与垃圾回收"><a href="#托管堆与垃圾回收" class="headerlink" title="托管堆与垃圾回收"></a>托管堆与垃圾回收</h2><h3 id="托管堆："><a href="#托管堆：" class="headerlink" title="托管堆："></a>托管堆：</h3><p>“托管堆”是一段内存，由项目脚本运行时（Mono或IL2CPP）的内存管理器自动管理。托管代码中创建的所有对象必须在托管堆上分配（<strong>注意：</strong>严格地说，必须在托管堆上分配所有非空引用类型对象和所有盒装值类型对象）。</p>
-<p><img src="https://wx3.sinaimg.cn/mw690/007CSzD7gy1g1f2klldndj30iz03ct8m.jpg" alt=""></p>
+<p><img src="https://wx3.sinaimg.cn/mw690/007CSzD7gy1g1f2klldndj30iz03ct8m.jpg" alt></p>
 <p>在上图中，白框表示分配给托管堆的内存量，其中的彩色框表示存储在托管堆内存空间中的数据值。当需要其他值时，将从托管堆中分配更多空间。</p>
 <p>垃圾收集器定期运行（<strong>注意：</strong>确切的时间与平台有关）。这会扫描堆上的所有对象，标记删除任何不再引用的对象。然后删除未引用的对象，释放内存。</p>
 <p>至关重要的是，Unity的垃圾收集 - 使用<a href="https://en.wikipedia.org/wiki/Boehm_garbage_collector" target="_blank" rel="noopener">Boehm GC算法</a> - 是非代数和非压缩的。“非世代”意味着GC在执行收集传递时必须扫描整个堆，因此其性能因堆扩展而降低。“非压缩”意味着内存中的对象不会被重新定位以便关闭对象之间的间隙。</p>
-<p><img src="https://wx4.sinaimg.cn/mw690/007CSzD7gy1g1f2klnzgmj30j2039jrc.jpg" alt=""></p>
+<p><img src="https://wx4.sinaimg.cn/mw690/007CSzD7gy1g1f2klnzgmj30j2039jrc.jpg" alt></p>
 <p>上图显示了内存碎片的示例。释放对象时，将释放其内存。但是，释放的空间也<strong>不会</strong>成为“空闲内存”一家独大池的一部分。释放对象两侧的对象可能仍在使用中。因此，释放的空间是存储器的其他部分之间的“间隙”（该间隙由图中的红色圆圈表示）。因此，新释放的空间仅可用于存储与释放的对象相同或更小的数据。</p>
 <p>分配对象时，请记住该对象必须始终占用内存中的连续空间块。</p>
 <p>这导致了内存碎片的核心问题：虽然堆中可用的总空间量可能很大，但是该空间中的一些或全部可能在分配的对象之间存在小的“间隙”。在这种情况下，即使可能有足够的总空间来容纳某个分配，托管堆也找不到足够大的连续内存块来适应分配。</p>
-<p><img src="https://wx3.sinaimg.cn/mw690/007CSzD7gy1g1f2klo5urj30j704oglm.jpg" alt=""></p>
+<p><img src="https://wx3.sinaimg.cn/mw690/007CSzD7gy1g1f2klo5urj30j704oglm.jpg" alt></p>
 <p>但是，如果分配了大对象并且没有足够的连续可用空间来容纳对象，则如上所述，Unity内存管理器执行两个操作。</p>
 <p>首先，如果还没有这样做，垃圾收集器就会运行。这会尝试释放足够的空间来完成分配请求。</p>
 <p>如果在GC运行后，仍然没有足够的连续空间来满足请求的内存量，则堆必须扩展。堆扩展的具体数量取决于平台; 但是，大多数Unity平台的大小都是托管堆的两倍。</p>
@@ -234,7 +235,7 @@
          
           <li><a href="/archives/">归档</a></li>
          
-          <li><a href="/projects_url">项目</a></li>
+          <li><a href="/search/">搜索</a></li>
         
       </ul>
     </div>
@@ -245,17 +246,17 @@
 
     <div id="share-footer" style="display: none">
       <ul>
-  <li><a class="icon" href="http://www.facebook.com/sharer.php?u=https://bitzhangmo.github.io/2019/03/25/Unity%E7%AC%94%E8%AE%B0/Unity-%E6%89%98%E7%AE%A1%E5%A0%86%E4%B8%8E%E5%9E%83%E5%9C%BE%E5%9B%9E%E6%94%B6/" target="_blank" rel="noopener"><i class="fab fa-facebook fa-lg" aria-hidden="true"></i></a></li>
-  <li><a class="icon" href="https://twitter.com/share?url=https://bitzhangmo.github.io/2019/03/25/Unity%E7%AC%94%E8%AE%B0/Unity-%E6%89%98%E7%AE%A1%E5%A0%86%E4%B8%8E%E5%9E%83%E5%9C%BE%E5%9B%9E%E6%94%B6/&text=[Unity] 托管堆与垃圾回收" target="_blank" rel="noopener"><i class="fab fa-twitter fa-lg" aria-hidden="true"></i></a></li>
-  <li><a class="icon" href="http://www.linkedin.com/shareArticle?url=https://bitzhangmo.github.io/2019/03/25/Unity%E7%AC%94%E8%AE%B0/Unity-%E6%89%98%E7%AE%A1%E5%A0%86%E4%B8%8E%E5%9E%83%E5%9C%BE%E5%9B%9E%E6%94%B6/&title=[Unity] 托管堆与垃圾回收" target="_blank" rel="noopener"><i class="fab fa-linkedin fa-lg" aria-hidden="true"></i></a></li>
-  <li><a class="icon" href="https://pinterest.com/pin/create/bookmarklet/?url=https://bitzhangmo.github.io/2019/03/25/Unity%E7%AC%94%E8%AE%B0/Unity-%E6%89%98%E7%AE%A1%E5%A0%86%E4%B8%8E%E5%9E%83%E5%9C%BE%E5%9B%9E%E6%94%B6/&is_video=false&description=[Unity] 托管堆与垃圾回收" target="_blank" rel="noopener"><i class="fab fa-pinterest fa-lg" aria-hidden="true"></i></a></li>
-  <li><a class="icon" href="mailto:?subject=[Unity] 托管堆与垃圾回收&body=Check out this article: https://bitzhangmo.github.io/2019/03/25/Unity%E7%AC%94%E8%AE%B0/Unity-%E6%89%98%E7%AE%A1%E5%A0%86%E4%B8%8E%E5%9E%83%E5%9C%BE%E5%9B%9E%E6%94%B6/"><i class="fas fa-envelope fa-lg" aria-hidden="true"></i></a></li>
-  <li><a class="icon" href="https://getpocket.com/save?url=https://bitzhangmo.github.io/2019/03/25/Unity%E7%AC%94%E8%AE%B0/Unity-%E6%89%98%E7%AE%A1%E5%A0%86%E4%B8%8E%E5%9E%83%E5%9C%BE%E5%9B%9E%E6%94%B6/&title=[Unity] 托管堆与垃圾回收" target="_blank" rel="noopener"><i class="fab fa-get-pocket fa-lg" aria-hidden="true"></i></a></li>
-  <li><a class="icon" href="http://reddit.com/submit?url=https://bitzhangmo.github.io/2019/03/25/Unity%E7%AC%94%E8%AE%B0/Unity-%E6%89%98%E7%AE%A1%E5%A0%86%E4%B8%8E%E5%9E%83%E5%9C%BE%E5%9B%9E%E6%94%B6/&title=[Unity] 托管堆与垃圾回收" target="_blank" rel="noopener"><i class="fab fa-reddit fa-lg" aria-hidden="true"></i></a></li>
-  <li><a class="icon" href="http://www.stumbleupon.com/submit?url=https://bitzhangmo.github.io/2019/03/25/Unity%E7%AC%94%E8%AE%B0/Unity-%E6%89%98%E7%AE%A1%E5%A0%86%E4%B8%8E%E5%9E%83%E5%9C%BE%E5%9B%9E%E6%94%B6/&title=[Unity] 托管堆与垃圾回收" target="_blank" rel="noopener"><i class="fab fa-stumbleupon fa-lg" aria-hidden="true"></i></a></li>
-  <li><a class="icon" href="http://digg.com/submit?url=https://bitzhangmo.github.io/2019/03/25/Unity%E7%AC%94%E8%AE%B0/Unity-%E6%89%98%E7%AE%A1%E5%A0%86%E4%B8%8E%E5%9E%83%E5%9C%BE%E5%9B%9E%E6%94%B6/&title=[Unity] 托管堆与垃圾回收" target="_blank" rel="noopener"><i class="fab fa-digg fa-lg" aria-hidden="true"></i></a></li>
-  <li><a class="icon" href="http://www.tumblr.com/share/link?url=https://bitzhangmo.github.io/2019/03/25/Unity%E7%AC%94%E8%AE%B0/Unity-%E6%89%98%E7%AE%A1%E5%A0%86%E4%B8%8E%E5%9E%83%E5%9C%BE%E5%9B%9E%E6%94%B6/&name=[Unity] 托管堆与垃圾回收&description=&lt;p&gt;有关Unity中的托管堆与垃圾回收。&lt;/p&gt;" target="_blank" rel="noopener"><i class="fab fa-tumblr fa-lg" aria-hidden="true"></i></a></li>
-  <li><a class="icon" href="https://news.ycombinator.com/submitlink?u=https://bitzhangmo.github.io/2019/03/25/Unity%E7%AC%94%E8%AE%B0/Unity-%E6%89%98%E7%AE%A1%E5%A0%86%E4%B8%8E%E5%9E%83%E5%9C%BE%E5%9B%9E%E6%94%B6/&t=[Unity] 托管堆与垃圾回收" target="_blank" rel="noopener"><i class="fab fa-hacker-news fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="http://www.facebook.com/sharer.php?u=https://bitzhangmo.github.io/2019/03/25/Unity笔记/Unity-托管堆与垃圾回收/"><i class="fab fa-facebook fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="https://twitter.com/share?url=https://bitzhangmo.github.io/2019/03/25/Unity笔记/Unity-托管堆与垃圾回收/&text=[Unity] 托管堆与垃圾回收"><i class="fab fa-twitter fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="http://www.linkedin.com/shareArticle?url=https://bitzhangmo.github.io/2019/03/25/Unity笔记/Unity-托管堆与垃圾回收/&title=[Unity] 托管堆与垃圾回收"><i class="fab fa-linkedin fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="https://pinterest.com/pin/create/bookmarklet/?url=https://bitzhangmo.github.io/2019/03/25/Unity笔记/Unity-托管堆与垃圾回收/&is_video=false&description=[Unity] 托管堆与垃圾回收"><i class="fab fa-pinterest fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="mailto:?subject=[Unity] 托管堆与垃圾回收&body=Check out this article: https://bitzhangmo.github.io/2019/03/25/Unity笔记/Unity-托管堆与垃圾回收/"><i class="fas fa-envelope fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="https://getpocket.com/save?url=https://bitzhangmo.github.io/2019/03/25/Unity笔记/Unity-托管堆与垃圾回收/&title=[Unity] 托管堆与垃圾回收"><i class="fab fa-get-pocket fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="http://reddit.com/submit?url=https://bitzhangmo.github.io/2019/03/25/Unity笔记/Unity-托管堆与垃圾回收/&title=[Unity] 托管堆与垃圾回收"><i class="fab fa-reddit fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="http://www.stumbleupon.com/submit?url=https://bitzhangmo.github.io/2019/03/25/Unity笔记/Unity-托管堆与垃圾回收/&title=[Unity] 托管堆与垃圾回收"><i class="fab fa-stumbleupon fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="http://digg.com/submit?url=https://bitzhangmo.github.io/2019/03/25/Unity笔记/Unity-托管堆与垃圾回收/&title=[Unity] 托管堆与垃圾回收"><i class="fab fa-digg fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="http://www.tumblr.com/share/link?url=https://bitzhangmo.github.io/2019/03/25/Unity笔记/Unity-托管堆与垃圾回收/&name=[Unity] 托管堆与垃圾回收&description=&lt;p&gt;有关Unity中的托管堆与垃圾回收。&lt;/p&gt;"><i class="fab fa-tumblr fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="https://news.ycombinator.com/submitlink?u=https://bitzhangmo.github.io/2019/03/25/Unity笔记/Unity-托管堆与垃圾回收/&t=[Unity] 托管堆与垃圾回收"><i class="fab fa-hacker-news fa-lg" aria-hidden="true"></i></a></li>
 </ul>
 
     </div>
@@ -285,7 +286,7 @@
          
           <li><a href="/archives/">归档</a></li>
          
-          <li><a href="/projects_url">项目</a></li>
+          <li><a href="/search/">搜索</a></li>
         
       </ul>
     </nav>
@@ -333,5 +334,5 @@
 <!-- Disqus Comments -->
 
 
-</body>
+<script src="/live2dw/lib/L2Dwidget.min.js?bd2294fafea3389ee458f1d9be5a2157"></script><script>L2Dwidget.init({"pluginRootPath":"live2dw/","pluginJsPath":"lib/","pluginModelPath":"assets/","tagMode":false,"debug":false,"model":{"jsonPath":"/live2dw/assets/hijiki.model.json"},"display":{"position":"left","width":100,"height":200},"mobile":{"show":false},"log":false});</script></body>
 </html>

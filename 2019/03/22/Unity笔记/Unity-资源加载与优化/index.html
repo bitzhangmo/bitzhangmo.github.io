@@ -1,23 +1,25 @@
 <!DOCTYPE html>
 <html lang=zh>
-<head>
+<head><meta name="generator" content="Hexo 3.9.0">
     <!-- so meta -->
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="HandheldFriendly" content="True">
-    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1" />
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
     <meta name="description" content="资源加载与优化：AssetBundle和优化工具。">
 <meta name="keywords" content="Unity,Unity3D 游戏开发">
 <meta property="og:type" content="article">
 <meta property="og:title" content="[Unity3D 游戏开发] 第十一章-资源加载与优化">
-<meta property="og:url" content="https:&#x2F;&#x2F;bitzhangmo.github.io&#x2F;2019&#x2F;03&#x2F;22&#x2F;Unity%E7%AC%94%E8%AE%B0&#x2F;Unity-%E8%B5%84%E6%BA%90%E5%8A%A0%E8%BD%BD%E4%B8%8E%E4%BC%98%E5%8C%96&#x2F;index.html">
+<meta property="og:url" content="https://bitzhangmo.github.io/2019/03/22/Unity笔记/Unity-资源加载与优化/index.html">
 <meta property="og:site_name" content="zhangMo Blog">
 <meta property="og:description" content="资源加载与优化：AssetBundle和优化工具。">
 <meta property="og:locale" content="zh-CN">
-<meta property="og:image" content="https:&#x2F;&#x2F;wx3.sinaimg.cn&#x2F;mw690&#x2F;007CSzD7ly1g275ufo57nj30d00mm41k.jpg">
+<meta property="og:image" content="https://wx3.sinaimg.cn/mw690/007CSzD7ly1g275ufo57nj30d00mm41k.jpg">
 <meta property="og:updated_time" content="2019-04-19T11:32:41.312Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:image" content="https:&#x2F;&#x2F;wx3.sinaimg.cn&#x2F;mw690&#x2F;007CSzD7ly1g275ufo57nj30d00mm41k.jpg">
+<meta name="twitter:title" content="[Unity3D 游戏开发] 第十一章-资源加载与优化">
+<meta name="twitter:description" content="资源加载与优化：AssetBundle和优化工具。">
+<meta name="twitter:image" content="https://wx3.sinaimg.cn/mw690/007CSzD7ly1g275ufo57nj30d00mm41k.jpg">
     
     
         
@@ -65,7 +67,7 @@
          
           <li><a href="/archives/">归档</a></li>
          
-          <li><a href="/projects_url">项目</a></li>
+          <li><a href="/search/">搜索</a></li>
         
       </ul>
     </span>
@@ -73,10 +75,10 @@
     <span id="actions">
       <ul>
         
-        <li><a class="icon" href="/2019/03/25/Unity%E7%AC%94%E8%AE%B0/Unity-UI%E6%A1%86%E6%9E%B6%E5%AD%A6%E4%B9%A0/"><i class="fas fa-chevron-left" aria-hidden="true" onmouseover="$('#i-prev').toggle();" onmouseout="$('#i-prev').toggle();"></i></a></li>
+        <li><a class="icon" href="/2019/03/25/Unity笔记/Unity-UI框架学习/"><i class="fas fa-chevron-left" aria-hidden="true" onmouseover="$('#i-prev').toggle();" onmouseout="$('#i-prev').toggle();"></i></a></li>
         
         
-        <li><a class="icon" href="/2019/03/18/Unity%E7%AC%94%E8%AE%B0/Unity-AssetBundle%E5%8A%A0%E8%BD%BD/"><i class="fas fa-chevron-right" aria-hidden="true" onmouseover="$('#i-next').toggle();" onmouseout="$('#i-next').toggle();"></i></a></li>
+        <li><a class="icon" href="/2019/03/18/Unity笔记/Unity-AssetBundle加载/"><i class="fas fa-chevron-right" aria-hidden="true" onmouseover="$('#i-next').toggle();" onmouseout="$('#i-next').toggle();"></i></a></li>
         
         <li><a class="icon" href="#" onclick="$('html, body').animate({ scrollTop: 0 }, 'fast');"><i class="fas fa-chevron-up" aria-hidden="true" onmouseover="$('#i-top').toggle();" onmouseout="$('#i-top').toggle();"></i></a></li>
         <li><a class="icon" href="#"><i class="fas fa-share-alt" aria-hidden="true" onmouseover="$('#i-share').toggle();" onmouseout="$('#i-share').toggle();" onclick="$('#share').toggle();return false;"></i></a></li>
@@ -89,17 +91,17 @@
     <br/>
     <div id="share" style="display: none">
       <ul>
-  <li><a class="icon" href="http://www.facebook.com/sharer.php?u=https://bitzhangmo.github.io/2019/03/22/Unity%E7%AC%94%E8%AE%B0/Unity-%E8%B5%84%E6%BA%90%E5%8A%A0%E8%BD%BD%E4%B8%8E%E4%BC%98%E5%8C%96/" target="_blank" rel="noopener"><i class="fab fa-facebook " aria-hidden="true"></i></a></li>
-  <li><a class="icon" href="https://twitter.com/share?url=https://bitzhangmo.github.io/2019/03/22/Unity%E7%AC%94%E8%AE%B0/Unity-%E8%B5%84%E6%BA%90%E5%8A%A0%E8%BD%BD%E4%B8%8E%E4%BC%98%E5%8C%96/&text=[Unity3D 游戏开发] 第十一章-资源加载与优化" target="_blank" rel="noopener"><i class="fab fa-twitter " aria-hidden="true"></i></a></li>
-  <li><a class="icon" href="http://www.linkedin.com/shareArticle?url=https://bitzhangmo.github.io/2019/03/22/Unity%E7%AC%94%E8%AE%B0/Unity-%E8%B5%84%E6%BA%90%E5%8A%A0%E8%BD%BD%E4%B8%8E%E4%BC%98%E5%8C%96/&title=[Unity3D 游戏开发] 第十一章-资源加载与优化" target="_blank" rel="noopener"><i class="fab fa-linkedin " aria-hidden="true"></i></a></li>
-  <li><a class="icon" href="https://pinterest.com/pin/create/bookmarklet/?url=https://bitzhangmo.github.io/2019/03/22/Unity%E7%AC%94%E8%AE%B0/Unity-%E8%B5%84%E6%BA%90%E5%8A%A0%E8%BD%BD%E4%B8%8E%E4%BC%98%E5%8C%96/&is_video=false&description=[Unity3D 游戏开发] 第十一章-资源加载与优化" target="_blank" rel="noopener"><i class="fab fa-pinterest " aria-hidden="true"></i></a></li>
-  <li><a class="icon" href="mailto:?subject=[Unity3D 游戏开发] 第十一章-资源加载与优化&body=Check out this article: https://bitzhangmo.github.io/2019/03/22/Unity%E7%AC%94%E8%AE%B0/Unity-%E8%B5%84%E6%BA%90%E5%8A%A0%E8%BD%BD%E4%B8%8E%E4%BC%98%E5%8C%96/"><i class="fas fa-envelope " aria-hidden="true"></i></a></li>
-  <li><a class="icon" href="https://getpocket.com/save?url=https://bitzhangmo.github.io/2019/03/22/Unity%E7%AC%94%E8%AE%B0/Unity-%E8%B5%84%E6%BA%90%E5%8A%A0%E8%BD%BD%E4%B8%8E%E4%BC%98%E5%8C%96/&title=[Unity3D 游戏开发] 第十一章-资源加载与优化" target="_blank" rel="noopener"><i class="fab fa-get-pocket " aria-hidden="true"></i></a></li>
-  <li><a class="icon" href="http://reddit.com/submit?url=https://bitzhangmo.github.io/2019/03/22/Unity%E7%AC%94%E8%AE%B0/Unity-%E8%B5%84%E6%BA%90%E5%8A%A0%E8%BD%BD%E4%B8%8E%E4%BC%98%E5%8C%96/&title=[Unity3D 游戏开发] 第十一章-资源加载与优化" target="_blank" rel="noopener"><i class="fab fa-reddit " aria-hidden="true"></i></a></li>
-  <li><a class="icon" href="http://www.stumbleupon.com/submit?url=https://bitzhangmo.github.io/2019/03/22/Unity%E7%AC%94%E8%AE%B0/Unity-%E8%B5%84%E6%BA%90%E5%8A%A0%E8%BD%BD%E4%B8%8E%E4%BC%98%E5%8C%96/&title=[Unity3D 游戏开发] 第十一章-资源加载与优化" target="_blank" rel="noopener"><i class="fab fa-stumbleupon " aria-hidden="true"></i></a></li>
-  <li><a class="icon" href="http://digg.com/submit?url=https://bitzhangmo.github.io/2019/03/22/Unity%E7%AC%94%E8%AE%B0/Unity-%E8%B5%84%E6%BA%90%E5%8A%A0%E8%BD%BD%E4%B8%8E%E4%BC%98%E5%8C%96/&title=[Unity3D 游戏开发] 第十一章-资源加载与优化" target="_blank" rel="noopener"><i class="fab fa-digg " aria-hidden="true"></i></a></li>
-  <li><a class="icon" href="http://www.tumblr.com/share/link?url=https://bitzhangmo.github.io/2019/03/22/Unity%E7%AC%94%E8%AE%B0/Unity-%E8%B5%84%E6%BA%90%E5%8A%A0%E8%BD%BD%E4%B8%8E%E4%BC%98%E5%8C%96/&name=[Unity3D 游戏开发] 第十一章-资源加载与优化&description=&lt;p&gt;资源加载与优化：AssetBundle和优化工具。&lt;/p&gt;" target="_blank" rel="noopener"><i class="fab fa-tumblr " aria-hidden="true"></i></a></li>
-  <li><a class="icon" href="https://news.ycombinator.com/submitlink?u=https://bitzhangmo.github.io/2019/03/22/Unity%E7%AC%94%E8%AE%B0/Unity-%E8%B5%84%E6%BA%90%E5%8A%A0%E8%BD%BD%E4%B8%8E%E4%BC%98%E5%8C%96/&t=[Unity3D 游戏开发] 第十一章-资源加载与优化" target="_blank" rel="noopener"><i class="fab fa-hacker-news " aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="http://www.facebook.com/sharer.php?u=https://bitzhangmo.github.io/2019/03/22/Unity笔记/Unity-资源加载与优化/"><i class="fab fa-facebook " aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="https://twitter.com/share?url=https://bitzhangmo.github.io/2019/03/22/Unity笔记/Unity-资源加载与优化/&text=[Unity3D 游戏开发] 第十一章-资源加载与优化"><i class="fab fa-twitter " aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="http://www.linkedin.com/shareArticle?url=https://bitzhangmo.github.io/2019/03/22/Unity笔记/Unity-资源加载与优化/&title=[Unity3D 游戏开发] 第十一章-资源加载与优化"><i class="fab fa-linkedin " aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="https://pinterest.com/pin/create/bookmarklet/?url=https://bitzhangmo.github.io/2019/03/22/Unity笔记/Unity-资源加载与优化/&is_video=false&description=[Unity3D 游戏开发] 第十一章-资源加载与优化"><i class="fab fa-pinterest " aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="mailto:?subject=[Unity3D 游戏开发] 第十一章-资源加载与优化&body=Check out this article: https://bitzhangmo.github.io/2019/03/22/Unity笔记/Unity-资源加载与优化/"><i class="fas fa-envelope " aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="https://getpocket.com/save?url=https://bitzhangmo.github.io/2019/03/22/Unity笔记/Unity-资源加载与优化/&title=[Unity3D 游戏开发] 第十一章-资源加载与优化"><i class="fab fa-get-pocket " aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="http://reddit.com/submit?url=https://bitzhangmo.github.io/2019/03/22/Unity笔记/Unity-资源加载与优化/&title=[Unity3D 游戏开发] 第十一章-资源加载与优化"><i class="fab fa-reddit " aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="http://www.stumbleupon.com/submit?url=https://bitzhangmo.github.io/2019/03/22/Unity笔记/Unity-资源加载与优化/&title=[Unity3D 游戏开发] 第十一章-资源加载与优化"><i class="fab fa-stumbleupon " aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="http://digg.com/submit?url=https://bitzhangmo.github.io/2019/03/22/Unity笔记/Unity-资源加载与优化/&title=[Unity3D 游戏开发] 第十一章-资源加载与优化"><i class="fab fa-digg " aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="http://www.tumblr.com/share/link?url=https://bitzhangmo.github.io/2019/03/22/Unity笔记/Unity-资源加载与优化/&name=[Unity3D 游戏开发] 第十一章-资源加载与优化&description=&lt;p&gt;资源加载与优化：AssetBundle和优化工具。&lt;/p&gt;"><i class="fab fa-tumblr " aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="https://news.ycombinator.com/submitlink?u=https://bitzhangmo.github.io/2019/03/22/Unity笔记/Unity-资源加载与优化/&t=[Unity3D 游戏开发] 第十一章-资源加载与优化"><i class="fab fa-hacker-news " aria-hidden="true"></i></a></li>
 </ul>
 
     </div>
@@ -137,14 +139,14 @@
       
     <div class="article-category">
         <i class="fas fa-archive"></i>
-        <a class="category-link" href="/categories/%E8%AF%BB%E4%B9%A6%E7%AC%94%E8%AE%B0/">读书笔记</a>
+        <a class="category-link" href="/categories/读书笔记/">读书笔记</a>
     </div>
 
 
       
     <div class="article-tag">
         <i class="fas fa-tag"></i>
-        <a class="tag-link" href="/tags/Unity/" rel="tag">Unity</a>, <a class="tag-link" href="/tags/Unity3D-%E6%B8%B8%E6%88%8F%E5%BC%80%E5%8F%91/" rel="tag">Unity3D 游戏开发</a>
+        <a class="tag-link" href="/tags/Unity/">Unity</a>, <a class="tag-link" href="/tags/Unity3D-游戏开发/">Unity3D 游戏开发</a>
     </div>
 
 
@@ -155,7 +157,6 @@
   <div class="content" itemprop="articleBody">
     <p>资源加载与优化：AssetBundle和优化工具。</p>
 <a id="more"></a>
-
 <h2 id="资源加载与优化"><a href="#资源加载与优化" class="headerlink" title="资源加载与优化"></a>资源加载与优化</h2><h3 id="编辑模式："><a href="#编辑模式：" class="headerlink" title="编辑模式："></a>编辑模式：</h3><h4 id="加载资源："><a href="#加载资源：" class="headerlink" title="加载资源："></a>加载资源：</h4><p>编辑模式下的资源可分为两类：一类是引擎可识别的资源，例如Prefab、声音、视频、动画和UI等；另一类是引擎无法识别的资源，例如外部导入的资源，这类资源需要通过第三方将它的信息解析出来，最终组织成引擎内可识别资源才可以使用。</p>
 <p>可以提供一个相对路径，使用<code>AssetDatabase.LoadAssetAtPath()</code>方法读取任意对象，如果使用<code>GameObject.Instance()</code>只能创建新对象，这会丢失Prefab的引用。</p>
 <h4 id="实例化Prefab"><a href="#实例化Prefab" class="headerlink" title="实例化Prefab"></a>实例化Prefab</h4><p>在编辑模式下，实例化Prefab需要使用<code>PrefabUtility.InstantiatePrefab()</code>方法。</p>
@@ -166,7 +167,6 @@
 <li>调用<code>EditorUtility.UnloadUnusedAssetsImmediate()</code>方法即可卸载编辑器下无用的资源了。</li>
 </ul>
 <figure class="highlight csharp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="keyword">class</span> <span class="title">Script_11_06</span></span><br><span class="line">&#123;</span><br><span class="line">    [<span class="meta">MenuItem(<span class="meta-string">"Assets/My Tools/UnloadUnusedAssetsImmediate"</span>,false,3)</span>]</span><br><span class="line">    <span class="function"><span class="keyword">static</span> <span class="keyword">void</span> <span class="title">UnloadUnusedAssetsImmediate</span>(<span class="params"></span>)</span></span><br><span class="line"><span class="function"></span>    &#123;</span><br><span class="line">			EditorUtility.UnloadUnusedAssetsImmediate();</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
 <h3 id="版本管理："><a href="#版本管理：" class="headerlink" title="版本管理："></a>版本管理：</h3><p>资源在导入Unity的时候，会自动生成很多中间资源，这些资源都不需要上传，只需要将<strong>Asset、ProjectSettings</strong>文件夹下的所有文件以及.meta文件上传即可。</p>
 <h4 id="meta文件："><a href="#meta文件：" class="headerlink" title=".meta文件："></a>.meta文件：</h4><p>.meta文件是Unity自动生成的。每个游戏资源都会有一个对应的.meta文件，它会标记资源在引擎中的一些设置信息，我们可以在资源视图面板中重新设置这些资源的参数。此时.meta文件会保留这些参数，将资源拖入工程时，就会利用这些参数重新压缩资源。换句话说，资源在用户无感知的情况下被Unity优化了。</p>
 <p>每个.meta文件都会记录guid这个重要信息。guid就是用来关联资源和游戏对象的引用的。</p>
@@ -182,8 +182,7 @@
 <h4 id="删除对象："><a href="#删除对象：" class="headerlink" title="删除对象："></a>删除对象：</h4><h4 id="删除资源："><a href="#删除资源：" class="headerlink" title="删除资源："></a>删除资源：</h4><h4 id="GC："><a href="#GC：" class="headerlink" title="GC："></a>GC：</h4><h3 id="AssetBundle："><a href="#AssetBundle：" class="headerlink" title="AssetBundle："></a>AssetBundle：</h3><p>在网络游戏中，可能需要运行时下载并更新资源，而Unity提供了<a href="https://docs.unity3d.com/ScriptReference/AssetBundle.html" target="_blank" rel="noopener">AssetBundle</a>组件，可以将指定的一部分资源构建成AssetBundle文件，如果需要下载，那么需要将这些AssetBundle文件上传到CDN上。</p>
 <h4 id="设置AssetBundle："><a href="#设置AssetBundle：" class="headerlink" title="设置AssetBundle："></a>设置AssetBundle：</h4><p>代码：</p>
 <figure class="highlight csharp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">using</span> UnityEditor;</span><br><span class="line"><span class="keyword">using</span> UnityEngine;</span><br><span class="line"><span class="keyword">using</span> System.IO;</span><br><span class="line"><span class="keyword">using</span> UnityEngine.Events;</span><br><span class="line"><span class="keyword">public</span> <span class="keyword">class</span> <span class="title">Script_11_12</span></span><br><span class="line">&#123;</span><br><span class="line">	[<span class="meta">MenuItem(<span class="meta-string">"Tools/BuildAssetbundle"</span>)</span>]</span><br><span class="line">	<span class="function"><span class="keyword">static</span> <span class="keyword">void</span> <span class="title">BuildAssetbundle</span>(<span class="params"></span>)</span></span><br><span class="line"><span class="function"></span>	&#123;</span><br><span class="line">		<span class="keyword">string</span> outPath = Path.Combine(Application.dataPath,<span class="string">"StreamingAssets"</span>);</span><br><span class="line"></span><br><span class="line">		<span class="comment">// 如果目录已经存在，则删除它</span></span><br><span class="line">		<span class="keyword">if</span>(Directory.Exists(outPath))</span><br><span class="line">		&#123;</span><br><span class="line">			Directory.Delete(outPath,<span class="literal">true</span>);</span><br><span class="line">		&#125;</span><br><span class="line">		Directory.CreateDirectory(outPath);</span><br><span class="line"></span><br><span class="line">		<span class="comment">// 构建AssetBundle</span></span><br><span class="line">		BuildPipeline.BuildAssetBundles(outPath,BuildAssetBundleOptions.ChunkBasedCompression,</span><br><span class="line">										BuildTarget.StandaloneOSX);</span><br><span class="line"></span><br><span class="line">		<span class="comment">// 刷新</span></span><br><span class="line">		AssetDatabase.Refresh();</span><br><span class="line">	&#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-<p><img src="https://wx3.sinaimg.cn/mw690/007CSzD7ly1g275ufo57nj30d00mm41k.jpg" alt=""></p>
+<p><img src="https://wx3.sinaimg.cn/mw690/007CSzD7ly1g275ufo57nj30d00mm41k.jpg" alt></p>
 <h4 id="依赖关系："><a href="#依赖关系：" class="headerlink" title="依赖关系："></a>依赖关系：</h4><p>如果两个Prefab都依赖了同一份材质和贴图文件，那么按照上面的打包方式，材质和贴图会生成两份。可以在有可能出现冗余的资源上输入它的AssetBundle名称，然后再构建AssetBundle，这样两个Prefab就会自动依赖材质和贴图了。构建AssetBundle后，会生成资源依赖关系文本(似乎是<code>.manifest</code>格式的)</p>
 <h4 id="通过脚本设置依赖关系："><a href="#通过脚本设置依赖关系：" class="headerlink" title="通过脚本设置依赖关系："></a>通过脚本设置依赖关系：</h4><h4 id="压缩格式："><a href="#压缩格式：" class="headerlink" title="压缩格式："></a>压缩格式：</h4><p>AssetBundle提供了如下三种可选的压缩格式：</p>
 <ul>
@@ -193,10 +192,8 @@
 </ul>
 <h4 id="加载包体内的AssetBundle："><a href="#加载包体内的AssetBundle：" class="headerlink" title="加载包体内的AssetBundle："></a>加载包体内的AssetBundle：</h4><p>包体内的AssetBundle只能放在StreamingAsset目录下，别的目录是无法读取的。可以使用<code>AssetBundle.LoadFromFile()</code>或者<code>AssetBundle.LoadFromFileAsync()</code>方法同步或者异步加载。这里需要注意的是，加载AssetBundle之前，需要使用AssetBundleManifest提取每个AssetBundle的相互依赖关系。</p>
 <figure class="highlight csharp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">using</span> System.Collections;</span><br><span class="line"><span class="keyword">using</span> System.Collections.Generic;</span><br><span class="line"><span class="keyword">using</span> UnityEngine;</span><br><span class="line"><span class="keyword">using</span> System.IO;</span><br><span class="line"></span><br><span class="line"><span class="keyword">public</span> <span class="keyword">class</span> <span class="title">Script_11_14</span> : <span class="title">MonoBehaviour</span></span><br><span class="line">&#123;</span><br><span class="line">    <span class="comment">// Start is called before the first frame update</span></span><br><span class="line">    <span class="function"><span class="keyword">void</span> <span class="title">Start</span>(<span class="params"></span>)</span></span><br><span class="line"><span class="function"></span>    &#123;</span><br><span class="line">        AssetBundle assetbundle = AssetBundle.LoadFromFile(Path.Combine(Application.streamingAssetsPath,<span class="string">"StreamingAssets"</span>));</span><br><span class="line">        AssetBundleManifest manifest = assetbundle.LoadAsset&lt;AssetBundleManifest&gt;(<span class="string">"AssetBundleManifest"</span>);</span><br><span class="line"></span><br><span class="line">        <span class="comment">// 加载AssetBundle前，需要加载依赖的Bundle</span></span><br><span class="line">        <span class="keyword">foreach</span>(<span class="keyword">var</span> item <span class="keyword">in</span> manifest.GetAllDependencies(<span class="string">"cube.unity3d"</span>))</span><br><span class="line">        &#123;</span><br><span class="line">            AssetBundle.LoadFromFile(Path.Combine(Application.streamingAssetsPath,item));</span><br><span class="line">        &#125;</span><br><span class="line"></span><br><span class="line">        <span class="comment">// 读取Bundle</span></span><br><span class="line">        assetbundle = AssetBundle.LoadFromFile(Path.Combine(Application.streamingAssetsPath,<span class="string">"cube.unity3d"</span>));</span><br><span class="line"></span><br><span class="line">        <span class="comment">// 从Bundle中读取资源</span></span><br><span class="line">        GameObject prefab = assetbundle.LoadAsset&lt;GameObject&gt;(<span class="string">"Cube"</span>);</span><br><span class="line">        <span class="comment">// 实例化资源</span></span><br><span class="line">        GameObject.Instantiate&lt;GameObject&gt;(prefab);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
 <h4 id="下载AssetBundle："><a href="#下载AssetBundle：" class="headerlink" title="下载AssetBundle："></a>下载AssetBundle：</h4><p>Unity提供了<a href="https://docs.unity3d.com/ScriptReference/WWW.html" target="_blank" rel="noopener">WWW</a>类来进行下载。它可以下载包括AssetBundle在内的任意资源，此时只需要提供一个URL下载地址即可。如果下载本地任意资源，则在前面加上<code>file://</code>即可。</p>
 <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">// 此处应有代码：</span><br></pre></td></tr></table></figure>
-
 <p>使用WWW来下载AssetBundle，接着通过<code>File.WritteAllBytes()</code>将AssetBundle写在本地中，最后使用<code>AssetBundle.LoadFromFile()</code>从硬盘中加载它。</p>
 <h4 id="加载场景："><a href="#加载场景：" class="headerlink" title="加载场景："></a>加载场景：</h4><h4 id="卸载AssetBundle："><a href="#卸载AssetBundle：" class="headerlink" title="卸载AssetBundle："></a>卸载AssetBundle：</h4><p>在同一个AssetBundle文件中，可以同时构建多个资源文件。<strong>正确的从AssetBundle中实例化一个Prefab的步骤如下</strong>：</p>
 <ol>
@@ -234,7 +231,7 @@
          
           <li><a href="/archives/">归档</a></li>
          
-          <li><a href="/projects_url">项目</a></li>
+          <li><a href="/search/">搜索</a></li>
         
       </ul>
     </div>
@@ -245,17 +242,17 @@
 
     <div id="share-footer" style="display: none">
       <ul>
-  <li><a class="icon" href="http://www.facebook.com/sharer.php?u=https://bitzhangmo.github.io/2019/03/22/Unity%E7%AC%94%E8%AE%B0/Unity-%E8%B5%84%E6%BA%90%E5%8A%A0%E8%BD%BD%E4%B8%8E%E4%BC%98%E5%8C%96/" target="_blank" rel="noopener"><i class="fab fa-facebook fa-lg" aria-hidden="true"></i></a></li>
-  <li><a class="icon" href="https://twitter.com/share?url=https://bitzhangmo.github.io/2019/03/22/Unity%E7%AC%94%E8%AE%B0/Unity-%E8%B5%84%E6%BA%90%E5%8A%A0%E8%BD%BD%E4%B8%8E%E4%BC%98%E5%8C%96/&text=[Unity3D 游戏开发] 第十一章-资源加载与优化" target="_blank" rel="noopener"><i class="fab fa-twitter fa-lg" aria-hidden="true"></i></a></li>
-  <li><a class="icon" href="http://www.linkedin.com/shareArticle?url=https://bitzhangmo.github.io/2019/03/22/Unity%E7%AC%94%E8%AE%B0/Unity-%E8%B5%84%E6%BA%90%E5%8A%A0%E8%BD%BD%E4%B8%8E%E4%BC%98%E5%8C%96/&title=[Unity3D 游戏开发] 第十一章-资源加载与优化" target="_blank" rel="noopener"><i class="fab fa-linkedin fa-lg" aria-hidden="true"></i></a></li>
-  <li><a class="icon" href="https://pinterest.com/pin/create/bookmarklet/?url=https://bitzhangmo.github.io/2019/03/22/Unity%E7%AC%94%E8%AE%B0/Unity-%E8%B5%84%E6%BA%90%E5%8A%A0%E8%BD%BD%E4%B8%8E%E4%BC%98%E5%8C%96/&is_video=false&description=[Unity3D 游戏开发] 第十一章-资源加载与优化" target="_blank" rel="noopener"><i class="fab fa-pinterest fa-lg" aria-hidden="true"></i></a></li>
-  <li><a class="icon" href="mailto:?subject=[Unity3D 游戏开发] 第十一章-资源加载与优化&body=Check out this article: https://bitzhangmo.github.io/2019/03/22/Unity%E7%AC%94%E8%AE%B0/Unity-%E8%B5%84%E6%BA%90%E5%8A%A0%E8%BD%BD%E4%B8%8E%E4%BC%98%E5%8C%96/"><i class="fas fa-envelope fa-lg" aria-hidden="true"></i></a></li>
-  <li><a class="icon" href="https://getpocket.com/save?url=https://bitzhangmo.github.io/2019/03/22/Unity%E7%AC%94%E8%AE%B0/Unity-%E8%B5%84%E6%BA%90%E5%8A%A0%E8%BD%BD%E4%B8%8E%E4%BC%98%E5%8C%96/&title=[Unity3D 游戏开发] 第十一章-资源加载与优化" target="_blank" rel="noopener"><i class="fab fa-get-pocket fa-lg" aria-hidden="true"></i></a></li>
-  <li><a class="icon" href="http://reddit.com/submit?url=https://bitzhangmo.github.io/2019/03/22/Unity%E7%AC%94%E8%AE%B0/Unity-%E8%B5%84%E6%BA%90%E5%8A%A0%E8%BD%BD%E4%B8%8E%E4%BC%98%E5%8C%96/&title=[Unity3D 游戏开发] 第十一章-资源加载与优化" target="_blank" rel="noopener"><i class="fab fa-reddit fa-lg" aria-hidden="true"></i></a></li>
-  <li><a class="icon" href="http://www.stumbleupon.com/submit?url=https://bitzhangmo.github.io/2019/03/22/Unity%E7%AC%94%E8%AE%B0/Unity-%E8%B5%84%E6%BA%90%E5%8A%A0%E8%BD%BD%E4%B8%8E%E4%BC%98%E5%8C%96/&title=[Unity3D 游戏开发] 第十一章-资源加载与优化" target="_blank" rel="noopener"><i class="fab fa-stumbleupon fa-lg" aria-hidden="true"></i></a></li>
-  <li><a class="icon" href="http://digg.com/submit?url=https://bitzhangmo.github.io/2019/03/22/Unity%E7%AC%94%E8%AE%B0/Unity-%E8%B5%84%E6%BA%90%E5%8A%A0%E8%BD%BD%E4%B8%8E%E4%BC%98%E5%8C%96/&title=[Unity3D 游戏开发] 第十一章-资源加载与优化" target="_blank" rel="noopener"><i class="fab fa-digg fa-lg" aria-hidden="true"></i></a></li>
-  <li><a class="icon" href="http://www.tumblr.com/share/link?url=https://bitzhangmo.github.io/2019/03/22/Unity%E7%AC%94%E8%AE%B0/Unity-%E8%B5%84%E6%BA%90%E5%8A%A0%E8%BD%BD%E4%B8%8E%E4%BC%98%E5%8C%96/&name=[Unity3D 游戏开发] 第十一章-资源加载与优化&description=&lt;p&gt;资源加载与优化：AssetBundle和优化工具。&lt;/p&gt;" target="_blank" rel="noopener"><i class="fab fa-tumblr fa-lg" aria-hidden="true"></i></a></li>
-  <li><a class="icon" href="https://news.ycombinator.com/submitlink?u=https://bitzhangmo.github.io/2019/03/22/Unity%E7%AC%94%E8%AE%B0/Unity-%E8%B5%84%E6%BA%90%E5%8A%A0%E8%BD%BD%E4%B8%8E%E4%BC%98%E5%8C%96/&t=[Unity3D 游戏开发] 第十一章-资源加载与优化" target="_blank" rel="noopener"><i class="fab fa-hacker-news fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="http://www.facebook.com/sharer.php?u=https://bitzhangmo.github.io/2019/03/22/Unity笔记/Unity-资源加载与优化/"><i class="fab fa-facebook fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="https://twitter.com/share?url=https://bitzhangmo.github.io/2019/03/22/Unity笔记/Unity-资源加载与优化/&text=[Unity3D 游戏开发] 第十一章-资源加载与优化"><i class="fab fa-twitter fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="http://www.linkedin.com/shareArticle?url=https://bitzhangmo.github.io/2019/03/22/Unity笔记/Unity-资源加载与优化/&title=[Unity3D 游戏开发] 第十一章-资源加载与优化"><i class="fab fa-linkedin fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="https://pinterest.com/pin/create/bookmarklet/?url=https://bitzhangmo.github.io/2019/03/22/Unity笔记/Unity-资源加载与优化/&is_video=false&description=[Unity3D 游戏开发] 第十一章-资源加载与优化"><i class="fab fa-pinterest fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="mailto:?subject=[Unity3D 游戏开发] 第十一章-资源加载与优化&body=Check out this article: https://bitzhangmo.github.io/2019/03/22/Unity笔记/Unity-资源加载与优化/"><i class="fas fa-envelope fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="https://getpocket.com/save?url=https://bitzhangmo.github.io/2019/03/22/Unity笔记/Unity-资源加载与优化/&title=[Unity3D 游戏开发] 第十一章-资源加载与优化"><i class="fab fa-get-pocket fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="http://reddit.com/submit?url=https://bitzhangmo.github.io/2019/03/22/Unity笔记/Unity-资源加载与优化/&title=[Unity3D 游戏开发] 第十一章-资源加载与优化"><i class="fab fa-reddit fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="http://www.stumbleupon.com/submit?url=https://bitzhangmo.github.io/2019/03/22/Unity笔记/Unity-资源加载与优化/&title=[Unity3D 游戏开发] 第十一章-资源加载与优化"><i class="fab fa-stumbleupon fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="http://digg.com/submit?url=https://bitzhangmo.github.io/2019/03/22/Unity笔记/Unity-资源加载与优化/&title=[Unity3D 游戏开发] 第十一章-资源加载与优化"><i class="fab fa-digg fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="http://www.tumblr.com/share/link?url=https://bitzhangmo.github.io/2019/03/22/Unity笔记/Unity-资源加载与优化/&name=[Unity3D 游戏开发] 第十一章-资源加载与优化&description=&lt;p&gt;资源加载与优化：AssetBundle和优化工具。&lt;/p&gt;"><i class="fab fa-tumblr fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="https://news.ycombinator.com/submitlink?u=https://bitzhangmo.github.io/2019/03/22/Unity笔记/Unity-资源加载与优化/&t=[Unity3D 游戏开发] 第十一章-资源加载与优化"><i class="fab fa-hacker-news fa-lg" aria-hidden="true"></i></a></li>
 </ul>
 
     </div>
@@ -285,7 +282,7 @@
          
           <li><a href="/archives/">归档</a></li>
          
-          <li><a href="/projects_url">项目</a></li>
+          <li><a href="/search/">搜索</a></li>
         
       </ul>
     </nav>
@@ -333,5 +330,5 @@
 <!-- Disqus Comments -->
 
 
-</body>
+<script src="/live2dw/lib/L2Dwidget.min.js?bd2294fafea3389ee458f1d9be5a2157"></script><script>L2Dwidget.init({"pluginRootPath":"live2dw/","pluginJsPath":"lib/","pluginModelPath":"assets/","tagMode":false,"debug":false,"model":{"jsonPath":"/live2dw/assets/hijiki.model.json"},"display":{"position":"left","width":100,"height":200},"mobile":{"show":false},"log":false});</script></body>
 </html>

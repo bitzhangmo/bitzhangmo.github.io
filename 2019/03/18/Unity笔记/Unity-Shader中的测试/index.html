@@ -1,21 +1,23 @@
 <!DOCTYPE html>
 <html lang=zh>
-<head>
+<head><meta name="generator" content="Hexo 3.9.0">
     <!-- so meta -->
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="HandheldFriendly" content="True">
-    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1" />
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
     <meta name="description" content="Unity Shader中的测试：Alpha测试、模版测试、深度测试。">
 <meta name="keywords" content="Unity,Shader">
 <meta property="og:type" content="article">
 <meta property="og:title" content="Unity Shader中的测试">
-<meta property="og:url" content="https:&#x2F;&#x2F;bitzhangmo.github.io&#x2F;2019&#x2F;03&#x2F;18&#x2F;Unity%E7%AC%94%E8%AE%B0&#x2F;Unity-Shader%E4%B8%AD%E7%9A%84%E6%B5%8B%E8%AF%95&#x2F;index.html">
+<meta property="og:url" content="https://bitzhangmo.github.io/2019/03/18/Unity笔记/Unity-Shader中的测试/index.html">
 <meta property="og:site_name" content="zhangMo Blog">
 <meta property="og:description" content="Unity Shader中的测试：Alpha测试、模版测试、深度测试。">
 <meta property="og:locale" content="zh-CN">
 <meta property="og:updated_time" content="2019-04-17T06:40:41.119Z">
 <meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="Unity Shader中的测试">
+<meta name="twitter:description" content="Unity Shader中的测试：Alpha测试、模版测试、深度测试。">
     
     
         
@@ -63,7 +65,7 @@
          
           <li><a href="/archives/">归档</a></li>
          
-          <li><a href="/projects_url">项目</a></li>
+          <li><a href="/search/">搜索</a></li>
         
       </ul>
     </span>
@@ -71,10 +73,10 @@
     <span id="actions">
       <ul>
         
-        <li><a class="icon" href="/2019/03/18/Unity%E7%AC%94%E8%AE%B0/Unity-AssetBundle%E5%8A%A0%E8%BD%BD/"><i class="fas fa-chevron-left" aria-hidden="true" onmouseover="$('#i-prev').toggle();" onmouseout="$('#i-prev').toggle();"></i></a></li>
+        <li><a class="icon" href="/2019/03/18/Unity笔记/Unity-AssetBundle加载/"><i class="fas fa-chevron-left" aria-hidden="true" onmouseover="$('#i-prev').toggle();" onmouseout="$('#i-prev').toggle();"></i></a></li>
         
         
-        <li><a class="icon" href="/2019/03/15/%E8%AE%BE%E8%AE%A1%E6%A8%A1%E5%BC%8F/%E6%B8%B8%E6%88%8F%E7%BC%96%E7%A8%8B%E6%A8%A1%E5%BC%8F%EF%BC%9A%E7%BB%84%E4%BB%B6%E6%A8%A1%E5%BC%8F/"><i class="fas fa-chevron-right" aria-hidden="true" onmouseover="$('#i-next').toggle();" onmouseout="$('#i-next').toggle();"></i></a></li>
+        <li><a class="icon" href="/2019/03/15/设计模式/游戏编程模式：组件模式/"><i class="fas fa-chevron-right" aria-hidden="true" onmouseover="$('#i-next').toggle();" onmouseout="$('#i-next').toggle();"></i></a></li>
         
         <li><a class="icon" href="#" onclick="$('html, body').animate({ scrollTop: 0 }, 'fast');"><i class="fas fa-chevron-up" aria-hidden="true" onmouseover="$('#i-top').toggle();" onmouseout="$('#i-top').toggle();"></i></a></li>
         <li><a class="icon" href="#"><i class="fas fa-share-alt" aria-hidden="true" onmouseover="$('#i-share').toggle();" onmouseout="$('#i-share').toggle();" onclick="$('#share').toggle();return false;"></i></a></li>
@@ -87,17 +89,17 @@
     <br/>
     <div id="share" style="display: none">
       <ul>
-  <li><a class="icon" href="http://www.facebook.com/sharer.php?u=https://bitzhangmo.github.io/2019/03/18/Unity%E7%AC%94%E8%AE%B0/Unity-Shader%E4%B8%AD%E7%9A%84%E6%B5%8B%E8%AF%95/" target="_blank" rel="noopener"><i class="fab fa-facebook " aria-hidden="true"></i></a></li>
-  <li><a class="icon" href="https://twitter.com/share?url=https://bitzhangmo.github.io/2019/03/18/Unity%E7%AC%94%E8%AE%B0/Unity-Shader%E4%B8%AD%E7%9A%84%E6%B5%8B%E8%AF%95/&text=Unity Shader中的测试" target="_blank" rel="noopener"><i class="fab fa-twitter " aria-hidden="true"></i></a></li>
-  <li><a class="icon" href="http://www.linkedin.com/shareArticle?url=https://bitzhangmo.github.io/2019/03/18/Unity%E7%AC%94%E8%AE%B0/Unity-Shader%E4%B8%AD%E7%9A%84%E6%B5%8B%E8%AF%95/&title=Unity Shader中的测试" target="_blank" rel="noopener"><i class="fab fa-linkedin " aria-hidden="true"></i></a></li>
-  <li><a class="icon" href="https://pinterest.com/pin/create/bookmarklet/?url=https://bitzhangmo.github.io/2019/03/18/Unity%E7%AC%94%E8%AE%B0/Unity-Shader%E4%B8%AD%E7%9A%84%E6%B5%8B%E8%AF%95/&is_video=false&description=Unity Shader中的测试" target="_blank" rel="noopener"><i class="fab fa-pinterest " aria-hidden="true"></i></a></li>
-  <li><a class="icon" href="mailto:?subject=Unity Shader中的测试&body=Check out this article: https://bitzhangmo.github.io/2019/03/18/Unity%E7%AC%94%E8%AE%B0/Unity-Shader%E4%B8%AD%E7%9A%84%E6%B5%8B%E8%AF%95/"><i class="fas fa-envelope " aria-hidden="true"></i></a></li>
-  <li><a class="icon" href="https://getpocket.com/save?url=https://bitzhangmo.github.io/2019/03/18/Unity%E7%AC%94%E8%AE%B0/Unity-Shader%E4%B8%AD%E7%9A%84%E6%B5%8B%E8%AF%95/&title=Unity Shader中的测试" target="_blank" rel="noopener"><i class="fab fa-get-pocket " aria-hidden="true"></i></a></li>
-  <li><a class="icon" href="http://reddit.com/submit?url=https://bitzhangmo.github.io/2019/03/18/Unity%E7%AC%94%E8%AE%B0/Unity-Shader%E4%B8%AD%E7%9A%84%E6%B5%8B%E8%AF%95/&title=Unity Shader中的测试" target="_blank" rel="noopener"><i class="fab fa-reddit " aria-hidden="true"></i></a></li>
-  <li><a class="icon" href="http://www.stumbleupon.com/submit?url=https://bitzhangmo.github.io/2019/03/18/Unity%E7%AC%94%E8%AE%B0/Unity-Shader%E4%B8%AD%E7%9A%84%E6%B5%8B%E8%AF%95/&title=Unity Shader中的测试" target="_blank" rel="noopener"><i class="fab fa-stumbleupon " aria-hidden="true"></i></a></li>
-  <li><a class="icon" href="http://digg.com/submit?url=https://bitzhangmo.github.io/2019/03/18/Unity%E7%AC%94%E8%AE%B0/Unity-Shader%E4%B8%AD%E7%9A%84%E6%B5%8B%E8%AF%95/&title=Unity Shader中的测试" target="_blank" rel="noopener"><i class="fab fa-digg " aria-hidden="true"></i></a></li>
-  <li><a class="icon" href="http://www.tumblr.com/share/link?url=https://bitzhangmo.github.io/2019/03/18/Unity%E7%AC%94%E8%AE%B0/Unity-Shader%E4%B8%AD%E7%9A%84%E6%B5%8B%E8%AF%95/&name=Unity Shader中的测试&description=&lt;p&gt;Unity Shader中的测试：Alpha测试、模版测试、深度测试。&lt;/p&gt;" target="_blank" rel="noopener"><i class="fab fa-tumblr " aria-hidden="true"></i></a></li>
-  <li><a class="icon" href="https://news.ycombinator.com/submitlink?u=https://bitzhangmo.github.io/2019/03/18/Unity%E7%AC%94%E8%AE%B0/Unity-Shader%E4%B8%AD%E7%9A%84%E6%B5%8B%E8%AF%95/&t=Unity Shader中的测试" target="_blank" rel="noopener"><i class="fab fa-hacker-news " aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="http://www.facebook.com/sharer.php?u=https://bitzhangmo.github.io/2019/03/18/Unity笔记/Unity-Shader中的测试/"><i class="fab fa-facebook " aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="https://twitter.com/share?url=https://bitzhangmo.github.io/2019/03/18/Unity笔记/Unity-Shader中的测试/&text=Unity Shader中的测试"><i class="fab fa-twitter " aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="http://www.linkedin.com/shareArticle?url=https://bitzhangmo.github.io/2019/03/18/Unity笔记/Unity-Shader中的测试/&title=Unity Shader中的测试"><i class="fab fa-linkedin " aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="https://pinterest.com/pin/create/bookmarklet/?url=https://bitzhangmo.github.io/2019/03/18/Unity笔记/Unity-Shader中的测试/&is_video=false&description=Unity Shader中的测试"><i class="fab fa-pinterest " aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="mailto:?subject=Unity Shader中的测试&body=Check out this article: https://bitzhangmo.github.io/2019/03/18/Unity笔记/Unity-Shader中的测试/"><i class="fas fa-envelope " aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="https://getpocket.com/save?url=https://bitzhangmo.github.io/2019/03/18/Unity笔记/Unity-Shader中的测试/&title=Unity Shader中的测试"><i class="fab fa-get-pocket " aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="http://reddit.com/submit?url=https://bitzhangmo.github.io/2019/03/18/Unity笔记/Unity-Shader中的测试/&title=Unity Shader中的测试"><i class="fab fa-reddit " aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="http://www.stumbleupon.com/submit?url=https://bitzhangmo.github.io/2019/03/18/Unity笔记/Unity-Shader中的测试/&title=Unity Shader中的测试"><i class="fab fa-stumbleupon " aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="http://digg.com/submit?url=https://bitzhangmo.github.io/2019/03/18/Unity笔记/Unity-Shader中的测试/&title=Unity Shader中的测试"><i class="fab fa-digg " aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="http://www.tumblr.com/share/link?url=https://bitzhangmo.github.io/2019/03/18/Unity笔记/Unity-Shader中的测试/&name=Unity Shader中的测试&description=&lt;p&gt;Unity Shader中的测试：Alpha测试、模版测试、深度测试。&lt;/p&gt;"><i class="fab fa-tumblr " aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="https://news.ycombinator.com/submitlink?u=https://bitzhangmo.github.io/2019/03/18/Unity笔记/Unity-Shader中的测试/&t=Unity Shader中的测试"><i class="fab fa-hacker-news " aria-hidden="true"></i></a></li>
 </ul>
 
     </div>
@@ -135,14 +137,14 @@
       
     <div class="article-category">
         <i class="fas fa-archive"></i>
-        <a class="category-link" href="/categories/%E8%AF%BB%E4%B9%A6%E7%AC%94%E8%AE%B0/">读书笔记</a>
+        <a class="category-link" href="/categories/读书笔记/">读书笔记</a>
     </div>
 
 
       
     <div class="article-tag">
         <i class="fas fa-tag"></i>
-        <a class="tag-link" href="/tags/Shader/" rel="tag">Shader</a>, <a class="tag-link" href="/tags/Unity/" rel="tag">Unity</a>
+        <a class="tag-link" href="/tags/Shader/">Shader</a>, <a class="tag-link" href="/tags/Unity/">Unity</a>
     </div>
 
 
@@ -153,7 +155,6 @@
   <div class="content" itemprop="articleBody">
     <p>Unity Shader中的测试：Alpha测试、模版测试、深度测试。</p>
 <a id="more"></a> 
-
 <h3 id="Alpha测试："><a href="#Alpha测试：" class="headerlink" title="Alpha测试："></a>Alpha测试：</h3><p>Alpha Test和Alpha Blending是两种处理透明的方法。</p>
 <h4 id="Alpha-Test："><a href="#Alpha-Test：" class="headerlink" title="Alpha Test："></a>Alpha Test：</h4><p>Alpha Test采用一种很霸道极端的机制，<strong>只要一个像素的alpha不满足条件，那么它就会被fragment shader舍弃。被舍弃的fragments不会对后面的各种Tests产生影响；否则，就会按正常方式写入到缓存中，并进行正常的深度检验等等，</strong>也就是说，Alpha Test是不需要关闭ZWrite的。Alpha Test产生的效果也很极端，要么完全透明，即看不到，要么完全不透明。</p>
 <h4 id="Alpha-Blending："><a href="#Alpha-Blending：" class="headerlink" title="Alpha Blending："></a>Alpha Blending：</h4><p>而Alpha Blending则是一种中庸的方式，<strong>它使用当前fragment的alpha作为混合因子，来混合之前写入到缓存中颜色值。但Alpha Blending麻烦的一点就是它需要关闭ZWrite，并且要十分小心物体的渲染顺序。如果不关闭ZWrite，那么在进行深度检测的时候，它背后的物体本来是可以透过它被我们看到的，但由于深度检测时大于它的深度就被剔除了，从而我们就看不到它后面的物体了。</strong>因此，我们需要保证物体的渲染顺序是<strong>从后往前</strong>，并且<strong>关闭该半透明对象的ZWrite。</strong></p>
@@ -205,7 +206,7 @@
          
           <li><a href="/archives/">归档</a></li>
          
-          <li><a href="/projects_url">项目</a></li>
+          <li><a href="/search/">搜索</a></li>
         
       </ul>
     </div>
@@ -216,17 +217,17 @@
 
     <div id="share-footer" style="display: none">
       <ul>
-  <li><a class="icon" href="http://www.facebook.com/sharer.php?u=https://bitzhangmo.github.io/2019/03/18/Unity%E7%AC%94%E8%AE%B0/Unity-Shader%E4%B8%AD%E7%9A%84%E6%B5%8B%E8%AF%95/" target="_blank" rel="noopener"><i class="fab fa-facebook fa-lg" aria-hidden="true"></i></a></li>
-  <li><a class="icon" href="https://twitter.com/share?url=https://bitzhangmo.github.io/2019/03/18/Unity%E7%AC%94%E8%AE%B0/Unity-Shader%E4%B8%AD%E7%9A%84%E6%B5%8B%E8%AF%95/&text=Unity Shader中的测试" target="_blank" rel="noopener"><i class="fab fa-twitter fa-lg" aria-hidden="true"></i></a></li>
-  <li><a class="icon" href="http://www.linkedin.com/shareArticle?url=https://bitzhangmo.github.io/2019/03/18/Unity%E7%AC%94%E8%AE%B0/Unity-Shader%E4%B8%AD%E7%9A%84%E6%B5%8B%E8%AF%95/&title=Unity Shader中的测试" target="_blank" rel="noopener"><i class="fab fa-linkedin fa-lg" aria-hidden="true"></i></a></li>
-  <li><a class="icon" href="https://pinterest.com/pin/create/bookmarklet/?url=https://bitzhangmo.github.io/2019/03/18/Unity%E7%AC%94%E8%AE%B0/Unity-Shader%E4%B8%AD%E7%9A%84%E6%B5%8B%E8%AF%95/&is_video=false&description=Unity Shader中的测试" target="_blank" rel="noopener"><i class="fab fa-pinterest fa-lg" aria-hidden="true"></i></a></li>
-  <li><a class="icon" href="mailto:?subject=Unity Shader中的测试&body=Check out this article: https://bitzhangmo.github.io/2019/03/18/Unity%E7%AC%94%E8%AE%B0/Unity-Shader%E4%B8%AD%E7%9A%84%E6%B5%8B%E8%AF%95/"><i class="fas fa-envelope fa-lg" aria-hidden="true"></i></a></li>
-  <li><a class="icon" href="https://getpocket.com/save?url=https://bitzhangmo.github.io/2019/03/18/Unity%E7%AC%94%E8%AE%B0/Unity-Shader%E4%B8%AD%E7%9A%84%E6%B5%8B%E8%AF%95/&title=Unity Shader中的测试" target="_blank" rel="noopener"><i class="fab fa-get-pocket fa-lg" aria-hidden="true"></i></a></li>
-  <li><a class="icon" href="http://reddit.com/submit?url=https://bitzhangmo.github.io/2019/03/18/Unity%E7%AC%94%E8%AE%B0/Unity-Shader%E4%B8%AD%E7%9A%84%E6%B5%8B%E8%AF%95/&title=Unity Shader中的测试" target="_blank" rel="noopener"><i class="fab fa-reddit fa-lg" aria-hidden="true"></i></a></li>
-  <li><a class="icon" href="http://www.stumbleupon.com/submit?url=https://bitzhangmo.github.io/2019/03/18/Unity%E7%AC%94%E8%AE%B0/Unity-Shader%E4%B8%AD%E7%9A%84%E6%B5%8B%E8%AF%95/&title=Unity Shader中的测试" target="_blank" rel="noopener"><i class="fab fa-stumbleupon fa-lg" aria-hidden="true"></i></a></li>
-  <li><a class="icon" href="http://digg.com/submit?url=https://bitzhangmo.github.io/2019/03/18/Unity%E7%AC%94%E8%AE%B0/Unity-Shader%E4%B8%AD%E7%9A%84%E6%B5%8B%E8%AF%95/&title=Unity Shader中的测试" target="_blank" rel="noopener"><i class="fab fa-digg fa-lg" aria-hidden="true"></i></a></li>
-  <li><a class="icon" href="http://www.tumblr.com/share/link?url=https://bitzhangmo.github.io/2019/03/18/Unity%E7%AC%94%E8%AE%B0/Unity-Shader%E4%B8%AD%E7%9A%84%E6%B5%8B%E8%AF%95/&name=Unity Shader中的测试&description=&lt;p&gt;Unity Shader中的测试：Alpha测试、模版测试、深度测试。&lt;/p&gt;" target="_blank" rel="noopener"><i class="fab fa-tumblr fa-lg" aria-hidden="true"></i></a></li>
-  <li><a class="icon" href="https://news.ycombinator.com/submitlink?u=https://bitzhangmo.github.io/2019/03/18/Unity%E7%AC%94%E8%AE%B0/Unity-Shader%E4%B8%AD%E7%9A%84%E6%B5%8B%E8%AF%95/&t=Unity Shader中的测试" target="_blank" rel="noopener"><i class="fab fa-hacker-news fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="http://www.facebook.com/sharer.php?u=https://bitzhangmo.github.io/2019/03/18/Unity笔记/Unity-Shader中的测试/"><i class="fab fa-facebook fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="https://twitter.com/share?url=https://bitzhangmo.github.io/2019/03/18/Unity笔记/Unity-Shader中的测试/&text=Unity Shader中的测试"><i class="fab fa-twitter fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="http://www.linkedin.com/shareArticle?url=https://bitzhangmo.github.io/2019/03/18/Unity笔记/Unity-Shader中的测试/&title=Unity Shader中的测试"><i class="fab fa-linkedin fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="https://pinterest.com/pin/create/bookmarklet/?url=https://bitzhangmo.github.io/2019/03/18/Unity笔记/Unity-Shader中的测试/&is_video=false&description=Unity Shader中的测试"><i class="fab fa-pinterest fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="mailto:?subject=Unity Shader中的测试&body=Check out this article: https://bitzhangmo.github.io/2019/03/18/Unity笔记/Unity-Shader中的测试/"><i class="fas fa-envelope fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="https://getpocket.com/save?url=https://bitzhangmo.github.io/2019/03/18/Unity笔记/Unity-Shader中的测试/&title=Unity Shader中的测试"><i class="fab fa-get-pocket fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="http://reddit.com/submit?url=https://bitzhangmo.github.io/2019/03/18/Unity笔记/Unity-Shader中的测试/&title=Unity Shader中的测试"><i class="fab fa-reddit fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="http://www.stumbleupon.com/submit?url=https://bitzhangmo.github.io/2019/03/18/Unity笔记/Unity-Shader中的测试/&title=Unity Shader中的测试"><i class="fab fa-stumbleupon fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="http://digg.com/submit?url=https://bitzhangmo.github.io/2019/03/18/Unity笔记/Unity-Shader中的测试/&title=Unity Shader中的测试"><i class="fab fa-digg fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="http://www.tumblr.com/share/link?url=https://bitzhangmo.github.io/2019/03/18/Unity笔记/Unity-Shader中的测试/&name=Unity Shader中的测试&description=&lt;p&gt;Unity Shader中的测试：Alpha测试、模版测试、深度测试。&lt;/p&gt;"><i class="fab fa-tumblr fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="https://news.ycombinator.com/submitlink?u=https://bitzhangmo.github.io/2019/03/18/Unity笔记/Unity-Shader中的测试/&t=Unity Shader中的测试"><i class="fab fa-hacker-news fa-lg" aria-hidden="true"></i></a></li>
 </ul>
 
     </div>
@@ -256,7 +257,7 @@
          
           <li><a href="/archives/">归档</a></li>
          
-          <li><a href="/projects_url">项目</a></li>
+          <li><a href="/search/">搜索</a></li>
         
       </ul>
     </nav>
@@ -304,5 +305,5 @@
 <!-- Disqus Comments -->
 
 
-</body>
+<script src="/live2dw/lib/L2Dwidget.min.js?bd2294fafea3389ee458f1d9be5a2157"></script><script>L2Dwidget.init({"pluginRootPath":"live2dw/","pluginJsPath":"lib/","pluginModelPath":"assets/","tagMode":false,"debug":false,"model":{"jsonPath":"/live2dw/assets/hijiki.model.json"},"display":{"position":"left","width":100,"height":200},"mobile":{"show":false},"log":false});</script></body>
 </html>

@@ -1,21 +1,23 @@
 <!DOCTYPE html>
 <html lang=zh>
-<head>
+<head><meta name="generator" content="Hexo 3.9.0">
     <!-- so meta -->
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="HandheldFriendly" content="True">
-    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1" />
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
     <meta name="description" content="Unity中的渲染优化技术。">
 <meta name="keywords" content="Unity,Shader">
 <meta property="og:type" content="article">
 <meta property="og:title" content="Unity中的渲染优化技术">
-<meta property="og:url" content="https:&#x2F;&#x2F;bitzhangmo.github.io&#x2F;2019&#x2F;03&#x2F;11&#x2F;Unity%E7%AC%94%E8%AE%B0&#x2F;Unity%E4%B8%AD%E7%9A%84%E6%B8%B2%E6%9F%93%E4%BC%98%E5%8C%96%E6%8A%80%E6%9C%AF&#x2F;index.html">
+<meta property="og:url" content="https://bitzhangmo.github.io/2019/03/11/Unity笔记/Unity中的渲染优化技术/index.html">
 <meta property="og:site_name" content="zhangMo Blog">
 <meta property="og:description" content="Unity中的渲染优化技术。">
 <meta property="og:locale" content="zh-CN">
 <meta property="og:updated_time" content="2019-04-17T06:45:49.249Z">
 <meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="Unity中的渲染优化技术">
+<meta name="twitter:description" content="Unity中的渲染优化技术。">
     
     
         
@@ -63,7 +65,7 @@
          
           <li><a href="/archives/">归档</a></li>
          
-          <li><a href="/projects_url">项目</a></li>
+          <li><a href="/search/">搜索</a></li>
         
       </ul>
     </span>
@@ -71,10 +73,10 @@
     <span id="actions">
       <ul>
         
-        <li><a class="icon" href="/2019/03/11/%E9%9A%8F%E7%AC%94/%E9%9D%A2%E8%AF%95%E7%9B%B8%E5%85%B3%E9%97%AE%E9%A2%98%E6%B1%87%E6%80%BB/"><i class="fas fa-chevron-left" aria-hidden="true" onmouseover="$('#i-prev').toggle();" onmouseout="$('#i-prev').toggle();"></i></a></li>
+        <li><a class="icon" href="/2019/03/11/随笔/面试相关问题汇总/"><i class="fas fa-chevron-left" aria-hidden="true" onmouseover="$('#i-prev').toggle();" onmouseout="$('#i-prev').toggle();"></i></a></li>
         
         
-        <li><a class="icon" href="/2019/03/10/Unity%E7%AC%94%E8%AE%B0/Unity-Shader-%E4%BD%BF%E7%94%A8%E5%99%AA%E5%A3%B0/"><i class="fas fa-chevron-right" aria-hidden="true" onmouseover="$('#i-next').toggle();" onmouseout="$('#i-next').toggle();"></i></a></li>
+        <li><a class="icon" href="/2019/03/10/Unity笔记/Unity-Shader-使用噪声/"><i class="fas fa-chevron-right" aria-hidden="true" onmouseover="$('#i-next').toggle();" onmouseout="$('#i-next').toggle();"></i></a></li>
         
         <li><a class="icon" href="#" onclick="$('html, body').animate({ scrollTop: 0 }, 'fast');"><i class="fas fa-chevron-up" aria-hidden="true" onmouseover="$('#i-top').toggle();" onmouseout="$('#i-top').toggle();"></i></a></li>
         <li><a class="icon" href="#"><i class="fas fa-share-alt" aria-hidden="true" onmouseover="$('#i-share').toggle();" onmouseout="$('#i-share').toggle();" onclick="$('#share').toggle();return false;"></i></a></li>
@@ -87,17 +89,17 @@
     <br/>
     <div id="share" style="display: none">
       <ul>
-  <li><a class="icon" href="http://www.facebook.com/sharer.php?u=https://bitzhangmo.github.io/2019/03/11/Unity%E7%AC%94%E8%AE%B0/Unity%E4%B8%AD%E7%9A%84%E6%B8%B2%E6%9F%93%E4%BC%98%E5%8C%96%E6%8A%80%E6%9C%AF/" target="_blank" rel="noopener"><i class="fab fa-facebook " aria-hidden="true"></i></a></li>
-  <li><a class="icon" href="https://twitter.com/share?url=https://bitzhangmo.github.io/2019/03/11/Unity%E7%AC%94%E8%AE%B0/Unity%E4%B8%AD%E7%9A%84%E6%B8%B2%E6%9F%93%E4%BC%98%E5%8C%96%E6%8A%80%E6%9C%AF/&text=Unity中的渲染优化技术" target="_blank" rel="noopener"><i class="fab fa-twitter " aria-hidden="true"></i></a></li>
-  <li><a class="icon" href="http://www.linkedin.com/shareArticle?url=https://bitzhangmo.github.io/2019/03/11/Unity%E7%AC%94%E8%AE%B0/Unity%E4%B8%AD%E7%9A%84%E6%B8%B2%E6%9F%93%E4%BC%98%E5%8C%96%E6%8A%80%E6%9C%AF/&title=Unity中的渲染优化技术" target="_blank" rel="noopener"><i class="fab fa-linkedin " aria-hidden="true"></i></a></li>
-  <li><a class="icon" href="https://pinterest.com/pin/create/bookmarklet/?url=https://bitzhangmo.github.io/2019/03/11/Unity%E7%AC%94%E8%AE%B0/Unity%E4%B8%AD%E7%9A%84%E6%B8%B2%E6%9F%93%E4%BC%98%E5%8C%96%E6%8A%80%E6%9C%AF/&is_video=false&description=Unity中的渲染优化技术" target="_blank" rel="noopener"><i class="fab fa-pinterest " aria-hidden="true"></i></a></li>
-  <li><a class="icon" href="mailto:?subject=Unity中的渲染优化技术&body=Check out this article: https://bitzhangmo.github.io/2019/03/11/Unity%E7%AC%94%E8%AE%B0/Unity%E4%B8%AD%E7%9A%84%E6%B8%B2%E6%9F%93%E4%BC%98%E5%8C%96%E6%8A%80%E6%9C%AF/"><i class="fas fa-envelope " aria-hidden="true"></i></a></li>
-  <li><a class="icon" href="https://getpocket.com/save?url=https://bitzhangmo.github.io/2019/03/11/Unity%E7%AC%94%E8%AE%B0/Unity%E4%B8%AD%E7%9A%84%E6%B8%B2%E6%9F%93%E4%BC%98%E5%8C%96%E6%8A%80%E6%9C%AF/&title=Unity中的渲染优化技术" target="_blank" rel="noopener"><i class="fab fa-get-pocket " aria-hidden="true"></i></a></li>
-  <li><a class="icon" href="http://reddit.com/submit?url=https://bitzhangmo.github.io/2019/03/11/Unity%E7%AC%94%E8%AE%B0/Unity%E4%B8%AD%E7%9A%84%E6%B8%B2%E6%9F%93%E4%BC%98%E5%8C%96%E6%8A%80%E6%9C%AF/&title=Unity中的渲染优化技术" target="_blank" rel="noopener"><i class="fab fa-reddit " aria-hidden="true"></i></a></li>
-  <li><a class="icon" href="http://www.stumbleupon.com/submit?url=https://bitzhangmo.github.io/2019/03/11/Unity%E7%AC%94%E8%AE%B0/Unity%E4%B8%AD%E7%9A%84%E6%B8%B2%E6%9F%93%E4%BC%98%E5%8C%96%E6%8A%80%E6%9C%AF/&title=Unity中的渲染优化技术" target="_blank" rel="noopener"><i class="fab fa-stumbleupon " aria-hidden="true"></i></a></li>
-  <li><a class="icon" href="http://digg.com/submit?url=https://bitzhangmo.github.io/2019/03/11/Unity%E7%AC%94%E8%AE%B0/Unity%E4%B8%AD%E7%9A%84%E6%B8%B2%E6%9F%93%E4%BC%98%E5%8C%96%E6%8A%80%E6%9C%AF/&title=Unity中的渲染优化技术" target="_blank" rel="noopener"><i class="fab fa-digg " aria-hidden="true"></i></a></li>
-  <li><a class="icon" href="http://www.tumblr.com/share/link?url=https://bitzhangmo.github.io/2019/03/11/Unity%E7%AC%94%E8%AE%B0/Unity%E4%B8%AD%E7%9A%84%E6%B8%B2%E6%9F%93%E4%BC%98%E5%8C%96%E6%8A%80%E6%9C%AF/&name=Unity中的渲染优化技术&description=&lt;p&gt;Unity中的渲染优化技术。&lt;/p&gt;" target="_blank" rel="noopener"><i class="fab fa-tumblr " aria-hidden="true"></i></a></li>
-  <li><a class="icon" href="https://news.ycombinator.com/submitlink?u=https://bitzhangmo.github.io/2019/03/11/Unity%E7%AC%94%E8%AE%B0/Unity%E4%B8%AD%E7%9A%84%E6%B8%B2%E6%9F%93%E4%BC%98%E5%8C%96%E6%8A%80%E6%9C%AF/&t=Unity中的渲染优化技术" target="_blank" rel="noopener"><i class="fab fa-hacker-news " aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="http://www.facebook.com/sharer.php?u=https://bitzhangmo.github.io/2019/03/11/Unity笔记/Unity中的渲染优化技术/"><i class="fab fa-facebook " aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="https://twitter.com/share?url=https://bitzhangmo.github.io/2019/03/11/Unity笔记/Unity中的渲染优化技术/&text=Unity中的渲染优化技术"><i class="fab fa-twitter " aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="http://www.linkedin.com/shareArticle?url=https://bitzhangmo.github.io/2019/03/11/Unity笔记/Unity中的渲染优化技术/&title=Unity中的渲染优化技术"><i class="fab fa-linkedin " aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="https://pinterest.com/pin/create/bookmarklet/?url=https://bitzhangmo.github.io/2019/03/11/Unity笔记/Unity中的渲染优化技术/&is_video=false&description=Unity中的渲染优化技术"><i class="fab fa-pinterest " aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="mailto:?subject=Unity中的渲染优化技术&body=Check out this article: https://bitzhangmo.github.io/2019/03/11/Unity笔记/Unity中的渲染优化技术/"><i class="fas fa-envelope " aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="https://getpocket.com/save?url=https://bitzhangmo.github.io/2019/03/11/Unity笔记/Unity中的渲染优化技术/&title=Unity中的渲染优化技术"><i class="fab fa-get-pocket " aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="http://reddit.com/submit?url=https://bitzhangmo.github.io/2019/03/11/Unity笔记/Unity中的渲染优化技术/&title=Unity中的渲染优化技术"><i class="fab fa-reddit " aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="http://www.stumbleupon.com/submit?url=https://bitzhangmo.github.io/2019/03/11/Unity笔记/Unity中的渲染优化技术/&title=Unity中的渲染优化技术"><i class="fab fa-stumbleupon " aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="http://digg.com/submit?url=https://bitzhangmo.github.io/2019/03/11/Unity笔记/Unity中的渲染优化技术/&title=Unity中的渲染优化技术"><i class="fab fa-digg " aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="http://www.tumblr.com/share/link?url=https://bitzhangmo.github.io/2019/03/11/Unity笔记/Unity中的渲染优化技术/&name=Unity中的渲染优化技术&description=&lt;p&gt;Unity中的渲染优化技术。&lt;/p&gt;"><i class="fab fa-tumblr " aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="https://news.ycombinator.com/submitlink?u=https://bitzhangmo.github.io/2019/03/11/Unity笔记/Unity中的渲染优化技术/&t=Unity中的渲染优化技术"><i class="fab fa-hacker-news " aria-hidden="true"></i></a></li>
 </ul>
 
     </div>
@@ -142,7 +144,7 @@
       
     <div class="article-tag">
         <i class="fas fa-tag"></i>
-        <a class="tag-link" href="/tags/Shader/" rel="tag">Shader</a>, <a class="tag-link" href="/tags/Unity/" rel="tag">Unity</a>
+        <a class="tag-link" href="/tags/Shader/">Shader</a>, <a class="tag-link" href="/tags/Unity/">Unity</a>
     </div>
 
 
@@ -153,7 +155,6 @@
   <div class="content" itemprop="articleBody">
     <p>Unity中的渲染优化技术。</p>
 <a id="more"></a>
-
 <h3 id="影响性能的因素："><a href="#影响性能的因素：" class="headerlink" title="影响性能的因素："></a>影响性能的因素：</h3><p>对于一个游戏来说，主要适用两种计算资源：CPU和GPU。它们会相互合作，来让我们的游戏可以在预期的帧率和分辨率下工作，其中CPU负责保证帧率，GPU负责分辨率相关的的一些处理。</p>
 <h4 id="性能瓶颈："><a href="#性能瓶颈：" class="headerlink" title="性能瓶颈："></a>性能瓶颈：</h4><ol>
 <li>CPU：<ul>
@@ -298,7 +299,7 @@
 <li><p>显存带宽。显存带宽是指GPU读写其专用内存的速度。如果我们的游戏速度受限于显存带宽，通常可能是我们使用的纹理太大，以至于GPU无法快速处理。</p>
 </li>
 </ol>
-<h4 id="纹理压缩："><a href="#纹理压缩：" class="headerlink" title="纹理压缩："></a>纹理压缩：</h4><p>纹理压缩技术可以同时极大的降低纹理在磁盘和内存中的大小。如果是显存带宽的问题，那么使用纹理压缩减小纹理在内存的大小可以帮助改善性能，Unity提供了很多纹理压缩的格式和设置，运用也十分简单，根据不同的需求、机器和场景我们使用的方式也有所不同，具体可以参照<a href="http://link.zhihu.com/?target=https%3A//docs.unity3d.com/Manual/class-TextureImporter.html">Unity 官方文档</a></p>
+<h4 id="纹理压缩："><a href="#纹理压缩：" class="headerlink" title="纹理压缩："></a>纹理压缩：</h4><p>纹理压缩技术可以同时极大的降低纹理在磁盘和内存中的大小。如果是显存带宽的问题，那么使用纹理压缩减小纹理在内存的大小可以帮助改善性能，Unity提供了很多纹理压缩的格式和设置，运用也十分简单，根据不同的需求、机器和场景我们使用的方式也有所不同，具体可以参照<a href="http://link.zhihu.com/?target=https%3A//docs.unity3d.com/Manual/class-TextureImporter.html" target="_blank" rel="noopener">Unity 官方文档</a></p>
 <h4 id="Mipmap："><a href="#Mipmap：" class="headerlink" title="Mipmap："></a>Mipmap：</h4><p>如果我们的场景包含距离摄像机很远的物体，我们可以通过使用mipmap来缓解显存带宽的问题，mipmap的主要作用便是模型的贴图会根据摄像机距离模型的远近而调整不同质量的贴图显示，以达到优化目的。</p>
 <h4 id="LOD（Levels-of-Detail）："><a href="#LOD（Levels-of-Detail）：" class="headerlink" title="LOD（Levels of Detail）："></a>LOD（Levels of Detail）：</h4><p>LOD与Mipmap类似，根据距离的远近使用不同精度模型，远处选择低精度的模型，近的时候选择高精度模型，这样就可以减少模型上面的顶点和面片数量从而提高性能。<br>其和Mipmap的差异主要在一Mipmap针对贴图，而LOD针对模型。Mipmap可以自动生成八张精度不同的贴图，而LOD必须由我们自己提供三个不同精度的模型。</p>
 <h3 id="Unity-中的渲染分析工具："><a href="#Unity-中的渲染分析工具：" class="headerlink" title="Unity 中的渲染分析工具："></a>Unity 中的渲染分析工具：</h3><h4 id="渲染统计窗口：Rendering-Statistics-Window"><a href="#渲染统计窗口：Rendering-Statistics-Window" class="headerlink" title="渲染统计窗口：Rendering Statistics Window"></a>渲染统计窗口：Rendering Statistics Window</h4><h4 id="性能分析器：Profiler"><a href="#性能分析器：Profiler" class="headerlink" title="性能分析器：Profiler"></a>性能分析器：Profiler</h4><h4 id="帧调试器：Frame-Debugger"><a href="#帧调试器：Frame-Debugger" class="headerlink" title="帧调试器：Frame Debugger"></a>帧调试器：Frame Debugger</h4><hr>
@@ -325,7 +326,7 @@
          
           <li><a href="/archives/">归档</a></li>
          
-          <li><a href="/projects_url">项目</a></li>
+          <li><a href="/search/">搜索</a></li>
         
       </ul>
     </div>
@@ -336,17 +337,17 @@
 
     <div id="share-footer" style="display: none">
       <ul>
-  <li><a class="icon" href="http://www.facebook.com/sharer.php?u=https://bitzhangmo.github.io/2019/03/11/Unity%E7%AC%94%E8%AE%B0/Unity%E4%B8%AD%E7%9A%84%E6%B8%B2%E6%9F%93%E4%BC%98%E5%8C%96%E6%8A%80%E6%9C%AF/" target="_blank" rel="noopener"><i class="fab fa-facebook fa-lg" aria-hidden="true"></i></a></li>
-  <li><a class="icon" href="https://twitter.com/share?url=https://bitzhangmo.github.io/2019/03/11/Unity%E7%AC%94%E8%AE%B0/Unity%E4%B8%AD%E7%9A%84%E6%B8%B2%E6%9F%93%E4%BC%98%E5%8C%96%E6%8A%80%E6%9C%AF/&text=Unity中的渲染优化技术" target="_blank" rel="noopener"><i class="fab fa-twitter fa-lg" aria-hidden="true"></i></a></li>
-  <li><a class="icon" href="http://www.linkedin.com/shareArticle?url=https://bitzhangmo.github.io/2019/03/11/Unity%E7%AC%94%E8%AE%B0/Unity%E4%B8%AD%E7%9A%84%E6%B8%B2%E6%9F%93%E4%BC%98%E5%8C%96%E6%8A%80%E6%9C%AF/&title=Unity中的渲染优化技术" target="_blank" rel="noopener"><i class="fab fa-linkedin fa-lg" aria-hidden="true"></i></a></li>
-  <li><a class="icon" href="https://pinterest.com/pin/create/bookmarklet/?url=https://bitzhangmo.github.io/2019/03/11/Unity%E7%AC%94%E8%AE%B0/Unity%E4%B8%AD%E7%9A%84%E6%B8%B2%E6%9F%93%E4%BC%98%E5%8C%96%E6%8A%80%E6%9C%AF/&is_video=false&description=Unity中的渲染优化技术" target="_blank" rel="noopener"><i class="fab fa-pinterest fa-lg" aria-hidden="true"></i></a></li>
-  <li><a class="icon" href="mailto:?subject=Unity中的渲染优化技术&body=Check out this article: https://bitzhangmo.github.io/2019/03/11/Unity%E7%AC%94%E8%AE%B0/Unity%E4%B8%AD%E7%9A%84%E6%B8%B2%E6%9F%93%E4%BC%98%E5%8C%96%E6%8A%80%E6%9C%AF/"><i class="fas fa-envelope fa-lg" aria-hidden="true"></i></a></li>
-  <li><a class="icon" href="https://getpocket.com/save?url=https://bitzhangmo.github.io/2019/03/11/Unity%E7%AC%94%E8%AE%B0/Unity%E4%B8%AD%E7%9A%84%E6%B8%B2%E6%9F%93%E4%BC%98%E5%8C%96%E6%8A%80%E6%9C%AF/&title=Unity中的渲染优化技术" target="_blank" rel="noopener"><i class="fab fa-get-pocket fa-lg" aria-hidden="true"></i></a></li>
-  <li><a class="icon" href="http://reddit.com/submit?url=https://bitzhangmo.github.io/2019/03/11/Unity%E7%AC%94%E8%AE%B0/Unity%E4%B8%AD%E7%9A%84%E6%B8%B2%E6%9F%93%E4%BC%98%E5%8C%96%E6%8A%80%E6%9C%AF/&title=Unity中的渲染优化技术" target="_blank" rel="noopener"><i class="fab fa-reddit fa-lg" aria-hidden="true"></i></a></li>
-  <li><a class="icon" href="http://www.stumbleupon.com/submit?url=https://bitzhangmo.github.io/2019/03/11/Unity%E7%AC%94%E8%AE%B0/Unity%E4%B8%AD%E7%9A%84%E6%B8%B2%E6%9F%93%E4%BC%98%E5%8C%96%E6%8A%80%E6%9C%AF/&title=Unity中的渲染优化技术" target="_blank" rel="noopener"><i class="fab fa-stumbleupon fa-lg" aria-hidden="true"></i></a></li>
-  <li><a class="icon" href="http://digg.com/submit?url=https://bitzhangmo.github.io/2019/03/11/Unity%E7%AC%94%E8%AE%B0/Unity%E4%B8%AD%E7%9A%84%E6%B8%B2%E6%9F%93%E4%BC%98%E5%8C%96%E6%8A%80%E6%9C%AF/&title=Unity中的渲染优化技术" target="_blank" rel="noopener"><i class="fab fa-digg fa-lg" aria-hidden="true"></i></a></li>
-  <li><a class="icon" href="http://www.tumblr.com/share/link?url=https://bitzhangmo.github.io/2019/03/11/Unity%E7%AC%94%E8%AE%B0/Unity%E4%B8%AD%E7%9A%84%E6%B8%B2%E6%9F%93%E4%BC%98%E5%8C%96%E6%8A%80%E6%9C%AF/&name=Unity中的渲染优化技术&description=&lt;p&gt;Unity中的渲染优化技术。&lt;/p&gt;" target="_blank" rel="noopener"><i class="fab fa-tumblr fa-lg" aria-hidden="true"></i></a></li>
-  <li><a class="icon" href="https://news.ycombinator.com/submitlink?u=https://bitzhangmo.github.io/2019/03/11/Unity%E7%AC%94%E8%AE%B0/Unity%E4%B8%AD%E7%9A%84%E6%B8%B2%E6%9F%93%E4%BC%98%E5%8C%96%E6%8A%80%E6%9C%AF/&t=Unity中的渲染优化技术" target="_blank" rel="noopener"><i class="fab fa-hacker-news fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="http://www.facebook.com/sharer.php?u=https://bitzhangmo.github.io/2019/03/11/Unity笔记/Unity中的渲染优化技术/"><i class="fab fa-facebook fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="https://twitter.com/share?url=https://bitzhangmo.github.io/2019/03/11/Unity笔记/Unity中的渲染优化技术/&text=Unity中的渲染优化技术"><i class="fab fa-twitter fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="http://www.linkedin.com/shareArticle?url=https://bitzhangmo.github.io/2019/03/11/Unity笔记/Unity中的渲染优化技术/&title=Unity中的渲染优化技术"><i class="fab fa-linkedin fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="https://pinterest.com/pin/create/bookmarklet/?url=https://bitzhangmo.github.io/2019/03/11/Unity笔记/Unity中的渲染优化技术/&is_video=false&description=Unity中的渲染优化技术"><i class="fab fa-pinterest fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="mailto:?subject=Unity中的渲染优化技术&body=Check out this article: https://bitzhangmo.github.io/2019/03/11/Unity笔记/Unity中的渲染优化技术/"><i class="fas fa-envelope fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="https://getpocket.com/save?url=https://bitzhangmo.github.io/2019/03/11/Unity笔记/Unity中的渲染优化技术/&title=Unity中的渲染优化技术"><i class="fab fa-get-pocket fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="http://reddit.com/submit?url=https://bitzhangmo.github.io/2019/03/11/Unity笔记/Unity中的渲染优化技术/&title=Unity中的渲染优化技术"><i class="fab fa-reddit fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="http://www.stumbleupon.com/submit?url=https://bitzhangmo.github.io/2019/03/11/Unity笔记/Unity中的渲染优化技术/&title=Unity中的渲染优化技术"><i class="fab fa-stumbleupon fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="http://digg.com/submit?url=https://bitzhangmo.github.io/2019/03/11/Unity笔记/Unity中的渲染优化技术/&title=Unity中的渲染优化技术"><i class="fab fa-digg fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="http://www.tumblr.com/share/link?url=https://bitzhangmo.github.io/2019/03/11/Unity笔记/Unity中的渲染优化技术/&name=Unity中的渲染优化技术&description=&lt;p&gt;Unity中的渲染优化技术。&lt;/p&gt;"><i class="fab fa-tumblr fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="https://news.ycombinator.com/submitlink?u=https://bitzhangmo.github.io/2019/03/11/Unity笔记/Unity中的渲染优化技术/&t=Unity中的渲染优化技术"><i class="fab fa-hacker-news fa-lg" aria-hidden="true"></i></a></li>
 </ul>
 
     </div>
@@ -376,7 +377,7 @@
          
           <li><a href="/archives/">归档</a></li>
          
-          <li><a href="/projects_url">项目</a></li>
+          <li><a href="/search/">搜索</a></li>
         
       </ul>
     </nav>
@@ -424,5 +425,5 @@
 <!-- Disqus Comments -->
 
 
-</body>
+<script src="/live2dw/lib/L2Dwidget.min.js?bd2294fafea3389ee458f1d9be5a2157"></script><script>L2Dwidget.init({"pluginRootPath":"live2dw/","pluginJsPath":"lib/","pluginModelPath":"assets/","tagMode":false,"debug":false,"model":{"jsonPath":"/live2dw/assets/hijiki.model.json"},"display":{"position":"left","width":100,"height":200},"mobile":{"show":false},"log":false});</script></body>
 </html>

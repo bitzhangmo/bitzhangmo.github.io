@@ -1,26 +1,28 @@
 <!DOCTYPE html>
 <html lang=zh>
-<head>
+<head><meta name="generator" content="Hexo 3.9.0">
     <!-- so meta -->
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="HandheldFriendly" content="True">
-    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1" />
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
     <meta name="description" content="AssetBundle 使用模式">
 <meta name="keywords" content="Unity">
 <meta property="og:type" content="article">
 <meta property="og:title" content="[转] AssetBundle 使用模式">
-<meta property="og:url" content="https:&#x2F;&#x2F;bitzhangmo.github.io&#x2F;2019&#x2F;04&#x2F;20&#x2F;Unity%E7%AC%94%E8%AE%B0&#x2F;%E8%BD%AC-AssetBundle-%E4%BD%BF%E7%94%A8%E6%A8%A1%E5%BC%8F&#x2F;index.html">
+<meta property="og:url" content="https://bitzhangmo.github.io/2019/04/20/Unity笔记/转-AssetBundle-使用模式/index.html">
 <meta property="og:site_name" content="zhangMo Blog">
 <meta property="og:description" content="AssetBundle 使用模式">
 <meta property="og:locale" content="zh-CN">
-<meta property="og:image" content="https:&#x2F;&#x2F;pic1.zhimg.com&#x2F;80&#x2F;v2-d1e9243af1c9eec1c84d5dfd35c48174_hd.jpg">
-<meta property="og:image" content="https:&#x2F;&#x2F;pic3.zhimg.com&#x2F;80&#x2F;v2-f8c1be947da9e9965529317888c98a9e_hd.jpg">
-<meta property="og:image" content="https:&#x2F;&#x2F;pic4.zhimg.com&#x2F;80&#x2F;v2-94762ab26286d455ae71670a8903a5eb_hd.jpg">
-<meta property="og:image" content="https:&#x2F;&#x2F;pic2.zhimg.com&#x2F;80&#x2F;v2-50a875967379cab7cedd2b5287ad1ec5_hd.jpg">
+<meta property="og:image" content="https://pic1.zhimg.com/80/v2-d1e9243af1c9eec1c84d5dfd35c48174_hd.jpg">
+<meta property="og:image" content="https://pic3.zhimg.com/80/v2-f8c1be947da9e9965529317888c98a9e_hd.jpg">
+<meta property="og:image" content="https://pic4.zhimg.com/80/v2-94762ab26286d455ae71670a8903a5eb_hd.jpg">
+<meta property="og:image" content="https://pic2.zhimg.com/80/v2-50a875967379cab7cedd2b5287ad1ec5_hd.jpg">
 <meta property="og:updated_time" content="2019-04-20T12:55:50.315Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:image" content="https:&#x2F;&#x2F;pic1.zhimg.com&#x2F;80&#x2F;v2-d1e9243af1c9eec1c84d5dfd35c48174_hd.jpg">
+<meta name="twitter:title" content="[转] AssetBundle 使用模式">
+<meta name="twitter:description" content="AssetBundle 使用模式">
+<meta name="twitter:image" content="https://pic1.zhimg.com/80/v2-d1e9243af1c9eec1c84d5dfd35c48174_hd.jpg">
     
     
         
@@ -68,7 +70,7 @@
          
           <li><a href="/archives/">归档</a></li>
          
-          <li><a href="/projects_url">项目</a></li>
+          <li><a href="/search/">搜索</a></li>
         
       </ul>
     </span>
@@ -76,10 +78,10 @@
     <span id="actions">
       <ul>
         
-        <li><a class="icon" href="/2019/04/24/Unity%E7%AC%94%E8%AE%B0/Unity-%E4%B8%8D%E5%90%8C%E8%AE%BE%E5%A4%87%E5%B1%8F%E5%B9%95%E9%80%82%E9%85%8D%E9%97%AE%E9%A2%98/"><i class="fas fa-chevron-left" aria-hidden="true" onmouseover="$('#i-prev').toggle();" onmouseout="$('#i-prev').toggle();"></i></a></li>
+        <li><a class="icon" href="/2019/04/24/Unity笔记/Unity-不同设备屏幕适配问题/"><i class="fas fa-chevron-left" aria-hidden="true" onmouseover="$('#i-prev').toggle();" onmouseout="$('#i-prev').toggle();"></i></a></li>
         
         
-        <li><a class="icon" href="/2019/04/20/Unity%E7%AC%94%E8%AE%B0/%E8%BD%AC-AssetBundle-%E5%9F%BA%E6%9C%AC%E7%9F%A5%E8%AF%86/"><i class="fas fa-chevron-right" aria-hidden="true" onmouseover="$('#i-next').toggle();" onmouseout="$('#i-next').toggle();"></i></a></li>
+        <li><a class="icon" href="/2019/04/20/Unity笔记/转-AssetBundle-基本知识/"><i class="fas fa-chevron-right" aria-hidden="true" onmouseover="$('#i-next').toggle();" onmouseout="$('#i-next').toggle();"></i></a></li>
         
         <li><a class="icon" href="#" onclick="$('html, body').animate({ scrollTop: 0 }, 'fast');"><i class="fas fa-chevron-up" aria-hidden="true" onmouseover="$('#i-top').toggle();" onmouseout="$('#i-top').toggle();"></i></a></li>
         <li><a class="icon" href="#"><i class="fas fa-share-alt" aria-hidden="true" onmouseover="$('#i-share').toggle();" onmouseout="$('#i-share').toggle();" onclick="$('#share').toggle();return false;"></i></a></li>
@@ -92,17 +94,17 @@
     <br/>
     <div id="share" style="display: none">
       <ul>
-  <li><a class="icon" href="http://www.facebook.com/sharer.php?u=https://bitzhangmo.github.io/2019/04/20/Unity%E7%AC%94%E8%AE%B0/%E8%BD%AC-AssetBundle-%E4%BD%BF%E7%94%A8%E6%A8%A1%E5%BC%8F/" target="_blank" rel="noopener"><i class="fab fa-facebook " aria-hidden="true"></i></a></li>
-  <li><a class="icon" href="https://twitter.com/share?url=https://bitzhangmo.github.io/2019/04/20/Unity%E7%AC%94%E8%AE%B0/%E8%BD%AC-AssetBundle-%E4%BD%BF%E7%94%A8%E6%A8%A1%E5%BC%8F/&text=[转] AssetBundle 使用模式" target="_blank" rel="noopener"><i class="fab fa-twitter " aria-hidden="true"></i></a></li>
-  <li><a class="icon" href="http://www.linkedin.com/shareArticle?url=https://bitzhangmo.github.io/2019/04/20/Unity%E7%AC%94%E8%AE%B0/%E8%BD%AC-AssetBundle-%E4%BD%BF%E7%94%A8%E6%A8%A1%E5%BC%8F/&title=[转] AssetBundle 使用模式" target="_blank" rel="noopener"><i class="fab fa-linkedin " aria-hidden="true"></i></a></li>
-  <li><a class="icon" href="https://pinterest.com/pin/create/bookmarklet/?url=https://bitzhangmo.github.io/2019/04/20/Unity%E7%AC%94%E8%AE%B0/%E8%BD%AC-AssetBundle-%E4%BD%BF%E7%94%A8%E6%A8%A1%E5%BC%8F/&is_video=false&description=[转] AssetBundle 使用模式" target="_blank" rel="noopener"><i class="fab fa-pinterest " aria-hidden="true"></i></a></li>
-  <li><a class="icon" href="mailto:?subject=[转] AssetBundle 使用模式&body=Check out this article: https://bitzhangmo.github.io/2019/04/20/Unity%E7%AC%94%E8%AE%B0/%E8%BD%AC-AssetBundle-%E4%BD%BF%E7%94%A8%E6%A8%A1%E5%BC%8F/"><i class="fas fa-envelope " aria-hidden="true"></i></a></li>
-  <li><a class="icon" href="https://getpocket.com/save?url=https://bitzhangmo.github.io/2019/04/20/Unity%E7%AC%94%E8%AE%B0/%E8%BD%AC-AssetBundle-%E4%BD%BF%E7%94%A8%E6%A8%A1%E5%BC%8F/&title=[转] AssetBundle 使用模式" target="_blank" rel="noopener"><i class="fab fa-get-pocket " aria-hidden="true"></i></a></li>
-  <li><a class="icon" href="http://reddit.com/submit?url=https://bitzhangmo.github.io/2019/04/20/Unity%E7%AC%94%E8%AE%B0/%E8%BD%AC-AssetBundle-%E4%BD%BF%E7%94%A8%E6%A8%A1%E5%BC%8F/&title=[转] AssetBundle 使用模式" target="_blank" rel="noopener"><i class="fab fa-reddit " aria-hidden="true"></i></a></li>
-  <li><a class="icon" href="http://www.stumbleupon.com/submit?url=https://bitzhangmo.github.io/2019/04/20/Unity%E7%AC%94%E8%AE%B0/%E8%BD%AC-AssetBundle-%E4%BD%BF%E7%94%A8%E6%A8%A1%E5%BC%8F/&title=[转] AssetBundle 使用模式" target="_blank" rel="noopener"><i class="fab fa-stumbleupon " aria-hidden="true"></i></a></li>
-  <li><a class="icon" href="http://digg.com/submit?url=https://bitzhangmo.github.io/2019/04/20/Unity%E7%AC%94%E8%AE%B0/%E8%BD%AC-AssetBundle-%E4%BD%BF%E7%94%A8%E6%A8%A1%E5%BC%8F/&title=[转] AssetBundle 使用模式" target="_blank" rel="noopener"><i class="fab fa-digg " aria-hidden="true"></i></a></li>
-  <li><a class="icon" href="http://www.tumblr.com/share/link?url=https://bitzhangmo.github.io/2019/04/20/Unity%E7%AC%94%E8%AE%B0/%E8%BD%AC-AssetBundle-%E4%BD%BF%E7%94%A8%E6%A8%A1%E5%BC%8F/&name=[转] AssetBundle 使用模式&description=&lt;p&gt;AssetBundle 使用模式&lt;/p&gt;" target="_blank" rel="noopener"><i class="fab fa-tumblr " aria-hidden="true"></i></a></li>
-  <li><a class="icon" href="https://news.ycombinator.com/submitlink?u=https://bitzhangmo.github.io/2019/04/20/Unity%E7%AC%94%E8%AE%B0/%E8%BD%AC-AssetBundle-%E4%BD%BF%E7%94%A8%E6%A8%A1%E5%BC%8F/&t=[转] AssetBundle 使用模式" target="_blank" rel="noopener"><i class="fab fa-hacker-news " aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="http://www.facebook.com/sharer.php?u=https://bitzhangmo.github.io/2019/04/20/Unity笔记/转-AssetBundle-使用模式/"><i class="fab fa-facebook " aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="https://twitter.com/share?url=https://bitzhangmo.github.io/2019/04/20/Unity笔记/转-AssetBundle-使用模式/&text=[转] AssetBundle 使用模式"><i class="fab fa-twitter " aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="http://www.linkedin.com/shareArticle?url=https://bitzhangmo.github.io/2019/04/20/Unity笔记/转-AssetBundle-使用模式/&title=[转] AssetBundle 使用模式"><i class="fab fa-linkedin " aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="https://pinterest.com/pin/create/bookmarklet/?url=https://bitzhangmo.github.io/2019/04/20/Unity笔记/转-AssetBundle-使用模式/&is_video=false&description=[转] AssetBundle 使用模式"><i class="fab fa-pinterest " aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="mailto:?subject=[转] AssetBundle 使用模式&body=Check out this article: https://bitzhangmo.github.io/2019/04/20/Unity笔记/转-AssetBundle-使用模式/"><i class="fas fa-envelope " aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="https://getpocket.com/save?url=https://bitzhangmo.github.io/2019/04/20/Unity笔记/转-AssetBundle-使用模式/&title=[转] AssetBundle 使用模式"><i class="fab fa-get-pocket " aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="http://reddit.com/submit?url=https://bitzhangmo.github.io/2019/04/20/Unity笔记/转-AssetBundle-使用模式/&title=[转] AssetBundle 使用模式"><i class="fab fa-reddit " aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="http://www.stumbleupon.com/submit?url=https://bitzhangmo.github.io/2019/04/20/Unity笔记/转-AssetBundle-使用模式/&title=[转] AssetBundle 使用模式"><i class="fab fa-stumbleupon " aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="http://digg.com/submit?url=https://bitzhangmo.github.io/2019/04/20/Unity笔记/转-AssetBundle-使用模式/&title=[转] AssetBundle 使用模式"><i class="fab fa-digg " aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="http://www.tumblr.com/share/link?url=https://bitzhangmo.github.io/2019/04/20/Unity笔记/转-AssetBundle-使用模式/&name=[转] AssetBundle 使用模式&description=&lt;p&gt;AssetBundle 使用模式&lt;/p&gt;"><i class="fab fa-tumblr " aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="https://news.ycombinator.com/submitlink?u=https://bitzhangmo.github.io/2019/04/20/Unity笔记/转-AssetBundle-使用模式/&t=[转] AssetBundle 使用模式"><i class="fab fa-hacker-news " aria-hidden="true"></i></a></li>
 </ul>
 
     </div>
@@ -140,14 +142,14 @@
       
     <div class="article-category">
         <i class="fas fa-archive"></i>
-        <a class="category-link" href="/categories/%E8%BD%AC%E8%BD%BD/">转载</a>
+        <a class="category-link" href="/categories/转载/">转载</a>
     </div>
 
 
       
     <div class="article-tag">
         <i class="fas fa-tag"></i>
-        <a class="tag-link" href="/tags/Unity/" rel="tag">Unity</a>
+        <a class="tag-link" href="/tags/Unity/">Unity</a>
     </div>
 
 
@@ -158,16 +160,15 @@
   <div class="content" itemprop="articleBody">
     <p>AssetBundle 使用模式</p>
 <a id="more"></a>
-
 <p>原文地址：<a href="https://zhuanlan.zhihu.com/p/33268074" target="_blank" rel="noopener">https://zhuanlan.zhihu.com/p/33268074</a></p>
 <hr>
-<p>原文：<a href="https://link.zhihu.com/?target=https%3A//unity3d.com/cn/learn/tutorials/temas/best-practices/assetbundle-usage-patterns">https://unity3d.com/cn/learn/tutorials/temas/best-practices/assetbundle-usage-patterns</a><br>译文参考： <a href="https://link.zhihu.com/?target=http%3A//blog.shuiguzi.com/2017/04/18/AssetBundle_usage_pattern_1/">http://blog.shuiguzi.com/2017/04/18/AssetBundle_usage_pattern_1/</a></p>
+<p>原文：<a href="https://link.zhihu.com/?target=https%3A//unity3d.com/cn/learn/tutorials/temas/best-practices/assetbundle-usage-patterns" target="_blank" rel="noopener">https://unity3d.com/cn/learn/tutorials/temas/best-practices/assetbundle-usage-patterns</a><br>译文参考： <a href="https://link.zhihu.com/?target=http%3A//blog.shuiguzi.com/2017/04/18/AssetBundle_usage_pattern_1/" target="_blank" rel="noopener">http://blog.shuiguzi.com/2017/04/18/AssetBundle_usage_pattern_1/</a></p>
 <p>这是 Unity 5 <a href="http://zhuanlan.zhihu.com/p/32838605" target="_blank" rel="noopener">资源、Resources目录和资源管理</a> 系列文章的第五篇。</p>
 <p>上一篇文章涵盖了 <a href="http://zhuanlan.zhihu.com/p/33268070" target="_blank" rel="noopener">AssetBundle 基础知识</a>，特别是各种加载资源 API 的底层行为。这篇会讨论实际使用 AssetBundle 碰到的问题和可能的解决方案。</p>
 <h2 id="4-1-管理已加载的资源"><a href="#4-1-管理已加载的资源" class="headerlink" title="4.1 管理已加载的资源"></a><strong>4.1 管理已加载的资源</strong></h2><p>在高性能要求的环境中，要特别严格地，小心翼翼地控制加载的对象的数量和大小。当对象从当前场景中移除时，Unity 不会自动的卸载他们。资源的清理在特殊的时间触发，当然它也可以手动来触发。</p>
-<p>AssetBundle 必须要被仔细地管理，来自本地存储文件的 AssetBundle（不管是从缓存或者是通过 <a href="https://link.zhihu.com/?target=http%3A//docs.unity3d.com/ScriptReference/AssetBundle.LoadFromFile.html">AssetBundle.LoadFromFile</a>加载的) 一般来说很少会超过10-40 kb的额外内存开销，所以它的开销是 <strong>最小</strong> 的。然而当存在大量 AssetBundle 时，这种开销仍然可能成为问题。</p>
+<p>AssetBundle 必须要被仔细地管理，来自本地存储文件的 AssetBundle（不管是从缓存或者是通过 <a href="https://link.zhihu.com/?target=http%3A//docs.unity3d.com/ScriptReference/AssetBundle.LoadFromFile.html" target="_blank" rel="noopener">AssetBundle.LoadFromFile</a>加载的) 一般来说很少会超过10-40 kb的额外内存开销，所以它的开销是 <strong>最小</strong> 的。然而当存在大量 AssetBundle 时，这种开销仍然可能成为问题。</p>
 <p>对大部分项目来说，一般允许用户对游戏内容重新体验（例如重玩关卡），那么考虑在什么时候加载和卸载AssetBundle就显得很重要了。<strong>如果一个 AssetBundle 没有被正确卸载，可能会引起内存中对象重复。</strong> 不正确的卸载资源也在某些情况下也可能引起不希望的结果，比如引起纹理丢失。要理解这其中的缘由，可以参考 “<a href="http://zhuanlan.zhihu.com/p/33268061" target="_blank" rel="noopener">资源、对象与序列化（Assets, Objects and serialization）</a>- 1.2 对象之间的引用(Inter-Object references)” 章节。</p>
-<p>要了解AssetBundle管理资源的关键，是要了解在调用 <a href="https://link.zhihu.com/?target=http%3A//docs.unity3d.com/ScriptReference/AssetBundle.Unload.html">AssetBundle.Unload</a> 函数时参数 true 或是 false 时的不同行为。</p>
+<p>要了解AssetBundle管理资源的关键，是要了解在调用 <a href="https://link.zhihu.com/?target=http%3A//docs.unity3d.com/ScriptReference/AssetBundle.Unload.html" target="_blank" rel="noopener">AssetBundle.Unload</a> 函数时参数 true 或是 false 时的不同行为。</p>
 <p>这个 API 会卸载调用的 AssetBundle 的信息头，参数意思是是否也卸载从这个 AssetBundle 加载的对象实例。如果是 true, 所有从这个 AssetBundle 实例化的对象会立即被卸载，即便是它们被当前场景正在被使用。</p>
 <p>例如，假设材质 M 是从 AssetBundle AB 中加载的，并且当前场景正使用着材质 M：</p>
 <p><img src="https://pic1.zhimg.com/80/v2-d1e9243af1c9eec1c84d5dfd35c48174_hd.jpg" alt="img"></p>
@@ -183,8 +184,8 @@
 <li>维护单个物体的引用计数，并当组成 AssetBundle 的对象都未被使用时卸载 AssetBundle。这允许应用卸载和重新加载对象而不会复制多余的内存。<br>如果应用必须使用 AssetBundle.Unload(false)来卸载资源, 则单个对象只能通过下面两种方式卸载：</li>
 </ol>
 <ul>
-<li>在场景和代码中清除不需要对象的所有引用，在完成之后调用 <a href="https://link.zhihu.com/?target=http%3A//docs.unity3d.com/ScriptReference/Resources.UnloadUnusedAssets.html">Resources.UnloadUnusedAssets</a></li>
-<li>排他性方式加载场景，这个操作会卸载当前场景中的所有对象，然后自动的调用 <a href="https://link.zhihu.com/?target=http%3A//docs.unity3d.com/ScriptReference/Resources.UnloadUnusedAssets.html">Resources.UnloadUnusedAssets</a></li>
+<li>在场景和代码中清除不需要对象的所有引用，在完成之后调用 <a href="https://link.zhihu.com/?target=http%3A//docs.unity3d.com/ScriptReference/Resources.UnloadUnusedAssets.html" target="_blank" rel="noopener">Resources.UnloadUnusedAssets</a></li>
+<li>排他性方式加载场景，这个操作会卸载当前场景中的所有对象，然后自动的调用 <a href="https://link.zhihu.com/?target=http%3A//docs.unity3d.com/ScriptReference/Resources.UnloadUnusedAssets.html" target="_blank" rel="noopener">Resources.UnloadUnusedAssets</a></li>
 </ul>
 <p>如果一个项目中有明确定义的时间点，那它可以用来等待对象的加载和卸载，比如游戏模式和关卡之间，那么在这些点应该尽可能多的卸载对象和加载新的对象。</p>
 <p>最简单的方法是将项目中离散块打包到场景中，然后把场景和所有依赖打包到 AssetBundle 中。这个应用可以进入一个 “加载” 场景，在这个场景中完全卸载包含旧场景的 AssetBundle ， 然后加载包含新场景的 AssetBundle。</p>
@@ -201,19 +202,19 @@
 </ul>
 <h2 id="4-2-1-1-Streaming-Assets目录"><a href="#4-2-1-1-Streaming-Assets目录" class="headerlink" title="4.2.1.1 Streaming Assets目录"></a><strong>4.2.1.1 Streaming Assets目录</strong></h2><p>在构建项目之前将内容放到 /Assets/StreamingAssets/ 文件夹里，是 Unity 程序安装时就包含各种各样的内容的最简便的方法。所有在 StreamingAssets 文件夹内的文件都会在项目构建的时候被拷贝到最终程序包里，StreamingAssets 文件夹可以用来存储最终程序包内的各种内容，而不仅仅是 AssetBundle。</p>
 <p>在运行时要想取得StreamingAssets 文件夹在本地存储中的全路径，可以通过属性 Application.streamingAssetsPath 得到，AssetBundle 在大多数平台上都可以通过 <strong>AssetBundle.LoadFromFile</strong>来加载。</p>
-<p><strong>致Android开发者：</strong> 在安卓平台上， <strong>Application.streamingAssetsPath</strong> 指向的是一个压缩的 .jar 文件，即便 AssetBundle 已经被压缩过了。在这种情况下，必须使用 <strong><a href="WWW.LoadFromCacheOrDownload">WWW.LoadFromCacheOrDownload</a></strong> 加载每个 AssetBundle。当然可以写代码去解压 .jar file，然后将 AssetBundle 提取到一个可以读的本地存储上。<br>[ <strong>译注：</strong> 这里文档有误，Android平台上通过AssetBundle.LoadFromFile(Async)加载StreammingAssets目录里的AssetBundle可行的，可以参考 <a href="https://link.zhihu.com/?target=https%3A//forum.unity.com/threads/assetbundle-load-question.402376/%23post-2679871">这里</a>]</p>
-<p><strong>注意：</strong> StreamingAssets目录 在一些平台上是不可写的。如果一个项目的 AssetBundle 需要在安装之后更新，可以使用 <strong><a href="WWW.LoadFromCacheOrDownload">WWW.LoadFromCacheOrDownload</a></strong> 或者写一个定制的下载器，更多详情请参照 “4.2.3.2 存储” 小结。</p>
+<p><strong>致Android开发者：</strong> 在安卓平台上， <strong>Application.streamingAssetsPath</strong> 指向的是一个压缩的 .jar 文件，即便 AssetBundle 已经被压缩过了。在这种情况下，必须使用 <strong>WWW.LoadFromCacheOrDownload</strong> 加载每个 AssetBundle。当然可以写代码去解压 .jar file，然后将 AssetBundle 提取到一个可以读的本地存储上。<br>[ <strong>译注：</strong> 这里文档有误，Android平台上通过AssetBundle.LoadFromFile(Async)加载StreammingAssets目录里的AssetBundle可行的，可以参考 <a href="https://link.zhihu.com/?target=https%3A//forum.unity.com/threads/assetbundle-load-question.402376/%23post-2679871" target="_blank" rel="noopener">这里</a>]</p>
+<p><strong>注意：</strong> StreamingAssets目录 在一些平台上是不可写的。如果一个项目的 AssetBundle 需要在安装之后更新，可以使用 <strong>WWW.LoadFromCacheOrDownload</strong> 或者写一个定制的下载器，更多详情请参照 “4.2.3.2 存储” 小结。</p>
 <h2 id="4-2-2-安装之后下载"><a href="#4-2-2-安装之后下载" class="headerlink" title="4.2.2 安装之后下载"></a><strong>4.2.2 安装之后下载</strong></h2><p>将 AssetBundle 交付到移动设备上的首选方式是在应用安装完之后下载，内容可以再在应用安装后，用户不需要重新下载整个应用的情况下新加或者修改。在移动平台上，应用文件需要进昂贵并且长时间的认证审核过程，所以一个安装后下载的系统是必不可少的。</p>
-<p>最简单地分发 AssetBundle 是将它们放到一个网络服务器上，然后通过 <strong><a href="WWW.LoadFromCacheOrDownload">WWW.LoadFromCacheOrDownload</a></strong>或者 <strong>UnityWebRequest</strong> 来下载它们。Unity 会在本地存储上自动的缓存已下载的 AssetBundle。如果下载的 AssetBundle 是 LZMA 压缩格式，为了之后更快的加载，它会以未压缩格式存储在缓存中。如果下载的 AssetBundle 是 LZ4 压缩格式，则会保持压缩格式存储在缓存中。</p>
+<p>最简单地分发 AssetBundle 是将它们放到一个网络服务器上，然后通过 <strong>WWW.LoadFromCacheOrDownload</strong>或者 <strong>UnityWebRequest</strong> 来下载它们。Unity 会在本地存储上自动的缓存已下载的 AssetBundle。如果下载的 AssetBundle 是 LZMA 压缩格式，为了之后更快的加载，它会以未压缩格式存储在缓存中。如果下载的 AssetBundle 是 LZ4 压缩格式，则会保持压缩格式存储在缓存中。</p>
 <p>如果缓存满了，Unity 会将最近未使用的 AssetBundle 从缓存中移除。更多详情请参考 “4.2.3 内置缓存” 小节。</p>
-<p>注意 <strong><a href="WWW.LoadFromCacheOrDownload">WWW.LoadFromCacheOrDownload</a></strong> 是有瑕疵的。就如在“3.4 加载AssetBundle” 小节中所说，WWW 对象下载的时候会消耗跟 AssetBundle 数据的大小一样的内存，这会导致意想不到的内存峰值。有三种方法可以避免这种情况：</p>
+<p>注意 <strong>WWW.LoadFromCacheOrDownload</strong> 是有瑕疵的。就如在“3.4 加载AssetBundle” 小节中所说，WWW 对象下载的时候会消耗跟 AssetBundle 数据的大小一样的内存，这会导致意想不到的内存峰值。有三种方法可以避免这种情况：</p>
 <ul>
 <li>使用小尺寸 AssetBundle，AssetBundle 下载过程中，项目内存预算值决定了下载的 AssetBundle 的最大值。有 “加载” 界面的应用可分配用来下载 AssetBundle 的内存通常会比在后台读写 AssetBundle 的多。</li>
-<li>如果是 Unity 5.3 或者更新版本，使用新的 <a href="https://link.zhihu.com/?target=http%3A//docs.unity3d.com/ScriptReference/Networking.UnityWebRequest.html">UnityWebRequest</a> API 的 <a href="https://link.zhihu.com/?target=http%3A//docs.unity3d.com/ScriptReference/Networking.DownloadHandlerAssetBundle.html">DownloadHandlerAssetBundle</a>，这个不会引起内存峰值。</li>
+<li>如果是 Unity 5.3 或者更新版本，使用新的 <a href="https://link.zhihu.com/?target=http%3A//docs.unity3d.com/ScriptReference/Networking.UnityWebRequest.html" target="_blank" rel="noopener">UnityWebRequest</a> API 的 <a href="https://link.zhihu.com/?target=http%3A//docs.unity3d.com/ScriptReference/Networking.DownloadHandlerAssetBundle.html" target="_blank" rel="noopener">DownloadHandlerAssetBundle</a>，这个不会引起内存峰值。</li>
 <li>定制一个下载器。更多的信息，可以参考“4.2.3 自定义下载器”章节。</li>
 </ul>
-<p>通常推荐尽可能使用 <strong>UnityWebRequest</strong> 或者在 Unity 5.2及之前版本中使用 <strong><a href="WWW.LoadFromCacheOrDownload">WWW.LoadFromCacheOrDownload</a></strong>。只有当内置的 API 在内存消耗，缓存行为或者性能上不满足项目需求，或者项目必须跑平台相关代码来满足其需求时才需要定制下载器。</p>
-<p>不适用 <strong>UnityWebRequest</strong> 或者 <strong><a href="WWW.LoadFromCacheOrDownload">WWW.LoadFromCacheOrDownload</a></strong> 的情况有：</p>
+<p>通常推荐尽可能使用 <strong>UnityWebRequest</strong> 或者在 Unity 5.2及之前版本中使用 <strong>WWW.LoadFromCacheOrDownload</strong>。只有当内置的 API 在内存消耗，缓存行为或者性能上不满足项目需求，或者项目必须跑平台相关代码来满足其需求时才需要定制下载器。</p>
+<p>不适用 <strong>UnityWebRequest</strong> 或者 <strong>WWW.LoadFromCacheOrDownload</strong> 的情况有：</p>
 <ul>
 <li>需要对 AssetBundle 缓存做细微地控制</li>
 <li>项目需要实现定制的压缩策略</li>
@@ -229,12 +230,12 @@
 <p>更多信息请参考 “4.4 给AssetBundle打补丁” 小节。</p>
 <p>我们可以调用缓存对象上的 API 来控制 Unity 内置的缓存。Unity 缓存行为可以通过 <strong>Caching.expirationDeplay</strong> 和 <strong>Caching.maximumAvailableDiskSpace</strong> 来控制：</p>
 <ul>
-<li><a href="https://link.zhihu.com/?target=http%3A//docs.unity3d.com/ScriptReference/Caching-expirationDelay.html">Caching.expirationDelay</a>是 AssetBundle 被自动删除前所需要达到的秒数。如果 AssetBundle 没有在设置的时间内访问，它将被自动删除。</li>
-<li><a href="https://link.zhihu.com/?target=http%3A//docs.unity3d.com/ScriptReference/Caching-maximumAvailableDiskSpace.html">Caching.maximumAvailableDiskSpace</a>决定了缓存在使用本地存储时，删除最少使用的 AssetBundle 时能达到的最大空间，它通过字节来计数。当达到最大限制时，Unity 会删除最近最少打开的或者通过 Caching.MarkAsUsed 标识已使用的 AssetBundle。直到空间满足新下载的 AssetBundle 时 Unity 才会停止删除已缓存的 AssetBundle。</li>
+<li><a href="https://link.zhihu.com/?target=http%3A//docs.unity3d.com/ScriptReference/Caching-expirationDelay.html" target="_blank" rel="noopener">Caching.expirationDelay</a>是 AssetBundle 被自动删除前所需要达到的秒数。如果 AssetBundle 没有在设置的时间内访问，它将被自动删除。</li>
+<li><a href="https://link.zhihu.com/?target=http%3A//docs.unity3d.com/ScriptReference/Caching-maximumAvailableDiskSpace.html" target="_blank" rel="noopener">Caching.maximumAvailableDiskSpace</a>决定了缓存在使用本地存储时，删除最少使用的 AssetBundle 时能达到的最大空间，它通过字节来计数。当达到最大限制时，Unity 会删除最近最少打开的或者通过 Caching.MarkAsUsed 标识已使用的 AssetBundle。直到空间满足新下载的 AssetBundle 时 Unity 才会停止删除已缓存的 AssetBundle。</li>
 </ul>
 <p><strong>注意：</strong> Unity 5.3 版本中控制内置缓存的功能很不完善。不支持主动地从缓存中移除指定的 AssetBundle, 而只能当 AssetBundle 超过了时限，或者超过了磁盘空间限制，或者调用 Caching.CleanCache API。Cache.CleanCache 将会清除缓存中的所有 AssetBundle。这会给开发过程或者线上操作带来问题，比如 Unity 不会移除不再被应用使用的 AssetBundle。</p>
 <h2 id="4-2-3-1-初始缓存-Cache-Priming"><a href="#4-2-3-1-初始缓存-Cache-Priming" class="headerlink" title="4.2.3.1 初始缓存(Cache Priming)"></a><strong>4.2.3.1 初始缓存(Cache Priming)</strong></h2><p>因为 AssetBundle 是通过他们的名字来区别的，所以应用程序时可以“初始化(prime)”缓存的。通过将基础版本的 AssetBundle 放置到 /Assets/StreamingAssets/ 文件夹下可以达到这种目的。这个过程跟 “4.2.1 随工程分发”提到的一种方式是一样的。</p>
-<p>应用第一次运行的时候，可以从 <strong>Application.streamingAssetsPath</strong> 加载一次 AssetBundle，这样就放置到缓存中。然后以后可以调用 <strong><a href="WWW.LoadFromCacheOrDownload">WWW.LoadFromCacheOrDownload</a></strong> 或者 <strong>UnityWebRequest</strong> 加载。</p>
+<p>应用第一次运行的时候，可以从 <strong>Application.streamingAssetsPath</strong> 加载一次 AssetBundle，这样就放置到缓存中。然后以后可以调用 <strong>WWW.LoadFromCacheOrDownload</strong> 或者 <strong>UnityWebRequest</strong> 加载。</p>
 <h2 id="4-2-3-自定义下载器"><a href="#4-2-3-自定义下载器" class="headerlink" title="4.2.3 自定义下载器"></a><strong>4.2.3 自定义下载器</strong></h2><p>定制一个下载器可以让应用全权控制 AssetBundle 如何下载，解压和存储。只有当大团队需要些一些精益的应用时才推荐写下载器。写一个下载器时有四个主要的问题需要考虑：</p>
 <ul>
 <li>怎么样下载 AssetBundle</li>
@@ -250,18 +251,18 @@
 <li>定制原生插件</li>
 <li>AssetStore 插件</li>
 </ul>
-<h2 id="4-2-3-1-1-C-类"><a href="#4-2-3-1-1-C-类" class="headerlink" title="4.2.3.1.1 C#类"></a><strong>4.2.3.1.1 C#类</strong></h2><p>如果应用不需要支持 HTTPS/SSL，C# 的 <a href="https://link.zhihu.com/?target=https%3A//msdn.microsoft.com/en-us/library/system.net.webclient.aspx">WebClient</a> 类提供了最简单的机制用来下载 AssetBundle。它能将任何文件异步的下载到本地存储中，不需要过多的内存分配。</p>
-<p>使用 WebClient 下载 AssetBundle, 只要创建一个 WebClient 实例，将 AssetBundle 的下载地址和存储地址传给实例就可以。如果需要更多的控制请求的参数，可以使用 C# 的 <a href="https://link.zhihu.com/?target=https%3A//msdn.microsoft.com/en-us/library/system.net.httpwebrequest.aspx">HttpWebRequest</a> 类去写下载器:</p>
+<h2 id="4-2-3-1-1-C-类"><a href="#4-2-3-1-1-C-类" class="headerlink" title="4.2.3.1.1 C#类"></a><strong>4.2.3.1.1 C#类</strong></h2><p>如果应用不需要支持 HTTPS/SSL，C# 的 <a href="https://link.zhihu.com/?target=https%3A//msdn.microsoft.com/en-us/library/system.net.webclient.aspx" target="_blank" rel="noopener">WebClient</a> 类提供了最简单的机制用来下载 AssetBundle。它能将任何文件异步的下载到本地存储中，不需要过多的内存分配。</p>
+<p>使用 WebClient 下载 AssetBundle, 只要创建一个 WebClient 实例，将 AssetBundle 的下载地址和存储地址传给实例就可以。如果需要更多的控制请求的参数，可以使用 C# 的 <a href="https://link.zhihu.com/?target=https%3A//msdn.microsoft.com/en-us/library/system.net.httpwebrequest.aspx" target="_blank" rel="noopener">HttpWebRequest</a> 类去写下载器:</p>
 <ol>
 <li>从 <strong>HttpWebResponse.GetResponseStream</strong> 获取一个字节流(byte stream)。</li>
 <li>从堆内存上分配一个固定长度的字节buffer。</li>
 <li>将字节从流中读到 buffer 里。</li>
-<li>将 Buffer 里的数据写到硬盘中，可以使用 C# <a href="https://link.zhihu.com/?target=http%3A//File.IO">http://File.IO</a> API或者其它流式IO系统。</li>
+<li>将 Buffer 里的数据写到硬盘中，可以使用 C# <a href="https://link.zhihu.com/?target=http%3A//File.IO" target="_blank" rel="noopener">http://File.IO</a> API或者其它流式IO系统。</li>
 </ol>
 <p><strong>平台相关注意：</strong> Unity C# 运行时支持 HTTPS/SSL 的平台仅有 iOS, Android 和 Windows Phone。在 PC 平台上，试图用 C# 类去访问 HTTPS 服务器的话会得到证书验证失败的错误提示。</p>
 <h2 id="4-2-3-1-2-AssetStore-插件"><a href="#4-2-3-1-2-AssetStore-插件" class="headerlink" title="4.2.3.1.2 AssetStore 插件"></a><strong>4.2.3.1.2 AssetStore 插件</strong></h2><p>有好几个 Asset Store 插件通过原生代码(native-code)提供了实现的可以通过 HTTP, HTTPS 和其他协议下载文件的功能。在为 Unity 写定制的原生代码插件前，推荐先评估一下 Asset Store插件。</p>
 <h2 id="4-2-3-1-3-定制原生插件"><a href="#4-2-3-1-3-定制原生插件" class="headerlink" title="4.2.3.1.3 定制原生插件"></a><strong>4.2.3.1.3 定制原生插件</strong></h2><p>写一个定制原生插件是在 Unity 下载数据方式中最耗时但又最灵活的。由于需要比较多的编程时间和技术要求，这个方式只推荐在其他方式不能满足应用需求的时候使用。比如，当应用必须要在 Unity 不支持的平台上使用 SSL 通讯时。这些平台有 Windows, OSX (mac OS) 和 Linux。</p>
-<p>定制原生插件一般会封装目标平台上的原生下载 API. 比如 iOS 上的 <a href="https://link.zhihu.com/?target=https%3A//developer.apple.com/library/ios/documentation/Cocoa/Reference/Foundation/Classes/NSURLConnection_Class/">NSURLConnection</a> 和安卓平台上的 <a href="https://link.zhihu.com/?target=http%3A//download.java.net/jdk7/archive/b123/docs/api/java/net/HttpURLConnection.html">java.net.HttpURLConnection</a>。关于这些 API 的更详细使用，请查看对于平台的原生文档。</p>
+<p>定制原生插件一般会封装目标平台上的原生下载 API. 比如 iOS 上的 <a href="https://link.zhihu.com/?target=https%3A//developer.apple.com/library/ios/documentation/Cocoa/Reference/Foundation/Classes/NSURLConnection_Class/" target="_blank" rel="noopener">NSURLConnection</a> 和安卓平台上的 <a href="https://link.zhihu.com/?target=http%3A//download.java.net/jdk7/archive/b123/docs/api/java/net/HttpURLConnection.html" target="_blank" rel="noopener">java.net.HttpURLConnection</a>。关于这些 API 的更详细使用，请查看对于平台的原生文档。</p>
 <h2 id="4-2-3-2-存储"><a href="#4-2-3-2-存储" class="headerlink" title="4.2.3.2 存储"></a><strong>4.2.3.2 存储</strong></h2><p>在所有平台上，Application.persistentDataPath 都指向了一个可以写的路径，这个路径用来保存可以程序多次运行持久化的数据。当写一个定制下载器时，强烈推荐使用 Application.persistentDataPath 的子目录去存储已下载的数据。</p>
 <p>Application.streamingAssetPath 是只读的，是用来做 AssetBundle 缓存的一个糟糕的选择。streamingAssetPath 其中：</p>
 <ul>
@@ -339,21 +340,21 @@
 <h2 id="4-3-3-不相干-concurrent-内容分组"><a href="#4-3-3-不相干-concurrent-内容分组" class="headerlink" title="4.3.3 不相干(concurrent)内容分组"></a><strong>4.3.3 不相干(concurrent)内容分组</strong></h2><p>不相干内容分组是将需要同时加载和使用内容分组到同一个 AssetBundle 的策略。这种策略最常用在强本地相关属性的内容上，也就是说内容很少或者基本不可能在应用特定的位置或者时间之外出现。举个例子，关卡游戏中每一关卡都独一无二的艺术效果，角色和声效。</p>
 <p>实现不相干内容分组的最常用的方法是通过场景来构建 AssetBundle，每个 AssetBundle 包括了场景中的几乎所有的依赖。<br>对没有强本地属性的项目，和在应用生命周期内很少出现的内容，应该通过逻辑实体策略来分组。这两种都是最优化使用 AssetBundle 内容的大体策略。</p>
 <p>一个例子就是，一个角色在世界中随机生成的开发世界游戏。这种情况中，很难预测几个角色会同时出现，所以它们一般需要使用不同的策略。</p>
-<h2 id="4-4-为Assetbunlde-打补丁"><a href="#4-4-为Assetbunlde-打补丁" class="headerlink" title="4.4 为Assetbunlde 打补丁"></a><strong>4.4 为Assetbunlde 打补丁</strong></h2><p>给 AssetBundle 打补丁就如简单地下载一个新的 AssetBundle 然后替换已存在的。如果 <a href="https://link.zhihu.com/?target=http%3A//docs.unity3d.com/ScriptReference/WWW.LoadFromCacheOrDownload.html">WWW.LoadFromCacheOrDownload</a> 或者 <a href="https://link.zhihu.com/?target=http%3A//docs.unity3d.com/ScriptReference/Networking.UnityWebRequest.GetAssetBundle.html">UnityWebRequest</a> 被用来管理应用已缓存的 AssetBundle，这个过程就是给所选的 API 传递不同的版本号一样简单。（可以参考上面的脚本参考链接来查看更多详情。）</p>
+<h2 id="4-4-为Assetbunlde-打补丁"><a href="#4-4-为Assetbunlde-打补丁" class="headerlink" title="4.4 为Assetbunlde 打补丁"></a><strong>4.4 为Assetbunlde 打补丁</strong></h2><p>给 AssetBundle 打补丁就如简单地下载一个新的 AssetBundle 然后替换已存在的。如果 <a href="https://link.zhihu.com/?target=http%3A//docs.unity3d.com/ScriptReference/WWW.LoadFromCacheOrDownload.html" target="_blank" rel="noopener">WWW.LoadFromCacheOrDownload</a> 或者 <a href="https://link.zhihu.com/?target=http%3A//docs.unity3d.com/ScriptReference/Networking.UnityWebRequest.GetAssetBundle.html" target="_blank" rel="noopener">UnityWebRequest</a> 被用来管理应用已缓存的 AssetBundle，这个过程就是给所选的 API 传递不同的版本号一样简单。（可以参考上面的脚本参考链接来查看更多详情。）</p>
 <p>更困难的问题是解决补丁系统检测哪个 AssetBundle 需要被替换。一个补丁系统需要两个信息列表：</p>
 <ul>
 <li>当前已下载的 AssetBundle 和它们的版本信息列表</li>
 <li>远程服务器上的 AssetBundle 和它们的版本信息列表</li>
 </ul>
 <p>修补程序需要下载服务器端的 AssetBundle 列表和然后比较这个列表。AssetBundle 丢失或者 AssetBundle 的版本信息改变了，都需要重新下载。</p>
-<p>Unity 5 的 AssetBundle 系统会在构建完成后创建一个额外的 AssetBundle。这个额外的 AssetBundle 包括一个 <strong>AssetBundleManifest</strong> 对象。这个清单对象包含 AssetBundle 和它们的哈希值，可以用来给客户端传递有效的 AssetBundle 下载列表和版本信息。关于 AssetBundle manifest bundle，请参照 <a href="https://link.zhihu.com/?target=http%3A//docs.unity3d.com/Manual/BuildingAssetBundles5x.html">Unity手册</a>。</p>
+<p>Unity 5 的 AssetBundle 系统会在构建完成后创建一个额外的 AssetBundle。这个额外的 AssetBundle 包括一个 <strong>AssetBundleManifest</strong> 对象。这个清单对象包含 AssetBundle 和它们的哈希值，可以用来给客户端传递有效的 AssetBundle 下载列表和版本信息。关于 AssetBundle manifest bundle，请参照 <a href="https://link.zhihu.com/?target=http%3A//docs.unity3d.com/Manual/BuildingAssetBundles5x.html" target="_blank" rel="noopener">Unity手册</a>。</p>
 <p>我们也可以写一个定制的系统来检测 AssetBundle 的改变。大部分写开发者写的系统都选择使用行业标准的数据结构作为他们的 AssetBundle 文件列表，比如 JSON，还有用来计算 checksum 的标准 C# 类，比如 MD5。</p>
-<h2 id="4-4-1-差异更新"><a href="#4-4-1-差异更新" class="headerlink" title="4.4.1 差异更新"></a><strong>4.4.1 差异更新</strong></h2><p>在 Unity 5 中，Unity 可以将数据按确定的顺序编译出 AssetBundle。这就允许定制下载器实现差异更新。要让 AssetBunle 按确定的布局构建，需要将 <a href="https://link.zhihu.com/?target=http%3A//docs.unity3d.com/ScriptReference/BuildAssetBundleOptions.DeterministicAssetBundle.html">BuildAssetBundleOptions.DeterministicAssetBundle</a> 标签传递给 BuildAssetBundles 函数。（更多详情请参照脚本参考的链接。）</p>
+<h2 id="4-4-1-差异更新"><a href="#4-4-1-差异更新" class="headerlink" title="4.4.1 差异更新"></a><strong>4.4.1 差异更新</strong></h2><p>在 Unity 5 中，Unity 可以将数据按确定的顺序编译出 AssetBundle。这就允许定制下载器实现差异更新。要让 AssetBunle 按确定的布局构建，需要将 <a href="https://link.zhihu.com/?target=http%3A//docs.unity3d.com/ScriptReference/BuildAssetBundleOptions.DeterministicAssetBundle.html" target="_blank" rel="noopener">BuildAssetBundleOptions.DeterministicAssetBundle</a> 标签传递给 BuildAssetBundles 函数。（更多详情请参照脚本参考的链接。）</p>
 <p>Unity 没有提供内置的差异更新的机制，WWW.LoadFromCacheOrDownload 和 UnityWebRequest 使用内置的缓存系统也没有实现差异更新。如果一个系统中，差异更新是必须的，那么必须要写一个定制的下载器。</p>
 <h2 id="4-4-2-iOS-中的按需加载资源"><a href="#4-4-2-iOS-中的按需加载资源" class="headerlink" title="4.4.2 iOS 中的按需加载资源"></a><strong>4.4.2 iOS 中的按需加载资源</strong></h2><p><strong>按需加载资源</strong> 是 Apple 为 iOS 和 TVOS 设备提供内容的 API，在iOS 9以上的系统中可用。它在 App Store 发布 iOS app 不是必须的需求，但是在 TVOS app 中是必须的。</p>
-<p>关于 Apple 的按需加载资源系统的资料可以从 <a href="https://link.zhihu.com/?target=https%3A//developer.apple.com/library/prerelease/ios/documentation/FileManagement/Conceptual/On_Demand_Resources_Guide/">Apple 开发者</a> 找到。</p>
+<p>关于 Apple 的按需加载资源系统的资料可以从 <a href="https://link.zhihu.com/?target=https%3A//developer.apple.com/library/prerelease/ios/documentation/FileManagement/Conceptual/On_Demand_Resources_Guide/" target="_blank" rel="noopener">Apple 开发者</a> 找到。</p>
 <p>Unity 5.2.1 中对 Apple 的应用分割和按需资源支持都是在 Apple 的另外一个叫Asset Catalogs系统上构建的。在 Unity 编辑器中注册回调函数之后，iOS 的构建管道会给出被自动放到 Asset Catalogs 中并分配了按需资源标签的文件集合。</p>
-<p>新的 API UnityEngine.iOS.OnDemandResources 提供了运行时获取和缓存按需资源文件的支持。一旦资源通过按需资源系统加载，它就可以通过标准的 API AssetBundle.LoadFromFile 加载进 Unity。<br>示例和更多的细节可以参照 <a href="https://link.zhihu.com/?target=http%3A//forum.unity3d.com/threads/second-preview-build-for-ios-9-on-demand-resources-and-app-slicing-support.353491/">这篇帖子</a>。</p>
+<p>新的 API UnityEngine.iOS.OnDemandResources 提供了运行时获取和缓存按需资源文件的支持。一旦资源通过按需资源系统加载，它就可以通过标准的 API AssetBundle.LoadFromFile 加载进 Unity。<br>示例和更多的细节可以参照 <a href="https://link.zhihu.com/?target=http%3A//forum.unity3d.com/threads/second-preview-build-for-ios-9-on-demand-resources-and-app-slicing-support.353491/" target="_blank" rel="noopener">这篇帖子</a>。</p>
 <h2 id="4-5-常见的坑"><a href="#4-5-常见的坑" class="headerlink" title="4.5 常见的坑"></a><strong>4.5 常见的坑</strong></h2><p>这小节讲述了使用 AssetBundle 的项目常出现的几个问题。</p>
 <h2 id="4-5-1-资源重复"><a href="#4-5-1-资源重复" class="headerlink" title="4.5.1 资源重复"></a><strong>4.5.1 资源重复</strong></h2><p>通过AssetDatabase，Unity 5 的 AssetBundle 系统可以找出打包进 AssetBundle 的对象的所有依赖。依赖信息决定了打包进 AssetBundle 的对象集合。</p>
 <p>对象被显式的分配到某个 AssetBundle 后它们只会被打包到那个 AssetBundle 中。对象被 “显式分配” 是对象的 AssetImpoter 的 assetBundleName 属性被设置为了非空字符串。这个行为可以在对象 Inspector 中选择 AssetBundle 或者通过编辑器脚本完成。</p>
@@ -400,8 +401,8 @@
 <h2 id="4-5-3-安卓纹理"><a href="#4-5-3-安卓纹理" class="headerlink" title="4.5.3 安卓纹理"></a><strong>4.5.3 安卓纹理</strong></h2><p>由于安卓生态中设备的碎片化特别严重，常常我们需要将纹理压缩成好几种格式。所有的安卓设备都支持 ETC1, 而 ETC1 不支持 alpha 通道。在不是必须要求使用 OpenGL ES 2 支持的设备上，最彻底简便的解决这个问题方法就是使用 ETC2 格式，这个格式被所有使用 OpenGL ES 3 的安卓设备支持。</p>
 <p>如果很多应用程序需要在不支持 ETC2 的老设备支持。一个解决这个问题的方法就是使用 Unity 5 的 AssetBundle 变体（Variants）。（更多设置详情请查看 Unity 的安卓优化指导。）</p>
 <p>为了使用 AssetBundle 变体（Variants），所有不能使用 ETC1 的纹理多要被隔离到只包含纹理的 AssetBundle 中。然后为非 ETC2 设备创建主变体，并使用第三方纹理压缩格式，比如 DXT5, PVRTC 和 ATITC。对于每个 AssetBundle 变体，改变包含的纹理的 TextureImporter 设置来改变为变体对应的格式。</p>
-<p>在运行时，不同纹理压缩格式可以用 <a href="https://link.zhihu.com/?target=http%3A//docs.unity3d.com/ScriptReference/SystemInfo.SupportsTextureFormat.html">SystemInfo.SupportsTextureFormat</a> API 来检测。这个信息应该用来选择和加载其所支持纹理格式的AssetBundle 变体。</p>
-<p>更多Android图片压缩格式的信息可以参考 <a href="https://link.zhihu.com/?target=http%3A//developer.android.com/guide/topics/graphics/opengl.html%23textures">这里</a>。</p>
+<p>在运行时，不同纹理压缩格式可以用 <a href="https://link.zhihu.com/?target=http%3A//docs.unity3d.com/ScriptReference/SystemInfo.SupportsTextureFormat.html" target="_blank" rel="noopener">SystemInfo.SupportsTextureFormat</a> API 来检测。这个信息应该用来选择和加载其所支持纹理格式的AssetBundle 变体。</p>
+<p>更多Android图片压缩格式的信息可以参考 <a href="https://link.zhihu.com/?target=http%3A//developer.android.com/guide/topics/graphics/opengl.html%23textures" target="_blank" rel="noopener">这里</a>。</p>
 <h2 id="4-5-4-过度使用iOS文件句柄"><a href="#4-5-4-过度使用iOS文件句柄" class="headerlink" title="4.5.4 过度使用iOS文件句柄"></a><strong>4.5.4 过度使用iOS文件句柄</strong></h2><p>下面描述的问题已经在 Unity 5.3.2p2 中修复，当前版本的 Unity 并不受其影响。</p>
 <p>在 Unity 5.3.2p2 之前，Unity 会在整个周期内保持对已加载过的 AssetBundle 的文件句柄的占用。这个对大多数平台不算大问题。但是 iOS 限制了并行的文件句柄数量最大为 255。 如果超过这个数量时加载 AssetBundle, 加载的调用会失败，并抛出 “打开文件句柄太多” 错误。</p>
 <p>这对那些把内容拆分到上百甚至上千个 AssetBundle 的项目算是比较常见的问题。</p>
@@ -457,7 +458,7 @@
          
           <li><a href="/archives/">归档</a></li>
          
-          <li><a href="/projects_url">项目</a></li>
+          <li><a href="/search/">搜索</a></li>
         
       </ul>
     </div>
@@ -468,17 +469,17 @@
 
     <div id="share-footer" style="display: none">
       <ul>
-  <li><a class="icon" href="http://www.facebook.com/sharer.php?u=https://bitzhangmo.github.io/2019/04/20/Unity%E7%AC%94%E8%AE%B0/%E8%BD%AC-AssetBundle-%E4%BD%BF%E7%94%A8%E6%A8%A1%E5%BC%8F/" target="_blank" rel="noopener"><i class="fab fa-facebook fa-lg" aria-hidden="true"></i></a></li>
-  <li><a class="icon" href="https://twitter.com/share?url=https://bitzhangmo.github.io/2019/04/20/Unity%E7%AC%94%E8%AE%B0/%E8%BD%AC-AssetBundle-%E4%BD%BF%E7%94%A8%E6%A8%A1%E5%BC%8F/&text=[转] AssetBundle 使用模式" target="_blank" rel="noopener"><i class="fab fa-twitter fa-lg" aria-hidden="true"></i></a></li>
-  <li><a class="icon" href="http://www.linkedin.com/shareArticle?url=https://bitzhangmo.github.io/2019/04/20/Unity%E7%AC%94%E8%AE%B0/%E8%BD%AC-AssetBundle-%E4%BD%BF%E7%94%A8%E6%A8%A1%E5%BC%8F/&title=[转] AssetBundle 使用模式" target="_blank" rel="noopener"><i class="fab fa-linkedin fa-lg" aria-hidden="true"></i></a></li>
-  <li><a class="icon" href="https://pinterest.com/pin/create/bookmarklet/?url=https://bitzhangmo.github.io/2019/04/20/Unity%E7%AC%94%E8%AE%B0/%E8%BD%AC-AssetBundle-%E4%BD%BF%E7%94%A8%E6%A8%A1%E5%BC%8F/&is_video=false&description=[转] AssetBundle 使用模式" target="_blank" rel="noopener"><i class="fab fa-pinterest fa-lg" aria-hidden="true"></i></a></li>
-  <li><a class="icon" href="mailto:?subject=[转] AssetBundle 使用模式&body=Check out this article: https://bitzhangmo.github.io/2019/04/20/Unity%E7%AC%94%E8%AE%B0/%E8%BD%AC-AssetBundle-%E4%BD%BF%E7%94%A8%E6%A8%A1%E5%BC%8F/"><i class="fas fa-envelope fa-lg" aria-hidden="true"></i></a></li>
-  <li><a class="icon" href="https://getpocket.com/save?url=https://bitzhangmo.github.io/2019/04/20/Unity%E7%AC%94%E8%AE%B0/%E8%BD%AC-AssetBundle-%E4%BD%BF%E7%94%A8%E6%A8%A1%E5%BC%8F/&title=[转] AssetBundle 使用模式" target="_blank" rel="noopener"><i class="fab fa-get-pocket fa-lg" aria-hidden="true"></i></a></li>
-  <li><a class="icon" href="http://reddit.com/submit?url=https://bitzhangmo.github.io/2019/04/20/Unity%E7%AC%94%E8%AE%B0/%E8%BD%AC-AssetBundle-%E4%BD%BF%E7%94%A8%E6%A8%A1%E5%BC%8F/&title=[转] AssetBundle 使用模式" target="_blank" rel="noopener"><i class="fab fa-reddit fa-lg" aria-hidden="true"></i></a></li>
-  <li><a class="icon" href="http://www.stumbleupon.com/submit?url=https://bitzhangmo.github.io/2019/04/20/Unity%E7%AC%94%E8%AE%B0/%E8%BD%AC-AssetBundle-%E4%BD%BF%E7%94%A8%E6%A8%A1%E5%BC%8F/&title=[转] AssetBundle 使用模式" target="_blank" rel="noopener"><i class="fab fa-stumbleupon fa-lg" aria-hidden="true"></i></a></li>
-  <li><a class="icon" href="http://digg.com/submit?url=https://bitzhangmo.github.io/2019/04/20/Unity%E7%AC%94%E8%AE%B0/%E8%BD%AC-AssetBundle-%E4%BD%BF%E7%94%A8%E6%A8%A1%E5%BC%8F/&title=[转] AssetBundle 使用模式" target="_blank" rel="noopener"><i class="fab fa-digg fa-lg" aria-hidden="true"></i></a></li>
-  <li><a class="icon" href="http://www.tumblr.com/share/link?url=https://bitzhangmo.github.io/2019/04/20/Unity%E7%AC%94%E8%AE%B0/%E8%BD%AC-AssetBundle-%E4%BD%BF%E7%94%A8%E6%A8%A1%E5%BC%8F/&name=[转] AssetBundle 使用模式&description=&lt;p&gt;AssetBundle 使用模式&lt;/p&gt;" target="_blank" rel="noopener"><i class="fab fa-tumblr fa-lg" aria-hidden="true"></i></a></li>
-  <li><a class="icon" href="https://news.ycombinator.com/submitlink?u=https://bitzhangmo.github.io/2019/04/20/Unity%E7%AC%94%E8%AE%B0/%E8%BD%AC-AssetBundle-%E4%BD%BF%E7%94%A8%E6%A8%A1%E5%BC%8F/&t=[转] AssetBundle 使用模式" target="_blank" rel="noopener"><i class="fab fa-hacker-news fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="http://www.facebook.com/sharer.php?u=https://bitzhangmo.github.io/2019/04/20/Unity笔记/转-AssetBundle-使用模式/"><i class="fab fa-facebook fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="https://twitter.com/share?url=https://bitzhangmo.github.io/2019/04/20/Unity笔记/转-AssetBundle-使用模式/&text=[转] AssetBundle 使用模式"><i class="fab fa-twitter fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="http://www.linkedin.com/shareArticle?url=https://bitzhangmo.github.io/2019/04/20/Unity笔记/转-AssetBundle-使用模式/&title=[转] AssetBundle 使用模式"><i class="fab fa-linkedin fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="https://pinterest.com/pin/create/bookmarklet/?url=https://bitzhangmo.github.io/2019/04/20/Unity笔记/转-AssetBundle-使用模式/&is_video=false&description=[转] AssetBundle 使用模式"><i class="fab fa-pinterest fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="mailto:?subject=[转] AssetBundle 使用模式&body=Check out this article: https://bitzhangmo.github.io/2019/04/20/Unity笔记/转-AssetBundle-使用模式/"><i class="fas fa-envelope fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="https://getpocket.com/save?url=https://bitzhangmo.github.io/2019/04/20/Unity笔记/转-AssetBundle-使用模式/&title=[转] AssetBundle 使用模式"><i class="fab fa-get-pocket fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="http://reddit.com/submit?url=https://bitzhangmo.github.io/2019/04/20/Unity笔记/转-AssetBundle-使用模式/&title=[转] AssetBundle 使用模式"><i class="fab fa-reddit fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="http://www.stumbleupon.com/submit?url=https://bitzhangmo.github.io/2019/04/20/Unity笔记/转-AssetBundle-使用模式/&title=[转] AssetBundle 使用模式"><i class="fab fa-stumbleupon fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="http://digg.com/submit?url=https://bitzhangmo.github.io/2019/04/20/Unity笔记/转-AssetBundle-使用模式/&title=[转] AssetBundle 使用模式"><i class="fab fa-digg fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="http://www.tumblr.com/share/link?url=https://bitzhangmo.github.io/2019/04/20/Unity笔记/转-AssetBundle-使用模式/&name=[转] AssetBundle 使用模式&description=&lt;p&gt;AssetBundle 使用模式&lt;/p&gt;"><i class="fab fa-tumblr fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="https://news.ycombinator.com/submitlink?u=https://bitzhangmo.github.io/2019/04/20/Unity笔记/转-AssetBundle-使用模式/&t=[转] AssetBundle 使用模式"><i class="fab fa-hacker-news fa-lg" aria-hidden="true"></i></a></li>
 </ul>
 
     </div>
@@ -508,7 +509,7 @@
          
           <li><a href="/archives/">归档</a></li>
          
-          <li><a href="/projects_url">项目</a></li>
+          <li><a href="/search/">搜索</a></li>
         
       </ul>
     </nav>
@@ -556,5 +557,5 @@
 <!-- Disqus Comments -->
 
 
-</body>
+<script src="/live2dw/lib/L2Dwidget.min.js?bd2294fafea3389ee458f1d9be5a2157"></script><script>L2Dwidget.init({"pluginRootPath":"live2dw/","pluginJsPath":"lib/","pluginModelPath":"assets/","tagMode":false,"debug":false,"model":{"jsonPath":"/live2dw/assets/hijiki.model.json"},"display":{"position":"left","width":100,"height":200},"mobile":{"show":false},"log":false});</script></body>
 </html>

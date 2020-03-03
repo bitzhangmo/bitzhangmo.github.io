@@ -1,24 +1,26 @@
 <!DOCTYPE html>
 <html lang=zh>
-<head>
+<head><meta name="generator" content="Hexo 3.9.0">
     <!-- so meta -->
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="HandheldFriendly" content="True">
-    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1" />
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
     <meta name="description" content="Unity的渲染路径以及更多不同类型的光源。">
 <meta name="keywords" content="UnityShader">
 <meta property="og:type" content="article">
 <meta property="og:title" content="[Unity] 渲染路径与光源">
-<meta property="og:url" content="https:&#x2F;&#x2F;bitzhangmo.github.io&#x2F;2018&#x2F;12&#x2F;24&#x2F;Unity%E7%AC%94%E8%AE%B0&#x2F;Unity-%E6%B8%B2%E6%9F%93%E8%B7%AF%E5%BE%84%E4%B8%8E%E5%85%89%E6%BA%90&#x2F;index.html">
+<meta property="og:url" content="https://bitzhangmo.github.io/2018/12/24/Unity笔记/Unity-渲染路径与光源/index.html">
 <meta property="og:site_name" content="zhangMo Blog">
 <meta property="og:description" content="Unity的渲染路径以及更多不同类型的光源。">
 <meta property="og:locale" content="zh-CN">
-<meta property="og:image" content="http:&#x2F;&#x2F;wx4.sinaimg.cn&#x2F;large&#x2F;007dFQ0Ily1fyl39t7v9gj30z60tsajj.jpg">
-<meta property="og:image" content="http:&#x2F;&#x2F;wx3.sinaimg.cn&#x2F;large&#x2F;007dFQ0Ily1fyll089tw2j30l20imdiw.jpg">
+<meta property="og:image" content="http://wx4.sinaimg.cn/large/007dFQ0Ily1fyl39t7v9gj30z60tsajj.jpg">
+<meta property="og:image" content="http://wx3.sinaimg.cn/large/007dFQ0Ily1fyll089tw2j30l20imdiw.jpg">
 <meta property="og:updated_time" content="2018-12-27T12:51:17.513Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:image" content="http:&#x2F;&#x2F;wx4.sinaimg.cn&#x2F;large&#x2F;007dFQ0Ily1fyl39t7v9gj30z60tsajj.jpg">
+<meta name="twitter:title" content="[Unity] 渲染路径与光源">
+<meta name="twitter:description" content="Unity的渲染路径以及更多不同类型的光源。">
+<meta name="twitter:image" content="http://wx4.sinaimg.cn/large/007dFQ0Ily1fyl39t7v9gj30z60tsajj.jpg">
     
     
         
@@ -66,7 +68,7 @@
          
           <li><a href="/archives/">归档</a></li>
          
-          <li><a href="/projects_url">项目</a></li>
+          <li><a href="/search/">搜索</a></li>
         
       </ul>
     </span>
@@ -74,10 +76,10 @@
     <span id="actions">
       <ul>
         
-        <li><a class="icon" href="/2019/01/01/%E9%9A%8F%E7%AC%94/%E5%B9%B4%E7%BB%88%E6%80%BB%E7%BB%93%EF%BC%882018%EF%BC%89/"><i class="fas fa-chevron-left" aria-hidden="true" onmouseover="$('#i-prev').toggle();" onmouseout="$('#i-prev').toggle();"></i></a></li>
+        <li><a class="icon" href="/2019/01/01/随笔/年终总结（2018）/"><i class="fas fa-chevron-left" aria-hidden="true" onmouseover="$('#i-prev').toggle();" onmouseout="$('#i-prev').toggle();"></i></a></li>
         
         
-        <li><a class="icon" href="/2018/12/20/%E8%AE%A1%E7%AE%97%E6%9C%BA%E5%9B%BE%E5%BD%A2%E5%AD%A6/%E5%9B%BE%E5%BD%A2%E5%AD%A6-%E7%BB%8F%E5%85%B8%E5%85%89%E7%85%A7%E6%A8%A1%E5%9E%8B/"><i class="fas fa-chevron-right" aria-hidden="true" onmouseover="$('#i-next').toggle();" onmouseout="$('#i-next').toggle();"></i></a></li>
+        <li><a class="icon" href="/2018/12/20/计算机图形学/图形学-经典光照模型/"><i class="fas fa-chevron-right" aria-hidden="true" onmouseover="$('#i-next').toggle();" onmouseout="$('#i-next').toggle();"></i></a></li>
         
         <li><a class="icon" href="#" onclick="$('html, body').animate({ scrollTop: 0 }, 'fast');"><i class="fas fa-chevron-up" aria-hidden="true" onmouseover="$('#i-top').toggle();" onmouseout="$('#i-top').toggle();"></i></a></li>
         <li><a class="icon" href="#"><i class="fas fa-share-alt" aria-hidden="true" onmouseover="$('#i-share').toggle();" onmouseout="$('#i-share').toggle();" onclick="$('#share').toggle();return false;"></i></a></li>
@@ -90,17 +92,17 @@
     <br/>
     <div id="share" style="display: none">
       <ul>
-  <li><a class="icon" href="http://www.facebook.com/sharer.php?u=https://bitzhangmo.github.io/2018/12/24/Unity%E7%AC%94%E8%AE%B0/Unity-%E6%B8%B2%E6%9F%93%E8%B7%AF%E5%BE%84%E4%B8%8E%E5%85%89%E6%BA%90/" target="_blank" rel="noopener"><i class="fab fa-facebook " aria-hidden="true"></i></a></li>
-  <li><a class="icon" href="https://twitter.com/share?url=https://bitzhangmo.github.io/2018/12/24/Unity%E7%AC%94%E8%AE%B0/Unity-%E6%B8%B2%E6%9F%93%E8%B7%AF%E5%BE%84%E4%B8%8E%E5%85%89%E6%BA%90/&text=[Unity] 渲染路径与光源" target="_blank" rel="noopener"><i class="fab fa-twitter " aria-hidden="true"></i></a></li>
-  <li><a class="icon" href="http://www.linkedin.com/shareArticle?url=https://bitzhangmo.github.io/2018/12/24/Unity%E7%AC%94%E8%AE%B0/Unity-%E6%B8%B2%E6%9F%93%E8%B7%AF%E5%BE%84%E4%B8%8E%E5%85%89%E6%BA%90/&title=[Unity] 渲染路径与光源" target="_blank" rel="noopener"><i class="fab fa-linkedin " aria-hidden="true"></i></a></li>
-  <li><a class="icon" href="https://pinterest.com/pin/create/bookmarklet/?url=https://bitzhangmo.github.io/2018/12/24/Unity%E7%AC%94%E8%AE%B0/Unity-%E6%B8%B2%E6%9F%93%E8%B7%AF%E5%BE%84%E4%B8%8E%E5%85%89%E6%BA%90/&is_video=false&description=[Unity] 渲染路径与光源" target="_blank" rel="noopener"><i class="fab fa-pinterest " aria-hidden="true"></i></a></li>
-  <li><a class="icon" href="mailto:?subject=[Unity] 渲染路径与光源&body=Check out this article: https://bitzhangmo.github.io/2018/12/24/Unity%E7%AC%94%E8%AE%B0/Unity-%E6%B8%B2%E6%9F%93%E8%B7%AF%E5%BE%84%E4%B8%8E%E5%85%89%E6%BA%90/"><i class="fas fa-envelope " aria-hidden="true"></i></a></li>
-  <li><a class="icon" href="https://getpocket.com/save?url=https://bitzhangmo.github.io/2018/12/24/Unity%E7%AC%94%E8%AE%B0/Unity-%E6%B8%B2%E6%9F%93%E8%B7%AF%E5%BE%84%E4%B8%8E%E5%85%89%E6%BA%90/&title=[Unity] 渲染路径与光源" target="_blank" rel="noopener"><i class="fab fa-get-pocket " aria-hidden="true"></i></a></li>
-  <li><a class="icon" href="http://reddit.com/submit?url=https://bitzhangmo.github.io/2018/12/24/Unity%E7%AC%94%E8%AE%B0/Unity-%E6%B8%B2%E6%9F%93%E8%B7%AF%E5%BE%84%E4%B8%8E%E5%85%89%E6%BA%90/&title=[Unity] 渲染路径与光源" target="_blank" rel="noopener"><i class="fab fa-reddit " aria-hidden="true"></i></a></li>
-  <li><a class="icon" href="http://www.stumbleupon.com/submit?url=https://bitzhangmo.github.io/2018/12/24/Unity%E7%AC%94%E8%AE%B0/Unity-%E6%B8%B2%E6%9F%93%E8%B7%AF%E5%BE%84%E4%B8%8E%E5%85%89%E6%BA%90/&title=[Unity] 渲染路径与光源" target="_blank" rel="noopener"><i class="fab fa-stumbleupon " aria-hidden="true"></i></a></li>
-  <li><a class="icon" href="http://digg.com/submit?url=https://bitzhangmo.github.io/2018/12/24/Unity%E7%AC%94%E8%AE%B0/Unity-%E6%B8%B2%E6%9F%93%E8%B7%AF%E5%BE%84%E4%B8%8E%E5%85%89%E6%BA%90/&title=[Unity] 渲染路径与光源" target="_blank" rel="noopener"><i class="fab fa-digg " aria-hidden="true"></i></a></li>
-  <li><a class="icon" href="http://www.tumblr.com/share/link?url=https://bitzhangmo.github.io/2018/12/24/Unity%E7%AC%94%E8%AE%B0/Unity-%E6%B8%B2%E6%9F%93%E8%B7%AF%E5%BE%84%E4%B8%8E%E5%85%89%E6%BA%90/&name=[Unity] 渲染路径与光源&description=&lt;p&gt;Unity的渲染路径以及更多不同类型的光源。&lt;/p&gt;" target="_blank" rel="noopener"><i class="fab fa-tumblr " aria-hidden="true"></i></a></li>
-  <li><a class="icon" href="https://news.ycombinator.com/submitlink?u=https://bitzhangmo.github.io/2018/12/24/Unity%E7%AC%94%E8%AE%B0/Unity-%E6%B8%B2%E6%9F%93%E8%B7%AF%E5%BE%84%E4%B8%8E%E5%85%89%E6%BA%90/&t=[Unity] 渲染路径与光源" target="_blank" rel="noopener"><i class="fab fa-hacker-news " aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="http://www.facebook.com/sharer.php?u=https://bitzhangmo.github.io/2018/12/24/Unity笔记/Unity-渲染路径与光源/"><i class="fab fa-facebook " aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="https://twitter.com/share?url=https://bitzhangmo.github.io/2018/12/24/Unity笔记/Unity-渲染路径与光源/&text=[Unity] 渲染路径与光源"><i class="fab fa-twitter " aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="http://www.linkedin.com/shareArticle?url=https://bitzhangmo.github.io/2018/12/24/Unity笔记/Unity-渲染路径与光源/&title=[Unity] 渲染路径与光源"><i class="fab fa-linkedin " aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="https://pinterest.com/pin/create/bookmarklet/?url=https://bitzhangmo.github.io/2018/12/24/Unity笔记/Unity-渲染路径与光源/&is_video=false&description=[Unity] 渲染路径与光源"><i class="fab fa-pinterest " aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="mailto:?subject=[Unity] 渲染路径与光源&body=Check out this article: https://bitzhangmo.github.io/2018/12/24/Unity笔记/Unity-渲染路径与光源/"><i class="fas fa-envelope " aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="https://getpocket.com/save?url=https://bitzhangmo.github.io/2018/12/24/Unity笔记/Unity-渲染路径与光源/&title=[Unity] 渲染路径与光源"><i class="fab fa-get-pocket " aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="http://reddit.com/submit?url=https://bitzhangmo.github.io/2018/12/24/Unity笔记/Unity-渲染路径与光源/&title=[Unity] 渲染路径与光源"><i class="fab fa-reddit " aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="http://www.stumbleupon.com/submit?url=https://bitzhangmo.github.io/2018/12/24/Unity笔记/Unity-渲染路径与光源/&title=[Unity] 渲染路径与光源"><i class="fab fa-stumbleupon " aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="http://digg.com/submit?url=https://bitzhangmo.github.io/2018/12/24/Unity笔记/Unity-渲染路径与光源/&title=[Unity] 渲染路径与光源"><i class="fab fa-digg " aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="http://www.tumblr.com/share/link?url=https://bitzhangmo.github.io/2018/12/24/Unity笔记/Unity-渲染路径与光源/&name=[Unity] 渲染路径与光源&description=&lt;p&gt;Unity的渲染路径以及更多不同类型的光源。&lt;/p&gt;"><i class="fab fa-tumblr " aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="https://news.ycombinator.com/submitlink?u=https://bitzhangmo.github.io/2018/12/24/Unity笔记/Unity-渲染路径与光源/&t=[Unity] 渲染路径与光源"><i class="fab fa-hacker-news " aria-hidden="true"></i></a></li>
 </ul>
 
     </div>
@@ -138,14 +140,14 @@
       
     <div class="article-category">
         <i class="fas fa-archive"></i>
-        <a class="category-link" href="/categories/%E8%AF%BB%E4%B9%A6%E7%AC%94%E8%AE%B0/">读书笔记</a>
+        <a class="category-link" href="/categories/读书笔记/">读书笔记</a>
     </div>
 
 
       
     <div class="article-tag">
         <i class="fas fa-tag"></i>
-        <a class="tag-link" href="/tags/UnityShader/" rel="tag">UnityShader</a>
+        <a class="tag-link" href="/tags/UnityShader/">UnityShader</a>
     </div>
 
 
@@ -156,7 +158,6 @@
   <div class="content" itemprop="articleBody">
     <p>Unity的渲染路径以及更多不同类型的光源。</p>
 <a id="more"></a>
-
 <h2 id="Unity的渲染路径："><a href="#Unity的渲染路径：" class="headerlink" title="Unity的渲染路径："></a>Unity的渲染路径：</h2><h3 id="渲染路径："><a href="#渲染路径：" class="headerlink" title="渲染路径："></a>渲染路径：</h3><p>在Unity里，渲染路径（<strong>Rendering Path</strong>）决定了光照是如何应用到Unity Shader中的，<strong>如果想让Shader的光照计算正确执行，必须为Shader正确的选择和设置需要的渲染路径。</strong></p>
 <h3 id="分类："><a href="#分类：" class="headerlink" title="分类："></a>分类：</h3><p>Unity支持多种类型的渲染路径，在Unity5.0前主要有三种：<strong>前向渲染路径（Forward Rendering Path），延迟渲染路径（Deferred Rendering Path）和顶点照明渲染路径（Vertex Lit Rendering Path）。</strong>在Unity5.0以后，顶点照明渲染路径已经被Unity抛弃（但目前仍然可以对之前使用了顶点照明渲染路径的UnityShader兼容），新的延迟渲染路径已经代替了旧的延迟渲染路径。</p>
 <p>大多数情况下，一个项目只使用一种渲染路径，因此可以为整个项目设置渲染时的渲染路径。</p>
@@ -167,6 +168,7 @@
 <ul>
 <li>LightMode支持的渲染路径设置选项：</li>
 </ul>
+<div class="table-container">
 <table>
 <thead>
 <tr>
@@ -174,7 +176,8 @@
 <th>描述</th>
 </tr>
 </thead>
-<tbody><tr>
+<tbody>
+<tr>
 <td>Always</td>
 <td>不管使用哪种渲染路径，该Pass总是会被渲染，但不会计算任何光照</td>
 </tr>
@@ -206,13 +209,14 @@
 <td>Vertex，VertexLMRGBM和VertexLM</td>
 <td>用于<strong>遗留的顶点照明渲染</strong></td>
 </tr>
-</tbody></table>
+</tbody>
+</table>
+</div>
 <h4 id="前向渲染路径："><a href="#前向渲染路径：" class="headerlink" title="前向渲染路径："></a>前向渲染路径：</h4><p>前向渲染路径是传统的渲染方式，也是我们最常用的一种渲染路径。</p>
 <ol>
 <li><p>前向渲染路径的原理：</p>
 <p>每进行一次完整的前向渲染，我们需要渲染该对象的渲染图元，并计算两个缓冲区的信息：<strong>颜色缓冲区与深度缓冲区</strong>。我们利用深度缓冲来决定一个片元是否可见，如果可见就更新颜色缓冲区中的颜色值。</p>
 <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line">Pass&#123;</span><br><span class="line">    for(each primitive in this model)&#123;</span><br><span class="line">        for(each fragment covered by this primitive)&#123;</span><br><span class="line">            if(failed in depth test)&#123;</span><br><span class="line">                // 未通过深度测试，该片元不可见</span><br><span class="line">                discard;</span><br><span class="line">            &#125;</span><br><span class="line">            else&#123;</span><br><span class="line">                // 可见则进行光照计算</span><br><span class="line">                float4 color = Shading(materialInfo,pos,normal,lightDir,viewDir);</span><br><span class="line">                // 更新帧缓冲</span><br><span class="line">                writeFrameBuffer(fragment,color);</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
 <p>对于每个逐像素光照，我们都需要进行上面一次完整的渲染流程。如果一个物体在多个逐像素光源的影响区域内，那么该物体就需要执行多个Pass，每个Pass计算一个逐像素光源的光照结果，然后在帧缓冲中把这些光照结果混合起来得到最终的颜色值。</p>
 </li>
 <li><p>Unity中的前向渲染</p>
@@ -229,7 +233,7 @@
 <li>如果以上规则得到的逐像素光源数量小于Quality Setting中的逐像素光源数量（Pixel Light Count），会有更多的光源以逐像素的方式进行渲染</li>
 </ul>
 </li>
-<li><p>前向渲染的光照计算细节：<br> <img src="http://wx4.sinaimg.cn/large/007dFQ0Ily1fyl39t7v9gj30z60tsajj.jpg" alt=""></p>
+<li><p>前向渲染的光照计算细节：<br> <img src="http://wx4.sinaimg.cn/large/007dFQ0Ily1fyl39t7v9gj30z60tsajj.jpg" alt></p>
 <ul>
 <li>需要使用编译指令保证Unity可以为相应类型的Pass生成所有需要的Shader变种，这些变种会处理不同条件下的渲染逻辑：是否使用光照贴图，当前处理哪种光源类型，是否开启了阴影等。</li>
 <li>Base Pass中的平行光默认是支持阴影的，而Additional Pass中渲染的光源在默认情况下是没有阴影效果的，即使在Light组件中设置了有阴影的Shadow Type，但可以在Additional Pass中使用<code>#pragma multi——compile_fwdadd_fullshadows</code>代替<code>#pragma multi_compile_fwdadd</code>编译指令，这会为点光源和聚光灯开启阴影效果，但需要在Unity内部使用更多的Shader变种。</li>
@@ -240,6 +244,7 @@
 <li><p>内置的光照变量和函数（前向渲染）</p>
 </li>
 </ol>
+<div class="table-container">
 <table>
 <thead>
 <tr>
@@ -248,7 +253,8 @@
 <th>描述</th>
 </tr>
 </thead>
-<tbody><tr>
+<tbody>
+<tr>
 <td>_LightColor0</td>
 <td>float4</td>
 <td>该Pass处理的逐像素光源的颜色</td>
@@ -278,7 +284,10 @@
 <td>half4[4]</td>
 <td>仅用于Base Pass。存储了前四个非重要的点光源的颜色。</td>
 </tr>
-</tbody></table>
+</tbody>
+</table>
+</div>
+<div class="table-container">
 <table>
 <thead>
 <tr>
@@ -286,7 +295,8 @@
 <th>描述</th>
 </tr>
 </thead>
-<tbody><tr>
+<tbody>
+<tr>
 <td>float3 WorldSpaceLightDir(float4 v)</td>
 <td><strong>仅可用于前向渲染中。</strong>输入一个<strong>模型空间</strong>中的顶点位置，返回<strong>世界空间</strong>中从该点到光源的光照方向。内部实现使用了UnityWorldSpaceLightDir函数，没有被归一化。</td>
 </tr>
@@ -302,7 +312,9 @@
 <td>float3 Shade4PointLights(…)</td>
 <td>仅可用于前向渲染中。计算四个点光源的光照，它的参数是已经打包进矢量的光照数据，通常是上述的光照变量，前向渲染通常会使用这个函数来计算逐顶点光照。</td>
 </tr>
-</tbody></table>
+</tbody>
+</table>
+</div>
 <h4 id="顶点照明渲染路径："><a href="#顶点照明渲染路径：" class="headerlink" title="顶点照明渲染路径："></a>顶点照明渲染路径：</h4><p>顶点照明渲染是对硬件配置要求最少、运算性能最高，但同时也是得到的效果最差的一种类型。它不支持那些逐像素才能得到的效果，例如阴影、法线映射、高精度的高光反射等。</p>
 <ol>
 <li><p>Unity中的顶点照明渲染：</p>
@@ -312,6 +324,7 @@
 <p>如果我们只需要渲染其中两个光源对物体的照明，可以仅使用_LightColor0与_WorldSpaceLightPos0。如果影响该物体的光源数目小于8，那么数组中剩下的光源颜色会被设置成黑色。</p>
 </li>
 </ol>
+<div class="table-container">
 <table>
 <thead>
 <tr>
@@ -320,7 +333,8 @@
 <th>描述</th>
 </tr>
 </thead>
-<tbody><tr>
+<tbody>
+<tr>
 <td>unity_LightColor</td>
 <td>half4[8]</td>
 <td>光源颜色。</td>
@@ -340,7 +354,10 @@
 <td>float4[8]</td>
 <td>如果光源是聚光灯的话，值为视角空间的聚光灯的位置；如果是其他类型的光源，值为(0,0,1,0)。</td>
 </tr>
-</tbody></table>
+</tbody>
+</table>
+</div>
+<div class="table-container">
 <table>
 <thead>
 <tr>
@@ -348,7 +365,8 @@
 <th>描述</th>
 </tr>
 </thead>
-<tbody><tr>
+<tbody>
+<tr>
 <td>float3 ShaderVertexLights(float4 vertex,float3 normal)</td>
 <td>输入模型空间中的顶点位置和法线，计算四个逐顶点光源的光照以及环境光。内部实现实际上调用了ShaderVertexLightsFull函数。</td>
 </tr>
@@ -356,7 +374,9 @@
 <td>Float3 ShaderVertexLightsFull (float4 vertex,float3 normal, int lightCount,bool spotLight)</td>
 <td>输入模型空间中的顶点位置和法线，计算lightCount个光源的光照以及环境光，如果spotLight值为true，那么这些光源会被当作聚光灯来处理，虽然结果更精确，但计算更加耗时；否则按点光源处理。</td>
 </tr>
-</tbody></table>
+</tbody>
+</table>
+</div>
 <h4 id="延迟渲染路径："><a href="#延迟渲染路径：" class="headerlink" title="延迟渲染路径："></a>延迟渲染路径：</h4><ul>
 <li>前向渲染的问题：当场景中包含大量实时光源的时候，前向渲染的性能会急速下降。多个影响范围相互重叠的光源为了得到最终的光照效果，会将该区域的每个物体执行多个Pass来计算不同光源对该物体的光照结果，然后在颜色缓存中把这些结果混合起来得到最终的光照。然而，每执行一个Pass都要重新渲染一次物体，这导致了重复计算。</li>
 <li>延迟渲染：利用颜色缓冲，深度缓冲以及额外的G-缓冲区，它存储了我们关心的表面的其他信息——法线，位置，用于光照计算的材质属性等。</li>
@@ -397,6 +417,7 @@
 <li><p>可访问的内置变量和函数：</p>
 </li>
 </ol>
+<div class="table-container">
 <table>
 <thead>
 <tr>
@@ -405,7 +426,8 @@
 <th>描述</th>
 </tr>
 </thead>
-<tbody><tr>
+<tbody>
+<tr>
 <td>_LightColor</td>
 <td>float4</td>
 <td>光源颜色</td>
@@ -415,7 +437,9 @@
 <td>float4x4</td>
 <td>从世界空间到光源空间的变换矩阵。可以用于采样cookie和光强衰减纹理</td>
 </tr>
-</tbody></table>
+</tbody>
+</table>
+</div>
 <h4 id="选择哪种渲染路径："><a href="#选择哪种渲染路径：" class="headerlink" title="选择哪种渲染路径："></a>选择哪种渲染路径：</h4><p><a href="http://docs.unity3d.com/Manual/RenderingPaths.html" target="_blank" rel="noopener">关于四种渲染路径的Unity的官方文档</a></p>
 <h2 id="Unity的光源类型："><a href="#Unity的光源类型：" class="headerlink" title="Unity的光源类型："></a>Unity的光源类型：</h2><h4 id="支持的光源类型："><a href="#支持的光源类型：" class="headerlink" title="支持的光源类型："></a>支持的光源类型：</h4><ul>
 <li>平行光</li>
@@ -425,7 +449,7 @@
 </ul>
 <h4 id="具体介绍："><a href="#具体介绍：" class="headerlink" title="具体介绍："></a>具体介绍：</h4><ol>
 <li><p>光源属性：位置，强度，方向，颜色，衰减</p>
-<p><img src="http://wx3.sinaimg.cn/large/007dFQ0Ily1fyll089tw2j30l20imdiw.jpg" alt=""></p>
+<p><img src="http://wx3.sinaimg.cn/large/007dFQ0Ily1fyll089tw2j30l20imdiw.jpg" alt></p>
 </li>
 <li><p>平行光：</p>
 <ol>
@@ -459,7 +483,7 @@
          
           <li><a href="/archives/">归档</a></li>
          
-          <li><a href="/projects_url">项目</a></li>
+          <li><a href="/search/">搜索</a></li>
         
       </ul>
     </div>
@@ -470,17 +494,17 @@
 
     <div id="share-footer" style="display: none">
       <ul>
-  <li><a class="icon" href="http://www.facebook.com/sharer.php?u=https://bitzhangmo.github.io/2018/12/24/Unity%E7%AC%94%E8%AE%B0/Unity-%E6%B8%B2%E6%9F%93%E8%B7%AF%E5%BE%84%E4%B8%8E%E5%85%89%E6%BA%90/" target="_blank" rel="noopener"><i class="fab fa-facebook fa-lg" aria-hidden="true"></i></a></li>
-  <li><a class="icon" href="https://twitter.com/share?url=https://bitzhangmo.github.io/2018/12/24/Unity%E7%AC%94%E8%AE%B0/Unity-%E6%B8%B2%E6%9F%93%E8%B7%AF%E5%BE%84%E4%B8%8E%E5%85%89%E6%BA%90/&text=[Unity] 渲染路径与光源" target="_blank" rel="noopener"><i class="fab fa-twitter fa-lg" aria-hidden="true"></i></a></li>
-  <li><a class="icon" href="http://www.linkedin.com/shareArticle?url=https://bitzhangmo.github.io/2018/12/24/Unity%E7%AC%94%E8%AE%B0/Unity-%E6%B8%B2%E6%9F%93%E8%B7%AF%E5%BE%84%E4%B8%8E%E5%85%89%E6%BA%90/&title=[Unity] 渲染路径与光源" target="_blank" rel="noopener"><i class="fab fa-linkedin fa-lg" aria-hidden="true"></i></a></li>
-  <li><a class="icon" href="https://pinterest.com/pin/create/bookmarklet/?url=https://bitzhangmo.github.io/2018/12/24/Unity%E7%AC%94%E8%AE%B0/Unity-%E6%B8%B2%E6%9F%93%E8%B7%AF%E5%BE%84%E4%B8%8E%E5%85%89%E6%BA%90/&is_video=false&description=[Unity] 渲染路径与光源" target="_blank" rel="noopener"><i class="fab fa-pinterest fa-lg" aria-hidden="true"></i></a></li>
-  <li><a class="icon" href="mailto:?subject=[Unity] 渲染路径与光源&body=Check out this article: https://bitzhangmo.github.io/2018/12/24/Unity%E7%AC%94%E8%AE%B0/Unity-%E6%B8%B2%E6%9F%93%E8%B7%AF%E5%BE%84%E4%B8%8E%E5%85%89%E6%BA%90/"><i class="fas fa-envelope fa-lg" aria-hidden="true"></i></a></li>
-  <li><a class="icon" href="https://getpocket.com/save?url=https://bitzhangmo.github.io/2018/12/24/Unity%E7%AC%94%E8%AE%B0/Unity-%E6%B8%B2%E6%9F%93%E8%B7%AF%E5%BE%84%E4%B8%8E%E5%85%89%E6%BA%90/&title=[Unity] 渲染路径与光源" target="_blank" rel="noopener"><i class="fab fa-get-pocket fa-lg" aria-hidden="true"></i></a></li>
-  <li><a class="icon" href="http://reddit.com/submit?url=https://bitzhangmo.github.io/2018/12/24/Unity%E7%AC%94%E8%AE%B0/Unity-%E6%B8%B2%E6%9F%93%E8%B7%AF%E5%BE%84%E4%B8%8E%E5%85%89%E6%BA%90/&title=[Unity] 渲染路径与光源" target="_blank" rel="noopener"><i class="fab fa-reddit fa-lg" aria-hidden="true"></i></a></li>
-  <li><a class="icon" href="http://www.stumbleupon.com/submit?url=https://bitzhangmo.github.io/2018/12/24/Unity%E7%AC%94%E8%AE%B0/Unity-%E6%B8%B2%E6%9F%93%E8%B7%AF%E5%BE%84%E4%B8%8E%E5%85%89%E6%BA%90/&title=[Unity] 渲染路径与光源" target="_blank" rel="noopener"><i class="fab fa-stumbleupon fa-lg" aria-hidden="true"></i></a></li>
-  <li><a class="icon" href="http://digg.com/submit?url=https://bitzhangmo.github.io/2018/12/24/Unity%E7%AC%94%E8%AE%B0/Unity-%E6%B8%B2%E6%9F%93%E8%B7%AF%E5%BE%84%E4%B8%8E%E5%85%89%E6%BA%90/&title=[Unity] 渲染路径与光源" target="_blank" rel="noopener"><i class="fab fa-digg fa-lg" aria-hidden="true"></i></a></li>
-  <li><a class="icon" href="http://www.tumblr.com/share/link?url=https://bitzhangmo.github.io/2018/12/24/Unity%E7%AC%94%E8%AE%B0/Unity-%E6%B8%B2%E6%9F%93%E8%B7%AF%E5%BE%84%E4%B8%8E%E5%85%89%E6%BA%90/&name=[Unity] 渲染路径与光源&description=&lt;p&gt;Unity的渲染路径以及更多不同类型的光源。&lt;/p&gt;" target="_blank" rel="noopener"><i class="fab fa-tumblr fa-lg" aria-hidden="true"></i></a></li>
-  <li><a class="icon" href="https://news.ycombinator.com/submitlink?u=https://bitzhangmo.github.io/2018/12/24/Unity%E7%AC%94%E8%AE%B0/Unity-%E6%B8%B2%E6%9F%93%E8%B7%AF%E5%BE%84%E4%B8%8E%E5%85%89%E6%BA%90/&t=[Unity] 渲染路径与光源" target="_blank" rel="noopener"><i class="fab fa-hacker-news fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="http://www.facebook.com/sharer.php?u=https://bitzhangmo.github.io/2018/12/24/Unity笔记/Unity-渲染路径与光源/"><i class="fab fa-facebook fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="https://twitter.com/share?url=https://bitzhangmo.github.io/2018/12/24/Unity笔记/Unity-渲染路径与光源/&text=[Unity] 渲染路径与光源"><i class="fab fa-twitter fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="http://www.linkedin.com/shareArticle?url=https://bitzhangmo.github.io/2018/12/24/Unity笔记/Unity-渲染路径与光源/&title=[Unity] 渲染路径与光源"><i class="fab fa-linkedin fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="https://pinterest.com/pin/create/bookmarklet/?url=https://bitzhangmo.github.io/2018/12/24/Unity笔记/Unity-渲染路径与光源/&is_video=false&description=[Unity] 渲染路径与光源"><i class="fab fa-pinterest fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="mailto:?subject=[Unity] 渲染路径与光源&body=Check out this article: https://bitzhangmo.github.io/2018/12/24/Unity笔记/Unity-渲染路径与光源/"><i class="fas fa-envelope fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="https://getpocket.com/save?url=https://bitzhangmo.github.io/2018/12/24/Unity笔记/Unity-渲染路径与光源/&title=[Unity] 渲染路径与光源"><i class="fab fa-get-pocket fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="http://reddit.com/submit?url=https://bitzhangmo.github.io/2018/12/24/Unity笔记/Unity-渲染路径与光源/&title=[Unity] 渲染路径与光源"><i class="fab fa-reddit fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="http://www.stumbleupon.com/submit?url=https://bitzhangmo.github.io/2018/12/24/Unity笔记/Unity-渲染路径与光源/&title=[Unity] 渲染路径与光源"><i class="fab fa-stumbleupon fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="http://digg.com/submit?url=https://bitzhangmo.github.io/2018/12/24/Unity笔记/Unity-渲染路径与光源/&title=[Unity] 渲染路径与光源"><i class="fab fa-digg fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="http://www.tumblr.com/share/link?url=https://bitzhangmo.github.io/2018/12/24/Unity笔记/Unity-渲染路径与光源/&name=[Unity] 渲染路径与光源&description=&lt;p&gt;Unity的渲染路径以及更多不同类型的光源。&lt;/p&gt;"><i class="fab fa-tumblr fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="https://news.ycombinator.com/submitlink?u=https://bitzhangmo.github.io/2018/12/24/Unity笔记/Unity-渲染路径与光源/&t=[Unity] 渲染路径与光源"><i class="fab fa-hacker-news fa-lg" aria-hidden="true"></i></a></li>
 </ul>
 
     </div>
@@ -510,7 +534,7 @@
          
           <li><a href="/archives/">归档</a></li>
          
-          <li><a href="/projects_url">项目</a></li>
+          <li><a href="/search/">搜索</a></li>
         
       </ul>
     </nav>
@@ -558,5 +582,5 @@
 <!-- Disqus Comments -->
 
 
-</body>
+<script src="/live2dw/lib/L2Dwidget.min.js?bd2294fafea3389ee458f1d9be5a2157"></script><script>L2Dwidget.init({"pluginRootPath":"live2dw/","pluginJsPath":"lib/","pluginModelPath":"assets/","tagMode":false,"debug":false,"model":{"jsonPath":"/live2dw/assets/hijiki.model.json"},"display":{"position":"left","width":100,"height":200},"mobile":{"show":false},"log":false});</script></body>
 </html>

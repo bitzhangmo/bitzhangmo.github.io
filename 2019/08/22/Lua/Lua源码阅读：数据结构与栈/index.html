@@ -1,24 +1,26 @@
 <!DOCTYPE html>
 <html lang=zh>
-<head>
+<head><meta name="generator" content="Hexo 3.9.0">
     <!-- so meta -->
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="HandheldFriendly" content="True">
-    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1" />
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
     <meta name="description" content="承接上篇虚拟机概述，解析函数执行流程。">
 <meta name="keywords" content="Lua">
 <meta property="og:type" content="article">
 <meta property="og:title" content="Lua源码阅读：数据结构与栈">
-<meta property="og:url" content="https:&#x2F;&#x2F;bitzhangmo.github.io&#x2F;2019&#x2F;08&#x2F;22&#x2F;Lua&#x2F;Lua%E6%BA%90%E7%A0%81%E9%98%85%E8%AF%BB%EF%BC%9A%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84%E4%B8%8E%E6%A0%88&#x2F;index.html">
+<meta property="og:url" content="https://bitzhangmo.github.io/2019/08/22/Lua/Lua源码阅读：数据结构与栈/index.html">
 <meta property="og:site_name" content="zhangMo Blog">
 <meta property="og:description" content="承接上篇虚拟机概述，解析函数执行流程。">
 <meta property="og:locale" content="zh-CN">
-<meta property="og:image" content="https:&#x2F;&#x2F;s2.ax1x.com&#x2F;2019&#x2F;08&#x2F;22&#x2F;m0c4zD.png">
-<meta property="og:image" content="https:&#x2F;&#x2F;i.loli.net&#x2F;2019&#x2F;08&#x2F;22&#x2F;IROLUSJyYKfevoZ.png">
+<meta property="og:image" content="https://s2.ax1x.com/2019/08/22/m0c4zD.png">
+<meta property="og:image" content="https://i.loli.net/2019/08/22/IROLUSJyYKfevoZ.png">
 <meta property="og:updated_time" content="2019-08-23T06:46:36.445Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:image" content="https:&#x2F;&#x2F;s2.ax1x.com&#x2F;2019&#x2F;08&#x2F;22&#x2F;m0c4zD.png">
+<meta name="twitter:title" content="Lua源码阅读：数据结构与栈">
+<meta name="twitter:description" content="承接上篇虚拟机概述，解析函数执行流程。">
+<meta name="twitter:image" content="https://s2.ax1x.com/2019/08/22/m0c4zD.png">
     
     
         
@@ -66,7 +68,7 @@
          
           <li><a href="/archives/">归档</a></li>
          
-          <li><a href="/projects_url">项目</a></li>
+          <li><a href="/search/">搜索</a></li>
         
       </ul>
     </span>
@@ -74,10 +76,10 @@
     <span id="actions">
       <ul>
         
-        <li><a class="icon" href="/2019/08/23/Lua/Lua%E6%BA%90%E7%A0%81%E9%98%85%E8%AF%BB%EF%BC%9A%E6%8C%87%E4%BB%A4%E7%9A%84%E8%A7%A3%E6%9E%90%E4%B8%8E%E6%89%A7%E8%A1%8C/"><i class="fas fa-chevron-left" aria-hidden="true" onmouseover="$('#i-prev').toggle();" onmouseout="$('#i-prev').toggle();"></i></a></li>
+        <li><a class="icon" href="/2019/08/23/Lua/Lua源码阅读：指令的解析与执行/"><i class="fas fa-chevron-left" aria-hidden="true" onmouseover="$('#i-prev').toggle();" onmouseout="$('#i-prev').toggle();"></i></a></li>
         
         
-        <li><a class="icon" href="/2019/08/21/Lua/Lua%E6%BA%90%E7%A0%81%E9%98%85%E8%AF%BB%EF%BC%9A%E8%99%9A%E6%8B%9F%E6%9C%BA%E6%A6%82%E8%BF%B0/"><i class="fas fa-chevron-right" aria-hidden="true" onmouseover="$('#i-next').toggle();" onmouseout="$('#i-next').toggle();"></i></a></li>
+        <li><a class="icon" href="/2019/08/21/Lua/Lua源码阅读：虚拟机概述/"><i class="fas fa-chevron-right" aria-hidden="true" onmouseover="$('#i-next').toggle();" onmouseout="$('#i-next').toggle();"></i></a></li>
         
         <li><a class="icon" href="#" onclick="$('html, body').animate({ scrollTop: 0 }, 'fast');"><i class="fas fa-chevron-up" aria-hidden="true" onmouseover="$('#i-top').toggle();" onmouseout="$('#i-top').toggle();"></i></a></li>
         <li><a class="icon" href="#"><i class="fas fa-share-alt" aria-hidden="true" onmouseover="$('#i-share').toggle();" onmouseout="$('#i-share').toggle();" onclick="$('#share').toggle();return false;"></i></a></li>
@@ -90,17 +92,17 @@
     <br/>
     <div id="share" style="display: none">
       <ul>
-  <li><a class="icon" href="http://www.facebook.com/sharer.php?u=https://bitzhangmo.github.io/2019/08/22/Lua/Lua%E6%BA%90%E7%A0%81%E9%98%85%E8%AF%BB%EF%BC%9A%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84%E4%B8%8E%E6%A0%88/" target="_blank" rel="noopener"><i class="fab fa-facebook " aria-hidden="true"></i></a></li>
-  <li><a class="icon" href="https://twitter.com/share?url=https://bitzhangmo.github.io/2019/08/22/Lua/Lua%E6%BA%90%E7%A0%81%E9%98%85%E8%AF%BB%EF%BC%9A%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84%E4%B8%8E%E6%A0%88/&text=Lua源码阅读：数据结构与栈" target="_blank" rel="noopener"><i class="fab fa-twitter " aria-hidden="true"></i></a></li>
-  <li><a class="icon" href="http://www.linkedin.com/shareArticle?url=https://bitzhangmo.github.io/2019/08/22/Lua/Lua%E6%BA%90%E7%A0%81%E9%98%85%E8%AF%BB%EF%BC%9A%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84%E4%B8%8E%E6%A0%88/&title=Lua源码阅读：数据结构与栈" target="_blank" rel="noopener"><i class="fab fa-linkedin " aria-hidden="true"></i></a></li>
-  <li><a class="icon" href="https://pinterest.com/pin/create/bookmarklet/?url=https://bitzhangmo.github.io/2019/08/22/Lua/Lua%E6%BA%90%E7%A0%81%E9%98%85%E8%AF%BB%EF%BC%9A%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84%E4%B8%8E%E6%A0%88/&is_video=false&description=Lua源码阅读：数据结构与栈" target="_blank" rel="noopener"><i class="fab fa-pinterest " aria-hidden="true"></i></a></li>
-  <li><a class="icon" href="mailto:?subject=Lua源码阅读：数据结构与栈&body=Check out this article: https://bitzhangmo.github.io/2019/08/22/Lua/Lua%E6%BA%90%E7%A0%81%E9%98%85%E8%AF%BB%EF%BC%9A%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84%E4%B8%8E%E6%A0%88/"><i class="fas fa-envelope " aria-hidden="true"></i></a></li>
-  <li><a class="icon" href="https://getpocket.com/save?url=https://bitzhangmo.github.io/2019/08/22/Lua/Lua%E6%BA%90%E7%A0%81%E9%98%85%E8%AF%BB%EF%BC%9A%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84%E4%B8%8E%E6%A0%88/&title=Lua源码阅读：数据结构与栈" target="_blank" rel="noopener"><i class="fab fa-get-pocket " aria-hidden="true"></i></a></li>
-  <li><a class="icon" href="http://reddit.com/submit?url=https://bitzhangmo.github.io/2019/08/22/Lua/Lua%E6%BA%90%E7%A0%81%E9%98%85%E8%AF%BB%EF%BC%9A%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84%E4%B8%8E%E6%A0%88/&title=Lua源码阅读：数据结构与栈" target="_blank" rel="noopener"><i class="fab fa-reddit " aria-hidden="true"></i></a></li>
-  <li><a class="icon" href="http://www.stumbleupon.com/submit?url=https://bitzhangmo.github.io/2019/08/22/Lua/Lua%E6%BA%90%E7%A0%81%E9%98%85%E8%AF%BB%EF%BC%9A%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84%E4%B8%8E%E6%A0%88/&title=Lua源码阅读：数据结构与栈" target="_blank" rel="noopener"><i class="fab fa-stumbleupon " aria-hidden="true"></i></a></li>
-  <li><a class="icon" href="http://digg.com/submit?url=https://bitzhangmo.github.io/2019/08/22/Lua/Lua%E6%BA%90%E7%A0%81%E9%98%85%E8%AF%BB%EF%BC%9A%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84%E4%B8%8E%E6%A0%88/&title=Lua源码阅读：数据结构与栈" target="_blank" rel="noopener"><i class="fab fa-digg " aria-hidden="true"></i></a></li>
-  <li><a class="icon" href="http://www.tumblr.com/share/link?url=https://bitzhangmo.github.io/2019/08/22/Lua/Lua%E6%BA%90%E7%A0%81%E9%98%85%E8%AF%BB%EF%BC%9A%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84%E4%B8%8E%E6%A0%88/&name=Lua源码阅读：数据结构与栈&description=&lt;p&gt;承接上篇虚拟机概述，解析函数执行流程。&lt;/p&gt;" target="_blank" rel="noopener"><i class="fab fa-tumblr " aria-hidden="true"></i></a></li>
-  <li><a class="icon" href="https://news.ycombinator.com/submitlink?u=https://bitzhangmo.github.io/2019/08/22/Lua/Lua%E6%BA%90%E7%A0%81%E9%98%85%E8%AF%BB%EF%BC%9A%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84%E4%B8%8E%E6%A0%88/&t=Lua源码阅读：数据结构与栈" target="_blank" rel="noopener"><i class="fab fa-hacker-news " aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="http://www.facebook.com/sharer.php?u=https://bitzhangmo.github.io/2019/08/22/Lua/Lua源码阅读：数据结构与栈/"><i class="fab fa-facebook " aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="https://twitter.com/share?url=https://bitzhangmo.github.io/2019/08/22/Lua/Lua源码阅读：数据结构与栈/&text=Lua源码阅读：数据结构与栈"><i class="fab fa-twitter " aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="http://www.linkedin.com/shareArticle?url=https://bitzhangmo.github.io/2019/08/22/Lua/Lua源码阅读：数据结构与栈/&title=Lua源码阅读：数据结构与栈"><i class="fab fa-linkedin " aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="https://pinterest.com/pin/create/bookmarklet/?url=https://bitzhangmo.github.io/2019/08/22/Lua/Lua源码阅读：数据结构与栈/&is_video=false&description=Lua源码阅读：数据结构与栈"><i class="fab fa-pinterest " aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="mailto:?subject=Lua源码阅读：数据结构与栈&body=Check out this article: https://bitzhangmo.github.io/2019/08/22/Lua/Lua源码阅读：数据结构与栈/"><i class="fas fa-envelope " aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="https://getpocket.com/save?url=https://bitzhangmo.github.io/2019/08/22/Lua/Lua源码阅读：数据结构与栈/&title=Lua源码阅读：数据结构与栈"><i class="fab fa-get-pocket " aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="http://reddit.com/submit?url=https://bitzhangmo.github.io/2019/08/22/Lua/Lua源码阅读：数据结构与栈/&title=Lua源码阅读：数据结构与栈"><i class="fab fa-reddit " aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="http://www.stumbleupon.com/submit?url=https://bitzhangmo.github.io/2019/08/22/Lua/Lua源码阅读：数据结构与栈/&title=Lua源码阅读：数据结构与栈"><i class="fab fa-stumbleupon " aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="http://digg.com/submit?url=https://bitzhangmo.github.io/2019/08/22/Lua/Lua源码阅读：数据结构与栈/&title=Lua源码阅读：数据结构与栈"><i class="fab fa-digg " aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="http://www.tumblr.com/share/link?url=https://bitzhangmo.github.io/2019/08/22/Lua/Lua源码阅读：数据结构与栈/&name=Lua源码阅读：数据结构与栈&description=&lt;p&gt;承接上篇虚拟机概述，解析函数执行流程。&lt;/p&gt;"><i class="fab fa-tumblr " aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="https://news.ycombinator.com/submitlink?u=https://bitzhangmo.github.io/2019/08/22/Lua/Lua源码阅读：数据结构与栈/&t=Lua源码阅读：数据结构与栈"><i class="fab fa-hacker-news " aria-hidden="true"></i></a></li>
 </ul>
 
     </div>
@@ -138,14 +140,14 @@
       
     <div class="article-category">
         <i class="fas fa-archive"></i>
-        <a class="category-link" href="/categories/%E6%BA%90%E7%A0%81%E9%98%85%E8%AF%BB/">源码阅读</a>
+        <a class="category-link" href="/categories/源码阅读/">源码阅读</a>
     </div>
 
 
       
     <div class="article-tag">
         <i class="fas fa-tag"></i>
-        <a class="tag-link" href="/tags/Lua/" rel="tag">Lua</a>
+        <a class="tag-link" href="/tags/Lua/">Lua</a>
     </div>
 
 
@@ -156,7 +158,6 @@
   <div class="content" itemprop="articleBody">
     <p>承接上篇虚拟机概述，解析函数执行流程。</p>
 <a id="more"></a>
-
 <h3 id="数据结构与栈："><a href="#数据结构与栈：" class="headerlink" title="数据结构与栈："></a>数据结构与栈：</h3><p>每个Lua 虚拟机对应一个 lua_State 结构体，它使用 TValue 数组来模拟栈，其中包括几个与栈相关的成员：</p>
 <ul>
 <li>stack：栈数组的起始位置</li>
@@ -166,7 +167,6 @@
 <p>这些成员的初始化操作在 stack_init 函数中完成。</p>
 <p>然而 lua_State 里面存放的是一个 lua 虚拟机的全局状态，当执行到一个函数时，需要有对应的数据结构来表示函数相关的信息，这个数据结构就是 CallInfo，这个结构体中同样有 top、base这两个与栈相关的成员。</p>
 <figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">/*</span></span><br><span class="line"><span class="comment">** Information about a call.</span></span><br><span class="line"><span class="comment">** When a thread yields, 'func' is adjusted to pretend that the</span></span><br><span class="line"><span class="comment">** top function has only the yielded values in its stack; in that</span></span><br><span class="line"><span class="comment">** case, the actual 'func' value is saved in field 'extra'. </span></span><br><span class="line"><span class="comment">** When a function calls another with a continuation, 'extra' keeps</span></span><br><span class="line"><span class="comment">** the function index so that, in case of errors, the continuation</span></span><br><span class="line"><span class="comment">** function can be called with the correct top.</span></span><br><span class="line"><span class="comment">*/</span></span><br><span class="line"><span class="keyword">typedef</span> <span class="class"><span class="keyword">struct</span> <span class="title">CallInfo</span> &#123;</span></span><br><span class="line">  StkId func;  <span class="comment">/* function index in the stack */</span></span><br><span class="line">  StkId	top;  <span class="comment">/* top for this function */</span></span><br><span class="line">  <span class="class"><span class="keyword">struct</span> <span class="title">CallInfo</span> *<span class="title">previous</span>, *<span class="title">next</span>;</span>  <span class="comment">/* dynamic call link */</span></span><br><span class="line">  <span class="keyword">union</span> &#123;</span><br><span class="line">    <span class="class"><span class="keyword">struct</span> &#123;</span>  <span class="comment">/* only for Lua functions */</span></span><br><span class="line">      StkId base;  <span class="comment">/* base for this function */</span></span><br><span class="line">      <span class="keyword">const</span> Instruction *savedpc;</span><br><span class="line">    &#125; l;</span><br><span class="line">    <span class="class"><span class="keyword">struct</span> &#123;</span>  <span class="comment">/* only for C functions */</span></span><br><span class="line">      lua_KFunction k;  <span class="comment">/* continuation in case of yields */</span></span><br><span class="line">      <span class="keyword">ptrdiff_t</span> old_errfunc;</span><br><span class="line">      lua_KContext ctx;  <span class="comment">/* context info. in case of yields */</span></span><br><span class="line">    &#125; c;</span><br><span class="line">  &#125; u;</span><br><span class="line">  <span class="keyword">ptrdiff_t</span> extra;</span><br><span class="line">  <span class="keyword">short</span> nresults;  <span class="comment">/* expected number of results from this function */</span></span><br><span class="line">  lu_byte callstatus;</span><br><span class="line">&#125; CallInfo;</span><br></pre></td></tr></table></figure>
-
 <p>在 lua_State 中，有一个 base_ci 的 CallInfo 数组，存储的就是 CallInfo 的信息，而另一个 ci 成员，指向的就是当前函数的 CallInfo 指针。</p>
 <p>在调用函数之前，一般会调用 luaD_precall 函数：</p>
 <ol>
@@ -176,16 +176,13 @@
 </ol>
 <h3 id="指令的解析："><a href="#指令的解析：" class="headerlink" title="指令的解析："></a>指令的解析：</h3><p>首先，分析阶段要用到的数据结构是 FuncState。这个结构体用于在语法分析时保存解析函数之后相关的信息，根据其中的 prev 指针成员来串联起来。对于下面的 Lua 代码：</p>
 <figure class="highlight lua"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">-- 最外层 FuncState fs1</span></span><br><span class="line"><span class="keyword">local</span> <span class="function"><span class="keyword">function</span> <span class="title">a</span><span class="params">()</span></span>	<span class="comment">-- 函数 a 的 FuncState fsa</span></span><br><span class="line">	<span class="keyword">local</span> <span class="function"><span class="keyword">function</span> <span class="title">b</span><span class="params">()</span></span>	<span class="comment">-- 函数 b 的 FuncState fsb</span></span><br><span class="line">	<span class="keyword">end</span></span><br><span class="line"><span class="keyword">end</span></span><br></pre></td></tr></table></figure>
-
 <p>涉及到三个 FuncState 指针，一层一层嵌套包围，其中fs1是 fsa 的父指针:</p>
-<p><img src="https://s2.ax1x.com/2019/08/22/m0c4zD.png" alt=""></p>
+<p><img src="https://s2.ax1x.com/2019/08/22/m0c4zD.png" alt></p>
 <p>在 FuncState 结构体中，有一个成员 Proto *f，它用来保存这个 FuncState 解析指令后生成的指令，其中除了自己的，还包括内部嵌套的子函数的：</p>
 <figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">/* state needed to generate code for a given function */</span></span><br><span class="line"><span class="keyword">typedef</span> <span class="class"><span class="keyword">struct</span> <span class="title">FuncState</span> &#123;</span></span><br><span class="line">  Proto *f;  <span class="comment">/* current function header */</span></span><br><span class="line">  <span class="class"><span class="keyword">struct</span> <span class="title">FuncState</span> *<span class="title">prev</span>;</span>  <span class="comment">/* enclosing function */</span></span><br><span class="line">  <span class="class"><span class="keyword">struct</span> <span class="title">LexState</span> *<span class="title">ls</span>;</span>  <span class="comment">/* lexical state */</span></span><br><span class="line">  <span class="class"><span class="keyword">struct</span> <span class="title">BlockCnt</span> *<span class="title">bl</span>;</span>  <span class="comment">/* chain of current blocks */</span></span><br><span class="line">  <span class="keyword">int</span> pc;  <span class="comment">/* next position to code (equivalent to 'ncode') */</span></span><br><span class="line">  <span class="keyword">int</span> lasttarget;   <span class="comment">/* 'label' of last 'jump label' */</span></span><br><span class="line">  <span class="keyword">int</span> jpc;  <span class="comment">/* list of pending jumps to 'pc' */</span></span><br><span class="line">  <span class="keyword">int</span> nk;  <span class="comment">/* number of elements in 'k' */</span></span><br><span class="line">  <span class="keyword">int</span> np;  <span class="comment">/* number of elements in 'p' */</span></span><br><span class="line">  <span class="keyword">int</span> firstlocal;  <span class="comment">/* index of first local var (in Dyndata array) */</span></span><br><span class="line">  <span class="keyword">short</span> nlocvars;  <span class="comment">/* number of elements in 'f-&gt;locvars' */</span></span><br><span class="line">  lu_byte nactvar;  <span class="comment">/* number of active local variables */</span></span><br><span class="line">  lu_byte nups;  <span class="comment">/* number of upvalues */</span></span><br><span class="line">  lu_byte freereg;  <span class="comment">/* first free register */</span></span><br><span class="line">&#125; FuncState;</span><br></pre></td></tr></table></figure>
-
 <p>各个层次的 Proto 数据是逐层包含的，因此最外层的全局 FuncState 结构体中的 Proto 数组一定有这个全局结构中所有 Proto 的信息，也就是解析完毕之后的指令信息。</p>
 <p>而 luaY_parser 这个函数，它是分析阶段的唯一入口函数，这个函数的返回值就是 Proto 指针，而 FuncState 等数据结构仅是用于分析过程中的临时数据结构，它们最终都是为了解析代码生成指令到 Proto 结构体服务的。</p>
 <h4 id="Proto-结构体："><a href="#Proto-结构体：" class="headerlink" title="Proto 结构体："></a>Proto 结构体：</h4><figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">/*</span></span><br><span class="line"><span class="comment">** Function Prototypes</span></span><br><span class="line"><span class="comment">*/</span></span><br><span class="line"><span class="keyword">typedef</span> <span class="class"><span class="keyword">struct</span> <span class="title">Proto</span> &#123;</span></span><br><span class="line">  CommonHeader;</span><br><span class="line">  lu_byte numparams;  <span class="comment">/* number of fixed parameters */</span></span><br><span class="line">  lu_byte is_vararg;</span><br><span class="line">  lu_byte maxstacksize;  <span class="comment">/* maximum stack used by this function */</span></span><br><span class="line">  <span class="keyword">int</span> sizeupvalues;  <span class="comment">/* size of 'upvalues' */</span></span><br><span class="line">  <span class="keyword">int</span> sizek;  <span class="comment">/* size of 'k' */</span></span><br><span class="line">  <span class="keyword">int</span> sizecode;</span><br><span class="line">  <span class="keyword">int</span> sizelineinfo;</span><br><span class="line">  <span class="keyword">int</span> sizep;  <span class="comment">/* size of 'p' */</span></span><br><span class="line">  <span class="keyword">int</span> sizelocvars;</span><br><span class="line">  <span class="keyword">int</span> linedefined;</span><br><span class="line">  <span class="keyword">int</span> lastlinedefined;</span><br><span class="line">  TValue *k;  <span class="comment">/* constants used by the function 函数使用的常量（数组） */</span></span><br><span class="line">  Instruction *code;	<span class="comment">/* 保存分析之后生成的 OpCode 数组 */</span></span><br><span class="line">  <span class="class"><span class="keyword">struct</span> <span class="title">Proto</span> **<span class="title">p</span>;</span>  <span class="comment">/* functions defined inside the function 函数内定义的函数 */</span></span><br><span class="line">  <span class="keyword">int</span> *lineinfo;  <span class="comment">/* map from opcodes to source lines (debug information) */</span></span><br><span class="line">  LocVar *locvars;  <span class="comment">/* information about local variables (debug information) 局部变量的数组（调试信息） */</span></span><br><span class="line">  Upvaldesc *upvalues;  <span class="comment">/* upvalue information 保存 upvalue 的数组 */</span></span><br><span class="line">  <span class="class"><span class="keyword">struct</span> <span class="title">LClosure</span> *<span class="title">cache</span>;</span>  <span class="comment">/* last created closure with this prototype */</span></span><br><span class="line">  TString  *source;  <span class="comment">/* used for debug information */</span></span><br><span class="line">  GCObject *gclist;</span><br><span class="line">&#125; Proto;</span><br></pre></td></tr></table></figure>
-
 <h3 id="指令格式："><a href="#指令格式：" class="headerlink" title="指令格式："></a>指令格式：</h3><p>lua 虚拟机的指令格式：</p>
 <p><img src="https://i.loli.net/2019/08/22/IROLUSJyYKfevoZ.png" alt="operation.png"></p>
 <p>首先，Lua 的指令是 32 位的：</p>
@@ -195,6 +192,7 @@
 </ul>
 <p>不同操作数的指令格式不同、含义不同。操作数是 6 位的，所以 Lua 最多支持 2^6-1 = 31 个指令。Lua 代码中，将每个操作数及其对应的指令格式都在 lopcodes.h 中的 OpCode 枚举类型中定义。</p>
 <p>Lua 虚拟机指令中有着不同的参数：</p>
+<div class="table-container">
 <table>
 <thead>
 <tr>
@@ -202,7 +200,8 @@
 <th>说明</th>
 </tr>
 </thead>
-<tbody><tr>
+<tbody>
+<tr>
 <td>R(A)</td>
 <td>A参数作为寄存器索引，R(B)、R(C)依此类推</td>
 </tr>
@@ -230,18 +229,17 @@
 <td>sBx</td>
 <td>有符号整数，用于表示跳转偏移量</td>
 </tr>
-</tbody></table>
+</tbody>
+</table>
+</div>
 <p>在lopcodes.h 文件中还定义了每个指令的格式，以及相关的宏；这里定义了在一个指令中每个参数对应的大小和位置。</p>
 <p>RK(B)的意思有两层，一是这个指令格式只可能作用在 OpCode 的 B、C 参数上，不会作用在参数 A 上；二是这个数据除了从函数栈获取之外，还有可能从常量数组中获取，关键在于宏 ISK 的判断。</p>
 <figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">/* test whether value is a constant */</span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">define</span> ISK(x)		((x) &amp; BITRK)</span></span><br></pre></td></tr></table></figure>
-
 <p>判断这个数据的第 8 位是不是 1，如果是，则认为应该从 K 数组获取数据，否则就是从函数栈寄存器中获取数据。</p>
 <p>从寄存器中取指令是在以 R 开头的宏中，实际代码中会使用一个 base 再加上对应的地址，base 值保存的是函数栈基址：</p>
 <figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="meta-keyword">define</span> RA(i)	(base+GETARG_A(i))</span></span><br><span class="line"><span class="comment">/* to be used after possible stack reallocation */</span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">define</span> RB(i)	check_exp(getBMode(GET_OPCODE(i)) == OpArgR, base+GETARG_B(i))</span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">define</span> RC(i)	check_exp(getCMode(GET_OPCODE(i)) == OpArgR, base+GETARG_C(i))</span></span><br></pre></td></tr></table></figure>
-
 <h3 id="指令的执行："><a href="#指令的执行：" class="headerlink" title="指令的执行："></a>指令的执行：</h3><p>指令执行的入口函数是 luaV_execute：</p>
 <figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">luaV_execute</span> <span class="params">(lua_State *L)</span> </span>&#123;</span><br><span class="line">  CallInfo *ci = L-&gt;ci;</span><br><span class="line">  LClosure *cl;</span><br><span class="line">  TValue *k;</span><br><span class="line">  StkId base;</span><br><span class="line"> newframe:  <span class="comment">/* reentry point when frame changes (call/return) */</span></span><br><span class="line">  lua_assert(ci == L-&gt;ci);</span><br><span class="line">  cl = clLvalue(ci-&gt;func);</span><br><span class="line">  k = cl-&gt;p-&gt;k;</span><br><span class="line">  base = ci-&gt;u.l.base;</span><br><span class="line">  <span class="comment">/* main loop of interpreter */</span></span><br><span class="line">  <span class="keyword">for</span> (;;) &#123;</span><br><span class="line">    Instruction i = *(ci-&gt;u.l.savedpc++);</span><br><span class="line">    StkId ra;</span><br><span class="line">    <span class="keyword">if</span> ((L-&gt;hookmask &amp; (LUA_MASKLINE | LUA_MASKCOUNT)) &amp;&amp;</span><br><span class="line">        (--L-&gt;hookcount == <span class="number">0</span> || L-&gt;hookmask &amp; LUA_MASKLINE)) &#123;</span><br><span class="line">      Protect(luaG_traceexec(L));</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="comment">/* WARNING: several calls may realloc the stack and invalidate 'ra' */</span></span><br><span class="line">    ra = RA(i);</span><br><span class="line">    lua_assert(base == ci-&gt;u.l.base);</span><br><span class="line">    lua_assert(base &lt;= L-&gt;top &amp;&amp; L-&gt;top &lt; L-&gt;<span class="built_in">stack</span> + L-&gt;stacksize);</span><br></pre></td></tr></table></figure>
-
 <ul>
 <li>ci：用于保存当前指令的执行位置（以及一些其他信息，包括动态调用链的双向链表）</li>
 <li>cl：当前所在的函数环境</li>
@@ -279,7 +277,7 @@
          
           <li><a href="/archives/">归档</a></li>
          
-          <li><a href="/projects_url">项目</a></li>
+          <li><a href="/search/">搜索</a></li>
         
       </ul>
     </div>
@@ -290,17 +288,17 @@
 
     <div id="share-footer" style="display: none">
       <ul>
-  <li><a class="icon" href="http://www.facebook.com/sharer.php?u=https://bitzhangmo.github.io/2019/08/22/Lua/Lua%E6%BA%90%E7%A0%81%E9%98%85%E8%AF%BB%EF%BC%9A%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84%E4%B8%8E%E6%A0%88/" target="_blank" rel="noopener"><i class="fab fa-facebook fa-lg" aria-hidden="true"></i></a></li>
-  <li><a class="icon" href="https://twitter.com/share?url=https://bitzhangmo.github.io/2019/08/22/Lua/Lua%E6%BA%90%E7%A0%81%E9%98%85%E8%AF%BB%EF%BC%9A%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84%E4%B8%8E%E6%A0%88/&text=Lua源码阅读：数据结构与栈" target="_blank" rel="noopener"><i class="fab fa-twitter fa-lg" aria-hidden="true"></i></a></li>
-  <li><a class="icon" href="http://www.linkedin.com/shareArticle?url=https://bitzhangmo.github.io/2019/08/22/Lua/Lua%E6%BA%90%E7%A0%81%E9%98%85%E8%AF%BB%EF%BC%9A%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84%E4%B8%8E%E6%A0%88/&title=Lua源码阅读：数据结构与栈" target="_blank" rel="noopener"><i class="fab fa-linkedin fa-lg" aria-hidden="true"></i></a></li>
-  <li><a class="icon" href="https://pinterest.com/pin/create/bookmarklet/?url=https://bitzhangmo.github.io/2019/08/22/Lua/Lua%E6%BA%90%E7%A0%81%E9%98%85%E8%AF%BB%EF%BC%9A%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84%E4%B8%8E%E6%A0%88/&is_video=false&description=Lua源码阅读：数据结构与栈" target="_blank" rel="noopener"><i class="fab fa-pinterest fa-lg" aria-hidden="true"></i></a></li>
-  <li><a class="icon" href="mailto:?subject=Lua源码阅读：数据结构与栈&body=Check out this article: https://bitzhangmo.github.io/2019/08/22/Lua/Lua%E6%BA%90%E7%A0%81%E9%98%85%E8%AF%BB%EF%BC%9A%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84%E4%B8%8E%E6%A0%88/"><i class="fas fa-envelope fa-lg" aria-hidden="true"></i></a></li>
-  <li><a class="icon" href="https://getpocket.com/save?url=https://bitzhangmo.github.io/2019/08/22/Lua/Lua%E6%BA%90%E7%A0%81%E9%98%85%E8%AF%BB%EF%BC%9A%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84%E4%B8%8E%E6%A0%88/&title=Lua源码阅读：数据结构与栈" target="_blank" rel="noopener"><i class="fab fa-get-pocket fa-lg" aria-hidden="true"></i></a></li>
-  <li><a class="icon" href="http://reddit.com/submit?url=https://bitzhangmo.github.io/2019/08/22/Lua/Lua%E6%BA%90%E7%A0%81%E9%98%85%E8%AF%BB%EF%BC%9A%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84%E4%B8%8E%E6%A0%88/&title=Lua源码阅读：数据结构与栈" target="_blank" rel="noopener"><i class="fab fa-reddit fa-lg" aria-hidden="true"></i></a></li>
-  <li><a class="icon" href="http://www.stumbleupon.com/submit?url=https://bitzhangmo.github.io/2019/08/22/Lua/Lua%E6%BA%90%E7%A0%81%E9%98%85%E8%AF%BB%EF%BC%9A%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84%E4%B8%8E%E6%A0%88/&title=Lua源码阅读：数据结构与栈" target="_blank" rel="noopener"><i class="fab fa-stumbleupon fa-lg" aria-hidden="true"></i></a></li>
-  <li><a class="icon" href="http://digg.com/submit?url=https://bitzhangmo.github.io/2019/08/22/Lua/Lua%E6%BA%90%E7%A0%81%E9%98%85%E8%AF%BB%EF%BC%9A%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84%E4%B8%8E%E6%A0%88/&title=Lua源码阅读：数据结构与栈" target="_blank" rel="noopener"><i class="fab fa-digg fa-lg" aria-hidden="true"></i></a></li>
-  <li><a class="icon" href="http://www.tumblr.com/share/link?url=https://bitzhangmo.github.io/2019/08/22/Lua/Lua%E6%BA%90%E7%A0%81%E9%98%85%E8%AF%BB%EF%BC%9A%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84%E4%B8%8E%E6%A0%88/&name=Lua源码阅读：数据结构与栈&description=&lt;p&gt;承接上篇虚拟机概述，解析函数执行流程。&lt;/p&gt;" target="_blank" rel="noopener"><i class="fab fa-tumblr fa-lg" aria-hidden="true"></i></a></li>
-  <li><a class="icon" href="https://news.ycombinator.com/submitlink?u=https://bitzhangmo.github.io/2019/08/22/Lua/Lua%E6%BA%90%E7%A0%81%E9%98%85%E8%AF%BB%EF%BC%9A%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84%E4%B8%8E%E6%A0%88/&t=Lua源码阅读：数据结构与栈" target="_blank" rel="noopener"><i class="fab fa-hacker-news fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="http://www.facebook.com/sharer.php?u=https://bitzhangmo.github.io/2019/08/22/Lua/Lua源码阅读：数据结构与栈/"><i class="fab fa-facebook fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="https://twitter.com/share?url=https://bitzhangmo.github.io/2019/08/22/Lua/Lua源码阅读：数据结构与栈/&text=Lua源码阅读：数据结构与栈"><i class="fab fa-twitter fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="http://www.linkedin.com/shareArticle?url=https://bitzhangmo.github.io/2019/08/22/Lua/Lua源码阅读：数据结构与栈/&title=Lua源码阅读：数据结构与栈"><i class="fab fa-linkedin fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="https://pinterest.com/pin/create/bookmarklet/?url=https://bitzhangmo.github.io/2019/08/22/Lua/Lua源码阅读：数据结构与栈/&is_video=false&description=Lua源码阅读：数据结构与栈"><i class="fab fa-pinterest fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="mailto:?subject=Lua源码阅读：数据结构与栈&body=Check out this article: https://bitzhangmo.github.io/2019/08/22/Lua/Lua源码阅读：数据结构与栈/"><i class="fas fa-envelope fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="https://getpocket.com/save?url=https://bitzhangmo.github.io/2019/08/22/Lua/Lua源码阅读：数据结构与栈/&title=Lua源码阅读：数据结构与栈"><i class="fab fa-get-pocket fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="http://reddit.com/submit?url=https://bitzhangmo.github.io/2019/08/22/Lua/Lua源码阅读：数据结构与栈/&title=Lua源码阅读：数据结构与栈"><i class="fab fa-reddit fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="http://www.stumbleupon.com/submit?url=https://bitzhangmo.github.io/2019/08/22/Lua/Lua源码阅读：数据结构与栈/&title=Lua源码阅读：数据结构与栈"><i class="fab fa-stumbleupon fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="http://digg.com/submit?url=https://bitzhangmo.github.io/2019/08/22/Lua/Lua源码阅读：数据结构与栈/&title=Lua源码阅读：数据结构与栈"><i class="fab fa-digg fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="http://www.tumblr.com/share/link?url=https://bitzhangmo.github.io/2019/08/22/Lua/Lua源码阅读：数据结构与栈/&name=Lua源码阅读：数据结构与栈&description=&lt;p&gt;承接上篇虚拟机概述，解析函数执行流程。&lt;/p&gt;"><i class="fab fa-tumblr fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="https://news.ycombinator.com/submitlink?u=https://bitzhangmo.github.io/2019/08/22/Lua/Lua源码阅读：数据结构与栈/&t=Lua源码阅读：数据结构与栈"><i class="fab fa-hacker-news fa-lg" aria-hidden="true"></i></a></li>
 </ul>
 
     </div>
@@ -330,7 +328,7 @@
          
           <li><a href="/archives/">归档</a></li>
          
-          <li><a href="/projects_url">项目</a></li>
+          <li><a href="/search/">搜索</a></li>
         
       </ul>
     </nav>
@@ -378,5 +376,5 @@
 <!-- Disqus Comments -->
 
 
-</body>
+<script src="/live2dw/lib/L2Dwidget.min.js?bd2294fafea3389ee458f1d9be5a2157"></script><script>L2Dwidget.init({"pluginRootPath":"live2dw/","pluginJsPath":"lib/","pluginModelPath":"assets/","tagMode":false,"debug":false,"model":{"jsonPath":"/live2dw/assets/hijiki.model.json"},"display":{"position":"left","width":100,"height":200},"mobile":{"show":false},"log":false});</script></body>
 </html>

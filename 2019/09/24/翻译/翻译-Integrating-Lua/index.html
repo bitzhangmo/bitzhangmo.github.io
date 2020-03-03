@@ -1,21 +1,23 @@
 <!DOCTYPE html>
 <html lang=zh>
-<head>
+<head><meta name="generator" content="Hexo 3.9.0">
     <!-- so meta -->
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="HandheldFriendly" content="True">
-    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1" />
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
     <meta name="description" content="一篇名为Integrating Lua的Wiki页面翻译。">
-<meta name="keywords" content="Lua,Unreal">
+<meta name="keywords" content="Unreal,Lua">
 <meta property="og:type" content="article">
 <meta property="og:title" content="[翻译]Integrating Lua">
-<meta property="og:url" content="https:&#x2F;&#x2F;bitzhangmo.github.io&#x2F;2019&#x2F;09&#x2F;24&#x2F;%E7%BF%BB%E8%AF%91&#x2F;%E7%BF%BB%E8%AF%91-Integrating-Lua&#x2F;index.html">
+<meta property="og:url" content="https://bitzhangmo.github.io/2019/09/24/翻译/翻译-Integrating-Lua/index.html">
 <meta property="og:site_name" content="zhangMo Blog">
 <meta property="og:description" content="一篇名为Integrating Lua的Wiki页面翻译。">
 <meta property="og:locale" content="zh-CN">
 <meta property="og:updated_time" content="2019-09-24T02:17:48.915Z">
 <meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="[翻译]Integrating Lua">
+<meta name="twitter:description" content="一篇名为Integrating Lua的Wiki页面翻译。">
     
     
         
@@ -63,7 +65,7 @@
          
           <li><a href="/archives/">归档</a></li>
          
-          <li><a href="/projects_url">项目</a></li>
+          <li><a href="/search/">搜索</a></li>
         
       </ul>
     </span>
@@ -71,10 +73,10 @@
     <span id="actions">
       <ul>
         
-        <li><a class="icon" href="/2019/10/05/%E9%9A%8F%E7%AC%94/%E6%90%AC%E7%93%A6%E5%B7%A5%E9%85%8D%E7%BD%AE%E8%AE%B0%E5%BD%95/"><i class="fas fa-chevron-left" aria-hidden="true" onmouseover="$('#i-prev').toggle();" onmouseout="$('#i-prev').toggle();"></i></a></li>
+        <li><a class="icon" href="/2019/10/05/随笔/搬瓦工配置记录/"><i class="fas fa-chevron-left" aria-hidden="true" onmouseover="$('#i-prev').toggle();" onmouseout="$('#i-prev').toggle();"></i></a></li>
         
         
-        <li><a class="icon" href="/2019/09/11/OpenGL%E7%AC%94%E8%AE%B0/Mac%E4%B8%8B%E9%85%8D%E7%BD%AEOpenGL%E7%8E%AF%E5%A2%83/"><i class="fas fa-chevron-right" aria-hidden="true" onmouseover="$('#i-next').toggle();" onmouseout="$('#i-next').toggle();"></i></a></li>
+        <li><a class="icon" href="/2019/09/11/OpenGL笔记/Mac下配置OpenGL环境/"><i class="fas fa-chevron-right" aria-hidden="true" onmouseover="$('#i-next').toggle();" onmouseout="$('#i-next').toggle();"></i></a></li>
         
         <li><a class="icon" href="#" onclick="$('html, body').animate({ scrollTop: 0 }, 'fast');"><i class="fas fa-chevron-up" aria-hidden="true" onmouseover="$('#i-top').toggle();" onmouseout="$('#i-top').toggle();"></i></a></li>
         <li><a class="icon" href="#"><i class="fas fa-share-alt" aria-hidden="true" onmouseover="$('#i-share').toggle();" onmouseout="$('#i-share').toggle();" onclick="$('#share').toggle();return false;"></i></a></li>
@@ -87,17 +89,17 @@
     <br/>
     <div id="share" style="display: none">
       <ul>
-  <li><a class="icon" href="http://www.facebook.com/sharer.php?u=https://bitzhangmo.github.io/2019/09/24/%E7%BF%BB%E8%AF%91/%E7%BF%BB%E8%AF%91-Integrating-Lua/" target="_blank" rel="noopener"><i class="fab fa-facebook " aria-hidden="true"></i></a></li>
-  <li><a class="icon" href="https://twitter.com/share?url=https://bitzhangmo.github.io/2019/09/24/%E7%BF%BB%E8%AF%91/%E7%BF%BB%E8%AF%91-Integrating-Lua/&text=[翻译]Integrating Lua" target="_blank" rel="noopener"><i class="fab fa-twitter " aria-hidden="true"></i></a></li>
-  <li><a class="icon" href="http://www.linkedin.com/shareArticle?url=https://bitzhangmo.github.io/2019/09/24/%E7%BF%BB%E8%AF%91/%E7%BF%BB%E8%AF%91-Integrating-Lua/&title=[翻译]Integrating Lua" target="_blank" rel="noopener"><i class="fab fa-linkedin " aria-hidden="true"></i></a></li>
-  <li><a class="icon" href="https://pinterest.com/pin/create/bookmarklet/?url=https://bitzhangmo.github.io/2019/09/24/%E7%BF%BB%E8%AF%91/%E7%BF%BB%E8%AF%91-Integrating-Lua/&is_video=false&description=[翻译]Integrating Lua" target="_blank" rel="noopener"><i class="fab fa-pinterest " aria-hidden="true"></i></a></li>
-  <li><a class="icon" href="mailto:?subject=[翻译]Integrating Lua&body=Check out this article: https://bitzhangmo.github.io/2019/09/24/%E7%BF%BB%E8%AF%91/%E7%BF%BB%E8%AF%91-Integrating-Lua/"><i class="fas fa-envelope " aria-hidden="true"></i></a></li>
-  <li><a class="icon" href="https://getpocket.com/save?url=https://bitzhangmo.github.io/2019/09/24/%E7%BF%BB%E8%AF%91/%E7%BF%BB%E8%AF%91-Integrating-Lua/&title=[翻译]Integrating Lua" target="_blank" rel="noopener"><i class="fab fa-get-pocket " aria-hidden="true"></i></a></li>
-  <li><a class="icon" href="http://reddit.com/submit?url=https://bitzhangmo.github.io/2019/09/24/%E7%BF%BB%E8%AF%91/%E7%BF%BB%E8%AF%91-Integrating-Lua/&title=[翻译]Integrating Lua" target="_blank" rel="noopener"><i class="fab fa-reddit " aria-hidden="true"></i></a></li>
-  <li><a class="icon" href="http://www.stumbleupon.com/submit?url=https://bitzhangmo.github.io/2019/09/24/%E7%BF%BB%E8%AF%91/%E7%BF%BB%E8%AF%91-Integrating-Lua/&title=[翻译]Integrating Lua" target="_blank" rel="noopener"><i class="fab fa-stumbleupon " aria-hidden="true"></i></a></li>
-  <li><a class="icon" href="http://digg.com/submit?url=https://bitzhangmo.github.io/2019/09/24/%E7%BF%BB%E8%AF%91/%E7%BF%BB%E8%AF%91-Integrating-Lua/&title=[翻译]Integrating Lua" target="_blank" rel="noopener"><i class="fab fa-digg " aria-hidden="true"></i></a></li>
-  <li><a class="icon" href="http://www.tumblr.com/share/link?url=https://bitzhangmo.github.io/2019/09/24/%E7%BF%BB%E8%AF%91/%E7%BF%BB%E8%AF%91-Integrating-Lua/&name=[翻译]Integrating Lua&description=&lt;p&gt;一篇名为Integrating Lua的Wiki页面翻译。&lt;/p&gt;" target="_blank" rel="noopener"><i class="fab fa-tumblr " aria-hidden="true"></i></a></li>
-  <li><a class="icon" href="https://news.ycombinator.com/submitlink?u=https://bitzhangmo.github.io/2019/09/24/%E7%BF%BB%E8%AF%91/%E7%BF%BB%E8%AF%91-Integrating-Lua/&t=[翻译]Integrating Lua" target="_blank" rel="noopener"><i class="fab fa-hacker-news " aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="http://www.facebook.com/sharer.php?u=https://bitzhangmo.github.io/2019/09/24/翻译/翻译-Integrating-Lua/"><i class="fab fa-facebook " aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="https://twitter.com/share?url=https://bitzhangmo.github.io/2019/09/24/翻译/翻译-Integrating-Lua/&text=[翻译]Integrating Lua"><i class="fab fa-twitter " aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="http://www.linkedin.com/shareArticle?url=https://bitzhangmo.github.io/2019/09/24/翻译/翻译-Integrating-Lua/&title=[翻译]Integrating Lua"><i class="fab fa-linkedin " aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="https://pinterest.com/pin/create/bookmarklet/?url=https://bitzhangmo.github.io/2019/09/24/翻译/翻译-Integrating-Lua/&is_video=false&description=[翻译]Integrating Lua"><i class="fab fa-pinterest " aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="mailto:?subject=[翻译]Integrating Lua&body=Check out this article: https://bitzhangmo.github.io/2019/09/24/翻译/翻译-Integrating-Lua/"><i class="fas fa-envelope " aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="https://getpocket.com/save?url=https://bitzhangmo.github.io/2019/09/24/翻译/翻译-Integrating-Lua/&title=[翻译]Integrating Lua"><i class="fab fa-get-pocket " aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="http://reddit.com/submit?url=https://bitzhangmo.github.io/2019/09/24/翻译/翻译-Integrating-Lua/&title=[翻译]Integrating Lua"><i class="fab fa-reddit " aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="http://www.stumbleupon.com/submit?url=https://bitzhangmo.github.io/2019/09/24/翻译/翻译-Integrating-Lua/&title=[翻译]Integrating Lua"><i class="fab fa-stumbleupon " aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="http://digg.com/submit?url=https://bitzhangmo.github.io/2019/09/24/翻译/翻译-Integrating-Lua/&title=[翻译]Integrating Lua"><i class="fab fa-digg " aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="http://www.tumblr.com/share/link?url=https://bitzhangmo.github.io/2019/09/24/翻译/翻译-Integrating-Lua/&name=[翻译]Integrating Lua&description=&lt;p&gt;一篇名为Integrating Lua的Wiki页面翻译。&lt;/p&gt;"><i class="fab fa-tumblr " aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="https://news.ycombinator.com/submitlink?u=https://bitzhangmo.github.io/2019/09/24/翻译/翻译-Integrating-Lua/&t=[翻译]Integrating Lua"><i class="fab fa-hacker-news " aria-hidden="true"></i></a></li>
 </ul>
 
     </div>
@@ -135,14 +137,14 @@
       
     <div class="article-category">
         <i class="fas fa-archive"></i>
-        <a class="category-link" href="/categories/%E7%BF%BB%E8%AF%91/">翻译</a>
+        <a class="category-link" href="/categories/翻译/">翻译</a>
     </div>
 
 
       
     <div class="article-tag">
         <i class="fas fa-tag"></i>
-        <a class="tag-link" href="/tags/Lua/" rel="tag">Lua</a>, <a class="tag-link" href="/tags/Unreal/" rel="tag">Unreal</a>
+        <a class="tag-link" href="/tags/Lua/">Lua</a>, <a class="tag-link" href="/tags/Unreal/">Unreal</a>
     </div>
 
 
@@ -153,7 +155,6 @@
   <div class="content" itemprop="articleBody">
     <p>一篇名为Integrating Lua的Wiki页面翻译。</p>
 <a id="more"></a>
-
 <p>原文链接：<a href="https://wiki.unrealengine.com/Integrating_Lua" target="_blank" rel="noopener">https://wiki.unrealengine.com/Integrating_Lua</a></p>
 <h2 id="Integrating-Lua"><a href="#Integrating-Lua" class="headerlink" title="Integrating Lua"></a>Integrating Lua</h2><h3 id="Overview"><a href="#Overview" class="headerlink" title="Overview"></a>Overview</h3><p>欢迎来到我的第三个Wiki页面，这个页面是关于那个很棒的游戏引擎的——虚幻引擎！这篇文章包含了人们最近问我数次的那个问题，我认为这将对游戏逻辑编程和一个高水平的mod-abilty（模块化能力？）：整合Lua很有用。</p>
 <h3 id="Requirements"><a href="#Requirements" class="headerlink" title="Requirements"></a>Requirements</h3><h3 id="Starting-off-code-in-our-project"><a href="#Starting-off-code-in-our-project" class="headerlink" title="Starting off : code in our project"></a>Starting off : code in our project</h3><h3 id="Aquiring"><a href="#Aquiring" class="headerlink" title="Aquiring:"></a>Aquiring:</h3><p>现在，我们需要向项目中引入Lua，以便于其与我们的项目一起编译并包含在最终游戏中。但是首先，我们需要获取到Lua的二进制文件。有些项目会为您提供预编译的二进制文件，或者您也可以自行编译！因为编译的过程耗费时间，而且这个过程是必要的，所以我们将使用预编译的版本。<a href="https://sourceforge.net/projects/luabinaries/files/" target="_blank" rel="noopener">LuaBinaries</a>是一个很棒的项目，它始终是最新的，并且具有适用于每个平台的二进制文件（在本文中，我们将只涉及Windows）。选择最新版本，然后选择Windows库，接着选择静态（Static），因为我们会将Lua嵌入到游戏的可执行文件中，然后根据需要搜索软件包。在我们下载过这些包后，我们应该在它们的结构中找到如下文件：</p>
@@ -189,17 +190,13 @@
 </ul>
 <h3 id="Linking"><a href="#Linking" class="headerlink" title="Linking"></a>Linking</h3><p>在Visual Studio中，打开<strong>YourProjectName.Build.cs</strong>，这个文件位于 Source/YourProjectName/ 文件夹中。默认情况下，此文件仅链接默认引擎模块。要对此链接Lua，我们需要向其中添加一些代码。由于展示每一个细节实在是太多了，所以我只向你展示我对Build.cs文件的改动：</p>
 <figure class="highlight csharp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">using</span> System.IO;</span><br><span class="line"><span class="keyword">using</span> UnrealBuildTool;</span><br><span class="line"></span><br><span class="line"><span class="keyword">public</span> <span class="keyword">class</span> <span class="title">ProjectName</span> : <span class="title">ModuleRules</span></span><br><span class="line">&#123;    </span><br><span class="line">	<span class="keyword">private</span> <span class="keyword">string</span> ThirdPartyPath</span><br><span class="line">	&#123;</span><br><span class="line">		<span class="keyword">get</span> &#123; <span class="keyword">return</span> Path.GetFullPath(Path.Combine(ModuleDirectory, <span class="string">"../../ThirdParty/"</span>)); &#125;</span><br><span class="line">	&#125;</span><br><span class="line"></span><br><span class="line">	<span class="function"><span class="keyword">public</span> <span class="title">ProjectName</span>(<span class="params">TargetInfo Target</span>)</span></span><br><span class="line"><span class="function"></span>	&#123;</span><br><span class="line">		PublicDependencyModuleNames.AddRange(<span class="keyword">new</span> <span class="keyword">string</span>[] &#123; <span class="string">"Core"</span>, <span class="string">"CoreUObject"</span>, <span class="string">"Engine"</span>, <span class="string">"InputCore"</span> &#125;);</span><br><span class="line"></span><br><span class="line">		PrivateDependencyModuleNames.AddRange(<span class="keyword">new</span> <span class="keyword">string</span>[] &#123;  &#125;);</span><br><span class="line"></span><br><span class="line">		<span class="comment">// 如果使用Slate UI，则取消注释</span></span><br><span class="line">    <span class="comment">// PrivateDependencyModuleNames.AddRange(new string[] &#123; "Slate", "SlateCore" &#125;);</span></span><br><span class="line"></span><br><span class="line">		<span class="comment">// 如果使用在线功能，则取消注释</span></span><br><span class="line">		<span class="comment">// PrivateDependencyModuleNames.Add("OnlineSubsystem");</span></span><br><span class="line"></span><br><span class="line">		<span class="comment">// 要包含 OnlineSubsystemSteam, 请将其添加到uproject文件的plugins部分中，并将Enabled属性设置为true</span></span><br><span class="line"></span><br><span class="line">		LoadLua(TargetRules); <span class="comment">// 此函数加载Lua</span></span><br><span class="line">	&#125;</span><br><span class="line"></span><br><span class="line">	<span class="function"><span class="keyword">private</span> <span class="keyword">bool</span> <span class="title">LoadLua</span>(<span class="params">ReadOnlyTargetRules TargetRules</span>)</span></span><br><span class="line"><span class="function"></span>	&#123;</span><br><span class="line">		<span class="keyword">bool</span> isLibSupported = <span class="literal">false</span>;</span><br><span class="line"></span><br><span class="line">		<span class="comment">// 检查是否使用的是Windows</span></span><br><span class="line">		<span class="keyword">if</span> ((Target.Platform == UnrealTargetPlatform.Win64) || (Target.Platform == UnrealTargetPlatform.Win32))</span><br><span class="line">		&#123;</span><br><span class="line">			isLibSupported = <span class="literal">true</span>;</span><br><span class="line"></span><br><span class="line">			<span class="keyword">string</span> PlatformString = (Target.Platform == UnrealTargetPlatform.Win64) ? <span class="string">"x64"</span> : <span class="string">"x86"</span>; <span class="comment">// 此字符串是“x64”或“x86”，因此我们可以将其附加到lib文件名</span></span><br><span class="line">			<span class="keyword">string</span> LibrariesPath = Path.Combine(ThirdPartyPath, <span class="string">"Lua"</span>, <span class="string">"libraries"</span>);</span><br><span class="line"></span><br><span class="line">			PublicAdditionalLibraries.Add(Path.Combine(LibrariesPath, <span class="string">"lua53."</span> + PlatformString + <span class="string">".lib"</span>));</span><br><span class="line"></span><br><span class="line">			PublicIncludePaths.Add(Path.Combine(ThirdPartyPath, <span class="string">"Lua"</span>, <span class="string">"includes"</span>));</span><br><span class="line">		&#125;</span><br><span class="line"></span><br><span class="line">		Definitions.Add(<span class="keyword">string</span>.Format(<span class="string">"WITH_LUA_BINDING=&#123;0&#125;"</span>, isLibSupported ? <span class="number">1</span> : <span class="number">0</span>));</span><br><span class="line"></span><br><span class="line">		<span class="keyword">return</span> isLibSupported;</span><br><span class="line">	&#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
 <p>“LoadLua”方法检查我们是否在Windows上，如果是，则根据编译的体系结构创建一个包含“x64”或“x86”的字符串，因此我们可以轻松的找到lib文件。然后，我们创建库路径，该路径就是（在这个例子中为“ThirdParty/”）/Lua/libraries。从那里，我们将平台字符串附加到文件名的前缀和后缀，因此最后应该是lua53.xxx.lib。此路径已添加到PublicAdditionalLibraries中，这会强制编译器使用我们放在其中的lib文件。我们还将includes目录添加到PublicIncludePaths，以便编译器找到我们的includes。最后也很重要的一点是，我们向已编译的游戏中添加了一个定义：WITH_LUA_BINDING = x，其中x为0（不支持Lua）或1（支持Lua）。</p>
 <h4 id="First-steps"><a href="#First-steps" class="headerlink" title="First steps"></a>First steps</h4><p>现在，我们已经将Lua二进制文件集成到我们的游戏中，让我们通过在Visual Studio中右键单击该项目并选择“Build”来进行尝试。它应该会成功！下一步：编写一个蓝图节点，该节点从我们输入的字符串中执行Lua代码。打开您创建的蓝图函数库的头文件（.h）。空文件如下所示：</p>
 <figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="meta-keyword">pragma</span> once</span></span><br><span class="line"></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">"Kismet/BlueprintFunctionLibrary.h"</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">"LuaBlueprints.generated.h"</span></span></span><br><span class="line"></span><br><span class="line"><span class="comment">/**</span></span><br><span class="line"><span class="comment"> * </span></span><br><span class="line"><span class="comment"> */</span></span><br><span class="line">UCLASS()</span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">YOURPROJECT_API</span> <span class="title">ULuaBlueprints</span> :</span> <span class="keyword">public</span> UBlueprintFunctionLibrary</span><br><span class="line">&#123;</span><br><span class="line">	GENERATED_BODY()</span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure>
-
 <p>首先，在顶部添加Lua包含项，以便编译器知道声明函数的位置。为此，请在其他包含项的头部添加<code>#include &quot;lua.hpp&quot;</code>。接下来，我们向其中添加一个新的UFUNCTION，将其解析为带有以下声明的蓝图节点：</p>
 <figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span>:</span><br><span class="line">	UFUNCTION(BlueprintCallable, Category = <span class="string">"Lua"</span>)</span><br><span class="line">	<span class="function"><span class="keyword">static</span> <span class="keyword">void</span> <span class="title">RunLua</span><span class="params">(<span class="keyword">const</span> FString&amp; code)</span></span>;</span><br></pre></td></tr></table></figure>
-
 <p>这将创建一个可调用的蓝图节点，该节点带有一个字符串（FString），我们可以在其中输入将要运行的Lua代码。请注意，这是静态的，因为我们没有要在上下文中调用此对象的对象，换言之，我们想在没有任何目标的情况下从任何地方调用它。让我们进入LuaBlueprints.cpp文件，该文件应该为空（include文件除外）。我们为RunLua函数添加定义：</p>
 <figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">void</span> ULuaBlueprints::RunLua(<span class="keyword">const</span> FString&amp; code)</span><br><span class="line">&#123;</span><br><span class="line">	lua_State* L = luaL_newstate();</span><br><span class="line">	luaL_openlibs(L);</span><br><span class="line"></span><br><span class="line">	<span class="keyword">int</span> result = luaL_dostring(L, TCHAR_TO_ANSI(*code));</span><br><span class="line">	<span class="keyword">if</span> (result != <span class="number">0</span>)</span><br><span class="line">	&#123;</span><br><span class="line">		UE_LOG(LogTemp, Error, TEXT(<span class="string">"Lua Script error: %s"</span>), ANSI_TO_TCHAR(lua_tostring(L, <span class="number">-1</span>)));</span><br><span class="line">	&#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
 <p>这很容易。它使用Lua C API创建一个新的Lua状态，将其分配给名为L的变量。然后，打开标准的lua库（例如math），然后通过执行luaL_dostring()运行代码。这将Lua状态L作为一个参数，并将要运行的代码作为另一个参数。该函数返回一个整数，如果一切正常，则返回0。如果不为0，则显然出了问题。在这种情况下，我使用UE_LOG将其打印到日志中。注意，我们通过lua_tostring(L,-1)得到Lua错误消息。</p>
 
   </div>
@@ -220,7 +217,7 @@
          
           <li><a href="/archives/">归档</a></li>
          
-          <li><a href="/projects_url">项目</a></li>
+          <li><a href="/search/">搜索</a></li>
         
       </ul>
     </div>
@@ -231,17 +228,17 @@
 
     <div id="share-footer" style="display: none">
       <ul>
-  <li><a class="icon" href="http://www.facebook.com/sharer.php?u=https://bitzhangmo.github.io/2019/09/24/%E7%BF%BB%E8%AF%91/%E7%BF%BB%E8%AF%91-Integrating-Lua/" target="_blank" rel="noopener"><i class="fab fa-facebook fa-lg" aria-hidden="true"></i></a></li>
-  <li><a class="icon" href="https://twitter.com/share?url=https://bitzhangmo.github.io/2019/09/24/%E7%BF%BB%E8%AF%91/%E7%BF%BB%E8%AF%91-Integrating-Lua/&text=[翻译]Integrating Lua" target="_blank" rel="noopener"><i class="fab fa-twitter fa-lg" aria-hidden="true"></i></a></li>
-  <li><a class="icon" href="http://www.linkedin.com/shareArticle?url=https://bitzhangmo.github.io/2019/09/24/%E7%BF%BB%E8%AF%91/%E7%BF%BB%E8%AF%91-Integrating-Lua/&title=[翻译]Integrating Lua" target="_blank" rel="noopener"><i class="fab fa-linkedin fa-lg" aria-hidden="true"></i></a></li>
-  <li><a class="icon" href="https://pinterest.com/pin/create/bookmarklet/?url=https://bitzhangmo.github.io/2019/09/24/%E7%BF%BB%E8%AF%91/%E7%BF%BB%E8%AF%91-Integrating-Lua/&is_video=false&description=[翻译]Integrating Lua" target="_blank" rel="noopener"><i class="fab fa-pinterest fa-lg" aria-hidden="true"></i></a></li>
-  <li><a class="icon" href="mailto:?subject=[翻译]Integrating Lua&body=Check out this article: https://bitzhangmo.github.io/2019/09/24/%E7%BF%BB%E8%AF%91/%E7%BF%BB%E8%AF%91-Integrating-Lua/"><i class="fas fa-envelope fa-lg" aria-hidden="true"></i></a></li>
-  <li><a class="icon" href="https://getpocket.com/save?url=https://bitzhangmo.github.io/2019/09/24/%E7%BF%BB%E8%AF%91/%E7%BF%BB%E8%AF%91-Integrating-Lua/&title=[翻译]Integrating Lua" target="_blank" rel="noopener"><i class="fab fa-get-pocket fa-lg" aria-hidden="true"></i></a></li>
-  <li><a class="icon" href="http://reddit.com/submit?url=https://bitzhangmo.github.io/2019/09/24/%E7%BF%BB%E8%AF%91/%E7%BF%BB%E8%AF%91-Integrating-Lua/&title=[翻译]Integrating Lua" target="_blank" rel="noopener"><i class="fab fa-reddit fa-lg" aria-hidden="true"></i></a></li>
-  <li><a class="icon" href="http://www.stumbleupon.com/submit?url=https://bitzhangmo.github.io/2019/09/24/%E7%BF%BB%E8%AF%91/%E7%BF%BB%E8%AF%91-Integrating-Lua/&title=[翻译]Integrating Lua" target="_blank" rel="noopener"><i class="fab fa-stumbleupon fa-lg" aria-hidden="true"></i></a></li>
-  <li><a class="icon" href="http://digg.com/submit?url=https://bitzhangmo.github.io/2019/09/24/%E7%BF%BB%E8%AF%91/%E7%BF%BB%E8%AF%91-Integrating-Lua/&title=[翻译]Integrating Lua" target="_blank" rel="noopener"><i class="fab fa-digg fa-lg" aria-hidden="true"></i></a></li>
-  <li><a class="icon" href="http://www.tumblr.com/share/link?url=https://bitzhangmo.github.io/2019/09/24/%E7%BF%BB%E8%AF%91/%E7%BF%BB%E8%AF%91-Integrating-Lua/&name=[翻译]Integrating Lua&description=&lt;p&gt;一篇名为Integrating Lua的Wiki页面翻译。&lt;/p&gt;" target="_blank" rel="noopener"><i class="fab fa-tumblr fa-lg" aria-hidden="true"></i></a></li>
-  <li><a class="icon" href="https://news.ycombinator.com/submitlink?u=https://bitzhangmo.github.io/2019/09/24/%E7%BF%BB%E8%AF%91/%E7%BF%BB%E8%AF%91-Integrating-Lua/&t=[翻译]Integrating Lua" target="_blank" rel="noopener"><i class="fab fa-hacker-news fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="http://www.facebook.com/sharer.php?u=https://bitzhangmo.github.io/2019/09/24/翻译/翻译-Integrating-Lua/"><i class="fab fa-facebook fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="https://twitter.com/share?url=https://bitzhangmo.github.io/2019/09/24/翻译/翻译-Integrating-Lua/&text=[翻译]Integrating Lua"><i class="fab fa-twitter fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="http://www.linkedin.com/shareArticle?url=https://bitzhangmo.github.io/2019/09/24/翻译/翻译-Integrating-Lua/&title=[翻译]Integrating Lua"><i class="fab fa-linkedin fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="https://pinterest.com/pin/create/bookmarklet/?url=https://bitzhangmo.github.io/2019/09/24/翻译/翻译-Integrating-Lua/&is_video=false&description=[翻译]Integrating Lua"><i class="fab fa-pinterest fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="mailto:?subject=[翻译]Integrating Lua&body=Check out this article: https://bitzhangmo.github.io/2019/09/24/翻译/翻译-Integrating-Lua/"><i class="fas fa-envelope fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="https://getpocket.com/save?url=https://bitzhangmo.github.io/2019/09/24/翻译/翻译-Integrating-Lua/&title=[翻译]Integrating Lua"><i class="fab fa-get-pocket fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="http://reddit.com/submit?url=https://bitzhangmo.github.io/2019/09/24/翻译/翻译-Integrating-Lua/&title=[翻译]Integrating Lua"><i class="fab fa-reddit fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="http://www.stumbleupon.com/submit?url=https://bitzhangmo.github.io/2019/09/24/翻译/翻译-Integrating-Lua/&title=[翻译]Integrating Lua"><i class="fab fa-stumbleupon fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="http://digg.com/submit?url=https://bitzhangmo.github.io/2019/09/24/翻译/翻译-Integrating-Lua/&title=[翻译]Integrating Lua"><i class="fab fa-digg fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="http://www.tumblr.com/share/link?url=https://bitzhangmo.github.io/2019/09/24/翻译/翻译-Integrating-Lua/&name=[翻译]Integrating Lua&description=&lt;p&gt;一篇名为Integrating Lua的Wiki页面翻译。&lt;/p&gt;"><i class="fab fa-tumblr fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="https://news.ycombinator.com/submitlink?u=https://bitzhangmo.github.io/2019/09/24/翻译/翻译-Integrating-Lua/&t=[翻译]Integrating Lua"><i class="fab fa-hacker-news fa-lg" aria-hidden="true"></i></a></li>
 </ul>
 
     </div>
@@ -271,7 +268,7 @@
          
           <li><a href="/archives/">归档</a></li>
          
-          <li><a href="/projects_url">项目</a></li>
+          <li><a href="/search/">搜索</a></li>
         
       </ul>
     </nav>
@@ -319,5 +316,5 @@
 <!-- Disqus Comments -->
 
 
-</body>
+<script src="/live2dw/lib/L2Dwidget.min.js?bd2294fafea3389ee458f1d9be5a2157"></script><script>L2Dwidget.init({"pluginRootPath":"live2dw/","pluginJsPath":"lib/","pluginModelPath":"assets/","tagMode":false,"debug":false,"model":{"jsonPath":"/live2dw/assets/hijiki.model.json"},"display":{"position":"left","width":100,"height":200},"mobile":{"show":false},"log":false});</script></body>
 </html>

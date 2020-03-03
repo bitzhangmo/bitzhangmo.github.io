@@ -1,23 +1,25 @@
 <!DOCTYPE html>
 <html lang=zh>
-<head>
+<head><meta name="generator" content="Hexo 3.9.0">
     <!-- so meta -->
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="HandheldFriendly" content="True">
-    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1" />
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
     <meta name="description" content="建立一个一对多的依赖，当一个对象改变状态，依赖它的对象都将收到通知并自动更新。">
 <meta name="keywords" content="设计模式">
 <meta property="og:type" content="article">
 <meta property="og:title" content="设计模式笔记（2）-观察者模式">
-<meta property="og:url" content="https:&#x2F;&#x2F;bitzhangmo.github.io&#x2F;2018&#x2F;04&#x2F;27&#x2F;%E8%AE%BE%E8%AE%A1%E6%A8%A1%E5%BC%8F&#x2F;%E8%AE%BE%E8%AE%A1%E6%A8%A1%E5%BC%8F%E7%AC%94%E8%AE%B0%EF%BC%882%EF%BC%89-%E8%A7%82%E5%AF%9F%E8%80%85%E6%A8%A1%E5%BC%8F&#x2F;index.html">
+<meta property="og:url" content="https://bitzhangmo.github.io/2018/04/27/设计模式/设计模式笔记（2）-观察者模式/index.html">
 <meta property="og:site_name" content="zhangMo Blog">
 <meta property="og:description" content="建立一个一对多的依赖，当一个对象改变状态，依赖它的对象都将收到通知并自动更新。">
 <meta property="og:locale" content="zh-CN">
-<meta property="og:image" content="http:&#x2F;&#x2F;design-patterns.readthedocs.io&#x2F;zh_CN&#x2F;latest&#x2F;_images&#x2F;Obeserver.jpg">
+<meta property="og:image" content="http://design-patterns.readthedocs.io/zh_CN/latest/_images/Obeserver.jpg">
 <meta property="og:updated_time" content="2019-04-13T02:54:37.032Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:image" content="http:&#x2F;&#x2F;design-patterns.readthedocs.io&#x2F;zh_CN&#x2F;latest&#x2F;_images&#x2F;Obeserver.jpg">
+<meta name="twitter:title" content="设计模式笔记（2）-观察者模式">
+<meta name="twitter:description" content="建立一个一对多的依赖，当一个对象改变状态，依赖它的对象都将收到通知并自动更新。">
+<meta name="twitter:image" content="http://design-patterns.readthedocs.io/zh_CN/latest/_images/Obeserver.jpg">
     
     
         
@@ -65,7 +67,7 @@
          
           <li><a href="/archives/">归档</a></li>
          
-          <li><a href="/projects_url">项目</a></li>
+          <li><a href="/search/">搜索</a></li>
         
       </ul>
     </span>
@@ -73,10 +75,10 @@
     <span id="actions">
       <ul>
         
-        <li><a class="icon" href="/2018/05/11/Unity%E7%AC%94%E8%AE%B0/Unity-Shader%20%E5%9F%BA%E7%A1%80/"><i class="fas fa-chevron-left" aria-hidden="true" onmouseover="$('#i-prev').toggle();" onmouseout="$('#i-prev').toggle();"></i></a></li>
+        <li><a class="icon" href="/2018/05/11/Unity笔记/Unity-Shader 基础/"><i class="fas fa-chevron-left" aria-hidden="true" onmouseover="$('#i-prev').toggle();" onmouseout="$('#i-prev').toggle();"></i></a></li>
         
         
-        <li><a class="icon" href="/2018/04/11/Unity%E7%AC%94%E8%AE%B0/Unity-Cursor%E5%AD%A6%E4%B9%A0/"><i class="fas fa-chevron-right" aria-hidden="true" onmouseover="$('#i-next').toggle();" onmouseout="$('#i-next').toggle();"></i></a></li>
+        <li><a class="icon" href="/2018/04/11/Unity笔记/Unity-Cursor学习/"><i class="fas fa-chevron-right" aria-hidden="true" onmouseover="$('#i-next').toggle();" onmouseout="$('#i-next').toggle();"></i></a></li>
         
         <li><a class="icon" href="#" onclick="$('html, body').animate({ scrollTop: 0 }, 'fast');"><i class="fas fa-chevron-up" aria-hidden="true" onmouseover="$('#i-top').toggle();" onmouseout="$('#i-top').toggle();"></i></a></li>
         <li><a class="icon" href="#"><i class="fas fa-share-alt" aria-hidden="true" onmouseover="$('#i-share').toggle();" onmouseout="$('#i-share').toggle();" onclick="$('#share').toggle();return false;"></i></a></li>
@@ -89,17 +91,17 @@
     <br/>
     <div id="share" style="display: none">
       <ul>
-  <li><a class="icon" href="http://www.facebook.com/sharer.php?u=https://bitzhangmo.github.io/2018/04/27/%E8%AE%BE%E8%AE%A1%E6%A8%A1%E5%BC%8F/%E8%AE%BE%E8%AE%A1%E6%A8%A1%E5%BC%8F%E7%AC%94%E8%AE%B0%EF%BC%882%EF%BC%89-%E8%A7%82%E5%AF%9F%E8%80%85%E6%A8%A1%E5%BC%8F/" target="_blank" rel="noopener"><i class="fab fa-facebook " aria-hidden="true"></i></a></li>
-  <li><a class="icon" href="https://twitter.com/share?url=https://bitzhangmo.github.io/2018/04/27/%E8%AE%BE%E8%AE%A1%E6%A8%A1%E5%BC%8F/%E8%AE%BE%E8%AE%A1%E6%A8%A1%E5%BC%8F%E7%AC%94%E8%AE%B0%EF%BC%882%EF%BC%89-%E8%A7%82%E5%AF%9F%E8%80%85%E6%A8%A1%E5%BC%8F/&text=设计模式笔记（2）-观察者模式" target="_blank" rel="noopener"><i class="fab fa-twitter " aria-hidden="true"></i></a></li>
-  <li><a class="icon" href="http://www.linkedin.com/shareArticle?url=https://bitzhangmo.github.io/2018/04/27/%E8%AE%BE%E8%AE%A1%E6%A8%A1%E5%BC%8F/%E8%AE%BE%E8%AE%A1%E6%A8%A1%E5%BC%8F%E7%AC%94%E8%AE%B0%EF%BC%882%EF%BC%89-%E8%A7%82%E5%AF%9F%E8%80%85%E6%A8%A1%E5%BC%8F/&title=设计模式笔记（2）-观察者模式" target="_blank" rel="noopener"><i class="fab fa-linkedin " aria-hidden="true"></i></a></li>
-  <li><a class="icon" href="https://pinterest.com/pin/create/bookmarklet/?url=https://bitzhangmo.github.io/2018/04/27/%E8%AE%BE%E8%AE%A1%E6%A8%A1%E5%BC%8F/%E8%AE%BE%E8%AE%A1%E6%A8%A1%E5%BC%8F%E7%AC%94%E8%AE%B0%EF%BC%882%EF%BC%89-%E8%A7%82%E5%AF%9F%E8%80%85%E6%A8%A1%E5%BC%8F/&is_video=false&description=设计模式笔记（2）-观察者模式" target="_blank" rel="noopener"><i class="fab fa-pinterest " aria-hidden="true"></i></a></li>
-  <li><a class="icon" href="mailto:?subject=设计模式笔记（2）-观察者模式&body=Check out this article: https://bitzhangmo.github.io/2018/04/27/%E8%AE%BE%E8%AE%A1%E6%A8%A1%E5%BC%8F/%E8%AE%BE%E8%AE%A1%E6%A8%A1%E5%BC%8F%E7%AC%94%E8%AE%B0%EF%BC%882%EF%BC%89-%E8%A7%82%E5%AF%9F%E8%80%85%E6%A8%A1%E5%BC%8F/"><i class="fas fa-envelope " aria-hidden="true"></i></a></li>
-  <li><a class="icon" href="https://getpocket.com/save?url=https://bitzhangmo.github.io/2018/04/27/%E8%AE%BE%E8%AE%A1%E6%A8%A1%E5%BC%8F/%E8%AE%BE%E8%AE%A1%E6%A8%A1%E5%BC%8F%E7%AC%94%E8%AE%B0%EF%BC%882%EF%BC%89-%E8%A7%82%E5%AF%9F%E8%80%85%E6%A8%A1%E5%BC%8F/&title=设计模式笔记（2）-观察者模式" target="_blank" rel="noopener"><i class="fab fa-get-pocket " aria-hidden="true"></i></a></li>
-  <li><a class="icon" href="http://reddit.com/submit?url=https://bitzhangmo.github.io/2018/04/27/%E8%AE%BE%E8%AE%A1%E6%A8%A1%E5%BC%8F/%E8%AE%BE%E8%AE%A1%E6%A8%A1%E5%BC%8F%E7%AC%94%E8%AE%B0%EF%BC%882%EF%BC%89-%E8%A7%82%E5%AF%9F%E8%80%85%E6%A8%A1%E5%BC%8F/&title=设计模式笔记（2）-观察者模式" target="_blank" rel="noopener"><i class="fab fa-reddit " aria-hidden="true"></i></a></li>
-  <li><a class="icon" href="http://www.stumbleupon.com/submit?url=https://bitzhangmo.github.io/2018/04/27/%E8%AE%BE%E8%AE%A1%E6%A8%A1%E5%BC%8F/%E8%AE%BE%E8%AE%A1%E6%A8%A1%E5%BC%8F%E7%AC%94%E8%AE%B0%EF%BC%882%EF%BC%89-%E8%A7%82%E5%AF%9F%E8%80%85%E6%A8%A1%E5%BC%8F/&title=设计模式笔记（2）-观察者模式" target="_blank" rel="noopener"><i class="fab fa-stumbleupon " aria-hidden="true"></i></a></li>
-  <li><a class="icon" href="http://digg.com/submit?url=https://bitzhangmo.github.io/2018/04/27/%E8%AE%BE%E8%AE%A1%E6%A8%A1%E5%BC%8F/%E8%AE%BE%E8%AE%A1%E6%A8%A1%E5%BC%8F%E7%AC%94%E8%AE%B0%EF%BC%882%EF%BC%89-%E8%A7%82%E5%AF%9F%E8%80%85%E6%A8%A1%E5%BC%8F/&title=设计模式笔记（2）-观察者模式" target="_blank" rel="noopener"><i class="fab fa-digg " aria-hidden="true"></i></a></li>
-  <li><a class="icon" href="http://www.tumblr.com/share/link?url=https://bitzhangmo.github.io/2018/04/27/%E8%AE%BE%E8%AE%A1%E6%A8%A1%E5%BC%8F/%E8%AE%BE%E8%AE%A1%E6%A8%A1%E5%BC%8F%E7%AC%94%E8%AE%B0%EF%BC%882%EF%BC%89-%E8%A7%82%E5%AF%9F%E8%80%85%E6%A8%A1%E5%BC%8F/&name=设计模式笔记（2）-观察者模式&description=&lt;p&gt;建立一个一对多的依赖，当一个对象改变状态，依赖它的对象都将收到通知并自动更新。&lt;/p&gt;" target="_blank" rel="noopener"><i class="fab fa-tumblr " aria-hidden="true"></i></a></li>
-  <li><a class="icon" href="https://news.ycombinator.com/submitlink?u=https://bitzhangmo.github.io/2018/04/27/%E8%AE%BE%E8%AE%A1%E6%A8%A1%E5%BC%8F/%E8%AE%BE%E8%AE%A1%E6%A8%A1%E5%BC%8F%E7%AC%94%E8%AE%B0%EF%BC%882%EF%BC%89-%E8%A7%82%E5%AF%9F%E8%80%85%E6%A8%A1%E5%BC%8F/&t=设计模式笔记（2）-观察者模式" target="_blank" rel="noopener"><i class="fab fa-hacker-news " aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="http://www.facebook.com/sharer.php?u=https://bitzhangmo.github.io/2018/04/27/设计模式/设计模式笔记（2）-观察者模式/"><i class="fab fa-facebook " aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="https://twitter.com/share?url=https://bitzhangmo.github.io/2018/04/27/设计模式/设计模式笔记（2）-观察者模式/&text=设计模式笔记（2）-观察者模式"><i class="fab fa-twitter " aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="http://www.linkedin.com/shareArticle?url=https://bitzhangmo.github.io/2018/04/27/设计模式/设计模式笔记（2）-观察者模式/&title=设计模式笔记（2）-观察者模式"><i class="fab fa-linkedin " aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="https://pinterest.com/pin/create/bookmarklet/?url=https://bitzhangmo.github.io/2018/04/27/设计模式/设计模式笔记（2）-观察者模式/&is_video=false&description=设计模式笔记（2）-观察者模式"><i class="fab fa-pinterest " aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="mailto:?subject=设计模式笔记（2）-观察者模式&body=Check out this article: https://bitzhangmo.github.io/2018/04/27/设计模式/设计模式笔记（2）-观察者模式/"><i class="fas fa-envelope " aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="https://getpocket.com/save?url=https://bitzhangmo.github.io/2018/04/27/设计模式/设计模式笔记（2）-观察者模式/&title=设计模式笔记（2）-观察者模式"><i class="fab fa-get-pocket " aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="http://reddit.com/submit?url=https://bitzhangmo.github.io/2018/04/27/设计模式/设计模式笔记（2）-观察者模式/&title=设计模式笔记（2）-观察者模式"><i class="fab fa-reddit " aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="http://www.stumbleupon.com/submit?url=https://bitzhangmo.github.io/2018/04/27/设计模式/设计模式笔记（2）-观察者模式/&title=设计模式笔记（2）-观察者模式"><i class="fab fa-stumbleupon " aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="http://digg.com/submit?url=https://bitzhangmo.github.io/2018/04/27/设计模式/设计模式笔记（2）-观察者模式/&title=设计模式笔记（2）-观察者模式"><i class="fab fa-digg " aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="http://www.tumblr.com/share/link?url=https://bitzhangmo.github.io/2018/04/27/设计模式/设计模式笔记（2）-观察者模式/&name=设计模式笔记（2）-观察者模式&description=&lt;p&gt;建立一个一对多的依赖，当一个对象改变状态，依赖它的对象都将收到通知并自动更新。&lt;/p&gt;"><i class="fab fa-tumblr " aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="https://news.ycombinator.com/submitlink?u=https://bitzhangmo.github.io/2018/04/27/设计模式/设计模式笔记（2）-观察者模式/&t=设计模式笔记（2）-观察者模式"><i class="fab fa-hacker-news " aria-hidden="true"></i></a></li>
 </ul>
 
     </div>
@@ -137,14 +139,14 @@
       
     <div class="article-category">
         <i class="fas fa-archive"></i>
-        <a class="category-link" href="/categories/%E8%AF%BB%E4%B9%A6%E7%AC%94%E8%AE%B0/">读书笔记</a> › <a class="category-link" href="/categories/%E8%AF%BB%E4%B9%A6%E7%AC%94%E8%AE%B0/%E8%AE%BE%E8%AE%A1%E6%A8%A1%E5%BC%8F/">设计模式</a>
+        <a class="category-link" href="/categories/读书笔记/">读书笔记</a> › <a class="category-link" href="/categories/读书笔记/设计模式/">设计模式</a>
     </div>
 
 
       
     <div class="article-tag">
         <i class="fas fa-tag"></i>
-        <a class="tag-link" href="/tags/%E8%AE%BE%E8%AE%A1%E6%A8%A1%E5%BC%8F/" rel="tag">设计模式</a>
+        <a class="tag-link" href="/tags/设计模式/">设计模式</a>
     </div>
 
 
@@ -155,7 +157,6 @@
   <div class="content" itemprop="articleBody">
     <p>建立一个一对多的依赖，当一个对象改变状态，依赖它的对象都将收到通知并自动更新。</p>
 <a id="more"></a>
-
 <h3 id="观察者模式"><a href="#观察者模式" class="headerlink" title="观察者模式"></a>观察者模式</h3><blockquote>
 <p>观察者模式定义了对象之间的一对多依赖，当一个对象改变状态时，它的所有依赖者都会收到通知并自动更新。</p>
 </blockquote>
@@ -172,7 +173,7 @@
 <li>Obsever: 观察者——接口，声明了更新数据的函数。</li>
 <li>ConcreteSubject: 具体观察者——具体类，实现了Obsever接口自动更新的函数。</li>
 </ul>
-<h4 id="类图："><a href="#类图：" class="headerlink" title="类图："></a>类图：</h4><p><img src="http://design-patterns.readthedocs.io/zh_CN/latest/_images/Obeserver.jpg" alt=""></p>
+<h4 id="类图："><a href="#类图：" class="headerlink" title="类图："></a>类图：</h4><p><img src="http://design-patterns.readthedocs.io/zh_CN/latest/_images/Obeserver.jpg" alt></p>
 <h4 id="优缺点"><a href="#优缺点" class="headerlink" title="优缺点:"></a>优缺点:</h4><ol>
 <li>优点：<ul>
 <li>可以实现表示层与数据逻辑层的分离，并定义了稳定的消息更新机制，抽象了更新接口，使得各种表示层可以作为具体观察者。</li>
@@ -211,7 +212,7 @@
          
           <li><a href="/archives/">归档</a></li>
          
-          <li><a href="/projects_url">项目</a></li>
+          <li><a href="/search/">搜索</a></li>
         
       </ul>
     </div>
@@ -222,17 +223,17 @@
 
     <div id="share-footer" style="display: none">
       <ul>
-  <li><a class="icon" href="http://www.facebook.com/sharer.php?u=https://bitzhangmo.github.io/2018/04/27/%E8%AE%BE%E8%AE%A1%E6%A8%A1%E5%BC%8F/%E8%AE%BE%E8%AE%A1%E6%A8%A1%E5%BC%8F%E7%AC%94%E8%AE%B0%EF%BC%882%EF%BC%89-%E8%A7%82%E5%AF%9F%E8%80%85%E6%A8%A1%E5%BC%8F/" target="_blank" rel="noopener"><i class="fab fa-facebook fa-lg" aria-hidden="true"></i></a></li>
-  <li><a class="icon" href="https://twitter.com/share?url=https://bitzhangmo.github.io/2018/04/27/%E8%AE%BE%E8%AE%A1%E6%A8%A1%E5%BC%8F/%E8%AE%BE%E8%AE%A1%E6%A8%A1%E5%BC%8F%E7%AC%94%E8%AE%B0%EF%BC%882%EF%BC%89-%E8%A7%82%E5%AF%9F%E8%80%85%E6%A8%A1%E5%BC%8F/&text=设计模式笔记（2）-观察者模式" target="_blank" rel="noopener"><i class="fab fa-twitter fa-lg" aria-hidden="true"></i></a></li>
-  <li><a class="icon" href="http://www.linkedin.com/shareArticle?url=https://bitzhangmo.github.io/2018/04/27/%E8%AE%BE%E8%AE%A1%E6%A8%A1%E5%BC%8F/%E8%AE%BE%E8%AE%A1%E6%A8%A1%E5%BC%8F%E7%AC%94%E8%AE%B0%EF%BC%882%EF%BC%89-%E8%A7%82%E5%AF%9F%E8%80%85%E6%A8%A1%E5%BC%8F/&title=设计模式笔记（2）-观察者模式" target="_blank" rel="noopener"><i class="fab fa-linkedin fa-lg" aria-hidden="true"></i></a></li>
-  <li><a class="icon" href="https://pinterest.com/pin/create/bookmarklet/?url=https://bitzhangmo.github.io/2018/04/27/%E8%AE%BE%E8%AE%A1%E6%A8%A1%E5%BC%8F/%E8%AE%BE%E8%AE%A1%E6%A8%A1%E5%BC%8F%E7%AC%94%E8%AE%B0%EF%BC%882%EF%BC%89-%E8%A7%82%E5%AF%9F%E8%80%85%E6%A8%A1%E5%BC%8F/&is_video=false&description=设计模式笔记（2）-观察者模式" target="_blank" rel="noopener"><i class="fab fa-pinterest fa-lg" aria-hidden="true"></i></a></li>
-  <li><a class="icon" href="mailto:?subject=设计模式笔记（2）-观察者模式&body=Check out this article: https://bitzhangmo.github.io/2018/04/27/%E8%AE%BE%E8%AE%A1%E6%A8%A1%E5%BC%8F/%E8%AE%BE%E8%AE%A1%E6%A8%A1%E5%BC%8F%E7%AC%94%E8%AE%B0%EF%BC%882%EF%BC%89-%E8%A7%82%E5%AF%9F%E8%80%85%E6%A8%A1%E5%BC%8F/"><i class="fas fa-envelope fa-lg" aria-hidden="true"></i></a></li>
-  <li><a class="icon" href="https://getpocket.com/save?url=https://bitzhangmo.github.io/2018/04/27/%E8%AE%BE%E8%AE%A1%E6%A8%A1%E5%BC%8F/%E8%AE%BE%E8%AE%A1%E6%A8%A1%E5%BC%8F%E7%AC%94%E8%AE%B0%EF%BC%882%EF%BC%89-%E8%A7%82%E5%AF%9F%E8%80%85%E6%A8%A1%E5%BC%8F/&title=设计模式笔记（2）-观察者模式" target="_blank" rel="noopener"><i class="fab fa-get-pocket fa-lg" aria-hidden="true"></i></a></li>
-  <li><a class="icon" href="http://reddit.com/submit?url=https://bitzhangmo.github.io/2018/04/27/%E8%AE%BE%E8%AE%A1%E6%A8%A1%E5%BC%8F/%E8%AE%BE%E8%AE%A1%E6%A8%A1%E5%BC%8F%E7%AC%94%E8%AE%B0%EF%BC%882%EF%BC%89-%E8%A7%82%E5%AF%9F%E8%80%85%E6%A8%A1%E5%BC%8F/&title=设计模式笔记（2）-观察者模式" target="_blank" rel="noopener"><i class="fab fa-reddit fa-lg" aria-hidden="true"></i></a></li>
-  <li><a class="icon" href="http://www.stumbleupon.com/submit?url=https://bitzhangmo.github.io/2018/04/27/%E8%AE%BE%E8%AE%A1%E6%A8%A1%E5%BC%8F/%E8%AE%BE%E8%AE%A1%E6%A8%A1%E5%BC%8F%E7%AC%94%E8%AE%B0%EF%BC%882%EF%BC%89-%E8%A7%82%E5%AF%9F%E8%80%85%E6%A8%A1%E5%BC%8F/&title=设计模式笔记（2）-观察者模式" target="_blank" rel="noopener"><i class="fab fa-stumbleupon fa-lg" aria-hidden="true"></i></a></li>
-  <li><a class="icon" href="http://digg.com/submit?url=https://bitzhangmo.github.io/2018/04/27/%E8%AE%BE%E8%AE%A1%E6%A8%A1%E5%BC%8F/%E8%AE%BE%E8%AE%A1%E6%A8%A1%E5%BC%8F%E7%AC%94%E8%AE%B0%EF%BC%882%EF%BC%89-%E8%A7%82%E5%AF%9F%E8%80%85%E6%A8%A1%E5%BC%8F/&title=设计模式笔记（2）-观察者模式" target="_blank" rel="noopener"><i class="fab fa-digg fa-lg" aria-hidden="true"></i></a></li>
-  <li><a class="icon" href="http://www.tumblr.com/share/link?url=https://bitzhangmo.github.io/2018/04/27/%E8%AE%BE%E8%AE%A1%E6%A8%A1%E5%BC%8F/%E8%AE%BE%E8%AE%A1%E6%A8%A1%E5%BC%8F%E7%AC%94%E8%AE%B0%EF%BC%882%EF%BC%89-%E8%A7%82%E5%AF%9F%E8%80%85%E6%A8%A1%E5%BC%8F/&name=设计模式笔记（2）-观察者模式&description=&lt;p&gt;建立一个一对多的依赖，当一个对象改变状态，依赖它的对象都将收到通知并自动更新。&lt;/p&gt;" target="_blank" rel="noopener"><i class="fab fa-tumblr fa-lg" aria-hidden="true"></i></a></li>
-  <li><a class="icon" href="https://news.ycombinator.com/submitlink?u=https://bitzhangmo.github.io/2018/04/27/%E8%AE%BE%E8%AE%A1%E6%A8%A1%E5%BC%8F/%E8%AE%BE%E8%AE%A1%E6%A8%A1%E5%BC%8F%E7%AC%94%E8%AE%B0%EF%BC%882%EF%BC%89-%E8%A7%82%E5%AF%9F%E8%80%85%E6%A8%A1%E5%BC%8F/&t=设计模式笔记（2）-观察者模式" target="_blank" rel="noopener"><i class="fab fa-hacker-news fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="http://www.facebook.com/sharer.php?u=https://bitzhangmo.github.io/2018/04/27/设计模式/设计模式笔记（2）-观察者模式/"><i class="fab fa-facebook fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="https://twitter.com/share?url=https://bitzhangmo.github.io/2018/04/27/设计模式/设计模式笔记（2）-观察者模式/&text=设计模式笔记（2）-观察者模式"><i class="fab fa-twitter fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="http://www.linkedin.com/shareArticle?url=https://bitzhangmo.github.io/2018/04/27/设计模式/设计模式笔记（2）-观察者模式/&title=设计模式笔记（2）-观察者模式"><i class="fab fa-linkedin fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="https://pinterest.com/pin/create/bookmarklet/?url=https://bitzhangmo.github.io/2018/04/27/设计模式/设计模式笔记（2）-观察者模式/&is_video=false&description=设计模式笔记（2）-观察者模式"><i class="fab fa-pinterest fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="mailto:?subject=设计模式笔记（2）-观察者模式&body=Check out this article: https://bitzhangmo.github.io/2018/04/27/设计模式/设计模式笔记（2）-观察者模式/"><i class="fas fa-envelope fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="https://getpocket.com/save?url=https://bitzhangmo.github.io/2018/04/27/设计模式/设计模式笔记（2）-观察者模式/&title=设计模式笔记（2）-观察者模式"><i class="fab fa-get-pocket fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="http://reddit.com/submit?url=https://bitzhangmo.github.io/2018/04/27/设计模式/设计模式笔记（2）-观察者模式/&title=设计模式笔记（2）-观察者模式"><i class="fab fa-reddit fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="http://www.stumbleupon.com/submit?url=https://bitzhangmo.github.io/2018/04/27/设计模式/设计模式笔记（2）-观察者模式/&title=设计模式笔记（2）-观察者模式"><i class="fab fa-stumbleupon fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="http://digg.com/submit?url=https://bitzhangmo.github.io/2018/04/27/设计模式/设计模式笔记（2）-观察者模式/&title=设计模式笔记（2）-观察者模式"><i class="fab fa-digg fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="http://www.tumblr.com/share/link?url=https://bitzhangmo.github.io/2018/04/27/设计模式/设计模式笔记（2）-观察者模式/&name=设计模式笔记（2）-观察者模式&description=&lt;p&gt;建立一个一对多的依赖，当一个对象改变状态，依赖它的对象都将收到通知并自动更新。&lt;/p&gt;"><i class="fab fa-tumblr fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="https://news.ycombinator.com/submitlink?u=https://bitzhangmo.github.io/2018/04/27/设计模式/设计模式笔记（2）-观察者模式/&t=设计模式笔记（2）-观察者模式"><i class="fab fa-hacker-news fa-lg" aria-hidden="true"></i></a></li>
 </ul>
 
     </div>
@@ -262,7 +263,7 @@
          
           <li><a href="/archives/">归档</a></li>
          
-          <li><a href="/projects_url">项目</a></li>
+          <li><a href="/search/">搜索</a></li>
         
       </ul>
     </nav>
@@ -310,5 +311,5 @@
 <!-- Disqus Comments -->
 
 
-</body>
+<script src="/live2dw/lib/L2Dwidget.min.js?bd2294fafea3389ee458f1d9be5a2157"></script><script>L2Dwidget.init({"pluginRootPath":"live2dw/","pluginJsPath":"lib/","pluginModelPath":"assets/","tagMode":false,"debug":false,"model":{"jsonPath":"/live2dw/assets/hijiki.model.json"},"display":{"position":"left","width":100,"height":200},"mobile":{"show":false},"log":false});</script></body>
 </html>

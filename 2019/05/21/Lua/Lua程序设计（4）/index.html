@@ -1,21 +1,23 @@
 <!DOCTYPE html>
 <html lang=zh>
-<head>
+<head><meta name="generator" content="Hexo 3.9.0">
     <!-- so meta -->
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="HandheldFriendly" content="True">
-    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1" />
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
     <meta name="description" content="Lua的输入输出、补充知识">
 <meta name="keywords" content="Lua">
 <meta property="og:type" content="article">
 <meta property="og:title" content="Lua程序设计（4）">
-<meta property="og:url" content="https:&#x2F;&#x2F;bitzhangmo.github.io&#x2F;2019&#x2F;05&#x2F;21&#x2F;Lua&#x2F;Lua%E7%A8%8B%E5%BA%8F%E8%AE%BE%E8%AE%A1%EF%BC%884%EF%BC%89&#x2F;index.html">
+<meta property="og:url" content="https://bitzhangmo.github.io/2019/05/21/Lua/Lua程序设计（4）/index.html">
 <meta property="og:site_name" content="zhangMo Blog">
 <meta property="og:description" content="Lua的输入输出、补充知识">
 <meta property="og:locale" content="zh-CN">
 <meta property="og:updated_time" content="2019-05-22T03:31:57.294Z">
 <meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="Lua程序设计（4）">
+<meta name="twitter:description" content="Lua的输入输出、补充知识">
     
     
         
@@ -63,7 +65,7 @@
          
           <li><a href="/archives/">归档</a></li>
          
-          <li><a href="/projects_url">项目</a></li>
+          <li><a href="/search/">搜索</a></li>
         
       </ul>
     </span>
@@ -71,10 +73,10 @@
     <span id="actions">
       <ul>
         
-        <li><a class="icon" href="/2019/05/22/Lua/Lua%E7%A8%8B%E5%BA%8F%E8%AE%BE%E8%AE%A1%EF%BC%885%EF%BC%89/"><i class="fas fa-chevron-left" aria-hidden="true" onmouseover="$('#i-prev').toggle();" onmouseout="$('#i-prev').toggle();"></i></a></li>
+        <li><a class="icon" href="/2019/05/22/Lua/Lua程序设计（5）/"><i class="fas fa-chevron-left" aria-hidden="true" onmouseover="$('#i-prev').toggle();" onmouseout="$('#i-prev').toggle();"></i></a></li>
         
         
-        <li><a class="icon" href="/2019/05/20/Lua/Lua%E7%A8%8B%E5%BA%8F%E8%AE%BE%E8%AE%A1%EF%BC%883%EF%BC%89/"><i class="fas fa-chevron-right" aria-hidden="true" onmouseover="$('#i-next').toggle();" onmouseout="$('#i-next').toggle();"></i></a></li>
+        <li><a class="icon" href="/2019/05/20/Lua/Lua程序设计（3）/"><i class="fas fa-chevron-right" aria-hidden="true" onmouseover="$('#i-next').toggle();" onmouseout="$('#i-next').toggle();"></i></a></li>
         
         <li><a class="icon" href="#" onclick="$('html, body').animate({ scrollTop: 0 }, 'fast');"><i class="fas fa-chevron-up" aria-hidden="true" onmouseover="$('#i-top').toggle();" onmouseout="$('#i-top').toggle();"></i></a></li>
         <li><a class="icon" href="#"><i class="fas fa-share-alt" aria-hidden="true" onmouseover="$('#i-share').toggle();" onmouseout="$('#i-share').toggle();" onclick="$('#share').toggle();return false;"></i></a></li>
@@ -87,17 +89,17 @@
     <br/>
     <div id="share" style="display: none">
       <ul>
-  <li><a class="icon" href="http://www.facebook.com/sharer.php?u=https://bitzhangmo.github.io/2019/05/21/Lua/Lua%E7%A8%8B%E5%BA%8F%E8%AE%BE%E8%AE%A1%EF%BC%884%EF%BC%89/" target="_blank" rel="noopener"><i class="fab fa-facebook " aria-hidden="true"></i></a></li>
-  <li><a class="icon" href="https://twitter.com/share?url=https://bitzhangmo.github.io/2019/05/21/Lua/Lua%E7%A8%8B%E5%BA%8F%E8%AE%BE%E8%AE%A1%EF%BC%884%EF%BC%89/&text=Lua程序设计（4）" target="_blank" rel="noopener"><i class="fab fa-twitter " aria-hidden="true"></i></a></li>
-  <li><a class="icon" href="http://www.linkedin.com/shareArticle?url=https://bitzhangmo.github.io/2019/05/21/Lua/Lua%E7%A8%8B%E5%BA%8F%E8%AE%BE%E8%AE%A1%EF%BC%884%EF%BC%89/&title=Lua程序设计（4）" target="_blank" rel="noopener"><i class="fab fa-linkedin " aria-hidden="true"></i></a></li>
-  <li><a class="icon" href="https://pinterest.com/pin/create/bookmarklet/?url=https://bitzhangmo.github.io/2019/05/21/Lua/Lua%E7%A8%8B%E5%BA%8F%E8%AE%BE%E8%AE%A1%EF%BC%884%EF%BC%89/&is_video=false&description=Lua程序设计（4）" target="_blank" rel="noopener"><i class="fab fa-pinterest " aria-hidden="true"></i></a></li>
-  <li><a class="icon" href="mailto:?subject=Lua程序设计（4）&body=Check out this article: https://bitzhangmo.github.io/2019/05/21/Lua/Lua%E7%A8%8B%E5%BA%8F%E8%AE%BE%E8%AE%A1%EF%BC%884%EF%BC%89/"><i class="fas fa-envelope " aria-hidden="true"></i></a></li>
-  <li><a class="icon" href="https://getpocket.com/save?url=https://bitzhangmo.github.io/2019/05/21/Lua/Lua%E7%A8%8B%E5%BA%8F%E8%AE%BE%E8%AE%A1%EF%BC%884%EF%BC%89/&title=Lua程序设计（4）" target="_blank" rel="noopener"><i class="fab fa-get-pocket " aria-hidden="true"></i></a></li>
-  <li><a class="icon" href="http://reddit.com/submit?url=https://bitzhangmo.github.io/2019/05/21/Lua/Lua%E7%A8%8B%E5%BA%8F%E8%AE%BE%E8%AE%A1%EF%BC%884%EF%BC%89/&title=Lua程序设计（4）" target="_blank" rel="noopener"><i class="fab fa-reddit " aria-hidden="true"></i></a></li>
-  <li><a class="icon" href="http://www.stumbleupon.com/submit?url=https://bitzhangmo.github.io/2019/05/21/Lua/Lua%E7%A8%8B%E5%BA%8F%E8%AE%BE%E8%AE%A1%EF%BC%884%EF%BC%89/&title=Lua程序设计（4）" target="_blank" rel="noopener"><i class="fab fa-stumbleupon " aria-hidden="true"></i></a></li>
-  <li><a class="icon" href="http://digg.com/submit?url=https://bitzhangmo.github.io/2019/05/21/Lua/Lua%E7%A8%8B%E5%BA%8F%E8%AE%BE%E8%AE%A1%EF%BC%884%EF%BC%89/&title=Lua程序设计（4）" target="_blank" rel="noopener"><i class="fab fa-digg " aria-hidden="true"></i></a></li>
-  <li><a class="icon" href="http://www.tumblr.com/share/link?url=https://bitzhangmo.github.io/2019/05/21/Lua/Lua%E7%A8%8B%E5%BA%8F%E8%AE%BE%E8%AE%A1%EF%BC%884%EF%BC%89/&name=Lua程序设计（4）&description=&lt;p&gt;Lua的输入输出、补充知识&lt;/p&gt;" target="_blank" rel="noopener"><i class="fab fa-tumblr " aria-hidden="true"></i></a></li>
-  <li><a class="icon" href="https://news.ycombinator.com/submitlink?u=https://bitzhangmo.github.io/2019/05/21/Lua/Lua%E7%A8%8B%E5%BA%8F%E8%AE%BE%E8%AE%A1%EF%BC%884%EF%BC%89/&t=Lua程序设计（4）" target="_blank" rel="noopener"><i class="fab fa-hacker-news " aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="http://www.facebook.com/sharer.php?u=https://bitzhangmo.github.io/2019/05/21/Lua/Lua程序设计（4）/"><i class="fab fa-facebook " aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="https://twitter.com/share?url=https://bitzhangmo.github.io/2019/05/21/Lua/Lua程序设计（4）/&text=Lua程序设计（4）"><i class="fab fa-twitter " aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="http://www.linkedin.com/shareArticle?url=https://bitzhangmo.github.io/2019/05/21/Lua/Lua程序设计（4）/&title=Lua程序设计（4）"><i class="fab fa-linkedin " aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="https://pinterest.com/pin/create/bookmarklet/?url=https://bitzhangmo.github.io/2019/05/21/Lua/Lua程序设计（4）/&is_video=false&description=Lua程序设计（4）"><i class="fab fa-pinterest " aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="mailto:?subject=Lua程序设计（4）&body=Check out this article: https://bitzhangmo.github.io/2019/05/21/Lua/Lua程序设计（4）/"><i class="fas fa-envelope " aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="https://getpocket.com/save?url=https://bitzhangmo.github.io/2019/05/21/Lua/Lua程序设计（4）/&title=Lua程序设计（4）"><i class="fab fa-get-pocket " aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="http://reddit.com/submit?url=https://bitzhangmo.github.io/2019/05/21/Lua/Lua程序设计（4）/&title=Lua程序设计（4）"><i class="fab fa-reddit " aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="http://www.stumbleupon.com/submit?url=https://bitzhangmo.github.io/2019/05/21/Lua/Lua程序设计（4）/&title=Lua程序设计（4）"><i class="fab fa-stumbleupon " aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="http://digg.com/submit?url=https://bitzhangmo.github.io/2019/05/21/Lua/Lua程序设计（4）/&title=Lua程序设计（4）"><i class="fab fa-digg " aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="http://www.tumblr.com/share/link?url=https://bitzhangmo.github.io/2019/05/21/Lua/Lua程序设计（4）/&name=Lua程序设计（4）&description=&lt;p&gt;Lua的输入输出、补充知识&lt;/p&gt;"><i class="fab fa-tumblr " aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="https://news.ycombinator.com/submitlink?u=https://bitzhangmo.github.io/2019/05/21/Lua/Lua程序设计（4）/&t=Lua程序设计（4）"><i class="fab fa-hacker-news " aria-hidden="true"></i></a></li>
 </ul>
 
     </div>
@@ -135,14 +137,14 @@
       
     <div class="article-category">
         <i class="fas fa-archive"></i>
-        <a class="category-link" href="/categories/%E8%AF%BB%E4%B9%A6%E7%AC%94%E8%AE%B0/">读书笔记</a>
+        <a class="category-link" href="/categories/读书笔记/">读书笔记</a>
     </div>
 
 
       
     <div class="article-tag">
         <i class="fas fa-tag"></i>
-        <a class="tag-link" href="/tags/Lua/" rel="tag">Lua</a>
+        <a class="tag-link" href="/tags/Lua/">Lua</a>
     </div>
 
 
@@ -153,19 +155,20 @@
   <div class="content" itemprop="articleBody">
     <p>Lua的输入输出、补充知识</p>
 <a id="more"></a>
-
 <h3 id="输入输出"><a href="#输入输出" class="headerlink" title="输入输出"></a>输入输出</h3><p>单就Lua语言而言，只提供了ISO C语言标准支持的功能，即基本的文件操作等。</p>
 <h4 id="简单I-O模型"><a href="#简单I-O模型" class="headerlink" title="简单I/O模型"></a>简单I/O模型</h4><p>简单模型虚拟了一个当前输入流和一个当前输出流。函数<code>io.input</code>和函数<code>io.output</code>可以用于改变当前的输入输出流，调用<code>io.input</code>会以只读模式打开指定文件，并将文件设置为当前输入流。之后所有的输入都将来自该文件，除非再次调用<code>io.input</code>。</p>
 <h5 id="io-write"><a href="#io-write" class="headerlink" title="io.write"></a>io.write</h5><p>函数<code>io.write</code>可以读取任意数量的字符串并将其写入当前输入流。由于调用函数时可以使用多个参数，因此应尽量避免使用连接操作符以节省资源。</p>
 <p>作为原则，应该只在”用后即弃”的代码中使用函数print，当需要完全控制输出时，应该使用函数io.write。</p>
-<h5 id="io-read"><a href="#io-read" class="headerlink" title="io.read"></a>io.read</h5><table>
+<h5 id="io-read"><a href="#io-read" class="headerlink" title="io.read"></a>io.read</h5><div class="table-container">
+<table>
 <thead>
 <tr>
 <th>参数</th>
 <th>操作</th>
 </tr>
 </thead>
-<tbody><tr>
+<tbody>
+<tr>
 <td>“a”</td>
 <td>读取整个文件</td>
 </tr>
@@ -185,7 +188,9 @@
 <td>Num</td>
 <td>以字符串读取num个字符</td>
 </tr>
-</tbody></table>
+</tbody>
+</table>
+</div>
 <p>调用<code>io.read(&quot;a&quot;)</code>可从当前位置开始读取当前输入文件的全部内容，如果当前处于文件末尾或者文件为空，那么该函数返回一个空字符串。</p>
 <h4 id="完整I-O模型"><a href="#完整I-O模型" class="headerlink" title="完整I/O模型"></a>完整I/O模型</h4><p>可以使用函数<code>io.open</code>来打开一个文件，这个函数有两个参数，一个参数是待打开文件的文件名，另一个参数是一个模式字符串，包括表示只读的r，表示只写的w，表示追加的a，以及一个可选的表示打开二进制文件的b。</p>
 <h3 id="补充知识"><a href="#补充知识" class="headerlink" title="补充知识"></a>补充知识</h3><h4 id="局部变量和代码块"><a href="#局部变量和代码块" class="headerlink" title="局部变量和代码块"></a>局部变量和代码块</h4><p>Lua中的变量在默认情况下是全局变量，所有的局部变量在使用前必须声明。</p>
@@ -206,7 +211,6 @@
 </li>
 <li><p>数值型for：</p>
 <figure class="highlight lua"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">for</span> var = exp1,exp2,exp3 <span class="keyword">do</span></span><br><span class="line">	something</span><br><span class="line"><span class="keyword">end</span></span><br></pre></td></tr></table></figure>
-
 <p>var值从exp1变化到exp2之前的每次循环会执行something，并在每次循环结束后将步长exp3增加到var上，如果exp3不存在则默认为1，不想设置循环上限，可以使用math.huge。</p>
 </li>
 <li><p>泛型for：</p>
@@ -234,7 +238,7 @@
          
           <li><a href="/archives/">归档</a></li>
          
-          <li><a href="/projects_url">项目</a></li>
+          <li><a href="/search/">搜索</a></li>
         
       </ul>
     </div>
@@ -245,17 +249,17 @@
 
     <div id="share-footer" style="display: none">
       <ul>
-  <li><a class="icon" href="http://www.facebook.com/sharer.php?u=https://bitzhangmo.github.io/2019/05/21/Lua/Lua%E7%A8%8B%E5%BA%8F%E8%AE%BE%E8%AE%A1%EF%BC%884%EF%BC%89/" target="_blank" rel="noopener"><i class="fab fa-facebook fa-lg" aria-hidden="true"></i></a></li>
-  <li><a class="icon" href="https://twitter.com/share?url=https://bitzhangmo.github.io/2019/05/21/Lua/Lua%E7%A8%8B%E5%BA%8F%E8%AE%BE%E8%AE%A1%EF%BC%884%EF%BC%89/&text=Lua程序设计（4）" target="_blank" rel="noopener"><i class="fab fa-twitter fa-lg" aria-hidden="true"></i></a></li>
-  <li><a class="icon" href="http://www.linkedin.com/shareArticle?url=https://bitzhangmo.github.io/2019/05/21/Lua/Lua%E7%A8%8B%E5%BA%8F%E8%AE%BE%E8%AE%A1%EF%BC%884%EF%BC%89/&title=Lua程序设计（4）" target="_blank" rel="noopener"><i class="fab fa-linkedin fa-lg" aria-hidden="true"></i></a></li>
-  <li><a class="icon" href="https://pinterest.com/pin/create/bookmarklet/?url=https://bitzhangmo.github.io/2019/05/21/Lua/Lua%E7%A8%8B%E5%BA%8F%E8%AE%BE%E8%AE%A1%EF%BC%884%EF%BC%89/&is_video=false&description=Lua程序设计（4）" target="_blank" rel="noopener"><i class="fab fa-pinterest fa-lg" aria-hidden="true"></i></a></li>
-  <li><a class="icon" href="mailto:?subject=Lua程序设计（4）&body=Check out this article: https://bitzhangmo.github.io/2019/05/21/Lua/Lua%E7%A8%8B%E5%BA%8F%E8%AE%BE%E8%AE%A1%EF%BC%884%EF%BC%89/"><i class="fas fa-envelope fa-lg" aria-hidden="true"></i></a></li>
-  <li><a class="icon" href="https://getpocket.com/save?url=https://bitzhangmo.github.io/2019/05/21/Lua/Lua%E7%A8%8B%E5%BA%8F%E8%AE%BE%E8%AE%A1%EF%BC%884%EF%BC%89/&title=Lua程序设计（4）" target="_blank" rel="noopener"><i class="fab fa-get-pocket fa-lg" aria-hidden="true"></i></a></li>
-  <li><a class="icon" href="http://reddit.com/submit?url=https://bitzhangmo.github.io/2019/05/21/Lua/Lua%E7%A8%8B%E5%BA%8F%E8%AE%BE%E8%AE%A1%EF%BC%884%EF%BC%89/&title=Lua程序设计（4）" target="_blank" rel="noopener"><i class="fab fa-reddit fa-lg" aria-hidden="true"></i></a></li>
-  <li><a class="icon" href="http://www.stumbleupon.com/submit?url=https://bitzhangmo.github.io/2019/05/21/Lua/Lua%E7%A8%8B%E5%BA%8F%E8%AE%BE%E8%AE%A1%EF%BC%884%EF%BC%89/&title=Lua程序设计（4）" target="_blank" rel="noopener"><i class="fab fa-stumbleupon fa-lg" aria-hidden="true"></i></a></li>
-  <li><a class="icon" href="http://digg.com/submit?url=https://bitzhangmo.github.io/2019/05/21/Lua/Lua%E7%A8%8B%E5%BA%8F%E8%AE%BE%E8%AE%A1%EF%BC%884%EF%BC%89/&title=Lua程序设计（4）" target="_blank" rel="noopener"><i class="fab fa-digg fa-lg" aria-hidden="true"></i></a></li>
-  <li><a class="icon" href="http://www.tumblr.com/share/link?url=https://bitzhangmo.github.io/2019/05/21/Lua/Lua%E7%A8%8B%E5%BA%8F%E8%AE%BE%E8%AE%A1%EF%BC%884%EF%BC%89/&name=Lua程序设计（4）&description=&lt;p&gt;Lua的输入输出、补充知识&lt;/p&gt;" target="_blank" rel="noopener"><i class="fab fa-tumblr fa-lg" aria-hidden="true"></i></a></li>
-  <li><a class="icon" href="https://news.ycombinator.com/submitlink?u=https://bitzhangmo.github.io/2019/05/21/Lua/Lua%E7%A8%8B%E5%BA%8F%E8%AE%BE%E8%AE%A1%EF%BC%884%EF%BC%89/&t=Lua程序设计（4）" target="_blank" rel="noopener"><i class="fab fa-hacker-news fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="http://www.facebook.com/sharer.php?u=https://bitzhangmo.github.io/2019/05/21/Lua/Lua程序设计（4）/"><i class="fab fa-facebook fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="https://twitter.com/share?url=https://bitzhangmo.github.io/2019/05/21/Lua/Lua程序设计（4）/&text=Lua程序设计（4）"><i class="fab fa-twitter fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="http://www.linkedin.com/shareArticle?url=https://bitzhangmo.github.io/2019/05/21/Lua/Lua程序设计（4）/&title=Lua程序设计（4）"><i class="fab fa-linkedin fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="https://pinterest.com/pin/create/bookmarklet/?url=https://bitzhangmo.github.io/2019/05/21/Lua/Lua程序设计（4）/&is_video=false&description=Lua程序设计（4）"><i class="fab fa-pinterest fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="mailto:?subject=Lua程序设计（4）&body=Check out this article: https://bitzhangmo.github.io/2019/05/21/Lua/Lua程序设计（4）/"><i class="fas fa-envelope fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="https://getpocket.com/save?url=https://bitzhangmo.github.io/2019/05/21/Lua/Lua程序设计（4）/&title=Lua程序设计（4）"><i class="fab fa-get-pocket fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="http://reddit.com/submit?url=https://bitzhangmo.github.io/2019/05/21/Lua/Lua程序设计（4）/&title=Lua程序设计（4）"><i class="fab fa-reddit fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="http://www.stumbleupon.com/submit?url=https://bitzhangmo.github.io/2019/05/21/Lua/Lua程序设计（4）/&title=Lua程序设计（4）"><i class="fab fa-stumbleupon fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="http://digg.com/submit?url=https://bitzhangmo.github.io/2019/05/21/Lua/Lua程序设计（4）/&title=Lua程序设计（4）"><i class="fab fa-digg fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="http://www.tumblr.com/share/link?url=https://bitzhangmo.github.io/2019/05/21/Lua/Lua程序设计（4）/&name=Lua程序设计（4）&description=&lt;p&gt;Lua的输入输出、补充知识&lt;/p&gt;"><i class="fab fa-tumblr fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="https://news.ycombinator.com/submitlink?u=https://bitzhangmo.github.io/2019/05/21/Lua/Lua程序设计（4）/&t=Lua程序设计（4）"><i class="fab fa-hacker-news fa-lg" aria-hidden="true"></i></a></li>
 </ul>
 
     </div>
@@ -285,7 +289,7 @@
          
           <li><a href="/archives/">归档</a></li>
          
-          <li><a href="/projects_url">项目</a></li>
+          <li><a href="/search/">搜索</a></li>
         
       </ul>
     </nav>
@@ -333,5 +337,5 @@
 <!-- Disqus Comments -->
 
 
-</body>
+<script src="/live2dw/lib/L2Dwidget.min.js?bd2294fafea3389ee458f1d9be5a2157"></script><script>L2Dwidget.init({"pluginRootPath":"live2dw/","pluginJsPath":"lib/","pluginModelPath":"assets/","tagMode":false,"debug":false,"model":{"jsonPath":"/live2dw/assets/hijiki.model.json"},"display":{"position":"left","width":100,"height":200},"mobile":{"show":false},"log":false});</script></body>
 </html>
