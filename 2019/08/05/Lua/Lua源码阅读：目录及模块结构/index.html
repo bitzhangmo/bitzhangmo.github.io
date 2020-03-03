@@ -212,30 +212,30 @@
 <li><strong>luac.c</strong> - Lua编译器（可保存字节码到文件中，也可在控制台列出字节码）</li>
 </ul>
 <h3 id="命名约定"><a href="#命名约定" class="headerlink" title="命名约定"></a>命名约定</h3><p>一个函数的前缀表明了它来自哪个模块</p>
-<pre><code>    luaA_ - lapi.c
-    luaB_ - lbaselib.c
-    luaC_ - lgc.c
-    luaD_ - ldo.c
-    luaE_ - lstate.c
-    luaF_ - lfunc.c
-    luaG_ - ldebug.c
-    luaH_ - ltable.c
-    luaI_ - lauxlib.c
-    luaK_ - lcode.c
-    luaL_ - llauxlib.c/h linit.c
-    luaM_ - lmem.c
-    luaO_ - lobject.c
-    luaP_ - lopcodes.c
-    luaS_ - lstring.c
-    luaT_ - ltm.c
-    luaU_ - lundump.c
-    luaV_ - lvm.c
-    luaX_ - llex.c
-    luaY_ - lparser.c
-    luaZ_ - lzio.c
-    lua_  - lapi.c/h + luaconfig.h, ldebug.c
-    luai_ - luaconf.h
-    luaopen_ - luaconf.h + libraries (lbaselib.c, ldblib.c, liolib.c, lmathlib.c, loadlib.c, loslib.c, lstrlib.c, ltablib.c)
+<pre><code>luaA_ - lapi.c
+luaB_ - lbaselib.c
+luaC_ - lgc.c
+luaD_ - ldo.c
+luaE_ - lstate.c
+luaF_ - lfunc.c
+luaG_ - ldebug.c
+luaH_ - ltable.c
+luaI_ - lauxlib.c
+luaK_ - lcode.c
+luaL_ - llauxlib.c/h linit.c
+luaM_ - lmem.c
+luaO_ - lobject.c
+luaP_ - lopcodes.c
+luaS_ - lstring.c
+luaT_ - ltm.c
+luaU_ - lundump.c
+luaV_ - lvm.c
+luaX_ - llex.c
+luaY_ - lparser.c
+luaZ_ - lzio.c
+lua_  - lapi.c/h + luaconfig.h, ldebug.c
+luai_ - luaconf.h
+luaopen_ - luaconf.h + libraries (lbaselib.c, ldblib.c, liolib.c, lmathlib.c, loadlib.c, loslib.c, lstrlib.c, ltablib.c)
 </code></pre><h3 id="参考："><a href="#参考：" class="headerlink" title="参考："></a>参考：</h3><ol>
 <li><a href="https://github.com/zgpxgame/lua-5.1.5/wiki/" target="_blank" rel="noopener">Lua源码阅读笔记</a></li>
 <li>Lua有关的<a href="http://www.lua.org/docs.html" target="_blank" rel="noopener">论文</a>和<a href="http://pgl.yoyo.org/lua/docs/luaarchitecture.doc" target="_blank" rel="noopener">The Lua Architecture</a>从各个方面论述了Lua的实现</li>

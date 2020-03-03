@@ -159,8 +159,7 @@
 <h4 id="简单I-O模型"><a href="#简单I-O模型" class="headerlink" title="简单I/O模型"></a>简单I/O模型</h4><p>简单模型虚拟了一个当前输入流和一个当前输出流。函数<code>io.input</code>和函数<code>io.output</code>可以用于改变当前的输入输出流，调用<code>io.input</code>会以只读模式打开指定文件，并将文件设置为当前输入流。之后所有的输入都将来自该文件，除非再次调用<code>io.input</code>。</p>
 <h5 id="io-write"><a href="#io-write" class="headerlink" title="io.write"></a>io.write</h5><p>函数<code>io.write</code>可以读取任意数量的字符串并将其写入当前输入流。由于调用函数时可以使用多个参数，因此应尽量避免使用连接操作符以节省资源。</p>
 <p>作为原则，应该只在”用后即弃”的代码中使用函数print，当需要完全控制输出时，应该使用函数io.write。</p>
-<h5 id="io-read"><a href="#io-read" class="headerlink" title="io.read"></a>io.read</h5><div class="table-container">
-<table>
+<h5 id="io-read"><a href="#io-read" class="headerlink" title="io.read"></a>io.read</h5><table>
 <thead>
 <tr>
 <th>参数</th>
@@ -190,7 +189,6 @@
 </tr>
 </tbody>
 </table>
-</div>
 <p>调用<code>io.read(&quot;a&quot;)</code>可从当前位置开始读取当前输入文件的全部内容，如果当前处于文件末尾或者文件为空，那么该函数返回一个空字符串。</p>
 <h4 id="完整I-O模型"><a href="#完整I-O模型" class="headerlink" title="完整I/O模型"></a>完整I/O模型</h4><p>可以使用函数<code>io.open</code>来打开一个文件，这个函数有两个参数，一个参数是待打开文件的文件名，另一个参数是一个模式字符串，包括表示只读的r，表示只写的w，表示追加的a，以及一个可选的表示打开二进制文件的b。</p>
 <h3 id="补充知识"><a href="#补充知识" class="headerlink" title="补充知识"></a>补充知识</h3><h4 id="局部变量和代码块"><a href="#局部变量和代码块" class="headerlink" title="局部变量和代码块"></a>局部变量和代码块</h4><p>Lua中的变量在默认情况下是全局变量，所有的局部变量在使用前必须声明。</p>
