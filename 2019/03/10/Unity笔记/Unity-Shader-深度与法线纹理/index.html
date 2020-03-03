@@ -1,0 +1,734 @@
+<!DOCTYPE html>
+
+
+
+  
+
+
+<html class="theme-next muse use-motion" lang="zh-CN">
+<head>
+  <meta charset="UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+<meta name="theme-color" content="#222">
+
+
+
+
+
+
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+  <link href="/lib/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css" />
+
+
+
+
+  
+  
+  
+  
+
+  
+    
+    
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+    
+    
+    <link href="//fonts.googleapis.com/css?family=Lato:300,300italic,400,400italic,700,700italic&subset=latin,latin-ext" rel="stylesheet" type="text/css">
+  
+
+
+
+
+
+
+<link href="/lib/font-awesome/css/font-awesome.min.css?v=4.6.2" rel="stylesheet" type="text/css" />
+
+<link href="/css/main.css?v=5.1.2" rel="stylesheet" type="text/css" />
+
+
+  <meta name="keywords" content="Unity,Shader," />
+
+
+
+
+
+
+
+
+  <link rel="shortcut icon" type="image/x-icon" href="/favicon.ico?v=5.1.2" />
+
+
+
+
+
+
+<meta name="description" content="Unity Shader 深度与法线纹理：运动模糊，全局雾效和边缘检测">
+<meta name="keywords" content="Unity,Shader">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Unity Shader 深度与法线纹理">
+<meta property="og:url" content="https:&#x2F;&#x2F;bitzhangmo.github.io&#x2F;2019&#x2F;03&#x2F;10&#x2F;Unity%E7%AC%94%E8%AE%B0&#x2F;Unity-Shader-%E6%B7%B1%E5%BA%A6%E4%B8%8E%E6%B3%95%E7%BA%BF%E7%BA%B9%E7%90%86&#x2F;index.html">
+<meta property="og:site_name" content="zhangMo Blog">
+<meta property="og:description" content="Unity Shader 深度与法线纹理：运动模糊，全局雾效和边缘检测">
+<meta property="og:locale" content="zh-CN">
+<meta property="og:image" content="https:&#x2F;&#x2F;learnopengl-cn.github.io&#x2F;img&#x2F;05&#x2F;04&#x2F;normal_mapping_normal_map.png">
+<meta property="og:updated_time" content="2019-04-09T11:14:06.263Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="https:&#x2F;&#x2F;learnopengl-cn.github.io&#x2F;img&#x2F;05&#x2F;04&#x2F;normal_mapping_normal_map.png">
+
+
+
+<script type="text/javascript" id="hexo.configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/',
+    scheme: 'Muse',
+    sidebar: {"position":"left","display":"post","offset":12,"offset_float":12,"b2t":false,"scrollpercent":false,"onmobile":false},
+    fancybox: true,
+    tabs: true,
+    motion: true,
+    duoshuo: {
+      userId: '0',
+      author: 'Author'
+    },
+    algolia: {
+      applicationID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    }
+  };
+</script>
+
+
+
+  <link rel="canonical" href="https://bitzhangmo.github.io/2019/03/10/Unity笔记/Unity-Shader-深度与法线纹理/"/>
+
+
+
+
+
+  <title>Unity Shader 深度与法线纹理 | zhangMo Blog</title>
+  
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="zh-CN">
+
+  
+  
+    
+  
+
+  <div class="container sidebar-position-left page-post-detail ">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-wrapper">
+  <div class="site-meta ">
+    
+
+    <div class="custom-logo-site-title">
+      <a href="/"  class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">zhangMo Blog</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+      
+        <p class="site-subtitle"></p>
+      
+  </div>
+
+  <div class="site-nav-toggle">
+    <button>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+    </button>
+  </div>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu">
+      
+        
+        <li class="menu-item menu-item-home">
+          <a href="/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-home"></i> <br />
+            
+            Home
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/archives/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-archive"></i> <br />
+            
+            Archives
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-tags">
+          <a href="/tags/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-tags"></i> <br />
+            
+            Tags
+          </a>
+        </li>
+      
+
+      
+    </ul>
+  
+
+  
+</nav>
+
+
+
+ </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="https://bitzhangmo.github.io/2019/03/10/Unity%E7%AC%94%E8%AE%B0/Unity-Shader-%E6%B7%B1%E5%BA%A6%E4%B8%8E%E6%B3%95%E7%BA%BF%E7%BA%B9%E7%90%86/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="zhangMo">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/avatar.gif">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="zhangMo Blog">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">Unity Shader 深度与法线纹理</h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">Posted on</span>
+              
+              <time title="Post created" itemprop="dateCreated datePublished" datetime="2019-03-10T16:48:46+08:00">
+                2019-03-10
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+            <span class="post-category" >
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">In</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/Unity/" itemprop="url" rel="index">
+                    <span itemprop="name">Unity</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <p>Unity Shader 深度与法线纹理：运动模糊，全局雾效和边缘检测</p>
+<a id="more"></a>
+
+<h3 id="获取深度和法线纹理"><a href="#获取深度和法线纹理" class="headerlink" title="获取深度和法线纹理"></a>获取深度和法线纹理</h3><h4 id="原理："><a href="#原理：" class="headerlink" title="原理："></a>原理：</h4><p><strong>法线纹理实际上是一张渲染纹理</strong>，只不过里面存储的像素值不是颜色值，而是一个高精度的<strong>深度值</strong>。由于被储存在一张纹理中，深度纹理里的深度值范围是[0,1]，而且通常是非线性分布的。</p>
+<p>这些深度值来自于<strong>顶点变换后</strong>得到的<strong>归一化的设备坐标</strong>（Normalized Device Coordinates，NDC）。</p>
+<p>一个模型要绘制到屏幕上，需要把它的顶点从模型空间变换到齐次裁剪空间下，这是通过在顶点着色器中乘以MVP变换矩阵得到的；在变换的最后一步，我们需要使用一个投影矩阵来变换顶点。如果是透视投影类型的摄像机，这个投影矩阵就是非线性的。</p>
+<p>在得到NDC后，深度纹理中的像素值可以很方便的计算得到了，这些深度值对应了NDC中顶点坐标的z分量的值，由于NDC中z分量的范围在[-1,1]，为了使其可以存到深度纹理中，要进行一次映射：d = 0.5*z(ndc) + 0.5</p>
+<blockquote>
+<p>由于法线向量是个几何工具，而纹理通常只用于储存颜色信息，用纹理储存法线向量不是非常直接。如果你想一想，就会知道纹理中的颜色向量用r、g、b元素代表一个3D向量。类似的我们也可以将法线向量的x、y、z元素储存到纹理中，代替颜色的r、g、b元素。法线向量的范围在-1到1之间，所以我们先要将其映射到0到1的范围。</p>
+<p><img src="https://learnopengl-cn.github.io/img/05/04/normal_mapping_normal_map.png" alt=""></p>
+<p>这会是一种偏蓝色调的纹理（你在网上找到的几乎所有法线贴图都是这样的）。这是因为所有法线的指向都偏向z轴（0, 0, 1）这是一种偏蓝的颜色。法线向量从z轴方向也向其他方向轻微偏移，颜色也就发生了轻微变化，这样看起来便有了一种深度。例如，你可以看到在每个砖块的顶部，颜色倾向于偏绿，这是因为砖块的顶部的法线偏向于指向正y轴方向（0, 1, 0），这样它就是绿色的了。</p>
+</blockquote>
+<h4 id="Unity如何得到深度纹理："><a href="#Unity如何得到深度纹理：" class="headerlink" title="Unity如何得到深度纹理："></a>Unity如何得到深度纹理：</h4><p>深度纹理可以直接来自于真正的深度缓存，也可以是由一个单独的Pass渲染而得，这取决于使用的渲染路径与硬件。</p>
+<p>当使用延迟渲染路径时，深度纹理可以访问到，因为延迟渲染会把这些信息渲染到G-buffer中。</p>
+<p>无法直接获取深度缓存时，深度和法线纹理是通过一个单独的Pass渲染而得的：Unity会使用着色器替换技术选择那些渲染类型为Opaque的物体，判断它们使用的渲染队列是否小于等于2500（Background，Geometry和AlphaTest），如果满足条件，就把它渲染到深度和法线纹理中。</p>
+<h4 id="深度纹理的属性："><a href="#深度纹理的属性：" class="headerlink" title="深度纹理的属性："></a>深度纹理的属性：</h4><p>深度纹理的精度通常为24位或16位，这取决于深度缓存的精度。如果生成一张深度+法线纹理，Unity会创建一张与<strong>屏幕分辨率相同、精度为32位的纹理</strong>，其中<strong>观察空间下的法线信息会被编码进纹理的R和G通道，而深度信息会被编码进B和A通道。</strong></p>
+<h4 id="如何获取深度纹理："><a href="#如何获取深度纹理：" class="headerlink" title="如何获取深度纹理："></a>如何获取深度纹理：</h4><p>设置摄像机模式：<code>camera.depthTextureMode = DepthTextureMode.Depth;</code></p>
+<p>如果想获取深度+法线纹理：<code>camera.depthTextureMode = DepthTextureMode.DepthNormals;</code></p>
+<h3 id="使用深度纹理模拟运动模糊："><a href="#使用深度纹理模拟运动模糊：" class="headerlink" title="使用深度纹理模拟运动模糊："></a>使用深度纹理模拟运动模糊：</h3><h3 id="全局雾效："><a href="#全局雾效：" class="headerlink" title="全局雾效："></a>全局雾效：</h3><h3 id="使用深度纹理进行边缘检测："><a href="#使用深度纹理进行边缘检测：" class="headerlink" title="使用深度纹理进行边缘检测："></a>使用深度纹理进行边缘检测：</h3><hr>
+<p>参考：</p>
+<ol>
+<li><a href="https://learnopengl-cn.github.io/05%20Advanced%20Lighting/04%20Normal%20Mapping/" target="_blank" rel="noopener">learnopengl-cn-法线贴图</a></li>
+<li></li>
+</ol>
+
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/Unity/" rel="tag"># Unity</a>
+          
+            <a href="/tags/Shader/" rel="tag"># Shader</a>
+          
+        </div>
+      
+
+      
+      
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2019/03/08/Unity%E7%AC%94%E8%AE%B0/Unity-Shader-%E5%B1%8F%E5%B9%95%E5%90%8E%E5%A4%84%E7%90%86%E6%95%88%E6%9E%9C/" rel="next" title="Unity Shader 屏幕后处理效果">
+                <i class="fa fa-chevron-left"></i> Unity Shader 屏幕后处理效果
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+              <a href="/2019/03/10/Unity%E7%AC%94%E8%AE%B0/Unity-Shader-%E9%9D%9E%E7%9C%9F%E5%AE%9E%E6%84%9F%E6%B8%B2%E6%9F%93/" rel="prev" title="Unity Shader 非真实感渲染">
+                Unity Shader 非真实感渲染 <i class="fa fa-chevron-right"></i>
+              </a>
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+
+    <div class="post-spread">
+      
+    </div>
+  </div>
+
+
+          </div>
+          
+
+
+          
+  <div class="comments" id="comments">
+    
+  </div>
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap" >
+            Table of Contents
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview">
+            Overview
+          </li>
+        </ul>
+      
+
+      <section class="site-overview sidebar-panel">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+          <img class="site-author-image" itemprop="image"
+               src="/images/avatar.gif"
+               alt="zhangMo" />
+          <p class="site-author-name" itemprop="name">zhangMo</p>
+           
+              <p class="site-description motion-element" itemprop="description">T&S&A&G</p>
+          
+        </div>
+        <nav class="site-state motion-element">
+
+          
+            <div class="site-state-item site-state-posts">
+              <a href="/archives/">
+                <span class="site-state-item-count">86</span>
+                <span class="site-state-item-name">posts</span>
+              </a>
+            </div>
+          
+
+          
+            
+            
+            <div class="site-state-item site-state-categories">
+              
+                <span class="site-state-item-count">10</span>
+                <span class="site-state-item-name">categories</span>
+              
+            </div>
+          
+
+          
+            
+            
+            <div class="site-state-item site-state-tags">
+              
+                <span class="site-state-item-count">34</span>
+                <span class="site-state-item-name">tags</span>
+              
+            </div>
+          
+
+        </nav>
+
+        
+
+        <div class="links-of-author motion-element">
+          
+        </div>
+
+        
+        
+
+        
+        
+
+        
+
+
+      </section>
+
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-3"><a class="nav-link" href="#获取深度和法线纹理"><span class="nav-number">1.</span> <span class="nav-text">获取深度和法线纹理</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#原理："><span class="nav-number">1.1.</span> <span class="nav-text">原理：</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#Unity如何得到深度纹理："><span class="nav-number">1.2.</span> <span class="nav-text">Unity如何得到深度纹理：</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#深度纹理的属性："><span class="nav-number">1.3.</span> <span class="nav-text">深度纹理的属性：</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#如何获取深度纹理："><span class="nav-number">1.4.</span> <span class="nav-text">如何获取深度纹理：</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#使用深度纹理模拟运动模糊："><span class="nav-number">2.</span> <span class="nav-text">使用深度纹理模拟运动模糊：</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#全局雾效："><span class="nav-number">3.</span> <span class="nav-text">全局雾效：</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#使用深度纹理进行边缘检测："><span class="nav-number">4.</span> <span class="nav-text">使用深度纹理进行边缘检测：</span></a></li></ol></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
+      
+
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright" >
+  
+  &copy; 
+  <span itemprop="copyrightYear">2020</span>
+  <span class="with-love">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">zhangMo</span>
+</div>
+
+
+<div class="powered-by">
+  Powered by <a class="theme-link" href="https://hexo.io" target="_blank" rel="noopener">Hexo</a>
+</div>
+
+<div class="theme-info">
+  Theme -
+  <a class="theme-link" href="https://github.com/iissnan/hexo-theme-next" target="_blank" rel="noopener">
+    NexT.Muse
+  </a>
+</div>
+
+
+        
+
+        
+      </div>
+    </footer>
+
+    
+      <div class="back-to-top">
+        <i class="fa fa-arrow-up"></i>
+        
+      </div>
+    
+
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  <script type="text/javascript" src="/lib/jquery/index.js?v=2.1.3"></script>
+
+  
+  <script type="text/javascript" src="/lib/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+
+  
+  <script type="text/javascript" src="/lib/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
+
+  
+  <script type="text/javascript" src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+
+  
+  <script type="text/javascript" src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+
+  
+  <script type="text/javascript" src="/lib/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=5.1.2"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=5.1.2"></script>
+
+
+
+  
+  
+
+  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.1.2"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.1.2"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.1.2"></script>
+
+
+
+  
+
+
+  
+
+
+
+
+	
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+</body>
+</html>

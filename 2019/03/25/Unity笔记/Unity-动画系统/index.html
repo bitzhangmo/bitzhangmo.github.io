@@ -1,0 +1,714 @@
+<!DOCTYPE html>
+
+
+
+  
+
+
+<html class="theme-next muse use-motion" lang="zh-CN">
+<head>
+  <meta charset="UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+<meta name="theme-color" content="#222">
+
+
+
+
+
+
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+  <link href="/lib/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css" />
+
+
+
+
+  
+  
+  
+  
+
+  
+    
+    
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+    
+    
+    <link href="//fonts.googleapis.com/css?family=Lato:300,300italic,400,400italic,700,700italic&subset=latin,latin-ext" rel="stylesheet" type="text/css">
+  
+
+
+
+
+
+
+<link href="/lib/font-awesome/css/font-awesome.min.css?v=4.6.2" rel="stylesheet" type="text/css" />
+
+<link href="/css/main.css?v=5.1.2" rel="stylesheet" type="text/css" />
+
+
+  <meta name="keywords" content="Unity," />
+
+
+
+
+
+
+
+
+  <link rel="shortcut icon" type="image/x-icon" href="/favicon.ico?v=5.1.2" />
+
+
+
+
+
+
+<meta name="description" content="Unity中的动画控制系统。">
+<meta name="keywords" content="Unity">
+<meta property="og:type" content="article">
+<meta property="og:title" content="[Unity] 动画系统">
+<meta property="og:url" content="https:&#x2F;&#x2F;bitzhangmo.github.io&#x2F;2019&#x2F;03&#x2F;25&#x2F;Unity%E7%AC%94%E8%AE%B0&#x2F;Unity-%E5%8A%A8%E7%94%BB%E7%B3%BB%E7%BB%9F&#x2F;index.html">
+<meta property="og:site_name" content="zhangMo Blog">
+<meta property="og:description" content="Unity中的动画控制系统。">
+<meta property="og:locale" content="zh-CN">
+<meta property="og:updated_time" content="2019-03-25T01:42:11.871Z">
+<meta name="twitter:card" content="summary">
+
+
+
+<script type="text/javascript" id="hexo.configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/',
+    scheme: 'Muse',
+    sidebar: {"position":"left","display":"post","offset":12,"offset_float":12,"b2t":false,"scrollpercent":false,"onmobile":false},
+    fancybox: true,
+    tabs: true,
+    motion: true,
+    duoshuo: {
+      userId: '0',
+      author: 'Author'
+    },
+    algolia: {
+      applicationID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    }
+  };
+</script>
+
+
+
+  <link rel="canonical" href="https://bitzhangmo.github.io/2019/03/25/Unity笔记/Unity-动画系统/"/>
+
+
+
+
+
+  <title>[Unity] 动画系统 | zhangMo Blog</title>
+  
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="zh-CN">
+
+  
+  
+    
+  
+
+  <div class="container sidebar-position-left page-post-detail ">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-wrapper">
+  <div class="site-meta ">
+    
+
+    <div class="custom-logo-site-title">
+      <a href="/"  class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">zhangMo Blog</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+      
+        <p class="site-subtitle"></p>
+      
+  </div>
+
+  <div class="site-nav-toggle">
+    <button>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+    </button>
+  </div>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu">
+      
+        
+        <li class="menu-item menu-item-home">
+          <a href="/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-home"></i> <br />
+            
+            Home
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/archives/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-archive"></i> <br />
+            
+            Archives
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-tags">
+          <a href="/tags/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-tags"></i> <br />
+            
+            Tags
+          </a>
+        </li>
+      
+
+      
+    </ul>
+  
+
+  
+</nav>
+
+
+
+ </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="https://bitzhangmo.github.io/2019/03/25/Unity%E7%AC%94%E8%AE%B0/Unity-%E5%8A%A8%E7%94%BB%E7%B3%BB%E7%BB%9F/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="zhangMo">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/avatar.gif">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="zhangMo Blog">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">[Unity] 动画系统</h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">Posted on</span>
+              
+              <time title="Post created" itemprop="dateCreated datePublished" datetime="2019-03-25T09:13:31+08:00">
+                2019-03-25
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+            <span class="post-category" >
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">In</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/%E8%AF%BB%E4%B9%A6%E7%AC%94%E8%AE%B0/" itemprop="url" rel="index">
+                    <span itemprop="name">读书笔记</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <p>Unity中的动画控制系统。</p>
+<a id="more"></a>
+
+<h2 id="动画系统"><a href="#动画系统" class="headerlink" title="动画系统"></a>动画系统</h2><p>Unity的动画系统支持引擎内编辑动画，也支持外部导入FBX动画。由于引擎内置的的动画编辑器没有骨骼动画的概念，所以只能编辑每一帧模型的Transform、整体的旋转、缩放和平移。</p>
+<h3 id="模型："><a href="#模型：" class="headerlink" title="模型："></a>模型：</h3><p>Unity显示模型必须给游戏对象提供Mesh Filter和Mesh Renderer组件，前者表示模型需要用的Mesh文件，后者通过材质的贴图和Shader最终将这个模型渲染出来。</p>
+<h4 id="Mesh-Filter："><a href="#Mesh-Filter：" class="headerlink" title="Mesh Filter："></a>Mesh Filter：</h4><h4 id="Mesh-Render："><a href="#Mesh-Render：" class="headerlink" title="Mesh Render："></a>Mesh Render：</h4><h4 id="Prefab："><a href="#Prefab：" class="headerlink" title="Prefab："></a>Prefab：</h4><h3 id="动画编辑器："><a href="#动画编辑器：" class="headerlink" title="动画编辑器："></a>动画编辑器：</h3><p>动画编辑器的原理就是通过时间线来修改组件的信息，比如修改Transform位置信息，修改Renderer组件或者修改颜色信息，控制模型显示隐藏；此外，还可以在时间线上添加动画事件，编辑后的动画需要配合Animator组件使用。</p>
+<h3 id="导入类动画："><a href="#导入类动画：" class="headerlink" title="导入类动画："></a>导入类动画：</h3><h4 id="人形重定向动画："><a href="#人形重定向动画：" class="headerlink" title="人形重定向动画："></a>人形重定向动画：</h4><p>人形重定向动画就是多个身形不同的人物模型也可以共用一份骨骼动画，此技术应用在游戏中会大量减少内存和包体大小。<strong>重定向动画的原理就是将不同身形的骨骼信息套入相同的动画中来运算</strong>。</p>
+<h4 id="通用动画："><a href="#通用动画：" class="headerlink" title="通用动画："></a>通用动画：</h4><h4 id="老版动画："><a href="#老版动画：" class="headerlink" title="老版动画："></a>老版动画：</h4><h4 id="导入类动画事件："><a href="#导入类动画事件：" class="headerlink" title="导入类动画事件："></a>导入类动画事件：</h4><h3 id="动画控制器："><a href="#动画控制器：" class="headerlink" title="动画控制器："></a>动画控制器：</h3><p>动画控制器的原理就是状态机：</p>
+
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/Unity/" rel="tag"># Unity</a>
+          
+        </div>
+      
+
+      
+      
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2019/03/25/Unity%E7%AC%94%E8%AE%B0/Unity-UI%E6%A1%86%E6%9E%B6%E5%AD%A6%E4%B9%A0/" rel="next" title="[Unity] UI框架学习">
+                <i class="fa fa-chevron-left"></i> [Unity] UI框架学习
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+              <a href="/2019/03/25/Unity%E7%AC%94%E8%AE%B0/%E8%BD%AC-%E6%B5%85%E8%B0%88Unity3D%E9%AA%A8%E9%AA%BC%E5%8A%A8%E7%94%BB/" rel="prev" title="[转] 浅谈Unity3D骨骼动画">
+                [转] 浅谈Unity3D骨骼动画 <i class="fa fa-chevron-right"></i>
+              </a>
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+
+    <div class="post-spread">
+      
+    </div>
+  </div>
+
+
+          </div>
+          
+
+
+          
+  <div class="comments" id="comments">
+    
+  </div>
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap" >
+            Table of Contents
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview">
+            Overview
+          </li>
+        </ul>
+      
+
+      <section class="site-overview sidebar-panel">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+          <img class="site-author-image" itemprop="image"
+               src="/images/avatar.gif"
+               alt="zhangMo" />
+          <p class="site-author-name" itemprop="name">zhangMo</p>
+           
+              <p class="site-description motion-element" itemprop="description">T&S&A&G</p>
+          
+        </div>
+        <nav class="site-state motion-element">
+
+          
+            <div class="site-state-item site-state-posts">
+              <a href="/archives/">
+                <span class="site-state-item-count">86</span>
+                <span class="site-state-item-name">posts</span>
+              </a>
+            </div>
+          
+
+          
+            
+            
+            <div class="site-state-item site-state-categories">
+              
+                <span class="site-state-item-count">10</span>
+                <span class="site-state-item-name">categories</span>
+              
+            </div>
+          
+
+          
+            
+            
+            <div class="site-state-item site-state-tags">
+              
+                <span class="site-state-item-count">34</span>
+                <span class="site-state-item-name">tags</span>
+              
+            </div>
+          
+
+        </nav>
+
+        
+
+        <div class="links-of-author motion-element">
+          
+        </div>
+
+        
+        
+
+        
+        
+
+        
+
+
+      </section>
+
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#动画系统"><span class="nav-number">1.</span> <span class="nav-text">动画系统</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#模型："><span class="nav-number">1.1.</span> <span class="nav-text">模型：</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#Mesh-Filter："><span class="nav-number">1.1.1.</span> <span class="nav-text">Mesh Filter：</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#Mesh-Render："><span class="nav-number">1.1.2.</span> <span class="nav-text">Mesh Render：</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#Prefab："><span class="nav-number">1.1.3.</span> <span class="nav-text">Prefab：</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#动画编辑器："><span class="nav-number">1.2.</span> <span class="nav-text">动画编辑器：</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#导入类动画："><span class="nav-number">1.3.</span> <span class="nav-text">导入类动画：</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#人形重定向动画："><span class="nav-number">1.3.1.</span> <span class="nav-text">人形重定向动画：</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#通用动画："><span class="nav-number">1.3.2.</span> <span class="nav-text">通用动画：</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#老版动画："><span class="nav-number">1.3.3.</span> <span class="nav-text">老版动画：</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#导入类动画事件："><span class="nav-number">1.3.4.</span> <span class="nav-text">导入类动画事件：</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#动画控制器："><span class="nav-number">1.4.</span> <span class="nav-text">动画控制器：</span></a></li></ol></li></ol></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
+      
+
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright" >
+  
+  &copy; 
+  <span itemprop="copyrightYear">2020</span>
+  <span class="with-love">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">zhangMo</span>
+</div>
+
+
+<div class="powered-by">
+  Powered by <a class="theme-link" href="https://hexo.io" target="_blank" rel="noopener">Hexo</a>
+</div>
+
+<div class="theme-info">
+  Theme -
+  <a class="theme-link" href="https://github.com/iissnan/hexo-theme-next" target="_blank" rel="noopener">
+    NexT.Muse
+  </a>
+</div>
+
+
+        
+
+        
+      </div>
+    </footer>
+
+    
+      <div class="back-to-top">
+        <i class="fa fa-arrow-up"></i>
+        
+      </div>
+    
+
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  <script type="text/javascript" src="/lib/jquery/index.js?v=2.1.3"></script>
+
+  
+  <script type="text/javascript" src="/lib/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+
+  
+  <script type="text/javascript" src="/lib/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
+
+  
+  <script type="text/javascript" src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+
+  
+  <script type="text/javascript" src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+
+  
+  <script type="text/javascript" src="/lib/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=5.1.2"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=5.1.2"></script>
+
+
+
+  
+  
+
+  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.1.2"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.1.2"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.1.2"></script>
+
+
+
+  
+
+
+  
+
+
+
+
+	
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+</body>
+</html>

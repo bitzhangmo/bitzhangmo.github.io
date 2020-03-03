@@ -1,0 +1,745 @@
+<!DOCTYPE html>
+
+
+
+  
+
+
+<html class="theme-next muse use-motion" lang="zh-CN">
+<head>
+  <meta charset="UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+<meta name="theme-color" content="#222">
+
+
+
+
+
+
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+  <link href="/lib/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css" />
+
+
+
+
+  
+  
+  
+  
+
+  
+    
+    
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+    
+    
+    <link href="//fonts.googleapis.com/css?family=Lato:300,300italic,400,400italic,700,700italic&subset=latin,latin-ext" rel="stylesheet" type="text/css">
+  
+
+
+
+
+
+
+<link href="/lib/font-awesome/css/font-awesome.min.css?v=4.6.2" rel="stylesheet" type="text/css" />
+
+<link href="/css/main.css?v=5.1.2" rel="stylesheet" type="text/css" />
+
+
+  <meta name="keywords" content="Lua," />
+
+
+
+
+
+
+
+
+  <link rel="shortcut icon" type="image/x-icon" href="/favicon.ico?v=5.1.2" />
+
+
+
+
+
+
+<meta name="description" content="关于Lua中的迭代器：ipairs与pairs。">
+<meta name="keywords" content="Lua">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Lua迭代器和范型for">
+<meta property="og:url" content="https:&#x2F;&#x2F;bitzhangmo.github.io&#x2F;2019&#x2F;07&#x2F;05&#x2F;Lua&#x2F;Lua%E8%BF%AD%E4%BB%A3%E5%99%A8%E5%92%8C%E8%8C%83%E5%9E%8Bfor&#x2F;index.html">
+<meta property="og:site_name" content="zhangMo Blog">
+<meta property="og:description" content="关于Lua中的迭代器：ipairs与pairs。">
+<meta property="og:locale" content="zh-CN">
+<meta property="og:updated_time" content="2019-08-07T03:32:07.253Z">
+<meta name="twitter:card" content="summary">
+
+
+
+<script type="text/javascript" id="hexo.configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/',
+    scheme: 'Muse',
+    sidebar: {"position":"left","display":"post","offset":12,"offset_float":12,"b2t":false,"scrollpercent":false,"onmobile":false},
+    fancybox: true,
+    tabs: true,
+    motion: true,
+    duoshuo: {
+      userId: '0',
+      author: 'Author'
+    },
+    algolia: {
+      applicationID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    }
+  };
+</script>
+
+
+
+  <link rel="canonical" href="https://bitzhangmo.github.io/2019/07/05/Lua/Lua迭代器和范型for/"/>
+
+
+
+
+
+  <title>Lua迭代器和范型for | zhangMo Blog</title>
+  
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="zh-CN">
+
+  
+  
+    
+  
+
+  <div class="container sidebar-position-left page-post-detail ">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-wrapper">
+  <div class="site-meta ">
+    
+
+    <div class="custom-logo-site-title">
+      <a href="/"  class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">zhangMo Blog</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+      
+        <p class="site-subtitle"></p>
+      
+  </div>
+
+  <div class="site-nav-toggle">
+    <button>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+    </button>
+  </div>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu">
+      
+        
+        <li class="menu-item menu-item-home">
+          <a href="/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-home"></i> <br />
+            
+            Home
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/archives/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-archive"></i> <br />
+            
+            Archives
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-tags">
+          <a href="/tags/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-tags"></i> <br />
+            
+            Tags
+          </a>
+        </li>
+      
+
+      
+    </ul>
+  
+
+  
+</nav>
+
+
+
+ </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="https://bitzhangmo.github.io/2019/07/05/Lua/Lua%E8%BF%AD%E4%BB%A3%E5%99%A8%E5%92%8C%E8%8C%83%E5%9E%8Bfor/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="zhangMo">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/avatar.gif">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="zhangMo Blog">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">Lua迭代器和范型for</h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">Posted on</span>
+              
+              <time title="Post created" itemprop="dateCreated datePublished" datetime="2019-07-05T15:38:57+08:00">
+                2019-07-05
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+            <span class="post-category" >
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">In</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/Lua/" itemprop="url" rel="index">
+                    <span itemprop="name">Lua</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <p>关于Lua中的迭代器：ipairs与pairs。</p>
+<a id="more"></a>
+
+<h3 id="迭代器和泛型for："><a href="#迭代器和泛型for：" class="headerlink" title="迭代器和泛型for："></a>迭代器和泛型for：</h3><h4 id="迭代器和闭包："><a href="#迭代器和闭包：" class="headerlink" title="迭代器和闭包："></a>迭代器和闭包：</h4><p>所有的迭代器都需要在连续的调用之间保存一些状态，这样才能知道当前迭代所处的位置及如何从当前位置步进到下一位置。对于我们自己的迭代器而言，闭包为保存状态提供了一种良好的机制。<strong>一个闭包就是一个可以访问其自身的环境中一个或多个局部变量的函数</strong>。这些变量将连续调用过程中的值并将其保存在闭包中，从而使得闭包能够记住迭代所处的位置。当然，要创建一个新的闭包，我们还需要创建非局部变量。因此，一个闭包结构通常涉及两个函数：闭包本身和一个用于创建该闭包及其封装变量的工厂。</p>
+<h4 id="泛型for："><a href="#泛型for：" class="headerlink" title="泛型for："></a>泛型for：</h4><p>泛型for在循环过程中在其内部保存了迭代函数，泛型for保存了三个值：一个迭代函数、一个不可变状态和一个控制变量。</p>
+<p>语法如下：</p>
+<figure class="highlight lua"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">for</span> var-list <span class="keyword">in</span> <span class="built_in">exp</span>-list <span class="keyword">do</span></span><br><span class="line">	body</span><br><span class="line"><span class="keyword">end</span></span><br></pre></td></tr></table></figure>
+
+<p>其中，var-list是由一个或多个变量名组成的列表，以逗号分隔；exp-list是一个或多个表达式组成的列表，同样以逗号分隔。通常，表达式列表只有一个元素，即一句对迭代器工厂的调用。</p>
+<figure class="highlight lua"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">for</span> k,v <span class="keyword">in</span> <span class="built_in">pairs</span>(t) <span class="keyword">do</span> <span class="built_in">print</span>(k,v) <span class="keyword">end</span></span><br></pre></td></tr></table></figure>
+
+<p>我们把变量列表的第一个变量称为控制变量，其值在循环过程中永远不会为nil，因为当其值为nil时循环就结束了。</p>
+<p>for做的第一件事情是对in后面的表达式求值。这些表达式应该返回三个值供for保存：<strong>迭代函数、不可变状态和控制变量的初始值。</strong>类似于多重赋值，只有最后一个白哦大事能够产生不止一个值；表达式列表的结果只会保留三个，多余的值会被丢弃，不足三个则以nil补齐。</p>
+<p>在上述的初始化步骤完成后，for使用不可变状态和控制变量为参数来调用迭代函数，从for代码结构的立足点来看，不可变状态根本没有意义，for只是把从初始化步骤得到的状态值传递给所有迭代函数，然后，for将迭代函数的返回值赋给变量列表中声明的变量。如果第一个返回值为nil，那么循环终止；否则，for执行它的循环体并再次调用迭代函数，再不断的重复这个过程。</p>
+<p>两种语法等价：</p>
+<figure class="highlight lua"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">for</span> var_1,...,var_n <span class="keyword">in</span> explist <span class="keyword">do</span> block <span class="keyword">end</span></span><br></pre></td></tr></table></figure>
+
+<p>等价于：</p>
+<figure class="highlight lua"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">do</span></span><br><span class="line">	<span class="keyword">local</span> _f,_s,_var = explist</span><br><span class="line">	<span class="keyword">while</span> <span class="literal">true</span> <span class="keyword">do</span> </span><br><span class="line">		<span class="keyword">local</span> var_1,...,var_n = _f(_s,_var)</span><br><span class="line">		_var = var_1</span><br><span class="line">		<span class="keyword">if</span> _var == <span class="literal">nil</span> <span class="keyword">then</span> <span class="keyword">break</span> <span class="keyword">end</span></span><br><span class="line">		block</span><br><span class="line">	<span class="keyword">end</span></span><br><span class="line"><span class="keyword">end</span></span><br></pre></td></tr></table></figure>
+
+<p>假设迭代函数是f，不可变状态为s，控制变量的初始值为a0，那么在循环中控制变量的值依次为a1=f(s,a0),a2=f(s,a1)，直到ai为nil。如果for还有其他变量，那么这些变量只是简单的在每次调用f后得到额外的返回值。</p>
+<h4 id="无状态迭代器："><a href="#无状态迭代器：" class="headerlink" title="无状态迭代器："></a>无状态迭代器：</h4><p>无状态迭代器就是一种自身不保存任何状态的迭代器，因此，可以在多个循环中使用同一个无状态迭代器，从而避免创建新闭包的开销。</p>
+<p>for循环会以不可变状态和控制变量为参数调用迭代函数，一个无状态迭代器之需要这两个值来为迭代生成下一个元素：</p>
+<figure class="highlight lua"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">a = &#123;<span class="string">"One"</span>,<span class="string">"Two"</span>,<span class="string">"Three"</span>&#125;</span><br><span class="line"><span class="keyword">for</span> i,v <span class="keyword">in</span> <span class="built_in">ipairs</span>(a) <span class="keyword">do</span></span><br><span class="line">	<span class="built_in">print</span>(i,v)</span><br><span class="line"><span class="keyword">end</span></span><br></pre></td></tr></table></figure>
+
+<p>ipairs和迭代器都非常简单：</p>
+<figure class="highlight lua"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">local</span> <span class="function"><span class="keyword">function</span> <span class="title">iter</span><span class="params">(t,i)</span></span></span><br><span class="line">	i = i + <span class="number">1</span></span><br><span class="line">	<span class="keyword">local</span> v = t[i]</span><br><span class="line">	<span class="keyword">if</span> v <span class="keyword">then</span></span><br><span class="line">		<span class="keyword">return</span> i,v</span><br><span class="line">	<span class="keyword">end</span></span><br><span class="line"><span class="keyword">end</span></span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">ipairs</span><span class="params">(t)</span></span></span><br><span class="line">	<span class="keyword">return</span> iter,t,<span class="number">0</span></span><br><span class="line"><span class="keyword">end</span></span><br></pre></td></tr></table></figure>
+
+<p>当调用for循环中的ipairs(t)时，ipairs(t)会返回三个值，即迭代函数iter，不可变状态表t和控制变量的初始值0。</p>
+<p>然后Lua语言调用iter(t,0)，得到1，t[1]（除非t[1]已经变成了nil）。在第二次迭代中，Lua语言调用iter(t,1)，得到2，t[2]，依次类推，直至得到第一个为nil的元素。</p>
+<p>函数pairs和函数ipairs类似，也用于遍历一个表中的所有元素，不同的是，函数pairs的迭代函数是Lua语言中的一个基本函数next：</p>
+<figure class="highlight lua"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">pairs</span><span class="params">(t)</span></span></span><br><span class="line">	<span class="keyword">return</span> <span class="built_in">next</span>,t,<span class="literal">nil</span></span><br><span class="line"><span class="keyword">end</span></span><br></pre></td></tr></table></figure>
+
+<p>在调用next(t,k)时，k是表t的一个键，该函数会以随机次序返回表中的下一个键以及k对应的值，调用next(t,nil)时，返回表中的第一个键值对。当所有的元素遍历完时，函数next返回nil。</p>
+<p>区别：</p>
+<ul>
+<li>pairs：用于迭代table，可以遍历表中所有的key，可以返回nil</li>
+<li>ipairs: 迭代数组，不能返回 nil,如果遇到 nil 则退出</li>
+</ul>
+
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/Lua/" rel="tag"># Lua</a>
+          
+        </div>
+      
+
+      
+      
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2019/07/04/Lua/Lua%E6%A8%A1%E5%9D%97%E4%B8%8E%E5%8C%85/" rel="next" title="Lua模块与包">
+                <i class="fa fa-chevron-left"></i> Lua模块与包
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+              <a href="/2019/07/23/Lua/Lua%E4%B8%AD%E7%9A%84%E6%B7%B1%E6%8B%B7%E8%B4%9D%E4%B8%8E%E6%B5%85%E6%8B%B7%E8%B4%9D/" rel="prev" title="Lua中的深拷贝与浅拷贝">
+                Lua中的深拷贝与浅拷贝 <i class="fa fa-chevron-right"></i>
+              </a>
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+
+    <div class="post-spread">
+      
+    </div>
+  </div>
+
+
+          </div>
+          
+
+
+          
+  <div class="comments" id="comments">
+    
+  </div>
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap" >
+            Table of Contents
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview">
+            Overview
+          </li>
+        </ul>
+      
+
+      <section class="site-overview sidebar-panel">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+          <img class="site-author-image" itemprop="image"
+               src="/images/avatar.gif"
+               alt="zhangMo" />
+          <p class="site-author-name" itemprop="name">zhangMo</p>
+           
+              <p class="site-description motion-element" itemprop="description">T&S&A&G</p>
+          
+        </div>
+        <nav class="site-state motion-element">
+
+          
+            <div class="site-state-item site-state-posts">
+              <a href="/archives/">
+                <span class="site-state-item-count">86</span>
+                <span class="site-state-item-name">posts</span>
+              </a>
+            </div>
+          
+
+          
+            
+            
+            <div class="site-state-item site-state-categories">
+              
+                <span class="site-state-item-count">10</span>
+                <span class="site-state-item-name">categories</span>
+              
+            </div>
+          
+
+          
+            
+            
+            <div class="site-state-item site-state-tags">
+              
+                <span class="site-state-item-count">34</span>
+                <span class="site-state-item-name">tags</span>
+              
+            </div>
+          
+
+        </nav>
+
+        
+
+        <div class="links-of-author motion-element">
+          
+        </div>
+
+        
+        
+
+        
+        
+
+        
+
+
+      </section>
+
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-3"><a class="nav-link" href="#迭代器和泛型for："><span class="nav-number">1.</span> <span class="nav-text">迭代器和泛型for：</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#迭代器和闭包："><span class="nav-number">1.1.</span> <span class="nav-text">迭代器和闭包：</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#泛型for："><span class="nav-number">1.2.</span> <span class="nav-text">泛型for：</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#无状态迭代器："><span class="nav-number">1.3.</span> <span class="nav-text">无状态迭代器：</span></a></li></ol></li></ol></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
+      
+
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright" >
+  
+  &copy; 
+  <span itemprop="copyrightYear">2020</span>
+  <span class="with-love">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">zhangMo</span>
+</div>
+
+
+<div class="powered-by">
+  Powered by <a class="theme-link" href="https://hexo.io" target="_blank" rel="noopener">Hexo</a>
+</div>
+
+<div class="theme-info">
+  Theme -
+  <a class="theme-link" href="https://github.com/iissnan/hexo-theme-next" target="_blank" rel="noopener">
+    NexT.Muse
+  </a>
+</div>
+
+
+        
+
+        
+      </div>
+    </footer>
+
+    
+      <div class="back-to-top">
+        <i class="fa fa-arrow-up"></i>
+        
+      </div>
+    
+
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  <script type="text/javascript" src="/lib/jquery/index.js?v=2.1.3"></script>
+
+  
+  <script type="text/javascript" src="/lib/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+
+  
+  <script type="text/javascript" src="/lib/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
+
+  
+  <script type="text/javascript" src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+
+  
+  <script type="text/javascript" src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+
+  
+  <script type="text/javascript" src="/lib/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=5.1.2"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=5.1.2"></script>
+
+
+
+  
+  
+
+  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.1.2"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.1.2"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.1.2"></script>
+
+
+
+  
+
+
+  
+
+
+
+
+	
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+</body>
+</html>

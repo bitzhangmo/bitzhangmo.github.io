@@ -1,0 +1,804 @@
+<!DOCTYPE html>
+
+
+
+  
+
+
+<html class="theme-next muse use-motion" lang="zh-CN">
+<head>
+  <meta charset="UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+<meta name="theme-color" content="#222">
+
+
+
+
+
+
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+  <link href="/lib/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css" />
+
+
+
+
+  
+  
+  
+  
+
+  
+    
+    
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+    
+    
+    <link href="//fonts.googleapis.com/css?family=Lato:300,300italic,400,400italic,700,700italic&subset=latin,latin-ext" rel="stylesheet" type="text/css">
+  
+
+
+
+
+
+
+<link href="/lib/font-awesome/css/font-awesome.min.css?v=4.6.2" rel="stylesheet" type="text/css" />
+
+<link href="/css/main.css?v=5.1.2" rel="stylesheet" type="text/css" />
+
+
+  <meta name="keywords" content="Unity,计算机网络,面试," />
+
+
+
+
+
+
+
+
+  <link rel="shortcut icon" type="image/x-icon" href="/favicon.ico?v=5.1.2" />
+
+
+
+
+
+
+<meta name="description" content="面试相关问题汇总">
+<meta name="keywords" content="Unity,计算机网络,面试">
+<meta property="og:type" content="article">
+<meta property="og:title" content="面试相关问题汇总">
+<meta property="og:url" content="https:&#x2F;&#x2F;bitzhangmo.github.io&#x2F;2019&#x2F;03&#x2F;11&#x2F;%E9%9A%8F%E7%AC%94&#x2F;%E9%9D%A2%E8%AF%95%E7%9B%B8%E5%85%B3%E9%97%AE%E9%A2%98%E6%B1%87%E6%80%BB&#x2F;index.html">
+<meta property="og:site_name" content="zhangMo Blog">
+<meta property="og:description" content="面试相关问题汇总">
+<meta property="og:locale" content="zh-CN">
+<meta property="og:updated_time" content="2019-04-10T14:30:14.881Z">
+<meta name="twitter:card" content="summary">
+
+
+
+<script type="text/javascript" id="hexo.configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/',
+    scheme: 'Muse',
+    sidebar: {"position":"left","display":"post","offset":12,"offset_float":12,"b2t":false,"scrollpercent":false,"onmobile":false},
+    fancybox: true,
+    tabs: true,
+    motion: true,
+    duoshuo: {
+      userId: '0',
+      author: 'Author'
+    },
+    algolia: {
+      applicationID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    }
+  };
+</script>
+
+
+
+  <link rel="canonical" href="https://bitzhangmo.github.io/2019/03/11/随笔/面试相关问题汇总/"/>
+
+
+
+
+
+  <title>面试相关问题汇总 | zhangMo Blog</title>
+  
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="zh-CN">
+
+  
+  
+    
+  
+
+  <div class="container sidebar-position-left page-post-detail ">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-wrapper">
+  <div class="site-meta ">
+    
+
+    <div class="custom-logo-site-title">
+      <a href="/"  class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">zhangMo Blog</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+      
+        <p class="site-subtitle"></p>
+      
+  </div>
+
+  <div class="site-nav-toggle">
+    <button>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+    </button>
+  </div>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu">
+      
+        
+        <li class="menu-item menu-item-home">
+          <a href="/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-home"></i> <br />
+            
+            Home
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/archives/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-archive"></i> <br />
+            
+            Archives
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-tags">
+          <a href="/tags/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-tags"></i> <br />
+            
+            Tags
+          </a>
+        </li>
+      
+
+      
+    </ul>
+  
+
+  
+</nav>
+
+
+
+ </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="https://bitzhangmo.github.io/2019/03/11/%E9%9A%8F%E7%AC%94/%E9%9D%A2%E8%AF%95%E7%9B%B8%E5%85%B3%E9%97%AE%E9%A2%98%E6%B1%87%E6%80%BB/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="zhangMo">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/avatar.gif">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="zhangMo Blog">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">面试相关问题汇总</h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">Posted on</span>
+              
+              <time title="Post created" itemprop="dateCreated datePublished" datetime="2019-03-11T22:11:47+08:00">
+                2019-03-11
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+            <span class="post-category" >
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">In</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/%E8%AF%BB%E4%B9%A6%E7%AC%94%E8%AE%B0/" itemprop="url" rel="index">
+                    <span itemprop="name">读书笔记</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <p>面试相关问题汇总</p>
+<a id="more"></a>
+
+<h2 id="面经以及相关问题解释："><a href="#面经以及相关问题解释：" class="headerlink" title="面经以及相关问题解释："></a>面经以及相关问题解释：</h2><h3 id="Unity的垃圾回收机制："><a href="#Unity的垃圾回收机制：" class="headerlink" title="Unity的垃圾回收机制："></a>Unity的垃圾回收机制：</h3><p>在最基本的层面上，Unity中的自动内存管理工作方式如下：</p>
+<ul>
+<li>Unity可以访问两个内存池：<strong>堆栈</strong>和<strong>堆</strong>（也称为<strong>托管堆</strong>。堆栈用于短期存储小块数据，堆用于长期存储和更大的数据。</li>
+<li>创建变量时，Unity会从堆栈或堆中请求一块内存。</li>
+<li>只要变量<a href="https://unity3d.com/learn/tutorials/topics/scripting/scope-and-access-modifiers" target="_blank" rel="noopener">在范围内</a>（仍然可以通过我们的代码访问），分配给它的内存仍然在使用中。我们说已经<strong>分配</strong>了这个内存。我们将堆栈内存中保存的变量描述为堆栈中的<strong>对象，将</strong>堆内存中的变量描述为堆上的<strong>对象</strong>。</li>
+<li>当变量超出范围时，不再需要内存，可以将其返回到它来自的池中。当内存返回其池时，我们说内存已被<strong>释放</strong>。只要它引用的变量超出范围，就会释放堆栈中的内存。但是，堆中的内存此时不会被释放，并且即使它引用的变量超出范围，也会保持分配状态。</li>
+<li>所述<strong>垃圾收集器</strong>标识，并释放未使用的堆内存。定期运行垃圾收集器以清理堆。</li>
+</ul>
+<p>现在我们了解了事件的流程，让我们仔细看看堆栈分配和解除分配与堆分配和解除分配的不同之处。</p>
+<h4 id="堆栈分配和释放期间会发生什么？"><a href="#堆栈分配和释放期间会发生什么？" class="headerlink" title="堆栈分配和释放期间会发生什么？"></a>堆栈分配和释放期间会发生什么？</h4><p>堆栈分配和解除分配快速而简单。这是因为堆栈仅用于在短时间内存储小数据。分配和解除分配总是以可预测的顺序发生，并且具有可预测的大小。</p>
+<p>堆栈的工作方式类似于<a href="https://en.wikipedia.org/wiki/Stack_(abstract_data_type)" target="_blank" rel="noopener">堆栈数据类型</a>：它是一个简单的元素集合，在这种情况下是内存块，其中元素只能按严格的顺序添加和删除。这种简单性和严格性使得它如此快速：当一个变量存储在堆栈中时，它的内存只是从堆栈的“末尾”分配。当堆栈变量超出范围时，用于存储该变量的内存会立即返回到堆栈以供重用。</p>
+<h4 id="堆分配期间会发生什么？"><a href="#堆分配期间会发生什么？" class="headerlink" title="堆分配期间会发生什么？"></a>堆分配期间会发生什么？</h4><p>堆分配比堆栈分配复杂得多。这是因为堆可用于存储长期和短期数据，以及许多不同类型和大小的数据。分配和解除分配并不总是以可预测的顺序发生，并且可能需要非常不同大小的存储器块。</p>
+<p>创建堆变量时，将执行以下步骤：</p>
+<ul>
+<li>首先，Unity必须检查堆中是否有足够的可用内存。如果堆中有足够的可用内存，则分配变量的内存。</li>
+<li>如果堆中没有足够的可用内存，Unity会尝试释放垃圾收集器，以释放未使用的堆内存。这可能是一个缓慢的操作。如果堆中现在有足够的可用内存，则会分配变量的内存。</li>
+<li>如果垃圾回收后堆中没有足够的可用内存，Unity会增加堆中的内存量。这可能是一个缓慢的操作。然后分配变量的内存。</li>
+</ul>
+<p>堆分配可能很慢，特别是如果垃圾收集器必须运行并且必须扩展堆。</p>
+<h4 id="垃圾收集期间会发生什么？"><a href="#垃圾收集期间会发生什么？" class="headerlink" title="垃圾收集期间会发生什么？"></a>垃圾收集期间会发生什么？</h4><p>当堆变量超出范围时，用于存储它的内存不会立即释放。只有在垃圾收集器运行时才会释放未使用的堆内存。</p>
+<p>每次垃圾收集器运行时，都会发生以下步骤：</p>
+<ul>
+<li>垃圾收集器检查堆上的每个对象。</li>
+<li>垃圾收集器搜索所有当前对象引用以确定堆上的对象是否仍在范围内。</li>
+<li>任何不再在范围内的对象都被标记为删除。</li>
+<li>将删除标记的对象，并将分配给它们的内存返回到堆中。</li>
+</ul>
+<p>垃圾收集可能是一项昂贵的操作。堆上的对象越多，它必须做的工作越多，代码中的对象引用越多，它必须做的工作就越多。</p>
+<h4 id="垃圾收集什么时候发生？"><a href="#垃圾收集什么时候发生？" class="headerlink" title="垃圾收集什么时候发生？"></a>垃圾收集什么时候发生？</h4><p>有三件事可能导致垃圾收集器运行：</p>
+<ul>
+<li>无论何时请求堆分配都无法使用堆中的可用内存来执行垃圾收集器。</li>
+<li>垃圾收集器会不时自动运行（尽管频率因平台而异）。</li>
+<li>垃圾收集器可以强制手动运行。</li>
+</ul>
+<p>垃圾收集可能是一个频繁的操作。每当无法从可用堆内存中实现堆分配时，就会触发垃圾收集器，这意味着频繁的堆分配和解除分配会导致频繁的垃圾回收。</p>
+<h4 id="降低GC的影响的方法"><a href="#降低GC的影响的方法" class="headerlink" title="降低GC的影响的方法"></a>降低GC的影响的方法</h4><p> 　　大体上来说，我们可以通过三种方法来降低GC的影响：</p>
+<p>　　1）减少GC的运行次数；</p>
+<p>　　2）减少单次GC的运行时间；</p>
+<p>　　3）将GC的运行时间延迟，避免在关键时候触发，比如可以在场景加载的时候调用GC</p>
+<p>​      似乎看起来很简单，基于此，我们可以采用三种策略：</p>
+<p>　　1）对游戏进行重构，减少堆内存的分配和引用的分配。更少的变量和引用会减少GC操作中的检测个数从而提高GC的运行效率。</p>
+<p>　　2）降低堆内存分配和回收的频率，尤其是在关键时刻。也就是说更少的事件触发GC操作，同时也降低堆内存的碎片化。</p>
+<p>　　3）我们可以试着测量GC和堆内存扩展的时间，使其按照可预测的顺序执行。当然这样操作的难度极大，但是这会大大降低GC的影响。</p>
+<h3 id="网络相关："><a href="#网络相关：" class="headerlink" title="网络相关："></a>网络相关：</h3><h4 id="状态同步与帧同步："><a href="#状态同步与帧同步：" class="headerlink" title="状态同步与帧同步："></a>状态同步与帧同步：</h4><h5 id="状态同步："><a href="#状态同步：" class="headerlink" title="状态同步："></a>状态同步：</h5><p>状态同步顾名思义，就是<strong>同步玩家的状态信息，比如位置，他的属性，还有其他跟玩法相关的数据。</strong>通常使用这种方案主逻辑基本上都在<strong>服务器</strong>运行，都在服务器进行计算，客户端只是作为一个显示。还有一个特点，就是我们通讯的网络流量大小是依赖于你的游戏里面，你的玩法里面，需要同步的一个实体数量。</p>
+<p>一些RTS游戏，像星际争霸，就不太会使用这种状态同步的方案，他们可以操纵兵的个体的数量是非常多，可能有上百个单位，如果这样用状态同步的话，流量就会非常大。客户端会把他们的输入发给服务器，然后服务器会做一个处理，把状态信息发到客户端做一个显示。</p>
+<h5 id="帧同步："><a href="#帧同步：" class="headerlink" title="帧同步："></a>帧同步：</h5><p>帧同步<strong>只同步玩家的指令，不同步状态。</strong>通常游戏的逻辑都是在<strong>客户端进行各自计算的</strong>。这肯定带来一个问题，就是说你要在各客户端各自计算，你怎么保证在各客户端算出来的结果是一样，这是帧同步的技术重点也是难点。然后就是网络流量是不依赖于同步实体的个数，只依赖于指令，这么一个大小，还有一个同步的频率。像星际争霸这种游戏，即使需要同步的单位从一百个加到两百个，加到三百个，对同步的网络流量也不会有特别明显的增加。</p>
+<p>客户端会把它们的消息跟它们的输出发送给服务器，服务器会以一个统一的频率把各个客户端的输入转发给其他的客户端，然后其他各个客户端收到大家的输入之后，统一地进行运算。</p>
+<ul>
+<li><p><strong>确定性</strong>：要保证确定性，这是帧同步方案最难的地方。那么你要保证这个确定性，就是说各个客户端根据同样的输入，算出同样的结果，我们可以注意哪些问题呢，<strong>首先一定要把各客户端的核心逻辑的同步频率保持一致。</strong>如果你的频率不一样，比如用Unity的函数，每一帧运行时间间隔不一样，如果这个不一样的话会带来非常多的问题，基本上是不可能算出一样的结果，首先第一步就把这个频率调成一样的。</p>
+<p><strong>然后是随机数</strong>，我们很多游戏的话，肯定会使用到一些随机的东西，随机数在使用的时候，我们几乎不能使用Unity自带的随机数，因为我们知道我们通常使用的是伪随机数，我们为了保证在各客户端的随机数是一样的，需要做哪些工作。<strong>首先需要把初始化的种子要同步，它们是一样。然后还要保证在各个客户端上，随机数调用的次数是一样。</strong></p>
+</li>
+<li><p><strong>流畅性</strong>，讲流畅性之前，先了解一下，你不流畅的时候，到底是一个什么样的表现。通常玩家反馈给你，只会反馈给你，一个是卡，或者说一卡一卡，或者卡卡的。玩家不会告诉你说，我是看到这个东西网络是不是延迟了，或者说怎么样？不会这样，他会给你的是一些很感性的词。当玩家在说卡的时候，他在说什么？其实他在说输入和反馈之间存在延迟。输入和反馈之间存在延迟，这很可能就是我们的网络，可能存在说你丢包要重发，就是网络延迟。</p>
+</li>
+<li><p>还有一个是画面卡顿，画面卡顿的话，游戏存在性能问题，刚才我们《球球大作战》跟我们分享了优化的对大家也是挺有帮助的。然后还有一个就是游戏物件在来回抖动，可能不是因为你的网络延迟，也不是因为性能问题，可能单纯只是因为你的这个物体，由于你逻辑上有问题，导致它看起来在抖动，我们就遇到过这个问题。</p>
+<p><a href="http://www.360doc.com/content/17/0605/09/40005136_660108363.shtml" target="_blank" rel="noopener">http://www.360doc.com/content/17/0605/09/40005136_660108363.shtml</a></p>
+</li>
+</ul>
+<hr>
+<p><strong>帧同步</strong>，一般而言是 P2P 架构。它的核心思路是：<strong>对同样的输入，每个客户端做出同样的操作，即可模拟视野内其他玩家的动作。</strong>这样的同步架构，一般而言只需要把少量的玩家输入分发给其他客户端，由其他客户端在本地进行模拟即可。例如一个 RTS 游戏，只需要把玩家的选兵、行动指令分发给其他客户端，由他们进行模拟即可。</p>
+<p><strong>状态同步</strong>则多采用 C2S 架构。它的核心思路则是：<strong>客户端将自己的操作或者局部状态交给服务器，由服务器来运算出游戏内的全局状态，最后由服务器把游戏内的状态分发给其他客户端（可能也包括自己），而客户端只是负责根据这些状态渲染出对应的画面而已。</strong>例如一个 MMORPG 游戏，每个玩家将自己所在的位置传递给服务端，服务端收集到各个玩家的位置之后，再分发给其他客户端。</p>
+<p>两种网络同步算法各有千秋。<strong>总的来说，帧同步算法更适合于做 RTS / FPS / MOBA 类游戏：这类游戏输入简单、对实时性要求非常高，且有“局”和“房间”的概念，一局游戏所能持续的时间有限；而状态同步算法则更适合于 MMORPG 类游戏：这类游戏动作繁多，但对实时性要求可以容忍（甚至可以加入前摇、公 CD 等机制强行增加延迟），且游戏内部状态数据非常庞大、时间轴也会延续很长。</strong></p>
+<h4 id="TCP与UDP："><a href="#TCP与UDP：" class="headerlink" title="TCP与UDP："></a>TCP与UDP：</h4><p>通常来说，我们认为<strong>对实时性要求比较高的MOBA游戏，我们还是选择UDP</strong>，有些游戏也是选择TCP，其实也是做的挺好，也可以根据自己的游戏需求，如果你觉得TCP还OK，那就选择TCP没有问题，很成熟，也很可靠。不需要做额外的工作。如果你觉得你的游戏对你的实时性要求比较强，还是推荐你用UDP，使用UDP带来什么问题，首先UDP是不可靠的传输协议，可能需要自己去处理一下丢包，还有顺序。通常常用的解决方案就是增加冗余数据，如果一次发包，可以一次带两帧的数据，如果丢包之后，丢了一个包，但是仍然可能还是有额外的一帧供你使用，继续去渲染。</p>
+<h5 id="TCP："><a href="#TCP：" class="headerlink" title="TCP："></a>TCP：</h5><p>TCP（Transmission Control Protocol，传输控制协议）是面向连接的协议，也就是说，在收发数据前，必须和对方建立可靠的连接。</p>
+<h5 id="UDP："><a href="#UDP：" class="headerlink" title="UDP："></a>UDP：</h5><p>UDP是一个非连接的协议，传输数据之前源端和终端不建立连接， 当它想传送时就简单地去抓取来自应用程序的数据，并尽可能快地把它扔到网络上。 在发送端，UDP传送数据的速度仅仅是受应用程序生成数据的速度、 计算机的能力和传输带宽的限制； 在接收端，UDP把每个消息段放在队列中，应用程序每次从队列中读一个消息段。</p>
+<h4 id="修改本地属性的外挂（计算结果不一致）："><a href="#修改本地属性的外挂（计算结果不一致）：" class="headerlink" title="修改本地属性的外挂（计算结果不一致）："></a>修改本地属性的外挂（计算结果不一致）：</h4><p>多客户端数据仲裁。</p>
+<h4 id="LockStep同步机制："><a href="#LockStep同步机制：" class="headerlink" title="LockStep同步机制："></a>LockStep同步机制：</h4><p><a href="http://gameinstitute.qq.com/article/detail/16108" target="_blank" rel="noopener">http://gameinstitute.qq.com/article/detail/16108</a></p>
+<p><a href="https://blog.codingnow.com/2018/08/lockstep.html" target="_blank" rel="noopener">https://blog.codingnow.com/2018/08/lockstep.html</a></p>
+<h3 id="协程："><a href="#协程：" class="headerlink" title="协程："></a>协程：</h3><p>我们在执行开启一个协程的时候，其本质就是<strong>返回一个迭代器的实例，然后在主线程中，每次update的时候，都会更新这个实例，判断其是否执行MoveNext的操作，如果可以执行(比如文件下载完成)，则执行一次MoveNext，将下一个对象赋值给Current(MoveNext需要返回为true， 如果为false表明迭代执行完成了)。</strong></p>
+<p>通过这儿，可以得到一个结论，协程并不是异步的，其本质还是在Unity的主线程中执行，每次update的时候都会触发是否执行MoveNext。</p>
+<h3 id="A-寻路："><a href="#A-寻路：" class="headerlink" title="A*寻路："></a>A*寻路：</h3><p>A*算法：</p>
+<p>维护两个列表，Open列表和Closed列表，Open列表用于记录所有被考虑为最短路径的方块，Closed列表用于记录不会再被考虑的方块。</p>
+<p>考虑与否取决于估值函数，我使用的估值函数为曼哈顿距离函数：当前方块到结束点的水平距离 + 当前方块到结束点的垂直距离。</p>
+<ol>
+<li>从开始点出发，将开始点记录为当前点P，将其放在Closed表中，搜寻P周围的点，如果它既不在Open表中，也不在Closed表中，则计算它的移动代价F = G + H，并将其父节点设置为P，然后将其放入开放列表。</li>
+<li>对开放列表进行排序，将F值最小的点拿出来作为下一步的P点</li>
+<li>如果该点就是终点，则结束寻路，回溯所有的父节点到起点，完成寻路。</li>
+<li>如果该点不是终点，则重复寻找步骤。</li>
+<li>如果开放列表已经空了，则说明所有可以找的点已经找完了，寻路失败。</li>
+</ol>
+<h3 id="进程与线程的区别："><a href="#进程与线程的区别：" class="headerlink" title="进程与线程的区别："></a>进程与线程的区别：</h3><p>进程和线程的主要差别在于它们是不同的操作系统资源管理方式。进程有独立的地址空间，一个进程崩溃后，在保护模式下不会对其它进程产生影响，而线程只是一个进程中的不同执行路径。线程有自己的堆栈和局部变量，但线程之间没有单独的地址空间，一个线程死掉就等于整个进程死掉，所以多进程的程序要比多线程的程序健壮，但在<a href="https://www.baidu.com/s?wd=%E8%BF%9B%E7%A8%8B%E5%88%87%E6%8D%A2&tn=24004469_oem_dg&rsv_dl=gh_pl_sl_csd" target="_blank" rel="noopener">进程切换</a>时，耗费资源较大，效率要差一些。<strong>但对于一些要求同时进行并且又要共享某些变量的并发操作，只能用线程，不能用进程。</strong></p>
+<p><strong>1) 简而言之,一个程序至少有一个进程,一个进程至少有一个线程.</strong></p>
+<p>2) 线程的划分尺度小于进程，使得多线程程序的并发性高。</p>
+<p>3) 另外，进程在执行过程中拥有独立的内存单元，而多个线程共享内存，从而极大地提高了程序的运行效率。</p>
+<p>4) 线程在执行过程中与进程还是有区别的。每个独立的线程有一个程序运行的入口、顺序执行序列和程序的出口。<strong>但是线程不能够独立执行，</strong>必须依存在应用程序中，由应用程序提供多个线程执行控制。</p>
+<p>5) 从逻辑角度来看，多线程的意义在于一个应用程序中，有多个执行部分可以同时执行。但操作系统并没有将多个线程看做多个独立的应用，来实现进程的调度和管理以及资源分配。<strong>这就是进程和线程的重要区别。</strong></p>
+<h4 id="协程：-1"><a href="#协程：-1" class="headerlink" title="协程："></a>协程：</h4><p>协程是一种用户态的轻量级线程，协程的调度完全由用户控制。协程拥有自己的寄存器上下文和栈。协程调度切换时，将寄存器上下文和栈保存到其他地方，在切回来的时候，恢复先前保存的寄存器上下文和栈，直接操作栈则基本没有内核切换的开销，可以不加锁的访问全局变量，所以上下文的切换非常快。 </p>
+<p><strong>进程拥有自己独立的堆和栈，既不共享堆，亦不共享栈，进程由操作系统调度。</strong></p>
+<p><strong>线程拥有自己独立的栈和共享的堆，共享堆，不共享栈，线程亦由操作系统调度(标准线程是这样的)。</strong></p>
+<p><strong>协程和线程一样共享堆，不共享栈，协程由程序员在协程的代码里显示调度。</strong></p>
+<p>一个应用程序一般对应一个进程，一个进程一般有一个主线程，还有若干个辅助线程，线程之间是平行运行的，在线程里面可以开启协程，让程序在特定的时间内运行。</p>
+<p>协程和线程的区别是：<strong>协程避免了无意义的调度，由此可以提高性能，但也因此，程序员必须自己承担调度的责任，同时，协程也失去了标准线程使用多CPU的能力。</strong></p>
+
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/Unity/" rel="tag"># Unity</a>
+          
+            <a href="/tags/%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%BD%91%E7%BB%9C/" rel="tag"># 计算机网络</a>
+          
+            <a href="/tags/%E9%9D%A2%E8%AF%95/" rel="tag"># 面试</a>
+          
+        </div>
+      
+
+      
+      
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2019/03/11/Unity%E7%AC%94%E8%AE%B0/Unity%E4%B8%AD%E7%9A%84%E6%B8%B2%E6%9F%93%E4%BC%98%E5%8C%96%E6%8A%80%E6%9C%AF/" rel="next" title="Unity中的渲染优化技术">
+                <i class="fa fa-chevron-left"></i> Unity中的渲染优化技术
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+              <a href="/2019/03/15/%E8%AE%BE%E8%AE%A1%E6%A8%A1%E5%BC%8F/%E6%B8%B8%E6%88%8F%E7%BC%96%E7%A8%8B%E6%A8%A1%E5%BC%8F%EF%BC%9A%E5%B7%A5%E5%8E%82%E6%A8%A1%E5%BC%8F/" rel="prev" title="游戏编程模式：工厂模式">
+                游戏编程模式：工厂模式 <i class="fa fa-chevron-right"></i>
+              </a>
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+
+    <div class="post-spread">
+      
+    </div>
+  </div>
+
+
+          </div>
+          
+
+
+          
+  <div class="comments" id="comments">
+    
+  </div>
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap" >
+            Table of Contents
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview">
+            Overview
+          </li>
+        </ul>
+      
+
+      <section class="site-overview sidebar-panel">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+          <img class="site-author-image" itemprop="image"
+               src="/images/avatar.gif"
+               alt="zhangMo" />
+          <p class="site-author-name" itemprop="name">zhangMo</p>
+           
+              <p class="site-description motion-element" itemprop="description">T&S&A&G</p>
+          
+        </div>
+        <nav class="site-state motion-element">
+
+          
+            <div class="site-state-item site-state-posts">
+              <a href="/archives/">
+                <span class="site-state-item-count">86</span>
+                <span class="site-state-item-name">posts</span>
+              </a>
+            </div>
+          
+
+          
+            
+            
+            <div class="site-state-item site-state-categories">
+              
+                <span class="site-state-item-count">10</span>
+                <span class="site-state-item-name">categories</span>
+              
+            </div>
+          
+
+          
+            
+            
+            <div class="site-state-item site-state-tags">
+              
+                <span class="site-state-item-count">34</span>
+                <span class="site-state-item-name">tags</span>
+              
+            </div>
+          
+
+        </nav>
+
+        
+
+        <div class="links-of-author motion-element">
+          
+        </div>
+
+        
+        
+
+        
+        
+
+        
+
+
+      </section>
+
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#面经以及相关问题解释："><span class="nav-number">1.</span> <span class="nav-text">面经以及相关问题解释：</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#Unity的垃圾回收机制："><span class="nav-number">1.1.</span> <span class="nav-text">Unity的垃圾回收机制：</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#堆栈分配和释放期间会发生什么？"><span class="nav-number">1.1.1.</span> <span class="nav-text">堆栈分配和释放期间会发生什么？</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#堆分配期间会发生什么？"><span class="nav-number">1.1.2.</span> <span class="nav-text">堆分配期间会发生什么？</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#垃圾收集期间会发生什么？"><span class="nav-number">1.1.3.</span> <span class="nav-text">垃圾收集期间会发生什么？</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#垃圾收集什么时候发生？"><span class="nav-number">1.1.4.</span> <span class="nav-text">垃圾收集什么时候发生？</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#降低GC的影响的方法"><span class="nav-number">1.1.5.</span> <span class="nav-text">降低GC的影响的方法</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#网络相关："><span class="nav-number">1.2.</span> <span class="nav-text">网络相关：</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#状态同步与帧同步："><span class="nav-number">1.2.1.</span> <span class="nav-text">状态同步与帧同步：</span></a><ol class="nav-child"><li class="nav-item nav-level-5"><a class="nav-link" href="#状态同步："><span class="nav-number">1.2.1.1.</span> <span class="nav-text">状态同步：</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#帧同步："><span class="nav-number">1.2.1.2.</span> <span class="nav-text">帧同步：</span></a></li></ol></li><li class="nav-item nav-level-4"><a class="nav-link" href="#TCP与UDP："><span class="nav-number">1.2.2.</span> <span class="nav-text">TCP与UDP：</span></a><ol class="nav-child"><li class="nav-item nav-level-5"><a class="nav-link" href="#TCP："><span class="nav-number">1.2.2.1.</span> <span class="nav-text">TCP：</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#UDP："><span class="nav-number">1.2.2.2.</span> <span class="nav-text">UDP：</span></a></li></ol></li><li class="nav-item nav-level-4"><a class="nav-link" href="#修改本地属性的外挂（计算结果不一致）："><span class="nav-number">1.2.3.</span> <span class="nav-text">修改本地属性的外挂（计算结果不一致）：</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#LockStep同步机制："><span class="nav-number">1.2.4.</span> <span class="nav-text">LockStep同步机制：</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#协程："><span class="nav-number">1.3.</span> <span class="nav-text">协程：</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#A-寻路："><span class="nav-number">1.4.</span> <span class="nav-text">A*寻路：</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#进程与线程的区别："><span class="nav-number">1.5.</span> <span class="nav-text">进程与线程的区别：</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#协程：-1"><span class="nav-number">1.5.1.</span> <span class="nav-text">协程：</span></a></li></ol></li></ol></li></ol></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
+      
+
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright" >
+  
+  &copy; 
+  <span itemprop="copyrightYear">2020</span>
+  <span class="with-love">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">zhangMo</span>
+</div>
+
+
+<div class="powered-by">
+  Powered by <a class="theme-link" href="https://hexo.io" target="_blank" rel="noopener">Hexo</a>
+</div>
+
+<div class="theme-info">
+  Theme -
+  <a class="theme-link" href="https://github.com/iissnan/hexo-theme-next" target="_blank" rel="noopener">
+    NexT.Muse
+  </a>
+</div>
+
+
+        
+
+        
+      </div>
+    </footer>
+
+    
+      <div class="back-to-top">
+        <i class="fa fa-arrow-up"></i>
+        
+      </div>
+    
+
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  <script type="text/javascript" src="/lib/jquery/index.js?v=2.1.3"></script>
+
+  
+  <script type="text/javascript" src="/lib/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+
+  
+  <script type="text/javascript" src="/lib/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
+
+  
+  <script type="text/javascript" src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+
+  
+  <script type="text/javascript" src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+
+  
+  <script type="text/javascript" src="/lib/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=5.1.2"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=5.1.2"></script>
+
+
+
+  
+  
+
+  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.1.2"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.1.2"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.1.2"></script>
+
+
+
+  
+
+
+  
+
+
+
+
+	
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+</body>
+</html>

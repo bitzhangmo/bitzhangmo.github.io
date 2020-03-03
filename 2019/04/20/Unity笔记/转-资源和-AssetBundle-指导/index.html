@@ -1,0 +1,697 @@
+<!DOCTYPE html>
+
+
+
+  
+
+
+<html class="theme-next muse use-motion" lang="zh-CN">
+<head>
+  <meta charset="UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+<meta name="theme-color" content="#222">
+
+
+
+
+
+
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+  <link href="/lib/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css" />
+
+
+
+
+  
+  
+  
+  
+
+  
+    
+    
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+    
+    
+    <link href="//fonts.googleapis.com/css?family=Lato:300,300italic,400,400italic,700,700italic&subset=latin,latin-ext" rel="stylesheet" type="text/css">
+  
+
+
+
+
+
+
+<link href="/lib/font-awesome/css/font-awesome.min.css?v=4.6.2" rel="stylesheet" type="text/css" />
+
+<link href="/css/main.css?v=5.1.2" rel="stylesheet" type="text/css" />
+
+
+  <meta name="keywords" content="Unity," />
+
+
+
+
+
+
+
+
+  <link rel="shortcut icon" type="image/x-icon" href="/favicon.ico?v=5.1.2" />
+
+
+
+
+
+
+<meta name="description" content="资源和 AssetBundle 指导。">
+<meta name="keywords" content="Unity">
+<meta property="og:type" content="article">
+<meta property="og:title" content="[转] 资源和 AssetBundle 指导">
+<meta property="og:url" content="https:&#x2F;&#x2F;bitzhangmo.github.io&#x2F;2019&#x2F;04&#x2F;20&#x2F;Unity%E7%AC%94%E8%AE%B0&#x2F;%E8%BD%AC-%E8%B5%84%E6%BA%90%E5%92%8C-AssetBundle-%E6%8C%87%E5%AF%BC&#x2F;index.html">
+<meta property="og:site_name" content="zhangMo Blog">
+<meta property="og:description" content="资源和 AssetBundle 指导。">
+<meta property="og:locale" content="zh-CN">
+<meta property="og:updated_time" content="2019-04-20T12:42:28.975Z">
+<meta name="twitter:card" content="summary">
+
+
+
+<script type="text/javascript" id="hexo.configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/',
+    scheme: 'Muse',
+    sidebar: {"position":"left","display":"post","offset":12,"offset_float":12,"b2t":false,"scrollpercent":false,"onmobile":false},
+    fancybox: true,
+    tabs: true,
+    motion: true,
+    duoshuo: {
+      userId: '0',
+      author: 'Author'
+    },
+    algolia: {
+      applicationID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    }
+  };
+</script>
+
+
+
+  <link rel="canonical" href="https://bitzhangmo.github.io/2019/04/20/Unity笔记/转-资源和-AssetBundle-指导/"/>
+
+
+
+
+
+  <title>[转] 资源和 AssetBundle 指导 | zhangMo Blog</title>
+  
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="zh-CN">
+
+  
+  
+    
+  
+
+  <div class="container sidebar-position-left page-post-detail ">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-wrapper">
+  <div class="site-meta ">
+    
+
+    <div class="custom-logo-site-title">
+      <a href="/"  class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">zhangMo Blog</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+      
+        <p class="site-subtitle"></p>
+      
+  </div>
+
+  <div class="site-nav-toggle">
+    <button>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+    </button>
+  </div>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu">
+      
+        
+        <li class="menu-item menu-item-home">
+          <a href="/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-home"></i> <br />
+            
+            Home
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/archives/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-archive"></i> <br />
+            
+            Archives
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-tags">
+          <a href="/tags/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-tags"></i> <br />
+            
+            Tags
+          </a>
+        </li>
+      
+
+      
+    </ul>
+  
+
+  
+</nav>
+
+
+
+ </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="https://bitzhangmo.github.io/2019/04/20/Unity%E7%AC%94%E8%AE%B0/%E8%BD%AC-%E8%B5%84%E6%BA%90%E5%92%8C-AssetBundle-%E6%8C%87%E5%AF%BC/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="zhangMo">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/avatar.gif">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="zhangMo Blog">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">[转] 资源和 AssetBundle 指导</h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">Posted on</span>
+              
+              <time title="Post created" itemprop="dateCreated datePublished" datetime="2019-04-20T20:41:15+08:00">
+                2019-04-20
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+            <span class="post-category" >
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">In</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/%E8%BD%AC%E8%BD%BD/" itemprop="url" rel="index">
+                    <span itemprop="name">转载</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <p>资源和 AssetBundle 指导。</p>
+<a id="more"></a>
+
+<p>原文地址：<a href="http://blog.shuiguzi.com/2016/12/15/GuideToABAndRes/" target="_blank" rel="noopener">http://blog.shuiguzi.com/2016/12/15/GuideToABAndRes/</a></p>
+<hr>
+<p>这是深度探讨 Unity 引擎中资源（Resource）和资产（Asset） 管理的系列文章。文章试图给高级开发者提供 Unity 资产和序列化系统的底层、代码级的知识，并且审视 Unity 的 AssetBundle 系统技术基础和当前使用它们的最佳实践。</p>
+<p>系列文章将会拆分为四个章节：</p>
+<ol>
+<li><a href="http://blog.shuiguzi.com/2016/12/15/Assets_Objects_serialization/" target="_blank" rel="noopener">[资产，对象和序列化]</a> 章节探讨 Unity 如何序列化资产和处理它们之间的引用的底层细节。<strong>强烈推荐从读者从这章开始阅读，因为它定义了贯穿这系列文章的术语</strong>。</li>
+<li><a href="http://blog.shuiguzi.com/2016/12/28/resources_folder/" target="_blank" rel="noopener">[Resources 文件夹]</a> 探讨内置的 Resources API.</li>
+<li><a href="http://blog.shuiguzi.com/2017/01/08/AssetBundle_Fundamentals/" target="_blank" rel="noopener">[AssetBundle 基本知识]</a> 在第一章的基础上描述 AssetBundles 怎么运转和加载 AssetBundles 及从 AssetBundles 加载资产。</li>
+<li><a href="https://unity3d.com/learn/tutorials/topics/best-practices/asset-bundle-usage-patterns" target="_blank" rel="noopener">AssetBundle 使用模式</a> 是一篇探讨很多 AssetBundle 的实际用途。它包括了给 AssetBundles 添加资产 和管理加载后的资产并描述了开发者使用 AssetBundles 时经常碰到的陷阱。</li>
+</ol>
+<p>注意：这系列文章中的对象和资产有别与 Unity API 命名约定中的对象和资产。</p>
+<p>本指导中所指的对象是数据，在很多 Unity API 中叫做资产，比如 <a href="http://docs.unity3d.com/ScriptReference/AssetBundle.LoadAsset.html" target="_blank" rel="noopener">AssetBundle.LoadAsset</a> and <a href="http://docs.unity3d.com/ScriptReference/Resources.UnloadUnusedAssets.html" target="_blank" rel="noopener">Resources.UnloadUnusedAssets</a>。 本指导中的资产很少在公开的 API 中出现。当他们出现时，一般仅在和构建相关的代码中，比如 <a href="http://docs.unity3d.com/ScriptReference/AssetDatabase.html" target="_blank" rel="noopener">AssetDatabase</a> and <a href="http://docs.unity3d.com/ScriptReference/BuildPipeline.html" target="_blank" rel="noopener">BuildPipeline</a>。这种情况下，公开的 API 中都叫它们为文件。</p>
+<p>英文原文链接: <a href="https://unity3d.com/cn/learn/tutorials/topics/best-practices/guide-assetbundles-and-resources" target="_blank" rel="noopener">https://unity3d.com/cn/learn/tutorials/topics/best-practices/guide-assetbundles-and-resources</a></p>
+
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/Unity/" rel="tag"># Unity</a>
+          
+        </div>
+      
+
+      
+      
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2019/04/18/Unity%E7%AC%94%E8%AE%B0/Unity3D-%E6%B8%B8%E6%88%8F%E5%BC%80%E5%8F%91-%E7%AC%AC%E4%B9%9D%E7%AB%A0-%E9%9D%99%E6%80%81%E5%AF%B9%E8%B1%A1/" rel="next" title="[Unity3D 游戏开发] 第九章-静态对象">
+                <i class="fa fa-chevron-left"></i> [Unity3D 游戏开发] 第九章-静态对象
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+              <a href="/2019/04/20/Unity%E7%AC%94%E8%AE%B0/%E8%BD%AC-%E8%B5%84%E4%BA%A7-%E5%AF%B9%E8%B1%A1%E5%92%8C%E5%BA%8F%E5%88%97%E5%8C%96/" rel="prev" title="[转] 资产, 对象和序列化">
+                [转] 资产, 对象和序列化 <i class="fa fa-chevron-right"></i>
+              </a>
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+
+    <div class="post-spread">
+      
+    </div>
+  </div>
+
+
+          </div>
+          
+
+
+          
+  <div class="comments" id="comments">
+    
+  </div>
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    
+    <div class="sidebar-inner">
+
+      
+
+      
+
+      <section class="site-overview sidebar-panel sidebar-panel-active">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+          <img class="site-author-image" itemprop="image"
+               src="/images/avatar.gif"
+               alt="zhangMo" />
+          <p class="site-author-name" itemprop="name">zhangMo</p>
+           
+              <p class="site-description motion-element" itemprop="description">T&S&A&G</p>
+          
+        </div>
+        <nav class="site-state motion-element">
+
+          
+            <div class="site-state-item site-state-posts">
+              <a href="/archives/">
+                <span class="site-state-item-count">86</span>
+                <span class="site-state-item-name">posts</span>
+              </a>
+            </div>
+          
+
+          
+            
+            
+            <div class="site-state-item site-state-categories">
+              
+                <span class="site-state-item-count">10</span>
+                <span class="site-state-item-name">categories</span>
+              
+            </div>
+          
+
+          
+            
+            
+            <div class="site-state-item site-state-tags">
+              
+                <span class="site-state-item-count">34</span>
+                <span class="site-state-item-name">tags</span>
+              
+            </div>
+          
+
+        </nav>
+
+        
+
+        <div class="links-of-author motion-element">
+          
+        </div>
+
+        
+        
+
+        
+        
+
+        
+
+
+      </section>
+
+      
+
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright" >
+  
+  &copy; 
+  <span itemprop="copyrightYear">2020</span>
+  <span class="with-love">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">zhangMo</span>
+</div>
+
+
+<div class="powered-by">
+  Powered by <a class="theme-link" href="https://hexo.io" target="_blank" rel="noopener">Hexo</a>
+</div>
+
+<div class="theme-info">
+  Theme -
+  <a class="theme-link" href="https://github.com/iissnan/hexo-theme-next" target="_blank" rel="noopener">
+    NexT.Muse
+  </a>
+</div>
+
+
+        
+
+        
+      </div>
+    </footer>
+
+    
+      <div class="back-to-top">
+        <i class="fa fa-arrow-up"></i>
+        
+      </div>
+    
+
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  <script type="text/javascript" src="/lib/jquery/index.js?v=2.1.3"></script>
+
+  
+  <script type="text/javascript" src="/lib/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+
+  
+  <script type="text/javascript" src="/lib/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
+
+  
+  <script type="text/javascript" src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+
+  
+  <script type="text/javascript" src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+
+  
+  <script type="text/javascript" src="/lib/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=5.1.2"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=5.1.2"></script>
+
+
+
+  
+  
+
+  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.1.2"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.1.2"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.1.2"></script>
+
+
+
+  
+
+
+  
+
+
+
+
+	
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+</body>
+</html>

@@ -1,0 +1,751 @@
+<!DOCTYPE html>
+
+
+
+  
+
+
+<html class="theme-next muse use-motion" lang="zh-CN">
+<head>
+  <meta charset="UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+<meta name="theme-color" content="#222">
+
+
+
+
+
+
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+  <link href="/lib/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css" />
+
+
+
+
+  
+  
+  
+  
+
+  
+    
+    
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+    
+    
+    <link href="//fonts.googleapis.com/css?family=Lato:300,300italic,400,400italic,700,700italic&subset=latin,latin-ext" rel="stylesheet" type="text/css">
+  
+
+
+
+
+
+
+<link href="/lib/font-awesome/css/font-awesome.min.css?v=4.6.2" rel="stylesheet" type="text/css" />
+
+<link href="/css/main.css?v=5.1.2" rel="stylesheet" type="text/css" />
+
+
+  <meta name="keywords" content="Unity,Shader," />
+
+
+
+
+
+
+
+
+  <link rel="shortcut icon" type="image/x-icon" href="/favicon.ico?v=5.1.2" />
+
+
+
+
+
+
+<meta name="description" content="消融效果、水波效果、全局雾效。">
+<meta name="keywords" content="Unity,Shader">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Unity Shader 使用噪声">
+<meta property="og:url" content="https:&#x2F;&#x2F;bitzhangmo.github.io&#x2F;2019&#x2F;03&#x2F;10&#x2F;Unity%E7%AC%94%E8%AE%B0&#x2F;Unity-Shader-%E4%BD%BF%E7%94%A8%E5%99%AA%E5%A3%B0&#x2F;index.html">
+<meta property="og:site_name" content="zhangMo Blog">
+<meta property="og:description" content="消融效果、水波效果、全局雾效。">
+<meta property="og:locale" content="zh-CN">
+<meta property="og:image" content="https:&#x2F;&#x2F;wx3.sinaimg.cn&#x2F;mw690&#x2F;007CSzD7ly1g0yn0oximmj313k0s6qso.jpg">
+<meta property="og:image" content="https:&#x2F;&#x2F;wx2.sinaimg.cn&#x2F;mw690&#x2F;007CSzD7ly1g0yn0ofirkj30yo0igdjv.jpg">
+<meta property="og:image" content="https:&#x2F;&#x2F;wx4.sinaimg.cn&#x2F;mw690&#x2F;007CSzD7ly1g0yn0o52rtj30ww0jy76n.jpg">
+<meta property="og:image" content="https:&#x2F;&#x2F;wx4.sinaimg.cn&#x2F;mw690&#x2F;007CSzD7ly1g0yn0o8u6rj30x60r4dko.jpg">
+<meta property="og:image" content="https:&#x2F;&#x2F;wx4.sinaimg.cn&#x2F;mw690&#x2F;007CSzD7ly1g0yn0oqz2xj31100u0gv7.jpg">
+<meta property="og:image" content="https:&#x2F;&#x2F;wx4.sinaimg.cn&#x2F;mw690&#x2F;007CSzD7ly1g0yn0o0y8xj30lq0d4mya.jpg">
+<meta property="og:image" content="https:&#x2F;&#x2F;wx3.sinaimg.cn&#x2F;mw690&#x2F;007CSzD7ly1g0yn0o4ipcj30t80n8acq.jpg">
+<meta property="og:updated_time" content="2019-04-17T06:21:36.552Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="https:&#x2F;&#x2F;wx3.sinaimg.cn&#x2F;mw690&#x2F;007CSzD7ly1g0yn0oximmj313k0s6qso.jpg">
+
+
+
+<script type="text/javascript" id="hexo.configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/',
+    scheme: 'Muse',
+    sidebar: {"position":"left","display":"post","offset":12,"offset_float":12,"b2t":false,"scrollpercent":false,"onmobile":false},
+    fancybox: true,
+    tabs: true,
+    motion: true,
+    duoshuo: {
+      userId: '0',
+      author: 'Author'
+    },
+    algolia: {
+      applicationID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    }
+  };
+</script>
+
+
+
+  <link rel="canonical" href="https://bitzhangmo.github.io/2019/03/10/Unity笔记/Unity-Shader-使用噪声/"/>
+
+
+
+
+
+  <title>Unity Shader 使用噪声 | zhangMo Blog</title>
+  
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="zh-CN">
+
+  
+  
+    
+  
+
+  <div class="container sidebar-position-left page-post-detail ">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-wrapper">
+  <div class="site-meta ">
+    
+
+    <div class="custom-logo-site-title">
+      <a href="/"  class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">zhangMo Blog</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+      
+        <p class="site-subtitle"></p>
+      
+  </div>
+
+  <div class="site-nav-toggle">
+    <button>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+    </button>
+  </div>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu">
+      
+        
+        <li class="menu-item menu-item-home">
+          <a href="/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-home"></i> <br />
+            
+            Home
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/archives/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-archive"></i> <br />
+            
+            Archives
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-tags">
+          <a href="/tags/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-tags"></i> <br />
+            
+            Tags
+          </a>
+        </li>
+      
+
+      
+    </ul>
+  
+
+  
+</nav>
+
+
+
+ </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="https://bitzhangmo.github.io/2019/03/10/Unity%E7%AC%94%E8%AE%B0/Unity-Shader-%E4%BD%BF%E7%94%A8%E5%99%AA%E5%A3%B0/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="zhangMo">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/avatar.gif">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="zhangMo Blog">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">Unity Shader 使用噪声</h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">Posted on</span>
+              
+              <time title="Post created" itemprop="dateCreated datePublished" datetime="2019-03-10T21:31:34+08:00">
+                2019-03-10
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+            <span class="post-category" >
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">In</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/Unity/" itemprop="url" rel="index">
+                    <span itemprop="name">Unity</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <p>消融效果、水波效果、全局雾效。</p>
+<a id="more"></a>
+
+<h3 id="消融效果的实现："><a href="#消融效果的实现：" class="headerlink" title="消融效果的实现："></a>消融效果的实现：</h3><p>通过噪声纹理采样与设置好的消融属性相减，将算得结果小于0的像素剔除。对于剩下的像素进行正常的光照计算，然后在设定好的宽度范围内对两种溶解颜色进行插值，再将混合得到的颜色与环境光和漫反射光照混合输出。</p>
+<p>后面还需要加一个用于处理阴影的Pass，否则已经消融的部分会投射影子。</p>
+<p><img src="https://wx3.sinaimg.cn/mw690/007CSzD7ly1g0yn0oximmj313k0s6qso.jpg" alt=""></p>
+<h4 id="定义属性："><a href="#定义属性：" class="headerlink" title="定义属性："></a>定义属性：</h4><p><img src="https://wx2.sinaimg.cn/mw690/007CSzD7ly1g0yn0ofirkj30yo0igdjv.jpg" alt="消融的属性"></p>
+<h4 id="定义消融需要的Pass："><a href="#定义消融需要的Pass：" class="headerlink" title="定义消融需要的Pass："></a>定义消融需要的Pass：</h4><p>为了得到正确的光照，我们设置了Pass的LightMode和multi_compile_fwdbase的编译指令。</p>
+<p>我们使用Cull off来关闭Shader的<strong>面片剔除</strong>，来使得其正面和背面都会被渲染。</p>
+<p><img src="https://wx4.sinaimg.cn/mw690/007CSzD7ly1g0yn0o52rtj30ww0jy76n.jpg" alt="设置正确的光照模式与渲染队列"></p>
+<h4 id="定义顶点着色器："><a href="#定义顶点着色器：" class="headerlink" title="定义顶点着色器："></a>定义顶点着色器：</h4><p><img src="https://wx4.sinaimg.cn/mw690/007CSzD7ly1g0yn0o8u6rj30x60r4dko.jpg" alt="定义顶点着色器"></p>
+<h4 id="通过片元着色器实现模拟消融效果："><a href="#通过片元着色器实现模拟消融效果：" class="headerlink" title="通过片元着色器实现模拟消融效果："></a>通过片元着色器实现模拟消融效果：</h4><p><img src="https://wx4.sinaimg.cn/mw690/007CSzD7ly1g0yn0oqz2xj31100u0gv7.jpg" alt="实现片元着色器"></p>
+<ul>
+<li>首先对噪声纹理进行采样，并将结果和用于控制消融程度的属性相减，传递给clip函数，将结果小于0的像素剔除。</li>
+<li>对于剩下的像素，进行正常的光照计算。我们根据漫反射纹理获得反射率albedo，并由此计算环境光照与漫反射光照。</li>
+<li>计算烧焦颜色：在宽度为<code>_LineWidth</code>的范围内模拟一个烧焦的颜色变化，使用smoothstep来计算混合系数（当t为1时，表明该像素位于消融的边界处；当t为0时，表明该像素为正常的模型颜色），插值用来模拟一个烧焦效果：使用t来混合两种火焰颜色。同样使用step函数来保证剔除。</li>
+</ul>
+<h4 id="自定义投射阴影的Pass："><a href="#自定义投射阴影的Pass：" class="headerlink" title="自定义投射阴影的Pass："></a>自定义投射阴影的Pass：</h4><p><img src="https://wx4.sinaimg.cn/mw690/007CSzD7ly1g0yn0o0y8xj30lq0d4mya.jpg" alt="自定义投射阴影的Pass"></p>
+<p><img src="https://wx3.sinaimg.cn/mw690/007CSzD7ly1g0yn0o4ipcj30t80n8acq.jpg" alt=""></p>
+<p>同样使用clip函数来剔除片元，然后使用内置宏<code>SHADOW_CASTER_FRAGMENT()</code>来完成阴影投射，将结果输出到深度图和阴影映射纹理中。</p>
+<h3 id="水波效果："><a href="#水波效果：" class="headerlink" title="水波效果："></a>水波效果：</h3><h3 id="全局雾效："><a href="#全局雾效：" class="headerlink" title="全局雾效："></a>全局雾效：</h3><h3 id="生成噪声："><a href="#生成噪声：" class="headerlink" title="生成噪声："></a>生成噪声：</h3><p><strong>噪声是怎么生成的</strong>：<a href="https://blog.csdn.net/candycat1992/article/details/50346469" target="_blank" rel="noopener">https://blog.csdn.net/candycat1992/article/details/50346469</a></p>
+<ul>
+<li><p>基于晶格的方法（Lattice based）</p>
+</li>
+<li><p>基于点的方法（Point based）</p>
+</li>
+<li><p>Perlin噪声：</p>
+<p>Perlin噪声还是比较简单的，Perlin噪声的实现需要三个步骤：</p>
+<ol>
+<li>定义一个晶格结构，每个晶格的顶点有一个“伪随机”的梯度向量（其实就是个向量啦）。对于二维的Perlin噪声来说，晶格结构就是一个平面网格，三维的就是一个立方体网格。</li>
+<li>输入一个点（二维的话就是二维坐标，三维就是三维坐标，n维的就是n个坐标），我们找到和它相邻的那些晶格顶点（二维下有4个，三维下有8个，n维下有2n2n个），计算该点到各个晶格顶点的距离向量，再分别与顶点上的梯度向量做点乘，得到2n2n个点乘结果。</li>
+<li>使用缓和曲线（ease curves）来计算它们的权重和。在原始的Perlin噪声实现中，缓和曲线是s(t)=3t2−2t3s(t)=3t2−2t3。</li>
+</ol>
+</li>
+</ul>
+
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/Unity/" rel="tag"># Unity</a>
+          
+            <a href="/tags/Shader/" rel="tag"># Shader</a>
+          
+        </div>
+      
+
+      
+      
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2019/03/10/Unity%E7%AC%94%E8%AE%B0/Unity-Shader-%E9%9D%9E%E7%9C%9F%E5%AE%9E%E6%84%9F%E6%B8%B2%E6%9F%93/" rel="next" title="Unity Shader 非真实感渲染">
+                <i class="fa fa-chevron-left"></i> Unity Shader 非真实感渲染
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+              <a href="/2019/03/11/Unity%E7%AC%94%E8%AE%B0/Unity%E4%B8%AD%E7%9A%84%E6%B8%B2%E6%9F%93%E4%BC%98%E5%8C%96%E6%8A%80%E6%9C%AF/" rel="prev" title="Unity中的渲染优化技术">
+                Unity中的渲染优化技术 <i class="fa fa-chevron-right"></i>
+              </a>
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+
+    <div class="post-spread">
+      
+    </div>
+  </div>
+
+
+          </div>
+          
+
+
+          
+  <div class="comments" id="comments">
+    
+  </div>
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap" >
+            Table of Contents
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview">
+            Overview
+          </li>
+        </ul>
+      
+
+      <section class="site-overview sidebar-panel">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+          <img class="site-author-image" itemprop="image"
+               src="/images/avatar.gif"
+               alt="zhangMo" />
+          <p class="site-author-name" itemprop="name">zhangMo</p>
+           
+              <p class="site-description motion-element" itemprop="description">T&S&A&G</p>
+          
+        </div>
+        <nav class="site-state motion-element">
+
+          
+            <div class="site-state-item site-state-posts">
+              <a href="/archives/">
+                <span class="site-state-item-count">86</span>
+                <span class="site-state-item-name">posts</span>
+              </a>
+            </div>
+          
+
+          
+            
+            
+            <div class="site-state-item site-state-categories">
+              
+                <span class="site-state-item-count">10</span>
+                <span class="site-state-item-name">categories</span>
+              
+            </div>
+          
+
+          
+            
+            
+            <div class="site-state-item site-state-tags">
+              
+                <span class="site-state-item-count">34</span>
+                <span class="site-state-item-name">tags</span>
+              
+            </div>
+          
+
+        </nav>
+
+        
+
+        <div class="links-of-author motion-element">
+          
+        </div>
+
+        
+        
+
+        
+        
+
+        
+
+
+      </section>
+
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-3"><a class="nav-link" href="#消融效果的实现："><span class="nav-number">1.</span> <span class="nav-text">消融效果的实现：</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#定义属性："><span class="nav-number">1.1.</span> <span class="nav-text">定义属性：</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#定义消融需要的Pass："><span class="nav-number">1.2.</span> <span class="nav-text">定义消融需要的Pass：</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#定义顶点着色器："><span class="nav-number">1.3.</span> <span class="nav-text">定义顶点着色器：</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#通过片元着色器实现模拟消融效果："><span class="nav-number">1.4.</span> <span class="nav-text">通过片元着色器实现模拟消融效果：</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#自定义投射阴影的Pass："><span class="nav-number">1.5.</span> <span class="nav-text">自定义投射阴影的Pass：</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#水波效果："><span class="nav-number">2.</span> <span class="nav-text">水波效果：</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#全局雾效："><span class="nav-number">3.</span> <span class="nav-text">全局雾效：</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#生成噪声："><span class="nav-number">4.</span> <span class="nav-text">生成噪声：</span></a></li></ol></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
+      
+
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright" >
+  
+  &copy; 
+  <span itemprop="copyrightYear">2020</span>
+  <span class="with-love">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">zhangMo</span>
+</div>
+
+
+<div class="powered-by">
+  Powered by <a class="theme-link" href="https://hexo.io" target="_blank" rel="noopener">Hexo</a>
+</div>
+
+<div class="theme-info">
+  Theme -
+  <a class="theme-link" href="https://github.com/iissnan/hexo-theme-next" target="_blank" rel="noopener">
+    NexT.Muse
+  </a>
+</div>
+
+
+        
+
+        
+      </div>
+    </footer>
+
+    
+      <div class="back-to-top">
+        <i class="fa fa-arrow-up"></i>
+        
+      </div>
+    
+
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  <script type="text/javascript" src="/lib/jquery/index.js?v=2.1.3"></script>
+
+  
+  <script type="text/javascript" src="/lib/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+
+  
+  <script type="text/javascript" src="/lib/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
+
+  
+  <script type="text/javascript" src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+
+  
+  <script type="text/javascript" src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+
+  
+  <script type="text/javascript" src="/lib/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=5.1.2"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=5.1.2"></script>
+
+
+
+  
+  
+
+  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.1.2"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.1.2"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.1.2"></script>
+
+
+
+  
+
+
+  
+
+
+
+
+	
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+</body>
+</html>

@@ -1,0 +1,815 @@
+<!DOCTYPE html>
+
+
+
+  
+
+
+<html class="theme-next muse use-motion" lang="zh-CN">
+<head>
+  <meta charset="UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+<meta name="theme-color" content="#222">
+
+
+
+
+
+
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+  <link href="/lib/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css" />
+
+
+
+
+  
+  
+  
+  
+
+  
+    
+    
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+    
+    
+    <link href="//fonts.googleapis.com/css?family=Lato:300,300italic,400,400italic,700,700italic&subset=latin,latin-ext" rel="stylesheet" type="text/css">
+  
+
+
+
+
+
+
+<link href="/lib/font-awesome/css/font-awesome.min.css?v=4.6.2" rel="stylesheet" type="text/css" />
+
+<link href="/css/main.css?v=5.1.2" rel="stylesheet" type="text/css" />
+
+
+  <meta name="keywords" content="Lua," />
+
+
+
+
+
+
+
+
+  <link rel="shortcut icon" type="image/x-icon" href="/favicon.ico?v=5.1.2" />
+
+
+
+
+
+
+<meta name="description" content="承接上篇虚拟机概述，解析函数执行流程。">
+<meta name="keywords" content="Lua">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Lua源码阅读：数据结构与栈">
+<meta property="og:url" content="https:&#x2F;&#x2F;bitzhangmo.github.io&#x2F;2019&#x2F;08&#x2F;22&#x2F;Lua&#x2F;Lua%E6%BA%90%E7%A0%81%E9%98%85%E8%AF%BB%EF%BC%9A%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84%E4%B8%8E%E6%A0%88&#x2F;index.html">
+<meta property="og:site_name" content="zhangMo Blog">
+<meta property="og:description" content="承接上篇虚拟机概述，解析函数执行流程。">
+<meta property="og:locale" content="zh-CN">
+<meta property="og:image" content="https:&#x2F;&#x2F;s2.ax1x.com&#x2F;2019&#x2F;08&#x2F;22&#x2F;m0c4zD.png">
+<meta property="og:image" content="https:&#x2F;&#x2F;i.loli.net&#x2F;2019&#x2F;08&#x2F;22&#x2F;IROLUSJyYKfevoZ.png">
+<meta property="og:updated_time" content="2019-08-23T06:46:36.445Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="https:&#x2F;&#x2F;s2.ax1x.com&#x2F;2019&#x2F;08&#x2F;22&#x2F;m0c4zD.png">
+
+
+
+<script type="text/javascript" id="hexo.configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/',
+    scheme: 'Muse',
+    sidebar: {"position":"left","display":"post","offset":12,"offset_float":12,"b2t":false,"scrollpercent":false,"onmobile":false},
+    fancybox: true,
+    tabs: true,
+    motion: true,
+    duoshuo: {
+      userId: '0',
+      author: 'Author'
+    },
+    algolia: {
+      applicationID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    }
+  };
+</script>
+
+
+
+  <link rel="canonical" href="https://bitzhangmo.github.io/2019/08/22/Lua/Lua源码阅读：数据结构与栈/"/>
+
+
+
+
+
+  <title>Lua源码阅读：数据结构与栈 | zhangMo Blog</title>
+  
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="zh-CN">
+
+  
+  
+    
+  
+
+  <div class="container sidebar-position-left page-post-detail ">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-wrapper">
+  <div class="site-meta ">
+    
+
+    <div class="custom-logo-site-title">
+      <a href="/"  class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">zhangMo Blog</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+      
+        <p class="site-subtitle"></p>
+      
+  </div>
+
+  <div class="site-nav-toggle">
+    <button>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+    </button>
+  </div>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu">
+      
+        
+        <li class="menu-item menu-item-home">
+          <a href="/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-home"></i> <br />
+            
+            Home
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/archives/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-archive"></i> <br />
+            
+            Archives
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-tags">
+          <a href="/tags/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-tags"></i> <br />
+            
+            Tags
+          </a>
+        </li>
+      
+
+      
+    </ul>
+  
+
+  
+</nav>
+
+
+
+ </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="https://bitzhangmo.github.io/2019/08/22/Lua/Lua%E6%BA%90%E7%A0%81%E9%98%85%E8%AF%BB%EF%BC%9A%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84%E4%B8%8E%E6%A0%88/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="zhangMo">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/avatar.gif">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="zhangMo Blog">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">Lua源码阅读：数据结构与栈</h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">Posted on</span>
+              
+              <time title="Post created" itemprop="dateCreated datePublished" datetime="2019-08-22T19:48:56+08:00">
+                2019-08-22
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+            <span class="post-category" >
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">In</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/%E6%BA%90%E7%A0%81%E9%98%85%E8%AF%BB/" itemprop="url" rel="index">
+                    <span itemprop="name">源码阅读</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <p>承接上篇虚拟机概述，解析函数执行流程。</p>
+<a id="more"></a>
+
+<h3 id="数据结构与栈："><a href="#数据结构与栈：" class="headerlink" title="数据结构与栈："></a>数据结构与栈：</h3><p>每个Lua 虚拟机对应一个 lua_State 结构体，它使用 TValue 数组来模拟栈，其中包括几个与栈相关的成员：</p>
+<ul>
+<li>stack：栈数组的起始位置</li>
+<li>base：当前函数栈的基地址</li>
+<li>top：当前栈的下一个可用位置</li>
+</ul>
+<p>这些成员的初始化操作在 stack_init 函数中完成。</p>
+<p>然而 lua_State 里面存放的是一个 lua 虚拟机的全局状态，当执行到一个函数时，需要有对应的数据结构来表示函数相关的信息，这个数据结构就是 CallInfo，这个结构体中同样有 top、base这两个与栈相关的成员。</p>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">/*</span></span><br><span class="line"><span class="comment">** Information about a call.</span></span><br><span class="line"><span class="comment">** When a thread yields, 'func' is adjusted to pretend that the</span></span><br><span class="line"><span class="comment">** top function has only the yielded values in its stack; in that</span></span><br><span class="line"><span class="comment">** case, the actual 'func' value is saved in field 'extra'. </span></span><br><span class="line"><span class="comment">** When a function calls another with a continuation, 'extra' keeps</span></span><br><span class="line"><span class="comment">** the function index so that, in case of errors, the continuation</span></span><br><span class="line"><span class="comment">** function can be called with the correct top.</span></span><br><span class="line"><span class="comment">*/</span></span><br><span class="line"><span class="keyword">typedef</span> <span class="class"><span class="keyword">struct</span> <span class="title">CallInfo</span> &#123;</span></span><br><span class="line">  StkId func;  <span class="comment">/* function index in the stack */</span></span><br><span class="line">  StkId	top;  <span class="comment">/* top for this function */</span></span><br><span class="line">  <span class="class"><span class="keyword">struct</span> <span class="title">CallInfo</span> *<span class="title">previous</span>, *<span class="title">next</span>;</span>  <span class="comment">/* dynamic call link */</span></span><br><span class="line">  <span class="keyword">union</span> &#123;</span><br><span class="line">    <span class="class"><span class="keyword">struct</span> &#123;</span>  <span class="comment">/* only for Lua functions */</span></span><br><span class="line">      StkId base;  <span class="comment">/* base for this function */</span></span><br><span class="line">      <span class="keyword">const</span> Instruction *savedpc;</span><br><span class="line">    &#125; l;</span><br><span class="line">    <span class="class"><span class="keyword">struct</span> &#123;</span>  <span class="comment">/* only for C functions */</span></span><br><span class="line">      lua_KFunction k;  <span class="comment">/* continuation in case of yields */</span></span><br><span class="line">      <span class="keyword">ptrdiff_t</span> old_errfunc;</span><br><span class="line">      lua_KContext ctx;  <span class="comment">/* context info. in case of yields */</span></span><br><span class="line">    &#125; c;</span><br><span class="line">  &#125; u;</span><br><span class="line">  <span class="keyword">ptrdiff_t</span> extra;</span><br><span class="line">  <span class="keyword">short</span> nresults;  <span class="comment">/* expected number of results from this function */</span></span><br><span class="line">  lu_byte callstatus;</span><br><span class="line">&#125; CallInfo;</span><br></pre></td></tr></table></figure>
+
+<p>在 lua_State 中，有一个 base_ci 的 CallInfo 数组，存储的就是 CallInfo 的信息，而另一个 ci 成员，指向的就是当前函数的 CallInfo 指针。</p>
+<p>在调用函数之前，一般会调用 luaD_precall 函数：</p>
+<ol>
+<li>保存当前虚拟机执行的指令 savedpc 到当前 CallInfo 的 savedpc 中。此处保存下来是为了后面调用完毕之后恢复执行。</li>
+<li>分别计算出待调用函数的 base、top 值，这些值的计算依赖于函数的参数数量。</li>
+<li>从 lua_State 的 base_ci 数组中分配一个新的 CallInfo 指针，存储前面两步计算出来的信息，切换到这个函数准备调用。</li>
+</ol>
+<h3 id="指令的解析："><a href="#指令的解析：" class="headerlink" title="指令的解析："></a>指令的解析：</h3><p>首先，分析阶段要用到的数据结构是 FuncState。这个结构体用于在语法分析时保存解析函数之后相关的信息，根据其中的 prev 指针成员来串联起来。对于下面的 Lua 代码：</p>
+<figure class="highlight lua"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">-- 最外层 FuncState fs1</span></span><br><span class="line"><span class="keyword">local</span> <span class="function"><span class="keyword">function</span> <span class="title">a</span><span class="params">()</span></span>	<span class="comment">-- 函数 a 的 FuncState fsa</span></span><br><span class="line">	<span class="keyword">local</span> <span class="function"><span class="keyword">function</span> <span class="title">b</span><span class="params">()</span></span>	<span class="comment">-- 函数 b 的 FuncState fsb</span></span><br><span class="line">	<span class="keyword">end</span></span><br><span class="line"><span class="keyword">end</span></span><br></pre></td></tr></table></figure>
+
+<p>涉及到三个 FuncState 指针，一层一层嵌套包围，其中fs1是 fsa 的父指针:</p>
+<p><img src="https://s2.ax1x.com/2019/08/22/m0c4zD.png" alt=""></p>
+<p>在 FuncState 结构体中，有一个成员 Proto *f，它用来保存这个 FuncState 解析指令后生成的指令，其中除了自己的，还包括内部嵌套的子函数的：</p>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">/* state needed to generate code for a given function */</span></span><br><span class="line"><span class="keyword">typedef</span> <span class="class"><span class="keyword">struct</span> <span class="title">FuncState</span> &#123;</span></span><br><span class="line">  Proto *f;  <span class="comment">/* current function header */</span></span><br><span class="line">  <span class="class"><span class="keyword">struct</span> <span class="title">FuncState</span> *<span class="title">prev</span>;</span>  <span class="comment">/* enclosing function */</span></span><br><span class="line">  <span class="class"><span class="keyword">struct</span> <span class="title">LexState</span> *<span class="title">ls</span>;</span>  <span class="comment">/* lexical state */</span></span><br><span class="line">  <span class="class"><span class="keyword">struct</span> <span class="title">BlockCnt</span> *<span class="title">bl</span>;</span>  <span class="comment">/* chain of current blocks */</span></span><br><span class="line">  <span class="keyword">int</span> pc;  <span class="comment">/* next position to code (equivalent to 'ncode') */</span></span><br><span class="line">  <span class="keyword">int</span> lasttarget;   <span class="comment">/* 'label' of last 'jump label' */</span></span><br><span class="line">  <span class="keyword">int</span> jpc;  <span class="comment">/* list of pending jumps to 'pc' */</span></span><br><span class="line">  <span class="keyword">int</span> nk;  <span class="comment">/* number of elements in 'k' */</span></span><br><span class="line">  <span class="keyword">int</span> np;  <span class="comment">/* number of elements in 'p' */</span></span><br><span class="line">  <span class="keyword">int</span> firstlocal;  <span class="comment">/* index of first local var (in Dyndata array) */</span></span><br><span class="line">  <span class="keyword">short</span> nlocvars;  <span class="comment">/* number of elements in 'f-&gt;locvars' */</span></span><br><span class="line">  lu_byte nactvar;  <span class="comment">/* number of active local variables */</span></span><br><span class="line">  lu_byte nups;  <span class="comment">/* number of upvalues */</span></span><br><span class="line">  lu_byte freereg;  <span class="comment">/* first free register */</span></span><br><span class="line">&#125; FuncState;</span><br></pre></td></tr></table></figure>
+
+<p>各个层次的 Proto 数据是逐层包含的，因此最外层的全局 FuncState 结构体中的 Proto 数组一定有这个全局结构中所有 Proto 的信息，也就是解析完毕之后的指令信息。</p>
+<p>而 luaY_parser 这个函数，它是分析阶段的唯一入口函数，这个函数的返回值就是 Proto 指针，而 FuncState 等数据结构仅是用于分析过程中的临时数据结构，它们最终都是为了解析代码生成指令到 Proto 结构体服务的。</p>
+<h4 id="Proto-结构体："><a href="#Proto-结构体：" class="headerlink" title="Proto 结构体："></a>Proto 结构体：</h4><figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">/*</span></span><br><span class="line"><span class="comment">** Function Prototypes</span></span><br><span class="line"><span class="comment">*/</span></span><br><span class="line"><span class="keyword">typedef</span> <span class="class"><span class="keyword">struct</span> <span class="title">Proto</span> &#123;</span></span><br><span class="line">  CommonHeader;</span><br><span class="line">  lu_byte numparams;  <span class="comment">/* number of fixed parameters */</span></span><br><span class="line">  lu_byte is_vararg;</span><br><span class="line">  lu_byte maxstacksize;  <span class="comment">/* maximum stack used by this function */</span></span><br><span class="line">  <span class="keyword">int</span> sizeupvalues;  <span class="comment">/* size of 'upvalues' */</span></span><br><span class="line">  <span class="keyword">int</span> sizek;  <span class="comment">/* size of 'k' */</span></span><br><span class="line">  <span class="keyword">int</span> sizecode;</span><br><span class="line">  <span class="keyword">int</span> sizelineinfo;</span><br><span class="line">  <span class="keyword">int</span> sizep;  <span class="comment">/* size of 'p' */</span></span><br><span class="line">  <span class="keyword">int</span> sizelocvars;</span><br><span class="line">  <span class="keyword">int</span> linedefined;</span><br><span class="line">  <span class="keyword">int</span> lastlinedefined;</span><br><span class="line">  TValue *k;  <span class="comment">/* constants used by the function 函数使用的常量（数组） */</span></span><br><span class="line">  Instruction *code;	<span class="comment">/* 保存分析之后生成的 OpCode 数组 */</span></span><br><span class="line">  <span class="class"><span class="keyword">struct</span> <span class="title">Proto</span> **<span class="title">p</span>;</span>  <span class="comment">/* functions defined inside the function 函数内定义的函数 */</span></span><br><span class="line">  <span class="keyword">int</span> *lineinfo;  <span class="comment">/* map from opcodes to source lines (debug information) */</span></span><br><span class="line">  LocVar *locvars;  <span class="comment">/* information about local variables (debug information) 局部变量的数组（调试信息） */</span></span><br><span class="line">  Upvaldesc *upvalues;  <span class="comment">/* upvalue information 保存 upvalue 的数组 */</span></span><br><span class="line">  <span class="class"><span class="keyword">struct</span> <span class="title">LClosure</span> *<span class="title">cache</span>;</span>  <span class="comment">/* last created closure with this prototype */</span></span><br><span class="line">  TString  *source;  <span class="comment">/* used for debug information */</span></span><br><span class="line">  GCObject *gclist;</span><br><span class="line">&#125; Proto;</span><br></pre></td></tr></table></figure>
+
+<h3 id="指令格式："><a href="#指令格式：" class="headerlink" title="指令格式："></a>指令格式：</h3><p>lua 虚拟机的指令格式：</p>
+<p><img src="https://i.loli.net/2019/08/22/IROLUSJyYKfevoZ.png" alt="operation.png"></p>
+<p>首先，Lua 的指令是 32 位的：</p>
+<ul>
+<li>Opcode：操作数</li>
+<li>A、B、C：参数</li>
+</ul>
+<p>不同操作数的指令格式不同、含义不同。操作数是 6 位的，所以 Lua 最多支持 2^6-1 = 31 个指令。Lua 代码中，将每个操作数及其对应的指令格式都在 lopcodes.h 中的 OpCode 枚举类型中定义。</p>
+<p>Lua 虚拟机指令中有着不同的参数：</p>
+<table>
+<thead>
+<tr>
+<th>格式</th>
+<th>说明</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>R(A)</td>
+<td>A参数作为寄存器索引，R(B)、R(C)依此类推</td>
+</tr>
+<tr>
+<td>pc</td>
+<td>程序计数器，这个数据用于指示当前指令的地址</td>
+</tr>
+<tr>
+<td>Kst(n)</td>
+<td>常量数组中的第n个数据</td>
+</tr>
+<tr>
+<td>Upvalue(n)</td>
+<td>upvalue 数组中的第 n 个数据</td>
+</tr>
+<tr>
+<td>Gbl[sym]</td>
+<td>全局符号表中取名为 sym 的数据</td>
+</tr>
+<tr>
+<td>RK(B)</td>
+<td>B 可能是寄存器索引，也可能是常量数组索引，RK(C)类似</td>
+</tr>
+<tr>
+<td>sBx</td>
+<td>有符号整数，用于表示跳转偏移量</td>
+</tr>
+</tbody></table>
+<p>在lopcodes.h 文件中还定义了每个指令的格式，以及相关的宏；这里定义了在一个指令中每个参数对应的大小和位置。</p>
+<p>RK(B)的意思有两层，一是这个指令格式只可能作用在 OpCode 的 B、C 参数上，不会作用在参数 A 上；二是这个数据除了从函数栈获取之外，还有可能从常量数组中获取，关键在于宏 ISK 的判断。</p>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">/* test whether value is a constant */</span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">define</span> ISK(x)		((x) &amp; BITRK)</span></span><br></pre></td></tr></table></figure>
+
+<p>判断这个数据的第 8 位是不是 1，如果是，则认为应该从 K 数组获取数据，否则就是从函数栈寄存器中获取数据。</p>
+<p>从寄存器中取指令是在以 R 开头的宏中，实际代码中会使用一个 base 再加上对应的地址，base 值保存的是函数栈基址：</p>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="meta-keyword">define</span> RA(i)	(base+GETARG_A(i))</span></span><br><span class="line"><span class="comment">/* to be used after possible stack reallocation */</span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">define</span> RB(i)	check_exp(getBMode(GET_OPCODE(i)) == OpArgR, base+GETARG_B(i))</span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">define</span> RC(i)	check_exp(getCMode(GET_OPCODE(i)) == OpArgR, base+GETARG_C(i))</span></span><br></pre></td></tr></table></figure>
+
+<h3 id="指令的执行："><a href="#指令的执行：" class="headerlink" title="指令的执行："></a>指令的执行：</h3><p>指令执行的入口函数是 luaV_execute：</p>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">luaV_execute</span> <span class="params">(lua_State *L)</span> </span>&#123;</span><br><span class="line">  CallInfo *ci = L-&gt;ci;</span><br><span class="line">  LClosure *cl;</span><br><span class="line">  TValue *k;</span><br><span class="line">  StkId base;</span><br><span class="line"> newframe:  <span class="comment">/* reentry point when frame changes (call/return) */</span></span><br><span class="line">  lua_assert(ci == L-&gt;ci);</span><br><span class="line">  cl = clLvalue(ci-&gt;func);</span><br><span class="line">  k = cl-&gt;p-&gt;k;</span><br><span class="line">  base = ci-&gt;u.l.base;</span><br><span class="line">  <span class="comment">/* main loop of interpreter */</span></span><br><span class="line">  <span class="keyword">for</span> (;;) &#123;</span><br><span class="line">    Instruction i = *(ci-&gt;u.l.savedpc++);</span><br><span class="line">    StkId ra;</span><br><span class="line">    <span class="keyword">if</span> ((L-&gt;hookmask &amp; (LUA_MASKLINE | LUA_MASKCOUNT)) &amp;&amp;</span><br><span class="line">        (--L-&gt;hookcount == <span class="number">0</span> || L-&gt;hookmask &amp; LUA_MASKLINE)) &#123;</span><br><span class="line">      Protect(luaG_traceexec(L));</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="comment">/* WARNING: several calls may realloc the stack and invalidate 'ra' */</span></span><br><span class="line">    ra = RA(i);</span><br><span class="line">    lua_assert(base == ci-&gt;u.l.base);</span><br><span class="line">    lua_assert(base &lt;= L-&gt;top &amp;&amp; L-&gt;top &lt; L-&gt;<span class="built_in">stack</span> + L-&gt;stacksize);</span><br></pre></td></tr></table></figure>
+
+<ul>
+<li>ci：用于保存当前指令的执行位置（以及一些其他信息，包括动态调用链的双向链表）</li>
+<li>cl：当前所在的函数环境</li>
+<li>base：当前函数环境的栈 base 地址</li>
+<li>k：当前函数环境的常量数组</li>
+</ul>
+<p>总结：</p>
+<ol>
+<li>分析阶段最后的结果就是Proto结构体。在这个结构体中，code成员用于存储指令，f数组用于保存里面嵌套的函数的Proto结构体。</li>
+<li>每个环境都有自己对应的栈，base指向这个栈的基地址，top指向这个栈的栈顶地址。取函数栈内的数据，都是以base基地址为基础地址的操作。</li>
+<li>在虚拟机开始执行指令之前，需要把对应的指令和栈地址切换到所要执行的函数的数据上。</li>
+</ol>
+<hr>
+<p>参考：</p>
+<ol>
+<li>《Lua设计与实现》（codedump 著）</li>
+<li><a href="https://jin-yang.github.io/post/lua-sourcecode.html" target="_blank" rel="noopener">Lua 源码解析</a></li>
+</ol>
+
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/Lua/" rel="tag"># Lua</a>
+          
+        </div>
+      
+
+      
+      
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2019/08/21/Lua/Lua%E6%BA%90%E7%A0%81%E9%98%85%E8%AF%BB%EF%BC%9A%E8%99%9A%E6%8B%9F%E6%9C%BA%E6%A6%82%E8%BF%B0/" rel="next" title="Lua源码阅读：虚拟机概述">
+                <i class="fa fa-chevron-left"></i> Lua源码阅读：虚拟机概述
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+              <a href="/2019/08/23/Lua/Lua%E6%BA%90%E7%A0%81%E9%98%85%E8%AF%BB%EF%BC%9A%E6%8C%87%E4%BB%A4%E7%9A%84%E8%A7%A3%E6%9E%90%E4%B8%8E%E6%89%A7%E8%A1%8C/" rel="prev" title="Lua源码阅读：指令的解析与执行">
+                Lua源码阅读：指令的解析与执行 <i class="fa fa-chevron-right"></i>
+              </a>
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+
+    <div class="post-spread">
+      
+    </div>
+  </div>
+
+
+          </div>
+          
+
+
+          
+  <div class="comments" id="comments">
+    
+  </div>
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap" >
+            Table of Contents
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview">
+            Overview
+          </li>
+        </ul>
+      
+
+      <section class="site-overview sidebar-panel">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+          <img class="site-author-image" itemprop="image"
+               src="/images/avatar.gif"
+               alt="zhangMo" />
+          <p class="site-author-name" itemprop="name">zhangMo</p>
+           
+              <p class="site-description motion-element" itemprop="description">T&S&A&G</p>
+          
+        </div>
+        <nav class="site-state motion-element">
+
+          
+            <div class="site-state-item site-state-posts">
+              <a href="/archives/">
+                <span class="site-state-item-count">86</span>
+                <span class="site-state-item-name">posts</span>
+              </a>
+            </div>
+          
+
+          
+            
+            
+            <div class="site-state-item site-state-categories">
+              
+                <span class="site-state-item-count">10</span>
+                <span class="site-state-item-name">categories</span>
+              
+            </div>
+          
+
+          
+            
+            
+            <div class="site-state-item site-state-tags">
+              
+                <span class="site-state-item-count">34</span>
+                <span class="site-state-item-name">tags</span>
+              
+            </div>
+          
+
+        </nav>
+
+        
+
+        <div class="links-of-author motion-element">
+          
+        </div>
+
+        
+        
+
+        
+        
+
+        
+
+
+      </section>
+
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-3"><a class="nav-link" href="#数据结构与栈："><span class="nav-number">1.</span> <span class="nav-text">数据结构与栈：</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#指令的解析："><span class="nav-number">2.</span> <span class="nav-text">指令的解析：</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#Proto-结构体："><span class="nav-number">2.1.</span> <span class="nav-text">Proto 结构体：</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#指令格式："><span class="nav-number">3.</span> <span class="nav-text">指令格式：</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#指令的执行："><span class="nav-number">4.</span> <span class="nav-text">指令的执行：</span></a></li></ol></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
+      
+
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright" >
+  
+  &copy; 
+  <span itemprop="copyrightYear">2020</span>
+  <span class="with-love">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">zhangMo</span>
+</div>
+
+
+<div class="powered-by">
+  Powered by <a class="theme-link" href="https://hexo.io" target="_blank" rel="noopener">Hexo</a>
+</div>
+
+<div class="theme-info">
+  Theme -
+  <a class="theme-link" href="https://github.com/iissnan/hexo-theme-next" target="_blank" rel="noopener">
+    NexT.Muse
+  </a>
+</div>
+
+
+        
+
+        
+      </div>
+    </footer>
+
+    
+      <div class="back-to-top">
+        <i class="fa fa-arrow-up"></i>
+        
+      </div>
+    
+
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  <script type="text/javascript" src="/lib/jquery/index.js?v=2.1.3"></script>
+
+  
+  <script type="text/javascript" src="/lib/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+
+  
+  <script type="text/javascript" src="/lib/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
+
+  
+  <script type="text/javascript" src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+
+  
+  <script type="text/javascript" src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+
+  
+  <script type="text/javascript" src="/lib/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=5.1.2"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=5.1.2"></script>
+
+
+
+  
+  
+
+  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.1.2"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.1.2"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.1.2"></script>
+
+
+
+  
+
+
+  
+
+
+
+
+	
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+</body>
+</html>

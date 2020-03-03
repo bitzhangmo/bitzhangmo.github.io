@@ -1,0 +1,976 @@
+<!DOCTYPE html>
+
+
+
+  
+
+
+<html class="theme-next muse use-motion" lang="zh-CN">
+<head>
+  <meta charset="UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+<meta name="theme-color" content="#222">
+
+
+
+
+
+
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+  <link href="/lib/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css" />
+
+
+
+
+  
+  
+  
+  
+
+  
+    
+    
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+    
+    
+    <link href="//fonts.googleapis.com/css?family=Lato:300,300italic,400,400italic,700,700italic&subset=latin,latin-ext" rel="stylesheet" type="text/css">
+  
+
+
+
+
+
+
+<link href="/lib/font-awesome/css/font-awesome.min.css?v=4.6.2" rel="stylesheet" type="text/css" />
+
+<link href="/css/main.css?v=5.1.2" rel="stylesheet" type="text/css" />
+
+
+  <meta name="keywords" content="Artificial Intelligence for Games," />
+
+
+
+
+
+
+
+
+  <link rel="shortcut icon" type="image/x-icon" href="/favicon.ico?v=5.1.2" />
+
+
+
+
+
+
+<meta name="description" content="[TOC] 游戏中的状态机，分层状态机以及伪代码实现。">
+<meta name="keywords" content="Artificial Intelligence for Games">
+<meta property="og:type" content="article">
+<meta property="og:title" content="[翻译] StateMachine">
+<meta property="og:url" content="https:&#x2F;&#x2F;bitzhangmo.github.io&#x2F;2018&#x2F;12&#x2F;17&#x2F;%E7%BF%BB%E8%AF%91&#x2F;%E7%BF%BB%E8%AF%91-StateMachine&#x2F;index.html">
+<meta property="og:site_name" content="zhangMo Blog">
+<meta property="og:description" content="[TOC] 游戏中的状态机，分层状态机以及伪代码实现。">
+<meta property="og:locale" content="zh-CN">
+<meta property="og:updated_time" content="2018-12-17T07:49:14.762Z">
+<meta name="twitter:card" content="summary">
+
+
+
+<script type="text/javascript" id="hexo.configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/',
+    scheme: 'Muse',
+    sidebar: {"position":"left","display":"post","offset":12,"offset_float":12,"b2t":false,"scrollpercent":false,"onmobile":false},
+    fancybox: true,
+    tabs: true,
+    motion: true,
+    duoshuo: {
+      userId: '0',
+      author: 'Author'
+    },
+    algolia: {
+      applicationID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    }
+  };
+</script>
+
+
+
+  <link rel="canonical" href="https://bitzhangmo.github.io/2018/12/17/翻译/翻译-StateMachine/"/>
+
+
+
+
+
+  <title>[翻译] StateMachine | zhangMo Blog</title>
+  
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="zh-CN">
+
+  
+  
+    
+  
+
+  <div class="container sidebar-position-left page-post-detail ">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-wrapper">
+  <div class="site-meta ">
+    
+
+    <div class="custom-logo-site-title">
+      <a href="/"  class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">zhangMo Blog</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+      
+        <p class="site-subtitle"></p>
+      
+  </div>
+
+  <div class="site-nav-toggle">
+    <button>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+    </button>
+  </div>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu">
+      
+        
+        <li class="menu-item menu-item-home">
+          <a href="/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-home"></i> <br />
+            
+            Home
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/archives/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-archive"></i> <br />
+            
+            Archives
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-tags">
+          <a href="/tags/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-tags"></i> <br />
+            
+            Tags
+          </a>
+        </li>
+      
+
+      
+    </ul>
+  
+
+  
+</nav>
+
+
+
+ </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="https://bitzhangmo.github.io/2018/12/17/%E7%BF%BB%E8%AF%91/%E7%BF%BB%E8%AF%91-StateMachine/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="zhangMo">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/avatar.gif">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="zhangMo Blog">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">[翻译] StateMachine</h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">Posted on</span>
+              
+              <time title="Post created" itemprop="dateCreated datePublished" datetime="2018-12-17T15:29:26+08:00">
+                2018-12-17
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+            <span class="post-category" >
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">In</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/%E7%BF%BB%E8%AF%91/" itemprop="url" rel="index">
+                    <span itemprop="name">翻译</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <p>[TOC]</p>
+<p>游戏中的状态机，分层状态机以及伪代码实现。</p>
+<a id="more"></a>
+
+<h2 id="Chapter-5-Decision-Making"><a href="#Chapter-5-Decision-Making" class="headerlink" title="Chapter 5 Decision Making"></a>Chapter 5 Decision Making</h2><h3 id="5-3-STATE-MACHINES：状态机"><a href="#5-3-STATE-MACHINES：状态机" class="headerlink" title="5.3 STATE MACHINES：状态机"></a>5.3 STATE MACHINES：状态机</h3><p>Often, characters in a game will act in one of a limited set of ways. They will carry on doing the same thing until some event or influence makes them change. A covenant warrior in Halo [Bungie Software, 2001], for example, will stand at its post until it notices the player, then it will switch into attack mode, taking cover and firing. </p>
+<p>通常来说，游戏中的角色所进行的行为将会从有限的行为集合中选取。它们将会保持这个状态，直到一些事件或者影响使得它们改变。以 <em>光环：战斗进化</em> 为例，敌人将会一直驻守直到它们注意到玩家，此时将会转换到攻击状态，寻求掩体以及开火。</p>
+<p>We can support this kind of behavior using decision trees, and we’ve gone some way to doing that using random decisions. In most cases, however, it is easier to use a technique designed for this purpose: state machines. </p>
+<p>我们可以通过决策树来实现这种行为，并且我们已经采用某种方式使用随机决策来做到这一点。然而，在大多数情况下，对于这个目标，我们可以采用更为容易的技术设计：状态机。</p>
+<p>State machines are the technique most often used for this kind of decision making and, along with scripting (see Section 5.9), make up the vast majority of decision making systems used in current games. </p>
+<p>状态机是一种经常用于这类决策的技术，它与脚本一起使用（参见第5.9节），构成当前游戏中使用的绝大多数（vast majority）决策系统。</p>
+<p>State machines take account of both the world around them (like decision trees) and their internal makeup (their state). </p>
+<p>状态机既与它周围的世界相关（类似于决策树）又与其内部组成相关（它们自身的状态）。</p>
+<h5 id="A-Basic-State-Machine-：一个基本状态机"><a href="#A-Basic-State-Machine-：一个基本状态机" class="headerlink" title="A Basic State Machine ：一个基本状态机"></a>A Basic State Machine ：一个基本状态机</h5><p>In a state machine each character occupies one state. Normally, actions or behaviors are associated with each state. So as long as the character remains in that state, it will continue carrying out the same action. </p>
+<p>在状态机中，每个角色占据一个状态。通常，动作或行为与每个状态相关联。因此，只要角色保持在该状态，它将继续执行相同的动作。</p>
+<p>States are connected together by transitions. Each transition leads from one state to another, the target state, and each has a set of associated conditions. If the game determines that the conditions of a transition are met, then the character changes state to the transition’s target state. When a transition’s conditions are met, it is said to trigger, and when the transition is followed to a new state, it has fired. </p>
+<p>每个状态通过状态转换联系在一起。每个转换从一个状态引导到另一个状态，即目标状态，并且每个转换具有一组相关条件。如果游戏确定满足转换的条件，则角色将状态改变为要转换的目标状态。当满足转换条件时，它会被触发，当转换到新状态时，它就会被触发。</p>
+<p>Figure 5.13 shows a simple state machine with three states: On Guard, Fight, and Run Away. Notice that each state has its own set of transitions. </p>
+<p>图5.13显示了一个具有三种状态的简单状态机：On Guard，Fight和Run Away。请注意，每个状态都有自己的一组转换。</p>
+<p>The state machine diagrams in this chapter are based on the UML state chart di- agram format, a standard notation used throughout software engineering. States are shown as curved corner boxes. Transitions are arrowed lines, labelled by the condition that triggers them. Conditions are contained in square brackets. </p>
+<p>本章中的状态机图表基于UML状态图表格式，这是整个软件工程中使用的标准符号。状态显示为弯角框。过渡是箭头线，由触发它们的条件标记。条件包含在方括号中。</p>
+<p>The solid circle in Figure 5.13 has only one transition without a trigger condition. The transition points to the initial state that will be entered when the state machine is first run. </p>
+<p>图5.13中的实心圆只有一个没有触发条件的转换。转换指向首次运行状态机时将进入的初始状态。</p>
+<p>![image-20181122004651145](/Users/zhangmo/Library/Application Support/typora-user-images/image-20181122004651145.png)</p>
+<p>You won’t need an in-depth understanding of UML to understand this chapter. If you want to find out more about UML, I’d recommend Pilone [2005]. </p>
+<p>您不需要深入了解UML来理解本章。如果你想了解更多关于UML的信息，我推荐<em>Pilone [2005]</em>。</p>
+<p>In a decision tree the same set of decisions is always used, and any action can be reached through the tree. In a state machine only transitions from the current state are considered, so not every action can be reached. </p>
+<p>在决策树中，始终使用相同的决策集，并且可以通过树到达任何操作。在状态机中，仅考虑从当前状态的转换，因此不是每个动作都可以到达。</p>
+<h5 id="Finite-State-Machines-：有限状态机"><a href="#Finite-State-Machines-：有限状态机" class="headerlink" title="Finite State Machines ：有限状态机"></a>Finite State Machines ：有限状态机</h5><p>In game AI any state machine with this kind of structure is usually called a finite state machine (FSM). This and the following sections will cover a range of increasingly powerful state machine implementations, all of which are often referred to as FSMs. </p>
+<p>在游戏AI中，具有这种结构的任何状态机通常称为有限状态机（FSM）。本节和以下部分将介绍一系列日益强大的状态机实现，所有这些实现通常都称为FSM。</p>
+<p>This causes confusion with non-games programmers, for whom the term FSM is more commonly used for a particular type of simple state machine. An FSM in computer science normally refers to an algorithm used for parsing text. Compilers use an FSM to tokenize the input code into symbols that can be interpreted by the compiler. </p>
+<p>这导致与非游戏程序员的混淆，对于他们来说，术语FSM更常用于特定类型的简单状态机。计算机科学中的FSM通常是指用于解析文本的算法。编译器使用FSM将输入代码标记为可由编译器解释的符号。</p>
+<h5 id="The-Game-FSM-：游戏中的有限状态机"><a href="#The-Game-FSM-：游戏中的有限状态机" class="headerlink" title="The Game FSM ：游戏中的有限状态机"></a>The Game FSM ：游戏中的有限状态机</h5><p>The basic state machine structure is very general and admits any number of imple- mentations. I have seen tens of different ways to implement a game FSM, and it is rare to find any two developers using exactly the same technique. That makes it difficult to put forward a single algorithm as being the “state machine” algorithm. </p>
+<p>基本状态机结构非常通用，允许任意数量的实现。我已经看到了几种不同的方法来实现游戏FSM，并且很少发现任何两个开发人员使用完全相同的技术。这使得将单个算法提出为“状态机”算法变得困难。</p>
+<p>Later in this section, I’ll look at a range of different implementation styles for the FSM, but the main algorithm I work through is just one. I chose it for its flexibility and the cleanness of its implementation. </p>
+<p>在本节的后面部分，我将介绍FSM的一系列不同的实现样式，但我使用的主要算法只有一个。我之所以选择它是因为它的灵活性和实现的优雅性。</p>
+<h4 id="5-3-1-THE-PROBLEM-：问题"><a href="#5-3-1-THE-PROBLEM-：问题" class="headerlink" title="5.3.1 THE PROBLEM ：问题"></a>5.3.1 THE PROBLEM ：问题</h4><p>We would like a general system that supports arbitrary state machines with any kind of transition condition. The state machine will conform to the structure given above and will occupy only one state at a time. </p>
+<p>我们想要一个支持具有任何转换条件的任意状态机的通用系统。这个状态机将符合上面给出的结构，并且一次只占用一个状态。</p>
+<h4 id="5-3-2-THE-ALGORITHM-：算法"><a href="#5-3-2-THE-ALGORITHM-：算法" class="headerlink" title="5.3.2 THE ALGORITHM ：算法"></a>5.3.2 THE ALGORITHM ：算法</h4><p>We will use a generic state interface which can be implemented to include any spe- cific code. The state machine keeps track of the set of possible states and records the current state it is in. Alongside each state, a series of transitions are maintained. Each transition is again a generic interface that can be implemented with the appropriate conditions. It simply reports to the state machine whether it is triggered or not. </p>
+<p>我们将使用通用状态接口，可以实现包含任何特定代码。 状态机跟踪可能状态的集合并记录它所处的当前状态。在每个状态下，保持一系列转换。 每次转换都是一个通用接口，可以使用适当的条件实现。 它只是向状态机报告它是否被触发。</p>
+<p>At each iteration (normally each frame), the state machine’s update function is called. This checks to see if any transition from the current state is triggered. The first transition that is triggered is scheduled to fire. The method then compiles a list of actions to perform from the currently active state. If a transition has been triggered, then the transition is fired. </p>
+<p>在每次迭代（通常是每个帧），调用状态机的更新函数。 这将检查是否触发了当前状态的任何转换。 触发的第一个转换将会被执行。 然后，该方法维护一个要从当前活动状态执行的动作列表(actions)。 如果已触发某个转换，则会执行这个转换。</p>
+<p>This separation of the triggering and firing of transitions allows the transitions to also have their own actions. Often, transitioning from one state to another also involves carrying out some action. In this case a fired transition can add the action it needs to those returned by the state. </p>
+<p>这种转换的触发和触发的分离允许转换也具有它们自己的动作。 通常，从一个状态转换到另一个状态也涉及执行某些行动。 //在这种情况下，触发转换可以将所需的操作添加到状态返回的操作。</p>
+<h4 id="5-3-3-PSEUDO-CODE-：伪代码实现"><a href="#5-3-3-PSEUDO-CODE-：伪代码实现" class="headerlink" title="5.3.3 PSEUDO-CODE ：伪代码实现"></a>5.3.3 PSEUDO-CODE ：伪代码实现</h4><p>The state machine holds a list of states, with an indication of which one is the current state. It has an update function for triggering and firing transitions and a function that returns a set of actions to carry out.</p>
+<p>状态机保存状态列表，指示哪一个是当前状态。 //它具有用于执行和触发转换的更新功能以及返回要执行的一组操作的功能。 </p>
+<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">machine</span></span></span><br><span class="line"><span class="class">&#123;</span></span><br><span class="line">    <span class="comment">// 维护一个状态机的状态列表</span></span><br><span class="line">    <span class="built_in">list</span>&lt;State&gt; states;</span><br><span class="line">    </span><br><span class="line">    <span class="comment">// 初始状态</span></span><br><span class="line">    State initialState；</span><br><span class="line">    </span><br><span class="line">    <span class="comment">// 当前状态</span></span><br><span class="line">    currentState = initialState;</span><br><span class="line">    </span><br><span class="line">    <span class="comment">// 检查并执行转换，同时返回一个动作列表</span></span><br><span class="line">    Update()</span><br><span class="line">    &#123;</span><br><span class="line">        <span class="comment">// 假定没有转换被触发</span></span><br><span class="line">        triggeredTransition = None;</span><br><span class="line">        </span><br><span class="line">        <span class="comment">// 遍历所有状态并保存第一个被触发的状态</span></span><br><span class="line">        <span class="keyword">for</span> transition in currentState.getTransitions()</span><br><span class="line">        &#123;</span><br><span class="line">            <span class="keyword">if</span> transition.isTriggered():</span><br><span class="line">			triggeredTransition = transition;</span><br><span class="line">			<span class="keyword">break</span>;</span><br><span class="line">        &#125;</span><br><span class="line">        </span><br><span class="line">        <span class="comment">// 检查是否有状态被触发？</span></span><br><span class="line">        <span class="keyword">if</span> triggeredTransition</span><br><span class="line">        &#123;</span><br><span class="line">			targetState = triggeredTransition.getTargetState();</span><br><span class="line">            </span><br><span class="line">			<span class="comment">// 在行为列表之中增加旧状态的退出操作、状态转移的操作以及新状态的入口操作</span></span><br><span class="line">			actions = currentState.getExitAction()</span><br><span class="line">			actions += triggeredTransition.getAction()</span><br><span class="line">			actions += targetState.getEntryAction()</span><br><span class="line">            </span><br><span class="line">            <span class="comment">// 完成状态转移并返回行为列表</span></span><br><span class="line">            currentState = targetState</span><br><span class="line">			<span class="keyword">return</span> actions</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="comment">// 否则直接返回当前状态的行为列表</span></span><br><span class="line">        <span class="keyword">else</span> <span class="keyword">return</span> currentState.getAction()</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h4 id="5-3-4-DATA-STRUCTURES-AND-INTERFACES-：数据结构与接口"><a href="#5-3-4-DATA-STRUCTURES-AND-INTERFACES-：数据结构与接口" class="headerlink" title="5.3.4 DATA STRUCTURES AND INTERFACES ：数据结构与接口"></a>5.3.4 DATA STRUCTURES AND INTERFACES ：数据结构与接口</h4><p>The state machine relies on having states and transitions with a particular interface.<br>The state interface has the following form:</p>
+<p>状态机依赖于具有特定接口的状态和转换。<br>状态接口具有以下形式：</p>
+<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">State</span></span></span><br><span class="line"><span class="class">&#123;</span></span><br><span class="line">    <span class="function">def <span class="title">getAction</span><span class="params">()</span></span>;</span><br><span class="line">    <span class="function">def <span class="title">getEntryAction</span><span class="params">()</span></span>;</span><br><span class="line">    <span class="function">def <span class="title">getExitAction</span><span class="params">()</span></span>;</span><br><span class="line">    </span><br><span class="line">    <span class="function">def <span class="title">getTransitions</span><span class="params">()</span></span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>Each of the getAction methods should return a list of actions to carry out. As we will see below, the getEntryAction is only called when the state is entered from a transition, and the getExitAction is only called when the state is exited. The rest of the time that the state is active, getAction is called. The getTransitions method should return a list of transitions that are outgoing from this state. </p>
+<p>The transition interface has the following form: </p>
+<p>每个getAction方法都应返回要执行的操作列表。 正如我们将在下面看到的，只有在从转换进入状态时才调用getEntryAction，并且仅在退出状态时调用getExitAction。 其余时间状态为活动状态，调用getAction。 getTransitions方法应返回从此状态传出的转换列表。</p>
+<p>转换接口具有以下形式：</p>
+<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Transition</span></span></span><br><span class="line"><span class="class">&#123;</span></span><br><span class="line">  <span class="function">def <span class="title">isTriggered</span><span class="params">()</span></span>;</span><br><span class="line">  <span class="function">def <span class="title">getTargetState</span><span class="params">()</span></span>;</span><br><span class="line">  <span class="function">def <span class="title">getAction</span><span class="params">()</span></span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>The isTriggered method returns true if the transition can fire; the getTarget-State method reports which state to transition to; and the getAction method returns a list of actions to carry out when the transition fires.</p>
+<p>如果转换可以触发，则isTriggered方法返回true; getTarget-State方法报告要转换到的状态; 并且getAction方法返回转换触发时要执行的操作列表。</p>
+<h5 id="Transition-Implementation-：实现转换"><a href="#Transition-Implementation-：实现转换" class="headerlink" title="Transition Implementation ：实现转换"></a>Transition Implementation ：实现转换</h5><p>Only one implementation of the state class should be required: it can simply hold the three lists of actions and the list of transitions as data members, returning them in the corresponding get methods. </p>
+<p>只需要一个状态类的实现：它可以简单地将三个动作列表和转换列表保存为数据成员，并在相应的get方法中返回它们。</p>
+<p>In the same way, we can store the target state and a list of actions in the transition class and have its methods return the stored values. The isTriggered method is more difficult to generalize. Each transition will have its own set of conditions, and much of the power in this method is allowing the transition to implement any kind of tests it likes. </p>
+<p>以同样的方式，我们可以在转换类中存储目标状态和操作列表，并使其方法返回存储的值。 isTriggered方法更难以概括。 每个转换都有自己的一组条件，这种方法的大部分功能是允许转换实现它喜欢的任何类型的条件测试。</p>
+<p>Because state machines are often defined in a data file and read into the game at run time, it is a common requirement to have a set of generic transitions. The state machine can then be set up from the data file by using the appropriate transitions for each state. </p>
+<p>由于状态机通常在数据文件中定义并在运行时读入游戏，因此通常需要具有一组通用转换。 然后，可以通过使用每个状态的适当转换从数据文件中设置状态机。</p>
+<p>In the previous section on decision trees, we saw generic testing decisions that operated on basic data types. The same principle can be used with state machine transitions: we have generic transitions that trigger when data they are looking at is in a given range. </p>
+<p>在上一节关于决策树的部分中，我们看到了对基本数据类型进行操作的通用测试决策。 相同的原理可以与状态机转换一起使用：我们具有通用转换，当它们正在查看的数据处于给定范围内时触发。</p>
+<p>Unlike decision trees, state machines don’t provide a simple way of combining these tests together to make more complex queries. If we need to transition based on the condition that the enemy is far away AND health is low, then we need some way of combining triggers together. </p>
+<p>与决策树不同，状态机不提供将这些测试组合在一起以进行更复杂查询的简单方法。// 如果我们需要根据敌人在远处且健康状况低的条件进行过渡，那么我们需要一些将触发器组合在一起的方法。</p>
+<p>In keeping with our polymorphic design for the state machine, we can accom- plish this with the addition of another interface: the condition interface. We can use a general transition class of the following form:</p>
+<p> 为了与状态机的多态设计保持一致，我们可以通过添加另一个接口来实现这一点：条件接口。 我们可以使用以下形式的一般转换类：</p>
+<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Transition</span></span></span><br><span class="line"><span class="class">&#123;</span><span class="comment">// 条件接口类</span></span><br><span class="line">	actions</span><br><span class="line">  	def getAction(): return actions</span><br><span class="line">  </span><br><span class="line">  	targetState</span><br><span class="line">  	def getTargetState(): return targetState</span><br><span class="line">  </span><br><span class="line">  	condition</span><br><span class="line">  	def isTriggered(): return condition.test()</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>The isTriggered function now delegates the testing to its condition member.<br>Conditions have the following simple format:</p>
+<p>isTriggered函数现在将测试委托给其条件成员。<br>条件具有以下简单格式：</p>
+<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Condition</span></span></span><br><span class="line"><span class="class">&#123;</span></span><br><span class="line">   <span class="function">def <span class="title">test</span><span class="params">()</span></span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>We can then make a set of sub-classes of condition for particular tests, just like we did for decision trees:</p>
+<p>然后，我们可以为特定测试创建一组条件子类，就像我们为决策树所做的那样：</p>
+<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="function">class <span class="title">FloatCondition</span> <span class="params">(Condition)</span></span></span><br><span class="line"><span class="function"></span>&#123;<span class="comment">// 数值条件</span></span><br><span class="line">	minValue;</span><br><span class="line">	maxValue;</span><br><span class="line">  	testValue; <span class="comment">// 我们想关注的游戏数据</span></span><br><span class="line">	<span class="function">def <span class="title">test</span><span class="params">()</span></span></span><br><span class="line"><span class="function">	</span>&#123;</span><br><span class="line">		<span class="keyword">return</span> minValue &lt;= testValue &lt;= maxValue</span><br><span class="line">	&#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>We can combine conditions together using Boolean sub-classes, such as AND, NOT, and OR:</p>
+<p>我们可以使用布尔子类将条件组合在一起，例如AND，NOT和OR：</p>
+<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br></pre></td><td class="code"><pre><span class="line"><span class="function">class <span class="title">AndCondition</span> <span class="params">(Condition)</span></span></span><br><span class="line"><span class="function"></span>&#123;<span class="comment">// 布尔条件</span></span><br><span class="line">	conditionA</span><br><span class="line">	conditionB</span><br><span class="line">	<span class="function">def <span class="title">test</span><span class="params">()</span></span></span><br><span class="line"><span class="function">	</span>&#123;</span><br><span class="line">        <span class="keyword">return</span> conditionA.test() <span class="keyword">and</span> conditionB.test();</span><br><span class="line">	&#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function">class <span class="title">NotCondition</span> <span class="params">(Condition)</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">	condition</span><br><span class="line">	<span class="function">def <span class="title">test</span><span class="params">()</span></span></span><br><span class="line"><span class="function">	</span>&#123;</span><br><span class="line">    	<span class="keyword">return</span> <span class="keyword">not</span> condition.test();</span><br><span class="line">	&#125;</span><br><span class="line">  </span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function">class <span class="title">OrCondition</span> <span class="params">(Condition)</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">	conditionA</span><br><span class="line">	conditionB</span><br><span class="line">	<span class="function">def <span class="title">test</span><span class="params">()</span></span></span><br><span class="line"><span class="function">	</span>&#123;</span><br><span class="line">    	<span class="keyword">return</span> conditionA.test() <span class="keyword">or</span> conditionB.test() </span><br><span class="line">	&#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>and so on, for any level of sophistication we need.</p>
+<p>等等……，支持我们需要的任何复杂程度。</p>
+<h5 id="Weaknesses-：缺点"><a href="#Weaknesses-：缺点" class="headerlink" title="Weaknesses ：缺点"></a>Weaknesses ：缺点</h5><p>This approach to transitions gives a lot of flexibility, but at the price of lots of method calls. In C++ these method calls have to be polymorphic, which can slow down the call and confuse the processor. All this adds time, which may make it unsuitable for use in every frame on lots of characters. </p>
+<p>这种转换方法提供了很大的灵活性，但代价是大量的方法调用。 在C ++中，这些方法调用必须是多态的，这会降低调用速度并使处理器混淆。 所有这些都增加了时间，这可能使其不适合在许多角色的每个帧中使用。</p>
+<p>Several developers I have come across use a homegrown scripting language to ex- press conditions for transitions. This still allows designers to create the state machine rules, but can be slightly more efficient. In practice, however, the speed up over this approach is quite small, unless the scripting language includes some kind of compila- tion into machine code (i.e., Just In Time Compiling). For all but the simplest code, interpreting a script is at least as time-consuming as calling polymorphic functions. </p>
+<p>我遇到的几个开发人员使用自己开发的脚本语言来表达转换条件。 这仍然允许设计人员创建状态机规则，但可以稍微提高效率。 然而，在实践中，除非脚本语言包括对机器代码的某种编译（即，及时编译），否则这种方法的速度非常快。 对于除最简单代码之外的所有代码，解释脚本至少与调用多态函数一样耗时。</p>
+<h4 id="5-3-6-PERFORMANCE-：开销"><a href="#5-3-6-PERFORMANCE-：开销" class="headerlink" title="5.3.6 PERFORMANCE ：开销"></a>5.3.6 PERFORMANCE ：开销</h4><p>The state machine algorithm only requires memory to hold a triggered transition and the current state. It is O(1) in memory, and O(m) in time, where m is the number of transitions per state. </p>
+<p>状态机算法仅需要存储器来保持触发转换和当前状态。 它在存储器中是O（1），在时间上是O（m），其中m是每个状态的转换数。</p>
+<p>The algorithm calls other functions in both the state and the transition classes, and in most cases the execution time of these functions accounts for most of the time spent in the algorithm. </p>
+<p>该算法调用状态和转换类中的其他函数，并且在大多数情况下，这些函数的执行时间占算法中花费的大部分时间。</p>
+<h4 id="5-3-7-IMPLEMENTATION-NOTES-：实现的一些说明"><a href="#5-3-7-IMPLEMENTATION-NOTES-：实现的一些说明" class="headerlink" title="5.3.7 IMPLEMENTATION NOTES ：实现的一些说明"></a>5.3.7 IMPLEMENTATION NOTES ：实现的一些说明</h4><p>As I mentioned earlier, there are any number of ways to implement a state machine. The state machine described in this section is as flexible as possible. I’ve tried to aim for an implementation that allows you to experiment with any kind of state machine and add interesting features. In many cases it may be too flexible. If you’re only planning to use a small subset of its flexibility, then it is very likely to be unnecessarily inefficient. </p>
+<p>正如我之前提到的，有许多方法可以实现状态机。 本节中描述的状态机尽可能灵活。 我试图实现一个允许您尝试任何类型的状态机并添加有趣功能的实现。 在许多情况下，它可能过于灵活。 如果您只计划使用其灵活性的一小部分，则很可能会产生不必要的低效率。</p>
+<h4 id="5-3-8-HARD-CODED-FSM-：FSM的硬编码问题"><a href="#5-3-8-HARD-CODED-FSM-：FSM的硬编码问题" class="headerlink" title="5.3.8 HARD-CODED FSM ：FSM的硬编码问题"></a>5.3.8 HARD-CODED FSM ：FSM的硬编码问题</h4><p>A few years back, almost all state machines were hard-coded. The rules for transitions and the execution of actions were part of the game code. It has become less common as level designers get more control over building the state machine logic, but it is still an important approach. </p>
+<p>几年前，几乎所有的状态机都是硬编码的。 转换规则和动作的执行是游戏代码的一部分。 随着关卡设计师对构建状态机逻辑的更多控制，它变得不那么常见，但它仍然是一种重要的方法。</p>
+<h5 id="Pseudo-Code-：伪代码"><a href="#Pseudo-Code-：伪代码" class="headerlink" title="Pseudo-Code ：伪代码"></a>Pseudo-Code ：伪代码</h5><p>In a hard-coded FSM, the state machine consists of an enumerated value, indicating which state is currently occupied, and a function that checks if a transition should be followed. Here I’ve combined the two into a class definition (although I personally tend to associate hard-coded FSMs with developers still working in C). </p>
+<p>在硬编码的FSM中，状态机由枚举值组成，指示当前占用的状态，以及检查是否应遵循转换的函数。 在这里，我将两者合并为一个类定义（尽管我个人倾向于将硬编码的FSM与仍在C中工作的开发人员联系起来）。</p>
+<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">MyFSM</span></span></span><br><span class="line"><span class="class">&#123;</span></span><br><span class="line">	<span class="comment">// 声明所有状态名</span></span><br><span class="line">	<span class="keyword">enum</span> State</span><br><span class="line">	&#123;</span><br><span class="line">		PATROL,</span><br><span class="line">		DEFEND,</span><br><span class="line">		SLEEP </span><br><span class="line">	&#125;;</span><br><span class="line">	<span class="comment">// 当前状态</span></span><br><span class="line">	myState；</span><br><span class="line">	<span class="function">def <span class="title">update</span><span class="params">()</span></span></span><br><span class="line"><span class="function">	</span>&#123;</span><br><span class="line">		<span class="comment">// 寻找当前状态</span></span><br><span class="line">		<span class="keyword">if</span> myState == PATROL</span><br><span class="line">		&#123;</span><br><span class="line">    		<span class="keyword">if</span> canSeePlayer()</span><br><span class="line">     		   	myState = DEFEND</span><br><span class="line">    		<span class="keyword">if</span> tired()</span><br><span class="line">      		  	myState = SLEEP</span><br><span class="line">		&#125;</span><br><span class="line">		<span class="keyword">else</span> <span class="keyword">if</span> myState == DEFEND</span><br><span class="line">		&#123;</span><br><span class="line">			<span class="keyword">if</span> <span class="keyword">not</span> canSeePlayer()</span><br><span class="line">				myState = PATROL </span><br><span class="line">		&#125;</span><br><span class="line">		<span class="keyword">else</span> <span class="keyword">if</span> myState == SLEEP</span><br><span class="line">		&#123;</span><br><span class="line">			<span class="keyword">if</span> <span class="keyword">not</span> tired()</span><br><span class="line">				myState = PATROL</span><br><span class="line">		&#125;  </span><br><span class="line">		def notifyNoiseHeard(volume)</span><br><span class="line">		&#123;</span><br><span class="line">    		<span class="keyword">if</span> myState == SLEEP <span class="keyword">and</span> volume &gt; <span class="number">10</span>:</span><br><span class="line">    		myState = DEFEND</span><br><span class="line">		&#125;</span><br><span class="line">	&#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>Notice that this is pseudo-code for a particular state machine rather than a type of state machine. In the update function there is a block of code for each state. In that block of code the conditions for each transition are checked in turn, and the state is updated if required. The transitions in this example all call functions (tired and canSeePlayer), which I am assuming have access to the current game state. </p>
+<p>请注意，这是特定状态机的伪代码，而不是一种状态机。 在更新功能中，每个状态都有一个代码块。 在该代码块中，依次检查每个转换的条件，并在需要时更新状态。 这个例子中的转换都是调用函数（tired()和canSeePlayer()），我假设它们可以访问当前的游戏状态。</p>
+<p>In addition, I’ve added a state transition in a separate function, notifyNoiseHeard. I am assuming that the game code will call this function whenever the character hears a loud noise. This illustrates the difference between a polling (asking for informa- tion explicitly) and an event-based (waiting to be told information) approach to state transitions. Chapter 10 on world interfacing contains more details on this distinction. </p>
+<p>另外，我在一个单独的函数notifyNoiseHeard中添加了一个状态转换。 我假设只要角色听到很大的噪音，游戏代码就会调用此函数。 <strong>这说明了轮询（明确要求信息）和基于事件（等待被告知信息）的状态转换方法之间的区别。</strong> 关于世界接口的第10章包含有关这种区别的更多细节。</p>
+<p>The update function is called in each frame, as before, and the current state is used to generate an output action. To do this, the FSM might have a method containing conditional blocks of the following form: </p>
+<p>更新函数像以前一样在每个帧中调用，当前状态用于生成输出动作。 为此，FSM可能有一个包含以下形式的条件块的方法：</p>
+<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="function">def <span class="title">getAction</span><span class="params">()</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">    <span class="keyword">if</span> myState == PATROL: <span class="keyword">return</span> PatrolAction</span><br><span class="line">	elif myState == DEFEND: <span class="keyword">return</span> DefendAction</span><br><span class="line">	elif myState == SLEEP: <span class="keyword">return</span> SleepAction</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>Often, the state machine simply carries out the actions directly, rather than returning details of the action for another piece of code to execute. </p>
+<p>通常，状态机只是直接执行操作，而不是返回要执行的另一段代码的操作细节。</p>
+<h5 id="Performance-：开销"><a href="#Performance-：开销" class="headerlink" title="Performance ：开销"></a>Performance ：开销</h5><p>This approach requires no memory and is O(n + m), where n is the number of states, and m is the number of transitions per state. </p>
+<p>这种方法不需要存储器，并且是O（n + m），其中n是状态数，m是每个状态的转换数。</p>
+<p>Although this appears to perform worse than the flexible implementation, it is usually faster in practice for all but huge state machines (i.e., thousands of states). </p>
+<p>虽然这似乎比灵活的实现更糟糕，但实际上除了巨大的状态机（即数千个状态）之外通常更快。</p>
+<h5 id="Weaknesses-：缺点-1"><a href="#Weaknesses-：缺点-1" class="headerlink" title="Weaknesses ：缺点"></a>Weaknesses ：缺点</h5><p>Although hard-coded state machines are easy to write, they are notoriously difficult to maintain. State machines in games can often get fairly large, and this can appear as ugly and unclear code. </p>
+<p>虽然硬编码的状态机很容易编写，但它们很难维护。 游戏中的状态机通常会变得相当大，这可能看起来像丑陋和不清楚的代码。</p>
+<p>Most developers, however, find that the main drawback is the need for program- mers to write the AI behaviors for each character. This implies a need to recompile the game each time the behavior changes. While it may not be a problem for a hobby game writer, it can become critical in a large game project that takes many minutes or hours to rebuild. </p>
+<p>然而，大多数开发人员发现主要缺点是程序员需要为每个角色编写AI行为。 这意味着每次行为改变时都需要重新编译游戏。 虽然它可能不是一个业余爱好游戏开发者的问题，但它可能在一个大型游戏项目中变得至关重要，需要花费很多分钟或几小时来重建。</p>
+<p>More complex structures, such as hierarchical state machines (see below), are also difficult to coordinate using hard-coded FSMs. With a more flexible implementation, debugging output can easily be added to all state machines, making it easier to track down problems in the AI. </p>
+<p>更复杂的结构，例如分层状态机（见下文），也很难使用硬编码的FSM进行协调。 通过更灵活的实现，可以轻松地将调试输出添加到所有状态机，从而更容易跟踪AI中的问题。</p>
+<h4 id="5-3-9-HIERARCHICAL-STATE-MACHINES：分层状态机"><a href="#5-3-9-HIERARCHICAL-STATE-MACHINES：分层状态机" class="headerlink" title="5.3.9 HIERARCHICAL STATE MACHINES：分层状态机"></a>5.3.9 HIERARCHICAL STATE MACHINES：分层状态机</h4><p>On its own, one state machine is a powerful tool, but it can be difficult to express some behaviors. One common source of difficulty is “alarm behaviors.” </p>
+<p>就其本身而言，一台状态机是一种强大的工具，但表达某些行为可能很困难。一个常见的例子是“警报行为”。</p>
+<p>Imagine a service robot that moves around a facility cleaning the floors. It has a state machine allowing it to do this. It might search around for objects that have been dropped, pick one up when it finds it, and carry it off to the trash compactor. This can be simply implemented using a normal state machine (see Figure 5.14). </p>
+<p>想象一下一个机器人在清洁地板的设施周围移动。 它有一个状态机允许它这样做。 它可能会搜索掉落的物体，找到它时拾取一个物体，然后将它带到垃圾压缩机。 这可以使用普通状态机简单地实现（参见图5.14）。</p>
+<p>![image-20181121110155364](/Users/zhangmo/Library/Application Support/typora-user-images/image-20181121110155364.png)</p>
+<p>Unfortunately, the robot can run low on power, whereupon it has to scurry off to the nearest electrical point and get recharged. Regardless of what it is doing at the time, it needs to stop, and when it is fully charged again, it needs to pick up where it left off. The recharging periods could allow the player to sneak by unnoticed, for example, or allow the player to disable all electricity to the area and thereby disable the robot. </p>
+<p>不幸的是，机器人的能源不是无限的，因此它必须赶到最近的电气点并进行充电。 不管它当时在做什么，它需要停止。当它再次充满电时，它需要从它停止的地方开始。 例如，充电时段可允许玩家不加注意地潜行，或允许玩家禁用该区域的所有电力，从而禁用机器人。（注：游戏场景模拟）</p>
+<p>This is an alarm mechanism: something that interrupts normal behavior to respond to something important. Representing this in a state machine leads to a dou- bling in the number of states. </p>
+<p>这是一种警报机制：可以中断正常行为以回应重要事件。 在状态机中表示这一点会导致状态数量的增加。</p>
+<p>With one level of alarm this isn’t a problem, but what would happen if we wanted the robot to hide when fighting breaks out in the corridor. If its hiding instinct is more important than its refuelling instinct, then it will have to interrupt refuelling to go hide. After the battle it will need to pick up refuelling where it left off, after which it will pick up whatever it was doing before that. For just 2 levels of alarm, we would have 16 states. </p>
+<p>通过一层警报，这不是问题，但如果我们希望机器人在走廊中发生战斗时隐藏会发生什么。 如果它的隐藏决策比加油决策优先级更高，那么就不得不中断加油才能隐藏起来。 在战斗结束后，它需要在停止的地方接受加油，之后它将重拾它之前做的事情。 对于仅2层警报，我们将有16个状态。（？）</p>
+<p>Rather than combining all the logic into a single state machine, we can separate it into several. Each alarm mechanism has its own state machine, along with the original behavior. They are arranged in a hierarchy, so the next state machine down is only considered when the higher level state machine is not responding to its alarm. </p>
+<p>我们可以将它分成几个，而不是将所有逻辑组合到一个状态机中。 每个报警机制都有自己的状态机以及原始行为。 它们按层次结构排列，因此仅当较高级别的状态机未响应其警报时才考虑下一个状态机。</p>
+<p>Figure 5.15 shows one alarm mechanism and corresponds exactly to the diagram above. </p>
+<p>图5.15显示了一种报警机制，与上图完全一致。</p>
+<p>![image-20181121111241030](/Users/zhangmo/Library/Application Support/typora-user-images/image-20181121111241030.png)</p>
+<p>We will nest one state machine inside another to indicate a hierarchical state ma- chine (Figure 5.16). The solid circle again represents the start state of the machine. When a composite state is first entered, the circle with H* inside it indicates which sub-state should be entered. </p>
+<p>我们将一个状态机嵌套在另一个状态机中以指示分层状态机（图5.16）。 实心圆圈再次表示机器的启动状态。 首次输入复合状态时，其中带有H *的圆圈表示应输入哪个子状态。</p>
+<p>![image-20181121111547584](/Users/zhangmo/Library/Application Support/typora-user-images/image-20181121111547584.png)</p>
+<p>If the composite state has already been entered, then the previous sub-state is returned to. The H* node is called the “history state” for this reason. </p>
+<p>如果已经输入复合状态，则返回先前的子状态。 由于这个原因，H *节点被称为“历史状态”。</p>
+<p>The details of why there’s an asterisk after the H, and some of the other vagaries of the UML state chart diagram, are beyond the scope of this chapter. Refer back to Pilone [2005] for more details. </p>
+<p>H之后有一个星号的原因以及UML状态图表中的一些其他变幻莫测的细节超出了本章的范围。 有关更多详细信息，请参阅Pilone [2005]。</p>
+<p>Rather than having separate states to keep track of the non-alarm state, we intro- duce nested states. We still keep track of the state of the cleaning state machine, even if we are in the process of refuelling. When the refuelling is over, the cleaning state machine will pick up where it left off. </p>
+<p>我们引入嵌套状态，而不是使用单独的状态来跟踪非警报状态。 即使我们正在加油，我们仍然会跟踪清洁状态机的状态。 当加油结束时，清洁状态机将从停止的地方开始。</p>
+<p>In effect, we are in more than one state at once: we might be in the “Refuel” state in the alarm mechanism, while at the same time be in the “Pick Up Object” state in the cleaning machine. Because there is a strict hierarchy, there is never any confusion about which state wins out: the highest state in the hierarchy is always in control. </p>
+<p>实际上，我们同时处于多个状态：我们可能处于报警机制中的“加油”状态，同时处于清洗机制中的“拾取对象”状态。 因为存在严格的层次结构，所以对于执行哪个状态并不存在任何混淆：层次结构中的最高状态始终处于控制之中。</p>
+<p>To implement this, we could simply arrange the state machines in our program so that one state machine calls another if it needs to. So if the refuelling state ma- chine is in its “Clean Up” state, it calls the cleaning state machine and asks it for the action to take. When it is in the “Refuel” state, it returns the refuelling action directly. </p>
+<p>为了实现这一点，我们可以简单地在我们的程序中安排状态机，以便一个状态机在需要时调用另一个状态机。 因此，如果加油状态机处于“清理”状态，它会调用清洁状态机并要求其采取措施。 当它处于“加油”状态时，它直接返回加油动作。</p>
+<p>While this would lead to slightly ugly code, it would implement our scenario. Most hierarchical state machines, however, support transitions between levels of the hierarchy, and for that we’ll need more complex algorithms. </p>
+<p>虽然这会导致稍微丑陋的代码，但它会实现我们的场景。 但是，大多数分层状态机支持层次结构级别之间的转换，为此我们需要更复杂的算法。</p>
+<p>For example, let’s expand our robot so that it can do something useful if there are no objects to collect. It makes sense that it will use the opportunity to go and recharge, rather than standing around waiting for its battery to go flat. The new state machine is shown in Figure 5.17. </p>
+<p>例如，让我们扩展我们的机器人，以便在没有要收集的对象时它可以做一些有用的事情。 这是有意义的，它会利用这个机会去充电，而不是站在那里等待电池电量消失。 新的状态机如图5.17所示。</p>
+<p>![image-20181121112706544](/Users/zhangmo/Library/Application Support/typora-user-images/image-20181121112706544.png)</p>
+<p>Notice that we’ve added one more transition: from the “Search” state right out into the “Refuel” state. This transition is triggered when there are no objects to collect. Because we transitioned directly out of this state, the inner state machine no longer has any state. When the robot has refuelled and the alarm system transitions back to cleaning, the robot will not have a record of where to pick up from, so it must start the state machine again from its initial node (“Search”). </p>
+<p>请注意，我们又添加了一个转换：从“搜索”状态直接进入“加油”状态。 没有要收集的对象时会触发此转换。 因为我们直接从这个状态转换，内部状态机不再具有任何状态。 当机器人加满了油并且报警系统转换回清洁时，机器人将无法记录从哪里取货，因此它必须从其初始节点（“搜索”）再次启动状态机。</p>
+<h5 id="The-Problem-：问题"><a href="#The-Problem-：问题" class="headerlink" title="The Problem ：问题"></a>The Problem ：问题</h5><p>We’d like an implementation of a state machine system that supports hierarchical state machines. We’d also like transitions that pass between different layers of the machine. </p>
+<p>我们想要一个支持分层状态机的状态机系统的实现。 我们也喜欢在机器的不同层之间传递的过渡。</p>
+<h6 id="The-Algorithm-：算法"><a href="#The-Algorithm-：算法" class="headerlink" title="The Algorithm ：算法"></a>The Algorithm ：算法</h6><p>In a hierarchical state machine each state can be a complete state machine in its own right. We therefore rely on recursive algorithms to process the whole hierarchy. As with most recursive algorithms, this can be pretty tricky to follow. The simplest im- plementation covered here is doubly tricky because it recurses up and down the hier- archy at different points. I’d encourage you to use the informal discussion and exam- ples in this section alongside the pseudo-code in the next section and play with the Hierarchical State Machine program on the CD to get a feel for how it is all working. </p>
+<p>在分层状态机中，每个状态本身可以是完整的状态机。 因此，我们依靠递归算法来处理整个层次结构。 与大多数递归算法一样，这可能非常棘手。 这里涉及的最简单的实现是双重棘手的，因为它在不同的点上上下起伏。 我鼓励您使用本节中的非正式讨论和示例以及下一节中的伪代码，并使用CD上的Hierarchical State Machine程序来了解它是如何工作的。</p>
+<p>The first part of the system returns the current state. The result is a list of states, from highest to lowest in the hierarchy. The state machine asks its current state to return its hierarchy. If the state is a terminal state, it returns itself; otherwise, it returns itself and adds to it the hierarchy of state from its own current state. </p>
+<p>系统的第一部分返回当前状态。 结果是状态列表，从层次结构的最高到最低。 状态机要求其当前状态返回其层次结构。 如果状态是终端状态，则返回自身; 否则，它返回自身并从其当前状态向其添加状态层次结构。</p>
+<p>In Figure 5.18 the current state is [State L, State A]. </p>
+<p>在图5.18中，当前状态是[状态L，状态A]。</p>
+<p>![image-20181121113748202](/Users/zhangmo/Library/Application Support/typora-user-images/image-20181121113748202.png)</p>
+<p>The second part of the hierarchical state machine is its update. In the original state machine we assumed that each state machine started off in its initial state. Because the state machine always transitioned from one state to another, there was never any need to check if there was no state. State machines in a hierarchy can be in no state; they may have a cross hierarchy transition. The first stage of the update, then, is to check if the state machine has a state. If not, it should enter its initial state. </p>
+<p>分层状态机的第二部分是它的更新。 在原始状态机中，我们假设每个状态机在其初始状态下启动。 因为状态机总是从一个状态转换到另一个状态，所以从来没有必要检查是否没有状态。 <strong>层次结构中的状态机可以处于无状态; 他们可能有一个跨层次的过渡。 然后，更新的第一阶段是检查状态机是否具有状态。 如果没有，它应该进入其初始状态。</strong></p>
+<p>Next, we check if the current state has a transition it wants to execute. Transitions at higher levels in the hierarchy always take priority, and the transitions of sub-states will not be considered if the super-state has one that triggers. </p>
+<p>接下来，我们检查当前状态是否有要执行的转换。 层次结构中较高级别的转换始终具有优先级，如果父状态已经被触发，则不会考虑子状态的转换。</p>
+<p>A triggered transition may be one of three types: it might be a transition to an- other state at the current level of the hierarchy; it might be a transition to a state higher up in the hierarchy; or it might be a transition to a state lower in the hierarchy. Clearly, the transition needs to provide more data than just a target state. We allow it to return a relative level: how many steps up or down the hierarchy the target state is. </p>
+<p>触发转换可以是以下三种类型之一：它可能是在层次结构的当前级别转换到另一种状态; 它可能是向层次结构中更高级别的状态过渡; 或者它可能是转换到层次结构中较低的状态。 <strong>显然，转换需要提供的数据多于目标状态。 我们允许它返回一个相对级别：目标状态在层次结构中向上或向下的步数。</strong></p>
+<p>We could simply search the hierarchy for the target state and not require an ex- plicit level. While this would be more flexible (we wouldn’t have to worry about the level values being wrong), it would be considerably more time-consuming. A hybrid, but fully automatic, extension could search the hierarchy once offline and store all appropriate level values. </p>
+<p>我们可以简单地在层次结构中搜索目标状态，而不需要一个明确的级别。 虽然这会更灵活（我们不必担心水平值是错误的），但它会更加耗时。 混合但全自动的扩展可以在离线时搜索层次结构并存储所有适当的级别值。</p>
+<p>So the triggered transition has a level of zero (state is at the same level), a level greater than zero (state is higher in the hierarchy), or a level less than zero (state is lower in the hierarchy). It acts differently depending on which category the level falls into. </p>
+<p>因此，触发转换拥有三种情况：级别为零（状态处于同一级别），级别大于零（层次结构中的状态较高），或小于零的级别（状态在层次结构中较低）。 它的行为取决于级别所属的类别。</p>
+<p>If the level is zero, then the transition is a normal state machine transition and can be performed at the current level, using the same algorithm used in the finite state machine. </p>
+<p>如果级别为零，则转换是正常状态机转换，并且可以使用在有限状态机中使用的相同算法在当前级别执行。</p>
+<p>If the level is greater than zero, then the current state needs to be exited and noth- ing else needs to be done at this level. The exit action is returned, along with an indication to whoever called the update function that the transition hasn’t been com- pleted. We will return the exit action, the transition outstanding, and the number of levels higher to pass the transition. This level value is decreased by one as it is returned. As we will see, the update function will be returning to the next highest state machine in the hierarchy. </p>
+<p>如果级别大于零，则需要退出当前状态，而不需要在此级别完成其他操作。 返回退出操作，同时向任何调用Update()的位置指示转换尚未完成。 我们将返回退出时执行的行为、未完成的转换以及更高级别的数量以通过转换。 该级别值在返回时减少一。 正如我们将看到的，更新功能将返回到层次结构中的下一个最高状态机。</p>
+<p>If the level is less than zero, then the current state needs to transition to the ancestor of the target state on the current level in the hierarchy. In addition, each of the children of that state also needs to do the same, down to the level of the final desti- nation state. To achieve this we use a separate function, updateDown, that recursively performs this transition from the level of the target state back up to the current level and returns any exit and entry actions along the way. The transition is then complete and doesn’t need to be passed on up. All the accumulated actions can be returned. </p>
+<p>// 如果级别小于零，则当前状态需要转换到层次结构中当前级别上的目标状态的父状态。 此外，该状态的每个孩子也需要做同样的事情，直到最终目标状态的水平。 为了实现这一点，我们使用一个单独的函数updateDown，它递归地执行从目标状态级别到当前级别的转换，并返回任何退出和进入操作。 然后转换完成，不需要向上传递。 可以返回所有累积的动作。</p>
+<p>So we’ve covered all possibilities if the current state has a transition that triggers. If it does not have a transition that triggers, then its action depends on whether the current state is a state machine itself. If not, and if the current state is a plain state, then we can return the actions associated with being in that state, just as before. </p>
+<p>因此，如果当前状态具有触发的转换，我们已经涵盖了所有可能性。 如果它没有触发的转换，那么它的动作取决于当前状态是否是状态机本身。 如果不是，并且如果当前状态是普通状态，那么我们可以像以前一样返回与处于该状态相关联的动作。</p>
+<p>If the current state is a state machine, then we need to give it the opportunity to trigger any transitions. We can do this by calling its update function. The update func- tion will handle any triggers and transitions automatically. As we saw above, a lower level transition that fires may have its target state at a higher level. The update func- tion will return a list of actions, but it may also return a transition that it is passing up the hierarchy and that hasn’t yet been fired. </p>
+<p>如果当前状态是状态机，那么我们需要给它机会来触发任何转换。 我们可以通过调用它的更新函数来实现。 更新功能将自动处理任何触发和转换。 如上所述，触发的较低级别转换可能使其目标状态处于较高级别。 更新功能将返回一个操作列表，但它也可能返回一个它正在向层次结构传递但尚未触发的转换。</p>
+<p>If such a transition is received, its level is checked. If the level is zero, then the transition should be acted on at this level. The transition is honored, just as if it were a regular transition for the current state. If the level is still greater than zero (it should never be less than zero, because we are passing up the hierarchy at this point), then the state machine should keep passing it up. It does this, as before, by exiting the current state and returning the following pieces of information: the exit action; any actions provided by the current state’s update function; the transition that is still pending; and the transition’s level, less one. </p>
+<p>如果收到这样的转换，则检查其级别。 如果级别为零，则应在此级别上执行转换。转换已经执行，就像它是当前状态的常规过渡一样。 如果级别仍然大于零（它应该永远不会小于零，因为我们此时正在调整层次结构），那么状态机应该继续传递它。 它像以前一样通过退出当前状态并返回以下信息来执行此操作：退出操作; 当前状态更新功能提供的任何行动; 仍未决的状态转换; 和转换的层级//，少一个。</p>
+<p>If no transition is returned from the current state’s update function, then we can simply return its list of actions. If we are at the top level of the hierarchy, the list alone is fine. If we are lower down, then we are also within a state, so we need to add the action for the state we’re in to the list we return. </p>
+<p>如果没有从当前状态的更新函数返回转换，那么我们可以简单地返回其动作列表。 如果我们处于层次结构的顶层，那么单独列表就可以了。 如果我们处于较低的层级，那么我们也处于一个状态，所以我们需要为我们返回的列表中的状态添加动作。</p>
+<p>Fortunately, this algorithm is at least as difficult to explain as it is to implement. To see how and why it works, let’s work through an example. </p>
+<p>幸运的是，这种算法至少与实现一样难以解释。 为了了解它的工作原理和原因，让我们来看一个例子。</p>
+<h5 id="Examples-：例子"><a href="#Examples-：例子" class="headerlink" title="Examples ：例子"></a>Examples ：例子</h5><p>Figure 5.19 shows a hierarchical state machine that we will use as an example.</p>
+<p>图5.19显示了我们将用作示例的分层状态机。</p>
+<p>![image-20181121133703875](/Users/zhangmo/Library/Application Support/typora-user-images/image-20181121133703875.png)</p>
+<p>To clarify the actions returned for each example, we will say S-entry is the set of entry actions for state S, similarly S-active and S-exit for active and exit actions. In transitions we use the same format 1-actions for the actions associated with transi- tion 1. </p>
+<p>为了阐明每个示例返回的操作，我们将说S-entry是状态S的入口操作集，类似于活动和退出操作的S-active和S-exit。 在转换中，我们对与转换1相关的操作使用相同的格式1动作。</p>
+<p>These examples can appear confusing if you skim them through. If you’re having trouble with the algorithm, I urge you to follow through step by step with both the diagram above and the pseudo-code from the next section. </p>
+<p>如果您浏览它们，这些示例可能会让您感到困惑。 如果您在使用算法时遇到问题，我建议您按照上图和下一部分的伪代码一步一步地进行操作。</p>
+<p>Suppose we start just in State L, and no transition triggers. We will transition into State [L, A], because L’s initial state is A. The update function will return: L-active and A-entry, because we are staying in L and just entering A. </p>
+<p>假设我们只是在状态L开始，没有转换触发器。 我们将转换到状态[L，A]，因为L’的初始状态是A.更新函数将返回：L-active和A-entry，因为我们留在L并且只是进入A.</p>
+<p>Now suppose transition 1 is the only one that triggers. The top-level state ma- chine will detect no valid transitions, so will call state machine L to see if it has any. L finds that its current state (A) has a triggered transition. Transition 1 is a transition at the current level, so it is handled within L and not passed anywhere. A transitions to A, and L’s update function returns: A-exit, 1-actions, B-entry. The top-level state machine accepts these actions and adds its own active action. Because we have stayed in State L throughout, the final set of actions is A-exit, 1-actions, B-entry, L-active. The current state is [L, B]. </p>
+<p>现在假设转换1是唯一触发的转换。 顶层状态机将检测到无有效转换，因此将调用状态机L以查看它是否有任何转换。 L发现其当前状态（A）具有触发转换。 转换1是当前级别的转换，因此它在L内处理，不会在任何地方传递。 转换到A，并且L的更新函数返回：A-exit，1–actions，B-entry。 顶层状态机接受这些操作并添加其自己的活动操作。 因为我们始终处于状态L，所以最后一组动作是A-exit，1-actions，B-entry，L-active。 当前状态是[L，B]。</p>
+<p>From this state, transition 4 triggers. The top-level state machine sees that transi- tion 4 triggers, and because it is a top-level transition, it can be honored immediately. The transition leads to State M, and the corresponding actions are L-exit, 4-actions, M-entry. The current state is [M]. Note that L is still keeping a record of being in State B, but because the top-level state machine is in State M, this record isn’t used at the moment. </p>
+<p>从这个状态，转换4触发。 顶级状态机看到转换4触发，并且因为它是顶级转换，所以它可以立即兑现。 转换导致状态M，并且相应的动作是L-exit，4-actions，M-entry。 当前状态是[M]。 请注意，L仍然保留在状态B中的记录，但由于顶级状态机处于状态M，因此此记录不会被使用。</p>
+<p>We’ll go from State M to State N in the normal way through transition 5. The pro- cedure is exactly the same as for the previous example and the non-hierarchical state machine. Now transition 6 triggers. Because it is a level zero transition, the top-level state machine can honor it immediately. It transitions into State L and returns the ac- tions N-exit, 6-actions, L-entry. But now, L’s record of being in State B is important: we end up in State [L, B] again. In our implementation we don’t return the B-entry action, because we didn’t return the B-exit action when we left State L previously. This is a personal preference on my part and isn’t fixed in stone. If you want to exit and re-enter State B, then you can modify your algorithm to return these extra actions at the appropriate time. </p>
+<p>我们将通过转换5以正常方式从状态M转到状态N.该过程与前一个示例和非分层状态机完全相同。 现在转换6个触发器。 因为它是一个零级转换，所以顶级状态机可以立即兑现它。 它转换到状态L并返回N-exit，6-actions，L-entry的动作。 但是现在，L在状态B的记录很重要：我们再次进入状态[L，B]。 在我们的实现中，我们不返回B-entry动作，因为我们之前离开状态L时没有返回B-exit动作。 这是我个人的偏好，并不是固定的。 如果要退出并重新输入状态B，则可以修改算法以在适当的时间返回这些额外的操作。</p>
+<p>Now suppose from State [L, B] transition 3 triggers. The top-level state machine finds no triggers, so it will call state machine L to see if it has any. L finds that State B has a triggered transition. This transition has a level of one: its target is one level higher in the hierarchy. This means that State B is being exited, and it means that we can’t honor the transition at this level. We return B-exit, along with the uncompleted transition, and the level minus one (i.e., zero, indicating that the next level up needs to handle the transition). So control returns to the top-level update function. It sees that L returned an outstanding transition, with zero level, so it honors it, transitioning in the normal way to State N. It combines the actions that L returned (namely,B-exit) with the normal transition actions to give a final set of actions: B-exit, L-exit,3-actions, N-entry. Note that, unlike in our third example, L is no longer keeping track of the fact that it is in State B, because we transitioned out of that state. If we fire transition 6 to return to State L, then State L’s initial state, A, would be entered, just like in the first example.</p>
+<p>现在假设从状态[L，B]过渡3触发。顶级状态机找不到触发器，因此它将调用状态机L以查看它是否有任何触发器。 L发现状态B已经触发转换。此转换的级别为1：其目标在层次结构中高一级。这意味着状态B正在退出，并且我们无法履行这一级别的过渡。我们返回B-exit，以及未完成的转换，以及级别减1（即，零，表示下一级需要处理转换）。因此控制移交回上层的Update函数。Update函数得到了一个未完成的状态转换，零级别，所以Update函数将执行这个转换：以正常方式转换到状态N。它将L返回的动作（即B-exit）与正常的过渡动作结合起来给出一组最终动作集：B-exit，L-exit，3-actions，N-entry。请注意，与我们的第三个示例不同，L不再跟踪它在状态B中执行的事，因为我们已经转换出该状态。如果我们触发转换6返回到状态L，则将输入State L’的初始状态A，就像在第一个示例中一样。</p>
+<p>Our final example covers transitions with level less than zero. Suppose we moved from State N to State M via transition 7. Now we make transition 2 trigger. The top- level state machine looks at its current state (M) and finds transition 2 triggered. It has a level of minus one, because it is descending one level in the hierarchy. Because it has a level of minus one, the state machine calls the updateDown function to perform the recursive transition. The updateDown function starts at the state machine (L) that contains the final target state (C), asking it to perform the transition at its level. State machine L, in turn, asks the top-level state machine to perform the transition at its level. The top-level state machine changes from State M to State L, returning M-exit, L-entry as the appropriate actions. Control returns to state machine L’s updateDown function. State machine L checks if it is currently in any state (it isn’t, since we left State B in the last example). It adds its action, C-entry, to those returned by the top- level machine. Control then returns to the top-level state machine’s update function: the descending transition has been honored, it adds the transition’s actions to the result, and returns M-exit, C-entry, L-entry, 2-actions. </p>
+<p>我们的最后一个示例涵盖了级别小于零的转换。假设我们通过转换7从状态N移动到状态M，现在我们通过触发器2执行转换。顶级状态机查看其当前状态（M）并找到触发的转换2。它的级别为-1，因为它在层次结构中下降一级。因为它的级别为-1，所以状态机调用updateDown函数来执行递归转换。 updateDown函数从包含最终目标状态（C）的状态机（L）开始，要求它在其级别执行转换。状态机L反过来要求顶级状态机在其级别执行转换。顶级状态机从状态M变为状态L，返回M-exit，L-entry作为适当的动作。控制返回状态机L的updateDown函数。状态机L检查它当前是否处于任何状态（它不是，因为我们在最后一个例子中离开了状态B）。它将其操作C-entry添加到顶级计算机返回的操作中。然后，Control返回到顶级状态机的Update函数：已经执行过降序转换，它将转换的动作添加到结果中，并返回M-exit，C-entry，L-entry，2-actions。</p>
+<p>If state machine L had still been in State B, then when L’s updateDown function was called, it would transition out of B and into C. It would add B-exit and C-entry to the actions that it received from the top-level state machine.</p>
+<p>如果状态机L仍处于状态B，那么当调用L的 updateDown函数时，它将从B转换为C。它会将B-exit和C-entry添加到它从顶层状态机接收的操作集中。</p>
+<h5 id="Pseudo-Code-：伪代码-1"><a href="#Pseudo-Code-：伪代码-1" class="headerlink" title="Pseudo-Code ：伪代码"></a>Pseudo-Code ：伪代码</h5><p>The hierarchical state machine implementation is made up of five classes and forms one of the longest algorithms in this book. The State and Transition classes are similar to those in the regular finite state machine. The HierarchicalStateMachine class runs state transitions, and SubMachineState combines the functionality of the state machine and a state. It is used for state machines that aren’t at the top level of the hierarchy. All classes but the Transition inherit from a HSMBase class, which simpli- fies the algorithm by allowing functions to treat anything in the hierarchy in the same way. </p>
+<p>分层状态机实现由五个类组成，并形成本书中最长的算法之一。 <strong>State和Transition类与常规有限状态机中的类相似。 HierarchicalStateMachine类运行状态转换，SubMachineState结合状态机和状态的功能。 它用于不在层次结构顶层的状态机。 除了Transition之外的所有类都继承自HSMBase类，它通过允许函数以相同的方式处理层次结构中的任何内容来简化算法。</strong></p>
+<p>The HSMBase has the following form:</p>
+<p>HSMBase类如下所示：</p>
+<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">HSMBase</span></span></span><br><span class="line"><span class="class">    # <span class="title">The</span> <span class="title">structure</span> <span class="title">returned</span> <span class="title">by</span> <span class="title">update</span></span></span><br><span class="line"><span class="class">    // <span class="title">Update</span>函数返回结果的结构体</span></span><br><span class="line"><span class="class">    <span class="title">struct</span> <span class="title">UpdateResult</span></span></span><br><span class="line"><span class="class">      <span class="title">actions</span>	// 行为</span></span><br><span class="line"><span class="class">      <span class="title">transition</span>// 转换路径</span></span><br><span class="line"><span class="class">      <span class="title">level</span>		// 层级</span></span><br><span class="line"><span class="class">    <span class="title">def</span> <span class="title">getAction</span>():</span> <span class="keyword">return</span> []</span><br><span class="line">    def update()</span><br><span class="line">    &#123;</span><br><span class="line">    	UpdateResult result</span><br><span class="line">		result.actions = getAction()</span><br><span class="line">		result.transition = None</span><br><span class="line">		result.level = <span class="number">0</span></span><br><span class="line">		</span><br><span class="line">		<span class="keyword">return</span> result        </span><br><span class="line">    &#125;</span><br><span class="line">	<span class="comment">// 未实现的功能？</span></span><br><span class="line">    def getStates() # unimplemented function</span><br></pre></td></tr></table></figure>
+
+<p>The HierarchicalStateMachine class has the following implementation:</p>
+<p>HierarchicalStateMachine类有着如下实现：</p>
+<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br><span class="line">78</span><br><span class="line">79</span><br><span class="line">80</span><br><span class="line">81</span><br><span class="line">82</span><br><span class="line">83</span><br><span class="line">84</span><br><span class="line">85</span><br><span class="line">86</span><br><span class="line">87</span><br><span class="line">88</span><br><span class="line">89</span><br><span class="line">90</span><br><span class="line">91</span><br><span class="line">92</span><br><span class="line">93</span><br><span class="line">94</span><br><span class="line">95</span><br><span class="line">96</span><br><span class="line">97</span><br><span class="line">98</span><br><span class="line">99</span><br><span class="line">100</span><br><span class="line">101</span><br><span class="line">102</span><br><span class="line">103</span><br><span class="line">104</span><br><span class="line">105</span><br><span class="line">106</span><br><span class="line">107</span><br><span class="line">108</span><br><span class="line">109</span><br><span class="line">110</span><br><span class="line">111</span><br><span class="line">112</span><br><span class="line">113</span><br><span class="line">114</span><br><span class="line">115</span><br><span class="line">116</span><br><span class="line">117</span><br><span class="line">118</span><br><span class="line">119</span><br><span class="line">120</span><br><span class="line">121</span><br><span class="line">122</span><br><span class="line">123</span><br><span class="line">124</span><br><span class="line">125</span><br><span class="line">126</span><br><span class="line">127</span><br><span class="line">128</span><br><span class="line">129</span><br><span class="line">130</span><br><span class="line">131</span><br><span class="line">132</span><br></pre></td><td class="code"><pre><span class="line"><span class="function">class <span class="title">HierarchicalStateMachine</span> <span class="params">(HSMBase)</span></span></span><br><span class="line">    # List of states at this level of the hierarchy</span><br><span class="line">    <span class="comment">// 本层次的状态列表</span></span><br><span class="line">    states</span><br><span class="line"></span><br><span class="line">    # The initial state <span class="keyword">for</span> when the machine has to</span><br><span class="line">    <span class="meta"># current state.</span></span><br><span class="line">    <span class="comment">// 机器必须处于当前状态的初始状态</span></span><br><span class="line">    initialState</span><br><span class="line">    </span><br><span class="line">    # The current state of the machine.</span><br><span class="line">    <span class="comment">// 状态机的当前状态</span></span><br><span class="line">    currentState = initialState</span><br><span class="line">    </span><br><span class="line">    # Gets the current state <span class="built_in">stack</span></span><br><span class="line">    <span class="comment">// 获得当前状态栈</span></span><br><span class="line">    def getStates():</span><br><span class="line">      <span class="keyword">if</span> currentState: <span class="keyword">return</span> currentState.getStates()</span><br><span class="line">      <span class="keyword">else</span>: <span class="keyword">return</span> []</span><br><span class="line">      </span><br><span class="line">    # Recursively updates the machine.</span><br><span class="line">    <span class="comment">// 递归更新状态机</span></span><br><span class="line">    def update():</span><br><span class="line">		# If we’re in no state, use the initial state</span><br><span class="line">		<span class="comment">// 如果没有处于任何状态，使用初始状态</span></span><br><span class="line">		<span class="keyword">if</span> <span class="keyword">not</span> currentState:</span><br><span class="line">			currentState = initialState</span><br><span class="line">			<span class="keyword">return</span> currentState.getEntryAction()</span><br><span class="line">        </span><br><span class="line">		# Try to find a transition in the current state</span><br><span class="line">		<span class="comment">// 从当前状态尝试找到一个转换</span></span><br><span class="line">		triggeredTransition = None</span><br><span class="line">		<span class="keyword">for</span> transition in currentState.getTransitions():</span><br><span class="line">			<span class="keyword">if</span> transition.isTriggered():</span><br><span class="line">			triggeredTransition = transition</span><br><span class="line">			<span class="keyword">break</span></span><br><span class="line">		</span><br><span class="line">        # If we’ve found one, make a result structure <span class="keyword">for</span> it</span><br><span class="line">		<span class="comment">// 如果我们找到了一个转换，为其生成一个结果结构体</span></span><br><span class="line">		<span class="keyword">if</span> triggeredTransition:</span><br><span class="line">        	result = UpdateResult()</span><br><span class="line">			result.actions = []</span><br><span class="line">			result.transition = triggeredTransition</span><br><span class="line">			result.level = triggeredTransition.getLevel()</span><br><span class="line">        </span><br><span class="line">        # Otherwise recurse down <span class="keyword">for</span> a result</span><br><span class="line">        <span class="comment">// 否则递归获得结果</span></span><br><span class="line">        <span class="keyword">else</span>:</span><br><span class="line">			result = currentState.update()</span><br><span class="line">        </span><br><span class="line">        # Check <span class="keyword">if</span> the result contains a transition</span><br><span class="line">        <span class="comment">// 检查结果中是否包含转换</span></span><br><span class="line">		<span class="keyword">if</span> result.transition:</span><br><span class="line"></span><br><span class="line">			# Act based on its level</span><br><span class="line">			<span class="comment">// 基于本层执行</span></span><br><span class="line">			<span class="keyword">if</span> result.level == <span class="number">0</span>:</span><br><span class="line">				# Its on our level: honor it</span><br><span class="line">				<span class="comment">// 结果行为在本层：执行</span></span><br><span class="line">				targetState = result.transition.getTargetState()</span><br><span class="line">				result.actions += currentState.getExitAction()</span><br><span class="line">				result.actions += result.transition.getAction()</span><br><span class="line">				result.actions += targetState.getEntryAction()</span><br><span class="line">                # Set our current state</span><br><span class="line">                <span class="comment">// 设置当前状态</span></span><br><span class="line">                currentState = targetState</span><br><span class="line">                </span><br><span class="line">                # Add our normal action (we may be a state)</span><br><span class="line">                <span class="comment">// 添加基本操作</span></span><br><span class="line">				result.actions += getAction()</span><br><span class="line">                # Clear the transition, so nobody <span class="keyword">else</span> does it</span><br><span class="line">				<span class="comment">// 清除转换，因此没有其他(?)执行它</span></span><br><span class="line">                result.transition = None</span><br><span class="line">                </span><br><span class="line">            <span class="keyword">else</span> <span class="keyword">if</span> result.level &gt; <span class="number">0</span>:</span><br><span class="line">				# Its destined <span class="keyword">for</span> a higher level</span><br><span class="line">				<span class="comment">// 这表示一个更高的层级</span></span><br><span class="line">				# Exit our current state</span><br><span class="line">				<span class="comment">// 退出当前状态</span></span><br><span class="line">				result.actions += currentState.getExitAction()</span><br><span class="line">				currentState = None</span><br><span class="line">				</span><br><span class="line">				# Decrease the number of levels to go</span><br><span class="line">				<span class="comment">// 当相对于目标层级为降低时</span></span><br><span class="line">				result.level -= <span class="number">1</span></span><br><span class="line">            </span><br><span class="line">            <span class="keyword">else</span>:</span><br><span class="line">				 # It needs to be passed down</span><br><span class="line">				<span class="comment">// 它需要向下迁移</span></span><br><span class="line">				targetState = result.transition.getTargetState()</span><br><span class="line">				targetMachine = targetState.parent</span><br><span class="line">    			result.actions += result.transition.getAction()</span><br><span class="line">    			result.actions += targetMachine.updateDown(targetState, -result.level)</span><br><span class="line"></span><br><span class="line">    			# Clear the transition, so nobody <span class="keyword">else</span> does it</span><br><span class="line">                <span class="comment">// 清除转换，因此没有其他(?)执行它</span></span><br><span class="line">    			result.transition = None</span><br><span class="line">    			</span><br><span class="line">    	# If we didn’t get a transition</span><br><span class="line">    	<span class="comment">// 如果我们没有（从结果中）取得转换</span></span><br><span class="line">		<span class="keyword">else</span>:</span><br><span class="line">  		# We can simply <span class="keyword">do</span> our normal action</span><br><span class="line">		<span class="comment">// 我们可以简单的执行我们的基本行为</span></span><br><span class="line">			result.action += getAction()</span><br><span class="line">		# Return the accumulated result</span><br><span class="line">        <span class="comment">// 返回积累的结果</span></span><br><span class="line">			<span class="keyword">return</span> result</span><br><span class="line"># Recurses up the parent hierarchy, transitioning into</span><br><span class="line"># each state in turn <span class="keyword">for</span> the given number of levels</span><br><span class="line"><span class="comment">// 递归父层次结构，依次转换到指定层级号的每个状态</span></span><br><span class="line">def updateDown(state, level):</span><br><span class="line">	# If we’re <span class="keyword">not</span> at top level, <span class="keyword">continue</span> recursing</span><br><span class="line">	<span class="comment">// 如果不在顶层，继续递归</span></span><br><span class="line">	<span class="keyword">if</span> level &gt; <span class="number">0</span>:</span><br><span class="line">  	</span><br><span class="line">	# Pass ourself as the transition state to our parent</span><br><span class="line">	<span class="comment">// 将自己作为转换状态传递给父状态</span></span><br><span class="line">  		actions = parent.updateDown(<span class="keyword">this</span>, level<span class="number">-1</span>)</span><br><span class="line">	</span><br><span class="line">    # Otherwise we have no actions to add to</span><br><span class="line">    <span class="comment">// 否则我们将没有要添加的行为</span></span><br><span class="line">	<span class="keyword">else</span>: actions = []</span><br><span class="line">	</span><br><span class="line">	# If we have a current state, <span class="built_in">exit</span> it</span><br><span class="line">	<span class="comment">// 如果当前状态存在，退出</span></span><br><span class="line">	<span class="keyword">if</span> currentState:</span><br><span class="line">		actions += currentState.getExitAction()</span><br><span class="line">	# Move to the <span class="keyword">new</span> state, <span class="keyword">and</span> <span class="keyword">return</span> all the actions</span><br><span class="line">	<span class="comment">// 转移到新的状态，并且返回所有行为</span></span><br><span class="line">    currentState = state</span><br><span class="line">	actions += state.getEntryAction()</span><br><span class="line">	<span class="keyword">return</span> actions</span><br></pre></td></tr></table></figure>
+
+<p>The state class is substantially the same as before, but adds an implementation for getStates:</p>
+<p>状态类的实现与之前的实现大体相同，但是增加了一个有关getStates的实现：</p>
+<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line">class State (HSMBase):</span><br><span class="line">	def getStates():</span><br><span class="line">    	# If we’re just a state, then the <span class="built_in">stack</span> is just us</span><br><span class="line">    	<span class="comment">// 如果是一个状态，那么要返回的状态栈仅有这个状态自身</span></span><br><span class="line">    	<span class="keyword">return</span> [<span class="keyword">this</span>]</span><br><span class="line">	# As before...</span><br><span class="line">	def getAction()</span><br><span class="line">  	def getEntryAction()</span><br><span class="line">  	def getExitAction()</span><br><span class="line">  	def getTransitions()</span><br></pre></td></tr></table></figure>
+
+<p>Similarly, the Transition class is the same, but adds a method to retrieve the level of the transition.</p>
+<p>无独有偶，Transition类的实现也一样，但是添加了一个方法来返回的转换所在的层级。</p>
+<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Transition</span>:</span>	</span><br><span class="line">	# Returns the different in levels of the hierarchy from</span><br><span class="line">  	<span class="meta"># the source to the target of the transition.</span></span><br><span class="line">  	<span class="comment">// 返回</span></span><br><span class="line">  	<span class="function">def <span class="title">getLevel</span><span class="params">()</span></span></span><br><span class="line">  	# As before...</span><br><span class="line">  	<span class="function">def <span class="title">isTriggered</span><span class="params">()</span></span></span><br><span class="line"><span class="function">  	def <span class="title">getTargetState</span><span class="params">()</span></span></span><br><span class="line"><span class="function">  	def <span class="title">getAction</span><span class="params">()</span></span></span><br></pre></td></tr></table></figure>
+
+<p>Finally, the SubMachineState class merges the functionality of a state and a state machine.</p>
+<p>最后，SubMachineState类整合了一个状态的功能与一个状态机。</p>
+<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line">class SubMachineState (State, HierarchicalStateMachine):</span><br><span class="line">	# Route get action to the state</span><br><span class="line">  	<span class="comment">// 转换</span></span><br><span class="line">  	def getAction(): return State::getAction()</span><br><span class="line">  	# Route update to the state machine</span><br><span class="line">	<span class="comment">// 转换 	</span></span><br><span class="line">  	def update(): return HierarchicalStateMachine::update()</span><br><span class="line">  	# We get states by adding ourself to our active children</span><br><span class="line">  	<span class="comment">// 通过将自身加入活跃子节点集中获取当前状态</span></span><br><span class="line">  	def getStates():</span><br><span class="line">    	<span class="keyword">if</span> currentState:</span><br><span class="line">      		<span class="keyword">return</span> [<span class="keyword">this</span>] + currentState.getStates()</span><br><span class="line">    	<span class="keyword">else</span>:</span><br><span class="line">      		<span class="keyword">return</span> [<span class="keyword">this</span>]</span><br></pre></td></tr></table></figure>
+
+<h5 id="Implementation-Notes：实现说明"><a href="#Implementation-Notes：实现说明" class="headerlink" title="Implementation Notes：实现说明"></a>Implementation Notes：实现说明</h5><p>I’ve used multiple inheritance to implement SubMachineState. For languages (or programmers) that don’t support multiple inheritance, there are two options. The Sub- MachineState could encapsulate HierarchicalStateMachine, or the Hierarchical- StateMachine can be converted so that it is a sub-class of State. The downside with the latter approach is that the top-level state machine will always return its active action from the update function, and getStates will always have it as the head of the list.</p>
+<p>我已经使用多重继承来实现SubMachineState类。对于不支持多重继承的语言（或程序员），有两种选择。 Sub-MachineState可以封装HierarchicalStateMachine，或者Hierarchical-StateMachine可以被转换，使其成为State的子类。后一种方法的缺点是顶级状态机将始终从更新函数返回其活动操作，并且getStates将始终将其作为列表的头部。</p>
+<p>I’ve elected to use a polymorphic structure for the state machine again. It is possible to implement the same algorithm without any polymorphic method calls. Given that it is complex enough already, however, I’ll leave that as an exercise. My experience deploying a hierarchical state machine involved an implementation using poly- morphic method calls (provided on the CD). In-game profiling on both PC and PS2 showed that the method call overhead was not a bottleneck in the algorithm. In a system with hundreds or thousands of states, it may well be, as cache efficiency issues come into play.<br>Some implementations of hierarchical state machines are significantly simpler than this by making it a requirement that transitions can only occur between states at the same level. With this requirement, all the recursion code can be eliminated. If you don’t need cross hierarchy transitions, then the simpler version will be easier to implement. It is unlikely to be any faster, however. Because the recursion isn’t used when the transition is at the same level, the code above will run about as fast if all the transitions have a zero level.</p>
+<p>我已经选择再次使用状态机的多态结构。没有任何多态方法调用就可以实现相同的算法。鉴于它已经足够复杂了，我将把它留作练习。我部署分层状态机的经验涉及使用多态方法调用的实现（在CD上提供）。 PC和PS2上的游戏内分析表明，方法调用开销不是算法中的瓶颈。在具有数百或数千个状态的系统中，很可能会出现缓存效率问题。<br>分层状态机的一些实现比这更简单，因为要求转换只能在同一级别的状态之间发生。根据此要求，可以消除所有递归代码。如果您不需要跨层次转换，则更简单的版本将更容易实现。然而，它不太可能更快。因为当转换处于相同级别时不使用递归，所以如果所有转换具有零级别，则上述代码将以相同的速度运行。</p>
+<h5 id="Performance-：开销-1"><a href="#Performance-：开销-1" class="headerlink" title="Performance ：开销"></a>Performance ：开销</h5><p>The algorithm is O(n) in memory, where n is the number of layers in the hierarchy. It requires temporary storage for actions when it recurses down and up the hierarchy. </p>
+<p>该算法在内存中是O（n），其中n是层次结构中的层数。它需要临时存储操作，以便在向下和向下递增层次结构时执行操作。</p>
+<p>Similarly, it is O(nt) in time, where t is the number of transitions per state. To find the correct transition to fire, it potentially needs to search each transition at each level of the hierarchy and O(nt) process. The recursion, both for a transition level &lt;0 and for a level &gt;0 is O(n), so it does not affect the O(nt) for the whole algorithm. </p>
+<p>类似地，它是时间上的O（nt），其中t是每个状态的转换数。要找到正确的触发转换，可能需要在层次结构的每个级别和O（nt）进程中搜索每个转换。对于转换级别&lt;0和级别&gt; 0的递归都是O（n），因此它不会影响整个算法的O（nt）。</p>
+<h4 id="5-3-10-COMBINING-DECISION-TREES-AND-STATE-MACHINES-：决策树与状态机的结合"><a href="#5-3-10-COMBINING-DECISION-TREES-AND-STATE-MACHINES-：决策树与状态机的结合" class="headerlink" title="5.3.10 COMBINING DECISION TREES AND STATE MACHINES ：决策树与状态机的结合"></a>5.3.10 COMBINING DECISION TREES AND STATE MACHINES ：决策树与状态机的结合</h4><p>The implementation of transitions bears more than a passing resemblance to the implementation of decision trees. This is no coincidence, but we can take it even further. Decision trees are an efficient way of matching a series of conditions, and this has application in state machines for matching transitions.</p>
+<p>We can combine the two approaches by replacing transitions from a state with a decision tree. The leaves of the tree, rather than being actions as before, are transitions to new states. </p>
+<p>转换的实现不仅仅与决策树的实现有相似之处。这不是巧合，但我们可以更进一步。决策树是匹配一系列条件的有效方式，而且具有这种行为在用于匹配转换的状态机中有效。</p>
+<p>我们可以通过用状态替换状态转换的方式来组合这两种方法决策树。树的叶子，而不是像以前那样的动作，是向新状态的过渡。</p>
+<p>A simple state machine might look like Figure 5.20. </p>
+<p>一个简单的状态机可能如图5.20所示。</p>
+<p>![image-20181122004826206](/Users/zhangmo/Library/Application Support/typora-user-images/image-20181122004826206.png)</p>
+<p>The diamond symbol is also part of the UML state chart diagram format, repre- senting a decision. In UML there is no differentiation between decisions and transi- tions, and the decisions themselves are usually not labelled. </p>
+<p>In this book I’ve labelled the decisions with the test that they perform, which is clearer for our needs. </p>
+<p>菱形符号也是UML状态图表格式的一部分，代表了一个决定。在UML中，决策和转换之间没有区别，决策本身通常没有标记。</p>
+<p>在本书中，我用他们执行的测试标记了决策，这更符合我们的需求。</p>
+<p>When in the “Alert” state, a sentry has only one possible transition: via the de- cision tree. It quickly ascertains whether the sentry can see the player. If the sentry is not able to see the player, then the transition ends and no new state is reached. If the sentry is able to see the player, then the decision tree makes a choice based on the distance of the player. Depending on the result of this choice, two different states may be reached: “Raise Alarm” or “Defend.” The latter can only be reached if a further test (distance to the player) passes. </p>
+<p>当处于“警报”状态时，哨兵只有一个可能的过渡：通过决策树。它可以快速确定哨兵是否可以看到玩家。如果哨兵无法看到该玩家，则转换结束并且不会达到新的状态。如果哨兵能够看到玩家，则决策树根据玩家的距离做出选择。根据此选择的结果，可能会达到两种不同的状态：“提升警报”或“防御”。只有在进一步测试（与玩家的距离）通过后才能达到后者。</p>
+<p>To implement the same state machine without the decision nodes, the state ma- chine in Figure 5.21 would be required. Note that now we have two very complex con- ditions and both have to evaluate the same information (distance to the player and distance to the alarm point). If the condition involved a time-consuming algorithm (such as the line of sight test in our example), then the decision tree implementation<br>would be significantly faster.</p>
+<p>要在没有决策节点的情况下实现相同的状态机，将需要图5.21中的状态机。请注意，现在我们有两个非常复杂的条件，两者都必须评估相同的信息（到播放器的距离和到报警点的距离）。如果条件涉及耗时的算法（例如我们示例中的视线测试），那么决策树实现将明显更快。</p>
+<p>![image-20181122004853810](/Users/zhangmo/Library/Application Support/typora-user-images/image-20181122004853810.png)</p>
+<h5 id="Pseudo-Code-：伪代码-2"><a href="#Pseudo-Code-：伪代码-2" class="headerlink" title="Pseudo-Code ：伪代码"></a>Pseudo-Code ：伪代码</h5><p>We can incorporate a decision tree into the state machine framework we’ve developed so far. </p>
+<p>我们可以将决策树合并到我们迄今为止开发的状态机框架中。</p>
+<p>The decision tree, as before, consists of DecisionTreeNodes. These may be decisions (using the same Decision class as before) or TargetStates (which replace the Action class in the basic decision tree). TargetStates hold the state to transition to and can contain actions. As before, if a branch of the decision tree should lead to no result, then we can have some null value at the leaf of the tree. </p>
+<p>与以前一样，决策树由DecisionTreeNodes组成。这些可能是决策（使用与之前相同的Decision类）或TargetStates（它们替换基本决策树中的Action类）。 TargetStates保持状态转换并可以包含操作。和以前一样，如果决策树的一个分支应该导致没有结果，那么我们可以在树的叶子上有一些空值。</p>
+<p>The decision making algorithm needs to change. Rather than testing for Actions to return, it now tests for TargetState instances:</p>
+<p>决策算法需要改变。它不是测试要返回的Actions，而是测试TargetState实例：</p>
+<p>We can then build an implementation of the Transition interface which supports these decision trees. It has the following algorithm: </p>
+<p>然后我们可以构建支持的Transition接口的实现这些决策树。它有以下算法：</p>
+<h5 id="Implementation：实现"><a href="#Implementation：实现" class="headerlink" title="Implementation：实现"></a>Implementation：实现</h5><p>As before, this implementation relies heavily on polymorphic methods in an object- oriented framework. The corresponding performance overhead may be unacceptable in some cases where lots of transitions or decisions are being considered.<br>和以前一样，这种实现在很大程度上依赖于面向对象框架中的多态方法。在考虑大量转换或决策的某些情况下，相应的性能开销可能是不可接受的。</p>
+
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/Artificial-Intelligence-for-Games/" rel="tag"># Artificial Intelligence for Games</a>
+          
+        </div>
+      
+
+      
+      
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2018/10/22/Unity%E7%AC%94%E8%AE%B0/unity-shader-%E9%80%8F%E6%98%8E%E6%95%88%E6%9E%9C/" rel="next" title="unity shader 透明效果">
+                <i class="fa fa-chevron-left"></i> unity shader 透明效果
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+              <a href="/2018/12/17/%E5%BC%80%E5%8F%91%E7%AC%94%E8%AE%B0/indlecamp-GameJam-%E5%BC%80%E5%8F%91%E7%AC%94%E8%AE%B0/" rel="prev" title="indlecamp GameJam 开发笔记">
+                indlecamp GameJam 开发笔记 <i class="fa fa-chevron-right"></i>
+              </a>
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+
+    <div class="post-spread">
+      
+    </div>
+  </div>
+
+
+          </div>
+          
+
+
+          
+  <div class="comments" id="comments">
+    
+  </div>
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap" >
+            Table of Contents
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview">
+            Overview
+          </li>
+        </ul>
+      
+
+      <section class="site-overview sidebar-panel">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+          <img class="site-author-image" itemprop="image"
+               src="/images/avatar.gif"
+               alt="zhangMo" />
+          <p class="site-author-name" itemprop="name">zhangMo</p>
+           
+              <p class="site-description motion-element" itemprop="description">T&S&A&G</p>
+          
+        </div>
+        <nav class="site-state motion-element">
+
+          
+            <div class="site-state-item site-state-posts">
+              <a href="/archives/">
+                <span class="site-state-item-count">86</span>
+                <span class="site-state-item-name">posts</span>
+              </a>
+            </div>
+          
+
+          
+            
+            
+            <div class="site-state-item site-state-categories">
+              
+                <span class="site-state-item-count">10</span>
+                <span class="site-state-item-name">categories</span>
+              
+            </div>
+          
+
+          
+            
+            
+            <div class="site-state-item site-state-tags">
+              
+                <span class="site-state-item-count">34</span>
+                <span class="site-state-item-name">tags</span>
+              
+            </div>
+          
+
+        </nav>
+
+        
+
+        <div class="links-of-author motion-element">
+          
+        </div>
+
+        
+        
+
+        
+        
+
+        
+
+
+      </section>
+
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#Chapter-5-Decision-Making"><span class="nav-number">1.</span> <span class="nav-text">Chapter 5 Decision Making</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#5-3-STATE-MACHINES：状态机"><span class="nav-number">1.1.</span> <span class="nav-text">5.3 STATE MACHINES：状态机</span></a><ol class="nav-child"><li class="nav-item nav-level-5"><a class="nav-link" href="#A-Basic-State-Machine-：一个基本状态机"><span class="nav-number">1.1.0.1.</span> <span class="nav-text">A Basic State Machine ：一个基本状态机</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#Finite-State-Machines-：有限状态机"><span class="nav-number">1.1.0.2.</span> <span class="nav-text">Finite State Machines ：有限状态机</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#The-Game-FSM-：游戏中的有限状态机"><span class="nav-number">1.1.0.3.</span> <span class="nav-text">The Game FSM ：游戏中的有限状态机</span></a></li></ol></li><li class="nav-item nav-level-4"><a class="nav-link" href="#5-3-1-THE-PROBLEM-：问题"><span class="nav-number">1.1.1.</span> <span class="nav-text">5.3.1 THE PROBLEM ：问题</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#5-3-2-THE-ALGORITHM-：算法"><span class="nav-number">1.1.2.</span> <span class="nav-text">5.3.2 THE ALGORITHM ：算法</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#5-3-3-PSEUDO-CODE-：伪代码实现"><span class="nav-number">1.1.3.</span> <span class="nav-text">5.3.3 PSEUDO-CODE ：伪代码实现</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#5-3-4-DATA-STRUCTURES-AND-INTERFACES-：数据结构与接口"><span class="nav-number">1.1.4.</span> <span class="nav-text">5.3.4 DATA STRUCTURES AND INTERFACES ：数据结构与接口</span></a><ol class="nav-child"><li class="nav-item nav-level-5"><a class="nav-link" href="#Transition-Implementation-：实现转换"><span class="nav-number">1.1.4.1.</span> <span class="nav-text">Transition Implementation ：实现转换</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#Weaknesses-：缺点"><span class="nav-number">1.1.4.2.</span> <span class="nav-text">Weaknesses ：缺点</span></a></li></ol></li><li class="nav-item nav-level-4"><a class="nav-link" href="#5-3-6-PERFORMANCE-：开销"><span class="nav-number">1.1.5.</span> <span class="nav-text">5.3.6 PERFORMANCE ：开销</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#5-3-7-IMPLEMENTATION-NOTES-：实现的一些说明"><span class="nav-number">1.1.6.</span> <span class="nav-text">5.3.7 IMPLEMENTATION NOTES ：实现的一些说明</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#5-3-8-HARD-CODED-FSM-：FSM的硬编码问题"><span class="nav-number">1.1.7.</span> <span class="nav-text">5.3.8 HARD-CODED FSM ：FSM的硬编码问题</span></a><ol class="nav-child"><li class="nav-item nav-level-5"><a class="nav-link" href="#Pseudo-Code-：伪代码"><span class="nav-number">1.1.7.1.</span> <span class="nav-text">Pseudo-Code ：伪代码</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#Performance-：开销"><span class="nav-number">1.1.7.2.</span> <span class="nav-text">Performance ：开销</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#Weaknesses-：缺点-1"><span class="nav-number">1.1.7.3.</span> <span class="nav-text">Weaknesses ：缺点</span></a></li></ol></li><li class="nav-item nav-level-4"><a class="nav-link" href="#5-3-9-HIERARCHICAL-STATE-MACHINES：分层状态机"><span class="nav-number">1.1.8.</span> <span class="nav-text">5.3.9 HIERARCHICAL STATE MACHINES：分层状态机</span></a><ol class="nav-child"><li class="nav-item nav-level-5"><a class="nav-link" href="#The-Problem-：问题"><span class="nav-number">1.1.8.1.</span> <span class="nav-text">The Problem ：问题</span></a><ol class="nav-child"><li class="nav-item nav-level-6"><a class="nav-link" href="#The-Algorithm-：算法"><span class="nav-number">1.1.8.1.1.</span> <span class="nav-text">The Algorithm ：算法</span></a></li></ol></li><li class="nav-item nav-level-5"><a class="nav-link" href="#Examples-：例子"><span class="nav-number">1.1.8.2.</span> <span class="nav-text">Examples ：例子</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#Pseudo-Code-：伪代码-1"><span class="nav-number">1.1.8.3.</span> <span class="nav-text">Pseudo-Code ：伪代码</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#Implementation-Notes：实现说明"><span class="nav-number">1.1.8.4.</span> <span class="nav-text">Implementation Notes：实现说明</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#Performance-：开销-1"><span class="nav-number">1.1.8.5.</span> <span class="nav-text">Performance ：开销</span></a></li></ol></li><li class="nav-item nav-level-4"><a class="nav-link" href="#5-3-10-COMBINING-DECISION-TREES-AND-STATE-MACHINES-：决策树与状态机的结合"><span class="nav-number">1.1.9.</span> <span class="nav-text">5.3.10 COMBINING DECISION TREES AND STATE MACHINES ：决策树与状态机的结合</span></a><ol class="nav-child"><li class="nav-item nav-level-5"><a class="nav-link" href="#Pseudo-Code-：伪代码-2"><span class="nav-number">1.1.9.1.</span> <span class="nav-text">Pseudo-Code ：伪代码</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#Implementation：实现"><span class="nav-number">1.1.9.2.</span> <span class="nav-text">Implementation：实现</span></a></li></ol></li></ol></li></ol></li></ol></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
+      
+
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright" >
+  
+  &copy; 
+  <span itemprop="copyrightYear">2020</span>
+  <span class="with-love">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">zhangMo</span>
+</div>
+
+
+<div class="powered-by">
+  Powered by <a class="theme-link" href="https://hexo.io" target="_blank" rel="noopener">Hexo</a>
+</div>
+
+<div class="theme-info">
+  Theme -
+  <a class="theme-link" href="https://github.com/iissnan/hexo-theme-next" target="_blank" rel="noopener">
+    NexT.Muse
+  </a>
+</div>
+
+
+        
+
+        
+      </div>
+    </footer>
+
+    
+      <div class="back-to-top">
+        <i class="fa fa-arrow-up"></i>
+        
+      </div>
+    
+
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  <script type="text/javascript" src="/lib/jquery/index.js?v=2.1.3"></script>
+
+  
+  <script type="text/javascript" src="/lib/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+
+  
+  <script type="text/javascript" src="/lib/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
+
+  
+  <script type="text/javascript" src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+
+  
+  <script type="text/javascript" src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+
+  
+  <script type="text/javascript" src="/lib/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=5.1.2"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=5.1.2"></script>
+
+
+
+  
+  
+
+  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.1.2"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.1.2"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.1.2"></script>
+
+
+
+  
+
+
+  
+
+
+
+
+	
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+</body>
+</html>

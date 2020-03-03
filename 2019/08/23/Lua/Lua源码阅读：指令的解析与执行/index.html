@@ -1,0 +1,819 @@
+<!DOCTYPE html>
+
+
+
+  
+
+
+<html class="theme-next muse use-motion" lang="zh-CN">
+<head>
+  <meta charset="UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+<meta name="theme-color" content="#222">
+
+
+
+
+
+
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+  <link href="/lib/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css" />
+
+
+
+
+  
+  
+  
+  
+
+  
+    
+    
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+    
+    
+    <link href="//fonts.googleapis.com/css?family=Lato:300,300italic,400,400italic,700,700italic&subset=latin,latin-ext" rel="stylesheet" type="text/css">
+  
+
+
+
+
+
+
+<link href="/lib/font-awesome/css/font-awesome.min.css?v=4.6.2" rel="stylesheet" type="text/css" />
+
+<link href="/css/main.css?v=5.1.2" rel="stylesheet" type="text/css" />
+
+
+  <meta name="keywords" content="Lua," />
+
+
+
+
+
+
+
+
+  <link rel="shortcut icon" type="image/x-icon" href="/favicon.ico?v=5.1.2" />
+
+
+
+
+
+
+<meta name="description" content="具体分析文件如何被解析、生成对应指令以及到虚拟机执行的流程。">
+<meta name="keywords" content="Lua">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Lua源码阅读：指令的解析与执行">
+<meta property="og:url" content="https:&#x2F;&#x2F;bitzhangmo.github.io&#x2F;2019&#x2F;08&#x2F;23&#x2F;Lua&#x2F;Lua%E6%BA%90%E7%A0%81%E9%98%85%E8%AF%BB%EF%BC%9A%E6%8C%87%E4%BB%A4%E7%9A%84%E8%A7%A3%E6%9E%90%E4%B8%8E%E6%89%A7%E8%A1%8C&#x2F;index.html">
+<meta property="og:site_name" content="zhangMo Blog">
+<meta property="og:description" content="具体分析文件如何被解析、生成对应指令以及到虚拟机执行的流程。">
+<meta property="og:locale" content="zh-CN">
+<meta property="og:image" content="https:&#x2F;&#x2F;s2.ax1x.com&#x2F;2019&#x2F;08&#x2F;26&#x2F;mh9OQU.png">
+<meta property="og:updated_time" content="2019-08-27T08:56:27.847Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="https:&#x2F;&#x2F;s2.ax1x.com&#x2F;2019&#x2F;08&#x2F;26&#x2F;mh9OQU.png">
+
+
+
+<script type="text/javascript" id="hexo.configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/',
+    scheme: 'Muse',
+    sidebar: {"position":"left","display":"post","offset":12,"offset_float":12,"b2t":false,"scrollpercent":false,"onmobile":false},
+    fancybox: true,
+    tabs: true,
+    motion: true,
+    duoshuo: {
+      userId: '0',
+      author: 'Author'
+    },
+    algolia: {
+      applicationID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    }
+  };
+</script>
+
+
+
+  <link rel="canonical" href="https://bitzhangmo.github.io/2019/08/23/Lua/Lua源码阅读：指令的解析与执行/"/>
+
+
+
+
+
+  <title>Lua源码阅读：指令的解析与执行 | zhangMo Blog</title>
+  
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="zh-CN">
+
+  
+  
+    
+  
+
+  <div class="container sidebar-position-left page-post-detail ">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-wrapper">
+  <div class="site-meta ">
+    
+
+    <div class="custom-logo-site-title">
+      <a href="/"  class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">zhangMo Blog</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+      
+        <p class="site-subtitle"></p>
+      
+  </div>
+
+  <div class="site-nav-toggle">
+    <button>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+    </button>
+  </div>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu">
+      
+        
+        <li class="menu-item menu-item-home">
+          <a href="/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-home"></i> <br />
+            
+            Home
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/archives/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-archive"></i> <br />
+            
+            Archives
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-tags">
+          <a href="/tags/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-tags"></i> <br />
+            
+            Tags
+          </a>
+        </li>
+      
+
+      
+    </ul>
+  
+
+  
+</nav>
+
+
+
+ </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="https://bitzhangmo.github.io/2019/08/23/Lua/Lua%E6%BA%90%E7%A0%81%E9%98%85%E8%AF%BB%EF%BC%9A%E6%8C%87%E4%BB%A4%E7%9A%84%E8%A7%A3%E6%9E%90%E4%B8%8E%E6%89%A7%E8%A1%8C/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="zhangMo">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/avatar.gif">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="zhangMo Blog">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">Lua源码阅读：指令的解析与执行</h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">Posted on</span>
+              
+              <time title="Post created" itemprop="dateCreated datePublished" datetime="2019-08-23T14:56:56+08:00">
+                2019-08-23
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+            <span class="post-category" >
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">In</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/%E6%BA%90%E7%A0%81%E9%98%85%E8%AF%BB/" itemprop="url" rel="index">
+                    <span itemprop="name">源码阅读</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <p>具体分析文件如何被解析、生成对应指令以及到虚拟机执行的流程。</p>
+<a id="more"></a>
+
+<h3 id="Lua词法："><a href="#Lua词法：" class="headerlink" title="Lua词法："></a>Lua词法：</h3><p>Lua使用一遍扫描代码文件的方式生成字节码，即在第一遍扫描代码的时候就生成字节码了，这么做主要是为了加快解释执行的速度。</p>
+<h3 id="赋值类指令："><a href="#赋值类指令：" class="headerlink" title="赋值类指令："></a>赋值类指令：</h3><h4 id="局部变量："><a href="#局部变量：" class="headerlink" title="局部变量："></a>局部变量：</h4><p>lua代码：</p>
+<figure class="highlight lua"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">local</span> a = <span class="number">10</span></span><br></pre></td></tr></table></figure>
+
+<p>相关的EBNF词法：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">chunk -&gt; &#123; stat [`;&apos;] &#125;</span><br><span class="line">stat -&gt; localstat</span><br><span class="line">localstat -&gt; LOCAL NAME &#123;`,&apos; NAME&#125;[`=&apos; explist1]</span><br><span class="line">explist1 -&gt; expr &#123;`,&apos; expr&#125;</span><br><span class="line">exp -&gt; subexpr</span><br><span class="line">subexpr -&gt; simpleexp</span><br><span class="line">simpleexp -&gt; NUMBER</span><br></pre></td></tr></table></figure>
+
+<p>第3行为赋值，涉及几个问题：</p>
+<ul>
+<li>= 左边是一个变量，只有变量才能赋值，于是涉及以下问题：如何存储局部变量，如何查找变量，怎么确定一个变量是局部变量、全局变量还是UpValue？</li>
+<li>= 右边是一个表达式列表 explist1，在这个最简单的例子中，这个表达式是常量数字 10。这种情况很简单，如果不是一个立即能得到的值，比如是一个函数调用的返回值，或者是对这个 block 之外的其他变量的引用，又怎么处理呢？</li>
+</ul>
+<p>第一个问题，如何识别局部变量？</p>
+<p>首先在函数 localstat 中，会有一个循环调用函数 new_localvar，将=左边的所有以逗号分隔的变量都生成一个相应的局部变量。</p>
+<p>存储每个局部变量的信息时，我们使用的是 LocVar 结构体：</p>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// lObject.h</span></span><br><span class="line"><span class="comment">/*</span></span><br><span class="line"><span class="comment">** Description of a local variable for function prototypes</span></span><br><span class="line"><span class="comment">** (used for debug information)</span></span><br><span class="line"><span class="comment">*/</span></span><br><span class="line"><span class="keyword">typedef</span> <span class="class"><span class="keyword">struct</span> <span class="title">LocVar</span> &#123;</span></span><br><span class="line">  TString *varname;</span><br><span class="line">  <span class="keyword">int</span> startpc;  <span class="comment">/* first point where variable is active */</span></span><br><span class="line">  <span class="keyword">int</span> endpc;    <span class="comment">/* first point where variable is dead */</span></span><br><span class="line">&#125; LocVar;</span><br></pre></td></tr></table></figure>
+
+<p>其中变量名放在 LocVar 结构体的变量 varname 中。函数中所有局部变量的 LocVar 信息，一般存放在 Proto 结构体的 LocVar 中。</p>
+<p>在结构体FuncState 中，成员变量 freereg 存放的就是当前函数栈的下一个可用位置。</p>
+<blockquote>
+<p>在每一个 chunk 函数中，都会根据当前函数栈存放的变量数量（包括函数的局部变量、函数的参数）进行调整（该书基于 lua 5.14版本写成）</p>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// lparser.c</span></span><br><span class="line"><span class="function"><span class="keyword">static</span> <span class="keyword">void</span> <span class="title">chunk</span> <span class="params">(LexState *ls)</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">  <span class="comment">/* chunk -&gt; &#123; stat [`;']&#125; */</span></span><br><span class="line">  <span class="keyword">while</span> (!islast &amp;&amp; !block_follow(ls-&gt;t.token))</span><br><span class="line">  &#123;</span><br><span class="line">    ls-&gt;fs-&gt;freereg = ls-&gt;fs-&gt;nactvar; <span class="comment">/* free registers */</span></span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+</blockquote>
+<p>在 Lua5.3 版本中，我找到了一个类似的函数：</p>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// lparser.c</span></span><br><span class="line"><span class="function"><span class="keyword">static</span> <span class="keyword">void</span> <span class="title">statlist</span> <span class="params">(LexState *ls)</span> </span>&#123;</span><br><span class="line">  <span class="comment">/* statlist -&gt; &#123; stat [';'] &#125; */</span></span><br><span class="line">  <span class="keyword">while</span> (!block_follow(ls, <span class="number">1</span>)) &#123;</span><br><span class="line">    <span class="keyword">if</span> (ls-&gt;t.token == TK_RETURN) &#123;</span><br><span class="line">      statement(ls);</span><br><span class="line">      <span class="keyword">return</span>;  <span class="comment">/* 'return' must be last statement */</span></span><br><span class="line">    &#125;</span><br><span class="line">    statement(ls);</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>这里调用 statement()函数：</p>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">static</span> <span class="keyword">void</span> <span class="title">statement</span> <span class="params">(LexState *ls)</span> </span>&#123;</span><br><span class="line">  <span class="keyword">int</span> <span class="built_in">line</span> = ls-&gt;linenumber;  <span class="comment">/* may be needed for error messages */</span></span><br><span class="line">  enterlevel(ls);</span><br><span class="line">  <span class="keyword">switch</span> (ls-&gt;t.token) &#123;</span><br><span class="line">    <span class="keyword">case</span> TK_LOCAL: &#123;  <span class="comment">/* stat -&gt; localstat */</span></span><br><span class="line">      luaX_next(ls);  <span class="comment">/* skip LOCAL */</span></span><br><span class="line">      <span class="keyword">if</span> (testnext(ls, TK_FUNCTION))  <span class="comment">/* local function? */</span></span><br><span class="line">        localfunc(ls);</span><br><span class="line">      <span class="keyword">else</span></span><br><span class="line">        localstat(ls);</span><br><span class="line">      <span class="keyword">break</span>;</span><br><span class="line">    &#125;</span><br><span class="line">  &#125;</span><br><span class="line">  lua_assert(ls-&gt;fs-&gt;f-&gt;maxstacksize &gt;= ls-&gt;fs-&gt;freereg &amp;&amp;</span><br><span class="line">             ls-&gt;fs-&gt;freereg &gt;= ls-&gt;fs-&gt;nactvar);</span><br><span class="line">  ls-&gt;fs-&gt;freereg = ls-&gt;fs-&gt;nactvar;  <span class="comment">/* free registers */</span></span><br><span class="line">  leavelevel(ls);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>可以看到在第 9 行对当前函数栈存放的变量数量（包括函数的局部变量、函数的参数等）进行调整。</p>
+<p>那么，nactvar 这个变量又是何时调整的呢？在这个例子中，变量 a 是一个局部变量，最后会在解析局部变量的函数 adjustlocalvars 中进行调整：</p>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">static</span> <span class="keyword">void</span> <span class="title">adjustlocalvars</span> <span class="params">(LexState *ls, <span class="keyword">int</span> nvars)</span> </span>&#123;</span><br><span class="line">  FuncState *fs = ls-&gt;fs;</span><br><span class="line">  fs-&gt;nactvar = cast_byte(fs-&gt;nactvar + nvars);</span><br><span class="line">  <span class="keyword">for</span> (; nvars; nvars--) &#123;</span><br><span class="line">    getlocvar(fs, fs-&gt;nactvar - nvars)-&gt;startpc = fs-&gt;pc;</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>至此，第一个问题得到了解决：在函数 localstat 中，会读取=号左边的所有变量，并在 Proto 结构体中创建相应的局部变量信息；而变量在 Lua 函数栈中的存储位置存放在 freereg 变量中，它会根据当前函数栈中变量的数量进行调整。</p>
+<p>第二个问题：表达式的结果如何存储？</p>
+<p>解析表达式的结果会存储在一个临时数据结构 expdesc 中：</p>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">typedef</span> <span class="class"><span class="keyword">struct</span> <span class="title">expdesc</span> &#123;</span></span><br><span class="line">  expkind k;</span><br><span class="line">  <span class="keyword">union</span> &#123;</span><br><span class="line">    <span class="class"><span class="keyword">struct</span> &#123;</span>  <span class="comment">/* for indexed variables (VINDEXED) 索引变量（VINDEXED） */</span></span><br><span class="line">      <span class="keyword">short</span> idx;  <span class="comment">/* index (R/K) 索引 */</span></span><br><span class="line">      lu_byte t;  <span class="comment">/* table (register or upvalue) 表（寄存器或者上值） */</span></span><br><span class="line">      lu_byte vt;  <span class="comment">/* whether 't' is register (VLOCAL) or upvalue (VUPVAL) t 是寄存器（局部变量）或者上值（上值） */</span></span><br><span class="line">    &#125; ind;</span><br><span class="line">    <span class="keyword">int</span> info;  <span class="comment">/* for generic use */</span></span><br><span class="line">    lua_Number nval;  <span class="comment">/* for VKFLT */</span></span><br><span class="line">    lua_Integer ival;    <span class="comment">/* for VKINT */</span></span><br><span class="line">  &#125; u;</span><br><span class="line">  <span class="keyword">int</span> t;  <span class="comment">/* patch list of 'exit when true' */</span></span><br><span class="line">  <span class="keyword">int</span> f;  <span class="comment">/* patch list of 'exit when false' */</span></span><br><span class="line">&#125; expdesc;</span><br></pre></td></tr></table></figure>
+
+<ul>
+<li>变量 k 表示具体的类型</li>
+<li>后面紧跟的 union u 根据不同的类型存储的数据有所区分，具体可以看 expkind 类型定义后面的注释</li>
+<li>至于 t 和 f 这两个变量，目前可以暂时不管，这是跳转相关的指令。</li>
+</ul>
+<h4 id="解析表达式列表："><a href="#解析表达式列表：" class="headerlink" title="解析表达式列表："></a>解析表达式列表：</h4><p>解析表达式列表的函数为explist：</p>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">static</span> <span class="keyword">int</span> <span class="title">explist</span> <span class="params">(LexState *ls, expdesc *v)</span> </span>&#123;</span><br><span class="line">  <span class="comment">/* explist -&gt; expr &#123; ',' expr &#125; */</span></span><br><span class="line">  <span class="keyword">int</span> n = <span class="number">1</span>;  <span class="comment">/* at least one expression */</span></span><br><span class="line">  expr(ls, v);</span><br><span class="line">  <span class="keyword">while</span> (testnext(ls, <span class="string">','</span>)) &#123;</span><br><span class="line">    luaK_exp2nextreg(ls-&gt;fs, v);</span><br><span class="line">    expr(ls, v);</span><br><span class="line">    n++;</span><br><span class="line">  &#125;</span><br><span class="line">  <span class="keyword">return</span> n;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<ul>
+<li>调用函数expr解析表达式</li>
+<li>当解析的表达式列表中还存在其他的表达式时，即有逗号（，）分隔的式子时，针对每个表达式继续调用expr函数解析表达式，将结果缓存在expdesc结构体中，然后调用函数 luaK_exp2nextreg 将表达式存入当前函数的下一个可用寄存器中。</li>
+</ul>
+<p>根据上面的调用路径，最终会走入 simpleexp 中：</p>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">static</span> <span class="keyword">void</span> <span class="title">simpleexp</span> <span class="params">(LexState *ls, expdesc *v)</span> </span>&#123;</span><br><span class="line">  <span class="comment">/* simpleexp -&gt; FLT | INT | STRING | NIL | TRUE | FALSE | ... |</span></span><br><span class="line"><span class="comment">                  constructor | FUNCTION body | suffixedexp */</span></span><br><span class="line">  <span class="keyword">switch</span> (ls-&gt;t.token) &#123;</span><br><span class="line">		...</span><br><span class="line">    <span class="keyword">case</span> TK_INT: &#123;</span><br><span class="line">      init_exp(v, VKINT, <span class="number">0</span>);</span><br><span class="line">      v-&gt;u.ival = ls-&gt;t.seminfo.i;</span><br><span class="line">      <span class="keyword">break</span>;</span><br><span class="line">    &#125;</span><br><span class="line">		...</span><br><span class="line">    <span class="keyword">default</span>: &#123;</span><br><span class="line">      suffixedexp(ls, v);</span><br><span class="line">      <span class="keyword">return</span>;</span><br><span class="line">    &#125;</span><br><span class="line">  &#125;</span><br><span class="line">  luaX_next(ls);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<ul>
+<li>使用类型 VKINT 初始化 expdesc 结构体，这个类型表示数字常量</li>
+<li>将具体的数据赋值给 expdesc 结构体中的 ival，前面说过，expdesc 结构体中 union u 的数据根据不同的类型会存储不同的信息，在 VKINT 这个类型下就是用来存储数字的。</li>
+</ul>
+<p>现在这个表达式的信息已经存放在 expdesc 结构体中，需要进一步根据这个结构体的信息来生成对应的字节码。</p>
+<p>这个工作由函数 luaK_exp2nextreg 完成，需要根据 expdesc 结构体生成字节码时，都要经过它：</p>
+<ul>
+<li>调用 luaK_dischargevars 函数，根据变量所在的不同作用域（local，global，upvalue）来决定这个变量是否需要重定向</li>
+<li>调用 luaK_reserveregs 函数，分配可用的函数寄存器空间，得到这个空间对应的寄存器索引。有了空间，才能存储变量</li>
+<li>调用exp2reg 函数，真正完成把表达式的数据放入寄存器空间的工作。在这个函数中，最终又会调用dischargereg函数，这个函数式根据不同的表达式类型（NIL，布尔表达式，数字等）来生成存取表达式的值到寄存器的字节码</li>
+</ul>
+<p>在函数 discharge2reg 中最终会走到这里：</p>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">static</span> <span class="keyword">void</span> <span class="title">discharge2reg</span> <span class="params">(FuncState *fs, expdesc *e, <span class="keyword">int</span> reg)</span> </span>&#123;</span><br><span class="line">  luaK_dischargevars(fs, e);</span><br><span class="line">  <span class="keyword">switch</span> (e-&gt;k) &#123;</span><br><span class="line">		...</span><br><span class="line">    <span class="keyword">case</span> VKINT: &#123;</span><br><span class="line">      luaK_codek(fs, reg, luaK_intK(fs, e-&gt;u.ival));</span><br><span class="line">      <span class="keyword">break</span>;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">default</span>: &#123;</span><br><span class="line">      lua_assert(e-&gt;k == VVOID || e-&gt;k == VJMP);</span><br><span class="line">      <span class="keyword">return</span>;  <span class="comment">/* nothing to do... */</span></span><br><span class="line">    &#125;</span><br><span class="line">  &#125;</span><br><span class="line">  e-&gt;u.info = reg;</span><br><span class="line">  e-&gt;k = VNONRELOC;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>在这个函数的参数中，reg 参数就是前面得到的寄存器索引，于是最后根据 k 值生成了OP_LOADK指令（另一种情况是生成OP_LOADKX指令），将数字 10 加载到 reg 参数对应的寄存器中。</p>
+<p>至此，通过对这个最简单的向局部变量赋值操作的分析，完成了 Lua 解释器从词法分析到生成字节码的全过程分析：</p>
+<ul>
+<li>每个局部变量都有一个对应的 LocVar 结构体存储它的变量名信息。</li>
+<li>每个局部变量都会对应分配一个函数栈的位置来保存它的数据。</li>
+<li>解析表达式的结果会存在 expdesc 结构体中。根据不同的类型，内部使用的联合体存放的数据有不同的意义。</li>
+<li>luaK_exp2nextreg 是一个非常重要的函数，它用于将 expdesc 结构体的信息中存储的表达式信息转换成对应的 opcode。</li>
+</ul>
+<h4 id="流程图："><a href="#流程图：" class="headerlink" title="流程图："></a>流程图：</h4><p><img src="https://s2.ax1x.com/2019/08/26/mh9OQU.png" alt="mh9OQU.png"></p>
+<p>如果代码变为：</p>
+<figure class="highlight lua"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">local</span> a,b = <span class="number">10</span></span><br></pre></td></tr></table></figure>
+
+<p>则在localstat函数中进入：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">static void localstat (LexState *ls) &#123;</span><br><span class="line">	...</span><br><span class="line">  adjust_assign(ls, nvars, nexps, &amp;e);</span><br><span class="line">  adjustlocalvars(ls, nvars);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>第一个函数adjust_assign用于根据等号两边变量和表达式的数量来调整赋值。具体来说，在上面这个例子中，当变量数量多于等号右边的表达式数量时，会将多余的变量置为NIL。</p>
+<p>第二个函数adjustlocalvars会根据变量的数量调整FuncState结构体中记录局部变量数量的nactvar对象，并记录这些局部变量的startpc值。</p>
+<p>如果代码变为：</p>
+<figure class="highlight lua"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">local</span> a = <span class="number">10</span></span><br><span class="line"><span class="keyword">local</span> b = a</span><br></pre></td></tr></table></figure>
+
+<p>主要区别在于走到simpleexp函数时，进入的是另一条路径，走入了primaryexp函数中。然后在prefixexp函数中，判断这是一个变量时，会调用singlevar函数（实际上，最后会调用递归函数 singlevaraux）来进行变量的查找，这个函数的大体流程如下：</p>
+<ol>
+<li>如果变量在当前函数的 LocVar 结构体数组中找到，那么这个变量就是局部变量，类型为 VLOCAL。</li>
+<li>如果在当前函数中找不到，就逐层往上面的 block 来查找，如果在某一层查到了，那么这个变量就是 UpValue，类型为 VUPVAL。</li>
+<li>如果最后那层都没有查到，那么这个变量就是全局变量，类型为 VGLOBAL。</li>
+</ol>
+<p>在 luaK_dischargevars 函数中，根据三种不同的类型有不同的操作。</p>
+<p>如果赋值的源数据是局部变量，则使用 MOVE 指令来完成赋值。</p>
+<h4 id="全局变量："><a href="#全局变量：" class="headerlink" title="全局变量："></a>全局变量：</h4><figure class="highlight lua"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">a = <span class="number">10</span></span><br><span class="line"><span class="keyword">local</span> b = a</span><br></pre></td></tr></table></figure>
+
+<p>这时对应的 luaK_dischargevars 函数这样：</p>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">luaK_dischargevars</span> <span class="params">(FuncState *fs, expdesc *e)</span> </span>&#123;</span><br><span class="line">  <span class="keyword">switch</span> (e-&gt;k) &#123;</span><br><span class="line">		...</span><br><span class="line">    <span class="keyword">case</span> VGLOBAL: &#123;</span><br><span class="line">      e-&gt;u.s.info = luaK_codeABx(fs, OP_GETGLOBAL, <span class="number">0</span>, e-&gt;u.s.info);</span><br><span class="line">      e-&gt;k = VRELOCABLE;</span><br><span class="line">      <span class="keyword">break</span>;</span><br><span class="line">    &#125;</span><br><span class="line">    ...</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br><span class="line"><span class="comment">// lua 5.1.5</span></span><br></pre></td></tr></table></figure>
+
+<p>而在 Lua 5.3版本中，应该是在这部分函数中对全局变量进行处理的（<strong>存疑</strong>）。</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line">static void singlevar (LexState *ls, expdesc *var) &#123;</span><br><span class="line">  TString *varname = str_checkname(ls);</span><br><span class="line">  FuncState *fs = ls-&gt;fs;</span><br><span class="line">  if (singlevaraux(fs, varname, var, 1) == VVOID) &#123;  /* global name? */</span><br><span class="line">    expdesc key;</span><br><span class="line">    singlevaraux(fs, ls-&gt;envn, var, 1);  /* get environment variable */</span><br><span class="line">    lua_assert(var-&gt;k == VLOCAL || var-&gt;k == VUPVAL);</span><br><span class="line">    codestring(ls, &amp;key, varname);  /* key is variable name */</span><br><span class="line">    luaK_indexed(fs, var, &amp;key);  /* env[varname] */</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<hr>
+<p>参考：</p>
+<ol>
+<li><a href="[https://zh.wikipedia.org/wiki/%E6%89%A9%E5%B1%95%E5%B7%B4%E7%A7%91%E6%96%AF%E8%8C%83%E5%BC%8F](https://zh.wikipedia.org/wiki/扩展巴科斯范式)">扩展巴科斯范式</a></li>
+</ol>
+
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/Lua/" rel="tag"># Lua</a>
+          
+        </div>
+      
+
+      
+      
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2019/08/22/Lua/Lua%E6%BA%90%E7%A0%81%E9%98%85%E8%AF%BB%EF%BC%9A%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84%E4%B8%8E%E6%A0%88/" rel="next" title="Lua源码阅读：数据结构与栈">
+                <i class="fa fa-chevron-left"></i> Lua源码阅读：数据结构与栈
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+              <a href="/2019/08/26/Lua/Lua%E6%BA%90%E7%A0%81%E9%98%85%E8%AF%BB%EF%BC%9A%E8%A1%A8%E6%93%8D%E4%BD%9C%E7%9A%84%E6%8C%87%E4%BB%A4/" rel="prev" title="Lua源码阅读：表操作的指令">
+                Lua源码阅读：表操作的指令 <i class="fa fa-chevron-right"></i>
+              </a>
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+
+    <div class="post-spread">
+      
+    </div>
+  </div>
+
+
+          </div>
+          
+
+
+          
+  <div class="comments" id="comments">
+    
+  </div>
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap" >
+            Table of Contents
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview">
+            Overview
+          </li>
+        </ul>
+      
+
+      <section class="site-overview sidebar-panel">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+          <img class="site-author-image" itemprop="image"
+               src="/images/avatar.gif"
+               alt="zhangMo" />
+          <p class="site-author-name" itemprop="name">zhangMo</p>
+           
+              <p class="site-description motion-element" itemprop="description">T&S&A&G</p>
+          
+        </div>
+        <nav class="site-state motion-element">
+
+          
+            <div class="site-state-item site-state-posts">
+              <a href="/archives/">
+                <span class="site-state-item-count">86</span>
+                <span class="site-state-item-name">posts</span>
+              </a>
+            </div>
+          
+
+          
+            
+            
+            <div class="site-state-item site-state-categories">
+              
+                <span class="site-state-item-count">10</span>
+                <span class="site-state-item-name">categories</span>
+              
+            </div>
+          
+
+          
+            
+            
+            <div class="site-state-item site-state-tags">
+              
+                <span class="site-state-item-count">34</span>
+                <span class="site-state-item-name">tags</span>
+              
+            </div>
+          
+
+        </nav>
+
+        
+
+        <div class="links-of-author motion-element">
+          
+        </div>
+
+        
+        
+
+        
+        
+
+        
+
+
+      </section>
+
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-3"><a class="nav-link" href="#Lua词法："><span class="nav-number">1.</span> <span class="nav-text">Lua词法：</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#赋值类指令："><span class="nav-number">2.</span> <span class="nav-text">赋值类指令：</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#局部变量："><span class="nav-number">2.1.</span> <span class="nav-text">局部变量：</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#解析表达式列表："><span class="nav-number">2.2.</span> <span class="nav-text">解析表达式列表：</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#流程图："><span class="nav-number">2.3.</span> <span class="nav-text">流程图：</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#全局变量："><span class="nav-number">2.4.</span> <span class="nav-text">全局变量：</span></a></li></ol></li></ol></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
+      
+
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright" >
+  
+  &copy; 
+  <span itemprop="copyrightYear">2020</span>
+  <span class="with-love">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">zhangMo</span>
+</div>
+
+
+<div class="powered-by">
+  Powered by <a class="theme-link" href="https://hexo.io" target="_blank" rel="noopener">Hexo</a>
+</div>
+
+<div class="theme-info">
+  Theme -
+  <a class="theme-link" href="https://github.com/iissnan/hexo-theme-next" target="_blank" rel="noopener">
+    NexT.Muse
+  </a>
+</div>
+
+
+        
+
+        
+      </div>
+    </footer>
+
+    
+      <div class="back-to-top">
+        <i class="fa fa-arrow-up"></i>
+        
+      </div>
+    
+
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  <script type="text/javascript" src="/lib/jquery/index.js?v=2.1.3"></script>
+
+  
+  <script type="text/javascript" src="/lib/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+
+  
+  <script type="text/javascript" src="/lib/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
+
+  
+  <script type="text/javascript" src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+
+  
+  <script type="text/javascript" src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+
+  
+  <script type="text/javascript" src="/lib/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=5.1.2"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=5.1.2"></script>
+
+
+
+  
+  
+
+  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.1.2"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.1.2"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.1.2"></script>
+
+
+
+  
+
+
+  
+
+
+
+
+	
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+</body>
+</html>

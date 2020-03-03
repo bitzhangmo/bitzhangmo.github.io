@@ -1,0 +1,766 @@
+<!DOCTYPE html>
+
+
+
+  
+
+
+<html class="theme-next muse use-motion" lang="zh-CN">
+<head>
+  <meta charset="UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+<meta name="theme-color" content="#222">
+
+
+
+
+
+
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+  <link href="/lib/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css" />
+
+
+
+
+  
+  
+  
+  
+
+  
+    
+    
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+    
+    
+    <link href="//fonts.googleapis.com/css?family=Lato:300,300italic,400,400italic,700,700italic&subset=latin,latin-ext" rel="stylesheet" type="text/css">
+  
+
+
+
+
+
+
+<link href="/lib/font-awesome/css/font-awesome.min.css?v=4.6.2" rel="stylesheet" type="text/css" />
+
+<link href="/css/main.css?v=5.1.2" rel="stylesheet" type="text/css" />
+
+
+  <meta name="keywords" content="Unity," />
+
+
+
+
+
+
+
+
+  <link rel="shortcut icon" type="image/x-icon" href="/favicon.ico?v=5.1.2" />
+
+
+
+
+
+
+<meta name="description" content="生命周期相关。">
+<meta name="keywords" content="Unity">
+<meta property="og:type" content="article">
+<meta property="og:title" content="[Unity] 生命周期相关">
+<meta property="og:url" content="https:&#x2F;&#x2F;bitzhangmo.github.io&#x2F;2019&#x2F;04&#x2F;17&#x2F;Unity%E7%AC%94%E8%AE%B0&#x2F;Unity-%E7%94%9F%E5%91%BD%E5%91%A8%E6%9C%9F%E7%9B%B8%E5%85%B3&#x2F;index.html">
+<meta property="og:site_name" content="zhangMo Blog">
+<meta property="og:description" content="生命周期相关。">
+<meta property="og:locale" content="zh-CN">
+<meta property="og:image" content="https:&#x2F;&#x2F;docs.unity3d.com&#x2F;uploads&#x2F;Main&#x2F;monobehaviour_flowchart.svg">
+<meta property="og:updated_time" content="2019-04-24T13:00:41.494Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="https:&#x2F;&#x2F;docs.unity3d.com&#x2F;uploads&#x2F;Main&#x2F;monobehaviour_flowchart.svg">
+
+
+
+<script type="text/javascript" id="hexo.configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/',
+    scheme: 'Muse',
+    sidebar: {"position":"left","display":"post","offset":12,"offset_float":12,"b2t":false,"scrollpercent":false,"onmobile":false},
+    fancybox: true,
+    tabs: true,
+    motion: true,
+    duoshuo: {
+      userId: '0',
+      author: 'Author'
+    },
+    algolia: {
+      applicationID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    }
+  };
+</script>
+
+
+
+  <link rel="canonical" href="https://bitzhangmo.github.io/2019/04/17/Unity笔记/Unity-生命周期相关/"/>
+
+
+
+
+
+  <title>[Unity] 生命周期相关 | zhangMo Blog</title>
+  
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="zh-CN">
+
+  
+  
+    
+  
+
+  <div class="container sidebar-position-left page-post-detail ">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-wrapper">
+  <div class="site-meta ">
+    
+
+    <div class="custom-logo-site-title">
+      <a href="/"  class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">zhangMo Blog</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+      
+        <p class="site-subtitle"></p>
+      
+  </div>
+
+  <div class="site-nav-toggle">
+    <button>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+    </button>
+  </div>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu">
+      
+        
+        <li class="menu-item menu-item-home">
+          <a href="/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-home"></i> <br />
+            
+            Home
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/archives/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-archive"></i> <br />
+            
+            Archives
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-tags">
+          <a href="/tags/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-tags"></i> <br />
+            
+            Tags
+          </a>
+        </li>
+      
+
+      
+    </ul>
+  
+
+  
+</nav>
+
+
+
+ </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="https://bitzhangmo.github.io/2019/04/17/Unity%E7%AC%94%E8%AE%B0/Unity-%E7%94%9F%E5%91%BD%E5%91%A8%E6%9C%9F%E7%9B%B8%E5%85%B3/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="zhangMo">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/avatar.gif">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="zhangMo Blog">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">[Unity] 生命周期相关</h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">Posted on</span>
+              
+              <time title="Post created" itemprop="dateCreated datePublished" datetime="2019-04-17T21:28:18+08:00">
+                2019-04-17
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+            <span class="post-category" >
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">In</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/%E8%AF%BB%E4%B9%A6%E7%AC%94%E8%AE%B0/" itemprop="url" rel="index">
+                    <span itemprop="name">读书笔记</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <p>生命周期相关。</p>
+<a id="more"></a>
+
+<h3 id="脚本的生命周期："><a href="#脚本的生命周期：" class="headerlink" title="脚本的生命周期："></a>脚本的生命周期：</h3><p>Unity脚本有一套完整的生命周期，脚本需要挂在任意游戏对象上，并且同一个游戏对象可以挂不同的脚本，各脚本执行自己的生命周期，它们可以互相组合并且互不干预。生命周期中的所有方法都是Unity系统自己回调的，不需要手动调用，主要有编辑脚本、初始化、物理碰撞事件、更新回调、渲染和销毁等。学习脚本的生命周期之前，我们不得不引用文档中非常经典的一张图，它完整的描述了脚本的生命周期：</p>
+<p><img src="https://docs.unity3d.com/uploads/Main/monobehaviour_flowchart.svg" alt=""></p>
+<h4 id="第一个场景加载："><a href="#第一个场景加载：" class="headerlink" title="第一个场景加载："></a>第一个场景加载：</h4><p>这些函数将在场景开始加载时调用。(场景中的每个物体仅调用一次)</p>
+<ul>
+<li><strong>Awake</strong>：这个方法总是在在任何开始方法之前调用(可以理解成最先调用吧？)，并且在一个prefab<strong>刚被实例化后</strong>就调用。(如果一个游戏物体在开始时是不活跃的(inactive)则将不会调用awake函数，直到其变为活跃。)</li>
+<li><strong>OnEnable</strong>：(仅在物体为活跃(active)状态调用)：这个函数仅在一个物体变为有效(enabled)后调用。这通常发生在一个MonoBehavior实例创建时，例如在一个场景加载时或者一个持有脚本组件的游戏物体被实例化时。</li>
+<li><strong>OnLevelWasLoaded</strong>：这个函数用来通知游戏逻辑一个新的场景已经被加载完。</li>
+</ul>
+<p>注意：对于加到场景中的物体来说，Awake和OnEnable方法将在所有脚本的任何类似于Start、Update等方法被调用之前调用。自然的，这些方法也不能在游戏进行中强制调用。</p>
+<h4 id="编辑器："><a href="#编辑器：" class="headerlink" title="编辑器："></a>编辑器：</h4><ul>
+<li><strong>Reset</strong>：Reset被调用于第一次将脚本绑定到物体上时初始化脚本属性，或者在Reset指令被触发时调用。</li>
+</ul>
+<h4 id="在帧之间："><a href="#在帧之间：" class="headerlink" title="在帧之间："></a>在帧之间：</h4><ul>
+<li><strong>OnApplicationPause</strong>:：这个方法在检测到暂停的帧的末尾调用，在正常帧更新间有效？之后将会发出一个额外的帧。调用<strong>OnApplicationPause</strong>以允许游戏显示指示暂停状态的图形。</li>
+</ul>
+<h4 id="更新顺序："><a href="#更新顺序：" class="headerlink" title="更新顺序："></a>更新顺序：</h4><p>当你追踪游戏逻辑和交互、动画、相机位置等，你可以使用几个不同的事件。常见的模式是在Update函数中执行大多数任务，但也可以使用其他功能。</p>
+<ul>
+<li><strong>FixedUpdate</strong>：FixedUpdate函数通常要比Update函数调用的更为频繁，会按照设置的时间固定频率来循环更新。如果帧速率低，则可以每帧调用多次，如果帧速率高，则可以不在帧之间调用。所有物理计算和更新在FixedUpdate之后立即发生。在FixedUpdate中应用移动计算时，不需要乘以Time.deltaTime。这是因为FixedUpdate在可靠的定时器上调用，与帧速率无关。</li>
+<li><strong>Update</strong>：Update每帧调用一次。它是帧更新的主要功能。</li>
+<li><strong>LateUpdate</strong>：LateUpdate每帧调用一次，但在Update执行结束之后。在LateUpdate开始时，在Update中执行的任何计算都应该已经完成。LateUpdate的一个常见用途是实现跟随的第三人称相机。如果你将角色移动放在Update中执行，那么你可以将所有的相机移动和旋转计算放在LateUpdate中执行。这将确保角色在摄像机跟踪其位置之前完全移动。</li>
+</ul>
+<blockquote>
+<p>总体来说，Update()和LateUpdate()属于立即更新，更新之间的频率是不固定的，比如某一帧有一个耗时操作的时候，就会影响到下一帧更新的时间，所以对更新频率要求比较稳定的物理系统就不太适合在这里处理更新。</p>
+<p>FixedUpdate()虽然是固定更新，但是其实也是相对固定的，比如某一帧耗了好几秒，它依然会卡住。不过正常的程序要优化耗时操作，小范围的帧率波动是正常的，可以让它更新的时间间隔稍微长一点，这样它的更新是比较平滑的。在实际的开发中，例如以秒为单位的倒计时，并不需要每一帧去判断时间，所以用FixedUpdate()就再合适不过了。</p>
+</blockquote>
+<h4 id="动画更新循环："><a href="#动画更新循环：" class="headerlink" title="动画更新循环："></a>动画更新循环：</h4><p>这些方法和Profiler Markers在Unity评估(？)动画系统时会调用。</p>
+<p>(暂略)</p>
+<h4 id="有用的profile-markers："><a href="#有用的profile-markers：" class="headerlink" title="有用的profile markers："></a>有用的profile markers：</h4><p>(暂略)</p>
+<h4 id="渲染："><a href="#渲染：" class="headerlink" title="渲染："></a>渲染：</h4><ul>
+<li><strong>OnPreCull</strong>：在相机剔除场景之前调用。剔除确定相机可以看到哪些对象。在剔除之前调用OnPreCull。</li>
+<li><strong>OnBecameVisible/OnBecameInvisible</strong>：当对象变得对任何相机可见/不可见时调用。</li>
+<li><strong>OnWillRenderObject</strong>：如果对象可见，则为每个摄像机调用一次。</li>
+<li><strong>OnPreRender</strong>：在相机开始渲染场景之前调用一次。</li>
+<li><strong>OnRenderObject</strong>：在完成所有常规场景渲染后调用。您可以使用GL类或Graphics.DrawMeshNow来绘制自定义几何体。</li>
+<li><strong>OnPostRender</strong>：在相机完成渲染场景后调用。</li>
+<li><strong>OnRenderImage</strong>：在场景渲染完成后调用以允许对图像进行后处理，请参阅后处理效果。</li>
+<li><strong>OnGUI</strong>：响应GUI事件，每帧调用多次。首先处理Layout和Repaint事件，然后为每个输入事件处理Layout和keyboard / mouse事件。</li>
+<li><strong>OnDrawGizmos</strong>：用于在场景视图中绘制Gizmo以进行可视化。</li>
+</ul>
+<h4 id="协程："><a href="#协程：" class="headerlink" title="协程："></a>协程：</h4><p>正常的协程在Update函数返回后更新。协程是一个可以暂停执行(yield)直到给定的YieldInstruction完成的函数。以下是协程的不同用处：</p>
+<ul>
+<li><strong>yield</strong>：在下一帧调用所有Update函数后，协程将继续。</li>
+<li><strong>yield WaitForSeconds</strong>：在为帧调用了所有的Update函数后，协程在指定的延迟时间后继续。</li>
+<li><strong>yield WaitForFixedUpdate</strong>：在所有脚本中的的所有FixedUpdate执行后继续协程。</li>
+<li><strong>yield WWW</strong>：在一个WWW类的下载完成之后执行协程。</li>
+<li><strong>yield StartCoroutine</strong>：链接协程，并将等待MyFunc协程首先完成。</li>
+</ul>
+<h4 id="当物体被销毁时："><a href="#当物体被销毁时：" class="headerlink" title="当物体被销毁时："></a>当物体被销毁时：</h4><ul>
+<li><strong>OnDestroy</strong>：在对象存在的最后一帧的所有帧更新之后调用这个函数。(该对象可能在相应Object.Destory或者场景闭合时被销毁)。</li>
+</ul>
+<h4 id="当退出时："><a href="#当退出时：" class="headerlink" title="当退出时："></a>当退出时：</h4><p>在场景中的所有活动对象上调用这些函数：</p>
+<ul>
+<li><strong>OnApplicationQuit</strong>：在退出应用程序之前，将在所有游戏对象上调用此函数。在编辑器中，当用户停止播放模式时调用它。</li>
+<li><strong>OnDisable</strong>：当行为被禁用或处于非活动状态时，将调用此函数。</li>
+</ul>
+
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/Unity/" rel="tag"># Unity</a>
+          
+        </div>
+      
+
+      
+      
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2019/04/12/%E5%BC%80%E5%8F%91%E7%AC%94%E8%AE%B0/Demo-%E4%B8%80%E4%B8%AA%E5%8F%AF%E8%A7%86%E5%8C%96%E5%AF%BB%E8%B7%AFProject/" rel="next" title="[Demo] 一个可视化寻路Project">
+                <i class="fa fa-chevron-left"></i> [Demo] 一个可视化寻路Project
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+              <a href="/2019/04/17/Unity%E7%AC%94%E8%AE%B0/Unity-%E5%9C%A8Unity%E4%B8%AD%E7%BA%B9%E7%90%86%E5%9B%BE%E8%AF%A5%E6%98%AF%E4%BB%80%E4%B9%88%E6%A0%BC%E5%BC%8F%EF%BC%9F/" rel="prev" title="[Unity] 在Unity中纹理图该是什么格式？">
+                [Unity] 在Unity中纹理图该是什么格式？ <i class="fa fa-chevron-right"></i>
+              </a>
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+
+    <div class="post-spread">
+      
+    </div>
+  </div>
+
+
+          </div>
+          
+
+
+          
+  <div class="comments" id="comments">
+    
+  </div>
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap" >
+            Table of Contents
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview">
+            Overview
+          </li>
+        </ul>
+      
+
+      <section class="site-overview sidebar-panel">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+          <img class="site-author-image" itemprop="image"
+               src="/images/avatar.gif"
+               alt="zhangMo" />
+          <p class="site-author-name" itemprop="name">zhangMo</p>
+           
+              <p class="site-description motion-element" itemprop="description">T&S&A&G</p>
+          
+        </div>
+        <nav class="site-state motion-element">
+
+          
+            <div class="site-state-item site-state-posts">
+              <a href="/archives/">
+                <span class="site-state-item-count">86</span>
+                <span class="site-state-item-name">posts</span>
+              </a>
+            </div>
+          
+
+          
+            
+            
+            <div class="site-state-item site-state-categories">
+              
+                <span class="site-state-item-count">10</span>
+                <span class="site-state-item-name">categories</span>
+              
+            </div>
+          
+
+          
+            
+            
+            <div class="site-state-item site-state-tags">
+              
+                <span class="site-state-item-count">34</span>
+                <span class="site-state-item-name">tags</span>
+              
+            </div>
+          
+
+        </nav>
+
+        
+
+        <div class="links-of-author motion-element">
+          
+        </div>
+
+        
+        
+
+        
+        
+
+        
+
+
+      </section>
+
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-3"><a class="nav-link" href="#脚本的生命周期："><span class="nav-number">1.</span> <span class="nav-text">脚本的生命周期：</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#第一个场景加载："><span class="nav-number">1.1.</span> <span class="nav-text">第一个场景加载：</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#编辑器："><span class="nav-number">1.2.</span> <span class="nav-text">编辑器：</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#在帧之间："><span class="nav-number">1.3.</span> <span class="nav-text">在帧之间：</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#更新顺序："><span class="nav-number">1.4.</span> <span class="nav-text">更新顺序：</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#动画更新循环："><span class="nav-number">1.5.</span> <span class="nav-text">动画更新循环：</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#有用的profile-markers："><span class="nav-number">1.6.</span> <span class="nav-text">有用的profile markers：</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#渲染："><span class="nav-number">1.7.</span> <span class="nav-text">渲染：</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#协程："><span class="nav-number">1.8.</span> <span class="nav-text">协程：</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#当物体被销毁时："><span class="nav-number">1.9.</span> <span class="nav-text">当物体被销毁时：</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#当退出时："><span class="nav-number">1.10.</span> <span class="nav-text">当退出时：</span></a></li></ol></li></ol></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
+      
+
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright" >
+  
+  &copy; 
+  <span itemprop="copyrightYear">2020</span>
+  <span class="with-love">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">zhangMo</span>
+</div>
+
+
+<div class="powered-by">
+  Powered by <a class="theme-link" href="https://hexo.io" target="_blank" rel="noopener">Hexo</a>
+</div>
+
+<div class="theme-info">
+  Theme -
+  <a class="theme-link" href="https://github.com/iissnan/hexo-theme-next" target="_blank" rel="noopener">
+    NexT.Muse
+  </a>
+</div>
+
+
+        
+
+        
+      </div>
+    </footer>
+
+    
+      <div class="back-to-top">
+        <i class="fa fa-arrow-up"></i>
+        
+      </div>
+    
+
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  <script type="text/javascript" src="/lib/jquery/index.js?v=2.1.3"></script>
+
+  
+  <script type="text/javascript" src="/lib/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+
+  
+  <script type="text/javascript" src="/lib/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
+
+  
+  <script type="text/javascript" src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+
+  
+  <script type="text/javascript" src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+
+  
+  <script type="text/javascript" src="/lib/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=5.1.2"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=5.1.2"></script>
+
+
+
+  
+  
+
+  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.1.2"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.1.2"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.1.2"></script>
+
+
+
+  
+
+
+  
+
+
+
+
+	
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+</body>
+</html>

@@ -1,0 +1,743 @@
+<!DOCTYPE html>
+
+
+
+  
+
+
+<html class="theme-next muse use-motion" lang="zh-CN">
+<head>
+  <meta charset="UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+<meta name="theme-color" content="#222">
+
+
+
+
+
+
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+  <link href="/lib/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css" />
+
+
+
+
+  
+  
+  
+  
+
+  
+    
+    
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+    
+    
+    <link href="//fonts.googleapis.com/css?family=Lato:300,300italic,400,400italic,700,700italic&subset=latin,latin-ext" rel="stylesheet" type="text/css">
+  
+
+
+
+
+
+
+<link href="/lib/font-awesome/css/font-awesome.min.css?v=4.6.2" rel="stylesheet" type="text/css" />
+
+<link href="/css/main.css?v=5.1.2" rel="stylesheet" type="text/css" />
+
+
+  <meta name="keywords" content="Unity,Shader," />
+
+
+
+
+
+
+
+
+  <link rel="shortcut icon" type="image/x-icon" href="/favicon.ico?v=5.1.2" />
+
+
+
+
+
+
+<meta name="description" content="Unity Shader中的测试：Alpha测试、模版测试、深度测试。">
+<meta name="keywords" content="Unity,Shader">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Unity Shader中的测试">
+<meta property="og:url" content="https:&#x2F;&#x2F;bitzhangmo.github.io&#x2F;2019&#x2F;03&#x2F;18&#x2F;Unity%E7%AC%94%E8%AE%B0&#x2F;Unity-Shader%E4%B8%AD%E7%9A%84%E6%B5%8B%E8%AF%95&#x2F;index.html">
+<meta property="og:site_name" content="zhangMo Blog">
+<meta property="og:description" content="Unity Shader中的测试：Alpha测试、模版测试、深度测试。">
+<meta property="og:locale" content="zh-CN">
+<meta property="og:updated_time" content="2019-04-17T06:40:41.119Z">
+<meta name="twitter:card" content="summary">
+
+
+
+<script type="text/javascript" id="hexo.configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/',
+    scheme: 'Muse',
+    sidebar: {"position":"left","display":"post","offset":12,"offset_float":12,"b2t":false,"scrollpercent":false,"onmobile":false},
+    fancybox: true,
+    tabs: true,
+    motion: true,
+    duoshuo: {
+      userId: '0',
+      author: 'Author'
+    },
+    algolia: {
+      applicationID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    }
+  };
+</script>
+
+
+
+  <link rel="canonical" href="https://bitzhangmo.github.io/2019/03/18/Unity笔记/Unity-Shader中的测试/"/>
+
+
+
+
+
+  <title>Unity Shader中的测试 | zhangMo Blog</title>
+  
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="zh-CN">
+
+  
+  
+    
+  
+
+  <div class="container sidebar-position-left page-post-detail ">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-wrapper">
+  <div class="site-meta ">
+    
+
+    <div class="custom-logo-site-title">
+      <a href="/"  class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">zhangMo Blog</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+      
+        <p class="site-subtitle"></p>
+      
+  </div>
+
+  <div class="site-nav-toggle">
+    <button>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+    </button>
+  </div>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu">
+      
+        
+        <li class="menu-item menu-item-home">
+          <a href="/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-home"></i> <br />
+            
+            Home
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/archives/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-archive"></i> <br />
+            
+            Archives
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-tags">
+          <a href="/tags/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-tags"></i> <br />
+            
+            Tags
+          </a>
+        </li>
+      
+
+      
+    </ul>
+  
+
+  
+</nav>
+
+
+
+ </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="https://bitzhangmo.github.io/2019/03/18/Unity%E7%AC%94%E8%AE%B0/Unity-Shader%E4%B8%AD%E7%9A%84%E6%B5%8B%E8%AF%95/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="zhangMo">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/avatar.gif">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="zhangMo Blog">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">Unity Shader中的测试</h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">Posted on</span>
+              
+              <time title="Post created" itemprop="dateCreated datePublished" datetime="2019-03-18T19:52:35+08:00">
+                2019-03-18
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+            <span class="post-category" >
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">In</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/%E8%AF%BB%E4%B9%A6%E7%AC%94%E8%AE%B0/" itemprop="url" rel="index">
+                    <span itemprop="name">读书笔记</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <p>Unity Shader中的测试：Alpha测试、模版测试、深度测试。</p>
+<a id="more"></a> 
+
+<h3 id="Alpha测试："><a href="#Alpha测试：" class="headerlink" title="Alpha测试："></a>Alpha测试：</h3><p>Alpha Test和Alpha Blending是两种处理透明的方法。</p>
+<h4 id="Alpha-Test："><a href="#Alpha-Test：" class="headerlink" title="Alpha Test："></a>Alpha Test：</h4><p>Alpha Test采用一种很霸道极端的机制，<strong>只要一个像素的alpha不满足条件，那么它就会被fragment shader舍弃。被舍弃的fragments不会对后面的各种Tests产生影响；否则，就会按正常方式写入到缓存中，并进行正常的深度检验等等，</strong>也就是说，Alpha Test是不需要关闭ZWrite的。Alpha Test产生的效果也很极端，要么完全透明，即看不到，要么完全不透明。</p>
+<h4 id="Alpha-Blending："><a href="#Alpha-Blending：" class="headerlink" title="Alpha Blending："></a>Alpha Blending：</h4><p>而Alpha Blending则是一种中庸的方式，<strong>它使用当前fragment的alpha作为混合因子，来混合之前写入到缓存中颜色值。但Alpha Blending麻烦的一点就是它需要关闭ZWrite，并且要十分小心物体的渲染顺序。如果不关闭ZWrite，那么在进行深度检测的时候，它背后的物体本来是可以透过它被我们看到的，但由于深度检测时大于它的深度就被剔除了，从而我们就看不到它后面的物体了。</strong>因此，我们需要保证物体的渲染顺序是<strong>从后往前</strong>，并且<strong>关闭该半透明对象的ZWrite。</strong></p>
+<p>注意：Alpha Blending只是关闭ZWrite，人家可没有关闭ZTest哦！这意味着，在<strong>输出一个Alpha Blending的fragment时，它还是会判断和当前Color Buffer中的fragment的深度关系，如果它比当前的fragment深度更远，那么它就不会再做后续的混合操作；否则，它就会和当前的fragment进行混合，但是不会把自己的深度信息写入Depth Buffer中。</strong>这是非常重要的，这一点决定了，即便一个不透明物体出现在一个透明物体的前面，不透明物体仍可以正常的遮挡住透明物体！也就是说，<strong>对于Alpha Blending来说，Depth Buffer是只读的。</strong></p>
+<p><strong>尽可能使用Alpha Blending，而不要使用Alpha Test</strong>。</p>
+<h3 id="模板测试："><a href="#模板测试：" class="headerlink" title="模板测试："></a>模板测试：</h3><p>模板测试stencil test是3d渲染管线中介于透明测试alpha test和深度测试depth test之间的测试，目的是根据条件来比较设置的参考值referenceValue和模板缓冲区stencil buff中对应的值stencilBuffValue的大小，如果条件满足就让片段fragment（候选的像素）进入下一测试，即深度测试，条件不满足就过滤掉片段，不把对应材质的片段输出到屏幕。</p>
+<h3 id="深度测试："><a href="#深度测试：" class="headerlink" title="深度测试："></a>深度测试：</h3><ol>
+<li><p>什么是<strong>深度</strong>？</p>
+<p><strong>深度其实就是该像素点在3d世界中距离摄象机的距离</strong>，深度值Zbuffer（Z值）越大，则离摄像机越远。</p>
+</li>
+<li><p>什么是<strong>深度缓存</strong>？</p>
+<p><strong>深度缓存中存储着每个像素点（绘制在屏幕上的）的深度值，如果启用了深度缓冲区，在绘制每个像素之前，OpenGL会把它的深度值和已经存储在这个像素的深度值进行比较。新像素深度值小于原先像素深度值，则新像素值会取代原先的；反之，新像素值被遮挡，其颜色值和深度将被丢弃，最终屏幕显示的就是深度缓存中深度对应的像素点的颜色！</strong>(深度主要起的是比较的作用)</p>
+</li>
+<li><p>什么是<strong>深度测试</strong>？</p>
+<p><strong>在深度测试中，默认情况是将要绘制的新像素的z值与深度缓冲区中对应位置的z值进行比较，如果比深度缓存中的值小，那么用新像素的颜色值更新深度缓存中对应像素的颜色值。</strong></p>
+</li>
+<li><p>为什么需要深度？</p>
+<p>在不使用深度测试的时候，如果我们先绘制一个距离较近的物体，再绘制距离较远的物体，则距离远的物体因为后绘制，会把距离近的物体覆盖掉，这样的效果并不是我们所希望的。而有了深度缓冲以后，绘制物体的顺序就不那么重要了，都能按照远近（Z值）正常显示，这很关键。(越后绘制的东西，距离相机就越近)</p>
+</li>
+</ol>
+<h4 id="ZWrite："><a href="#ZWrite：" class="headerlink" title="ZWrite："></a>ZWrite：</h4><p>ZWrite可以取的值为：On/Off，默认值为On，代表<strong>是否要将像素的深度写入深度缓存中</strong>。</p>
+<h4 id="ZTest："><a href="#ZTest：" class="headerlink" title="ZTest："></a>ZTest：</h4><p>ZTest可以取的值为：Greater/GEqual/Less/LEqual/Equal/NotEqual/Always/Never/Off，默认值为LEqual，<strong>代表如何将像素的颜色写入深度缓存中</strong>，例如当取默认值的情况下，如果将要绘制的新像素的z值小于等于深度缓存中的值，则将用新像素的颜色值更新深度缓存中对应像素的颜色值。<strong>需要注意的是，当ZTest取值为Off时，表示的是关闭深度测试，等价于取值为Always，而不是Never！Always指的是直接将当前像素颜色(不是深度)写进颜色缓冲区中；而Never指的是不要将当前像素颜色写进颜色缓冲区中，相当于消失。</strong></p>
+<h4 id="Early-Z技术："><a href="#Early-Z技术：" class="headerlink" title="Early-Z技术："></a>Early-Z技术：</h4><p>传统的渲染管线中，<strong>ZTest其实是在Blending阶段，这时候进行深度测试，所有对象的像素着色器都会计算一遍，没有什么性能提升，仅仅是为了得出正确的遮挡结果，会造成大量的无用计算，因为每个像素点上肯定重叠了很多计算。</strong>因此现代GPU中运用了Early-Z的技术，<strong>在Vertex阶段和Fragment阶段之间（光栅化之后，fragment之前）进行一次深度测试，如果深度测试失败，就不必进行fragment阶段的计算了，因此在性能上会有很大的提升。但是最终的ZTest仍然需要进行，以保证最终的遮挡关系结果正确。</strong>前面的一次主要是Z-Cull为了裁剪以达到优化的目的，后一次主要是Z-Check。</p>
+<p>Early-Z的实现，主要是通过一个Z-pre-pass实现，简单来说，<strong>对于所有不透明的物体（透明的没有用，本身不会写深度），首先用一个超级简单的shader进行渲染，这个shader不写颜色缓冲区，只写深度缓冲区，第二个pass关闭深度写入，开启深度测试，用正常的shader进行渲染。</strong>其实这种技术，我们也可以借鉴，在渲染透明物体时，因为关闭了深度写入，有时候会有其他不透明的部分遮挡住透明的部分，而我们其实不希望他们被遮挡，仅仅希望被遮挡的物体半透，这时我们就可以用两个pass来渲染，第一个pass使用Color Mask屏蔽颜色写入，仅写入深度，第二个pass正常渲染半透，关闭深度写入。</p>
+<h4 id="Unity渲染顺序："><a href="#Unity渲染顺序：" class="headerlink" title="Unity渲染顺序："></a>Unity渲染顺序：</h4><p>如果我们先绘制后面的物体，再绘制前面的物体，就会造成over draw；而通过Early-Z技术，我们就可以先绘制较近的物体，再绘制较远的物体（仅限不透明物体），<strong>这样，通过先渲染前面的物体，让前面的物体先占坑，就可以让后面的物体深度测试失败，进而减少重复的fragment计算，达到优化的目的。</strong>Unity中默认应该就是按照最近距离的面进行绘制的。</p>
+<hr>
+<p>参考：</p>
+<ol>
+<li><a href="https://blog.csdn.net/candycat1992/article/details/41599167" target="_blank" rel="noopener">【Unity Shaders】Alpha Test和Alpha Blending</a></li>
+<li><a href="http://www.unity.5helpyou.com/3090.html" target="_blank" rel="noopener">Unity Shader中的渲染队列、ZWrite和ZTest</a></li>
+<li><a href="https://blog.csdn.net/puppet_master/article/details/53900568" target="_blank" rel="noopener">Unity Shader-渲染队列，ZTest，ZWrite，Early-Z</a></li>
+</ol>
+
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/Unity/" rel="tag"># Unity</a>
+          
+            <a href="/tags/Shader/" rel="tag"># Shader</a>
+          
+        </div>
+      
+
+      
+      
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2019/03/15/%E8%AE%BE%E8%AE%A1%E6%A8%A1%E5%BC%8F/%E6%B8%B8%E6%88%8F%E7%BC%96%E7%A8%8B%E6%A8%A1%E5%BC%8F%EF%BC%9A%E7%BB%84%E4%BB%B6%E6%A8%A1%E5%BC%8F/" rel="next" title="游戏编程模式：组件模式">
+                <i class="fa fa-chevron-left"></i> 游戏编程模式：组件模式
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+              <a href="/2019/03/18/Unity%E7%AC%94%E8%AE%B0/Unity-AssetBundle%E5%8A%A0%E8%BD%BD/" rel="prev" title="Unity AssetBundle加载">
+                Unity AssetBundle加载 <i class="fa fa-chevron-right"></i>
+              </a>
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+
+    <div class="post-spread">
+      
+    </div>
+  </div>
+
+
+          </div>
+          
+
+
+          
+  <div class="comments" id="comments">
+    
+  </div>
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap" >
+            Table of Contents
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview">
+            Overview
+          </li>
+        </ul>
+      
+
+      <section class="site-overview sidebar-panel">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+          <img class="site-author-image" itemprop="image"
+               src="/images/avatar.gif"
+               alt="zhangMo" />
+          <p class="site-author-name" itemprop="name">zhangMo</p>
+           
+              <p class="site-description motion-element" itemprop="description">T&S&A&G</p>
+          
+        </div>
+        <nav class="site-state motion-element">
+
+          
+            <div class="site-state-item site-state-posts">
+              <a href="/archives/">
+                <span class="site-state-item-count">86</span>
+                <span class="site-state-item-name">posts</span>
+              </a>
+            </div>
+          
+
+          
+            
+            
+            <div class="site-state-item site-state-categories">
+              
+                <span class="site-state-item-count">10</span>
+                <span class="site-state-item-name">categories</span>
+              
+            </div>
+          
+
+          
+            
+            
+            <div class="site-state-item site-state-tags">
+              
+                <span class="site-state-item-count">34</span>
+                <span class="site-state-item-name">tags</span>
+              
+            </div>
+          
+
+        </nav>
+
+        
+
+        <div class="links-of-author motion-element">
+          
+        </div>
+
+        
+        
+
+        
+        
+
+        
+
+
+      </section>
+
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-3"><a class="nav-link" href="#Alpha测试："><span class="nav-number">1.</span> <span class="nav-text">Alpha测试：</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#Alpha-Test："><span class="nav-number">1.1.</span> <span class="nav-text">Alpha Test：</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#Alpha-Blending："><span class="nav-number">1.2.</span> <span class="nav-text">Alpha Blending：</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#模板测试："><span class="nav-number">2.</span> <span class="nav-text">模板测试：</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#深度测试："><span class="nav-number">3.</span> <span class="nav-text">深度测试：</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#ZWrite："><span class="nav-number">3.1.</span> <span class="nav-text">ZWrite：</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#ZTest："><span class="nav-number">3.2.</span> <span class="nav-text">ZTest：</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#Early-Z技术："><span class="nav-number">3.3.</span> <span class="nav-text">Early-Z技术：</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#Unity渲染顺序："><span class="nav-number">3.4.</span> <span class="nav-text">Unity渲染顺序：</span></a></li></ol></li></ol></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
+      
+
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright" >
+  
+  &copy; 
+  <span itemprop="copyrightYear">2020</span>
+  <span class="with-love">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">zhangMo</span>
+</div>
+
+
+<div class="powered-by">
+  Powered by <a class="theme-link" href="https://hexo.io" target="_blank" rel="noopener">Hexo</a>
+</div>
+
+<div class="theme-info">
+  Theme -
+  <a class="theme-link" href="https://github.com/iissnan/hexo-theme-next" target="_blank" rel="noopener">
+    NexT.Muse
+  </a>
+</div>
+
+
+        
+
+        
+      </div>
+    </footer>
+
+    
+      <div class="back-to-top">
+        <i class="fa fa-arrow-up"></i>
+        
+      </div>
+    
+
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  <script type="text/javascript" src="/lib/jquery/index.js?v=2.1.3"></script>
+
+  
+  <script type="text/javascript" src="/lib/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+
+  
+  <script type="text/javascript" src="/lib/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
+
+  
+  <script type="text/javascript" src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+
+  
+  <script type="text/javascript" src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+
+  
+  <script type="text/javascript" src="/lib/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=5.1.2"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=5.1.2"></script>
+
+
+
+  
+  
+
+  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.1.2"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.1.2"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.1.2"></script>
+
+
+
+  
+
+
+  
+
+
+
+
+	
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+</body>
+</html>
