@@ -14,7 +14,7 @@
 <meta property="og:site_name" content="zhangMo Blog">
 <meta property="og:description" content="2.22 变量声明和定义的关系声明使得名字为程序所知，一个文件如果想使用别处定义的名字则必须包含对那个名字的声明。而定义负责创建与名字关联的实体。 变量声明规定了变量的类型和名字，在这一点上定义与之相同。但是除此之外，定义还申请存储空间，也可能会为变量赋一个初始值。 如果想声明一个变量而非定义它，就在变量名前添加关键字extern，而且不要显式的初始化变量。 123extern int i;">
 <meta property="og:locale" content="zh-CN">
-<meta property="og:updated_time" content="2020-03-05T14:57:51.079Z">
+<meta property="og:updated_time" content="2020-03-07T05:53:31.736Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="C++ Primer 读书笔记（0）">
 <meta name="twitter:description" content="2.22 变量声明和定义的关系声明使得名字为程序所知，一个文件如果想使用别处定义的名字则必须包含对那个名字的声明。而定义负责创建与名字关联的实体。 变量声明规定了变量的类型和名字，在这一点上定义与之相同。但是除此之外，定义还申请存储空间，也可能会为变量赋一个初始值。 如果想声明一个变量而非定义它，就在变量名前添加关键字extern，而且不要显式的初始化变量。 123extern int i;">
@@ -76,6 +76,8 @@
     <br/>
     <span id="actions">
       <ul>
+        
+        <li><a class="icon" href="/2020/03/07/C-Primer-读书笔记（1）字符串、向量和数组/"><i class="fas fa-chevron-left" aria-hidden="true" onmouseover="$('#i-prev').toggle();" onmouseout="$('#i-prev').toggle();"></i></a></li>
         
         
         <li><a class="icon" href="/2019/12/18/随笔/Ludum-Dare-历届主题/"><i class="fas fa-chevron-right" aria-hidden="true" onmouseover="$('#i-next').toggle();" onmouseout="$('#i-next').toggle();"></i></a></li>
@@ -184,6 +186,7 @@
 <li>无效指针，也就是上述情况之外的其他值</li>
 </ol>
 <p>试图拷贝或以其他方式访问无效指针的值都将引发错误。</p>
+<p>void<em>是一种特殊的指针类型，可用于存放任意对象的地址。我们可以拿它和别的指针比较、作为函数的输入或输出，或者赋给另外一个void\</em>指针，不能直接操作其所指的对象，因为我们并不知道这个对象到底是什么类型，也就无法确定能在对象上做哪些操作。</p>
 
   </div>
 </article>

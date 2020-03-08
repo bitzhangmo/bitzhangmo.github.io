@@ -172,7 +172,6 @@
 <ul>
 <li>LightMode支持的渲染路径设置选项：</li>
 </ul>
-<div class="table-container">
 <table>
 <thead>
 <tr>
@@ -215,7 +214,6 @@
 </tr>
 </tbody>
 </table>
-</div>
 <h4 id="前向渲染路径："><a href="#前向渲染路径：" class="headerlink" title="前向渲染路径："></a>前向渲染路径：</h4><p>前向渲染路径是传统的渲染方式，也是我们最常用的一种渲染路径。</p>
 <ol>
 <li><p>前向渲染路径的原理：</p>
@@ -248,7 +246,6 @@
 <li><p>内置的光照变量和函数（前向渲染）</p>
 </li>
 </ol>
-<div class="table-container">
 <table>
 <thead>
 <tr>
@@ -290,8 +287,6 @@
 </tr>
 </tbody>
 </table>
-</div>
-<div class="table-container">
 <table>
 <thead>
 <tr>
@@ -318,7 +313,6 @@
 </tr>
 </tbody>
 </table>
-</div>
 <h4 id="顶点照明渲染路径："><a href="#顶点照明渲染路径：" class="headerlink" title="顶点照明渲染路径："></a>顶点照明渲染路径：</h4><p>顶点照明渲染是对硬件配置要求最少、运算性能最高，但同时也是得到的效果最差的一种类型。它不支持那些逐像素才能得到的效果，例如阴影、法线映射、高精度的高光反射等。</p>
 <ol>
 <li><p>Unity中的顶点照明渲染：</p>
@@ -328,7 +322,6 @@
 <p>如果我们只需要渲染其中两个光源对物体的照明，可以仅使用_LightColor0与_WorldSpaceLightPos0。如果影响该物体的光源数目小于8，那么数组中剩下的光源颜色会被设置成黑色。</p>
 </li>
 </ol>
-<div class="table-container">
 <table>
 <thead>
 <tr>
@@ -360,8 +353,6 @@
 </tr>
 </tbody>
 </table>
-</div>
-<div class="table-container">
 <table>
 <thead>
 <tr>
@@ -380,7 +371,6 @@
 </tr>
 </tbody>
 </table>
-</div>
 <h4 id="延迟渲染路径："><a href="#延迟渲染路径：" class="headerlink" title="延迟渲染路径："></a>延迟渲染路径：</h4><ul>
 <li>前向渲染的问题：当场景中包含大量实时光源的时候，前向渲染的性能会急速下降。多个影响范围相互重叠的光源为了得到最终的光照效果，会将该区域的每个物体执行多个Pass来计算不同光源对该物体的光照结果，然后在颜色缓存中把这些结果混合起来得到最终的光照。然而，每执行一个Pass都要重新渲染一次物体，这导致了重复计算。</li>
 <li>延迟渲染：利用颜色缓冲，深度缓冲以及额外的G-缓冲区，它存储了我们关心的表面的其他信息——法线，位置，用于光照计算的材质属性等。</li>
@@ -421,7 +411,6 @@
 <li><p>可访问的内置变量和函数：</p>
 </li>
 </ol>
-<div class="table-container">
 <table>
 <thead>
 <tr>
@@ -443,7 +432,6 @@
 </tr>
 </tbody>
 </table>
-</div>
 <h4 id="选择哪种渲染路径："><a href="#选择哪种渲染路径：" class="headerlink" title="选择哪种渲染路径："></a>选择哪种渲染路径：</h4><p><a href="http://docs.unity3d.com/Manual/RenderingPaths.html" target="_blank" rel="noopener">关于四种渲染路径的Unity的官方文档</a></p>
 <h2 id="Unity的光源类型："><a href="#Unity的光源类型：" class="headerlink" title="Unity的光源类型："></a>Unity的光源类型：</h2><h4 id="支持的光源类型："><a href="#支持的光源类型：" class="headerlink" title="支持的光源类型："></a>支持的光源类型：</h4><ul>
 <li>平行光</li>

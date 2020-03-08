@@ -173,7 +173,7 @@
 <h4 id="ShaderLab"><a href="#ShaderLab" class="headerlink" title="ShaderLab"></a>ShaderLab</h4><p>一款专门为Unity Shader服务的语言。</p>
 <h5 id="Properties-属性"><a href="#Properties-属性" class="headerlink" title="Properties 属性"></a>Properties 属性</h5><ol>
 <li>语句格式：<code>Name(&quot;display name&quot;,PropertyType)=DefaultValue</code></li>
-<li>支持的属性类型：<br> |属性类型|定义语法|<br> |:————:|:————:|<br> |Int|number|<br> |Float|number|<br> |Range(min,max)|number|<br> |Color|(number,number,number,number)|<br> |Vector|(number,number,number,number)|<br> |2D|”defaulttexture”{}|<br> |Cube|”defaulttexture”{}|<br> |3D|”defaulttexture”{}|</li>
+<li>支持的属性类型：<br> |属性类型|定义语法|<br> |:——–:|:——–:|<br> |Int|number|<br> |Float|number|<br> |Range(min,max)|number|<br> |Color|(number,number,number,number)|<br> |Vector|(number,number,number,number)|<br> |2D|”defaulttexture”{}|<br> |Cube|”defaulttexture”{}|<br> |3D|”defaulttexture”{}|</li>
 </ol>
 <blockquote>
 <p>Unity允许重载默认的材质编辑面板以提供更多的自定义数据类型。 关键词“Custom Shader GUI”<br>Properties语义块的作用仅仅是为了让这些属性可以出现在材质面板里。</p>
@@ -182,16 +182,16 @@
 <li><p>语句格式</p>
 <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line">SubShader&#123;</span><br><span class="line">	//可选的，标签</span><br><span class="line">	[Tags]</span><br><span class="line"></span><br><span class="line">	//可选的，状态</span><br><span class="line">	[RenderSetup]</span><br><span class="line"></span><br><span class="line">	//一次完整的渲染流程，如果pass的数目过多，会造成渲染性能的下降。</span><br><span class="line">	Pass&#123;</span><br><span class="line">	&#125;</span><br><span class="line">	...</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 </li>
-<li><p>RenderSetup 状态：关于渲染状态的设置指令<br>| 状态名称 | 设置指令 |解释|<br>|:————:|:————:|:——:|<br>|   Cull     |Cull Back/Front/Off|  剔除模式：剔除背面/正面/关闭剔除|<br>|ZTest|ZTest Less Greater/LEqual/GEqual/Equal/NotEqual/Always|设置深度剔除时使用的函数|<br>|ZWrite|ZWrite On/Off|关闭/开启深度写入|<br>|Blend|Blend SrcFactor DstFactor|开启并设置混合模式|</p>
+<li><p>RenderSetup 状态：关于渲染状态的设置指令<br>| 状态名称 | 设置指令 |解释|<br>|:——–:|:——–:|:—-:|<br>|   Cull     |Cull Back/Front/Off|  剔除模式：剔除背面/正面/关闭剔除|<br>|ZTest|ZTest Less Greater/LEqual/GEqual/Equal/NotEqual/Always|设置深度剔除时使用的函数|<br>|ZWrite|ZWrite On/Off|关闭/开启深度写入|<br>|Blend|Blend SrcFactor DstFactor|开启并设置混合模式|</p>
 </li>
-<li><p>Tags 标签：希望怎样以及何时渲染这个对象<code>Tags{&quot;TagName1&quot;=&quot;Value1&quot; &quot;TagName2&quot;=&quot;Value2&quot;}</code><br>| 标签类型 | 说明 |<br>|————|————|<br>| Queue | 控制渲染顺序，指定该物体属于哪一个渲染队列 |<br>|RenderType|对着色器进行分类，可以用于着色器替换功能|<br>|DisableBatching|指明是否对该SubShader使用批处理|<br>|ForceNoShadowCasting|控制使用该SubShader的物体是否会投射阴影|<br>|IgnoreProjector|控制使用该SubShader的物体是否受projector（投影仪？）的影响|<br>|CanUseSpriteAtlas|当该SubShader是用于sprite时，将该标签设为“false”|<br>|PreviewType|指明材质面板将如何预览该材质。默认材质下，材质将显示为一个球形，我们可以通过将该标签的值设为“Plane”“SkyBox”来改变预览类型|<br>上述标签可以在SubShader中声明，而不可以在Pass块中声明，Pass块有专属于自己的标签。</p>
+<li><p>Tags 标签：希望怎样以及何时渲染这个对象<code>Tags{&quot;TagName1&quot;=&quot;Value1&quot; &quot;TagName2&quot;=&quot;Value2&quot;}</code><br>| 标签类型 | 说明 |<br>|——–|——–|<br>| Queue | 控制渲染顺序，指定该物体属于哪一个渲染队列 |<br>|RenderType|对着色器进行分类，可以用于着色器替换功能|<br>|DisableBatching|指明是否对该SubShader使用批处理|<br>|ForceNoShadowCasting|控制使用该SubShader的物体是否会投射阴影|<br>|IgnoreProjector|控制使用该SubShader的物体是否受projector（投影仪？）的影响|<br>|CanUseSpriteAtlas|当该SubShader是用于sprite时，将该标签设为“false”|<br>|PreviewType|指明材质面板将如何预览该材质。默认材质下，材质将显示为一个球形，我们可以通过将该标签的值设为“Plane”“SkyBox”来改变预览类型|<br>上述标签可以在SubShader中声明，而不可以在Pass块中声明，Pass块有专属于自己的标签。</p>
 </li>
 <li><p>Pass语义块：</p>
 <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">Pass&#123;</span><br><span class="line">    [Name]</span><br><span class="line">    [Tag]</span><br><span class="line">    [RenderSetup]</span><br><span class="line">    // Other code</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 <ol>
 <li>Name “MyPassName”：定义该Pass的名称，可以使用UsePass命令来直接使用其他unity shader中的Pass，例如：<code>UsePass &quot;MyShader/MYPASSNAME&quot;</code>，由于Unity 内部会将所有Pass 名称转换为大写字母的表示，所以在使用UsePass的时候必须使用大写形式的名字。</li>
 <li>RenderSetup：我们可以对Pass设置渲染状态，除上述状态设置以外，我们还可以使用固定管线的着色器。</li>
-<li><p>Tag：<br>|标签类型|说明|例子|<br>|—-|——|—-|<br>|LightMode|定义该Pass在Unity渲染流水线中的角色|Tags{“LightMode”=”ForwardBase”}|<br>|RequireOptions|用于制定当满足某些条件的时候才渲染该Pass，它的值是一个由空格分割的字符串，目前支持的选项：SoftVegetation|Tags{“RequireOptions”=”SoftVegetation”}|</p>
+<li><p>Tag：<br>|标签类型|说明|例子|<br>|—|—-|—|<br>|LightMode|定义该Pass在Unity渲染流水线中的角色|Tags{“LightMode”=”ForwardBase”}|<br>|RequireOptions|用于制定当满足某些条件的时候才渲染该Pass，它的值是一个由空格分割的字符串，目前支持的选项：SoftVegetation|Tags{“RequireOptions”=”SoftVegetation”}|</p>
 </li>
 <li><p>特殊的Pass：</p>
 <ul>
