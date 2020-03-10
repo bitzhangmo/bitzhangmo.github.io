@@ -196,6 +196,7 @@
 </ul>
 <p>不同操作数的指令格式不同、含义不同。操作数是 6 位的，所以 Lua 最多支持 2^6-1 = 31 个指令。Lua 代码中，将每个操作数及其对应的指令格式都在 lopcodes.h 中的 OpCode 枚举类型中定义。</p>
 <p>Lua 虚拟机指令中有着不同的参数：</p>
+<div class="table-container">
 <table>
 <thead>
 <tr>
@@ -234,6 +235,7 @@
 </tr>
 </tbody>
 </table>
+</div>
 <p>在lopcodes.h 文件中还定义了每个指令的格式，以及相关的宏；这里定义了在一个指令中每个参数对应的大小和位置。</p>
 <p>RK(B)的意思有两层，一是这个指令格式只可能作用在 OpCode 的 B、C 参数上，不会作用在参数 A 上；二是这个数据除了从函数栈获取之外，还有可能从常量数组中获取，关键在于宏 ISK 的判断。</p>
 <figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">/* test whether value is a constant */</span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">define</span> ISK(x)		((x) &amp; BITRK)</span></span><br></pre></td></tr></table></figure>
