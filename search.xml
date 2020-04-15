@@ -1,6 +1,11 @@
 <?xml version="1.0" encoding="utf-8"?>
 <search>
   <entry>
+    <title><![CDATA[report]]></title>
+    <url>%2F2020%2F04%2F16%2F%E4%B8%AA%E4%BA%BA%E6%8A%A5%E5%91%8A%2Ftest%2F</url>
+    <content type="text"><![CDATA[testt]]></content>
+  </entry>
+  <entry>
     <title><![CDATA[2020年第「16」周周报]]></title>
     <url>%2F2020%2F04%2F16%2F2020%E5%B9%B4%E7%AC%AC%E3%80%8C16%E3%80%8D%E5%91%A8%E5%91%A8%E6%8A%A5%2F</url>
     <content type="text"><![CDATA[test]]></content>
@@ -95,8 +100,8 @@
         <category>计算机图形学</category>
       </categories>
       <tags>
-        <tag>计算机图形学</tag>
         <tag>OpenGL</tag>
+        <tag>计算机图形学</tag>
       </tags>
   </entry>
   <entry>
