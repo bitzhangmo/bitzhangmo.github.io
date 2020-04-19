@@ -345,6 +345,7 @@
 <p>In  order  to  be  driven  by  a  virtual  camera,  the  Unity  Camera  must  have  a  CinemachineBrain behaviour,  which  will  select  the  most  eligible  virtual  camera  based  on  its  priority  or  on  other criteria,  and  will  manage  blending. </p>
 <p>Unity Camera可以由场景中的任何虚拟摄像头驱动。 游戏逻辑可以通过基于游戏逻辑操纵虚拟相机的启用标志及其优先级来选择虚拟相机来实现。</p>
 <p>为了由虚拟摄像头驱动，Unity Camera必须具有CinemachineBrain行为，该行为将根据其优先级或其他标准选择最符合条件的虚拟摄像机，并将管理混合。</p>
+<div class="table-container">
 <table>
 <thead>
 <tr>
@@ -376,6 +377,8 @@
 </tr>
 </tbody>
 </table>
+</div>
+<div class="table-container">
 <table>
 <thead>
 <tr>
@@ -407,8 +410,10 @@
 </tr>
 </tbody>
 </table>
+</div>
 <h5 id="LensSettings"><a href="#LensSettings" class="headerlink" title="LensSettings"></a>LensSettings</h5><p>Describes the FOV and clip planes for a camera. This generally mirrors the Unity Camera’s lens settings, and will be used to drive the Unity camera when the vcam is active.</p>
 <p>描述摄像机的FOV和剪裁平面。 这通常反映了Unity Camera的镜头设置，并将在vcam处于活动状态时用于驱动Unity相机。</p>
+<div class="table-container">
 <table>
 <thead>
 <tr>
@@ -445,6 +450,8 @@
 </tr>
 </tbody>
 </table>
+</div>
+<div class="table-container">
 <table>
 <thead>
 <tr>
@@ -481,6 +488,7 @@
 </tr>
 </tbody>
 </table>
+</div>
 <h5 id="CinemachineComposer-："><a href="#CinemachineComposer-：" class="headerlink" title="CinemachineComposer ："></a>CinemachineComposer ：</h5><p>This is a CinemachineComponent in the Aim section of the component pipeline. Its job is to aim the camera at the vcam’s LookAt target object, with configurable offsets, damping, and composition rules. </p>
 <p>The composer does not change the camera’s position. It will only pan and tilt the camera where it is, in order to get the desired framing. To move the camera, you have to use the virtual camera’s Body section. </p>
 <p>The vcam’s LookAt target is the Composer’s target. Common Composer targets: include bones on a character like the upper spine or head bone, vehicles, or dummy objects which are controlled or animated programmatically. </p>
@@ -493,6 +501,7 @@
 <p>一旦你设置了vcam的LookAt目标并跟踪某些东西，你需要定义你想要它在屏幕上的位置以及你想要相机跟踪它的积极程度。两个控件定义了延迟程度或相机跟随主体的紧密程度：</p>
 <p><strong>水平/垂直软阻尼</strong>：将这些值设置为零意味着摄像机将硬跟踪主体，上方的蓝色区域将作为锁定摄像机移动的刚性障碍，以使目标保持在这些值内。设置较大的将允许目标“挤压”到蓝色区域，给你一些非常好的相机重量和滞后。这就是真正的相机操作员所做的！垂直和水平值是分开的，因此您可以让相机从左到右更加挤压，或者跟随上下更紧，等等。</p>
 <p><strong>SoftZone / DeadZone</strong>：调整这些以定义主体在屏幕上的位置。这些控件非常通用。蓝色区域是基于您具有多少水平/垂直阻尼的“柔软”区域，红色区域定义了摄像机始终跟踪主体的“无通过”限制。打开柔和区域以在中间创建“死区”允许您使屏幕区域免受目标运动的影响，这对于像动画周期这样的事情很方便，如果它只是移动一点点的话，你可能不希望摄像机跟踪目标。</p>
+<div class="table-container">
 <table>
 <thead>
 <tr>
@@ -564,6 +573,8 @@
 </tr>
 </tbody>
 </table>
+</div>
+<div class="table-container">
 <table>
 <thead>
 <tr>
@@ -635,6 +646,7 @@
 </tr>
 </tbody>
 </table>
+</div>
 <h5 id="CinemachineTransposer"><a href="#CinemachineTransposer" class="headerlink" title="CinemachineTransposer"></a>CinemachineTransposer</h5><p>This is a CinemachineComponent in the Body section of the component pipeline. Its job is to position the camera in a fixed relationship to the vcam’s Follow target object, with offsets and damping. </p>
 <p>The Transposer will only change the camera’s position in space. It will not re-orient or otherwise aim the camera. To to that, you need to instruct the vcam in the Aim section of its pipeline. </p>
 <p>Transposer is a component which mounts a camera to any object. It has a number of advantages over just putting the camera under the object you want to have the camera follow. Hood Cam, Door Cam, POV Cam, Missile Cam - if you want to mount the camera to something, use Transposer. </p>
@@ -675,6 +687,7 @@
 </ul>
 <p>These different modes do incredibly different things, so try them out and one should work well for whatever your requirements are. The ‘Door Cam’ or ‘Hood Cam’ ideas would use L ocal Space Locked To Target. </p>
 <p>这些不同的模式做了非常不同的事情，所以尝试一下，某个应该适合你的要求。 “监视器”或“固定在遮光罩上的镜头”的想法应使用Local Space Locked To Target。</p>
+<div class="table-container">
 <table>
 <thead>
 <tr>
@@ -756,6 +769,8 @@
 </tr>
 </tbody>
 </table>
+</div>
+<div class="table-container">
 <table>
 <thead>
 <tr>
@@ -837,6 +852,7 @@
 </tr>
 </tbody>
 </table>
+</div>
 <h5 id="Cinemachine-BasicMultiChannelPerlin"><a href="#Cinemachine-BasicMultiChannelPerlin" class="headerlink" title="Cinemachine BasicMultiChannelPerlin"></a>Cinemachine BasicMultiChannelPerlin</h5><h5 id="NoiseSettings"><a href="#NoiseSettings" class="headerlink" title="NoiseSettings"></a>NoiseSettings</h5><h5 id="NoiseSettings-NoiseParams"><a href="#NoiseSettings-NoiseParams" class="headerlink" title="NoiseSettings.NoiseParams"></a>NoiseSettings.NoiseParams</h5><h5 id="NoiseSettings-Transform-NoiseParams"><a href="#NoiseSettings-Transform-NoiseParams" class="headerlink" title="NoiseSettings.Transform NoiseParams"></a>NoiseSettings.Transform NoiseParams</h5>
   </div>
 </article>
