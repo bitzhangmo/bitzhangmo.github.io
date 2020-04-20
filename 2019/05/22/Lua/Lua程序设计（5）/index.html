@@ -1,0 +1,321 @@
+<!DOCTYPE html>
+<html lang=zh>
+<head><meta name="generator" content="Hexo 3.9.0">
+    <!-- so meta -->
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="HandheldFriendly" content="True">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+    <meta name="description" content="Lua中的闭包。">
+<meta name="keywords" content="Lua">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Lua程序设计（5）">
+<meta property="og:url" content="https://bitzhangmo.github.io/2019/05/22/Lua/Lua程序设计（5）/index.html">
+<meta property="og:site_name" content="zhangMo Blog">
+<meta property="og:description" content="Lua中的闭包。">
+<meta property="og:locale" content="zh-CN">
+<meta property="og:updated_time" content="2019-08-07T02:44:06.877Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="Lua程序设计（5）">
+<meta name="twitter:description" content="Lua中的闭包。">
+    
+    
+        
+          
+              <link rel="shortcut icon" href="/images/favicon.ico">
+          
+        
+        
+          
+            <link rel="icon" type="image/png" href="/images/favicon-192x192.png" sizes="192x192">
+          
+        
+        
+          
+            <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon.png">
+          
+        
+    
+    <!-- title -->
+    <title>Lua程序设计（5）</title>
+    <!-- styles -->
+    <link rel="stylesheet" href="/css/style.css">
+    <!-- persian styles -->
+    
+      <link rel="stylesheet" href="/css/rtl.css">
+    
+    <!-- rss -->
+    
+    
+</head>
+
+<body class="max-width mx-auto px3 ltr">
+    
+      <div id="header-post">
+  <a id="menu-icon" href="#"><i class="fas fa-bars fa-lg"></i></a>
+  <a id="menu-icon-tablet" href="#"><i class="fas fa-bars fa-lg"></i></a>
+  <a id="top-icon-tablet" href="#" onclick="$('html, body').animate({ scrollTop: 0 }, 'fast');" style="display:none;"><i class="fas fa-chevron-up fa-lg"></i></a>
+  <span id="menu">
+    <span id="nav">
+      <ul>
+         
+          <li><a href="/">首页</a></li>
+         
+          <li><a href="/about/">关于</a></li>
+         
+          <li><a href="/tags/">tags</a></li>
+         
+          <li><a href="/categories/">categories</a></li>
+         
+          <li><a href="/archives/">归档</a></li>
+         
+          <li><a href="/categories/reports/">reports</a></li>
+         
+          <li><a href="/search/">搜索</a></li>
+        
+      </ul>
+    </span>
+    <br/>
+    <span id="actions">
+      <ul>
+        
+        <li><a class="icon" href="/2019/05/22/开发笔记/开发笔记-Chernobog-Rebirth（0）/"><i class="fas fa-chevron-left" aria-hidden="true" onmouseover="$('#i-prev').toggle();" onmouseout="$('#i-prev').toggle();"></i></a></li>
+        
+        
+        <li><a class="icon" href="/2019/05/21/Lua/Lua程序设计（4）/"><i class="fas fa-chevron-right" aria-hidden="true" onmouseover="$('#i-next').toggle();" onmouseout="$('#i-next').toggle();"></i></a></li>
+        
+        <li><a class="icon" href="#" onclick="$('html, body').animate({ scrollTop: 0 }, 'fast');"><i class="fas fa-chevron-up" aria-hidden="true" onmouseover="$('#i-top').toggle();" onmouseout="$('#i-top').toggle();"></i></a></li>
+        <li><a class="icon" href="#"><i class="fas fa-share-alt" aria-hidden="true" onmouseover="$('#i-share').toggle();" onmouseout="$('#i-share').toggle();" onclick="$('#share').toggle();return false;"></i></a></li>
+      </ul>
+      <span id="i-prev" class="info" style="display:none;">上一篇</span>
+      <span id="i-next" class="info" style="display:none;">下一篇</span>
+      <span id="i-top" class="info" style="display:none;">返回顶部</span>
+      <span id="i-share" class="info" style="display:none;">分享文章</span>
+    </span>
+    <br/>
+    <div id="share" style="display: none">
+      <ul>
+  <li><a class="icon" href="http://www.facebook.com/sharer.php?u=https://bitzhangmo.github.io/2019/05/22/Lua/Lua程序设计（5）/"><i class="fab fa-facebook " aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="https://twitter.com/share?url=https://bitzhangmo.github.io/2019/05/22/Lua/Lua程序设计（5）/&text=Lua程序设计（5）"><i class="fab fa-twitter " aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="http://www.linkedin.com/shareArticle?url=https://bitzhangmo.github.io/2019/05/22/Lua/Lua程序设计（5）/&title=Lua程序设计（5）"><i class="fab fa-linkedin " aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="https://pinterest.com/pin/create/bookmarklet/?url=https://bitzhangmo.github.io/2019/05/22/Lua/Lua程序设计（5）/&is_video=false&description=Lua程序设计（5）"><i class="fab fa-pinterest " aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="mailto:?subject=Lua程序设计（5）&body=Check out this article: https://bitzhangmo.github.io/2019/05/22/Lua/Lua程序设计（5）/"><i class="fas fa-envelope " aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="https://getpocket.com/save?url=https://bitzhangmo.github.io/2019/05/22/Lua/Lua程序设计（5）/&title=Lua程序设计（5）"><i class="fab fa-get-pocket " aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="http://reddit.com/submit?url=https://bitzhangmo.github.io/2019/05/22/Lua/Lua程序设计（5）/&title=Lua程序设计（5）"><i class="fab fa-reddit " aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="http://www.stumbleupon.com/submit?url=https://bitzhangmo.github.io/2019/05/22/Lua/Lua程序设计（5）/&title=Lua程序设计（5）"><i class="fab fa-stumbleupon " aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="http://digg.com/submit?url=https://bitzhangmo.github.io/2019/05/22/Lua/Lua程序设计（5）/&title=Lua程序设计（5）"><i class="fab fa-digg " aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="http://www.tumblr.com/share/link?url=https://bitzhangmo.github.io/2019/05/22/Lua/Lua程序设计（5）/&name=Lua程序设计（5）&description=&lt;p&gt;Lua中的闭包。&lt;/p&gt;"><i class="fab fa-tumblr " aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="https://news.ycombinator.com/submitlink?u=https://bitzhangmo.github.io/2019/05/22/Lua/Lua程序设计（5）/&t=Lua程序设计（5）"><i class="fab fa-hacker-news " aria-hidden="true"></i></a></li>
+</ul>
+
+    </div>
+    <div id="toc">
+      <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#闭包"><span class="toc-number">1.</span> <span class="toc-text">闭包</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#函数是第一类值："><span class="toc-number">1.1.</span> <span class="toc-text">函数是第一类值：</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#非全局函数"><span class="toc-number">1.2.</span> <span class="toc-text">非全局函数</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#词法定界"><span class="toc-number">1.3.</span> <span class="toc-text">词法定界</span></a></li></ol></li></ol>
+    </div>
+  </span>
+</div>
+
+    
+    <div class="content index py4">
+        
+        <article class="post" itemscope itemtype="http://schema.org/BlogPosting">
+  <header>
+    
+    <h1 class="posttitle" itemprop="name headline">
+        Lua程序设计（5）
+    </h1>
+
+
+
+    <div class="meta">
+      <span class="author" itemprop="author" itemscope itemtype="http://schema.org/Person">
+        <span itemprop="name">zhangMo Blog</span>
+      </span>
+      
+    <div class="postdate">
+      
+        <time datetime="2019-05-21T16:47:14.000Z" itemprop="datePublished">2019-05-22</time>
+        
+        (Updated: <time datetime="2019-08-07T02:44:06.877Z" itemprop="dateModified">2019-08-07</time>)
+        
+      
+    </div>
+
+
+      
+    <div class="article-category">
+        <i class="fas fa-archive"></i>
+        <a class="category-link" href="/categories/读书笔记/">读书笔记</a>
+    </div>
+
+
+      
+    <div class="article-tag">
+        <i class="fas fa-tag"></i>
+        <a class="tag-link" href="/tags/Lua/">Lua</a>
+    </div>
+
+
+    </div>
+  </header>
+  
+
+  <div class="content" itemprop="articleBody">
+    <p>Lua中的闭包。</p>
+<a id="more"></a>
+<h2 id="闭包"><a href="#闭包" class="headerlink" title="闭包"></a>闭包</h2><p>在Lua语言中，函数是严格遵循词法定界的第一类值。</p>
+<p>“第一类值”意味着Lua语言中的函数与与其他常见类型的值具有同等权限（<strong>函数也是值</strong>）：</p>
+<ul>
+<li>一个程序可以将某个函数保存到变量中或表中</li>
+<li>可以将某个函数作为参数传递给其他函数</li>
+<li>还可以将某个函数作为其他函数的返回值返回。</li>
+</ul>
+<p>“词法定界”意味着Lua语言中的函数可以访问包含其自身的外部函数中的变量。</p>
+<h3 id="函数是第一类值："><a href="#函数是第一类值：" class="headerlink" title="函数是第一类值："></a>函数是第一类值：</h3><p>Lua中常见的函数定义方式如下：</p>
+<figure class="highlight lua"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">foo</span><span class="params">(x)</span></span> <span class="keyword">return</span> <span class="number">2</span>*x <span class="keyword">end</span> <span class="comment">-- 语法糖</span></span><br><span class="line"><span class="comment">-- 等同于</span></span><br><span class="line">foo = <span class="function"><span class="keyword">function</span><span class="params">(x)</span></span> <span class="keyword">return</span> <span class="number">2</span>*x <span class="keyword">end</span></span><br></pre></td></tr></table></figure>
+<p>赋值语句右边的表达式就是函数构造器。</p>
+<p>在Lua语言中，所有的函数都是匿名的，像其他所有的值一样，函数并没有名字，在讨论函数名时，<strong>实际上指的是保存该函数的变量名</strong>。</p>
+<p>以另一个函数为参数的函数，称为<strong>高阶函数</strong>（例如函数sort）。高阶函数是一种强大的编程机制，而利用匿名函数作为参数正是其灵活性的来源。</p>
+<h3 id="非全局函数"><a href="#非全局函数" class="headerlink" title="非全局函数"></a>非全局函数</h3><p>函数不仅可以被存储在全局变量中，还可以被存储在表字段和局部变量中。</p>
+<figure class="highlight lua"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">-- 几种存储在表字段中的写法</span></span><br><span class="line">Lib = &#123;&#125;</span><br><span class="line">Lib.foo = <span class="function"><span class="keyword">function</span> <span class="params">(x,y)</span></span> <span class="keyword">return</span> x + y <span class="keyword">end</span></span><br><span class="line">Lib.goo = <span class="function"><span class="keyword">function</span> <span class="params">(x,y)</span></span> <span class="keyword">return</span> x - y <span class="keyword">end</span></span><br><span class="line"></span><br><span class="line"><span class="comment">-- 表构造器</span></span><br><span class="line">Lib = &#123;</span><br><span class="line">	foo = <span class="function"><span class="keyword">function</span> <span class="params">(x,y)</span></span> <span class="keyword">return</span> x + y <span class="keyword">end</span></span><br><span class="line">	goo = <span class="function"><span class="keyword">function</span> <span class="params">(x,y)</span></span> <span class="keyword">return</span> x - y <span class="keyword">end</span></span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="comment">-- 一种特殊的语法</span></span><br><span class="line">Lib = &#123;&#125;</span><br><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">Lib.foo</span> <span class="params">(x,y)</span></span> <span class="keyword">return</span> x + y <span class="keyword">end</span></span><br><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">Lib.goo</span> <span class="params">(x,y)</span></span> <span class="keyword">return</span> x - y <span class="keyword">end</span></span><br></pre></td></tr></table></figure>
+<p>当把一个函数存储到局部变量中，就得到了一个局部函数，即<strong>一个被限定在指定作用域中使用的函数</strong>。由于Lua语言将每个程序段作为一个函数处理，所以在一段程序中声明的函数就是局部函数，这些局部函数只在该程序段中可见。</p>
+<h3 id="词法定界"><a href="#词法定界" class="headerlink" title="词法定界"></a>词法定界</h3><p><strong>当编写一个被其他函数B包含的函数A时，被包含的函数A可以访问包含其的函数B的所有全局变量。</strong></p>
+<p>假入想建立一个函数来对学生姓名排序，可以：</p>
+<figure class="highlight lua"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">sortbygrade</span><span class="params">(names,grades)</span></span></span><br><span class="line">	<span class="built_in">table</span>.<span class="built_in">sort</span>(names,<span class="function"><span class="keyword">function</span><span class="params">(n1,n2)</span></span></span><br><span class="line">		<span class="keyword">return</span> grades[n1] &gt; grades[n2]</span><br><span class="line">		<span class="keyword">end</span>)</span><br><span class="line"><span class="keyword">end</span></span><br></pre></td></tr></table></figure>
+<p>注意：传给函数sort的匿名函数可以访问grades，而grades是包含匿名函数的外层函数sortbygrades的形参，在该匿名函数中，grades既不是全局变量，也不是局部变量，而是非全局变量，也称上值（upvalue）。</p>
+<blockquote>
+<p>函数作为第一类值，能够逃逸出它们变量的原始定界范围。</p>
+</blockquote>
+<p>简单的说，<strong>一个闭包就是一个函数外加能够使该函数正确访问非局部变量所需的其他机制</strong>。</p>
+
+  </div>
+</article>
+
+
+
+        
+          <div id="footer-post-container">
+  <div id="footer-post">
+
+    <div id="nav-footer" style="display: none">
+      <ul>
+         
+          <li><a href="/">首页</a></li>
+         
+          <li><a href="/about/">关于</a></li>
+         
+          <li><a href="/tags/">tags</a></li>
+         
+          <li><a href="/categories/">categories</a></li>
+         
+          <li><a href="/archives/">归档</a></li>
+         
+          <li><a href="/categories/reports/">reports</a></li>
+         
+          <li><a href="/search/">搜索</a></li>
+        
+      </ul>
+    </div>
+
+    <div id="toc-footer" style="display: none">
+      <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#闭包"><span class="toc-number">1.</span> <span class="toc-text">闭包</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#函数是第一类值："><span class="toc-number">1.1.</span> <span class="toc-text">函数是第一类值：</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#非全局函数"><span class="toc-number">1.2.</span> <span class="toc-text">非全局函数</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#词法定界"><span class="toc-number">1.3.</span> <span class="toc-text">词法定界</span></a></li></ol></li></ol>
+    </div>
+
+    <div id="share-footer" style="display: none">
+      <ul>
+  <li><a class="icon" href="http://www.facebook.com/sharer.php?u=https://bitzhangmo.github.io/2019/05/22/Lua/Lua程序设计（5）/"><i class="fab fa-facebook fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="https://twitter.com/share?url=https://bitzhangmo.github.io/2019/05/22/Lua/Lua程序设计（5）/&text=Lua程序设计（5）"><i class="fab fa-twitter fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="http://www.linkedin.com/shareArticle?url=https://bitzhangmo.github.io/2019/05/22/Lua/Lua程序设计（5）/&title=Lua程序设计（5）"><i class="fab fa-linkedin fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="https://pinterest.com/pin/create/bookmarklet/?url=https://bitzhangmo.github.io/2019/05/22/Lua/Lua程序设计（5）/&is_video=false&description=Lua程序设计（5）"><i class="fab fa-pinterest fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="mailto:?subject=Lua程序设计（5）&body=Check out this article: https://bitzhangmo.github.io/2019/05/22/Lua/Lua程序设计（5）/"><i class="fas fa-envelope fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="https://getpocket.com/save?url=https://bitzhangmo.github.io/2019/05/22/Lua/Lua程序设计（5）/&title=Lua程序设计（5）"><i class="fab fa-get-pocket fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="http://reddit.com/submit?url=https://bitzhangmo.github.io/2019/05/22/Lua/Lua程序设计（5）/&title=Lua程序设计（5）"><i class="fab fa-reddit fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="http://www.stumbleupon.com/submit?url=https://bitzhangmo.github.io/2019/05/22/Lua/Lua程序设计（5）/&title=Lua程序设计（5）"><i class="fab fa-stumbleupon fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="http://digg.com/submit?url=https://bitzhangmo.github.io/2019/05/22/Lua/Lua程序设计（5）/&title=Lua程序设计（5）"><i class="fab fa-digg fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="http://www.tumblr.com/share/link?url=https://bitzhangmo.github.io/2019/05/22/Lua/Lua程序设计（5）/&name=Lua程序设计（5）&description=&lt;p&gt;Lua中的闭包。&lt;/p&gt;"><i class="fab fa-tumblr fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="https://news.ycombinator.com/submitlink?u=https://bitzhangmo.github.io/2019/05/22/Lua/Lua程序设计（5）/&t=Lua程序设计（5）"><i class="fab fa-hacker-news fa-lg" aria-hidden="true"></i></a></li>
+</ul>
+
+    </div>
+
+    <div id="actions-footer">
+        <a id="menu" class="icon" href="#" onclick="$('#nav-footer').toggle();return false;"><i class="fas fa-bars fa-lg" aria-hidden="true"></i> 菜单</a>
+        <a id="toc" class="icon" href="#" onclick="$('#toc-footer').toggle();return false;"><i class="fas fa-list fa-lg" aria-hidden="true"></i> 目录</a>
+        <a id="share" class="icon" href="#" onclick="$('#share-footer').toggle();return false;"><i class="fas fa-share-alt fa-lg" aria-hidden="true"></i> 分享</a>
+        <a id="top" style="display:none" class="icon" href="#" onclick="$('html, body').animate({ scrollTop: 0 }, 'fast');"><i class="fas fa-chevron-up fa-lg" aria-hidden="true"></i> 返回顶部</a>
+    </div>
+
+  </div>
+</div>
+
+        
+        <footer id="footer">
+  <div class="footer-left">
+    Copyright &copy; 2020 zhangMo
+  </div>
+  <div class="footer-right">
+    <nav>
+      <ul>
+         
+          <li><a href="/">首页</a></li>
+         
+          <li><a href="/about/">关于</a></li>
+         
+          <li><a href="/tags/">tags</a></li>
+         
+          <li><a href="/categories/">categories</a></li>
+         
+          <li><a href="/archives/">归档</a></li>
+         
+          <li><a href="/categories/reports/">reports</a></li>
+         
+          <li><a href="/search/">搜索</a></li>
+        
+      </ul>
+    </nav>
+  </div>
+</footer>
+
+    </div>
+    <!-- styles -->
+<link rel="stylesheet" href="/lib/font-awesome/css/all.min.css">
+<link rel="stylesheet" href="/lib/justified-gallery/css/justifiedGallery.min.css">
+
+    <!-- jquery -->
+<script src="/lib/jquery/jquery.min.js"></script>
+<script src="/lib/justified-gallery/js/jquery.justifiedGallery.min.js"></script>
+<!-- clipboard -->
+
+  <script src="/lib/clipboard/clipboard.min.js"></script>
+  <script type="text/javascript">
+  $(function() {
+    // copy-btn HTML
+    var btn = "<span class=\"btn-copy tooltipped tooltipped-sw\" aria-label=\"复制到粘贴板!\">";
+    btn += '<i class="far fa-clone"></i>';
+    btn += '</span>'; 
+    // mount it!
+    $(".highlight table").before(btn);
+    var clip = new ClipboardJS('.btn-copy', {
+      text: function(trigger) {
+        return Array.from(trigger.nextElementSibling.querySelectorAll('.code')).reduce((str,it)=>str+it.innerText+'\n','')
+      }
+    });
+    clip.on('success', function(e) {
+      e.trigger.setAttribute('aria-label', "复制成功!");
+      e.clearSelection();
+    })
+  })
+  </script>
+
+<script src="/js/main.js"></script>
+<!-- search -->
+
+<!-- Google Analytics -->
+
+<!-- Baidu Analytics -->
+
+<!-- Disqus Comments -->
+
+
+<script src="/live2dw/lib/L2Dwidget.min.js?bd2294fafea3389ee458f1d9be5a2157"></script><script>L2Dwidget.init({"pluginRootPath":"live2dw/","pluginJsPath":"lib/","pluginModelPath":"assets/","tagMode":false,"debug":false,"model":{"jsonPath":"/live2dw/assets/hijiki.model.json"},"display":{"position":"left","width":100,"height":200},"mobile":{"show":false},"log":false});</script></body>
+</html>
