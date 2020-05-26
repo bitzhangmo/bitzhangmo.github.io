@@ -1,9 +1,54 @@
 <?xml version="1.0" encoding="utf-8"?>
 <search>
   <entry>
+    <title><![CDATA[“一个使用C++开发的软渲染器（0）开发准备”]]></title>
+    <url>%2F2020%2F05%2F26%2F%E5%BC%80%E5%8F%91%E7%AC%94%E8%AE%B0%2FC%2B%2B%E8%BD%AF%E6%B8%B2%E6%9F%93%E5%99%A80%2F</url>
+    <content type="text"><![CDATA[相关博客及资料 动手实现一个C++软渲染器（一）做一点微小的工作 想用C++实现一个软件渲染器，类似DX和OpenGL，除了《3D游戏编程大师技巧》，或者什么网站推荐？ 如何开始用 C++ 写一个光栅化渲染器？ 渲染器 0 —— 准备工作 如何写一个软渲染(1)-Set Up 尝试实现软件渲染器 SDL2画点 随手记 移花接木—做一个简单的软件渲染器 可参考的实现 mini3d by 韦易笑 Tiny Renderer by ssloy renderer.gua by guaxiao SoftRenderer by gameknife 可借助的库 Simple DirectMedia Layer , SDL]]></content>
+      <categories>
+        <category>开发笔记</category>
+      </categories>
+      <tags>
+        <tag>C++</tag>
+        <tag>计算机图形学</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title><![CDATA[“2020年第21周周报”]]></title>
+    <url>%2F2020%2F05%2F26%2F%E4%B8%AA%E4%BA%BA%E6%8A%A5%E5%91%8A%2F202021%2F</url>
+    <content type="text"><![CDATA[这是2020年的第21周报告（0518～0524）。 上周计划完成情况本周做了什么下周打算做点什么]]></content>
+      <categories>
+        <category>reports</category>
+      </categories>
+      <tags>
+        <tag>report</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title><![CDATA[“2020年第20周周报”]]></title>
+    <url>%2F2020%2F05%2F26%2F%E4%B8%AA%E4%BA%BA%E6%8A%A5%E5%91%8A%2F202020%2F</url>
+    <content type="text"><![CDATA[这是2020年的第20周报告（0511～0517）。 上周计划完成情况本周做了什么下周打算做点什么]]></content>
+      <categories>
+        <category>reports</category>
+      </categories>
+      <tags>
+        <tag>report</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title><![CDATA[“C++Primer读书笔记（2）表达式”]]></title>
+    <url>%2F2020%2F05%2F12%2FC%2B%2BPrimer%E7%AC%94%E8%AE%B0%2FC%2B%2B-Primer-%E8%AF%BB%E4%B9%A6%E7%AC%94%E8%AE%B0%EF%BC%882%EF%BC%89%E8%A1%A8%E8%BE%BE%E5%BC%8F%2F</url>
+    <content type="text"><![CDATA[]]></content>
+      <categories>
+        <category>读书笔记</category>
+      </categories>
+      <tags>
+        <tag>C++</tag>
+      </tags>
+  </entry>
+  <entry>
     <title><![CDATA[“2020年第19周周报”]]></title>
     <url>%2F2020%2F05%2F12%2F%E4%B8%AA%E4%BA%BA%E6%8A%A5%E5%91%8A%2F202019%2F</url>
-    <content type="text"><![CDATA[这是2020年的第19周报告（0504～0510）。 上周计划完成情况 毕业设计：改初稿。 8号老师才给我反馈意见，在这之前基本上是放飞自我，这之后开始苦哈哈的改稿。 本周做了什么输出 摄影：(这里放的是微博的图片链接，等我搞好github仓库的图床再改吧) 姑且命名为「马其顿防线」 改论文稿。 消费 美的台灯：¥59，之前搬家，东西都搬走了，在家这边又买了一个台灯，和寝室用的一样，能亮就行。 和朋友聚餐：¥88，社交花费。 输入 《羞羞的铁拳》：作为一个喜剧片来说还可以。 《bilibili献给新一代的演讲《后浪》》：一种目前无法企及的生活状态宣传片。 《动物新世代 BNA ビー・エヌ・エー》：老生常谈的设定和出色的画面表现，以及合适的BGM切入时机。 下周打算做点什么 论文改稿，降重，答辩。 学习C++。 学习Unreal。 坚持跑步。]]></content>
+    <content type="text"><![CDATA[这是2020年的第19周报告（0504～0510）。 上周计划完成情况 毕业设计：改初稿。 8号老师才给我反馈意见，在这之前基本上是放飞自我，这之后开始苦哈哈的改稿。 本周做了什么输出 摄影： 姑且命名为「马其顿防线」 改论文稿。 消费 美的台灯：¥59，之前搬家，东西都搬走了，在家这边又买了一个台灯，和寝室用的一样，能亮就行。 和朋友聚餐：¥88，社交花费。 输入 《羞羞的铁拳》：作为一个喜剧片来说还可以。 《bilibili献给新一代的演讲《后浪》》：一种目前无法企及的生活状态宣传片。 《动物新世代 BNA ビー・エヌ・エー》：老生常谈的设定和出色的画面表现，以及合适的BGM切入时机。 下周打算做点什么 论文改稿，降重，答辩。 学习C++。 学习Unreal。 坚持跑步。]]></content>
       <categories>
         <category>reports</category>
       </categories>

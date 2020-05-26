@@ -14,7 +14,7 @@
 <meta property="og:site_name" content="zhangMo Blog">
 <meta property="og:description" content="3.1 命名空间的using声明头文件不应该包含using声明，因为头文件的内容会拷贝到所有引用它的文件中去，如果头文件中里有某个using声明，那么每个使用了该头文件的文件就都会有这个声明。对于某些程序来说，由于不经意间包含了一些名字，反而可能产生始料未及的名字冲突。 3.2 标准库类型string标准库类型string表示可变长的字符序列。 123456string s1;							//">
 <meta property="og:locale" content="zh-CN">
-<meta property="og:updated_time" content="2020-03-08T15:20:48.926Z">
+<meta property="og:updated_time" content="2020-05-13T11:30:19.989Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="C++ Primer 读书笔记（1）字符串、向量和数组">
 <meta name="twitter:description" content="3.1 命名空间的using声明头文件不应该包含using声明，因为头文件的内容会拷贝到所有引用它的文件中去，如果头文件中里有某个using声明，那么每个使用了该头文件的文件就都会有这个声明。对于某些程序来说，由于不经意间包含了一些名字，反而可能产生始料未及的名字冲突。 3.2 标准库类型string标准库类型string表示可变长的字符序列。 123456string s1;							//">
@@ -136,7 +136,7 @@
       
         <time datetime="2020-03-07T06:45:59.000Z" itemprop="datePublished">2020-03-07</time>
         
-        (Updated: <time datetime="2020-03-08T15:20:48.926Z" itemprop="dateModified">2020-03-08</time>)
+        (Updated: <time datetime="2020-05-13T11:30:19.989Z" itemprop="dateModified">2020-05-13</time>)
         
       
     </div>
@@ -165,13 +165,13 @@
 <h3 id="3-1-命名空间的using声明"><a href="#3-1-命名空间的using声明" class="headerlink" title="3.1 命名空间的using声明"></a>3.1 命名空间的using声明</h3><p>头文件不应该包含using声明，<strong>因为头文件的内容会拷贝到所有引用它的文件中去</strong>，如果头文件中里有某个using声明，那么每个使用了该头文件的文件就都会有这个声明。对于某些程序来说，由于不经意间包含了一些名字，反而可能产生始料未及的名字冲突。</p>
 <h3 id="3-2-标准库类型string"><a href="#3-2-标准库类型string" class="headerlink" title="3.2 标准库类型string"></a>3.2 标准库类型string</h3><p>标准库类型string表示<strong>可变长的字符序列</strong>。</p>
 <figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">string</span> s1;							<span class="comment">// 默认初始化，s1是一个空串</span></span><br><span class="line"><span class="function"><span class="built_in">string</span> <span class="title">s2</span><span class="params">(s1)</span></span>;					<span class="comment">// s2是s1的副本</span></span><br><span class="line"><span class="built_in">string</span> s2 = s1;					<span class="comment">// 等价于上条</span></span><br><span class="line"><span class="function"><span class="built_in">string</span> <span class="title">s3</span><span class="params">(<span class="string">"value"</span>)</span></span>;			<span class="comment">// s3是字面值“value”的副本，除了字面值最后的那个空字符外，直接初始化</span></span><br><span class="line"><span class="built_in">string</span> s3 = <span class="string">"value"</span>;		<span class="comment">// 等价于上条，拷贝初始化</span></span><br><span class="line"><span class="function"><span class="built_in">string</span> <span class="title">s4</span><span class="params">(n,<span class="string">'c'</span>)</span></span>;				<span class="comment">// 把s4初始化为由连续n个字符c组成的串</span></span><br></pre></td></tr></table></figure>
-<p>当把string对象和字符字面值及字符串字面值混在一条语句中使用时，必须确保每个加法运算符（+）两侧的运算对象至少有一个是string：</p>
+<p><strong>当把string对象和字符字面值及字符串字面值混在一条语句中使用时，必须确保每个加法运算符（+）两侧的运算对象至少有一个是string：</strong></p>
 <figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">string</span> s4 = s1 + <span class="string">","</span>;						<span class="comment">// 正确：把一个string对象和一个字面值相加</span></span><br><span class="line"><span class="built_in">string</span> s5 = <span class="string">"hello"</span> + <span class="string">","</span>;			<span class="comment">// 错误，两个运算对象都不是string</span></span><br><span class="line"><span class="built_in">string</span> s6 = s1 + <span class="string">","</span> + <span class="string">"world"</span>;	<span class="comment">// 正确，每个加法运算符都有一个运算对象是string</span></span><br><span class="line"><span class="comment">// 等价于</span></span><br><span class="line"><span class="built_in">string</span> s6 = (s1 + <span class="string">","</span>) + <span class="string">"world"</span>;</span><br><span class="line"><span class="built_in">string</span> tmp = s1 + <span class="string">","</span>;</span><br><span class="line">s6 = tmp + <span class="string">"world"</span>;</span><br><span class="line"><span class="built_in">string</span> s7 = <span class="string">"hello"</span> + <span class="string">","</span> + s2;	<span class="comment">// 错误，不能把字面值直接相加</span></span><br></pre></td></tr></table></figure>
 <p><strong>C++语言中的字符串字面值并不是标准库类型string的对象，字符串字面值与string是不同的类型。</strong></p>
 <h3 id="3-3-标准库类型vector"><a href="#3-3-标准库类型vector" class="headerlink" title="3.3 标准库类型vector"></a>3.3 标准库类型vector</h3><p>标准库类型vector表示对象的集合，<strong>其中所有对象的类型都相同</strong>。</p>
 <p>C++既有类模版，也有函数模版，其中vector是一个类模版。模版本身不是类或函数，相反可以将模版看作为编译器生成类或函数编写的一份说明。编译器根据模版创建类或函数的过程称为实例化，当使用模版时，需要指出编译器应把类或函数实例化成何种类型。</p>
 <p>对于类模版来说，我们通过提供一些额外信息来指定模版到底实例化成什么样的类，需要提供哪些信息由模版决定。vector能容纳绝大多数类型的对象作为其元素，但是因为引用不是对象，所以不存在包含引用的vector。</p>
-<p>两个vector对象相等当且仅当它们所含的元素个数相同，而且对应位置的元素值也相同。关系运算符依照字典顺序进行比较：如果两个vector对象的容量不同，但是在相同位置上的元素值都一样，则元素较少的vector对象小于元素较多的vector对象；若元素的值有区别，则vector对象的大小关系由第一对相异的元素值的大小关系决定。</p>
+<p>两个vector对象相等<strong>当且仅当它们所含的元素个数相同，而且对应位置的元素值也相同</strong>。关系运算符依照字典顺序进行比较：如果两个vector对象的容量不同，但是在相同位置上的元素值都一样，则元素较少的vector对象小于元素较多的vector对象；若元素的值有区别，则vector对象的大小关系由第一对相异的元素值的大小关系决定。</p>
 <p>vector对象（以及string对象）的下标运算符可用于访问已存在的元素，而不能用于添加元素。</p>
 <h3 id="3-4-迭代器介绍"><a href="#3-4-迭代器介绍" class="headerlink" title="3.4 迭代器介绍"></a>3.4 迭代器介绍</h3><p>C++程序员习惯性的使用<code>!=</code>，其原因和他们更愿意使用迭代器而非下标的原因一样：<strong>因为这种编程风格在标准库提供的所有容器上都有效。</strong></p>
 <p>只有string和vector等一些标准库类型有下标运算符，并非全都如此。与之类似，所有标准库容器的迭代器都定义了==和！=，但是它们中的大多数都没有定义&lt;运算符。</p>
