@@ -226,8 +226,8 @@
 <p>找到变量名<code>arr</code>，先往右是<code>[]</code>运算符，说明<code>arr</code>是一个数组；再往左是一个<code>*</code>号，说明<code>arr</code>数组的元素是指针（<strong>注意</strong>：这里的<code>*</code>修饰的不是<code>arr</code>，而是<code>arr[10]</code>。原因是<code>[]</code>运算符的优先级比<code>*</code>要高，<code>arr</code>先与<code>[]</code>结合。）；跳出圆括号，先往右又遇到圆括号，说明<code>arr</code>数组的元素是指向函数的指针，它指向的函数有一个int类型的参数，返回值类型是int。</p>
 <p>分析完这两个定义，相信多数人心里面应该有点谱了。可应该还有人会问：怎么判断定义的是函数指针（定义6），还是数组指针（定义5），或是数组（定义7）？可以抽象出几个模式：</p>
 <ul>
-<li><code>type (*var)(...);</code> ：变量名var与*结合，被圆括号括起来，右边是参数列表。表明这是<strong>函数指针</strong></li>
-<li><code>type (*var)[];</code> ：变量名var与*结合，被圆括号括起来，右边是[]运算符。表示这是<strong>数组指针</strong></li>
+<li><code>type (*var)(...);</code> ：变量名var与<em>结合，被圆括号括起来，右边是参数列表。表明这是<em>*函数指针</em></em></li>
+<li><code>type (*var)[];</code> ：变量名var与<em>结合，被圆括号括起来，右边是[]运算符。表示这是<em>*数组指针</em></em></li>
 <li><code>type (*var[])...;</code>  ： 变量名var先与[]结合，说明这是一个<strong>数组</strong>（至于数组包含的是什么，由旁边的修饰决定）  </li>
 </ul>
 <p>至此，我们应该有能力分析文章开始列出来了几条声明和定义：</p>
