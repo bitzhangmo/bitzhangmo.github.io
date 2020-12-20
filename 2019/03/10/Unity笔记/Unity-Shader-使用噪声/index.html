@@ -1,0 +1,356 @@
+<!DOCTYPE html>
+<html lang=zh>
+<head><meta name="generator" content="Hexo 3.9.0">
+    <!-- so meta -->
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="HandheldFriendly" content="True">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+    <meta name="description" content="消融效果、水波效果、全局雾效。">
+<meta name="keywords" content="Unity,Shader">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Unity Shader 使用噪声">
+<meta property="og:url" content="https://bitzhangmo.github.io/2019/03/10/Unity笔记/Unity-Shader-使用噪声/index.html">
+<meta property="og:site_name" content="zhangMo Blog">
+<meta property="og:description" content="消融效果、水波效果、全局雾效。">
+<meta property="og:locale" content="zh-CN">
+<meta property="og:image" content="https://wx3.sinaimg.cn/mw690/007CSzD7ly1g0yn0oximmj313k0s6qso.jpg">
+<meta property="og:image" content="https://wx2.sinaimg.cn/mw690/007CSzD7ly1g0yn0ofirkj30yo0igdjv.jpg">
+<meta property="og:image" content="https://wx4.sinaimg.cn/mw690/007CSzD7ly1g0yn0o52rtj30ww0jy76n.jpg">
+<meta property="og:image" content="https://wx4.sinaimg.cn/mw690/007CSzD7ly1g0yn0o8u6rj30x60r4dko.jpg">
+<meta property="og:image" content="https://wx4.sinaimg.cn/mw690/007CSzD7ly1g0yn0oqz2xj31100u0gv7.jpg">
+<meta property="og:image" content="https://wx4.sinaimg.cn/mw690/007CSzD7ly1g0yn0o0y8xj30lq0d4mya.jpg">
+<meta property="og:image" content="https://wx3.sinaimg.cn/mw690/007CSzD7ly1g0yn0o4ipcj30t80n8acq.jpg">
+<meta property="og:updated_time" content="2019-04-17T06:21:36.000Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="Unity Shader 使用噪声">
+<meta name="twitter:description" content="消融效果、水波效果、全局雾效。">
+<meta name="twitter:image" content="https://wx3.sinaimg.cn/mw690/007CSzD7ly1g0yn0oximmj313k0s6qso.jpg">
+    
+    
+        
+          
+              <link rel="shortcut icon" href="/images/favicon.ico">
+          
+        
+        
+          
+            <link rel="icon" type="image/png" href="/images/favicon-192x192.png" sizes="192x192">
+          
+        
+        
+          
+            <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon.png">
+          
+        
+    
+    <!-- title -->
+    <title>Unity Shader 使用噪声</title>
+    <!-- styles -->
+    <link rel="stylesheet" href="/css/style.css">
+    <!-- persian styles -->
+    
+      <link rel="stylesheet" href="/css/rtl.css">
+    
+    <!-- rss -->
+    
+    
+</head>
+
+<body class="max-width mx-auto px3 ltr">
+    
+      <div id="header-post">
+  <a id="menu-icon" href="#"><i class="fas fa-bars fa-lg"></i></a>
+  <a id="menu-icon-tablet" href="#"><i class="fas fa-bars fa-lg"></i></a>
+  <a id="top-icon-tablet" href="#" onclick="$('html, body').animate({ scrollTop: 0 }, 'fast');" style="display:none;"><i class="fas fa-chevron-up fa-lg"></i></a>
+  <span id="menu">
+    <span id="nav">
+      <ul>
+         
+          <li><a href="/">首页</a></li>
+         
+          <li><a href="/about/">关于</a></li>
+         
+          <li><a href="/tags/">tags</a></li>
+         
+          <li><a href="/categories/">categories</a></li>
+         
+          <li><a href="/archives/">归档</a></li>
+         
+          <li><a href="/categories/reports/">reports</a></li>
+         
+          <li><a href="/search/">搜索</a></li>
+        
+      </ul>
+    </span>
+    <br/>
+    <span id="actions">
+      <ul>
+        
+        <li><a class="icon" href="/2019/03/18/Unity笔记/Unity-Shader中的测试/"><i class="fas fa-chevron-left" aria-hidden="true" onmouseover="$('#i-prev').toggle();" onmouseout="$('#i-prev').toggle();"></i></a></li>
+        
+        
+        <li><a class="icon" href="/2019/03/10/Unity笔记/Unity-Shader-非真实感渲染/"><i class="fas fa-chevron-right" aria-hidden="true" onmouseover="$('#i-next').toggle();" onmouseout="$('#i-next').toggle();"></i></a></li>
+        
+        <li><a class="icon" href="#" onclick="$('html, body').animate({ scrollTop: 0 }, 'fast');"><i class="fas fa-chevron-up" aria-hidden="true" onmouseover="$('#i-top').toggle();" onmouseout="$('#i-top').toggle();"></i></a></li>
+        <li><a class="icon" href="#"><i class="fas fa-share-alt" aria-hidden="true" onmouseover="$('#i-share').toggle();" onmouseout="$('#i-share').toggle();" onclick="$('#share').toggle();return false;"></i></a></li>
+      </ul>
+      <span id="i-prev" class="info" style="display:none;">上一篇</span>
+      <span id="i-next" class="info" style="display:none;">下一篇</span>
+      <span id="i-top" class="info" style="display:none;">返回顶部</span>
+      <span id="i-share" class="info" style="display:none;">分享文章</span>
+    </span>
+    <br/>
+    <div id="share" style="display: none">
+      <ul>
+  <li><a class="icon" href="http://www.facebook.com/sharer.php?u=https://bitzhangmo.github.io/2019/03/10/Unity笔记/Unity-Shader-使用噪声/"><i class="fab fa-facebook " aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="https://twitter.com/share?url=https://bitzhangmo.github.io/2019/03/10/Unity笔记/Unity-Shader-使用噪声/&text=Unity Shader 使用噪声"><i class="fab fa-twitter " aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="http://www.linkedin.com/shareArticle?url=https://bitzhangmo.github.io/2019/03/10/Unity笔记/Unity-Shader-使用噪声/&title=Unity Shader 使用噪声"><i class="fab fa-linkedin " aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="https://pinterest.com/pin/create/bookmarklet/?url=https://bitzhangmo.github.io/2019/03/10/Unity笔记/Unity-Shader-使用噪声/&is_video=false&description=Unity Shader 使用噪声"><i class="fab fa-pinterest " aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="mailto:?subject=Unity Shader 使用噪声&body=Check out this article: https://bitzhangmo.github.io/2019/03/10/Unity笔记/Unity-Shader-使用噪声/"><i class="fas fa-envelope " aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="https://getpocket.com/save?url=https://bitzhangmo.github.io/2019/03/10/Unity笔记/Unity-Shader-使用噪声/&title=Unity Shader 使用噪声"><i class="fab fa-get-pocket " aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="http://reddit.com/submit?url=https://bitzhangmo.github.io/2019/03/10/Unity笔记/Unity-Shader-使用噪声/&title=Unity Shader 使用噪声"><i class="fab fa-reddit " aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="http://www.stumbleupon.com/submit?url=https://bitzhangmo.github.io/2019/03/10/Unity笔记/Unity-Shader-使用噪声/&title=Unity Shader 使用噪声"><i class="fab fa-stumbleupon " aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="http://digg.com/submit?url=https://bitzhangmo.github.io/2019/03/10/Unity笔记/Unity-Shader-使用噪声/&title=Unity Shader 使用噪声"><i class="fab fa-digg " aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="http://www.tumblr.com/share/link?url=https://bitzhangmo.github.io/2019/03/10/Unity笔记/Unity-Shader-使用噪声/&name=Unity Shader 使用噪声&description=&lt;p&gt;消融效果、水波效果、全局雾效。&lt;/p&gt;"><i class="fab fa-tumblr " aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="https://news.ycombinator.com/submitlink?u=https://bitzhangmo.github.io/2019/03/10/Unity笔记/Unity-Shader-使用噪声/&t=Unity Shader 使用噪声"><i class="fab fa-hacker-news " aria-hidden="true"></i></a></li>
+</ul>
+
+    </div>
+    <div id="toc">
+      <ol class="toc"><li class="toc-item toc-level-3"><a class="toc-link" href="#消融效果的实现："><span class="toc-number">1.</span> <span class="toc-text">消融效果的实现：</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#定义属性："><span class="toc-number">1.1.</span> <span class="toc-text">定义属性：</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#定义消融需要的Pass："><span class="toc-number">1.2.</span> <span class="toc-text">定义消融需要的Pass：</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#定义顶点着色器："><span class="toc-number">1.3.</span> <span class="toc-text">定义顶点着色器：</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#通过片元着色器实现模拟消融效果："><span class="toc-number">1.4.</span> <span class="toc-text">通过片元着色器实现模拟消融效果：</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#自定义投射阴影的Pass："><span class="toc-number">1.5.</span> <span class="toc-text">自定义投射阴影的Pass：</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#水波效果："><span class="toc-number">2.</span> <span class="toc-text">水波效果：</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#全局雾效："><span class="toc-number">3.</span> <span class="toc-text">全局雾效：</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#生成噪声："><span class="toc-number">4.</span> <span class="toc-text">生成噪声：</span></a></li></ol>
+    </div>
+  </span>
+</div>
+
+    
+    <div class="content index py4">
+        
+        <article class="post" itemscope itemtype="http://schema.org/BlogPosting">
+  <header>
+    
+    <h1 class="posttitle" itemprop="name headline">
+        Unity Shader 使用噪声
+    </h1>
+
+
+
+    <div class="meta">
+      <span class="author" itemprop="author" itemscope itemtype="http://schema.org/Person">
+        <span itemprop="name">zhangMo Blog</span>
+      </span>
+      
+    <div class="postdate">
+      
+        <time datetime="2019-03-10T13:31:34.000Z" itemprop="datePublished">2019-03-10</time>
+        
+        (Updated: <time datetime="2019-04-17T06:21:36.000Z" itemprop="dateModified">2019-04-17</time>)
+        
+      
+    </div>
+
+
+      
+    <div class="article-category">
+        <i class="fas fa-archive"></i>
+        <a class="category-link" href="/categories/Unity/">Unity</a>
+    </div>
+
+
+      
+    <div class="article-tag">
+        <i class="fas fa-tag"></i>
+        <a class="tag-link" href="/tags/Shader/">Shader</a>, <a class="tag-link" href="/tags/Unity/">Unity</a>
+    </div>
+
+
+    </div>
+  </header>
+  
+
+  <div class="content" itemprop="articleBody">
+    <p>消融效果、水波效果、全局雾效。</p>
+<a id="more"></a>
+<h3 id="消融效果的实现："><a href="#消融效果的实现：" class="headerlink" title="消融效果的实现："></a>消融效果的实现：</h3><p>通过噪声纹理采样与设置好的消融属性相减，将算得结果小于0的像素剔除。对于剩下的像素进行正常的光照计算，然后在设定好的宽度范围内对两种溶解颜色进行插值，再将混合得到的颜色与环境光和漫反射光照混合输出。</p>
+<p>后面还需要加一个用于处理阴影的Pass，否则已经消融的部分会投射影子。</p>
+<p><img src="https://wx3.sinaimg.cn/mw690/007CSzD7ly1g0yn0oximmj313k0s6qso.jpg" alt></p>
+<h4 id="定义属性："><a href="#定义属性：" class="headerlink" title="定义属性："></a>定义属性：</h4><p><img src="https://wx2.sinaimg.cn/mw690/007CSzD7ly1g0yn0ofirkj30yo0igdjv.jpg" alt="消融的属性"></p>
+<h4 id="定义消融需要的Pass："><a href="#定义消融需要的Pass：" class="headerlink" title="定义消融需要的Pass："></a>定义消融需要的Pass：</h4><p>为了得到正确的光照，我们设置了Pass的LightMode和multi_compile_fwdbase的编译指令。</p>
+<p>我们使用Cull off来关闭Shader的<strong>面片剔除</strong>，来使得其正面和背面都会被渲染。</p>
+<p><img src="https://wx4.sinaimg.cn/mw690/007CSzD7ly1g0yn0o52rtj30ww0jy76n.jpg" alt="设置正确的光照模式与渲染队列"></p>
+<h4 id="定义顶点着色器："><a href="#定义顶点着色器：" class="headerlink" title="定义顶点着色器："></a>定义顶点着色器：</h4><p><img src="https://wx4.sinaimg.cn/mw690/007CSzD7ly1g0yn0o8u6rj30x60r4dko.jpg" alt="定义顶点着色器"></p>
+<h4 id="通过片元着色器实现模拟消融效果："><a href="#通过片元着色器实现模拟消融效果：" class="headerlink" title="通过片元着色器实现模拟消融效果："></a>通过片元着色器实现模拟消融效果：</h4><p><img src="https://wx4.sinaimg.cn/mw690/007CSzD7ly1g0yn0oqz2xj31100u0gv7.jpg" alt="实现片元着色器"></p>
+<ul>
+<li>首先对噪声纹理进行采样，并将结果和用于控制消融程度的属性相减，传递给clip函数，将结果小于0的像素剔除。</li>
+<li>对于剩下的像素，进行正常的光照计算。我们根据漫反射纹理获得反射率albedo，并由此计算环境光照与漫反射光照。</li>
+<li>计算烧焦颜色：在宽度为<code>_LineWidth</code>的范围内模拟一个烧焦的颜色变化，使用smoothstep来计算混合系数（当t为1时，表明该像素位于消融的边界处；当t为0时，表明该像素为正常的模型颜色），插值用来模拟一个烧焦效果：使用t来混合两种火焰颜色。同样使用step函数来保证剔除。</li>
+</ul>
+<h4 id="自定义投射阴影的Pass："><a href="#自定义投射阴影的Pass：" class="headerlink" title="自定义投射阴影的Pass："></a>自定义投射阴影的Pass：</h4><p><img src="https://wx4.sinaimg.cn/mw690/007CSzD7ly1g0yn0o0y8xj30lq0d4mya.jpg" alt="自定义投射阴影的Pass"></p>
+<p><img src="https://wx3.sinaimg.cn/mw690/007CSzD7ly1g0yn0o4ipcj30t80n8acq.jpg" alt></p>
+<p>同样使用clip函数来剔除片元，然后使用内置宏<code>SHADOW_CASTER_FRAGMENT()</code>来完成阴影投射，将结果输出到深度图和阴影映射纹理中。</p>
+<h3 id="水波效果："><a href="#水波效果：" class="headerlink" title="水波效果："></a>水波效果：</h3><h3 id="全局雾效："><a href="#全局雾效：" class="headerlink" title="全局雾效："></a>全局雾效：</h3><h3 id="生成噪声："><a href="#生成噪声：" class="headerlink" title="生成噪声："></a>生成噪声：</h3><p><strong>噪声是怎么生成的</strong>：<a href="https://blog.csdn.net/candycat1992/article/details/50346469" target="_blank" rel="noopener">https://blog.csdn.net/candycat1992/article/details/50346469</a></p>
+<ul>
+<li><p>基于晶格的方法（Lattice based）</p>
+</li>
+<li><p>基于点的方法（Point based）</p>
+</li>
+<li><p>Perlin噪声：</p>
+<p>Perlin噪声还是比较简单的，Perlin噪声的实现需要三个步骤：</p>
+<ol>
+<li>定义一个晶格结构，每个晶格的顶点有一个“伪随机”的梯度向量（其实就是个向量啦）。对于二维的Perlin噪声来说，晶格结构就是一个平面网格，三维的就是一个立方体网格。</li>
+<li>输入一个点（二维的话就是二维坐标，三维就是三维坐标，n维的就是n个坐标），我们找到和它相邻的那些晶格顶点（二维下有4个，三维下有8个，n维下有2n2n个），计算该点到各个晶格顶点的距离向量，再分别与顶点上的梯度向量做点乘，得到2n2n个点乘结果。</li>
+<li>使用缓和曲线（ease curves）来计算它们的权重和。在原始的Perlin噪声实现中，缓和曲线是s(t)=3t2−2t3s(t)=3t2−2t3。</li>
+</ol>
+</li>
+</ul>
+
+  </div>
+</article>
+
+
+
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/gitalk@1/dist/gitalk.css">
+    <script src="https://cdn.jsdelivr.net/npm/gitalk@1/dist/gitalk.min.js"></script>
+    <script src="https://cdn.bootcss.com/blueimp-md5/2.10.0/js/md5.min.js"></script>
+    <div id="gitalk-container"></div>
+    <script type="text/javascript">
+        var gitalk = new Gitalk({
+            clientID: '643bb65e08572c0f02f9',
+            clientSecret: '267594ee5074e2f5b6392c6deba31c86b4b98abe',
+            id: md5(window.location.pathname),
+            repo: 'bitzhangmo.github.io',
+            owner: 'bitzhangmo',
+            admin: 'bitzhangmo',
+            distractionFreeMode: ''
+        })
+        gitalk.render('gitalk-container')
+    </script>
+
+
+        
+          <div id="footer-post-container">
+  <div id="footer-post">
+
+    <div id="nav-footer" style="display: none">
+      <ul>
+         
+          <li><a href="/">首页</a></li>
+         
+          <li><a href="/about/">关于</a></li>
+         
+          <li><a href="/tags/">tags</a></li>
+         
+          <li><a href="/categories/">categories</a></li>
+         
+          <li><a href="/archives/">归档</a></li>
+         
+          <li><a href="/categories/reports/">reports</a></li>
+         
+          <li><a href="/search/">搜索</a></li>
+        
+      </ul>
+    </div>
+
+    <div id="toc-footer" style="display: none">
+      <ol class="toc"><li class="toc-item toc-level-3"><a class="toc-link" href="#消融效果的实现："><span class="toc-number">1.</span> <span class="toc-text">消融效果的实现：</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#定义属性："><span class="toc-number">1.1.</span> <span class="toc-text">定义属性：</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#定义消融需要的Pass："><span class="toc-number">1.2.</span> <span class="toc-text">定义消融需要的Pass：</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#定义顶点着色器："><span class="toc-number">1.3.</span> <span class="toc-text">定义顶点着色器：</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#通过片元着色器实现模拟消融效果："><span class="toc-number">1.4.</span> <span class="toc-text">通过片元着色器实现模拟消融效果：</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#自定义投射阴影的Pass："><span class="toc-number">1.5.</span> <span class="toc-text">自定义投射阴影的Pass：</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#水波效果："><span class="toc-number">2.</span> <span class="toc-text">水波效果：</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#全局雾效："><span class="toc-number">3.</span> <span class="toc-text">全局雾效：</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#生成噪声："><span class="toc-number">4.</span> <span class="toc-text">生成噪声：</span></a></li></ol>
+    </div>
+
+    <div id="share-footer" style="display: none">
+      <ul>
+  <li><a class="icon" href="http://www.facebook.com/sharer.php?u=https://bitzhangmo.github.io/2019/03/10/Unity笔记/Unity-Shader-使用噪声/"><i class="fab fa-facebook fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="https://twitter.com/share?url=https://bitzhangmo.github.io/2019/03/10/Unity笔记/Unity-Shader-使用噪声/&text=Unity Shader 使用噪声"><i class="fab fa-twitter fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="http://www.linkedin.com/shareArticle?url=https://bitzhangmo.github.io/2019/03/10/Unity笔记/Unity-Shader-使用噪声/&title=Unity Shader 使用噪声"><i class="fab fa-linkedin fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="https://pinterest.com/pin/create/bookmarklet/?url=https://bitzhangmo.github.io/2019/03/10/Unity笔记/Unity-Shader-使用噪声/&is_video=false&description=Unity Shader 使用噪声"><i class="fab fa-pinterest fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="mailto:?subject=Unity Shader 使用噪声&body=Check out this article: https://bitzhangmo.github.io/2019/03/10/Unity笔记/Unity-Shader-使用噪声/"><i class="fas fa-envelope fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="https://getpocket.com/save?url=https://bitzhangmo.github.io/2019/03/10/Unity笔记/Unity-Shader-使用噪声/&title=Unity Shader 使用噪声"><i class="fab fa-get-pocket fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="http://reddit.com/submit?url=https://bitzhangmo.github.io/2019/03/10/Unity笔记/Unity-Shader-使用噪声/&title=Unity Shader 使用噪声"><i class="fab fa-reddit fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="http://www.stumbleupon.com/submit?url=https://bitzhangmo.github.io/2019/03/10/Unity笔记/Unity-Shader-使用噪声/&title=Unity Shader 使用噪声"><i class="fab fa-stumbleupon fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="http://digg.com/submit?url=https://bitzhangmo.github.io/2019/03/10/Unity笔记/Unity-Shader-使用噪声/&title=Unity Shader 使用噪声"><i class="fab fa-digg fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="http://www.tumblr.com/share/link?url=https://bitzhangmo.github.io/2019/03/10/Unity笔记/Unity-Shader-使用噪声/&name=Unity Shader 使用噪声&description=&lt;p&gt;消融效果、水波效果、全局雾效。&lt;/p&gt;"><i class="fab fa-tumblr fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="https://news.ycombinator.com/submitlink?u=https://bitzhangmo.github.io/2019/03/10/Unity笔记/Unity-Shader-使用噪声/&t=Unity Shader 使用噪声"><i class="fab fa-hacker-news fa-lg" aria-hidden="true"></i></a></li>
+</ul>
+
+    </div>
+
+    <div id="actions-footer">
+        <a id="menu" class="icon" href="#" onclick="$('#nav-footer').toggle();return false;"><i class="fas fa-bars fa-lg" aria-hidden="true"></i> 菜单</a>
+        <a id="toc" class="icon" href="#" onclick="$('#toc-footer').toggle();return false;"><i class="fas fa-list fa-lg" aria-hidden="true"></i> 目录</a>
+        <a id="share" class="icon" href="#" onclick="$('#share-footer').toggle();return false;"><i class="fas fa-share-alt fa-lg" aria-hidden="true"></i> 分享</a>
+        <a id="top" style="display:none" class="icon" href="#" onclick="$('html, body').animate({ scrollTop: 0 }, 'fast');"><i class="fas fa-chevron-up fa-lg" aria-hidden="true"></i> 返回顶部</a>
+    </div>
+
+  </div>
+</div>
+
+        
+        <footer id="footer">
+  <div class="footer-left">
+    Copyright &copy; 2020 zhangMo
+  </div>
+  <div class="footer-right">
+    <nav>
+      <ul>
+         
+          <li><a href="/">首页</a></li>
+         
+          <li><a href="/about/">关于</a></li>
+         
+          <li><a href="/tags/">tags</a></li>
+         
+          <li><a href="/categories/">categories</a></li>
+         
+          <li><a href="/archives/">归档</a></li>
+         
+          <li><a href="/categories/reports/">reports</a></li>
+         
+          <li><a href="/search/">搜索</a></li>
+        
+      </ul>
+    </nav>
+  </div>
+</footer>
+
+        
+    </div>
+    <!-- styles -->
+<link rel="stylesheet" href="/lib/font-awesome/css/all.min.css">
+<link rel="stylesheet" href="/lib/justified-gallery/css/justifiedGallery.min.css">
+
+    <!-- jquery -->
+<script src="/lib/jquery/jquery.min.js"></script>
+<script src="/lib/justified-gallery/js/jquery.justifiedGallery.min.js"></script>
+<!-- clipboard -->
+
+  <script src="/lib/clipboard/clipboard.min.js"></script>
+  <script type="text/javascript">
+  $(function() {
+    // copy-btn HTML
+    var btn = "<span class=\"btn-copy tooltipped tooltipped-sw\" aria-label=\"复制到粘贴板!\">";
+    btn += '<i class="far fa-clone"></i>';
+    btn += '</span>'; 
+    // mount it!
+    $(".highlight table").before(btn);
+    var clip = new ClipboardJS('.btn-copy', {
+      text: function(trigger) {
+        return Array.from(trigger.nextElementSibling.querySelectorAll('.code')).reduce((str,it)=>str+it.innerText+'\n','')
+      }
+    });
+    clip.on('success', function(e) {
+      e.trigger.setAttribute('aria-label', "复制成功!");
+      e.clearSelection();
+    })
+  })
+  </script>
+
+<script src="/js/main.js"></script>
+<!-- search -->
+
+<!-- Google Analytics -->
+
+<!-- Baidu Analytics -->
+
+<!-- Disqus Comments -->
+
+
+<script src="/live2dw/lib/L2Dwidget.min.js?bd2294fafea3389ee458f1d9be5a2157"></script><script>L2Dwidget.init({"pluginRootPath":"live2dw/","pluginJsPath":"lib/","pluginModelPath":"assets/","tagMode":false,"debug":false,"model":{"jsonPath":"/live2dw/assets/hijiki.model.json"},"display":{"position":"left","width":100,"height":200},"mobile":{"show":false},"log":false});</script></body>
+</html>

@@ -1,0 +1,406 @@
+<!DOCTYPE html>
+<html lang=zh>
+<head><meta name="generator" content="Hexo 3.9.0">
+    <!-- so meta -->
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="HandheldFriendly" content="True">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+    <meta name="description" content="Lua源码阅读的第一期，主要内容：系列内容计划以及目录。">
+<meta name="keywords" content="Lua">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Lua源码阅读：目录及模块结构">
+<meta property="og:url" content="https://bitzhangmo.github.io/2019/08/05/Lua/Lua源码阅读：目录及模块结构/index.html">
+<meta property="og:site_name" content="zhangMo Blog">
+<meta property="og:description" content="Lua源码阅读的第一期，主要内容：系列内容计划以及目录。">
+<meta property="og:locale" content="zh-CN">
+<meta property="og:updated_time" content="2019-08-06T11:55:24.000Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="Lua源码阅读：目录及模块结构">
+<meta name="twitter:description" content="Lua源码阅读的第一期，主要内容：系列内容计划以及目录。">
+    
+    
+        
+          
+              <link rel="shortcut icon" href="/images/favicon.ico">
+          
+        
+        
+          
+            <link rel="icon" type="image/png" href="/images/favicon-192x192.png" sizes="192x192">
+          
+        
+        
+          
+            <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon.png">
+          
+        
+    
+    <!-- title -->
+    <title>Lua源码阅读：目录及模块结构</title>
+    <!-- styles -->
+    <link rel="stylesheet" href="/css/style.css">
+    <!-- persian styles -->
+    
+      <link rel="stylesheet" href="/css/rtl.css">
+    
+    <!-- rss -->
+    
+    
+</head>
+
+<body class="max-width mx-auto px3 ltr">
+    
+      <div id="header-post">
+  <a id="menu-icon" href="#"><i class="fas fa-bars fa-lg"></i></a>
+  <a id="menu-icon-tablet" href="#"><i class="fas fa-bars fa-lg"></i></a>
+  <a id="top-icon-tablet" href="#" onclick="$('html, body').animate({ scrollTop: 0 }, 'fast');" style="display:none;"><i class="fas fa-chevron-up fa-lg"></i></a>
+  <span id="menu">
+    <span id="nav">
+      <ul>
+         
+          <li><a href="/">首页</a></li>
+         
+          <li><a href="/about/">关于</a></li>
+         
+          <li><a href="/tags/">tags</a></li>
+         
+          <li><a href="/categories/">categories</a></li>
+         
+          <li><a href="/archives/">归档</a></li>
+         
+          <li><a href="/categories/reports/">reports</a></li>
+         
+          <li><a href="/search/">搜索</a></li>
+        
+      </ul>
+    </span>
+    <br/>
+    <span id="actions">
+      <ul>
+        
+        <li><a class="icon" href="/2019/08/06/Lua/Lua源码阅读：标准库/"><i class="fas fa-chevron-left" aria-hidden="true" onmouseover="$('#i-prev').toggle();" onmouseout="$('#i-prev').toggle();"></i></a></li>
+        
+        
+        <li><a class="icon" href="/2019/07/29/计算机图形学/RayTracing-In-Weekend-读书笔记/"><i class="fas fa-chevron-right" aria-hidden="true" onmouseover="$('#i-next').toggle();" onmouseout="$('#i-next').toggle();"></i></a></li>
+        
+        <li><a class="icon" href="#" onclick="$('html, body').animate({ scrollTop: 0 }, 'fast');"><i class="fas fa-chevron-up" aria-hidden="true" onmouseover="$('#i-top').toggle();" onmouseout="$('#i-top').toggle();"></i></a></li>
+        <li><a class="icon" href="#"><i class="fas fa-share-alt" aria-hidden="true" onmouseover="$('#i-share').toggle();" onmouseout="$('#i-share').toggle();" onclick="$('#share').toggle();return false;"></i></a></li>
+      </ul>
+      <span id="i-prev" class="info" style="display:none;">上一篇</span>
+      <span id="i-next" class="info" style="display:none;">下一篇</span>
+      <span id="i-top" class="info" style="display:none;">返回顶部</span>
+      <span id="i-share" class="info" style="display:none;">分享文章</span>
+    </span>
+    <br/>
+    <div id="share" style="display: none">
+      <ul>
+  <li><a class="icon" href="http://www.facebook.com/sharer.php?u=https://bitzhangmo.github.io/2019/08/05/Lua/Lua源码阅读：目录及模块结构/"><i class="fab fa-facebook " aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="https://twitter.com/share?url=https://bitzhangmo.github.io/2019/08/05/Lua/Lua源码阅读：目录及模块结构/&text=Lua源码阅读：目录及模块结构"><i class="fab fa-twitter " aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="http://www.linkedin.com/shareArticle?url=https://bitzhangmo.github.io/2019/08/05/Lua/Lua源码阅读：目录及模块结构/&title=Lua源码阅读：目录及模块结构"><i class="fab fa-linkedin " aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="https://pinterest.com/pin/create/bookmarklet/?url=https://bitzhangmo.github.io/2019/08/05/Lua/Lua源码阅读：目录及模块结构/&is_video=false&description=Lua源码阅读：目录及模块结构"><i class="fab fa-pinterest " aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="mailto:?subject=Lua源码阅读：目录及模块结构&body=Check out this article: https://bitzhangmo.github.io/2019/08/05/Lua/Lua源码阅读：目录及模块结构/"><i class="fas fa-envelope " aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="https://getpocket.com/save?url=https://bitzhangmo.github.io/2019/08/05/Lua/Lua源码阅读：目录及模块结构/&title=Lua源码阅读：目录及模块结构"><i class="fab fa-get-pocket " aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="http://reddit.com/submit?url=https://bitzhangmo.github.io/2019/08/05/Lua/Lua源码阅读：目录及模块结构/&title=Lua源码阅读：目录及模块结构"><i class="fab fa-reddit " aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="http://www.stumbleupon.com/submit?url=https://bitzhangmo.github.io/2019/08/05/Lua/Lua源码阅读：目录及模块结构/&title=Lua源码阅读：目录及模块结构"><i class="fab fa-stumbleupon " aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="http://digg.com/submit?url=https://bitzhangmo.github.io/2019/08/05/Lua/Lua源码阅读：目录及模块结构/&title=Lua源码阅读：目录及模块结构"><i class="fab fa-digg " aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="http://www.tumblr.com/share/link?url=https://bitzhangmo.github.io/2019/08/05/Lua/Lua源码阅读：目录及模块结构/&name=Lua源码阅读：目录及模块结构&description=&lt;p&gt;Lua源码阅读的第一期，主要内容：系列内容计划以及目录。&lt;/p&gt;"><i class="fab fa-tumblr " aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="https://news.ycombinator.com/submitlink?u=https://bitzhangmo.github.io/2019/08/05/Lua/Lua源码阅读：目录及模块结构/&t=Lua源码阅读：目录及模块结构"><i class="fab fa-hacker-news " aria-hidden="true"></i></a></li>
+</ul>
+
+    </div>
+    <div id="toc">
+      <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#Lua源码阅读："><span class="toc-number">1.</span> <span class="toc-text">Lua源码阅读：</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#目录"><span class="toc-number">1.1.</span> <span class="toc-text">目录</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#lua-c"><span class="toc-number">1.2.</span> <span class="toc-text">lua.c</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#模块结构"><span class="toc-number">1.3.</span> <span class="toc-text">模块结构</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#以下模块实现了一些实用函数："><span class="toc-number">1.3.1.</span> <span class="toc-text">以下模块实现了一些实用函数：</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#以下模块实现了基本的数据类型："><span class="toc-number">1.3.2.</span> <span class="toc-text">以下模块实现了基本的数据类型：</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#以下模块做语法解析和代码生成："><span class="toc-number">1.3.3.</span> <span class="toc-text">以下模块做语法解析和代码生成：</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#以下模块处理Lua字节码的执行："><span class="toc-number">1.3.4.</span> <span class="toc-text">以下模块处理Lua字节码的执行：</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#以下模块实现标准库："><span class="toc-number">1.3.5.</span> <span class="toc-text">以下模块实现标准库：</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#以下模块定义了C-API："><span class="toc-number">1.3.6.</span> <span class="toc-text">以下模块定义了C API：</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#以下模块实现Lua和Luac两个程序："><span class="toc-number">1.3.7.</span> <span class="toc-text">以下模块实现Lua和Luac两个程序：</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#命名约定"><span class="toc-number">1.4.</span> <span class="toc-text">命名约定</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#参考："><span class="toc-number">1.5.</span> <span class="toc-text">参考：</span></a></li></ol></li></ol>
+    </div>
+  </span>
+</div>
+
+    
+    <div class="content index py4">
+        
+        <article class="post" itemscope itemtype="http://schema.org/BlogPosting">
+  <header>
+    
+    <h1 class="posttitle" itemprop="name headline">
+        Lua源码阅读：目录及模块结构
+    </h1>
+
+
+
+    <div class="meta">
+      <span class="author" itemprop="author" itemscope itemtype="http://schema.org/Person">
+        <span itemprop="name">zhangMo Blog</span>
+      </span>
+      
+    <div class="postdate">
+      
+        <time datetime="2019-08-05T13:38:23.000Z" itemprop="datePublished">2019-08-05</time>
+        
+        (Updated: <time datetime="2019-08-06T11:55:24.000Z" itemprop="dateModified">2019-08-06</time>)
+        
+      
+    </div>
+
+
+      
+    <div class="article-category">
+        <i class="fas fa-archive"></i>
+        <a class="category-link" href="/categories/源码阅读/">源码阅读</a>
+    </div>
+
+
+      
+    <div class="article-tag">
+        <i class="fas fa-tag"></i>
+        <a class="tag-link" href="/tags/Lua/">Lua</a>
+    </div>
+
+
+    </div>
+  </header>
+  
+
+  <div class="content" itemprop="articleBody">
+    <p>Lua源码阅读的第一期，主要内容：系列内容计划以及目录。</p>
+<a id="more"></a>
+<h2 id="Lua源码阅读："><a href="#Lua源码阅读：" class="headerlink" title="Lua源码阅读："></a>Lua源码阅读：</h2><p>本篇转载于<a href="http://lua-users.org/wiki/LuaSource" target="_blank" rel="noopener">LuaSource</a></p>
+<h3 id="目录"><a href="#目录" class="headerlink" title="目录"></a>目录</h3><ul>
+<li><a href="https://bitzhangmo.github.io/2019/08/05/Lua/Lua源码阅读：目录及模块结构/">第一篇：目录及模块结构</a></li>
+<li><a href="https://bitzhangmo.github.io/2019/08/06/Lua/Lua源码阅读：基本数据类型/">第二篇：基本数据类型</a></li>
+<li><a href="https://bitzhangmo.github.io/2019/08/06/Lua/Lua源码阅读：实用函数/">第三篇：实用函数</a></li>
+<li><a href="https://bitzhangmo.github.io/2019/08/06/Lua/Lua源码阅读：标准库/">第四篇：标准库</a></li>
+<li><a href="https://bitzhangmo.github.io/2019/08/06/Lua/Lua源码阅读：C-API/">第五篇：C API</a></li>
+</ul>
+<h3 id="lua-c"><a href="#lua-c" class="headerlink" title="lua.c"></a>lua.c</h3><figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">main</span> <span class="params">(<span class="keyword">int</span> argc, <span class="keyword">char</span> **argv)</span> </span>&#123;</span><br><span class="line">  <span class="keyword">int</span> status, result;</span><br><span class="line">  lua_State *L = luaL_newstate();  <span class="comment">/* create state */</span></span><br><span class="line">  <span class="keyword">if</span> (L == <span class="literal">NULL</span>) &#123;</span><br><span class="line">    l_message(argv[<span class="number">0</span>], <span class="string">"cannot create state: not enough memory"</span>);</span><br><span class="line">    <span class="keyword">return</span> EXIT_FAILURE;</span><br><span class="line">  &#125;</span><br><span class="line">  lua_pushcfunction(L, &amp;pmain);  <span class="comment">/* to call 'pmain' in protected mode */</span></span><br><span class="line">  lua_pushinteger(L, argc);  <span class="comment">/* 1st argument */</span></span><br><span class="line">  lua_pushlightuserdata(L, argv); <span class="comment">/* 2nd argument */</span></span><br><span class="line">  status = lua_pcall(L, <span class="number">2</span>, <span class="number">1</span>, <span class="number">0</span>);  <span class="comment">/* do the call */</span></span><br><span class="line">  result = lua_toboolean(L, <span class="number">-1</span>);  <span class="comment">/* get result */</span></span><br><span class="line">  report(L, status);</span><br><span class="line">  lua_close(L);</span><br><span class="line">  <span class="keyword">return</span> (result &amp;&amp; status == LUA_OK) ? EXIT_SUCCESS : EXIT_FAILURE;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h3 id="模块结构"><a href="#模块结构" class="headerlink" title="模块结构"></a>模块结构</h3><p>Lua代码的模块概要介绍如下：</p>
+<h4 id="以下模块实现了一些实用函数："><a href="#以下模块实现了一些实用函数：" class="headerlink" title="以下模块实现了一些实用函数："></a>以下模块实现了一些实用函数：</h4><ul>
+<li><strong>ldebug.c</strong> - 调试接口，包含功能有：访问调试钩子（lua_sethook、lua_gethook、lua_gethookcount）；访问运行时栈（lua_getstack、lua_getlocal、lua_setlocal）；检测字节码（luaG_checkopenop、luaG_checkcode）；抛出错误（luaG_typeerror、luaG_concaterror、luaG_aritherror、luaG_ordererror、luaG_errormsg、luaG_runerror）</li>
+<li><strong>lzio.c</strong> - 通用的输入流接口</li>
+<li><strong>lmem.c</strong> - 内存管理接口。实现了luaM_realloc / luaM_growaux_ 两个函数，其中封装了内存分配函数</li>
+<li><strong>lgc.c</strong> - 增量的垃圾回收器</li>
+</ul>
+<h4 id="以下模块实现了基本的数据类型："><a href="#以下模块实现了基本的数据类型：" class="headerlink" title="以下模块实现了基本的数据类型："></a>以下模块实现了基本的数据类型：</h4><ul>
+<li><strong>lstate.c</strong> - 全局状态。包括打开、关闭Lua状态机（lua_newstate / lua_close）和线程（luaE_newthread / luaE_freethread）。</li>
+<li><strong>lobject.c</strong> - 一些操作Lua Object的通用函数。包括一些数据类型到字符串的互转函数，原生类型的相等性测试（luaO_rawequalObj），和以2为底的对数函数（luaO_log2）</li>
+<li><strong>lstring.c</strong> - 字符串哈希表（管理了所有被Lua用到的字符串）</li>
+<li><strong>lfunc.c</strong> - 一些用于操作函数原型(Proto）和闭包（Closure）的辅助函数</li>
+<li><strong>ltable.c</strong> - Lua的table实现</li>
+</ul>
+<h4 id="以下模块做语法解析和代码生成："><a href="#以下模块做语法解析和代码生成：" class="headerlink" title="以下模块做语法解析和代码生成："></a>以下模块做语法解析和代码生成：</h4><ul>
+<li><strong>lcode.c</strong> - 代码生成器，被lparser.c用到</li>
+<li><strong>llex.c</strong> - 词法分析器，被lparser.c用到</li>
+<li><strong>lparser.c</strong> - Lua语法解析器</li>
+<li><strong>lundump.c</strong> - 加载预编译的Lua代码块。实现了luaU_undump函数，此函数加载预编译的代码块。还提供了另外一个函数lua_header（被luaU_undump内部使用），用于加载代码块中的函数头信息。</li>
+<li><strong>ldump.c</strong> - 保存预编译的Lua代码块。实现了luaU_dump函数，些函数导出Lua函数为二进制形式的字符串</li>
+</ul>
+<h4 id="以下模块处理Lua字节码的执行："><a href="#以下模块处理Lua字节码的执行：" class="headerlink" title="以下模块处理Lua字节码的执行："></a>以下模块处理Lua字节码的执行：</h4><ul>
+<li><strong>lopcodes.c</strong> - 定义Lua虚拟机的操作码。定义了所有操作码的名字和操作模式等信息（通过列表luaP_opnames、luaP_opmodes定义的）</li>
+<li><strong>lvm.c</strong> - Lua虚拟机（luaV_execute），可执行Lua字节码。另外还暴露了一些被lapi.c用到的函数，比如：luaV_concat</li>
+<li><strong>ldo.c</strong> - 函数调用栈。处理函数调用（luaD_call、luaD_pcall），栈空间增长，协程等</li>
+<li><strong>ltm.c</strong> - 元方法。实现从对象访问元方法的一些函数</li>
+</ul>
+<h4 id="以下模块实现标准库："><a href="#以下模块实现标准库：" class="headerlink" title="以下模块实现标准库："></a>以下模块实现标准库：</h4><ul>
+<li><strong>lbaselib.c</strong> - 基础函数</li>
+<li><strong>lstrlib.c</strong> - 字符串函数</li>
+<li><strong>ltablib.c</strong> - 表函数</li>
+<li><strong>lmathlib.c</strong> - 数学函数</li>
+<li><strong>loslib.c</strong> - 系统函数</li>
+<li><strong>liolib.c</strong> - 输入输出、文件读写</li>
+<li><strong>loadlib.c</strong> - 包、模块</li>
+<li><strong>ldblib.c</strong> - 调试函数</li>
+</ul>
+<h4 id="以下模块定义了C-API："><a href="#以下模块定义了C-API：" class="headerlink" title="以下模块定义了C API："></a>以下模块定义了C API：</h4><ul>
+<li><strong>lapi.c</strong> - Lua API。实现了大部分Lua C API（lua_* 系列函数）</li>
+<li><strong>lauxlib.c</strong> - 定义了luaL_*系列函数</li>
+<li><strong>linit.c</strong> - 实现luaL_openlibs，这个函数中加载了所有的标准库函数</li>
+</ul>
+<h4 id="以下模块实现Lua和Luac两个程序："><a href="#以下模块实现Lua和Luac两个程序：" class="headerlink" title="以下模块实现Lua和Luac两个程序："></a>以下模块实现Lua和Luac两个程序：</h4><ul>
+<li><strong>lua.c</strong> - Lua的独立解释器</li>
+<li><strong>print.c</strong> - 定义了“PrintFunction”函数，它可以打印出一个函数的字节码（可在Luac中使用 -l 选项）</li>
+<li><strong>luac.c</strong> - Lua编译器（可保存字节码到文件中，也可在控制台列出字节码）</li>
+</ul>
+<h3 id="命名约定"><a href="#命名约定" class="headerlink" title="命名约定"></a>命名约定</h3><p>一个函数的前缀表明了它来自哪个模块</p>
+<pre><code>luaA_ - lapi.c
+luaB_ - lbaselib.c
+luaC_ - lgc.c
+luaD_ - ldo.c
+luaE_ - lstate.c
+luaF_ - lfunc.c
+luaG_ - ldebug.c
+luaH_ - ltable.c
+luaI_ - lauxlib.c
+luaK_ - lcode.c
+luaL_ - llauxlib.c/h linit.c
+luaM_ - lmem.c
+luaO_ - lobject.c
+luaP_ - lopcodes.c
+luaS_ - lstring.c
+luaT_ - ltm.c
+luaU_ - lundump.c
+luaV_ - lvm.c
+luaX_ - llex.c
+luaY_ - lparser.c
+luaZ_ - lzio.c
+lua_  - lapi.c/h + luaconfig.h, ldebug.c
+luai_ - luaconf.h
+luaopen_ - luaconf.h + libraries (lbaselib.c, ldblib.c, liolib.c, lmathlib.c, loadlib.c, loslib.c, lstrlib.c, ltablib.c)
+</code></pre><h3 id="参考："><a href="#参考：" class="headerlink" title="参考："></a>参考：</h3><ol>
+<li><a href="https://github.com/zgpxgame/lua-5.1.5/wiki/" target="_blank" rel="noopener">Lua源码阅读笔记</a></li>
+<li>Lua有关的<a href="http://www.lua.org/docs.html" target="_blank" rel="noopener">论文</a>和<a href="http://pgl.yoyo.org/lua/docs/luaarchitecture.doc" target="_blank" rel="noopener">The Lua Architecture</a>从各个方面论述了Lua的实现</li>
+<li>Lua VM指令在文档<a href="http://luaforge.net/docman/83/98/ANoFrillsIntroToLua51VMInstructions.pdf" target="_blank" rel="noopener">A No-Frills Introduction to Lua 5.1 VM Instructions</a>中</li>
+<li><a href="http://luaforge.net/projects/yueliang/" target="_blank" rel="noopener">Yueliang</a>项目（用Lua实现Lua VM），其中的大量的源码注释，可以帮助理解相关的C代码</li>
+<li>LuaAnnotate - C代码注释，注释单独存放在外部文件中，用某些文本工具可以将注释嵌入显示在代码中</li>
+<li><a href="http://stevedonovan.github.com/lua-5.1.4" target="_blank" rel="noopener">stevedonovan.github.com/lua-5.1.4</a> 包含LuaAnnotate注释的源码</li>
+<li>可在<a href="http://www.lua.org/source/网站上浏览Lua源码" target="_blank" rel="noopener">http://www.lua.org/source/网站上浏览Lua源码</a></li>
+</ol>
+
+  </div>
+</article>
+
+
+
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/gitalk@1/dist/gitalk.css">
+    <script src="https://cdn.jsdelivr.net/npm/gitalk@1/dist/gitalk.min.js"></script>
+    <script src="https://cdn.bootcss.com/blueimp-md5/2.10.0/js/md5.min.js"></script>
+    <div id="gitalk-container"></div>
+    <script type="text/javascript">
+        var gitalk = new Gitalk({
+            clientID: '643bb65e08572c0f02f9',
+            clientSecret: '267594ee5074e2f5b6392c6deba31c86b4b98abe',
+            id: md5(window.location.pathname),
+            repo: 'bitzhangmo.github.io',
+            owner: 'bitzhangmo',
+            admin: 'bitzhangmo',
+            distractionFreeMode: ''
+        })
+        gitalk.render('gitalk-container')
+    </script>
+
+
+        
+          <div id="footer-post-container">
+  <div id="footer-post">
+
+    <div id="nav-footer" style="display: none">
+      <ul>
+         
+          <li><a href="/">首页</a></li>
+         
+          <li><a href="/about/">关于</a></li>
+         
+          <li><a href="/tags/">tags</a></li>
+         
+          <li><a href="/categories/">categories</a></li>
+         
+          <li><a href="/archives/">归档</a></li>
+         
+          <li><a href="/categories/reports/">reports</a></li>
+         
+          <li><a href="/search/">搜索</a></li>
+        
+      </ul>
+    </div>
+
+    <div id="toc-footer" style="display: none">
+      <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#Lua源码阅读："><span class="toc-number">1.</span> <span class="toc-text">Lua源码阅读：</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#目录"><span class="toc-number">1.1.</span> <span class="toc-text">目录</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#lua-c"><span class="toc-number">1.2.</span> <span class="toc-text">lua.c</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#模块结构"><span class="toc-number">1.3.</span> <span class="toc-text">模块结构</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#以下模块实现了一些实用函数："><span class="toc-number">1.3.1.</span> <span class="toc-text">以下模块实现了一些实用函数：</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#以下模块实现了基本的数据类型："><span class="toc-number">1.3.2.</span> <span class="toc-text">以下模块实现了基本的数据类型：</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#以下模块做语法解析和代码生成："><span class="toc-number">1.3.3.</span> <span class="toc-text">以下模块做语法解析和代码生成：</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#以下模块处理Lua字节码的执行："><span class="toc-number">1.3.4.</span> <span class="toc-text">以下模块处理Lua字节码的执行：</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#以下模块实现标准库："><span class="toc-number">1.3.5.</span> <span class="toc-text">以下模块实现标准库：</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#以下模块定义了C-API："><span class="toc-number">1.3.6.</span> <span class="toc-text">以下模块定义了C API：</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#以下模块实现Lua和Luac两个程序："><span class="toc-number">1.3.7.</span> <span class="toc-text">以下模块实现Lua和Luac两个程序：</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#命名约定"><span class="toc-number">1.4.</span> <span class="toc-text">命名约定</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#参考："><span class="toc-number">1.5.</span> <span class="toc-text">参考：</span></a></li></ol></li></ol>
+    </div>
+
+    <div id="share-footer" style="display: none">
+      <ul>
+  <li><a class="icon" href="http://www.facebook.com/sharer.php?u=https://bitzhangmo.github.io/2019/08/05/Lua/Lua源码阅读：目录及模块结构/"><i class="fab fa-facebook fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="https://twitter.com/share?url=https://bitzhangmo.github.io/2019/08/05/Lua/Lua源码阅读：目录及模块结构/&text=Lua源码阅读：目录及模块结构"><i class="fab fa-twitter fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="http://www.linkedin.com/shareArticle?url=https://bitzhangmo.github.io/2019/08/05/Lua/Lua源码阅读：目录及模块结构/&title=Lua源码阅读：目录及模块结构"><i class="fab fa-linkedin fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="https://pinterest.com/pin/create/bookmarklet/?url=https://bitzhangmo.github.io/2019/08/05/Lua/Lua源码阅读：目录及模块结构/&is_video=false&description=Lua源码阅读：目录及模块结构"><i class="fab fa-pinterest fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="mailto:?subject=Lua源码阅读：目录及模块结构&body=Check out this article: https://bitzhangmo.github.io/2019/08/05/Lua/Lua源码阅读：目录及模块结构/"><i class="fas fa-envelope fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="https://getpocket.com/save?url=https://bitzhangmo.github.io/2019/08/05/Lua/Lua源码阅读：目录及模块结构/&title=Lua源码阅读：目录及模块结构"><i class="fab fa-get-pocket fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="http://reddit.com/submit?url=https://bitzhangmo.github.io/2019/08/05/Lua/Lua源码阅读：目录及模块结构/&title=Lua源码阅读：目录及模块结构"><i class="fab fa-reddit fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="http://www.stumbleupon.com/submit?url=https://bitzhangmo.github.io/2019/08/05/Lua/Lua源码阅读：目录及模块结构/&title=Lua源码阅读：目录及模块结构"><i class="fab fa-stumbleupon fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="http://digg.com/submit?url=https://bitzhangmo.github.io/2019/08/05/Lua/Lua源码阅读：目录及模块结构/&title=Lua源码阅读：目录及模块结构"><i class="fab fa-digg fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="http://www.tumblr.com/share/link?url=https://bitzhangmo.github.io/2019/08/05/Lua/Lua源码阅读：目录及模块结构/&name=Lua源码阅读：目录及模块结构&description=&lt;p&gt;Lua源码阅读的第一期，主要内容：系列内容计划以及目录。&lt;/p&gt;"><i class="fab fa-tumblr fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="https://news.ycombinator.com/submitlink?u=https://bitzhangmo.github.io/2019/08/05/Lua/Lua源码阅读：目录及模块结构/&t=Lua源码阅读：目录及模块结构"><i class="fab fa-hacker-news fa-lg" aria-hidden="true"></i></a></li>
+</ul>
+
+    </div>
+
+    <div id="actions-footer">
+        <a id="menu" class="icon" href="#" onclick="$('#nav-footer').toggle();return false;"><i class="fas fa-bars fa-lg" aria-hidden="true"></i> 菜单</a>
+        <a id="toc" class="icon" href="#" onclick="$('#toc-footer').toggle();return false;"><i class="fas fa-list fa-lg" aria-hidden="true"></i> 目录</a>
+        <a id="share" class="icon" href="#" onclick="$('#share-footer').toggle();return false;"><i class="fas fa-share-alt fa-lg" aria-hidden="true"></i> 分享</a>
+        <a id="top" style="display:none" class="icon" href="#" onclick="$('html, body').animate({ scrollTop: 0 }, 'fast');"><i class="fas fa-chevron-up fa-lg" aria-hidden="true"></i> 返回顶部</a>
+    </div>
+
+  </div>
+</div>
+
+        
+        <footer id="footer">
+  <div class="footer-left">
+    Copyright &copy; 2020 zhangMo
+  </div>
+  <div class="footer-right">
+    <nav>
+      <ul>
+         
+          <li><a href="/">首页</a></li>
+         
+          <li><a href="/about/">关于</a></li>
+         
+          <li><a href="/tags/">tags</a></li>
+         
+          <li><a href="/categories/">categories</a></li>
+         
+          <li><a href="/archives/">归档</a></li>
+         
+          <li><a href="/categories/reports/">reports</a></li>
+         
+          <li><a href="/search/">搜索</a></li>
+        
+      </ul>
+    </nav>
+  </div>
+</footer>
+
+        
+    </div>
+    <!-- styles -->
+<link rel="stylesheet" href="/lib/font-awesome/css/all.min.css">
+<link rel="stylesheet" href="/lib/justified-gallery/css/justifiedGallery.min.css">
+
+    <!-- jquery -->
+<script src="/lib/jquery/jquery.min.js"></script>
+<script src="/lib/justified-gallery/js/jquery.justifiedGallery.min.js"></script>
+<!-- clipboard -->
+
+  <script src="/lib/clipboard/clipboard.min.js"></script>
+  <script type="text/javascript">
+  $(function() {
+    // copy-btn HTML
+    var btn = "<span class=\"btn-copy tooltipped tooltipped-sw\" aria-label=\"复制到粘贴板!\">";
+    btn += '<i class="far fa-clone"></i>';
+    btn += '</span>'; 
+    // mount it!
+    $(".highlight table").before(btn);
+    var clip = new ClipboardJS('.btn-copy', {
+      text: function(trigger) {
+        return Array.from(trigger.nextElementSibling.querySelectorAll('.code')).reduce((str,it)=>str+it.innerText+'\n','')
+      }
+    });
+    clip.on('success', function(e) {
+      e.trigger.setAttribute('aria-label', "复制成功!");
+      e.clearSelection();
+    })
+  })
+  </script>
+
+<script src="/js/main.js"></script>
+<!-- search -->
+
+<!-- Google Analytics -->
+
+<!-- Baidu Analytics -->
+
+<!-- Disqus Comments -->
+
+
+<script src="/live2dw/lib/L2Dwidget.min.js?bd2294fafea3389ee458f1d9be5a2157"></script><script>L2Dwidget.init({"pluginRootPath":"live2dw/","pluginJsPath":"lib/","pluginModelPath":"assets/","tagMode":false,"debug":false,"model":{"jsonPath":"/live2dw/assets/hijiki.model.json"},"display":{"position":"left","width":100,"height":200},"mobile":{"show":false},"log":false});</script></body>
+</html>
