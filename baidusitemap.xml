@@ -1,6 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
   <url>
+    <loc>https://bitzhangmo.github.io/2019/07/29/%E7%92%81%EF%BC%84%E7%95%BB%E9%8F%88%E5%93%84%E6%B5%98%E8%A4%B0%E3%88%A0%EE%84%9F/RayTracing-In-Weekend-%E7%92%87%E8%AE%B3%E5%8A%9F%E7%BB%97%E6%97%87%EE%86%87/</loc>
+    <lastmod>2020-12-20T15:03:05.093Z</lastmod>
+  </url>  <url>
     <loc>https://bitzhangmo.github.io/2020/09/17/Minigame%E6%B5%A0%E3%83%A5%E5%BC%B7%E9%8D%8F%E6%9C%B5%E7%B2%AC%E9%8F%88%E5%A4%8C%E6%AE%91%E5%A8%8C%EF%BC%84%E6%AE%91/</loc>
     <lastmod>2020-09-16T18:50:16.000Z</lastmod>
   </url>  <url>
@@ -69,9 +72,6 @@
   </url>  <url>
     <loc>https://bitzhangmo.github.io/2019/08/06/Lua/Lua%E5%A9%A7%E6%84%AE%E7%88%9C%E9%97%83%E5%91%B0%EE%87%B0%E9%94%9B%E6%AC%B3-API/</loc>
     <lastmod>2019-08-06T08:07:28.000Z</lastmod>
-  </url>  <url>
-    <loc>https://bitzhangmo.github.io/2019/07/29/%E7%92%81%EF%BC%84%E7%95%BB%E9%8F%88%E5%93%84%E6%B5%98%E8%A4%B0%E3%88%A0%EE%84%9F/RayTracing-In-Weekend-%E7%92%87%E8%AE%B3%E5%8A%9F%E7%BB%97%E6%97%87%EE%86%87/</loc>
-    <lastmod>2019-07-29T03:38:52.000Z</lastmod>
   </url>  <url>
     <loc>https://bitzhangmo.github.io/2019/07/04/Lua/Lua%E5%A6%AF%E2%80%B3%E6%BD%A1%E6%B6%93%E5%BA%A1%E5%AF%98/</loc>
     <lastmod>2019-07-05T07:27:56.000Z</lastmod>
