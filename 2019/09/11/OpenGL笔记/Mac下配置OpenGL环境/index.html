@@ -51,8 +51,7 @@
     <!-- rss -->
     
     
-<link rel="stylesheet" href="/css/prism-tomorrow.css" type="text/css">
-<link rel="stylesheet" href="/css/prism-line-numbers.css" type="text/css"></head>
+</head>
 
 <body class="max-width mx-auto px3 ltr">
     
@@ -115,7 +114,7 @@
 
     </div>
     <div id="toc">
-      <ol class="toc"><li class="toc-item toc-level-3"><a class="toc-link" href="#Mac下配置OpenGL"><span class="toc-number">1.</span> <span class="toc-text">Mac下配置OpenGL</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#CLion法（推荐）"><span class="toc-number">1.1.</span> <span class="toc-text">CLion法（推荐）</span></a></li></ol></li></ol></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#include"><span class="toc-number"></span> <span class="toc-text">include </span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#include-1"><span class="toc-number"></span> <span class="toc-text">include </span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#include-2"><span class="toc-number"></span> <span class="toc-text">include </span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#XCode法"><span class="toc-number">0.1.</span> <span class="toc-text">XCode法</span></a></li></ol></li></ol>
+      <ol class="toc"><li class="toc-item toc-level-3"><a class="toc-link" href="#Mac下配置OpenGL"><span class="toc-number">1.</span> <span class="toc-text">Mac下配置OpenGL</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#CLion法（推荐）"><span class="toc-number">1.1.</span> <span class="toc-text">CLion法（推荐）</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#XCode法"><span class="toc-number">1.2.</span> <span class="toc-text">XCode法</span></a></li></ol></li></ol>
     </div>
   </span>
 </div>
@@ -186,93 +185,19 @@
 <li><p>将子目录中的/include/glad与/include/KHR复制到/usr/Local/include文件夹下。（如果/usr文件夹隐藏，可用快捷键<strong>command+shift+G</strong>输入访问）</p>
 </li>
 <li><p>新建一个项目，配置对应的Cmake文件：</p>
-<pre class="line-numbers language-lang-c"><code class="language-lang-c">cmake_minimum_required(VERSION 3.12)
-project(OpenGL)
-
-set(CMAKE_CXX_STANDARD 14)
-
-set(GLEW_H /usr/local/Cellar/glew/2.1.0/include/GL)
-set(GLFW_H /usr/local/Cellar/glfw/3.2.1/include/GLFW)
-set(GLAD_H /usr/local/include/glad)
-set(KH_H /usr/local/include/KHR)
-include_directories(${GLEW_H} ${GLFW_H} ${GLAD_H} ${KH_H})
-
-# 添加目标链接
-set(GLEW_LINK /usr/local/Cellar/glew/2.1.0/lib/libGLEW.2.1.dylib)
-set(GLFW_LINK /usr/local/Cellar/glfw/3.2.1/lib/libglfw.3.dylib)
-link_libraries(${OPENGL} ${GLEW_LINK} ${GLFW_LINK})
-
-# 执行编译命令
-# 这个glad.c在第2步中说过要拉到项目中，注意路径
-set(SOURCE_FILES "src/glad.c" "main.cpp")
-add_executable(OpenGL ${SOURCE_FILES})
-
-# mac下这步很重要
-if (APPLE)
-  target_link_libraries(OpenGL "-framework OpenGL")
-  target_link_libraries(OpenGL "-framework GLUT")
-endif()
-<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br></pre></td><td class="code"><pre><span class="line">cmake_minimum_required(VERSION <span class="number">3.12</span>)</span><br><span class="line">project(OpenGL)</span><br><span class="line"></span><br><span class="line"><span class="built_in">set</span>(CMAKE_CXX_STANDARD <span class="number">14</span>)</span><br><span class="line"></span><br><span class="line"><span class="built_in">set</span>(GLEW_H /usr/local/Cellar/glew/<span class="number">2.1</span><span class="number">.0</span>/include/GL)</span><br><span class="line"><span class="built_in">set</span>(GLFW_H /usr/local/Cellar/glfw/<span class="number">3.2</span><span class="number">.1</span>/include/GLFW)</span><br><span class="line"><span class="built_in">set</span>(GLAD_H /usr/local/include/glad)</span><br><span class="line"><span class="built_in">set</span>(KH_H /usr/local/include/KHR)</span><br><span class="line">include_directories($&#123;GLEW_H&#125; $&#123;GLFW_H&#125; $&#123;GLAD_H&#125; $&#123;KH_H&#125;)</span><br><span class="line"></span><br><span class="line"># 添加目标链接</span><br><span class="line"><span class="built_in">set</span>(GLEW_LINK /usr/local/Cellar/glew/<span class="number">2.1</span><span class="number">.0</span>/lib/libGLEW<span class="number">.2</span><span class="number">.1</span>.dylib)</span><br><span class="line"><span class="built_in">set</span>(GLFW_LINK /usr/local/Cellar/glfw/<span class="number">3.2</span><span class="number">.1</span>/lib/libglfw<span class="number">.3</span>.dylib)</span><br><span class="line">link_libraries($&#123;OPENGL&#125; $&#123;GLEW_LINK&#125; $&#123;GLFW_LINK&#125;)</span><br><span class="line"></span><br><span class="line"># 执行编译命令</span><br><span class="line"># 这个glad.c在第<span class="number">2</span>步中说过要拉到项目中，注意路径</span><br><span class="line"><span class="built_in">set</span>(SOURCE_FILES <span class="string">"src/glad.c"</span> <span class="string">"main.cpp"</span>)</span><br><span class="line">add_executable(OpenGL $&#123;SOURCE_FILES&#125;)</span><br><span class="line"></span><br><span class="line"><span class="meta"># mac下这步很重要</span></span><br><span class="line"><span class="keyword">if</span> (APPLE)</span><br><span class="line">    target_link_libraries(OpenGL <span class="string">"-framework OpenGL"</span>)</span><br><span class="line">    target_link_libraries(OpenGL <span class="string">"-framework GLUT"</span>)</span><br><span class="line">endif()</span><br></pre></td></tr></table></figure>
 </li>
-<li><p>注意这样配置之后需要更改<code>/usr/local/include/glad文件夹下的glad.h</code>中的<code>#include &lt;KHR/khrplatform.h&gt;</code>更改为<code>#include &lt;khrplatform.h&gt;</code>，具体步骤：</p>
-<ol>
-<li>在CLion中打开<code>glad.c</code>文件，command+点按<code>#include &lt;glad.h&gt;</code>会跳到<code>glad.h</code></li>
-<li>然后在<code>glad.h</code>中command+f找到<code>#include &lt;KHR/khrplatform.h&gt;</code>，将它改为<code>#include &lt;khrplatform.h&gt;</code></li>
-</ol>
-</li>
-<li><p>运行测试代码（把下列代码复制到main.cpp中）：</p>
-<p>```cpp</p>
-<h1 id="include"><a href="#include" class="headerlink" title="include "></a>include <glew.h></glew.h></h1><h1 id="include-1"><a href="#include-1" class="headerlink" title="include "></a>include <glfw3.h></glfw3.h></h1><h1 id="include-2"><a href="#include-2" class="headerlink" title="include "></a>include <iostream></iostream></h1><p>using namespace std;</p>
-<p>void key_callback(GLFWwindow* window, int key, int scancode, int action, int mode)<br>{<br>  //如果按下ESC，把windowShouldClose设置为True，外面的循环会关闭应用<br>  if(key==GLFW_KEY_ESCAPE &amp;&amp; action == GLFW_PRESS)</p>
-<pre><code>  glfwSetWindowShouldClose(window, GL_TRUE);
-</code></pre><p>  std::cout&lt;&lt;”ESC”&lt;&lt;mode;<br>}</p>
-<p>int main(void)<br>{<br>  //初始化GLFW库<br>  if(!glfwInit())</p>
-<pre><code>  return -1;
-</code></pre><p>  //创建窗口以及上下文<br>  GLFWwindow* window = glfwCreateWindow(640, 480, “hello world”, NULL, NULL);<br>  if(!window)<br>  {</p>
-<pre><code>  //创建失败会返回NULL
-  glfwTerminate();
-</code></pre><p>  }<br>  //建立当前窗口的上下文<br>  glfwMakeContextCurrent(window);</p>
-<p>  glfwSetKeyCallback(window, key_callback); //注册回调函数<br>  //循环，直到用户关闭窗口<br>  while(!glfwWindowShouldClose(window))<br>  {</p>
-<pre><code>  /*******轮询事件*******/
-  glfwPollEvents();
-
-  /*******渲染*******/
-  //选择清空的颜色RGBA
-  glClearColor(0.2, 0.3, 0.3, 1);
-  glClear(GL_COLOR_BUFFER_BIT);
-
-  //开始画一个三角形
-  glBegin(GL_TRIANGLES);
-  glColor3f(1, 0, 0); //Red
-  glVertex3f(0, 1, 1);
-
-  glColor3f(0, 1, 0); //Green
-  glVertex3f(-1, -1, 0);
-
-  glColor3f(0, 0, 1); //Blue
-  glVertex3f(1, -1, 0);
-  //结束一个画图步骤
-  glEnd();
-
-  glBegin(GL_POLYGON);
-  //再画个梯形，需要注意笔顺
-  glColor3f(0.5, 0.5, 0.5); //Grey
-  glVertex2d(0.5, 0.5);
-  glVertex2d(1, 1);
-  glVertex2d(1, 0);
-  glVertex2d(0.5, 0);
-  glEnd();
-</code></pre></li>
 </ol>
 </li>
 </ol>
-<pre><code>           /******交换缓冲区，更新window上的内容******/
-           glfwSwapBuffers(window);
-       }
-       glfwTerminate();
-       return 0;
-   }
-   ```
+<pre><code>4. 注意这样配置之后需要更改`/usr/local/include/glad文件夹下的glad.h`中的`#include &lt;KHR/khrplatform.h&gt;`更改为`#include &lt;khrplatform.h&gt;`，具体步骤：
+
+   1. 在CLion中打开`glad.c`文件，command+点按`#include &lt;glad.h&gt;`会跳到`glad.h`
+   2. 然后在`glad.h`中command+f找到`#include &lt;KHR/khrplatform.h&gt;`，将它改为`#include &lt;khrplatform.h&gt;`
+
+5. 运行测试代码（把下列代码复制到main.cpp中）：
+
+   <figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;glew.h&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;glfw3.h&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;iostream&gt;</span></span></span><br><span class="line"><span class="keyword">using</span> <span class="keyword">namespace</span> <span class="built_in">std</span>;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">key_callback</span><span class="params">(GLFWwindow* window, <span class="keyword">int</span> key, <span class="keyword">int</span> scancode, <span class="keyword">int</span> action, <span class="keyword">int</span> mode)</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">    <span class="comment">//如果按下ESC，把windowShouldClose设置为True，外面的循环会关闭应用</span></span><br><span class="line">    <span class="keyword">if</span>(key==GLFW_KEY_ESCAPE &amp;&amp; action == GLFW_PRESS)</span><br><span class="line">        glfwSetWindowShouldClose(window, GL_TRUE);</span><br><span class="line">    <span class="built_in">std</span>::<span class="built_in">cout</span>&lt;&lt;<span class="string">"ESC"</span>&lt;&lt;mode;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">main</span><span class="params">(<span class="keyword">void</span>)</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">    <span class="comment">//初始化GLFW库</span></span><br><span class="line">    <span class="keyword">if</span>(!glfwInit())</span><br><span class="line">        <span class="keyword">return</span> <span class="number">-1</span>;</span><br><span class="line">    <span class="comment">//创建窗口以及上下文</span></span><br><span class="line">    GLFWwindow* window = glfwCreateWindow(<span class="number">640</span>, <span class="number">480</span>, <span class="string">"hello world"</span>, <span class="literal">NULL</span>, <span class="literal">NULL</span>);</span><br><span class="line">    <span class="keyword">if</span>(!window)</span><br><span class="line">    &#123;</span><br><span class="line">        <span class="comment">//创建失败会返回NULL</span></span><br><span class="line">        glfwTerminate();</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="comment">//建立当前窗口的上下文</span></span><br><span class="line">    glfwMakeContextCurrent(window);</span><br><span class="line"></span><br><span class="line">    glfwSetKeyCallback(window, key_callback); <span class="comment">//注册回调函数</span></span><br><span class="line">    <span class="comment">//循环，直到用户关闭窗口</span></span><br><span class="line">    <span class="keyword">while</span>(!glfwWindowShouldClose(window))</span><br><span class="line">    &#123;</span><br><span class="line">        <span class="comment">/*******轮询事件*******/</span></span><br><span class="line">        glfwPollEvents();</span><br><span class="line"></span><br><span class="line">        <span class="comment">/*******渲染*******/</span></span><br><span class="line">        <span class="comment">//选择清空的颜色RGBA</span></span><br><span class="line">        glClearColor(<span class="number">0.2</span>, <span class="number">0.3</span>, <span class="number">0.3</span>, <span class="number">1</span>);</span><br><span class="line">        glClear(GL_COLOR_BUFFER_BIT);</span><br><span class="line"></span><br><span class="line">        <span class="comment">//开始画一个三角形</span></span><br><span class="line">        glBegin(GL_TRIANGLES);</span><br><span class="line">        glColor3f(<span class="number">1</span>, <span class="number">0</span>, <span class="number">0</span>); <span class="comment">//Red</span></span><br><span class="line">        glVertex3f(<span class="number">0</span>, <span class="number">1</span>, <span class="number">1</span>);</span><br><span class="line"></span><br><span class="line">        glColor3f(<span class="number">0</span>, <span class="number">1</span>, <span class="number">0</span>); <span class="comment">//Green</span></span><br><span class="line">        glVertex3f(<span class="number">-1</span>, <span class="number">-1</span>, <span class="number">0</span>);</span><br><span class="line"></span><br><span class="line">        glColor3f(<span class="number">0</span>, <span class="number">0</span>, <span class="number">1</span>); <span class="comment">//Blue</span></span><br><span class="line">        glVertex3f(<span class="number">1</span>, <span class="number">-1</span>, <span class="number">0</span>);</span><br><span class="line">        <span class="comment">//结束一个画图步骤</span></span><br><span class="line">        glEnd();</span><br><span class="line"></span><br><span class="line">        glBegin(GL_POLYGON);</span><br><span class="line">        <span class="comment">//再画个梯形，需要注意笔顺</span></span><br><span class="line">        glColor3f(<span class="number">0.5</span>, <span class="number">0.5</span>, <span class="number">0.5</span>); <span class="comment">//Grey</span></span><br><span class="line">        glVertex2d(<span class="number">0.5</span>, <span class="number">0.5</span>);</span><br><span class="line">        glVertex2d(<span class="number">1</span>, <span class="number">1</span>);</span><br><span class="line">        glVertex2d(<span class="number">1</span>, <span class="number">0</span>);</span><br><span class="line">        glVertex2d(<span class="number">0.5</span>, <span class="number">0</span>);</span><br><span class="line">        glEnd();</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">        <span class="comment">/******交换缓冲区，更新window上的内容******/</span></span><br><span class="line">        glfwSwapBuffers(window);</span><br><span class="line">    &#125;</span><br><span class="line">    glfwTerminate();</span><br><span class="line">    <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 </code></pre><p>如果出现如下窗口说明配置成功：<br><img src="https://i.loli.net/2019/09/11/CsKWBMOerqEcTUp.png" alt="屏幕快照 2019-09-11 下午9.45.32.png"></p>
 <h4 id="XCode法"><a href="#XCode法" class="headerlink" title="XCode法"></a>XCode法</h4><ol>
 <li><p>在App Store中搜索XCode并安装。</p>
@@ -280,7 +205,7 @@ endif()
 <li><p>新建Xcode的Command Line C++项目，在<code>build settings</code>中设置<code>Header Search Path</code>与<code>Library Search Path</code>，在其中添加对应的<code>glew</code>与<code>glfw</code>的头文件(include)与库文件(lib)路径。</p>
 </li>
 <li><p>在<code>build Phases</code>中添加库文件<img src="https://wx3.sinaimg.cn/mw1024/007dFQ0Igy1ftpq5ygm41j31kw0eh0zx.jpg" alt="屏幕快照 2018-07-28 下午5.27.39"></p>
-<pre><code> ​        （在对应的文件夹中将两个/.dylib的文件直接拖拽进来）
+<pre><code>​        （在对应的文件夹中将两个/.dylib的文件直接拖拽进来）
 </code></pre></li>
 <li><p>配置GLAD：</p>
 <ol>
@@ -291,90 +216,8 @@ endif()
 </ol>
 </li>
 <li><p>此时如果不出意外的话，你的第一个测试程序已经可以运行了，点击<a href="https://learnopengl.com/code_viewer_gh.php?code=src/1.getting_started/1.1.hello_window/hello_window.cpp" target="_blank" rel="noopener">测试代码</a>，复制到自己的.cpp文件中执行，会出现一个黑色窗口。(或者直接复制下面的代码)</p>
-<pre><code>```cpp
-#include &lt;glad/glad.h&gt;
-#include &lt;GLFW/glfw3.h&gt;
-
-#include &lt;iostream&gt;
-
-void framebuffer_size_callback(GLFWwindow* window, int width, int height);
-void processInput(GLFWwindow *window);
-
-// settings
-const unsigned int SCR_WIDTH = 800;
-const unsigned int SCR_HEIGHT = 600;
-
-int main()
-{
-    // glfw: initialize and configure
-    // ------------------------------
-    glfwInit();
-    glfwWindowHint(GLFW_CONTEXT_VERSION_MAJOR, 3);
-    glfwWindowHint(GLFW_CONTEXT_VERSION_MINOR, 3);
-    glfwWindowHint(GLFW_OPENGL_PROFILE, GLFW_OPENGL_CORE_PROFILE);
-
-#ifdef __APPLE__
-    glfwWindowHint(GLFW_OPENGL_FORWARD_COMPAT, GL_TRUE); // uncomment this statement to fix compilation on OS X
-#endif
-
-    // glfw window creation
-    // --------------------
-    GLFWwindow* window = glfwCreateWindow(SCR_WIDTH, SCR_HEIGHT, &quot;LearnOpenGL&quot;, NULL, NULL);
-    if (window == NULL)
-    {
-        std::cout &lt;&lt; &quot;Failed to create GLFW window&quot; &lt;&lt; std::endl;
-        glfwTerminate();
-        return -1;
-    }
-    glfwMakeContextCurrent(window);
-    glfwSetFramebufferSizeCallback(window, framebuffer_size_callback);
-
-    // glad: load all OpenGL function pointers
-    // ---------------------------------------
-    if (!gladLoadGLLoader((GLADloadproc)glfwGetProcAddress))
-    {
-        std::cout &lt;&lt; &quot;Failed to initialize GLAD&quot; &lt;&lt; std::endl;
-        return -1;
-    }    
-
-    // render loop
-    // -----------
-    while (!glfwWindowShouldClose(window))
-    {
-        // input
-        // -----
-        processInput(window);
-
-        // glfw: swap buffers and poll IO events (keys pressed/released, mouse moved etc.)
-        // -------------------------------------------------------------------------------
-        glfwSwapBuffers(window);
-        glfwPollEvents();
-    }
-
-    // glfw: terminate, clearing all previously allocated GLFW resources.
-    // ------------------------------------------------------------------
-    glfwTerminate();
-    return 0;
-}
-
-// process all input: query GLFW whether relevant keys are pressed/released this frame and react accordingly
-// ---------------------------------------------------------------------------------------------------------
-void processInput(GLFWwindow *window)
-{
-    if(glfwGetKey(window, GLFW_KEY_ESCAPE) == GLFW_PRESS)
-        glfwSetWindowShouldClose(window, true);
-}
-
-// glfw: whenever the window size changed (by OS or user resize) this callback function executes
-// ---------------------------------------------------------------------------------------------
-void framebuffer_size_callback(GLFWwindow* window, int width, int height)
-{
-    // make sure the viewport matches the new window dimensions; note that width and 
-    // height will be significantly larger than specified on retina displays.
-    glViewport(0, 0, width, height);
-}
-</code></pre><p> ```</p>
-</li>
+<pre><code><figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br><span class="line">78</span><br><span class="line">79</span><br><span class="line">80</span><br><span class="line">81</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;glad/glad.h&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;GLFW/glfw3.h&gt;</span></span></span><br><span class="line"></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;iostream&gt;</span></span></span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">framebuffer_size_callback</span><span class="params">(GLFWwindow* window, <span class="keyword">int</span> width, <span class="keyword">int</span> height)</span></span>;</span><br><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">processInput</span><span class="params">(GLFWwindow *window)</span></span>;</span><br><span class="line"></span><br><span class="line"><span class="comment">// settings</span></span><br><span class="line"><span class="keyword">const</span> <span class="keyword">unsigned</span> <span class="keyword">int</span> SCR_WIDTH = <span class="number">800</span>;</span><br><span class="line"><span class="keyword">const</span> <span class="keyword">unsigned</span> <span class="keyword">int</span> SCR_HEIGHT = <span class="number">600</span>;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">main</span><span class="params">()</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">    <span class="comment">// glfw: initialize and configure</span></span><br><span class="line">    <span class="comment">// ------------------------------</span></span><br><span class="line">    glfwInit();</span><br><span class="line">    glfwWindowHint(GLFW_CONTEXT_VERSION_MAJOR, <span class="number">3</span>);</span><br><span class="line">    glfwWindowHint(GLFW_CONTEXT_VERSION_MINOR, <span class="number">3</span>);</span><br><span class="line">    glfwWindowHint(GLFW_OPENGL_PROFILE, GLFW_OPENGL_CORE_PROFILE);</span><br><span class="line"></span><br><span class="line"><span class="meta">#<span class="meta-keyword">ifdef</span> __APPLE__</span></span><br><span class="line">    glfwWindowHint(GLFW_OPENGL_FORWARD_COMPAT, GL_TRUE); <span class="comment">// uncomment this statement to fix compilation on OS X</span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">endif</span></span></span><br><span class="line"></span><br><span class="line">    <span class="comment">// glfw window creation</span></span><br><span class="line">    <span class="comment">// --------------------</span></span><br><span class="line">    GLFWwindow* window = glfwCreateWindow(SCR_WIDTH, SCR_HEIGHT, <span class="string">"LearnOpenGL"</span>, <span class="literal">NULL</span>, <span class="literal">NULL</span>);</span><br><span class="line">    <span class="keyword">if</span> (window == <span class="literal">NULL</span>)</span><br><span class="line">    &#123;</span><br><span class="line">        <span class="built_in">std</span>::<span class="built_in">cout</span> &lt;&lt; <span class="string">"Failed to create GLFW window"</span> &lt;&lt; <span class="built_in">std</span>::<span class="built_in">endl</span>;</span><br><span class="line">        glfwTerminate();</span><br><span class="line">        <span class="keyword">return</span> <span class="number">-1</span>;</span><br><span class="line">    &#125;</span><br><span class="line">    glfwMakeContextCurrent(window);</span><br><span class="line">    glfwSetFramebufferSizeCallback(window, framebuffer_size_callback);</span><br><span class="line"></span><br><span class="line">    <span class="comment">// glad: load all OpenGL function pointers</span></span><br><span class="line">    <span class="comment">// ---------------------------------------</span></span><br><span class="line">    <span class="keyword">if</span> (!gladLoadGLLoader((GLADloadproc)glfwGetProcAddress))</span><br><span class="line">    &#123;</span><br><span class="line">        <span class="built_in">std</span>::<span class="built_in">cout</span> &lt;&lt; <span class="string">"Failed to initialize GLAD"</span> &lt;&lt; <span class="built_in">std</span>::<span class="built_in">endl</span>;</span><br><span class="line">        <span class="keyword">return</span> <span class="number">-1</span>;</span><br><span class="line">    &#125;    </span><br><span class="line"></span><br><span class="line">    <span class="comment">// render loop</span></span><br><span class="line">    <span class="comment">// -----------</span></span><br><span class="line">    <span class="keyword">while</span> (!glfwWindowShouldClose(window))</span><br><span class="line">    &#123;</span><br><span class="line">        <span class="comment">// input</span></span><br><span class="line">        <span class="comment">// -----</span></span><br><span class="line">        processInput(window);</span><br><span class="line"></span><br><span class="line">        <span class="comment">// glfw: swap buffers and poll IO events (keys pressed/released, mouse moved etc.)</span></span><br><span class="line">        <span class="comment">// -------------------------------------------------------------------------------</span></span><br><span class="line">        glfwSwapBuffers(window);</span><br><span class="line">        glfwPollEvents();</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="comment">// glfw: terminate, clearing all previously allocated GLFW resources.</span></span><br><span class="line">    <span class="comment">// ------------------------------------------------------------------</span></span><br><span class="line">    glfwTerminate();</span><br><span class="line">    <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="comment">// process all input: query GLFW whether relevant keys are pressed/released this frame and react accordingly</span></span><br><span class="line"><span class="comment">// ---------------------------------------------------------------------------------------------------------</span></span><br><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">processInput</span><span class="params">(GLFWwindow *window)</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">    <span class="keyword">if</span>(glfwGetKey(window, GLFW_KEY_ESCAPE) == GLFW_PRESS)</span><br><span class="line">        glfwSetWindowShouldClose(window, <span class="literal">true</span>);</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="comment">// glfw: whenever the window size changed (by OS or user resize) this callback function executes</span></span><br><span class="line"><span class="comment">// ---------------------------------------------------------------------------------------------</span></span><br><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">framebuffer_size_callback</span><span class="params">(GLFWwindow* window, <span class="keyword">int</span> width, <span class="keyword">int</span> height)</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">    <span class="comment">// make sure the viewport matches the new window dimensions; note that width and </span></span><br><span class="line">    <span class="comment">// height will be significantly larger than specified on retina displays.</span></span><br><span class="line">    glViewport(<span class="number">0</span>, <span class="number">0</span>, width, height);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+</code></pre></li>
 </ol>
 <p>如果运行出现如下窗口，说明配置成功：<br><img src="https://i.loli.net/2019/09/11/i4oQutflXhg8mRx.png" alt="屏幕快照 2019-09-11 下午9.47.29.png"></p>
 <hr>
@@ -431,7 +274,7 @@ void framebuffer_size_callback(GLFWwindow* window, int width, int height)
     </div>
 
     <div id="toc-footer" style="display: none">
-      <ol class="toc"><li class="toc-item toc-level-3"><a class="toc-link" href="#Mac下配置OpenGL"><span class="toc-number">1.</span> <span class="toc-text">Mac下配置OpenGL</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#CLion法（推荐）"><span class="toc-number">1.1.</span> <span class="toc-text">CLion法（推荐）</span></a></li></ol></li></ol></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#include"><span class="toc-number"></span> <span class="toc-text">include </span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#include-1"><span class="toc-number"></span> <span class="toc-text">include </span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#include-2"><span class="toc-number"></span> <span class="toc-text">include </span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#XCode法"><span class="toc-number">0.1.</span> <span class="toc-text">XCode法</span></a></li></ol></li></ol>
+      <ol class="toc"><li class="toc-item toc-level-3"><a class="toc-link" href="#Mac下配置OpenGL"><span class="toc-number">1.</span> <span class="toc-text">Mac下配置OpenGL</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#CLion法（推荐）"><span class="toc-number">1.1.</span> <span class="toc-text">CLion法（推荐）</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#XCode法"><span class="toc-number">1.2.</span> <span class="toc-text">XCode法</span></a></li></ol></li></ol>
     </div>
 
     <div id="share-footer" style="display: none">
