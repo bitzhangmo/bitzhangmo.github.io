@@ -15,11 +15,11 @@
 <meta property="og:description" content="SDK构建相关阅读[toc] 在Unreal项目开发的过程中，可能会用到第三方开发的库来集成一些第三方的功能，例如语音通话、播放视频等功能。虚幻引擎本身也引用了很多第三方的库,例如物理库PhysX、Steam平台相关的库SteamWorks、GoogleVR等等。这些库可以在引擎的Engine\Source\ThirdParty目录下找到。Unreal官方推荐将第三方库集成到插件目录中，这样可以">
 <meta property="og:locale" content="zh-CN">
 <meta property="og:image" content="http://hust_mo.gitee.io/blogpicturerepo/image-20201224174958125.png">
-<meta property="og:image" content="https://gitee.com/hust_mo/BlogPictureRepo/blob/master/image-20201224210510607.png">
-<meta property="og:image" content="c:/Users/mosswang.TENCENT/Desktop/文档/笔记/mdPicture/render">
-<meta property="og:image" content="c:/Users/mosswang.TENCENT/Desktop/文档/笔记/mdPicture/image-20201224221924928.png">
-<meta property="og:image" content="c:/Users/mosswang.TENCENT/Desktop/文档/笔记/mdPicture/image-20201225151117492.png">
-<meta property="og:updated_time" content="2020-12-27T15:42:06.784Z">
+<meta property="og:image" content="http://hust_mo.gitee.io/blogpicturerepo/image-20201224210510607.png">
+<meta property="og:image" content="http://hust_mo.gitee.io/blogpicturerepo/render">
+<meta property="og:image" content="http://hust_mo.gitee.io/blogpicturerepo/image-20201224221924928.png">
+<meta property="og:image" content="http://hust_mo.gitee.io/blogpicturerepo/image-20201225151117492.png">
+<meta property="og:updated_time" content="2020-12-27T16:12:32.526Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="Unreal Engine 4 SDK构建相关笔记">
 <meta name="twitter:description" content="SDK构建相关阅读[toc] 在Unreal项目开发的过程中，可能会用到第三方开发的库来集成一些第三方的功能，例如语音通话、播放视频等功能。虚幻引擎本身也引用了很多第三方的库,例如物理库PhysX、Steam平台相关的库SteamWorks、GoogleVR等等。这些库可以在引擎的Engine\Source\ThirdParty目录下找到。Unreal官方推荐将第三方库集成到插件目录中，这样可以">
@@ -140,7 +140,7 @@
       
         <time datetime="2020-12-23T16:04:56.000Z" itemprop="datePublished">2020-12-24</time>
         
-        (Updated: <time datetime="2020-12-27T15:42:06.784Z" itemprop="dateModified">2020-12-27</time>)
+        (Updated: <time datetime="2020-12-27T16:12:32.526Z" itemprop="dateModified">2020-12-28</time>)
         
       
     </div>
@@ -174,16 +174,17 @@
 <p><img src="http://hust_mo.gitee.io/blogpicturerepo/image-20201224174958125.png" alt></p>
 <p>其中<code>SDKTest</code>是插件本身逻辑的目录，<code>ThirdParty</code>是第三方库的目录，对于不同平台，所使用的SDK文件格式也有不同，这一点我们在后面再详细展开讲。</p>
 <ul>
-<li><code>.uplugin</code>文件是<a href="https://docs.unrealengine.com/zh-CN/ProductionPipelines/Plugins/index.html#%E6%8F%92%E4%BB%B6%E6%8F%8F%E8%BF%B0%E6%96%87%E4%BB%B6" target="_blank" rel="noopener">插件描述文件</a>，虚幻引擎通过搜索这个格式的文件来查找插件，这个文件提供插件相关的基本信息。</li>
+<li><p><code>.uplugin</code>文件是<a href="https://docs.unrealengine.com/zh-CN/ProductionPipelines/Plugins/index.html#%E6%8F%92%E4%BB%B6%E6%8F%8F%E8%BF%B0%E6%96%87%E4%BB%B6" target="_blank" rel="noopener">插件描述文件</a>，虚幻引擎通过搜索这个格式的文件来查找插件，这个文件提供插件相关的基本信息。</p>
+</li>
 <li><p><code>XXX.Build.cs</code>文件是<a href="https://docs.unrealengine.com/zh-CN/ProductionPipelines/BuildTools/UnrealBuildTool/ModuleFiles/index.html" target="_blank" rel="noopener">模块描述文件</a>，虚幻引擎使用UnrealBuildTool编译这个文件，并构造来确定整个编译环境。</p>
 </li>
 <li><p><code>Mac</code>,<code>x64</code>文件夹内是不同平台下引入的库文件，x64平台下一般为<code>.lib</code>和<code>.dll</code>文件，Mac平台下一般为<code>dylib</code>，IOS平台下一般为<code>.a</code>文件、<code>.dylib</code>文件和<code>.framework</code>文件，Android平台下一般为<code>.aar</code>和<code>.jar</code>文件。这些文件在模块描述文件中进行引入，在实例项目中如图所示：</p>
-<p><img src="https://gitee.com/hust_mo/BlogPictureRepo/blob/master/image-20201224210510607.png" alt="image-20201224210510607"></p>
+<p><img src="http://hust_mo.gitee.io/blogpicturerepo/image-20201224210510607.png" alt></p>
 </li>
 </ul>
 <h3 id="一个例子："><a href="#一个例子：" class="headerlink" title="一个例子："></a>一个例子：</h3><p>以GCloud的相关SDK接入为例（<a href="https://sdk.gcloud.tencent.com/documents/details/GCloudSDK%E4%BA%A7%E5%93%81%E4%BD%BF%E7%94%A8%E8%AF%B4%E6%98%8E/%E6%8E%A5%E5%85%A5%E6%8C%87%E5%BC%95" target="_blank" rel="noopener">GCloud相关文档</a>）:</p>
 <p><del>(由于没有SDK的下载权限所以只能用官网的图来意思意思)</del></p>
-<p><img src="C:\Users\mosswang.TENCENT\Desktop\文档\笔记\mdPicture\render" alt="img"></p>
+<p><img src="http://hust_mo.gitee.io/blogpicturerepo/render" alt></p>
 <p>下载之后将文件夹拷贝到插件的Public目录下，并参考<code>AAInfo4Copy.txt</code>，在<code>xxx.Build.cs</code>文件中引入相应的插件。</p>
 <p>在官方文档中引入插件的方法是：</p>
 <figure class="highlight csharp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">PrivateDependencyModuleNames.AddRange(<span class="keyword">new</span> <span class="keyword">string</span>[] &#123; <span class="string">"GCloudCore"</span> &#125;);</span><br><span class="line">PrivateDependencyModuleNames.AddRange(<span class="keyword">new</span> <span class="keyword">string</span>[] &#123; <span class="string">"GCloud"</span> &#125;);</span><br><span class="line">PrivateDependencyModuleNames.AddRange(<span class="keyword">new</span> <span class="keyword">string</span>[] &#123; <span class="string">"TApm"</span> &#125;);</span><br><span class="line">PrivateDependencyModuleNames.AddRange(<span class="keyword">new</span> <span class="keyword">string</span>[] &#123; <span class="string">"GVoice"</span> &#125;);</span><br><span class="line">PrivateDependencyModuleNames.AddRange(<span class="keyword">new</span> <span class="keyword">string</span>[] &#123; <span class="string">"GEM_OneSDK"</span> &#125;);</span><br></pre></td></tr></table></figure>
@@ -197,7 +198,7 @@
 <p>在第三方库的引入过程中，可能会涉及到一些平台相关的功能，比如说权限获取等，这部分的设置文件，不同平台下有不同的规定，以Android和ios为例，在安卓平台下，使用<a href="https://developer.android.com/guide/topics/manifest/manifest-intro?hl=zh-cn" target="_blank" rel="noopener">应用清单概览</a>文件对组件和权限进行控制，即<code>AndroidManifest.xml</code>文件；而在IOS下，使用Property List文件来存储用户设置。</p>
 <p>对于Android平台，可能需要对<code>AndroidManifest.xml</code>文件进行一些修改，这时候就需要使用UPL来对该文件进行改动。</p>
 <h4 id="一个例子"><a href="#一个例子" class="headerlink" title="一个例子"></a>一个例子</h4><p>以GCloudSDK中的<a href="http://sdk.gcloud.tencent.com/documents/details/%E7%A7%BB%E5%8A%A8%E6%B8%B8%E6%88%8F%E5%BC%80%E5%8F%91%E5%A5%97%E4%BB%B6MSDK/SDK%E6%8E%A5%E5%85%A5%E6%8C%87%E5%8D%97/%E6%8E%A5%E5%85%A5%E6%95%99%E7%A8%8B%EF%BC%88UE4%EF%BC%89" target="_blank" rel="noopener">MSDK</a>为例：</p>
-<p><img src="C:\Users\mosswang.TENCENT\Desktop\文档\笔记\mdPicture\image-20201224221924928.png" alt="image-20201224221924928"></p>
+<p><img src="http://hust_mo.gitee.io/blogpicturerepo/image-20201224221924928.png" alt></p>
 <p>这里的一些参数本质上是Android的一些参数，如果详细了解请阅读：<a href="https://developer.android.com/guide?hl=zh-cn" target="_blank" rel="noopener">Android开发者指南</a>，<del>(有一说一Google这个文档写的是真滴好，什么是国际大厂啊)</del></p>
 <p>以其中几个为例：</p>
 <ul>
@@ -231,7 +232,7 @@
 </li>
 <li><p>如何拓展：</p>
 <p>在<a href="https://github.com/EpicGames/UnrealEngine/blob/f8f4b403eb682ffc055613c7caf9d2ba5df7f319/Engine/Source/Programs/UnrealBuildTool/System/UnrealPluginLanguage.cs#L378" target="_blank" rel="noopener">UPL</a>的源代码中可以看到全部的API，在SDK文档中应该会说明SDK的使用步骤，例如GCloud的文档中：</p>
-<p><img src="C:\Users\mosswang.TENCENT\Desktop\文档\笔记\mdPicture\image-20201225151117492.png" alt="image-20201225151117492"></p>
+<p><img src="http://hust_mo.gitee.io/blogpicturerepo/image-20201225151117492.png" alt></p>
 <p>这部分的初始化代码就可以使用UPL插入到<code>GameActivity.java</code>中：</p>
 <figure class="highlight xml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">gameActivityOnCreateAdditions</span>&gt;</span></span><br><span class="line">	<span class="tag">&lt;<span class="name">insert</span>&gt;</span></span><br><span class="line">       	GCloud::InitializeInfo initInfo;</span><br><span class="line">		initInfo.GameId = GCLOUD_GAME_ID;</span><br><span class="line">		initInfo.GameKey = GCLOUD_GAME_KEY;</span><br><span class="line"></span><br><span class="line">		IGCloud::GetInstance().Initialize(initInfo);</span><br><span class="line">    <span class="tag">&lt;/<span class="name">insert</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">gameActivityOnCreateAdditions</span>&gt;</span></span><br></pre></td></tr></table></figure>
 <p>当然具体的实现要参考不同SDK文档中提供的实现。</p>
