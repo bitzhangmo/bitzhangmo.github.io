@@ -49,7 +49,8 @@
     <!-- rss -->
     
     
-</head>
+<link rel="stylesheet" href="/css/prism-tomorrow.css" type="text/css">
+<link rel="stylesheet" href="/css/prism-line-numbers.css" type="text/css"></head>
 
 <body class="max-width mx-auto px3 ltr">
     
@@ -167,39 +168,194 @@
 <a id="more"></a>
 <h3 id="Chapter1��Output-an-Image"><a href="#Chapter1��Output-an-Image" class="headerlink" title="Chapter1��Output an Image"></a>Chapter1��Output an Image</h3><p>����һ��ppm�����������ص���<a href="https://www.xnview.com/en/" target="_blank" rel="noopener">XnView</a>��</p>
 <p>��һ����������Ĵ��벢�������������õ�PPM��ʽ���ļ��Ļ�����Ҫ�ڴ��������д��txt�ļ��Ĵ��룺</p>
-<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">"pch.h"</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;iostream&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;fstream&gt;</span></span></span><br><span class="line"></span><br><span class="line"><span class="keyword">using</span> <span class="keyword">namespace</span> <span class="built_in">std</span>;</span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">main</span><span class="params">()</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">	<span class="keyword">int</span> nx = <span class="number">200</span>;</span><br><span class="line">	<span class="keyword">int</span> ny = <span class="number">100</span>;</span><br><span class="line"></span><br><span class="line">	<span class="function">ofstream <span class="title">outfile</span><span class="params">(<span class="string">".\\result\\FirstPicture.txt"</span>, ios_base::out)</span></span>;</span><br><span class="line">	outfile &lt;&lt; <span class="string">"P3\n"</span> &lt;&lt; nx &lt;&lt; <span class="string">" "</span> &lt;&lt; ny &lt;&lt; <span class="string">"\n255\n"</span>;</span><br><span class="line">	<span class="keyword">for</span> (<span class="keyword">int</span> j = ny - <span class="number">1</span>; j &gt;= <span class="number">0</span>; j--)</span><br><span class="line">	&#123;</span><br><span class="line">		<span class="keyword">for</span> (<span class="keyword">int</span> i = <span class="number">0</span>; i &lt; nx; i++)</span><br><span class="line">		&#123;</span><br><span class="line">			<span class="keyword">float</span> r = <span class="keyword">float</span>(i) / <span class="keyword">float</span>(nx);</span><br><span class="line">			<span class="keyword">float</span> g = <span class="keyword">float</span>(j) / <span class="keyword">float</span>(ny);</span><br><span class="line">			<span class="keyword">float</span> b = <span class="number">0.2</span>;</span><br><span class="line">			<span class="keyword">int</span> ir = <span class="keyword">int</span>(<span class="number">255.99</span>*r);</span><br><span class="line">			<span class="keyword">int</span> ig = <span class="keyword">int</span>(<span class="number">255.99</span>*g);</span><br><span class="line">			<span class="keyword">int</span> ib = <span class="keyword">int</span>(<span class="number">255.99</span>*b);</span><br><span class="line">			outfile &lt;&lt; ir &lt;&lt; <span class="string">" "</span> &lt;&lt; ig &lt;&lt; <span class="string">" "</span> &lt;&lt; ib &lt;&lt; <span class="string">"\n"</span>;</span><br><span class="line">			<span class="built_in">std</span>::<span class="built_in">cout</span> &lt;&lt; ir &lt;&lt; <span class="string">" "</span> &lt;&lt; ig &lt;&lt; <span class="string">" "</span> &lt;&lt; ib &lt;&lt; <span class="string">"\n"</span>;</span><br><span class="line">		&#125;</span><br><span class="line">	&#125;</span><br><span class="line"></span><br><span class="line">	<span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<pre class="line-numbers language-lang-c++"><code class="language-lang-c++">#include "pch.h"
+#include <iostream>
+#include <fstream>
+
+using namespace std;
+int main()
+{
+    int nx = 200;
+    int ny = 100;
+
+    ofstream outfile(".\\result\\FirstPicture.txt", ios_base::out);
+    outfile << "P3\n" << nx << " " << ny << "\n255\n";
+    for (int j = ny - 1; j >= 0; j--)
+    {
+        for (int i = 0; i < nx; i++)
+        {
+            float r = float(i) / float(nx);
+            float g = float(j) / float(ny);
+            float b = 0.2;
+            int ir = int(255.99*r);
+            int ig = int(255.99*g);
+            int ib = int(255.99*b);
+            outfile << ir << " " << ig << " " << ib << "\n";
+            std::cout << ir << " " << ig << " " << ib << "\n";
+        }
+    }
+
+    return 0;
+}
+<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
 <p>��VmView�п��Կ�����Ӧ��ͼƬ��</p>
 <p><img src="https://i.loli.net/2019/07/29/5d3e5c2ac5cfc71862.png" alt></p>
 <h3 id="Chapter2��The-vec3-class"><a href="#Chapter2��The-vec3-class" class="headerlink" title="Chapter2��The vec3 class"></a>Chapter2��The vec3 class</h3><p>������һ�����vec3���������</p>
 <p>����������ļӼ��˳�������������ļӼ��˳��������Ĳ������ȡ�</p>
-<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">inline</span> <span class="keyword">float</span> <span class="title">dot</span><span class="params">(<span class="keyword">const</span> vec3 &amp;v1, <span class="keyword">const</span> vec3 &amp;v2)</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">	<span class="keyword">return</span> v1.e[<span class="number">0</span>] * v2.e[<span class="number">0</span>] + v1.e[<span class="number">1</span>] * v2.e[<span class="number">1</span>] + v1.e[<span class="number">2</span>] * v2.e[<span class="number">2</span>];</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">inline</span> vec3 <span class="title">cross</span><span class="params">(<span class="keyword">const</span> vec3 &amp;v1, <span class="keyword">const</span> vec3 &amp;v2)</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">	<span class="keyword">return</span> vec3((v1.e[<span class="number">1</span>] * v2.e[<span class="number">2</span>] - v1.e[<span class="number">2</span>] * v2.e[<span class="number">1</span>]),</span><br><span class="line">		(-(v1.e[<span class="number">0</span>] * v2.e[<span class="number">2</span>] - v1.e[<span class="number">2</span>] * v2.e[<span class="number">0</span>])),</span><br><span class="line">		(v1.e[<span class="number">0</span>] * v2.e[<span class="number">1</span>] - v1.e[<span class="number">1</span>] * v2.e[<span class="number">0</span>]));</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<pre class="line-numbers language-lang-c++"><code class="language-lang-c++">inline float dot(const vec3 &v1, const vec3 &v2)
+{
+    return v1.e[0] * v2.e[0] + v1.e[1] * v2.e[1] + v1.e[2] * v2.e[2];
+}
+
+inline vec3 cross(const vec3 &v1, const vec3 &v2)
+{
+    return vec3((v1.e[1] * v2.e[2] - v1.e[2] * v2.e[1]),
+        (-(v1.e[0] * v2.e[2] - v1.e[2] * v2.e[0])),
+        (v1.e[0] * v2.e[1] - v1.e[1] * v2.e[0]));
+}
+<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
 <h3 id="Chapter3��Rays-a-simple-camera-and-background"><a href="#Chapter3��Rays-a-simple-camera-and-background" class="headerlink" title="Chapter3��Rays,a simple camera, and background"></a>Chapter3��Rays,a simple camera, and background</h3><p>�����������࣬�������������������ֱ𷵻�ԭ�㡢�����Լ����߱��������߱�����һ��Vec3��ʾ��</p>
 <h3 id="Chapter4"><a href="#Chapter4" class="headerlink" title="Chapter4:"></a>Chapter4:</h3><p>�����еĴ����м�����һ������������ཻ�ĺ���������������Դ�2D��������Բ���ཻ��⺯������ȥ���⡣</p>
 <p>����Ὣ����뵽������ͷ�ļ��С�</p>
-<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">bool</span> sphere :: hit(<span class="keyword">const</span> ray&amp; r, <span class="keyword">float</span> t_min, <span class="keyword">float</span> t_max, hit_record&amp; rec)<span class="keyword">const</span> &#123;</span><br><span class="line">	vec3 oc = r.origin() - center;</span><br><span class="line">	</span><br><span class="line">	<span class="keyword">float</span> a = dot(r.direction(), r.direction());</span><br><span class="line">	<span class="keyword">float</span> b = dot(oc, r.direction());</span><br><span class="line">	<span class="keyword">float</span> c = dot(oc, oc) - radius * radius;</span><br><span class="line"></span><br><span class="line">	<span class="keyword">float</span> discriminant = b * b - a * c;</span><br><span class="line">	<span class="keyword">if</span> (discriminant &gt; <span class="number">0</span>)</span><br><span class="line">	&#123;</span><br><span class="line">		<span class="keyword">float</span> temp = (-b - <span class="built_in">sqrt</span>(b*b - a * c)) / a;</span><br><span class="line">		<span class="keyword">if</span> (temp &lt; t_max &amp;&amp; temp &gt; t_min)</span><br><span class="line">		&#123;</span><br><span class="line">			rec.t = temp;</span><br><span class="line">			rec.p = r.point_at_parameter(rec.t);</span><br><span class="line">			rec.normal = (rec.p - center) / radius;</span><br><span class="line">			<span class="keyword">return</span> <span class="literal">true</span>;</span><br><span class="line">		&#125;</span><br><span class="line">		temp = (-b + <span class="built_in">sqrt</span>(b*b - a * c)) / a;</span><br><span class="line">		<span class="keyword">if</span> (temp&lt;t_max &amp;&amp; temp&gt;t_min)</span><br><span class="line">		&#123;</span><br><span class="line">			rec.t = temp;</span><br><span class="line">			rec.p = r.point_at_parameter(rec.t);</span><br><span class="line">			rec.normal = (rec.p - center) / radius;</span><br><span class="line">			<span class="keyword">return</span> <span class="literal">true</span>;</span><br><span class="line">		&#125;</span><br><span class="line">	&#125;</span><br><span class="line">	<span class="keyword">return</span> <span class="literal">false</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<pre class="line-numbers language-lang-c++"><code class="language-lang-c++">bool sphere :: hit(const ray& r, float t_min, float t_max, hit_record& rec)const {
+    vec3 oc = r.origin() - center;
+
+    float a = dot(r.direction(), r.direction());
+    float b = dot(oc, r.direction());
+    float c = dot(oc, oc) - radius * radius;
+
+    float discriminant = b * b - a * c;
+    if (discriminant > 0)
+    {
+        float temp = (-b - sqrt(b*b - a * c)) / a;
+        if (temp < t_max && temp > t_min)
+        {
+            rec.t = temp;
+            rec.p = r.point_at_parameter(rec.t);
+            rec.normal = (rec.p - center) / radius;
+            return true;
+        }
+        temp = (-b + sqrt(b*b - a * c)) / a;
+        if (temp<t_max && temp>t_min)
+        {
+            rec.t = temp;
+            rec.p = r.point_at_parameter(rec.t);
+            rec.normal = (rec.p - center) / radius;
+            return true;
+        }
+    }
+    return false;
+}
+<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
 <h3 id="Chapter5��Surface-normals-and-multiple-objects"><a href="#Chapter5��Surface-normals-and-multiple-objects" class="headerlink" title="Chapter5��Surface normals and multiple objects."></a>Chapter5��Surface normals and multiple objects.</h3><p>�����˶Է��߷�������㣬������Ӧ�����߼�⺯�����뵽�˶�Ӧ��ͷ�ļ��С�</p>
 <p>�����ĵ�����ĳ���������Ϊ�õ�ķ��߷���</p>
 <p>���ⶨ����һ���࣬�������㲢�洢�����������������һ����о�������ԭ�������һ���㡣</p>
 <h3 id="Chapter6��Antialasing"><a href="#Chapter6��Antialasing" class="headerlink" title="Chapter6��Antialasing"></a>Chapter6��Antialasing</h3><p>��Ŀ��Ϊ����ݡ�</p>
 <p>�������������ÿ�������ص�Ϊ���ģ��������Ϊ1�ķ�Χ�ڲ���n�Σ���n��������ֵ����ƽ����Ϊ�õ����յ�����ֵ��</p>
 <p>������ͼ���������Ƶķ�ʽ����Ϊ��ֵ�˲���</p>
-<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="function">vec3 <span class="title">col</span><span class="params">(<span class="number">0</span>, <span class="number">0</span>, <span class="number">0</span>)</span></span>;</span><br><span class="line"><span class="keyword">for</span> (<span class="keyword">int</span> s = <span class="number">0</span>; s &lt; ns; s++)</span><br><span class="line">&#123;</span><br><span class="line">	<span class="keyword">float</span> random = rand() % (<span class="number">100</span>) / (<span class="keyword">float</span>)(<span class="number">100</span>);</span><br><span class="line">	<span class="keyword">float</span> u = <span class="keyword">float</span>(i + random) / <span class="keyword">float</span>(nx);</span><br><span class="line">	<span class="keyword">float</span> v = <span class="keyword">float</span>(j + random) / <span class="keyword">float</span>(ny);</span><br><span class="line">	ray r = cam.get_ray(u, v);</span><br><span class="line">	vec3 p = r.point_at_parameter(<span class="number">2.0</span>);</span><br><span class="line">	col += color(r, world);</span><br><span class="line">&#125;</span><br><span class="line">col /= <span class="keyword">float</span>(ns);</span><br></pre></td></tr></table></figure>
+<pre class="line-numbers language-lang-c++"><code class="language-lang-c++">vec3 col(0, 0, 0);
+for (int s = 0; s < ns; s++)
+{
+    float random = rand() % (100) / (float)(100);
+    float u = float(i + random) / float(nx);
+    float v = float(j + random) / float(ny);
+    ray r = cam.get_ray(u, v);
+    vec3 p = r.point_at_parameter(2.0);
+    col += color(r, world);
+}
+col /= float(ns);
+<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
 <h3 id="Chapter7��Diffuse-Materials"><a href="#Chapter7��Diffuse-Materials" class="headerlink" title="Chapter7��Diffuse Materials"></a>Chapter7��Diffuse Materials</h3><p>��Ŀ��Ϊ��������ʡ�</p>
 <blockquote>
 <p>Pick a random point s from the unit radius sphere that is tangent to the hitpoint, and send a ray from the hitpoint p to the random point s. That sphere has center (p+N):</p>
 <p>�������е����еĵ�λ�뾶����ѡ��һ�������s������һ�����ߴ����е����������s������Ϊ��p+N��</p>
 </blockquote>
 <p>����������ǽ����䷽�����һ������ķ�����Ϊ������ķ���</p>
-<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br></pre></td><td class="code"><pre><span class="line"><span class="function">vec3 <span class="title">random_in_unit_sphere</span><span class="params">()</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">	vec3 p;</span><br><span class="line">	<span class="keyword">do</span> &#123;</span><br><span class="line">		<span class="keyword">float</span> random0 = rand() % (<span class="number">100</span>) / (<span class="keyword">float</span>)(<span class="number">100</span>);</span><br><span class="line">		<span class="keyword">float</span> random1 = rand() % (<span class="number">100</span>) / (<span class="keyword">float</span>)(<span class="number">100</span>);</span><br><span class="line">		<span class="keyword">float</span> random2 = rand() % (<span class="number">100</span>) / (<span class="keyword">float</span>)(<span class="number">100</span>);</span><br><span class="line">		p = <span class="number">2.0</span>*vec3(random0, random1, random2) - vec3(<span class="number">1</span>, <span class="number">1</span>, <span class="number">1</span>);</span><br><span class="line">	&#125; <span class="keyword">while</span> (p.squared_length() &gt;= <span class="number">1.0</span>);</span><br><span class="line">	</span><br><span class="line">	<span class="keyword">return</span> p;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function">vec3 <span class="title">color</span><span class="params">(<span class="keyword">const</span> ray&amp; r, hitable *world)</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">	hit_record rec;</span><br><span class="line">	<span class="keyword">if</span> (world-&gt;hit(r, <span class="number">0.001</span>, (numeric_limits&lt;<span class="keyword">float</span>&gt;::max)(), rec))</span><br><span class="line">	&#123;</span><br><span class="line">		vec3 target = rec.p + rec.normal + random_in_unit_sphere();</span><br><span class="line">		<span class="keyword">return</span> <span class="number">0.5</span>*color(ray(rec.p,target - rec.p), world);</span><br><span class="line">	&#125;</span><br><span class="line">	<span class="keyword">else</span></span><br><span class="line">	&#123;</span><br><span class="line">		vec3 unit_direction = unit_vector(r.direction());</span><br><span class="line">		<span class="keyword">float</span> t = <span class="number">0.5</span>*(unit_direction.y() + <span class="number">1.0</span>);</span><br><span class="line">		<span class="keyword">return</span> (<span class="number">1.0</span> - t)*vec3(<span class="number">1.0</span>, <span class="number">1.0</span>, <span class="number">1.0</span>) + t * vec3(<span class="number">0.5</span>, <span class="number">0.7</span>, <span class="number">1.0</span>);</span><br><span class="line">	&#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<pre class="line-numbers language-lang-c++"><code class="language-lang-c++">vec3 random_in_unit_sphere()
+{
+    vec3 p;
+    do {
+        float random0 = rand() % (100) / (float)(100);
+        float random1 = rand() % (100) / (float)(100);
+        float random2 = rand() % (100) / (float)(100);
+        p = 2.0*vec3(random0, random1, random2) - vec3(1, 1, 1);
+    } while (p.squared_length() >= 1.0);
+
+    return p;
+}
+
+vec3 color(const ray& r, hitable *world)
+{
+    hit_record rec;
+    if (world->hit(r, 0.001, (numeric_limits<float>::max)(), rec))
+    {
+        vec3 target = rec.p + rec.normal + random_in_unit_sphere();
+        return 0.5*color(ray(rec.p,target - rec.p), world);
+    }
+    else
+    {
+        vec3 unit_direction = unit_vector(r.direction());
+        float t = 0.5*(unit_direction.y() + 1.0);
+        return (1.0 - t)*vec3(1.0, 1.0, 1.0) + t * vec3(0.5, 0.7, 1.0);
+    }
+}
+<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
 <h3 id="Chapter8��Metal"><a href="#Chapter8��Metal" class="headerlink" title="Chapter8��Metal"></a>Chapter8��Metal</h3><p>�ڰ��¼����˼򵥵Ĳ��ʡ�</p>
 <p>���Ƕ�����һ���򵥵��ʲ������������������һ���ʣ�����ġ����֡����������������ԡ����۹۲��ߵ��ӽ���Σ��ʲ�����Թ۲��ߵı������ȶ�����ͬ�ġ�</p>
-<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="meta-keyword">ifndef</span> LANBERTIANH</span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">define</span> LANBERTIANH</span></span><br><span class="line"></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">"material.h"</span></span></span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">lambertian</span> :</span><span class="keyword">public</span> material</span><br><span class="line">&#123;</span><br><span class="line"><span class="keyword">public</span>:</span><br><span class="line">	lambertian(<span class="keyword">const</span> vec3&amp; a):albedo(a)&#123;&#125;</span><br><span class="line">	<span class="function"><span class="keyword">virtual</span> <span class="keyword">bool</span> <span class="title">scatter</span><span class="params">(<span class="keyword">const</span> ray&amp; r_in, <span class="keyword">const</span> hit_record&amp; rec, vec3&amp; attenuation, ray&amp; scattered)</span><span class="keyword">const</span></span>;</span><br><span class="line">	vec3 albedo;</span><br><span class="line">&#125;;</span><br><span class="line"></span><br><span class="line"><span class="function">vec3 <span class="title">random_in_unit_sphere</span><span class="params">()</span> </span>&#123;</span><br><span class="line">	vec3 p;</span><br><span class="line">	<span class="keyword">do</span> &#123;</span><br><span class="line">		<span class="keyword">float</span> random0 = rand() % (<span class="number">100</span>) / (<span class="keyword">float</span>)(<span class="number">100</span>);</span><br><span class="line">		<span class="keyword">float</span> random1 = rand() % (<span class="number">100</span>) / (<span class="keyword">float</span>)(<span class="number">100</span>);</span><br><span class="line">		<span class="keyword">float</span> random2 = rand() % (<span class="number">100</span>) / (<span class="keyword">float</span>)(<span class="number">100</span>);</span><br><span class="line">		p = <span class="number">2.0</span>*vec3(random0, random1, random2) - vec3(<span class="number">1</span>, <span class="number">1</span>, <span class="number">1</span>);</span><br><span class="line">	&#125; <span class="keyword">while</span> (p.squared_length() &gt;= <span class="number">1.0</span>);</span><br><span class="line">	<span class="keyword">return</span> p;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="keyword">bool</span> lambertian::scatter(<span class="keyword">const</span> ray&amp; r_in, <span class="keyword">const</span> hit_record&amp; rec, vec3&amp; attenuation, ray&amp; scattered) <span class="keyword">const</span> &#123;</span><br><span class="line">	vec3 target = rec.p + rec.normal + random_in_unit_sphere();</span><br><span class="line">	scattered = ray(rec.p, target - rec.p);</span><br><span class="line">	attenuation = albedo;</span><br><span class="line">	<span class="keyword">return</span> <span class="literal">true</span>;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="meta">#<span class="meta-keyword">endif</span> <span class="comment">// !LANBERTIANH</span></span></span><br></pre></td></tr></table></figure>
+<pre class="line-numbers language-lang-C++"><code class="language-lang-C++">#ifndef LANBERTIANH
+#define LANBERTIANH
+
+#include "material.h"
+class lambertian :public material
+{
+public:
+    lambertian(const vec3& a):albedo(a){}
+    virtual bool scatter(const ray& r_in, const hit_record& rec, vec3& attenuation, ray& scattered)const;
+    vec3 albedo;
+};
+
+vec3 random_in_unit_sphere() {
+    vec3 p;
+    do {
+        float random0 = rand() % (100) / (float)(100);
+        float random1 = rand() % (100) / (float)(100);
+        float random2 = rand() % (100) / (float)(100);
+        p = 2.0*vec3(random0, random1, random2) - vec3(1, 1, 1);
+    } while (p.squared_length() >= 1.0);
+    return p;
+}
+
+bool lambertian::scatter(const ray& r_in, const hit_record& rec, vec3& attenuation, ray& scattered) const {
+    vec3 target = rec.p + rec.normal + random_in_unit_sphere();
+    scattered = ray(rec.p, target - rec.p);
+    attenuation = albedo;
+    return true;
+}
+
+#endif // !LANBERTIANH
+<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
 <p>ע��ԭ��������������û���ҵ���Ӧ�����ã���������ݴ�������rand()���档</p>
 <p>����ԭ�黹������һ�����淴���࣬�����ķ��亯���ο�����������</p>
-<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="function">vec3 <span class="title">reflect</span><span class="params">(<span class="keyword">const</span> vec3&amp; v, <span class="keyword">const</span> vec3&amp; n)</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">	<span class="keyword">return</span> v - <span class="number">2</span> * dot(v, n)*n;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<pre class="line-numbers language-lang-c++"><code class="language-lang-c++">vec3 reflect(const vec3& v, const vec3& n)
+{
+    return v - 2 * dot(v, n)*n;
+}
+<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span></span></code></pre>
 <p>�ڱ��µ��������������һ��ģ���Ĳ��������ģ���Ĳ���ʹ�÷�����ߵķ�������һ������ƫ�ơ�</p>
 <h3 id="Chapter9��Dielectrics"><a href="#Chapter9��Dielectrics" class="headerlink" title="Chapter9��Dielectrics"></a>Chapter9��Dielectrics</h3><p>��һ�µı���Ϊ����ʣ�ʵ������˵�������ݰ���������ˮ����͸���Ŀ���������ߵĲ��ʣ�</p>
-<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">bool</span> <span class="title">refract</span><span class="params">(<span class="keyword">const</span> vec3&amp; v, <span class="keyword">const</span> vec3&amp; n, <span class="keyword">float</span> ni_over_nt, vec3&amp; refracted)</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">	vec3 uv = unit_vector(v);</span><br><span class="line">	<span class="keyword">float</span> dt = dot(uv, n);</span><br><span class="line">	<span class="keyword">float</span> discriminant = <span class="number">1.0</span> - ni_over_nt * ni_over_nt*(<span class="number">1</span> - dt * dt);</span><br><span class="line">	<span class="keyword">if</span> (discriminant &gt; <span class="number">0</span>)</span><br><span class="line">	&#123;</span><br><span class="line">		refracted = ni_over_nt * (uv - n * dt) - n * <span class="built_in">sqrt</span>(discriminant);</span><br><span class="line">		<span class="keyword">return</span> <span class="literal">true</span>;</span><br><span class="line">	&#125;</span><br><span class="line">	<span class="keyword">else</span> <span class="keyword">return</span> <span class="literal">false</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<pre class="line-numbers language-lang-c++"><code class="language-lang-c++">bool refract(const vec3& v, const vec3& n, float ni_over_nt, vec3& refracted)
+{
+    vec3 uv = unit_vector(v);
+    float dt = dot(uv, n);
+    float discriminant = 1.0 - ni_over_nt * ni_over_nt*(1 - dt * dt);
+    if (discriminant > 0)
+    {
+        refracted = ni_over_nt * (uv - n * dt) - n * sqrt(discriminant);
+        return true;
+    }
+    else return false;
+}
+<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
 <p>ע�⣬���������жϰ���һ��ȫ����������</p>
 <p>��������Ĺ�ʽ��ο���<a href="[https://zh.wikipedia.org/wiki/%E6%96%AF%E6%B6%85%E5%B0%94%E5%AE%9A%E5%BE%8B](https://zh.wikipedia.org/wiki/˹��������">˹��������</a>)</p>
 <h3 id="Chapter10��Positionable-camera"><a href="#Chapter10��Positionable-camera" class="headerlink" title="Chapter10��Positionable camera"></a>Chapter10��Positionable camera</h3><p>�ڵ�ʮ�£����Ƕ�����һ������͸�ӹ��ܵ�������ڹ۲쳡����</p>

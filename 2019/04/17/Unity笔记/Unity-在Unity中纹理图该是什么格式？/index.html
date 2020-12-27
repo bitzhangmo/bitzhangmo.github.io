@@ -50,7 +50,8 @@
     <!-- rss -->
     
     
-</head>
+<link rel="stylesheet" href="/css/prism-tomorrow.css" type="text/css">
+<link rel="stylesheet" href="/css/prism-line-numbers.css" type="text/css"></head>
 
 <body class="max-width mx-auto px3 ltr">
     
@@ -172,7 +173,39 @@
 <p><strong>AssetPostProcessor</strong>是一个编辑器类，用来管理资源导入，当资源导入之前和之后都会发送通知，可以根据不同的资源类型，在导入之前和之后做不同的处理，来修改Unity内部资源格式。</p>
 <p>由于这是一个编辑器类，在UnityEditor命名空间下，所以在使用C#脚本时，需要在脚本前加上using UnityEditor引用，且放在工程目录下的Asset/Editor文件夹下。<br>一般我们通过修改这个类中<strong>OnPreprocessxxx</strong>和<strong>OnPostprocessxxx</strong>函数来修改资源数据和设置。<br>这两者的区别可以简单理解为：前者用来Inspector视图可见的选项，后者为不可见的。</p>
 <p>下面的脚本可以自动设置不同文件夹下贴图的压缩格式以及大小：</p>
-<figure class="highlight csharp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">using</span> UnityEditor;</span><br><span class="line"><span class="keyword">using</span> UnityEngine;</span><br><span class="line"></span><br><span class="line"><span class="keyword">public</span> <span class="keyword">class</span> <span class="title">Script_12_02</span> : <span class="title">AssetPostprocessor</span></span><br><span class="line">&#123;</span><br><span class="line">    <span class="function"><span class="keyword">void</span> <span class="title">OnPreprocessTexture</span>(<span class="params"></span>)</span></span><br><span class="line"><span class="function"></span>    &#123;</span><br><span class="line">        TextureImporter textureImporter = (TextureImporter)assetImporter;</span><br><span class="line"></span><br><span class="line">        <span class="keyword">if</span>(textureImporter.assetPath.Contains(<span class="string">"UI"</span>))</span><br><span class="line">        &#123;</span><br><span class="line">            textureImporter.textureType = TextureImporterType.Sprite;</span><br><span class="line">            textureImporter.mipmapEnabled = <span class="literal">false</span>;</span><br><span class="line"></span><br><span class="line">            <span class="comment">// 设置UI贴图在三个平台下的压缩格式以及大小</span></span><br><span class="line">            textureImporter.SetPlatformTextureSettings(<span class="string">"Standalone"</span>,<span class="number">2048</span>,TextureImporterFormat.RGBA32);</span><br><span class="line">            textureImporter.SetPlatformTextureSettings(<span class="string">"iPhone"</span>,<span class="number">2048</span>,TextureImporterFormat.RGBA32,<span class="number">100</span>,<span class="literal">true</span>);</span><br><span class="line">            textureImporter.SetPlatformTextureSettings(<span class="string">"Android"</span>,<span class="number">2048</span>,TextureImporterFormat.RGBA32,<span class="literal">true</span>);</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">else</span> <span class="keyword">if</span>(textureImporter.assetPath.Contains(<span class="string">"Texture"</span>))</span><br><span class="line">        &#123;</span><br><span class="line">            textureImporter.textureType = TextureImporterType.Default;</span><br><span class="line">            textureImporter.mipmapEnabled = <span class="literal">true</span>;</span><br><span class="line"></span><br><span class="line">            <span class="comment">// 设置模型贴图在三个平台下的压缩格式以及大小</span></span><br><span class="line">            textureImporter.SetPlatformTextureSettings(<span class="string">"Standalone"</span>,<span class="number">2048</span>,TextureImporterFormat.DXT5);</span><br><span class="line">            textureImporter.SetPlatformTextureSettings(<span class="string">"iPhone"</span>,<span class="number">2048</span>,TextureImporterFormat.ASTC_RGBA_4x4,<span class="number">100</span>,<span class="literal">true</span>);</span><br><span class="line">            textureImporter.SetPlatformTextureSettings(<span class="string">"Android"</span>,<span class="number">2048</span>,TextureImporterFormat.ETC_RGB4,<span class="literal">true</span>);</span><br><span class="line"></span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<pre class="line-numbers language-lang-csharp"><code class="language-lang-csharp">using UnityEditor;
+using UnityEngine;
+
+public class Script_12_02 : AssetPostprocessor
+{
+    void OnPreprocessTexture()
+    {
+        TextureImporter textureImporter = (TextureImporter)assetImporter;
+
+        if(textureImporter.assetPath.Contains("UI"))
+        {
+            textureImporter.textureType = TextureImporterType.Sprite;
+            textureImporter.mipmapEnabled = false;
+
+            // 设置UI贴图在三个平台下的压缩格式以及大小
+            textureImporter.SetPlatformTextureSettings("Standalone",2048,TextureImporterFormat.RGBA32);
+            textureImporter.SetPlatformTextureSettings("iPhone",2048,TextureImporterFormat.RGBA32,100,true);
+            textureImporter.SetPlatformTextureSettings("Android",2048,TextureImporterFormat.RGBA32,true);
+        }
+        else if(textureImporter.assetPath.Contains("Texture"))
+        {
+            textureImporter.textureType = TextureImporterType.Default;
+            textureImporter.mipmapEnabled = true;
+
+            // 设置模型贴图在三个平台下的压缩格式以及大小
+            textureImporter.SetPlatformTextureSettings("Standalone",2048,TextureImporterFormat.DXT5);
+            textureImporter.SetPlatformTextureSettings("iPhone",2048,TextureImporterFormat.ASTC_RGBA_4x4,100,true);
+            textureImporter.SetPlatformTextureSettings("Android",2048,TextureImporterFormat.ETC_RGB4,true);
+
+        }
+    }
+}
+<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
 <h4 id="拓展阅读："><a href="#拓展阅读：" class="headerlink" title="拓展阅读："></a>拓展阅读：</h4><p>为什么要进行纹理压缩：<a href="http://www.newhappy.com.cn/?p=907" target="_blank" rel="noopener">http://www.newhappy.com.cn/?p=907</a></p>
 <h3 id="那么纹理有哪些压缩格式呢？"><a href="#那么纹理有哪些压缩格式呢？" class="headerlink" title="那么纹理有哪些压缩格式呢？"></a>那么纹理有哪些压缩格式呢？</h3><h4 id="桌面平台："><a href="#桌面平台：" class="headerlink" title="桌面平台："></a>桌面平台：</h4><ul>
 <li>RGB Compressed DXT1 压缩的RGB纹理。这是最常见的漫反射纹理格式。4位/像素（32 KB 256x256）</li>

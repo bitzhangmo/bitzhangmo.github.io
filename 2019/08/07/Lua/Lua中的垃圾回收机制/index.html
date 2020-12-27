@@ -47,7 +47,8 @@
     <!-- rss -->
     
     
-</head>
+<link rel="stylesheet" href="/css/prism-tomorrow.css" type="text/css">
+<link rel="stylesheet" href="/css/prism-line-numbers.css" type="text/css"></head>
 
 <body class="max-width mx-auto px3 ltr">
     
@@ -174,7 +175,11 @@
 <p>只有对象可以从弱引用表中被移除，而像数字和布尔这样的“值”是不可回收的。</p>
 <h4 id="析构器："><a href="#析构器：" class="headerlink" title="析构器："></a>析构器：</h4><p>析构器是一个与对象关联的函数，当该对象即将被回收时该函数会被调用。</p>
 <p>Lua语言通过元方法__gc实现析构器：</p>
-<figure class="highlight lua"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">o = &#123;x = <span class="string">"hi"</span>&#125;</span><br><span class="line"><span class="built_in">setmetatable</span>(o,&#123;<span class="built_in">__gc</span> = <span class="function"><span class="keyword">function</span><span class="params">(o)</span></span> <span class="built_in">print</span>(o.x) <span class="keyword">end</span>&#125;)</span><br><span class="line">o = <span class="literal">nil</span></span><br><span class="line"><span class="built_in">collectgarbage</span>()  <span class="comment">--&gt; hi</span></span><br></pre></td></tr></table></figure>
+<pre class="line-numbers language-lang-lua"><code class="language-lang-lua">o = {x = "hi"}
+setmetatable(o,{__gc = function(o) print(o.x) end})
+o = nil
+collectgarbage()  --> hi
+<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span></span></code></pre>
 <p>通过给对象设置一个具有非空__gc元方法的元表，就可以将一个对象标记为需要进行析构处理，如果不标记对象，那么对象就不会被析构。</p>
 <p>当垃圾收集器在同一个周期中析构多个对象时，它会按照对象被标记为需要析构处理的顺序<strong>逆序</strong>调用这些对象的析构器。</p>
 <p>析构器的另一个特点是<strong>复苏</strong>：当一个析构器被调用时，它的参数是正在被析构的对象。因此，这个对象会至少在析构期间重新变成活跃的，这叫做“临时复苏”；在析构器执行期间，我们无法阻止析构器把该对象存储在全局变量中，使得该对象在析构器返回后仍然可访问，这称为“永久复苏”。</p>

@@ -47,7 +47,8 @@
     <!-- rss -->
     
     
-</head>
+<link rel="stylesheet" href="/css/prism-tomorrow.css" type="text/css">
+<link rel="stylesheet" href="/css/prism-line-numbers.css" type="text/css"></head>
 
 <body class="max-width mx-auto px3 ltr">
     
@@ -177,25 +178,43 @@
 <h4 id="ShaderLab"><a href="#ShaderLab" class="headerlink" title="ShaderLab"></a>ShaderLab</h4><p>一款专门为Unity Shader服务的语言。</p>
 <h5 id="Properties-属性"><a href="#Properties-属性" class="headerlink" title="Properties 属性"></a>Properties 属性</h5><ol>
 <li>语句格式：<code>Name(&quot;display name&quot;,PropertyType)=DefaultValue</code></li>
-<li>支持的属性类型：<br> |属性类型|定义语法|<br> |:——–:|:——–:|<br> |Int|number|<br> |Float|number|<br> |Range(min,max)|number|<br> |Color|(number,number,number,number)|<br> |Vector|(number,number,number,number)|<br> |2D|”defaulttexture”{}|<br> |Cube|”defaulttexture”{}|<br> |3D|”defaulttexture”{}|</li>
+<li>支持的属性类型：<br> |属性类型|定义语法|<br> |:————:|:————:|<br> |Int|number|<br> |Float|number|<br> |Range(min,max)|number|<br> |Color|(number,number,number,number)|<br> |Vector|(number,number,number,number)|<br> |2D|”defaulttexture”{}|<br> |Cube|”defaulttexture”{}|<br> |3D|”defaulttexture”{}|</li>
 </ol>
 <blockquote>
 <p>Unity允许重载默认的材质编辑面板以提供更多的自定义数据类型。 关键词“Custom Shader GUI”<br>Properties语义块的作用仅仅是为了让这些属性可以出现在材质面板里。</p>
 </blockquote>
 <h5 id="SubShader-表面着色器"><a href="#SubShader-表面着色器" class="headerlink" title="SubShader:表面着色器"></a>SubShader:表面着色器</h5><ol>
 <li><p>语句格式</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line">SubShader&#123;</span><br><span class="line">	//可选的，标签</span><br><span class="line">	[Tags]</span><br><span class="line"></span><br><span class="line">	//可选的，状态</span><br><span class="line">	[RenderSetup]</span><br><span class="line"></span><br><span class="line">	//一次完整的渲染流程，如果pass的数目过多，会造成渲染性能的下降。</span><br><span class="line">	Pass&#123;</span><br><span class="line">	&#125;</span><br><span class="line">	...</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<pre class="line-numbers language-lang-cg"><code class="language-lang-cg">SubShader{
+ //可选的，标签
+ [Tags]
+
+ //可选的，状态
+ [RenderSetup]
+
+ //一次完整的渲染流程，如果pass的数目过多，会造成渲染性能的下降。
+ Pass{
+ }
+ ...
+}
+<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
 </li>
-<li><p>RenderSetup 状态：关于渲染状态的设置指令<br>| 状态名称 | 设置指令 |解释|<br>|:——–:|:——–:|:—-:|<br>|   Cull     |Cull Back/Front/Off|  剔除模式：剔除背面/正面/关闭剔除|<br>|ZTest|ZTest Less Greater/LEqual/GEqual/Equal/NotEqual/Always|设置深度剔除时使用的函数|<br>|ZWrite|ZWrite On/Off|关闭/开启深度写入|<br>|Blend|Blend SrcFactor DstFactor|开启并设置混合模式|</p>
+<li><p>RenderSetup 状态：关于渲染状态的设置指令<br>| 状态名称 | 设置指令 |解释|<br>|:————:|:————:|:——:|<br>|   Cull     |Cull Back/Front/Off|  剔除模式：剔除背面/正面/关闭剔除|<br>|ZTest|ZTest Less Greater/LEqual/GEqual/Equal/NotEqual/Always|设置深度剔除时使用的函数|<br>|ZWrite|ZWrite On/Off|关闭/开启深度写入|<br>|Blend|Blend SrcFactor DstFactor|开启并设置混合模式|</p>
 </li>
-<li><p>Tags 标签：希望怎样以及何时渲染这个对象<code>Tags{&quot;TagName1&quot;=&quot;Value1&quot; &quot;TagName2&quot;=&quot;Value2&quot;}</code><br>| 标签类型 | 说明 |<br>|——–|——–|<br>| Queue | 控制渲染顺序，指定该物体属于哪一个渲染队列 |<br>|RenderType|对着色器进行分类，可以用于着色器替换功能|<br>|DisableBatching|指明是否对该SubShader使用批处理|<br>|ForceNoShadowCasting|控制使用该SubShader的物体是否会投射阴影|<br>|IgnoreProjector|控制使用该SubShader的物体是否受projector（投影仪？）的影响|<br>|CanUseSpriteAtlas|当该SubShader是用于sprite时，将该标签设为“false”|<br>|PreviewType|指明材质面板将如何预览该材质。默认材质下，材质将显示为一个球形，我们可以通过将该标签的值设为“Plane”“SkyBox”来改变预览类型|<br>上述标签可以在SubShader中声明，而不可以在Pass块中声明，Pass块有专属于自己的标签。</p>
+<li><p>Tags 标签：希望怎样以及何时渲染这个对象<code>Tags{&quot;TagName1&quot;=&quot;Value1&quot; &quot;TagName2&quot;=&quot;Value2&quot;}</code><br>| 标签类型 | 说明 |<br>|————|————|<br>| Queue | 控制渲染顺序，指定该物体属于哪一个渲染队列 |<br>|RenderType|对着色器进行分类，可以用于着色器替换功能|<br>|DisableBatching|指明是否对该SubShader使用批处理|<br>|ForceNoShadowCasting|控制使用该SubShader的物体是否会投射阴影|<br>|IgnoreProjector|控制使用该SubShader的物体是否受projector（投影仪？）的影响|<br>|CanUseSpriteAtlas|当该SubShader是用于sprite时，将该标签设为“false”|<br>|PreviewType|指明材质面板将如何预览该材质。默认材质下，材质将显示为一个球形，我们可以通过将该标签的值设为“Plane”“SkyBox”来改变预览类型|<br>上述标签可以在SubShader中声明，而不可以在Pass块中声明，Pass块有专属于自己的标签。</p>
 </li>
 <li><p>Pass语义块：</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">Pass&#123;</span><br><span class="line">    [Name]</span><br><span class="line">    [Tag]</span><br><span class="line">    [RenderSetup]</span><br><span class="line">    // Other code</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<pre class="line-numbers language-lang-cg"><code class="language-lang-cg">Pass{
+    [Name]
+    [Tag]
+    [RenderSetup]
+    // Other code
+}
+<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
 <ol>
 <li>Name “MyPassName”：定义该Pass的名称，可以使用UsePass命令来直接使用其他unity shader中的Pass，例如：<code>UsePass &quot;MyShader/MYPASSNAME&quot;</code>，由于Unity 内部会将所有Pass 名称转换为大写字母的表示，所以在使用UsePass的时候必须使用大写形式的名字。</li>
 <li>RenderSetup：我们可以对Pass设置渲染状态，除上述状态设置以外，我们还可以使用固定管线的着色器。</li>
-<li><p>Tag：<br>|标签类型|说明|例子|<br>|—|—-|—|<br>|LightMode|定义该Pass在Unity渲染流水线中的角色|Tags{“LightMode”=”ForwardBase”}|<br>|RequireOptions|用于制定当满足某些条件的时候才渲染该Pass，它的值是一个由空格分割的字符串，目前支持的选项：SoftVegetation|Tags{“RequireOptions”=”SoftVegetation”}|</p>
+<li><p>Tag：<br>|标签类型|说明|例子|<br>|—-|——|—-|<br>|LightMode|定义该Pass在Unity渲染流水线中的角色|Tags{“LightMode”=”ForwardBase”}|<br>|RequireOptions|用于制定当满足某些条件的时候才渲染该Pass，它的值是一个由空格分割的字符串，目前支持的选项：SoftVegetation|Tags{“RequireOptions”=”SoftVegetation”}|</p>
 </li>
 <li><p>特殊的Pass：</p>
 <ul>
@@ -209,20 +228,87 @@
 </li>
 </ol>
 <h5 id="FallBack"><a href="#FallBack" class="headerlink" title="FallBack"></a>FallBack</h5><p>如果上面所有的SubShader在这块显卡上都不能运行，那么就用这个最低级的Shader。</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">FallBack &quot;name&quot;</span><br><span class="line">// 或者</span><br><span class="line">FallBack Off</span><br></pre></td></tr></table></figure>
+<pre class="line-numbers language-lang-CG"><code class="language-lang-CG">FallBack "name"
+// 或者
+FallBack Off
+<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span></span></code></pre>
 <p>通过一个字符串通知引擎最低级的Shader是哪个，也可以关闭Fallback功能——如果上述的SubShader无法使用，那就不要管它了。</p>
 <h5 id="其他语义"><a href="#其他语义" class="headerlink" title="其他语义"></a>其他语义</h5><ul>
 <li>拓展编辑界面：CustomEditor</li>
 <li>对命令进行分组：CateGory</li>
 </ul>
-<h4 id="UnityShader的形式"><a href="#UnityShader的形式" class="headerlink" title="UnityShader的形式"></a>UnityShader的形式</h4><p>ShaderLab语句块：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line">Shader &quot;Myshader&quot;&#123;</span><br><span class="line">    Properties&#123;</span><br><span class="line">        // 所需的各种属性</span><br><span class="line">    &#125;</span><br><span class="line">    SubShader&#123;</span><br><span class="line">        // 真正意义上的SubShdaer代码会出现在这里</span><br><span class="line">        // 表面着色器(Surface Shader)</span><br><span class="line">        // 顶点/片元着色器(Vertex/Fragment Shader)</span><br><span class="line">        // 固定函数着色器(Fixed Function Shader)</span><br><span class="line">    &#125;</span><br><span class="line">    SubShader&#123;</span><br><span class="line">        // 与上一个Shader类似</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
+<h4 id="UnityShader的形式"><a href="#UnityShader的形式" class="headerlink" title="UnityShader的形式"></a>UnityShader的形式</h4><p>ShaderLab语句块：</p>
+<pre class="line-numbers language-lang-cg"><code class="language-lang-cg">Shader "Myshader"{
+    Properties{
+        // 所需的各种属性
+    }
+    SubShader{
+        // 真正意义上的SubShdaer代码会出现在这里
+        // 表面着色器(Surface Shader)
+        // 顶点/片元着色器(Vertex/Fragment Shader)
+        // 固定函数着色器(Fixed Function Shader)
+    }
+    SubShader{
+        // 与上一个Shader类似
+    }
+}
+<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
 <h5 id="表面着色器"><a href="#表面着色器" class="headerlink" title="表面着色器"></a>表面着色器</h5><p>当给Unity提供一个表面着色器的时候，它在背后依旧将其转换为对应的顶点/片元着色器。意义在于Unity为我们处理了很多光照细节，使得我们无需再操心这些事情。</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line">Shader &quot;Custom/Simple Surface Shader&quot;&#123;</span><br><span class="line">    SubShader&#123;</span><br><span class="line">        Tags&#123; &quot;RenderType&quot; = &quot;Opaque&quot; &#125;</span><br><span class="line">        CGPROGRAM</span><br><span class="line">        #pragma surface surf Lambert</span><br><span class="line">        struct Input &#123;</span><br><span class="line">            float4 color:COLOR;</span><br><span class="line">        &#125;;</span><br><span class="line">        void surf (Input IN,inout SurfaceOutput o)</span><br><span class="line">        &#123;</span><br><span class="line">            o.Albedo = 1;</span><br><span class="line">        &#125;</span><br><span class="line">        ENDCG</span><br><span class="line">    &#125;</span><br><span class="line">    Fallback &quot;Diffuse&quot;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<pre class="line-numbers language-lang-Cg"><code class="language-lang-Cg">Shader "Custom/Simple Surface Shader"{
+    SubShader{
+        Tags{ "RenderType" = "Opaque" }
+        CGPROGRAM
+        #pragma surface surf Lambert
+        struct Input {
+            float4 color:COLOR;
+        };
+        void surf (Input IN,inout SurfaceOutput o)
+        {
+            o.Albedo = 1;
+        }
+        ENDCG
+    }
+    Fallback "Diffuse"
+}
+<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
 <p>表面着色器被定义在SubShader语义块中的CGPROGRAM与ENDCG之间。之间的代码使用Cg/HLSL语言编写，它嵌套在ShaderLab语言中。</p>
 <h5 id="顶点-片元着色器"><a href="#顶点-片元着色器" class="headerlink" title="顶点/片元着色器"></a>顶点/片元着色器</h5><p>顶点/片元着色器的代码需要定义在CGPROGRAM与ENDCG之间，而着色器是写在Pass语义块内，而非SubShader内，这样做来定义每个Pass需要的Shader代码，灵活性更高，同时控制渲染的实现细节。</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br></pre></td><td class="code"><pre><span class="line">Shader &quot;Custom/Simple VertexFragment Shader&quot;&#123;</span><br><span class="line">    SubShader&#123;</span><br><span class="line">        Pass&#123;</span><br><span class="line">            CGPROGRAM</span><br><span class="line"></span><br><span class="line">            #pragma vertex vert</span><br><span class="line">            #pragma fragment frag</span><br><span class="line"></span><br><span class="line">            float4 vert(float4 v:POSITION):SV_POSITION&#123;</span><br><span class="line">                return mul(UNITY_MATRIX_MVP,v);</span><br><span class="line">            &#125;</span><br><span class="line"></span><br><span class="line">            fixed4 frag():SV_Target&#123;</span><br><span class="line">                return fixed4(1.0,0.0,0.0,1.0);</span><br><span class="line">            &#125;</span><br><span class="line"></span><br><span class="line">            ENDCG</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<pre class="line-numbers language-lang-cg"><code class="language-lang-cg">Shader "Custom/Simple VertexFragment Shader"{
+    SubShader{
+        Pass{
+            CGPROGRAM
+
+            #pragma vertex vert
+            #pragma fragment frag
+
+            float4 vert(float4 v:POSITION):SV_POSITION{
+                return mul(UNITY_MATRIX_MVP,v);
+            }
+
+            fixed4 frag():SV_Target{
+                return fixed4(1.0,0.0,0.0,1.0);
+            }
+
+            ENDCG
+        }
+    }
+}
+<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
 <h5 id="固定函数着色器"><a href="#固定函数着色器" class="headerlink" title="固定函数着色器"></a>固定函数着色器</h5><p>上面两种UnityShader形式都使用了可编程管线，而对于一些旧的设备不支持可编程管线着色器，此时需要使用固定函数着色器来完成渲染，这些着色器往往只可以完成一些非常简单的效果。</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line">Shader &quot;Tutorial/Basic&quot;&#123;</span><br><span class="line">    Properties&#123;</span><br><span class="line">        _Color(&quot;Main Color&quot;,color)=(1.0,5.0,5.1)</span><br><span class="line">    &#125;</span><br><span class="line">    SubShader&#123;</span><br><span class="line">        Pass&#123;</span><br><span class="line">            Material&#123;</span><br><span class="line">                Diffuse[_Color]</span><br><span class="line">            &#125;</span><br><span class="line">            Lighting On</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<pre class="line-numbers language-lang-cg"><code class="language-lang-cg">Shader "Tutorial/Basic"{
+    Properties{
+        _Color("Main Color",color)=(1.0,5.0,5.1)
+    }
+    SubShader{
+        Pass{
+            Material{
+                Diffuse[_Color]
+            }
+            Lighting On
+        }
+    }
+}
+<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
 <h5 id="乐乐女神的一些建议："><a href="#乐乐女神的一些建议：" class="headerlink" title="乐乐女神的一些建议："></a>乐乐女神的一些建议：</h5><ul>
 <li>除非有明确的需求必须要使用固定函数着色器，否则请使用可编程管线的着色器。</li>
 <li>如果想和各种光源打交道，你可能更喜欢表面着色器，但需要小心它在移动平台的性能表现。</li>
