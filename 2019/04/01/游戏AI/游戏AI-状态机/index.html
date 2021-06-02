@@ -171,13 +171,37 @@
 </ol>
 <hr>
 <h2 id="状态机"><a href="#状态机" class="headerlink" title="状态机"></a>状态机</h2><h3 id="状态机是什么："><a href="#状态机是什么：" class="headerlink" title="状态机是什么："></a>状态机是什么：</h3><h3 id="为什么选择状态机："><a href="#为什么选择状态机：" class="headerlink" title="为什么选择状态机："></a>为什么选择状态机：</h3><h3 id="状态机的演进："><a href="#状态机的演进：" class="headerlink" title="状态机的演进："></a>状态机的演进：</h3><h4 id="最简单的状态机："><a href="#最简单的状态机：" class="headerlink" title="最简单的状态机："></a>最简单的状态机：</h4><p>首先很容易抽象出IUnit：</p>
-<figure class="highlight csharp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="keyword">interface</span> <span class="title">IUnit</span></span><br><span class="line">&#123;</span><br><span class="line">    <span class="function"><span class="keyword">void</span> <span class="title">ChangeState</span>(<span class="params">UnitStateEnum state</span>)</span>;</span><br><span class="line">    <span class="function"><span class="keyword">void</span> <span class="title">Patrol</span>(<span class="params"></span>)</span>; </span><br><span class="line">    <span class="function">IUnit <span class="title">GetNearestTarget</span>(<span class="params"></span>)</span>; </span><br><span class="line">    <span class="function"><span class="keyword">void</span> <span class="title">LockTarget</span>(<span class="params">IUnit unit</span>)</span>;</span><br><span class="line">    <span class="function"><span class="keyword">float</span> <span class="title">GetFleeBloodRate</span>(<span class="params"></span>)</span>;</span><br><span class="line">    <span class="function"><span class="keyword">bool</span> <span class="title">CanMove</span>(<span class="params"></span>)</span>;</span><br><span class="line">    <span class="function"><span class="keyword">bool</span> <span class="title">HpRateLessThan</span>(<span class="params"><span class="keyword">float</span> rate</span>)</span>;</span><br><span class="line">    <span class="function"><span class="keyword">void</span> <span class="title">Flee</span>(<span class="params"></span>)</span>;</span><br><span class="line">    <span class="function"><span class="keyword">void</span> <span class="title">Speak</span>(<span class="params"></span>)</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<pre><code class="hljs csharp"><span class="hljs-keyword">public</span> <span class="hljs-keyword">interface</span> <span class="hljs-title">IUnit</span>
+&#123;
+    <span class="hljs-function"><span class="hljs-keyword">void</span> <span class="hljs-title">ChangeState</span>(<span class="hljs-params">UnitStateEnum state</span>)</span>;
+    <span class="hljs-function"><span class="hljs-keyword">void</span> <span class="hljs-title">Patrol</span>(<span class="hljs-params"></span>)</span>; 
+    <span class="hljs-function">IUnit <span class="hljs-title">GetNearestTarget</span>(<span class="hljs-params"></span>)</span>; 
+    <span class="hljs-function"><span class="hljs-keyword">void</span> <span class="hljs-title">LockTarget</span>(<span class="hljs-params">IUnit unit</span>)</span>;
+    <span class="hljs-function"><span class="hljs-keyword">float</span> <span class="hljs-title">GetFleeBloodRate</span>(<span class="hljs-params"></span>)</span>;
+    <span class="hljs-function"><span class="hljs-keyword">bool</span> <span class="hljs-title">CanMove</span>(<span class="hljs-params"></span>)</span>;
+    <span class="hljs-function"><span class="hljs-keyword">bool</span> <span class="hljs-title">HpRateLessThan</span>(<span class="hljs-params"><span class="hljs-keyword">float</span> rate</span>)</span>;
+    <span class="hljs-function"><span class="hljs-keyword">void</span> <span class="hljs-title">Flee</span>(<span class="hljs-params"></span>)</span>;
+    <span class="hljs-function"><span class="hljs-keyword">void</span> <span class="hljs-title">Speak</span>(<span class="hljs-params"></span>)</span>;
+&#125;</code></pre>
 <p>要注意的是，<strong>原作者的实现方式是定义一个单位接口，每个智能体要实现这个单位接口中定义的方法。</strong>(这样写会使每个单位类中有着一套自己所有行为的方法。我之前的实现方式是状态机来控制单位进行相应的行为，这样可以使每个状态仅有这个状态下自身的方法，但是耦合性较高。原作者这种接口是不是可以改写成虚方法的形式，在基类中实现基本行为，具体单位子类中再override出特定的行为？)</p>
 <p>一个最简单的状态机定义：</p>
-<figure class="highlight csharp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">public interface IState&lt;TState,TUnit&gt; where TState : IConvertible</span><br><span class="line">&#123;</span><br><span class="line">  TState Enum &#123;<span class="keyword">get</span>;&#125;</span><br><span class="line">  TUnit Self &#123;<span class="keyword">get</span>;&#125;</span><br><span class="line">  <span class="function"><span class="keyword">void</span> <span class="title">OnEnter</span>(<span class="params"></span>)</span>;</span><br><span class="line">  <span class="function"><span class="keyword">void</span> <span class="title">Drive</span>(<span class="params"></span>)</span>;</span><br><span class="line">  <span class="function"><span class="keyword">void</span> <span class="title">OnExit</span>(<span class="params"></span>)</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<pre><code class="hljs csharp">public interface IState&lt;TState,TUnit&gt; where TState : IConvertible
+&#123;
+  TState Enum &#123;get;&#125;
+  TUnit Self &#123;get;&#125;
+  void OnEnter();
+  void Drive();
+  void OnExit();
+&#125;</code></pre>
 <p>这样写有着一个明显的性能问题：状态机本质是描述状态迁移的，并不需要保存实体的上下文，如果实体的上下文都保存在State中(上文中的TUnit类型的Self)，那么这个状态机的每个状态迁移逻辑需要每个状态都保存一个实体的实例，这样浪费内存，应该将决策逻辑与实体的上下文分离。</p>
 <h4 id="决策逻辑和上下文分离："><a href="#决策逻辑和上下文分离：" class="headerlink" title="决策逻辑和上下文分离："></a>决策逻辑和上下文分离：</h4><p>剥离后：</p>
-<figure class="highlight csharp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">public interface IState&lt;TState,TUnit&gt; where TState : IConvertible</span><br><span class="line">&#123;</span><br><span class="line">  TState Enum &#123;<span class="keyword">get</span>;&#125;</span><br><span class="line">  <span class="function"><span class="keyword">void</span> <span class="title">OnEnter</span>(<span class="params">TUnit self</span>)</span>;</span><br><span class="line">  <span class="function"><span class="keyword">void</span> <span class="title">Drive</span>(<span class="params">TUnit self</span>)</span>;</span><br><span class="line">  <span class="function"><span class="keyword">void</span> <span class="title">OnExit</span>(<span class="params">TUnit self</span>)</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<pre><code class="hljs csharp">public interface IState&lt;TState,TUnit&gt; where TState : IConvertible
+&#123;
+  TState Enum &#123;get;&#125;
+  void OnEnter(TUnit self);
+  void Drive(TUnit self);
+  void OnExit(TUnit self);
+&#125;</code></pre>
 <p>可以使用单例模式保持静态的状态内容实例只有一个，此时状态之间的迁移逻辑变成了静态，动态的是状态迁移过程中的上下文。</p>
 <h4 id="分层有限状态机："><a href="#分层有限状态机：" class="headerlink" title="分层有限状态机："></a>分层有限状态机：</h4><p>如果想要让状态机框架描述层级结构的概念，需要对其进行拓展：</p>
 <p>例如一个怪物需要在巡逻一段时间后进行休息，在休息一段时间后再次进行巡逻，而巡逻与休息状态均保持着对于战斗的检查。这时如果按照之前的框架(我之前就是最初级的那种)，就需要手动进行装配，在每个状态中都写入一个关于是否进入战斗状态的检查。可以看出战斗状态的优先级较高，并且相对来说算是一种”全局检查”，可以将其抽离出来作为上层状态。</p>
@@ -189,11 +213,79 @@
 <p>考虑这样一个组合状态情景：巡逻时，需要依次得先走到一个点，然后怠工一会儿，再走到下一个点，然后再怠工一会儿，循环往复。这样就需要父状态（巡逻状态）注记当前激活的子状态，并且根据子状态执行结果的不同来修改激活的子状态集合。这样不仅是Unit自身有上下文，连组合状态也有了自己的上下文。</p>
 </blockquote>
 <p>状态定义：</p>
-<figure class="highlight csharp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">public interface IState&lt;TState, TCleverUnit, TResult&gt; where TState : IConvertible</span><br><span class="line">&#123;</span><br><span class="line">	<span class="comment">// ...</span></span><br><span class="line">	<span class="function">TResult <span class="title">Drive</span>(<span class="params"></span>)</span>;</span><br><span class="line">	<span class="comment">// ...</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<pre><code class="hljs csharp">public interface IState&lt;TState, TCleverUnit, TResult&gt; where TState : IConvertible
+&#123;
+	// ...
+	TResult Drive();
+	// ...
+&#125;</code></pre>
 <p>组合状态的定义：</p>
-<figure class="highlight csharp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="keyword">abstract</span> <span class="keyword">class</span> <span class="title">UnitCompositeStateBase</span> : <span class="title">UnitStateBase</span></span><br><span class="line">&#123;</span><br><span class="line">	<span class="keyword">protected</span> <span class="keyword">readonly</span> LinkedList&lt;UnitStateBase&gt; subStates = <span class="keyword">new</span> LinkedList&lt;UnitStateBase&gt;();</span><br><span class="line"></span><br><span class="line">	<span class="comment">// ...</span></span><br><span class="line">	<span class="function"><span class="keyword">protected</span> Result <span class="title">ProcessSubStates</span>(<span class="params"></span>)</span></span><br><span class="line"><span class="function"></span>	&#123;</span><br><span class="line">		<span class="keyword">if</span> (subStates.Count == <span class="number">0</span>)</span><br><span class="line">		&#123;</span><br><span class="line">			<span class="keyword">return</span> Result.Success;</span><br><span class="line">		&#125;</span><br><span class="line"></span><br><span class="line">		<span class="keyword">var</span> front = subStates.First;</span><br><span class="line">		<span class="keyword">var</span> res = front.Value.Drive();</span><br><span class="line"></span><br><span class="line">		<span class="keyword">if</span> (res != Result.Continue)</span><br><span class="line">		&#123;</span><br><span class="line">			subStates.RemoveFirst();</span><br><span class="line">		&#125;</span><br><span class="line"></span><br><span class="line">		<span class="keyword">return</span> Result.Continue;</span><br><span class="line">	&#125;</span><br><span class="line">	<span class="comment">// ...</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<pre><code class="hljs csharp"><span class="hljs-keyword">public</span> <span class="hljs-keyword">abstract</span> <span class="hljs-keyword">class</span> <span class="hljs-title">UnitCompositeStateBase</span> : <span class="hljs-title">UnitStateBase</span>
+&#123;
+	<span class="hljs-keyword">protected</span> <span class="hljs-keyword">readonly</span> LinkedList&lt;UnitStateBase&gt; subStates = <span class="hljs-keyword">new</span> LinkedList&lt;UnitStateBase&gt;();
+
+	<span class="hljs-comment">// ...</span>
+	<span class="hljs-function"><span class="hljs-keyword">protected</span> Result <span class="hljs-title">ProcessSubStates</span>(<span class="hljs-params"></span>)</span>
+	&#123;
+		<span class="hljs-keyword">if</span> (subStates.Count == <span class="hljs-number">0</span>)
+		&#123;
+			<span class="hljs-keyword">return</span> Result.Success;
+		&#125;
+
+		<span class="hljs-keyword">var</span> front = subStates.First;
+		<span class="hljs-keyword">var</span> res = front.Value.Drive();
+
+		<span class="hljs-keyword">if</span> (res != Result.Continue)
+		&#123;
+			subStates.RemoveFirst();
+		&#125;
+
+		<span class="hljs-keyword">return</span> Result.Continue;
+	&#125;
+	<span class="hljs-comment">// ...</span>
+&#125;</code></pre>
 <p>巡逻状态：</p>
-<figure class="highlight csharp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="keyword">class</span> <span class="title">PatrolState</span> : <span class="title">UnitCompositeStateBase</span></span><br><span class="line">&#123;</span><br><span class="line">	<span class="comment">// ...</span></span><br><span class="line">	<span class="function"><span class="keyword">public</span> <span class="keyword">override</span> <span class="keyword">void</span> <span class="title">OnEnter</span>(<span class="params"></span>)</span></span><br><span class="line"><span class="function"></span>	&#123;</span><br><span class="line">		<span class="keyword">base</span>.OnEnter();</span><br><span class="line">		AddSubState(<span class="keyword">new</span> MoveToState(Self));</span><br><span class="line">	&#125;</span><br><span class="line"></span><br><span class="line">	<span class="function"><span class="keyword">public</span> <span class="keyword">override</span> Result <span class="title">Drive</span>(<span class="params"></span>)</span></span><br><span class="line"><span class="function"></span>	&#123;</span><br><span class="line">		<span class="keyword">if</span> (subStates.Count == <span class="number">0</span>)</span><br><span class="line">		&#123;</span><br><span class="line">			<span class="keyword">return</span> Result.Success;</span><br><span class="line">		&#125;</span><br><span class="line"></span><br><span class="line">		<span class="keyword">var</span> unit = Self.GetNearestTarget();</span><br><span class="line">		<span class="keyword">if</span> (unit != <span class="literal">null</span>)</span><br><span class="line"> 		&#123;</span><br><span class="line">			Self.LockTarget(unit);</span><br><span class="line">			<span class="keyword">return</span> Result.Success;</span><br><span class="line">		&#125;</span><br><span class="line"></span><br><span class="line">		<span class="keyword">var</span> front = subStates.First;</span><br><span class="line">		<span class="keyword">var</span> ret = front.Value.Drive();</span><br><span class="line"></span><br><span class="line">		<span class="keyword">if</span> (ret != Result.Continue)</span><br><span class="line">		&#123;</span><br><span class="line">			<span class="keyword">if</span> (front.Value.Enum == CleverUnitStateEnum.MoveTo)</span><br><span class="line">			&#123;</span><br><span class="line">				AddSubState(<span class="keyword">new</span> IdleState(Self));</span><br><span class="line">			&#125;</span><br><span class="line">			<span class="keyword">else</span></span><br><span class="line">			&#123;</span><br><span class="line">				AddSubState(<span class="keyword">new</span> MoveToState(Self));</span><br><span class="line">			&#125;</span><br><span class="line">		&#125;</span><br><span class="line">            </span><br><span class="line">		<span class="keyword">return</span> Result.Continue;</span><br><span class="line">	&#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<pre><code class="hljs csharp"><span class="hljs-keyword">public</span> <span class="hljs-keyword">class</span> <span class="hljs-title">PatrolState</span> : <span class="hljs-title">UnitCompositeStateBase</span>
+&#123;
+	<span class="hljs-comment">// ...</span>
+	<span class="hljs-function"><span class="hljs-keyword">public</span> <span class="hljs-keyword">override</span> <span class="hljs-keyword">void</span> <span class="hljs-title">OnEnter</span>(<span class="hljs-params"></span>)</span>
+	&#123;
+		<span class="hljs-keyword">base</span>.OnEnter();
+		AddSubState(<span class="hljs-keyword">new</span> MoveToState(Self));
+	&#125;
+
+	<span class="hljs-function"><span class="hljs-keyword">public</span> <span class="hljs-keyword">override</span> Result <span class="hljs-title">Drive</span>(<span class="hljs-params"></span>)</span>
+	&#123;
+		<span class="hljs-keyword">if</span> (subStates.Count == <span class="hljs-number">0</span>)
+		&#123;
+			<span class="hljs-keyword">return</span> Result.Success;
+		&#125;
+
+		<span class="hljs-keyword">var</span> unit = Self.GetNearestTarget();
+		<span class="hljs-keyword">if</span> (unit != <span class="hljs-literal">null</span>)
+ 		&#123;
+			Self.LockTarget(unit);
+			<span class="hljs-keyword">return</span> Result.Success;
+		&#125;
+
+		<span class="hljs-keyword">var</span> front = subStates.First;
+		<span class="hljs-keyword">var</span> ret = front.Value.Drive();
+
+		<span class="hljs-keyword">if</span> (ret != Result.Continue)
+		&#123;
+			<span class="hljs-keyword">if</span> (front.Value.Enum == CleverUnitStateEnum.MoveTo)
+			&#123;
+				AddSubState(<span class="hljs-keyword">new</span> IdleState(Self));
+			&#125;
+			<span class="hljs-keyword">else</span>
+			&#123;
+				AddSubState(<span class="hljs-keyword">new</span> MoveToState(Self));
+			&#125;
+		&#125;
+            
+		<span class="hljs-keyword">return</span> Result.Continue;
+	&#125;
+&#125;</code></pre>
 <h4 id="分层有限状态机的上下文分离："><a href="#分层有限状态机的上下文分离：" class="headerlink" title="分层有限状态机的上下文分离："></a>分层有限状态机的上下文分离：</h4><p>　　我们对之前重构出来的层次状态机框架再进行一次Context分离优化。</p>
 <p>　　要优化的点有这样几个：</p>
 <ul>
@@ -225,12 +317,100 @@
 </ul>
 <p>　　这样，再还原现场时，就需要即给A一个a，还需要让A有能力从Context中拿到需要给B的b。因此上下文的结构理应是递归定义的，是一个层级结构。</p>
 <p>　　Context如下定义：</p>
-<figure class="highlight csharp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="keyword">class</span> <span class="title">Continuation</span></span><br><span class="line">    &#123;</span><br><span class="line">        <span class="keyword">public</span> Continuation SubContinuation &#123; <span class="keyword">get</span>; <span class="keyword">set</span>; &#125;</span><br><span class="line">        <span class="keyword">public</span> <span class="keyword">int</span> NextStep &#123; <span class="keyword">get</span>; <span class="keyword">set</span>; &#125;</span><br><span class="line">        <span class="keyword">public</span> <span class="keyword">object</span> Param &#123; <span class="keyword">get</span>; <span class="keyword">set</span>; &#125;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">public class Context&lt;T&gt;</span><br><span class="line">&#123;</span><br><span class="line">	<span class="keyword">public</span> Continuation Continuation &#123; <span class="keyword">get</span>; <span class="keyword">set</span>; &#125;</span><br><span class="line">	<span class="keyword">public</span> T Self &#123; <span class="keyword">get</span>; <span class="keyword">set</span>; &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<pre><code class="hljs csharp">public class Continuation
+    &#123;
+        public Continuation SubContinuation &#123; get; set; &#125;
+        public int NextStep &#123; get; set; &#125;
+        public object Param &#123; get; set; &#125;
+    &#125;
+
+public class Context&lt;T&gt;
+&#123;
+	public Continuation Continuation &#123; get; set; &#125;
+	public T Self &#123; get; set; &#125;
+&#125;</code></pre>
 <p>　　修改State的接口定义为：</p>
-<figure class="highlight csharp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">public interface IState&lt;TCleverUnit, TResult&gt;</span><br><span class="line">    &#123;</span><br><span class="line">        <span class="function">TResult <span class="title">Drive</span>(<span class="params">Context&lt;TCleverUnit&gt; ctx</span>)</span>;</span><br><span class="line">    &#125;</span><br></pre></td></tr></table></figure>
+<pre><code class="hljs csharp">public interface IState&lt;TCleverUnit, TResult&gt;
+    &#123;
+        TResult Drive(Context&lt;TCleverUnit&gt; ctx);
+    &#125;</code></pre>
 <p>　　已经相当简洁了。</p>
 <p>　　这样，我们对之前的巡逻状态也做下修改，达到一个ContextFree的效果。利用Context中的Continuation来确定当前结点应该从什么状态继续：</p>
-<figure class="highlight csharp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br></pre></td><td class="code"><pre><span class="line">public class PatrolState : IState&lt;ICleverUnit, Result&gt;</span><br><span class="line">    &#123;</span><br><span class="line">        <span class="keyword">private</span> <span class="keyword">readonly</span> List&lt;IState&lt;ICleverUnit, Result&gt;&gt; subStates;</span><br><span class="line">        <span class="function"><span class="keyword">public</span> <span class="title">PatrolState</span>(<span class="params"></span>)</span></span><br><span class="line"><span class="function"></span>        &#123;</span><br><span class="line">            subStates = <span class="keyword">new</span> List&lt;IState&lt;ICleverUnit, Result&gt;&gt;()</span><br><span class="line">            &#123;</span><br><span class="line">                <span class="keyword">new</span> MoveToState(),</span><br><span class="line">                <span class="keyword">new</span> IdleState(),</span><br><span class="line">            &#125;;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="function"><span class="keyword">public</span> Result <span class="title">Drive</span>(<span class="params">Context&lt;ICleverUnit&gt; ctx</span>)</span></span><br><span class="line"><span class="function"></span>        &#123;</span><br><span class="line">            <span class="keyword">var</span> unit = ctx.Self.GetNearestTarget();</span><br><span class="line">            <span class="keyword">if</span> (unit != <span class="literal">null</span>)</span><br><span class="line">            &#123;</span><br><span class="line">                ctx.Self.LockTarget(unit);</span><br><span class="line"></span><br><span class="line">                <span class="keyword">return</span> Result.Success;</span><br><span class="line">            &#125;</span><br><span class="line"></span><br><span class="line">            <span class="keyword">var</span> nextStep = <span class="number">0</span>;</span><br><span class="line">            <span class="keyword">if</span> (ctx.Continuation != <span class="literal">null</span>)</span><br><span class="line">            &#123;</span><br><span class="line">                <span class="comment">// Continuation</span></span><br><span class="line">                <span class="keyword">var</span> thisContinuation = ctx.Continuation;</span><br><span class="line"></span><br><span class="line">                ctx.Continuation = thisContinuation.SubContinuation;</span><br><span class="line"></span><br><span class="line">                <span class="keyword">var</span> ret = subStates[nextStep].Drive(ctx);</span><br><span class="line"></span><br><span class="line">                <span class="keyword">if</span> (ret == Result.Continue)</span><br><span class="line">                &#123;</span><br><span class="line">                    thisContinuation.SubContinuation = ctx.Continuation;</span><br><span class="line">                    ctx.Continuation = thisContinuation;</span><br><span class="line"></span><br><span class="line">                    <span class="keyword">return</span> Result.Continue;</span><br><span class="line">                &#125;</span><br><span class="line">                <span class="keyword">else</span> <span class="keyword">if</span> (ret == Result.Failure)</span><br><span class="line">                &#123;</span><br><span class="line">                    ctx.Continuation = <span class="literal">null</span>;</span><br><span class="line"></span><br><span class="line">                    <span class="keyword">return</span> Result.Failure;</span><br><span class="line">                &#125;</span><br><span class="line"></span><br><span class="line">                ctx.Continuation = <span class="literal">null</span>;</span><br><span class="line">                nextStep = thisContinuation.NextStep + <span class="number">1</span>;</span><br><span class="line">            &#125;</span><br><span class="line"></span><br><span class="line">            <span class="keyword">for</span> (; nextStep &lt; subStates.Count; nextStep++)</span><br><span class="line">            &#123;</span><br><span class="line">                <span class="keyword">var</span> ret = subStates[nextStep].Drive(ctx);</span><br><span class="line">                <span class="keyword">if</span> (ret == Result.Continue)</span><br><span class="line">                &#123;</span><br><span class="line">                    ctx.Continuation = <span class="keyword">new</span> Continuation()</span><br><span class="line">                    &#123;</span><br><span class="line">                        SubContinuation = ctx.Continuation,</span><br><span class="line">                        NextStep = nextStep,</span><br><span class="line">                    &#125;;</span><br><span class="line"></span><br><span class="line">                    <span class="keyword">return</span> Result.Continue;</span><br><span class="line">                &#125; </span><br><span class="line">                <span class="keyword">else</span> <span class="keyword">if</span> (ret == Result.Failure) </span><br><span class="line">                &#123;</span><br><span class="line">                    ctx.Continuation = <span class="literal">null</span>;</span><br><span class="line"></span><br><span class="line">                    <span class="keyword">return</span> Result.Failure;</span><br><span class="line">                &#125;</span><br><span class="line">            &#125;</span><br><span class="line"></span><br><span class="line">            ctx.Continuation = <span class="literal">null</span>;</span><br><span class="line"></span><br><span class="line">            <span class="keyword">return</span> Result.Success;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br></pre></td></tr></table></figure>
+<pre><code class="hljs csharp">public class PatrolState : IState&lt;ICleverUnit, Result&gt;
+    &#123;
+        private readonly List&lt;IState&lt;ICleverUnit, Result&gt;&gt; subStates;
+        public PatrolState()
+        &#123;
+            subStates = new List&lt;IState&lt;ICleverUnit, Result&gt;&gt;()
+            &#123;
+                new MoveToState(),
+                new IdleState(),
+            &#125;;
+        &#125;
+        public Result Drive(Context&lt;ICleverUnit&gt; ctx)
+        &#123;
+            var unit = ctx.Self.GetNearestTarget();
+            if (unit != null)
+            &#123;
+                ctx.Self.LockTarget(unit);
+
+                return Result.Success;
+            &#125;
+
+            var nextStep = 0;
+            if (ctx.Continuation != null)
+            &#123;
+                // Continuation
+                var thisContinuation = ctx.Continuation;
+
+                ctx.Continuation = thisContinuation.SubContinuation;
+
+                var ret = subStates[nextStep].Drive(ctx);
+
+                if (ret == Result.Continue)
+                &#123;
+                    thisContinuation.SubContinuation = ctx.Continuation;
+                    ctx.Continuation = thisContinuation;
+
+                    return Result.Continue;
+                &#125;
+                else if (ret == Result.Failure)
+                &#123;
+                    ctx.Continuation = null;
+
+                    return Result.Failure;
+                &#125;
+
+                ctx.Continuation = null;
+                nextStep = thisContinuation.NextStep + 1;
+            &#125;
+
+            for (; nextStep &lt; subStates.Count; nextStep++)
+            &#123;
+                var ret = subStates[nextStep].Drive(ctx);
+                if (ret == Result.Continue)
+                &#123;
+                    ctx.Continuation = new Continuation()
+                    &#123;
+                        SubContinuation = ctx.Continuation,
+                        NextStep = nextStep,
+                    &#125;;
+
+                    return Result.Continue;
+                &#125; 
+                else if (ret == Result.Failure) 
+                &#123;
+                    ctx.Continuation = null;
+
+                    return Result.Failure;
+                &#125;
+            &#125;
+
+            ctx.Continuation = null;
+
+            return Result.Success;
+        &#125;
+    &#125;</code></pre>
 <p>　　subStates是readonly的，在组合状态构造的一开始就确定了值。这样结构本身就是静态的，而上下文是动态的。不同的entity instance共用同一个树的instance。</p>
 <p>​    (最后这个理解起来比较吃力了)</p>
 
@@ -315,7 +495,7 @@
         
         <footer id="footer">
   <div class="footer-left">
-    Copyright &copy; 2020 zhangMo
+    Copyright &copy; 2021 zhangMo
   </div>
   <div class="footer-right">
     <nav>

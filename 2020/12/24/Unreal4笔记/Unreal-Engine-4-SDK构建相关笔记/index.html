@@ -85,6 +85,8 @@
     <span id="actions">
       <ul>
         
+        <li><a class="icon" href="/2021/06/02/Lua读书笔记/"><i class="fas fa-chevron-left" aria-hidden="true" onmouseover="$('#i-prev').toggle();" onmouseout="$('#i-prev').toggle();"></i></a></li>
+        
         
         <li><a class="icon" href="/2020/09/17/随笔/Minigame以及其他有的没的/"><i class="fas fa-chevron-right" aria-hidden="true" onmouseover="$('#i-next').toggle();" onmouseout="$('#i-next').toggle();"></i></a></li>
         
@@ -169,7 +171,7 @@
 <h1 id="SDK构建相关阅读"><a href="#SDK构建相关阅读" class="headerlink" title="SDK构建相关阅读"></a>SDK构建相关阅读</h1><p>[toc]</p>
 <p>在Unreal项目开发的过程中，可能会用到第三方开发的库来集成一些第三方的功能，例如语音通话、播放视频等功能。虚幻引擎本身也引用了很多第三方的库,例如物理库<code>PhysX</code>、Steam平台相关的库<code>SteamWorks</code>、<code>GoogleVR</code>等等。这些库可以在引擎的<code>Engine\Source\ThirdParty</code>目录下找到。Unreal官方推荐将第三方库集成到插件目录中，这样可以将游戏代码与第三方代码进行隔离。</p>
 <h2 id="使用插件引入第三方库"><a href="#使用插件引入第三方库" class="headerlink" title="使用插件引入第三方库"></a>使用插件引入第三方库</h2><p>在Unreal的编辑器中，可以新建一个ThirdParty插件来引入SDK：在项目中点击<code>编辑-插件-新插件-第三方库</code>就可以创建一个使用已包含第三方库的插件。</p>
-<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="number">1.</span> 貌似只有C++项目中才可以创建第三方库插件，蓝图项目中貌似只能建立空白插件</span><br></pre></td></tr></table></figure>
+<pre><code class="hljs c"><span class="hljs-number">1.</span> 貌似只有C++项目中才可以创建第三方库插件，蓝图项目中貌似只能建立空白插件</code></pre>
 <p>新插件的目录结构如下：</p>
 <p><img src="http://hust_mo.gitee.io/blogpicturerepo/image-20201224174958125.png" alt></p>
 <p>其中<code>SDKTest</code>是插件本身逻辑的目录，<code>ThirdParty</code>是第三方库的目录，对于不同平台，所使用的SDK文件格式也有不同，这一点我们在后面再详细展开讲。</p>
@@ -187,9 +189,30 @@
 <p><img src="http://hust_mo.gitee.io/blogpicturerepo/render" alt></p>
 <p>下载之后将文件夹拷贝到插件的Public目录下，并参考<code>AAInfo4Copy.txt</code>，在<code>xxx.Build.cs</code>文件中引入相应的插件。</p>
 <p>在官方文档中引入插件的方法是：</p>
-<figure class="highlight csharp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">PrivateDependencyModuleNames.AddRange(<span class="keyword">new</span> <span class="keyword">string</span>[] &#123; <span class="string">"GCloudCore"</span> &#125;);</span><br><span class="line">PrivateDependencyModuleNames.AddRange(<span class="keyword">new</span> <span class="keyword">string</span>[] &#123; <span class="string">"GCloud"</span> &#125;);</span><br><span class="line">PrivateDependencyModuleNames.AddRange(<span class="keyword">new</span> <span class="keyword">string</span>[] &#123; <span class="string">"TApm"</span> &#125;);</span><br><span class="line">PrivateDependencyModuleNames.AddRange(<span class="keyword">new</span> <span class="keyword">string</span>[] &#123; <span class="string">"GVoice"</span> &#125;);</span><br><span class="line">PrivateDependencyModuleNames.AddRange(<span class="keyword">new</span> <span class="keyword">string</span>[] &#123; <span class="string">"GEM_OneSDK"</span> &#125;);</span><br></pre></td></tr></table></figure>
+<pre><code class="hljs csharp">PrivateDependencyModuleNames.AddRange(<span class="hljs-keyword">new</span> <span class="hljs-keyword">string</span>[] &#123; <span class="hljs-string">"GCloudCore"</span> &#125;);
+PrivateDependencyModuleNames.AddRange(<span class="hljs-keyword">new</span> <span class="hljs-keyword">string</span>[] &#123; <span class="hljs-string">"GCloud"</span> &#125;);
+PrivateDependencyModuleNames.AddRange(<span class="hljs-keyword">new</span> <span class="hljs-keyword">string</span>[] &#123; <span class="hljs-string">"TApm"</span> &#125;);
+PrivateDependencyModuleNames.AddRange(<span class="hljs-keyword">new</span> <span class="hljs-keyword">string</span>[] &#123; <span class="hljs-string">"GVoice"</span> &#125;);
+PrivateDependencyModuleNames.AddRange(<span class="hljs-keyword">new</span> <span class="hljs-keyword">string</span>[] &#123; <span class="hljs-string">"GEM_OneSDK"</span> &#125;);</code></pre>
 <p>这部分的代码原理可以参考<code>Engine\Source\Programs\UnrealBuildTool\Configuration\ModuleRules.cs</code>文件中的相关定义</p>
-<figure class="highlight cs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 通过将插件中的Public文件夹下的相对路径添加进这个List中来暴露给其他模块</span></span><br><span class="line"><span class="keyword">public</span> List&lt;<span class="keyword">string</span>&gt; PublicIncludePaths = <span class="keyword">new</span> List&lt;<span class="keyword">string</span>&gt;();</span><br><span class="line"><span class="comment">// 同理，如果不想暴露给其他模块，则将相对路径添加到这个List中</span></span><br><span class="line"><span class="keyword">public</span> List&lt;<span class="keyword">string</span>&gt; PrivateIncludePaths = <span class="keyword">new</span> List&lt;<span class="keyword">string</span>&gt;();</span><br><span class="line"></span><br><span class="line"><span class="comment">// 公共依赖模块名称列表（不需要路径）（自动进行私有/公共包含）。这些模块是我们的公共源文件所需要的。</span></span><br><span class="line"><span class="keyword">public</span> List&lt;<span class="keyword">string</span>&gt; PublicDependencyModuleNames = <span class="keyword">new</span> List&lt;<span class="keyword">string</span>&gt;();</span><br><span class="line"><span class="comment">// 私有依赖模块名称列表。 这些模块是我们的私有代码所依赖的模块，但在公共的include文件中没有任何模块可以依赖。</span></span><br><span class="line"><span class="keyword">public</span> List&lt;<span class="keyword">string</span>&gt; PrivateDependencyModuleNames = <span class="keyword">new</span> List&lt;<span class="keyword">string</span>&gt;();</span><br><span class="line"></span><br><span class="line"><span class="comment">// 附加库列表（包括拓展名在内的.lib文件名），通常用于第三方模块</span></span><br><span class="line"><span class="keyword">public</span> List&lt;<span class="keyword">string</span>&gt; PublicAdditionalLibraries = <span class="keyword">new</span> List&lt;<span class="keyword">string</span>&gt;();</span><br><span class="line"></span><br><span class="line"><span class="comment">//...除此之外还有很多列表，可以在上述路径中文件内查看源码和注释</span></span><br><span class="line"></span><br><span class="line"><span class="comment">// ReceiptProperty在\Engine\Source\Programs\UnrealBuildTool\System\TargetReceipt.cs中定义</span></span><br><span class="line"><span class="comment">// 任意属性名/值，来自构建脚本的元数据可以传递给下游任务。（这是一对键值对），在文件中存储着UPL格式写的XML文件，其中可以进行一些设置，并且可以插入代码到AndroidManifest.xml和GameActivity.java中，关于这两个文件的作用在后面会解释</span></span><br><span class="line"><span class="keyword">public</span> List&lt;ReceiptProperty&gt; AdditionalPropertiesForReceipt = <span class="keyword">new</span> List&lt;ReceiptProperty&gt;();</span><br></pre></td></tr></table></figure>
+<pre><code class="hljs cs"><span class="hljs-comment">// 通过将插件中的Public文件夹下的相对路径添加进这个List中来暴露给其他模块</span>
+<span class="hljs-keyword">public</span> List&lt;<span class="hljs-keyword">string</span>&gt; PublicIncludePaths = <span class="hljs-keyword">new</span> List&lt;<span class="hljs-keyword">string</span>&gt;();
+<span class="hljs-comment">// 同理，如果不想暴露给其他模块，则将相对路径添加到这个List中</span>
+<span class="hljs-keyword">public</span> List&lt;<span class="hljs-keyword">string</span>&gt; PrivateIncludePaths = <span class="hljs-keyword">new</span> List&lt;<span class="hljs-keyword">string</span>&gt;();
+
+<span class="hljs-comment">// 公共依赖模块名称列表（不需要路径）（自动进行私有/公共包含）。这些模块是我们的公共源文件所需要的。</span>
+<span class="hljs-keyword">public</span> List&lt;<span class="hljs-keyword">string</span>&gt; PublicDependencyModuleNames = <span class="hljs-keyword">new</span> List&lt;<span class="hljs-keyword">string</span>&gt;();
+<span class="hljs-comment">// 私有依赖模块名称列表。 这些模块是我们的私有代码所依赖的模块，但在公共的include文件中没有任何模块可以依赖。</span>
+<span class="hljs-keyword">public</span> List&lt;<span class="hljs-keyword">string</span>&gt; PrivateDependencyModuleNames = <span class="hljs-keyword">new</span> List&lt;<span class="hljs-keyword">string</span>&gt;();
+
+<span class="hljs-comment">// 附加库列表（包括拓展名在内的.lib文件名），通常用于第三方模块</span>
+<span class="hljs-keyword">public</span> List&lt;<span class="hljs-keyword">string</span>&gt; PublicAdditionalLibraries = <span class="hljs-keyword">new</span> List&lt;<span class="hljs-keyword">string</span>&gt;();
+
+<span class="hljs-comment">//...除此之外还有很多列表，可以在上述路径中文件内查看源码和注释</span>
+
+<span class="hljs-comment">// ReceiptProperty在\Engine\Source\Programs\UnrealBuildTool\System\TargetReceipt.cs中定义</span>
+<span class="hljs-comment">// 任意属性名/值，来自构建脚本的元数据可以传递给下游任务。（这是一对键值对），在文件中存储着UPL格式写的XML文件，其中可以进行一些设置，并且可以插入代码到AndroidManifest.xml和GameActivity.java中，关于这两个文件的作用在后面会解释</span>
+<span class="hljs-keyword">public</span> List&lt;ReceiptProperty&gt; AdditionalPropertiesForReceipt = <span class="hljs-keyword">new</span> List&lt;ReceiptProperty&gt;();</code></pre>
 <p>总而言之，在<code>xxx.Build.cs</code>文件中，将对应的第三方库路径和设置文件的路径加入到了全局的List中，在之后的编译过程中，UBT会根据这个文件将对应的第三方库文件编译构建到指定的位置。</p>
 <h3 id="虚幻插件语言（Unreal-Plugin-Language-UPL）"><a href="#虚幻插件语言（Unreal-Plugin-Language-UPL）" class="headerlink" title="虚幻插件语言（Unreal Plugin Language, UPL）"></a>虚幻插件语言（Unreal Plugin Language, UPL）</h3><blockquote>
 <p><strong>虚幻插件语言</strong> (UPL)是一种基于XML的简单语言，用于操作XML和返回字符串。它包含一个分段，在计算任何其他分段之前，每个架构计算一次这个分段。状态被维护并推进到下个分段进行评估，因此分段的执行顺序很重要。虽然UPL是一个用于修改和查询XML的通用系统，但它专门用于允许插件影响其所属包的全局配置。例如，它允许插件修改Android APK AndroidManfiest.xml文件或IOS IPA plist文件。UBT还将查询插件的UPL xml文件，查找文件中要包含的字符串（对于包来说必须是常见的字符串），例如Android上的一些.java文件。</p>
@@ -234,7 +257,15 @@
 <p>在<a href="https://github.com/EpicGames/UnrealEngine/blob/f8f4b403eb682ffc055613c7caf9d2ba5df7f319/Engine/Source/Programs/UnrealBuildTool/System/UnrealPluginLanguage.cs#L378" target="_blank" rel="noopener">UPL</a>的源代码中可以看到全部的API，在SDK文档中应该会说明SDK的使用步骤，例如GCloud的文档中：</p>
 <p><img src="http://hust_mo.gitee.io/blogpicturerepo/image-20201225151117492.png" alt></p>
 <p>这部分的初始化代码就可以使用UPL插入到<code>GameActivity.java</code>中：</p>
-<figure class="highlight xml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">gameActivityOnCreateAdditions</span>&gt;</span></span><br><span class="line">	<span class="tag">&lt;<span class="name">insert</span>&gt;</span></span><br><span class="line">       	GCloud::InitializeInfo initInfo;</span><br><span class="line">		initInfo.GameId = GCLOUD_GAME_ID;</span><br><span class="line">		initInfo.GameKey = GCLOUD_GAME_KEY;</span><br><span class="line"></span><br><span class="line">		IGCloud::GetInstance().Initialize(initInfo);</span><br><span class="line">    <span class="tag">&lt;/<span class="name">insert</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">gameActivityOnCreateAdditions</span>&gt;</span></span><br></pre></td></tr></table></figure>
+<pre><code class="hljs xml"><span class="hljs-tag">&lt;<span class="hljs-name">gameActivityOnCreateAdditions</span>&gt;</span>
+	<span class="hljs-tag">&lt;<span class="hljs-name">insert</span>&gt;</span>
+       	GCloud::InitializeInfo initInfo;
+		initInfo.GameId = GCLOUD_GAME_ID;
+		initInfo.GameKey = GCLOUD_GAME_KEY;
+
+		IGCloud::GetInstance().Initialize(initInfo);
+    <span class="hljs-tag">&lt;/<span class="hljs-name">insert</span>&gt;</span>
+<span class="hljs-tag">&lt;/<span class="hljs-name">gameActivityOnCreateAdditions</span>&gt;</span></code></pre>
 <p>当然具体的实现要参考不同SDK文档中提供的实现。</p>
 </li>
 </ol>
@@ -357,7 +388,7 @@
         
         <footer id="footer">
   <div class="footer-left">
-    Copyright &copy; 2020 zhangMo
+    Copyright &copy; 2021 zhangMo
   </div>
   <div class="footer-right">
     <nav>
