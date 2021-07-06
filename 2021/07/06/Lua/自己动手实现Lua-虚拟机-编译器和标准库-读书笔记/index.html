@@ -1,0 +1,386 @@
+<!DOCTYPE html>
+<html lang=zh>
+<head><meta name="generator" content="Hexo 3.9.0">
+    <!-- so meta -->
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="HandheldFriendly" content="True">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+    <meta name="description" content="本篇是《自己动手实现Lua：虚拟机、编译器和标准库》的读书笔记，持续更新中。">
+<meta name="keywords" content="Lua">
+<meta property="og:type" content="article">
+<meta property="og:title" content="&lt;自己动手实现Lua:虚拟机,编译器和标准库&gt;读书笔记">
+<meta property="og:url" content="https://bitzhangmo.github.io/2021/07/06/Lua/自己动手实现Lua-虚拟机-编译器和标准库-读书笔记/index.html">
+<meta property="og:site_name" content="zhangMo Blog">
+<meta property="og:description" content="本篇是《自己动手实现Lua：虚拟机、编译器和标准库》的读书笔记，持续更新中。">
+<meta property="og:locale" content="zh-CN">
+<meta property="og:updated_time" content="2021-07-06T16:53:25.156Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="&lt;自己动手实现Lua:虚拟机,编译器和标准库&gt;读书笔记">
+<meta name="twitter:description" content="本篇是《自己动手实现Lua：虚拟机、编译器和标准库》的读书笔记，持续更新中。">
+    
+    
+        
+          
+              <link rel="shortcut icon" href="/images/favicon.ico">
+          
+        
+        
+          
+            <link rel="icon" type="image/png" href="/images/favicon-192x192.png" sizes="192x192">
+          
+        
+        
+          
+            <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon.png">
+          
+        
+    
+    <!-- title -->
+    <title>&lt;自己动手实现Lua:虚拟机,编译器和标准库&gt;读书笔记</title>
+    <!-- styles -->
+    <link rel="stylesheet" href="/css/style.css">
+    <!-- persian styles -->
+    
+      <link rel="stylesheet" href="/css/rtl.css">
+    
+    <!-- rss -->
+    
+    
+</head>
+
+<body class="max-width mx-auto px3 ltr">
+    
+      <div id="header-post">
+  <a id="menu-icon" href="#"><i class="fas fa-bars fa-lg"></i></a>
+  <a id="menu-icon-tablet" href="#"><i class="fas fa-bars fa-lg"></i></a>
+  <a id="top-icon-tablet" href="#" onclick="$('html, body').animate({ scrollTop: 0 }, 'fast');" style="display:none;"><i class="fas fa-chevron-up fa-lg"></i></a>
+  <span id="menu">
+    <span id="nav">
+      <ul>
+         
+          <li><a href="/">首页</a></li>
+         
+          <li><a href="/about/">关于</a></li>
+         
+          <li><a href="/tags/">tags</a></li>
+         
+          <li><a href="/categories/">categories</a></li>
+         
+          <li><a href="/archives/">归档</a></li>
+         
+          <li><a href="/categories/reports/">reports</a></li>
+         
+          <li><a href="/search/">搜索</a></li>
+        
+      </ul>
+    </span>
+    <br/>
+    <span id="actions">
+      <ul>
+        
+        
+        <li><a class="icon" href="/2021/06/02/Lua/Lua读书笔记/"><i class="fas fa-chevron-right" aria-hidden="true" onmouseover="$('#i-next').toggle();" onmouseout="$('#i-next').toggle();"></i></a></li>
+        
+        <li><a class="icon" href="#" onclick="$('html, body').animate({ scrollTop: 0 }, 'fast');"><i class="fas fa-chevron-up" aria-hidden="true" onmouseover="$('#i-top').toggle();" onmouseout="$('#i-top').toggle();"></i></a></li>
+        <li><a class="icon" href="#"><i class="fas fa-share-alt" aria-hidden="true" onmouseover="$('#i-share').toggle();" onmouseout="$('#i-share').toggle();" onclick="$('#share').toggle();return false;"></i></a></li>
+      </ul>
+      <span id="i-prev" class="info" style="display:none;">上一篇</span>
+      <span id="i-next" class="info" style="display:none;">下一篇</span>
+      <span id="i-top" class="info" style="display:none;">返回顶部</span>
+      <span id="i-share" class="info" style="display:none;">分享文章</span>
+    </span>
+    <br/>
+    <div id="share" style="display: none">
+      <ul>
+  <li><a class="icon" href="http://www.facebook.com/sharer.php?u=https://bitzhangmo.github.io/2021/07/06/Lua/自己动手实现Lua-虚拟机-编译器和标准库-读书笔记/"><i class="fab fa-facebook " aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="https://twitter.com/share?url=https://bitzhangmo.github.io/2021/07/06/Lua/自己动手实现Lua-虚拟机-编译器和标准库-读书笔记/&text=&lt;自己动手实现Lua:虚拟机,编译器和标准库&gt;读书笔记"><i class="fab fa-twitter " aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="http://www.linkedin.com/shareArticle?url=https://bitzhangmo.github.io/2021/07/06/Lua/自己动手实现Lua-虚拟机-编译器和标准库-读书笔记/&title=&lt;自己动手实现Lua:虚拟机,编译器和标准库&gt;读书笔记"><i class="fab fa-linkedin " aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="https://pinterest.com/pin/create/bookmarklet/?url=https://bitzhangmo.github.io/2021/07/06/Lua/自己动手实现Lua-虚拟机-编译器和标准库-读书笔记/&is_video=false&description=&lt;自己动手实现Lua:虚拟机,编译器和标准库&gt;读书笔记"><i class="fab fa-pinterest " aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="mailto:?subject=&lt;自己动手实现Lua:虚拟机,编译器和标准库&gt;读书笔记&body=Check out this article: https://bitzhangmo.github.io/2021/07/06/Lua/自己动手实现Lua-虚拟机-编译器和标准库-读书笔记/"><i class="fas fa-envelope " aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="https://getpocket.com/save?url=https://bitzhangmo.github.io/2021/07/06/Lua/自己动手实现Lua-虚拟机-编译器和标准库-读书笔记/&title=&lt;自己动手实现Lua:虚拟机,编译器和标准库&gt;读书笔记"><i class="fab fa-get-pocket " aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="http://reddit.com/submit?url=https://bitzhangmo.github.io/2021/07/06/Lua/自己动手实现Lua-虚拟机-编译器和标准库-读书笔记/&title=&lt;自己动手实现Lua:虚拟机,编译器和标准库&gt;读书笔记"><i class="fab fa-reddit " aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="http://www.stumbleupon.com/submit?url=https://bitzhangmo.github.io/2021/07/06/Lua/自己动手实现Lua-虚拟机-编译器和标准库-读书笔记/&title=&lt;自己动手实现Lua:虚拟机,编译器和标准库&gt;读书笔记"><i class="fab fa-stumbleupon " aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="http://digg.com/submit?url=https://bitzhangmo.github.io/2021/07/06/Lua/自己动手实现Lua-虚拟机-编译器和标准库-读书笔记/&title=&lt;自己动手实现Lua:虚拟机,编译器和标准库&gt;读书笔记"><i class="fab fa-digg " aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="http://www.tumblr.com/share/link?url=https://bitzhangmo.github.io/2021/07/06/Lua/自己动手实现Lua-虚拟机-编译器和标准库-读书笔记/&name=&lt;自己动手实现Lua:虚拟机,编译器和标准库&gt;读书笔记&description=&lt;p&gt;本篇是《自己动手实现Lua：虚拟机、编译器和标准库》的读书笔记，持续更新中。&lt;/p&gt;"><i class="fab fa-tumblr " aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="https://news.ycombinator.com/submitlink?u=https://bitzhangmo.github.io/2021/07/06/Lua/自己动手实现Lua-虚拟机-编译器和标准库-读书笔记/&t=&lt;自己动手实现Lua:虚拟机,编译器和标准库&gt;读书笔记"><i class="fab fa-hacker-news " aria-hidden="true"></i></a></li>
+</ul>
+
+    </div>
+    <div id="toc">
+      <ol class="toc"><li class="toc-item toc-level-3"><a class="toc-link" href="#第一章："><span class="toc-number">1.</span> <span class="toc-text">第一章：</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#第二章：二进制chunk"><span class="toc-number">2.</span> <span class="toc-text">第二章：二进制chunk</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#二进制chunk格式："><span class="toc-number">2.1.</span> <span class="toc-text">二进制chunk格式：</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#总体结构："><span class="toc-number">2.2.</span> <span class="toc-text">总体结构：</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#第三章：指令集"><span class="toc-number">3.</span> <span class="toc-text">第三章：指令集</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#编码模式："><span class="toc-number">3.1.</span> <span class="toc-text">编码模式：</span></a></li></ol></li></ol>
+    </div>
+  </span>
+</div>
+
+    
+    <div class="content index py4">
+        
+        <article class="post" itemscope itemtype="http://schema.org/BlogPosting">
+  <header>
+    
+    <h1 class="posttitle" itemprop="name headline">
+        &lt;自己动手实现Lua:虚拟机,编译器和标准库&gt;读书笔记
+    </h1>
+
+
+
+    <div class="meta">
+      <span class="author" itemprop="author" itemscope itemtype="http://schema.org/Person">
+        <span itemprop="name">zhangMo Blog</span>
+      </span>
+      
+    <div class="postdate">
+      
+        <time datetime="2021-07-06T14:30:53.000Z" itemprop="datePublished">2021-07-06</time>
+        
+        (Updated: <time datetime="2021-07-06T16:53:25.156Z" itemprop="dateModified">2021-07-07</time>)
+        
+      
+    </div>
+
+
+      
+    <div class="article-category">
+        <i class="fas fa-archive"></i>
+        <a class="category-link" href="/categories/读书笔记/">读书笔记</a>
+    </div>
+
+
+      
+    <div class="article-tag">
+        <i class="fas fa-tag"></i>
+        <a class="tag-link" href="/tags/Lua/">Lua</a>
+    </div>
+
+
+    </div>
+  </header>
+  
+
+  <div class="content" itemprop="articleBody">
+    <p>本篇是《自己动手实现Lua：虚拟机、编译器和标准库》的读书笔记，持续更新中。</p>
+<a id="more"></a>
+<h3 id="第一章："><a href="#第一章：" class="headerlink" title="第一章："></a>第一章：</h3><p>第一章的内容本质上就是配环境，值得一提的一点是，如果下载了最新版的Go，可能会和书上的内容有些出入，所以为了避免不必要的麻烦，我还是按照书上的描述下载了Go(v1.10.2)。</p>
+<h3 id="第二章：二进制chunk"><a href="#第二章：二进制chunk" class="headerlink" title="第二章：二进制chunk"></a>第二章：二进制chunk</h3><blockquote>
+<p>Lua脚本并不是直接被Lua解释器解释执行，而是先由Lua编译器编译成字节码，然后再交给Lua虚拟机去执行。</p>
+<p>Lua解释器会在内部编译lua脚本（此处描述存疑），预编译可以加快脚本加载的速度，并可以在一定程度上保护源代码。</p>
+</blockquote>
+<p>Lua本身提供了命令行工具luac来编译lua源代码，以函数为单位进行编译，每个函数都会被编译成名为<code>Prototype</code>的结构，包含内容有下：</p>
+<ul>
+<li>函数基本信息</li>
+<li>字节码</li>
+<li>常量表</li>
+<li>Upvalue表</li>
+<li>调试信息</li>
+<li>子函数原型列表</li>
+</ul>
+<p>Lua编译器会为我们的脚本添加一个主函数，把整个程序都放进这个函数里，然后以其为起点进行编译。这个函数既是编译的起点，也是虚拟机解释执行程序的入口。对于一行代码<code>print(&quot;Hello world!&quot;)</code>，使用luac反编译编译出来的.luac文件可以看到输出：</p>
+<p>【图】</p>
+<h4 id="二进制chunk格式："><a href="#二进制chunk格式：" class="headerlink" title="二进制chunk格式："></a>二进制chunk格式：</h4><ol>
+<li>二进制chunk属于lua虚拟机内部实现细节，并没有标准化以及相关的说明文档。</li>
+<li>二进制chunk没有考虑跨平台需求：编译lua脚本时，会按照本机的大小端方式生成二进制chunk文件，如果加载的文件大小端方式与本机不匹配就拒绝加载。</li>
+<li>加载二进制chunk文件时，会检测被加载文件的版本号，如果和当前lua版本不匹配，就拒绝加载。</li>
+</ol>
+<h4 id="总体结构："><a href="#总体结构：" class="headerlink" title="总体结构："></a>总体结构：</h4><pre><code class="hljs go"><span class="hljs-keyword">type</span> binaryChunk <span class="hljs-keyword">struct</span> &#123;
+	header					<span class="hljs-comment">// 头部</span>
+	sizeUpvalues <span class="hljs-keyword">byte</span>		<span class="hljs-comment">// 主函数upvalue数量</span>
+	mainFunc *Prototype		<span class="hljs-comment">// 主函数原型</span>
+&#125;</code></pre>
+<ol>
+<li><p>头部：</p>
+ <pre><code class="hljs go"><span class="hljs-keyword">type</span> header <span class="hljs-keyword">struct</span> &#123;
+  signature 		[<span class="hljs-number">4</span>]<span class="hljs-keyword">byte</span>		<span class="hljs-comment">// 魔数，用来标示文件开头(用来快速识别文件)</span>
+  version 		<span class="hljs-keyword">byte</span>		<span class="hljs-comment">// lua版本号 校验用</span>
+	format			<span class="hljs-keyword">byte</span>		<span class="hljs-comment">// 格式号 校验用</span>
+	luacData		[<span class="hljs-number">6</span>]<span class="hljs-keyword">byte</span>		<span class="hljs-comment">// LUAC_DATA 校验用</span>
+	cintSize		<span class="hljs-keyword">byte</span>		<span class="hljs-comment">// 指令宽度 cint 校验用</span>
+	sizetSize		<span class="hljs-keyword">byte</span>		<span class="hljs-comment">// 指令宽度 size_t 校验用</span>
+	instructionSize	<span class="hljs-keyword">byte</span>		<span class="hljs-comment">// 指令宽度 Lua虚拟机指令 校验用</span>
+	luaIntegerSize	<span class="hljs-keyword">byte</span>		<span class="hljs-comment">// 指令宽度 Lua整数 校验用</span>
+	luaNumberSize	<span class="hljs-keyword">byte</span>		<span class="hljs-comment">// 指令宽度 Lua浮点数 校验用</span>
+	luacInt			<span class="hljs-keyword">int64</span>		<span class="hljs-comment">// Lua整数值(用来检查大小端方式)</span>
+	luacNum			<span class="hljs-keyword">float64</span>		<span class="hljs-comment">// Lua浮点数(用来检查浮点数格式)</span>
+&#125;</code></pre>
+<p> 【图】</p>
+</li>
+<li><p>函数原型：</p>
+ <pre><code class="hljs go"><span class="hljs-keyword">type</span> Prototype <span class="hljs-keyword">struct</span> &#123;
+  Source				<span class="hljs-keyword">string</span>			<span class="hljs-comment">// 源文件名(仅在主函数中有值，避免重复)</span>
+ LineDefined			<span class="hljs-keyword">uint32</span>			<span class="hljs-comment">// 起止行号(对应函数的起止行号)</span>
+	LastLineDefined		<span class="hljs-keyword">uint32</span>			
+	NumParams			<span class="hljs-keyword">byte</span>			<span class="hljs-comment">// 固定参数个数</span>
+	IsVararg			<span class="hljs-keyword">byte</span>			<span class="hljs-comment">// 是否有变长参数，0否1是</span>
+  MaxStackSize		<span class="hljs-keyword">byte</span>			<span class="hljs-comment">// 寄存器数量:函数执行期间至少用到的</span>
+	Code				[]<span class="hljs-keyword">uint32</span>		<span class="hljs-comment">// 指令表(每条指令4个字节)</span>
+	Constants			[]<span class="hljs-keyword">interface</span>&#123;&#125;	<span class="hljs-comment">// 常量表,存放Lua代码中出现的字面量</span>
+  Upvalues			[]Upvalue		<span class="hljs-comment">// Upvalue表(第十章介绍，待补，不过我估计是把闭包用到的值的拷贝)</span>
+  Protos				[]*Prototype	<span class="hljs-comment">// 子函数原型表(递归)</span>
+  LineInfo			[]<span class="hljs-keyword">uint32</span>		<span class="hljs-comment">// 行号表(每条指令对应源代码中的行号)</span>
+  LocVars				[]LocVar		<span class="hljs-comment">// 局部变量表(结构：变量名，起止行号)</span>
+	UpvalueNames		[]<span class="hljs-keyword">string</span>		<span class="hljs-comment">// Upvalue名列表（与Upvalues一一对应）</span>
+&#125;</code></pre>
+</li>
+</ol>
+<p>第二章中后续的部分都是用Go实现一个简单的编译器的细节，和Lua实现细节关系不大，故在此不做赘述。</p>
+<h3 id="第三章：指令集"><a href="#第三章：指令集" class="headerlink" title="第三章：指令集"></a>第三章：指令集</h3><p>虚拟机根据实现方式大致可以分为两类：</p>
+<ol>
+<li><p>基于栈(Stack Based)：Java虚拟机、.NET CLR、Python虚拟机、Ruby YARV等</p>
+<p> 使用PUSH类指令向栈顶推入值，其他指令是对栈顶进行操作，指令集相对较大，但指令长度较短。</p>
+</li>
+<li><p>基于寄存器(Register Based)：Lua虚拟机（5.0版之后）</p>
+<p> 可以直接对寄存器进行寻址、指令集相对较小，但需要把寄存器地址编码到指令里，所以指令的平均长度较长。</p>
+</li>
+</ol>
+<p>指令长度是否固定，可以分为定长和变长两种指令集：Lua虚拟机是定长指令集，6bit为操作码，其余26bit为操作数。</p>
+<h4 id="编码模式："><a href="#编码模式：" class="headerlink" title="编码模式："></a>编码模式：</h4>
+  </div>
+</article>
+
+
+
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/gitalk@1/dist/gitalk.css">
+    <script src="https://cdn.jsdelivr.net/npm/gitalk@1/dist/gitalk.min.js"></script>
+    <script src="https://cdn.bootcss.com/blueimp-md5/2.10.0/js/md5.min.js"></script>
+    <div id="gitalk-container"></div>
+    <script type="text/javascript">
+        var gitalk = new Gitalk({
+            clientID: '643bb65e08572c0f02f9',
+            clientSecret: '267594ee5074e2f5b6392c6deba31c86b4b98abe',
+            id: md5(window.location.pathname),
+            repo: 'bitzhangmo.github.io',
+            owner: 'bitzhangmo',
+            admin: 'bitzhangmo',
+            distractionFreeMode: ''
+        })
+        gitalk.render('gitalk-container')
+    </script>
+
+
+        
+          <div id="footer-post-container">
+  <div id="footer-post">
+
+    <div id="nav-footer" style="display: none">
+      <ul>
+         
+          <li><a href="/">首页</a></li>
+         
+          <li><a href="/about/">关于</a></li>
+         
+          <li><a href="/tags/">tags</a></li>
+         
+          <li><a href="/categories/">categories</a></li>
+         
+          <li><a href="/archives/">归档</a></li>
+         
+          <li><a href="/categories/reports/">reports</a></li>
+         
+          <li><a href="/search/">搜索</a></li>
+        
+      </ul>
+    </div>
+
+    <div id="toc-footer" style="display: none">
+      <ol class="toc"><li class="toc-item toc-level-3"><a class="toc-link" href="#第一章："><span class="toc-number">1.</span> <span class="toc-text">第一章：</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#第二章：二进制chunk"><span class="toc-number">2.</span> <span class="toc-text">第二章：二进制chunk</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#二进制chunk格式："><span class="toc-number">2.1.</span> <span class="toc-text">二进制chunk格式：</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#总体结构："><span class="toc-number">2.2.</span> <span class="toc-text">总体结构：</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#第三章：指令集"><span class="toc-number">3.</span> <span class="toc-text">第三章：指令集</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#编码模式："><span class="toc-number">3.1.</span> <span class="toc-text">编码模式：</span></a></li></ol></li></ol>
+    </div>
+
+    <div id="share-footer" style="display: none">
+      <ul>
+  <li><a class="icon" href="http://www.facebook.com/sharer.php?u=https://bitzhangmo.github.io/2021/07/06/Lua/自己动手实现Lua-虚拟机-编译器和标准库-读书笔记/"><i class="fab fa-facebook fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="https://twitter.com/share?url=https://bitzhangmo.github.io/2021/07/06/Lua/自己动手实现Lua-虚拟机-编译器和标准库-读书笔记/&text=&lt;自己动手实现Lua:虚拟机,编译器和标准库&gt;读书笔记"><i class="fab fa-twitter fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="http://www.linkedin.com/shareArticle?url=https://bitzhangmo.github.io/2021/07/06/Lua/自己动手实现Lua-虚拟机-编译器和标准库-读书笔记/&title=&lt;自己动手实现Lua:虚拟机,编译器和标准库&gt;读书笔记"><i class="fab fa-linkedin fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="https://pinterest.com/pin/create/bookmarklet/?url=https://bitzhangmo.github.io/2021/07/06/Lua/自己动手实现Lua-虚拟机-编译器和标准库-读书笔记/&is_video=false&description=&lt;自己动手实现Lua:虚拟机,编译器和标准库&gt;读书笔记"><i class="fab fa-pinterest fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="mailto:?subject=&lt;自己动手实现Lua:虚拟机,编译器和标准库&gt;读书笔记&body=Check out this article: https://bitzhangmo.github.io/2021/07/06/Lua/自己动手实现Lua-虚拟机-编译器和标准库-读书笔记/"><i class="fas fa-envelope fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="https://getpocket.com/save?url=https://bitzhangmo.github.io/2021/07/06/Lua/自己动手实现Lua-虚拟机-编译器和标准库-读书笔记/&title=&lt;自己动手实现Lua:虚拟机,编译器和标准库&gt;读书笔记"><i class="fab fa-get-pocket fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="http://reddit.com/submit?url=https://bitzhangmo.github.io/2021/07/06/Lua/自己动手实现Lua-虚拟机-编译器和标准库-读书笔记/&title=&lt;自己动手实现Lua:虚拟机,编译器和标准库&gt;读书笔记"><i class="fab fa-reddit fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="http://www.stumbleupon.com/submit?url=https://bitzhangmo.github.io/2021/07/06/Lua/自己动手实现Lua-虚拟机-编译器和标准库-读书笔记/&title=&lt;自己动手实现Lua:虚拟机,编译器和标准库&gt;读书笔记"><i class="fab fa-stumbleupon fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="http://digg.com/submit?url=https://bitzhangmo.github.io/2021/07/06/Lua/自己动手实现Lua-虚拟机-编译器和标准库-读书笔记/&title=&lt;自己动手实现Lua:虚拟机,编译器和标准库&gt;读书笔记"><i class="fab fa-digg fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="http://www.tumblr.com/share/link?url=https://bitzhangmo.github.io/2021/07/06/Lua/自己动手实现Lua-虚拟机-编译器和标准库-读书笔记/&name=&lt;自己动手实现Lua:虚拟机,编译器和标准库&gt;读书笔记&description=&lt;p&gt;本篇是《自己动手实现Lua：虚拟机、编译器和标准库》的读书笔记，持续更新中。&lt;/p&gt;"><i class="fab fa-tumblr fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="https://news.ycombinator.com/submitlink?u=https://bitzhangmo.github.io/2021/07/06/Lua/自己动手实现Lua-虚拟机-编译器和标准库-读书笔记/&t=&lt;自己动手实现Lua:虚拟机,编译器和标准库&gt;读书笔记"><i class="fab fa-hacker-news fa-lg" aria-hidden="true"></i></a></li>
+</ul>
+
+    </div>
+
+    <div id="actions-footer">
+        <a id="menu" class="icon" href="#" onclick="$('#nav-footer').toggle();return false;"><i class="fas fa-bars fa-lg" aria-hidden="true"></i> 菜单</a>
+        <a id="toc" class="icon" href="#" onclick="$('#toc-footer').toggle();return false;"><i class="fas fa-list fa-lg" aria-hidden="true"></i> 目录</a>
+        <a id="share" class="icon" href="#" onclick="$('#share-footer').toggle();return false;"><i class="fas fa-share-alt fa-lg" aria-hidden="true"></i> 分享</a>
+        <a id="top" style="display:none" class="icon" href="#" onclick="$('html, body').animate({ scrollTop: 0 }, 'fast');"><i class="fas fa-chevron-up fa-lg" aria-hidden="true"></i> 返回顶部</a>
+    </div>
+
+  </div>
+</div>
+
+        
+        <footer id="footer">
+  <div class="footer-left">
+    Copyright &copy; 2021 zhangMo
+  </div>
+  <div class="footer-right">
+    <nav>
+      <ul>
+         
+          <li><a href="/">首页</a></li>
+         
+          <li><a href="/about/">关于</a></li>
+         
+          <li><a href="/tags/">tags</a></li>
+         
+          <li><a href="/categories/">categories</a></li>
+         
+          <li><a href="/archives/">归档</a></li>
+         
+          <li><a href="/categories/reports/">reports</a></li>
+         
+          <li><a href="/search/">搜索</a></li>
+        
+      </ul>
+    </nav>
+  </div>
+</footer>
+
+        
+    </div>
+    <!-- styles -->
+<link rel="stylesheet" href="/lib/font-awesome/css/all.min.css">
+<link rel="stylesheet" href="/lib/justified-gallery/css/justifiedGallery.min.css">
+
+    <!-- jquery -->
+<script src="/lib/jquery/jquery.min.js"></script>
+<script src="/lib/justified-gallery/js/jquery.justifiedGallery.min.js"></script>
+<!-- clipboard -->
+
+  <script src="/lib/clipboard/clipboard.min.js"></script>
+  <script type="text/javascript">
+  $(function() {
+    // copy-btn HTML
+    var btn = "<span class=\"btn-copy tooltipped tooltipped-sw\" aria-label=\"复制到粘贴板!\">";
+    btn += '<i class="far fa-clone"></i>';
+    btn += '</span>'; 
+    // mount it!
+    $(".highlight table").before(btn);
+    var clip = new ClipboardJS('.btn-copy', {
+      text: function(trigger) {
+        return Array.from(trigger.nextElementSibling.querySelectorAll('.code')).reduce((str,it)=>str+it.innerText+'\n','')
+      }
+    });
+    clip.on('success', function(e) {
+      e.trigger.setAttribute('aria-label', "复制成功!");
+      e.clearSelection();
+    })
+  })
+  </script>
+
+<script src="/js/main.js"></script>
+<!-- search -->
+
+<!-- Google Analytics -->
+
+<!-- Baidu Analytics -->
+
+<!-- Disqus Comments -->
+
+
+<script src="/live2dw/lib/L2Dwidget.min.js?bd2294fafea3389ee458f1d9be5a2157"></script><script>L2Dwidget.init({"pluginRootPath":"live2dw/","pluginJsPath":"lib/","pluginModelPath":"assets/","tagMode":false,"debug":false,"model":{"jsonPath":"/live2dw/assets/hijiki.model.json"},"display":{"position":"left","width":100,"height":200},"mobile":{"show":false},"log":false});</script></body>
+</html>
