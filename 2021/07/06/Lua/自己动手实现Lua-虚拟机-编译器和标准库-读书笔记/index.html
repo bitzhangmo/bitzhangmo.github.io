@@ -14,7 +14,7 @@
 <meta property="og:site_name" content="zhangMo Blog">
 <meta property="og:description" content="本篇是《自己动手实现Lua：虚拟机、编译器和标准库》的读书笔记，持续更新中。">
 <meta property="og:locale" content="zh-CN">
-<meta property="og:updated_time" content="2021-07-06T16:53:25.156Z">
+<meta property="og:updated_time" content="2021-07-08T16:00:06.881Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="&lt;自己动手实现Lua:虚拟机,编译器和标准库&gt;读书笔记">
 <meta name="twitter:description" content="本篇是《自己动手实现Lua：虚拟机、编译器和标准库》的读书笔记，持续更新中。">
@@ -108,7 +108,7 @@
 
     </div>
     <div id="toc">
-      <ol class="toc"><li class="toc-item toc-level-3"><a class="toc-link" href="#第一章："><span class="toc-number">1.</span> <span class="toc-text">第一章：</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#第二章：二进制chunk"><span class="toc-number">2.</span> <span class="toc-text">第二章：二进制chunk</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#二进制chunk格式："><span class="toc-number">2.1.</span> <span class="toc-text">二进制chunk格式：</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#总体结构："><span class="toc-number">2.2.</span> <span class="toc-text">总体结构：</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#第三章：指令集"><span class="toc-number">3.</span> <span class="toc-text">第三章：指令集</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#编码模式："><span class="toc-number">3.1.</span> <span class="toc-text">编码模式：</span></a></li></ol></li></ol>
+      <ol class="toc"><li class="toc-item toc-level-3"><a class="toc-link" href="#第一章："><span class="toc-number">1.</span> <span class="toc-text">第一章：</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#第二章：二进制chunk"><span class="toc-number">2.</span> <span class="toc-text">第二章：二进制chunk</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#二进制chunk格式："><span class="toc-number">2.1.</span> <span class="toc-text">二进制chunk格式：</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#总体结构："><span class="toc-number">2.2.</span> <span class="toc-text">总体结构：</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#第三章：指令集"><span class="toc-number">3.</span> <span class="toc-text">第三章：指令集</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#编码模式："><span class="toc-number">3.1.</span> <span class="toc-text">编码模式：</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#第四章：Lua-API"><span class="toc-number">4.</span> <span class="toc-text">第四章：Lua API</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#Lua栈"><span class="toc-number">4.1.</span> <span class="toc-text">Lua栈</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#第五章：Lua运算符"><span class="toc-number">5.</span> <span class="toc-text">第五章：Lua运算符</span></a></li></ol>
     </div>
   </span>
 </div>
@@ -134,7 +134,7 @@
       
         <time datetime="2021-07-06T14:30:53.000Z" itemprop="datePublished">2021-07-06</time>
         
-        (Updated: <time datetime="2021-07-06T16:53:25.156Z" itemprop="dateModified">2021-07-07</time>)
+        (Updated: <time datetime="2021-07-08T16:00:06.881Z" itemprop="dateModified">2021-07-09</time>)
         
       
     </div>
@@ -207,7 +207,7 @@
 <li><p>函数原型：</p>
  <pre><code class="hljs go"><span class="hljs-keyword">type</span> Prototype <span class="hljs-keyword">struct</span> &#123;
   Source				<span class="hljs-keyword">string</span>			<span class="hljs-comment">// 源文件名(仅在主函数中有值，避免重复)</span>
- LineDefined			<span class="hljs-keyword">uint32</span>			<span class="hljs-comment">// 起止行号(对应函数的起止行号)</span>
+   LineDefined			<span class="hljs-keyword">uint32</span>			<span class="hljs-comment">// 起止行号(对应函数的起止行号)</span>
 	LastLineDefined		<span class="hljs-keyword">uint32</span>			
 	NumParams			<span class="hljs-keyword">byte</span>			<span class="hljs-comment">// 固定参数个数</span>
 	IsVararg			<span class="hljs-keyword">byte</span>			<span class="hljs-comment">// 是否有变长参数，0否1是</span>
@@ -233,7 +233,72 @@
 </li>
 </ol>
 <p>指令长度是否固定，可以分为定长和变长两种指令集：Lua虚拟机是定长指令集，6bit为操作码，其余26bit为操作数。</p>
-<h4 id="编码模式："><a href="#编码模式：" class="headerlink" title="编码模式："></a>编码模式：</h4>
+<h4 id="编码模式："><a href="#编码模式：" class="headerlink" title="编码模式："></a>编码模式：</h4><blockquote>
+<p>Lua虚拟机是定长指令集，6bit为操作码，其余26bit为操作数。</p>
+</blockquote>
+<p>Lua虚拟机指令可以分为四类：iABC、iABx、iAsBx、iAx</p>
+<p>指令与操作数的关系如图所示：</p>
+<p>【图】</p>
+<p>只有iAsBx模式下的sBx操作数会被解释成有符号整数，其他情况下操作数均被解释为无符号整数。</p>
+<p>本章剩余部分完善了上个部分实现的反编译器。</p>
+<h3 id="第四章：Lua-API"><a href="#第四章：Lua-API" class="headerlink" title="第四章：Lua API"></a>第四章：Lua API</h3><blockquote>
+<p>Lua核心是以库的形式实现的，其他应用程序只需要链接Lua库就可以使用Lua提供的API。</p>
+</blockquote>
+<h4 id="Lua栈"><a href="#Lua栈" class="headerlink" title="Lua栈"></a>Lua栈</h4><blockquote>
+<p>Lua State内部封装的最为基础的一个状态就是虚拟栈，是宿主语言和Lua进行沟通的桥梁。</p>
+</blockquote>
+<p>栈索引：</p>
+<ul>
+<li>Lua API中，栈索引是从1开始的；</li>
+<li>索引可以是负数，正数从1（栈底）开始递增，负数从-1（栈顶）开始递减，Lua API会在内部把负数转换为正数。</li>
+<li>假设栈的容量为n，位于[1,top]区间内的索引为有效索引，位于[1,n]区间内的索引为可接受索引。写入值必须在有效索引区间，读取值可以从可接受索引中读取。</li>
+</ul>
+<p>本章剩余部分使用go语言实现了一个简单的库，包含了入栈出栈函数等。</p>
+<h3 id="第五章：Lua运算符"><a href="#第五章：Lua运算符" class="headerlink" title="第五章：Lua运算符"></a>第五章：Lua运算符</h3><ol>
+<li><p>算术运算符（加减乘除，整除，取模，乘方）：</p>
+<ul>
+<li><p>除法运算符和乘方会先把操作数转换为浮点数再进行运算，计算结果也一定是浮点数。其他六个运算符会先判断操作数是不是整数，如果是则进行整数运算，结果也一定是整数；否则转换为浮点数计算，结果也是浮点数。</p>
+</li>
+<li><p>整除运算符会将结果向下取整。</p>
+  <pre><code class="hljs lua"><span class="hljs-built_in">print</span>(<span class="hljs-number">5</span> // <span class="hljs-number">3</span>)				<span class="hljs-comment">-- 1</span>
+<span class="hljs-built_in">print</span>(<span class="hljs-number">-5</span> // <span class="hljs-number">3</span>)			<span class="hljs-comment">-- -2</span>
+<span class="hljs-built_in">print</span>(<span class="hljs-number">5</span> // <span class="hljs-number">-3.0</span>)		<span class="hljs-comment">-- -2.0</span>
+<span class="hljs-built_in">print</span>(<span class="hljs-number">-5.0</span> // <span class="hljs-number">-3.0</span>)	<span class="hljs-comment">-- -1.0</span></code></pre>
+</li>
+</ul>
+</li>
+</ol>
+<pre><code>- 取模：
+  <pre><code class="hljs lua">a % b == a - ((a // b) * b)</code></pre>
+
+
+- 乘方和字符串拼接运算符为右结合性，其他二元运算符具有左结合性。
+</code></pre><ol start="2">
+<li><p>按位运算符：</p>
+<ul>
+<li>按位运算符会先把操作数转换成整数再运算，结果也一定是整数。</li>
+<li>右移运算符是无符号右移，空出来的bit补0。</li>
+<li>移动-n bit 等于反向移动 n bit。</li>
+</ul>
+</li>
+<li><p>逻辑运算符：</p>
+<ul>
+<li><p>Lua 会对<strong>逻辑与(and)</strong>和<strong>逻辑或(or)</strong>进行短路求值，运算结果为操作数之一，不一定是布尔值。</p>
+  <pre><code class="hljs lua">t = t <span class="hljs-keyword">or</span> &#123;&#125; 						<span class="hljs-comment">-- if not t then t = &#123;&#125; end</span>
+<span class="hljs-built_in">max</span> = a &gt; b <span class="hljs-keyword">and</span> a <span class="hljs-keyword">or</span> b 	<span class="hljs-comment">-- a &gt; b ? a : b</span></code></pre>
+</li>
+<li><p><strong>逻辑非(not)</strong>会把操作数转换为布尔值，结果也一定是布尔值。</p>
+</li>
+</ul>
+</li>
+</ol>
+<p>本章接下来的内容为用 Go 实现基本的 LuaAPI 方法：</p>
+<pre><code class="hljs go"><span class="hljs-comment">// 覆盖了除逻辑运算符以外的所有 Lua 运算符</span>
+Arith()			<span class="hljs-comment">// 算术与按位运算</span>
+Compare()		<span class="hljs-comment">// 比较运算</span>
+Len()				<span class="hljs-comment">// 取长度运算</span>
+Concat()		<span class="hljs-comment">// 字符串拼接运算</span></code></pre>
+
   </div>
 </article>
 
@@ -282,7 +347,7 @@
     </div>
 
     <div id="toc-footer" style="display: none">
-      <ol class="toc"><li class="toc-item toc-level-3"><a class="toc-link" href="#第一章："><span class="toc-number">1.</span> <span class="toc-text">第一章：</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#第二章：二进制chunk"><span class="toc-number">2.</span> <span class="toc-text">第二章：二进制chunk</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#二进制chunk格式："><span class="toc-number">2.1.</span> <span class="toc-text">二进制chunk格式：</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#总体结构："><span class="toc-number">2.2.</span> <span class="toc-text">总体结构：</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#第三章：指令集"><span class="toc-number">3.</span> <span class="toc-text">第三章：指令集</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#编码模式："><span class="toc-number">3.1.</span> <span class="toc-text">编码模式：</span></a></li></ol></li></ol>
+      <ol class="toc"><li class="toc-item toc-level-3"><a class="toc-link" href="#第一章："><span class="toc-number">1.</span> <span class="toc-text">第一章：</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#第二章：二进制chunk"><span class="toc-number">2.</span> <span class="toc-text">第二章：二进制chunk</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#二进制chunk格式："><span class="toc-number">2.1.</span> <span class="toc-text">二进制chunk格式：</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#总体结构："><span class="toc-number">2.2.</span> <span class="toc-text">总体结构：</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#第三章：指令集"><span class="toc-number">3.</span> <span class="toc-text">第三章：指令集</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#编码模式："><span class="toc-number">3.1.</span> <span class="toc-text">编码模式：</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#第四章：Lua-API"><span class="toc-number">4.</span> <span class="toc-text">第四章：Lua API</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#Lua栈"><span class="toc-number">4.1.</span> <span class="toc-text">Lua栈</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#第五章：Lua运算符"><span class="toc-number">5.</span> <span class="toc-text">第五章：Lua运算符</span></a></li></ol>
     </div>
 
     <div id="share-footer" style="display: none">
