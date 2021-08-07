@@ -19,7 +19,7 @@
 <meta property="og:image" content="http://hust_mo.gitee.io/blogpicturerepo/render">
 <meta property="og:image" content="http://hust_mo.gitee.io/blogpicturerepo/image-20201224221924928.png">
 <meta property="og:image" content="http://hust_mo.gitee.io/blogpicturerepo/image-20201225151117492.png">
-<meta property="og:updated_time" content="2020-12-27T16:38:50.458Z">
+<meta property="og:updated_time" content="2021-08-07T13:48:31.757Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="Unreal Engine 4 SDK构建相关笔记">
 <meta name="twitter:description" content="SDK构建相关阅读[toc] 在Unreal项目开发的过程中，可能会用到第三方开发的库来集成一些第三方的功能，例如语音通话、播放视频等功能。虚幻引擎本身也引用了很多第三方的库,例如物理库PhysX、Steam平台相关的库SteamWorks、GoogleVR等等。这些库可以在引擎的Engine\Source\ThirdParty目录下找到。Unreal官方推荐将第三方库集成到插件目录中，这样可以">
@@ -116,7 +116,7 @@
 
     </div>
     <div id="toc">
-      <ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#SDK构建相关阅读"><span class="toc-number">1.</span> <span class="toc-text">SDK构建相关阅读</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#使用插件引入第三方库"><span class="toc-number">1.1.</span> <span class="toc-text">使用插件引入第三方库</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#一个例子："><span class="toc-number">1.1.1.</span> <span class="toc-text">一个例子：</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#虚幻插件语言（Unreal-Plugin-Language-UPL）"><span class="toc-number">1.1.2.</span> <span class="toc-text">虚幻插件语言（Unreal Plugin Language, UPL）</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#一个例子"><span class="toc-number">1.1.2.1.</span> <span class="toc-text">一个例子</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#对GameActivity-java的拓展："><span class="toc-number">1.1.2.2.</span> <span class="toc-text">对GameActivity.java的拓展：</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#IOS平台设置相关："><span class="toc-number">1.1.2.3.</span> <span class="toc-text">IOS平台设置相关：</span></a></li></ol></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#参考"><span class="toc-number">1.2.</span> <span class="toc-text">参考</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#插件"><span class="toc-number">1.2.1.</span> <span class="toc-text">插件</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#模块"><span class="toc-number">1.2.2.</span> <span class="toc-text">模块</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#平台相关"><span class="toc-number">1.3.</span> <span class="toc-text">平台相关</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#Android"><span class="toc-number">1.3.1.</span> <span class="toc-text">Android</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#IOS"><span class="toc-number">1.3.1.1.</span> <span class="toc-text">IOS</span></a></li></ol></li></ol></li></ol></li></ol>
+      <ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#SDK构建相关阅读"><span class="toc-number">1.</span> <span class="toc-text">SDK构建相关阅读</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#使用插件引入第三方库"><span class="toc-number">1.1.</span> <span class="toc-text">使用插件引入第三方库</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#一个例子："><span class="toc-number">1.1.1.</span> <span class="toc-text">一个例子：</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#虚幻插件语言（Unreal-Plugin-Language-UPL）"><span class="toc-number">1.1.2.</span> <span class="toc-text">虚幻插件语言（Unreal Plugin Language, UPL）</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#一个例子"><span class="toc-number">1.1.2.1.</span> <span class="toc-text">一个例子</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#对GameActivity-java的拓展："><span class="toc-number">1.1.2.2.</span> <span class="toc-text">对GameActivity.java的拓展：</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#IOS平台设置相关："><span class="toc-number">1.1.2.3.</span> <span class="toc-text">IOS平台设置相关：</span></a></li></ol></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#在虚幻中调用Java代码"><span class="toc-number">1.2.</span> <span class="toc-text">在虚幻中调用Java代码</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#JNI：Java-Native-Interface"><span class="toc-number">1.2.1.</span> <span class="toc-text">JNI：Java Native Interface</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#在虚幻中调用"><span class="toc-number">1.2.2.</span> <span class="toc-text">在虚幻中调用 :</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#一些其他的坑"><span class="toc-number">1.2.3.</span> <span class="toc-text">一些其他的坑 :</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#参考"><span class="toc-number">1.3.</span> <span class="toc-text">参考</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#插件"><span class="toc-number">1.3.1.</span> <span class="toc-text">插件</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#模块"><span class="toc-number">1.3.2.</span> <span class="toc-text">模块</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#平台相关"><span class="toc-number">1.4.</span> <span class="toc-text">平台相关</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#Android"><span class="toc-number">1.4.1.</span> <span class="toc-text">Android</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#IOS"><span class="toc-number">1.4.1.1.</span> <span class="toc-text">IOS</span></a></li></ol></li></ol></li></ol></li></ol>
     </div>
   </span>
 </div>
@@ -142,7 +142,7 @@
       
         <time datetime="2020-12-23T16:04:56.000Z" itemprop="datePublished">2020-12-24</time>
         
-        (Updated: <time datetime="2020-12-27T16:38:50.458Z" itemprop="dateModified">2020-12-28</time>)
+        (Updated: <time datetime="2021-08-07T13:48:31.757Z" itemprop="dateModified">2021-08-07</time>)
         
       
     </div>
@@ -278,6 +278,58 @@ PrivateDependencyModuleNames.AddRange(<span class="hljs-keyword">new</span> <spa
 </li>
 </ol>
 <p>一些详细的解读可以参考查利鹏大佬的这篇博文：<a href="https://imzlp.me/posts/1948/" target="_blank" rel="noopener">UE4 开发笔记：Mac/iOS 篇</a></p>
+<h2 id="在虚幻中调用Java代码"><a href="#在虚幻中调用Java代码" class="headerlink" title="在虚幻中调用Java代码"></a>在虚幻中调用Java代码</h2><h3 id="JNI：Java-Native-Interface"><a href="#JNI：Java-Native-Interface" class="headerlink" title="JNI：Java Native Interface"></a>JNI：Java Native Interface</h3><p>Java Native Interface , Java原生接口，一种让其他语言或程序调用Java代码的方法，具体实现细节笔者并不清楚，可以参考<a href="https://docs.oracle.com/javase/7/docs/technotes/guides/jni/spec/jniTOC.html" target="_blank" rel="noopener">官方文档</a>，此处仅对项目中遇到的问题进行总结和梳理。</p>
+<p>对于Android平台，SDK提供方可能会提供一些Java版本的函数接口，这些Java函数接口需要我们在虚幻引擎中调用，我们假定前置的接入插件的步骤已经完成。</p>
+<p>以<a href="https://slugteam.qq.com/sdk/v2/install/android-ue4.html#slugsdk-build-cs" target="_blank" rel="noopener">SlugSDK</a>为例，它提供了一个初始化SDK组件的接口：</p>
+<pre><code class="hljs java"><span class="hljs-comment">/*
+* @url 打开的页面url
+* @supportedOrientations 设置屏幕方向类型（1：只支持横屏，2：只支持竖屏，3：横竖屏都支持）
+* @qqAppid 设置游戏的qq Appid（用来分享到qq）
+* @wxAppid 设置游戏的微信Appid（用来分享到微信）
+* @className: String类型,比如"com.tencent.ingame.TestActivity"，从H5页面跳转到游戏的某个界面，如果不需要可以设置为""，H5页面跳转到游戏的某个界面时，会先跳转到游戏的该Activity（Activity声明需设置singleTask或singleTop）再由该Activity作为中转跳转到具体的游戏界面，该Activity先在onNewIntent方法setIntent(intent)，然后可以通过getIntent().getStringExtra("routeInfo")获取跳转的路由信息，比如关闭浏览器时获取的routeInfo值为"close"
+* @finishShouldSendMsgToGame 浏览器webview finish时向游戏发送close消息，不需要可以传false，如果需要则必须先设置@className参数
+* @webviewBackground 设置打开的浏览器背景颜色，比如#ffffffff
+* */</span>
+<span class="hljs-function"><span class="hljs-keyword">public</span> <span class="hljs-keyword">static</span> <span class="hljs-keyword">void</span> <span class="hljs-title">openIngameCommunityByUrl</span><span class="hljs-params">(Activity currentActivity, String url, <span class="hljs-keyword">int</span> supportedOrientations, String qqAppid, String wxAppid, String className, <span class="hljs-keyword">boolean</span> finishShouldSendMsgToGame, String webviewBackground)</span></span></code></pre>
+<p>该函数的函数签名如下:</p>
+<ul>
+<li>参数 : <code>Activity currentActivity, String url, int supportedOrientations, String qqAppid, String wxAppid, String className, boolean finishShouldSendMsgToGame, String webviewBackground</code></li>
+<li>返回值 :<code>void</code></li>
+</ul>
+<p>我们可以用命令行工具 : <code>javap -s</code>输出函数签名 , 具体可以参考博文 : <a href="https://blog.csdn.net/qq_36642554/article/details/69834428" target="_blank" rel="noopener">Java dos命令窗口获取方法的签名</a> ; 也可以根据JNI函数签名的<a href="https://docs.oracle.com/javase/7/docs/technotes/guides/jni/spec/types.html#wp15954" target="_blank" rel="noopener">转换规则(详见Type Signatures部分)</a>进行转换 , 以上面的函数为例 :</p>
+<pre><code class="hljs undefined">Activity	-- Landroid/app/Activity
+string		-- Ljava/lang/String;
+int 		-- I
+string		-- Ljava/lang/String;
+string		-- Ljava/lang/String;
+string		-- Ljava/lang/String;
+bool		-- Z
+string		-- Ljava/lang/String;
+void		-- V</code></pre>
+<p>需要注意的是 : <strong>内置基础类型对应的签名后面没有分号 , 不要擅自加上分号 , 这样会导致搜索不到对应的方法!</strong></p>
+<p>因此最后该函数我们导出的函数签名为(注意为<code>ILjava/lang/String</code>) :</p>
+<pre><code class="hljs undefined">(Landroid/app/Activity;Ljava/lang/String;ILjava/lang/String;Ljava/lang/String;Ljava/lang/String;ZLjava/lang/String;)V</code></pre>
+<p>至此 , 我们完成了调用Java代码的准备工作。</p>
+<h3 id="在虚幻中调用"><a href="#在虚幻中调用" class="headerlink" title="在虚幻中调用 :"></a>在虚幻中调用 :</h3><p>我们需要JNIEnv环境 , 在虚幻中我们可以使用<code>FAndroidApplication::GetJavaEnv();</code></p>
+<p>我们需要对应的jclass , 在虚幻中我们可以使用<code>FAndroidApplication::FindJavaClass(ClassName)</code>进行获取</p>
+<p>我们需要对应的函数 , 此时我们就用上了刚刚推导的函数签名 , 同样在虚幻中我们可以使用<code>env-&gt;GetStaticMethodID(signature)</code>获得</p>
+<p>最后我们需要调用函数 , 还是通过env完成 , 可以调用<code>env-&gt;CallStaticVoidMethod()</code>完成</p>
+<p>整个过程的伪代码如下(对于env , cls , jmethodID必要时可以做一些防御性检查): </p>
+<pre><code class="hljs c++"><span class="hljs-keyword">void</span> AndroidSlugSDK::OpenIngameCommunity(FString url, <span class="hljs-keyword">int</span> supportedOrientations, FString qqAppid, FString wxAppid, FString className, <span class="hljs-keyword">bool</span> finishShouldSendMsgToGame, FString webviewBackground)&#123;
+    JNIEnv *env = FAndroidApplication::GetJavaEnv();
+    jclass cls = FAndroidApplication::FindJavaClass(<span class="hljs-string">"com/tencent/slugsdk/SlugWebAdapter"</span>);
+    jmethodID jOpenCommunityMthod = env-&gt;GetStaticMethodID(cls, <span class="hljs-string">"openIngameCommunityByUrl"</span>, <span class="hljs-string">"(Landroid/app/Activity;Ljava/lang/String;ILjava/lang/String;Ljava/lang/String;Ljava/lang/String;ZLjava/lang/String;)V"</span>);
+    jstring jUrl = env-&gt;NewStringUTF(TCHAR_TO_UTF8(*url));
+	jstring jqqAppID = env-&gt;NewStringUTF(TCHAR_TO_UTF8(*qqAppID));
+	jstring jwxAppID = env-&gt;NewStringUTF(TCHAR_TO_UTF8(*wxAppID));
+	jstring jclassName = env-&gt;NewStringUTF(TCHAR_TO_UTF8(*className));
+	jstring jwebColor = env-&gt;NewStringUTF(TCHAR_TO_UTF8(*WebViewBackgroundColor));
+	env-&gt;CallStaticVoidMethod(cls, jOpenCommunityMthod, FAndroidApplication::GetGameActivityThis(), jUrl, supportedOrientations, jqqAppID, jwxAppID, jclassName, finishShouldSendMsgToGame, jwebColor);
+&#125;</code></pre>
+<h3 id="一些其他的坑"><a href="#一些其他的坑" class="headerlink" title="一些其他的坑 :"></a>一些其他的坑 :</h3><ol>
+<li>要明确项目是否支持aar包 , 貌似用gradle构建才可以使用aar包</li>
+<li>ios的代码调用要在主线程 , 防止崩溃</li>
+</ol>
 <h2 id="参考"><a href="#参考" class="headerlink" title="参考"></a>参考</h2><h3 id="插件"><a href="#插件" class="headerlink" title="插件"></a>插件</h3><ol>
 <li>虚幻插件语言(Unreal Plugin Language) : <a href="https://docs.unrealengine.com/en-US/SharingAndReleasing/Mobile/UnrealPluginLanguage/index.html" target="_blank" rel="noopener">https://docs.unrealengine.com/en-US/SharingAndReleasing/Mobile/UnrealPluginLanguage/index.html</a></li>
 <li>虚幻插件语言参考：<a href="https://qiita.com/shiena/items/fe0e4cc1de4ddbaa60f0" target="_blank" rel="noopener">https://qiita.com/shiena/items/fe0e4cc1de4ddbaa60f0</a></li>
@@ -355,7 +407,7 @@ PrivateDependencyModuleNames.AddRange(<span class="hljs-keyword">new</span> <spa
     </div>
 
     <div id="toc-footer" style="display: none">
-      <ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#SDK构建相关阅读"><span class="toc-number">1.</span> <span class="toc-text">SDK构建相关阅读</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#使用插件引入第三方库"><span class="toc-number">1.1.</span> <span class="toc-text">使用插件引入第三方库</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#一个例子："><span class="toc-number">1.1.1.</span> <span class="toc-text">一个例子：</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#虚幻插件语言（Unreal-Plugin-Language-UPL）"><span class="toc-number">1.1.2.</span> <span class="toc-text">虚幻插件语言（Unreal Plugin Language, UPL）</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#一个例子"><span class="toc-number">1.1.2.1.</span> <span class="toc-text">一个例子</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#对GameActivity-java的拓展："><span class="toc-number">1.1.2.2.</span> <span class="toc-text">对GameActivity.java的拓展：</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#IOS平台设置相关："><span class="toc-number">1.1.2.3.</span> <span class="toc-text">IOS平台设置相关：</span></a></li></ol></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#参考"><span class="toc-number">1.2.</span> <span class="toc-text">参考</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#插件"><span class="toc-number">1.2.1.</span> <span class="toc-text">插件</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#模块"><span class="toc-number">1.2.2.</span> <span class="toc-text">模块</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#平台相关"><span class="toc-number">1.3.</span> <span class="toc-text">平台相关</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#Android"><span class="toc-number">1.3.1.</span> <span class="toc-text">Android</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#IOS"><span class="toc-number">1.3.1.1.</span> <span class="toc-text">IOS</span></a></li></ol></li></ol></li></ol></li></ol>
+      <ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#SDK构建相关阅读"><span class="toc-number">1.</span> <span class="toc-text">SDK构建相关阅读</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#使用插件引入第三方库"><span class="toc-number">1.1.</span> <span class="toc-text">使用插件引入第三方库</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#一个例子："><span class="toc-number">1.1.1.</span> <span class="toc-text">一个例子：</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#虚幻插件语言（Unreal-Plugin-Language-UPL）"><span class="toc-number">1.1.2.</span> <span class="toc-text">虚幻插件语言（Unreal Plugin Language, UPL）</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#一个例子"><span class="toc-number">1.1.2.1.</span> <span class="toc-text">一个例子</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#对GameActivity-java的拓展："><span class="toc-number">1.1.2.2.</span> <span class="toc-text">对GameActivity.java的拓展：</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#IOS平台设置相关："><span class="toc-number">1.1.2.3.</span> <span class="toc-text">IOS平台设置相关：</span></a></li></ol></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#在虚幻中调用Java代码"><span class="toc-number">1.2.</span> <span class="toc-text">在虚幻中调用Java代码</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#JNI：Java-Native-Interface"><span class="toc-number">1.2.1.</span> <span class="toc-text">JNI：Java Native Interface</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#在虚幻中调用"><span class="toc-number">1.2.2.</span> <span class="toc-text">在虚幻中调用 :</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#一些其他的坑"><span class="toc-number">1.2.3.</span> <span class="toc-text">一些其他的坑 :</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#参考"><span class="toc-number">1.3.</span> <span class="toc-text">参考</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#插件"><span class="toc-number">1.3.1.</span> <span class="toc-text">插件</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#模块"><span class="toc-number">1.3.2.</span> <span class="toc-text">模块</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#平台相关"><span class="toc-number">1.4.</span> <span class="toc-text">平台相关</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#Android"><span class="toc-number">1.4.1.</span> <span class="toc-text">Android</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#IOS"><span class="toc-number">1.4.1.1.</span> <span class="toc-text">IOS</span></a></li></ol></li></ol></li></ol></li></ol>
     </div>
 
     <div id="share-footer" style="display: none">
