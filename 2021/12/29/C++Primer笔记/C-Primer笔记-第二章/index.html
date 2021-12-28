@@ -1,0 +1,434 @@
+<!DOCTYPE html>
+<html lang=zh>
+<head><meta name="generator" content="Hexo 3.9.0">
+    <!-- so meta -->
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="HandheldFriendly" content="True">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+    <meta name="description" content="关键词 : 对象 , 变量 , 引用 , 指针 , const , auto , decltype">
+<meta name="keywords" content="C++">
+<meta property="og:type" content="article">
+<meta property="og:title" content="C++Primer笔记(第二章)">
+<meta property="og:url" content="https://bitzhangmo.github.io/2021/12/29/C++Primer笔记/C-Primer笔记-第二章/index.html">
+<meta property="og:site_name" content="zhangMo Blog">
+<meta property="og:description" content="关键词 : 对象 , 变量 , 引用 , 指针 , const , auto , decltype">
+<meta property="og:locale" content="zh-CN">
+<meta property="og:image" content="https://hust_mo.gitee.io/blogpicturerepo/image-20211228103857644.png">
+<meta property="og:updated_time" content="2021-12-28T17:38:03.298Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="C++Primer笔记(第二章)">
+<meta name="twitter:description" content="关键词 : 对象 , 变量 , 引用 , 指针 , const , auto , decltype">
+<meta name="twitter:image" content="https://hust_mo.gitee.io/blogpicturerepo/image-20211228103857644.png">
+    
+    
+        
+          
+              <link rel="shortcut icon" href="/images/favicon.ico">
+          
+        
+        
+          
+            <link rel="icon" type="image/png" href="/images/favicon-192x192.png" sizes="192x192">
+          
+        
+        
+          
+            <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon.png">
+          
+        
+    
+    <!-- title -->
+    <title>C++Primer笔记(第二章)</title>
+    <!-- styles -->
+    <link rel="stylesheet" href="/css/style.css">
+    <!-- persian styles -->
+    
+      <link rel="stylesheet" href="/css/rtl.css">
+    
+    <!-- rss -->
+    
+    
+</head>
+
+<body class="max-width mx-auto px3 ltr">
+    
+      <div id="header-post">
+  <a id="menu-icon" href="#"><i class="fas fa-bars fa-lg"></i></a>
+  <a id="menu-icon-tablet" href="#"><i class="fas fa-bars fa-lg"></i></a>
+  <a id="top-icon-tablet" href="#" onclick="$('html, body').animate({ scrollTop: 0 }, 'fast');" style="display:none;"><i class="fas fa-chevron-up fa-lg"></i></a>
+  <span id="menu">
+    <span id="nav">
+      <ul>
+         
+          <li><a href="/">首页</a></li>
+         
+          <li><a href="/about/">关于</a></li>
+         
+          <li><a href="/tags/">tags</a></li>
+         
+          <li><a href="/categories/">categories</a></li>
+         
+          <li><a href="/archives/">归档</a></li>
+         
+          <li><a href="/categories/reports/">reports</a></li>
+         
+          <li><a href="/search/">搜索</a></li>
+        
+      </ul>
+    </span>
+    <br/>
+    <span id="actions">
+      <ul>
+        
+        
+        <li><a class="icon" href="/2021/07/06/Lua/自己动手实现Lua-虚拟机-编译器和标准库-读书笔记/"><i class="fas fa-chevron-right" aria-hidden="true" onmouseover="$('#i-next').toggle();" onmouseout="$('#i-next').toggle();"></i></a></li>
+        
+        <li><a class="icon" href="#" onclick="$('html, body').animate({ scrollTop: 0 }, 'fast');"><i class="fas fa-chevron-up" aria-hidden="true" onmouseover="$('#i-top').toggle();" onmouseout="$('#i-top').toggle();"></i></a></li>
+        <li><a class="icon" href="#"><i class="fas fa-share-alt" aria-hidden="true" onmouseover="$('#i-share').toggle();" onmouseout="$('#i-share').toggle();" onclick="$('#share').toggle();return false;"></i></a></li>
+      </ul>
+      <span id="i-prev" class="info" style="display:none;">上一篇</span>
+      <span id="i-next" class="info" style="display:none;">下一篇</span>
+      <span id="i-top" class="info" style="display:none;">返回顶部</span>
+      <span id="i-share" class="info" style="display:none;">分享文章</span>
+    </span>
+    <br/>
+    <div id="share" style="display: none">
+      <ul>
+  <li><a class="icon" href="http://www.facebook.com/sharer.php?u=https://bitzhangmo.github.io/2021/12/29/C++Primer笔记/C-Primer笔记-第二章/"><i class="fab fa-facebook " aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="https://twitter.com/share?url=https://bitzhangmo.github.io/2021/12/29/C++Primer笔记/C-Primer笔记-第二章/&text=C++Primer笔记(第二章)"><i class="fab fa-twitter " aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="http://www.linkedin.com/shareArticle?url=https://bitzhangmo.github.io/2021/12/29/C++Primer笔记/C-Primer笔记-第二章/&title=C++Primer笔记(第二章)"><i class="fab fa-linkedin " aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="https://pinterest.com/pin/create/bookmarklet/?url=https://bitzhangmo.github.io/2021/12/29/C++Primer笔记/C-Primer笔记-第二章/&is_video=false&description=C++Primer笔记(第二章)"><i class="fab fa-pinterest " aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="mailto:?subject=C++Primer笔记(第二章)&body=Check out this article: https://bitzhangmo.github.io/2021/12/29/C++Primer笔记/C-Primer笔记-第二章/"><i class="fas fa-envelope " aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="https://getpocket.com/save?url=https://bitzhangmo.github.io/2021/12/29/C++Primer笔记/C-Primer笔记-第二章/&title=C++Primer笔记(第二章)"><i class="fab fa-get-pocket " aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="http://reddit.com/submit?url=https://bitzhangmo.github.io/2021/12/29/C++Primer笔记/C-Primer笔记-第二章/&title=C++Primer笔记(第二章)"><i class="fab fa-reddit " aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="http://www.stumbleupon.com/submit?url=https://bitzhangmo.github.io/2021/12/29/C++Primer笔记/C-Primer笔记-第二章/&title=C++Primer笔记(第二章)"><i class="fab fa-stumbleupon " aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="http://digg.com/submit?url=https://bitzhangmo.github.io/2021/12/29/C++Primer笔记/C-Primer笔记-第二章/&title=C++Primer笔记(第二章)"><i class="fab fa-digg " aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="http://www.tumblr.com/share/link?url=https://bitzhangmo.github.io/2021/12/29/C++Primer笔记/C-Primer笔记-第二章/&name=C++Primer笔记(第二章)&description=&lt;p&gt;关键词 : 对象 , 变量 , 引用 , 指针 , const , auto , decltype &lt;/p&gt;"><i class="fab fa-tumblr " aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="https://news.ycombinator.com/submitlink?u=https://bitzhangmo.github.io/2021/12/29/C++Primer笔记/C-Primer笔记-第二章/&t=C++Primer笔记(第二章)"><i class="fab fa-hacker-news " aria-hidden="true"></i></a></li>
+</ul>
+
+    </div>
+    <div id="toc">
+      <ol class="toc"><li class="toc-item toc-level-3"><a class="toc-link" href="#第二章"><span class="toc-number">1.</span> <span class="toc-text">第二章 :</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#有关对象"><span class="toc-number">1.1.</span> <span class="toc-text">有关对象 :</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#有关变量"><span class="toc-number">1.2.</span> <span class="toc-text">有关变量 :</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#有关作用域"><span class="toc-number">1.3.</span> <span class="toc-text">有关作用域 :</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#有关引用和指针"><span class="toc-number">1.4.</span> <span class="toc-text">有关引用和指针 :</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#关于复合类型的声明"><span class="toc-number">1.5.</span> <span class="toc-text">关于复合类型的声明 :</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#指针和const"><span class="toc-number">1.6.</span> <span class="toc-text">指针和const</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#顶层const与底层const"><span class="toc-number">1.7.</span> <span class="toc-text">顶层const与底层const</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#constexpr和常量表达式"><span class="toc-number">1.8.</span> <span class="toc-text">constexpr和常量表达式 :</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#关于类型别名"><span class="toc-number">1.9.</span> <span class="toc-text">关于类型别名 :</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#关于auto类型说明符"><span class="toc-number">1.10.</span> <span class="toc-text">关于auto类型说明符 :</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#decltype类型指示符"><span class="toc-number">1.11.</span> <span class="toc-text">decltype类型指示符:</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#有关头文件"><span class="toc-number">1.12.</span> <span class="toc-text">有关头文件 :</span></a></li></ol></li></ol>
+    </div>
+  </span>
+</div>
+
+    
+    <div class="content index py4">
+        
+        <article class="post" itemscope itemtype="http://schema.org/BlogPosting">
+  <header>
+    
+    <h1 class="posttitle" itemprop="name headline">
+        C++Primer笔记(第二章)
+    </h1>
+
+
+
+    <div class="meta">
+      <span class="author" itemprop="author" itemscope itemtype="http://schema.org/Person">
+        <span itemprop="name">zhangMo Blog</span>
+      </span>
+      
+    <div class="postdate">
+      
+        <time datetime="2021-12-28T17:26:17.000Z" itemprop="datePublished">2021-12-29</time>
+        
+        (Updated: <time datetime="2021-12-28T17:38:03.298Z" itemprop="dateModified">2021-12-29</time>)
+        
+      
+    </div>
+
+
+      
+    <div class="article-category">
+        <i class="fas fa-archive"></i>
+        <a class="category-link" href="/categories/2022笔记/">2022笔记</a>
+    </div>
+
+
+      
+    <div class="article-tag">
+        <i class="fas fa-tag"></i>
+        <a class="tag-link" href="/tags/C/">C++</a>
+    </div>
+
+
+    </div>
+  </header>
+  
+
+  <div class="content" itemprop="articleBody">
+    <p>关键词 : 对象 , 变量 , 引用 , 指针 , const , auto , decltype </p>
+<a id="more"></a>
+<h3 id="第二章"><a href="#第二章" class="headerlink" title="第二章 :"></a>第二章 :</h3><h4 id="有关对象"><a href="#有关对象" class="headerlink" title="有关对象 :"></a>有关对象 :</h4><p>对象是指一块能存储数据并具有某种类型的内存空间 , 当对象创建时获得了一个特定的值 , 这个行为被称作初始化 . 初始化与赋值的区别在于赋值是把对象的当前值擦除 , 而以一个新值来替代.(“擦除”和”替代”)</p>
+<h4 id="有关变量"><a href="#有关变量" class="headerlink" title="有关变量 :"></a>有关变量 :</h4><p>声明 : 规定了变量的类型和名字</p>
+<p>定义 : 任何包含了显式初始化的声明即成为定义(申请储存空间并赋值)</p>
+<p>如果想声明一个变量而非定义 , 就在变量名前添加关键字<code>extern</code>, 而且不要显式的初始化变量 . 在函数体内部 , 如果试图初始化一个<code>extern</code>关键字标记的变量将引发错误.</p>
+<p>变量能且只能被定义一次 , 但是可以被多次声明.(怎么理解?)</p>
+<p>变量的定义必须出现在且只能出现在一个文件中 , 而其他用到该变量的文件必须对其进行声明 , 却绝对不能重复定义.</p>
+<h4 id="有关作用域"><a href="#有关作用域" class="headerlink" title="有关作用域 :"></a>有关作用域 :</h4><p><code>::</code>称为作用域操作符 , 当左侧为空的时候 , 向全局作用域请求获得操作符右侧名字的变量.</p>
+<h4 id="有关引用和指针"><a href="#有关引用和指针" class="headerlink" title="有关引用和指针 :"></a>有关引用和指针 :</h4><p>引用和指针应该算是第二章里比较重点 , 同时也比较绕的内容 , 特将内容梳理如下以备查阅与理解:</p>
+<p>引用 : 引用是为已经存在的对象起的另外一个名字.</p>
+<ul>
+<li>引用必须被初始化 : 在定义引用的时候 , 程序就把引用和它的初始值绑定在了一起 , 因为无法重新绑定到其他对象 , 所以引用必须被初始化 . </li>
+<li>因为引用本身不是一个对象(可寻址的空间) , 所以无法定义引用的引用. </li>
+<li>引用只能绑定在对象上 , 而不能绑定在字面值或者某个表达式的计算结果上.(原因 : 首先字面值本身不是一个对象 , 所以不能绑定 , 表达式的计算结果应该是一个临时变量 , 也不是一个对象所以无法绑定 ? 怎么理解 ?)</li>
+</ul>
+<p>指针 : 指针本身就是一个对象 , 允许对指针进行赋值以及拷贝 , 在指针的生命周期里可以先后指向不同的对象 . 指针无需在定义时赋初值 , 如果定义时未初始化则有一个不确定的值.</p>
+<p>同样(与引用类似) , 一个指向常量的指针可以指向一个非常量对象.</p>
+<p>引用不是对象 , 没有实际地址 , 所以无法定义指向引用的指针.</p>
+<p>指针的值应属于以下四种状态之一 : </p>
+<ol>
+<li>指向一个对象</li>
+<li>指向紧邻对象所占空间的下一个位置</li>
+<li>空指针 , 没有指向任何对象</li>
+<li>无效指针 , 除了上述情况的其他值</li>
+</ol>
+<p>指针伴随着一对操作符 : 取地址符<code>&amp;</code>和解引用符<code>*</code> , 前者获得对应对象的地址 , 后者获得地址所指的对象(解引用操作仅适用于那些指向了有效地址的指针). </p>
+<p>尽量初始化所有的指针 , 并且在可能的情况下 , 尽量等定义了对象再定义指向它的指针 , 如果不知道应该指向何处 , 可以把它初始化为nullptr或者0 .</p>
+<p>指针可以使用<code>==</code>进行比较 , 当指向的地址值相同时为true.</p>
+<p>void<em> 是一种特殊的指针类型 , 可以用于存放任意对象的地址 . 可以用来拿它和别的指针比较 , 作为函数的输入和输出 , 或者赋给另外一个void</em>指针 .</p>
+<h4 id="关于复合类型的声明"><a href="#关于复合类型的声明" class="headerlink" title="关于复合类型的声明 :"></a>关于复合类型的声明 :</h4><ul>
+<li><p>最简单的办法就是从右向左阅读r的定义，离变量名最近的符号对变量的类型有最直接的影响 . </p>
+</li>
+<li><p>关于const限定符 :</p>
+<p>  const对象必须初始化.</p>
+<p>  只能在const类型的对象上执行不改变其内容的操作 , 默认情况下 , const变量仅在文件中有效 , 当多个文件中出现了同名的const变量时 , 其实等同于在不同文件中定义了独立的变量.</p>
+<p>  如果想在多个文件之间共享const对象 , 必须在变量的定义前添加extern关键字.</p>
+<p>  可以把引用绑定到const对象上 , 称之为对常量的引用 , 不能被用作修改它所绑定的对象.</p>
+<p>  引用的使用场景(怎么理解?) : </p>
+<ol>
+<li>别名–&gt;减少拷贝开销</li>
+<li>参数传递–&gt;减少拷贝开销 , 避免空指针</li>
+<li>函数返回值–&gt;</li>
+</ol>
+</li>
+</ul>
+<pre><code class="hljs c++"><span class="hljs-keyword">double</span> dval = <span class="hljs-number">3.14</span>;
+<span class="hljs-keyword">const</span> <span class="hljs-keyword">int</span> &amp;ri = dval;
+
+<span class="hljs-comment">/* 编译器做法 */</span>
+<span class="hljs-keyword">const</span> <span class="hljs-keyword">int</span> temp = dval;		<span class="hljs-comment">// 让double类型生成一个临时的int变量</span>
+<span class="hljs-keyword">const</span> <span class="hljs-keyword">int</span> &amp;ri = temp;		<span class="hljs-comment">// 让ri绑定这个临时量</span>
+
+<span class="hljs-comment">/* 因为不可以通过被const修饰符限定的常量引用修改被引用的对象,所以该引用可以绑定在临时量上,不会对临时量产生修改的操作; 如果是非常量引用,则可能通过该引用修改对应的临时量,但是代码的目的是通过ri来修改试图绑定的dval,却绑定到了临时量上,与预期不符,所以非法 */</span>
+<span class="hljs-keyword">int</span> &amp;ri = dval;				<span class="hljs-comment">// 非法</span></code></pre>
+<p><img src="https://hust_mo.gitee.io/blogpicturerepo/image-20211228103857644.png" alt="img"></p>
+<p>常量引用仅仅对引用可参与的操作进行了限制 , 即不能通过该引用改变其引用的对象 , 对于对象本身是否是常量未做限定.</p>
+<h4 id="指针和const"><a href="#指针和const" class="headerlink" title="指针和const"></a>指针和const</h4><p>指向常量的指针(<code>pointer to const</code>)不能用于改变其所指对象的值 , 存放常量对象的地址 , 只能使用指向常量的指针.</p>
+<pre><code class="hljs c++"><span class="hljs-keyword">const</span> <span class="hljs-keyword">double</span> pi = <span class="hljs-number">3.14</span>;
+<span class="hljs-keyword">double</span> *ptr = &amp;pi;			<span class="hljs-comment">// 非法</span>
+<span class="hljs-keyword">const</span> <span class="hljs-keyword">double</span> *cptr = &amp;pi;	<span class="hljs-comment">// 合法</span>
+*cptr = <span class="hljs-number">43</span>;					<span class="hljs-comment">// 非法, 不能给*cptr赋值.</span></code></pre>
+<p>同样指向常量的指针也对指向的对象本身是否是常量未做限定 , 仅仅是不能通过该指针改变所指对象的值.</p>
+<p>常量指针(<code>const pointer</code>) , 指针本身是常量 , 根据const的规则 , 必须初始化 , 初始化完成后其值不可改变 , 不可变的是指针本身而不是指向的值 , 是否可以通过该指针改变其指向的值取决于它指向的值是否是常量.</p>
+<h4 id="顶层const与底层const"><a href="#顶层const与底层const" class="headerlink" title="顶层const与底层const"></a>顶层const与底层const</h4><p>顶层const(<code>top-level const</code>) : 表示指针本身是个常量 </p>
+<p>底层const(<code>low-level const</code>) : 表示指针所指的对象是个常量</p>
+<pre><code class="hljs c++"><span class="hljs-keyword">int</span> i = <span class="hljs-number">0</span>;
+<span class="hljs-keyword">int</span> *<span class="hljs-keyword">const</span> p1 = &amp;i;		<span class="hljs-comment">// 指向int的常量指针,top-level</span>
+<span class="hljs-keyword">const</span> <span class="hljs-keyword">int</span> ci = <span class="hljs-number">42</span>;		<span class="hljs-comment">// 常量int, top-level</span>
+<span class="hljs-keyword">const</span> <span class="hljs-keyword">int</span> *p2 = &amp;ci;	<span class="hljs-comment">// 指向常量int的指针, low-level</span>
+<span class="hljs-keyword">const</span> <span class="hljs-keyword">int</span> *<span class="hljs-keyword">const</span> p3 = p2;<span class="hljs-comment">// 指向常量int的常量指针,第一个为low-level,第二个为top-level</span>
+<span class="hljs-keyword">const</span> <span class="hljs-keyword">int</span> &amp;r = ci;		<span class="hljs-comment">// 用于声明引用的const都是底层const(怎么理解? 不能通过引用改变绑定的变量, 所以是底层const? 换句话说, 常量引用认为自己绑定的变量是个常量?)</span>
+
+<span class="hljs-comment">/* 当执行对象的拷贝操作时, 拷入和拷出的对象必须有相同的底层const资格, 或者两个对象的数据类型可以相互转换, 非常量可以转换成常量, 反之不行*/</span>
+<span class="hljs-keyword">int</span> *p = p3;			<span class="hljs-comment">// 错误: p3包含了底层const, 如果正确则可能通过p改变p3指向的值, 与const冲突</span>
+p2 = p3;				<span class="hljs-comment">// 正确: p2和p3都是底层const</span>
+p2 = &amp;i;				<span class="hljs-comment">// 正确: int *可以转换成const int *</span>
+<span class="hljs-keyword">int</span> &amp;r = ci;			<span class="hljs-comment">// 错误: int&amp;不能绑定到const int上</span>
+<span class="hljs-keyword">const</span> <span class="hljs-keyword">int</span> &amp;r2 = i;		<span class="hljs-comment">// 正确: const int&amp; 可以绑定到int上</span>
+
+<span class="hljs-comment">/* 可以通过"试图改变某对象"的思路来判断是否正确, 不过这些内容应该编译器都会提示吧...... */</span></code></pre>
+<h4 id="constexpr和常量表达式"><a href="#constexpr和常量表达式" class="headerlink" title="constexpr和常量表达式 :"></a>constexpr和常量表达式 :</h4><p><strong>值不会改变</strong>并且<strong>在编译过程中就能得到计算结果</strong>的表达式 .</p>
+<pre><code class="hljs c++"><span class="hljs-keyword">int</span> staff_size = <span class="hljs-number">27</span>;		<span class="hljs-comment">// 不是常量表达式, staff_size可以改变</span>
+<span class="hljs-keyword">const</span> <span class="hljs-keyword">int</span> sz = get_size();	<span class="hljs-comment">// 不是常量表达式, sz的具体值直到运行时才能获得</span>
+
+<span class="hljs-keyword">const</span> <span class="hljs-keyword">int</span> *p = <span class="hljs-literal">nullptr</span>;		<span class="hljs-comment">// 指向整形常量的指针</span>
+<span class="hljs-keyword">constexpr</span> <span class="hljs-keyword">int</span> *q = <span class="hljs-literal">nullptr</span>;	<span class="hljs-comment">// 指向整数的常量指针</span></code></pre>
+<blockquote>
+<p>将会提到 , 函数体内定义的变量一般来说并非存放在固定地址中 , 因此constexpr指针不能指向这样的变量,  定义于所有函数体之外的对象地址固定不变, 能用来初始化constexpr指针 , 允许函数定义一类有效范围超出函数本身的变量, 这类变量和定义在函数体之外的变量一样有固定地址, 因此, constexpr引用能绑定到这样的变量上, constexpr指针也能指向这样的变量. (后面提到再看吧……)</p>
+</blockquote>
+<h4 id="关于类型别名"><a href="#关于类型别名" class="headerlink" title="关于类型别名 :"></a>关于类型别名 :</h4><p>可以使用typedef和using两种关键字进行定义.</p>
+<pre><code class="hljs c++"><span class="hljs-keyword">typedef</span> <span class="hljs-keyword">char</span>* pstring;
+<span class="hljs-keyword">const</span> pstring cstr = <span class="hljs-number">0</span>;		<span class="hljs-comment">// 指向char的常量指针</span>
+<span class="hljs-keyword">const</span> pstring *ps;			<span class="hljs-comment">// 指向一个指向char的常量指针的指针</span>
+
+<span class="hljs-keyword">const</span> <span class="hljs-keyword">char</span>* cstr = <span class="hljs-number">0</span>;		<span class="hljs-comment">// 指向const char的指针</span>
+<span class="hljs-keyword">const</span> <span class="hljs-keyword">char</span> **ptr;			<span class="hljs-comment">// 指向一个const char指针的指针</span>
+<span class="hljs-comment">/* const是对给定类型的修饰, 所以const pstring为指向char的常量指针, 而非指向常量char的指针*/</span>
+<span class="hljs-comment">/* 不能通过替换类型别名来理解 */</span></code></pre>
+<h4 id="关于auto类型说明符"><a href="#关于auto类型说明符" class="headerlink" title="关于auto类型说明符 :"></a>关于auto类型说明符 :</h4><p>auto定义的变量必须有初始值 . </p>
+<p>当引用被用作初始值时 , 真正参与初始化的其实是引用对象的值 , 编译器以引用对象的类型作为auto的类型.</p>
+<p>auto一般会忽略掉顶层const , 同时底层const则会保留下来 :</p>
+<pre><code class="hljs c++"><span class="hljs-keyword">int</span> i = <span class="hljs-number">0</span>, &amp;r = i;
+<span class="hljs-keyword">auto</span> a = r;
+<span class="hljs-keyword">const</span> <span class="hljs-keyword">int</span> ci = i, &amp;cr = ci;
+<span class="hljs-keyword">auto</span> b = ci;				<span class="hljs-comment">// b推断为一个int(ci作为top-level被忽略)</span>
+<span class="hljs-keyword">auto</span> c = cr;				<span class="hljs-comment">// c推断为一个int(cr是ci的引用,ci本身是一个top-level) ??? cr不是一个底层const吗(理解: cr是ci的引用, c是ci的copy, 目的不是通过c去改变ci, 所以c推断为一个int)</span>
+
+<span class="hljs-keyword">const</span> <span class="hljs-keyword">auto</span> f = ci;			<span class="hljs-comment">// f为const int, 需要显式指定const来推断出top-level const</span></code></pre>
+<p><strong>符号&amp;和*只从属于某个声明符 , 而非基本数据类型的一部分 , 因此初始值必须是同一种类型.</strong></p>
+<h4 id="decltype类型指示符"><a href="#decltype类型指示符" class="headerlink" title="decltype类型指示符:"></a>decltype类型指示符:</h4><p>  类似于lua中的type()用来推断类型, 它的作用是选择并返回操作数的数据类型 , 编译器分析表达式并得到它的类型, 却不实际计算表达式的值.</p>
+  <pre><code class="hljs c++"><span class="hljs-keyword">decltype</span>(f()) sum = x;        <span class="hljs-comment">// sun类型为函数f的返回类型</span></code></pre>
+<p>  如果decltype使用的表达式是一个变量, 则decltype返回该变量的类型 (包括top-level const和引用在内) ; 如果decltype使用的表达式不是一个变量 , 则decltype返回表达式结果对应的类型.</p>
+<p><code>decltype((variable))</code>的结果永远是引用 , 而<code>decltype(variable)</code>结果只有当<code>variable</code>本身是一个引用时才是引用. </p>
+<pre><code class="hljs c++"><span class="hljs-keyword">decltype</span>((i)) d;			<span class="hljs-comment">// d是int&amp;, 必须初始化</span></code></pre>
+<h4 id="有关头文件"><a href="#有关头文件" class="headerlink" title="有关头文件 :"></a>有关头文件 :</h4><p>头文件通常只包含那些只能被定义一次的实体, 如类 , const和constexpr变量.</p>
+<pre><code class="hljs c++"><span class="hljs-meta">#<span class="hljs-meta-keyword">define</span>		<span class="hljs-comment">// 把一个名字设定成预处理变量</span></span>
+<span class="hljs-meta">#<span class="hljs-meta-keyword">ifdef</span>		<span class="hljs-comment">// 当且仅当变量已定义时为真</span></span>
+<span class="hljs-meta">#<span class="hljs-meta-keyword">ifndef</span>		<span class="hljs-comment">// 当且仅当变量未定义时为真</span></span>
+<span class="hljs-meta">#<span class="hljs-meta-keyword">endif</span>		<span class="hljs-comment">// 结束符</span></span></code></pre>
+
+  </div>
+</article>
+
+
+
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/gitalk@1/dist/gitalk.css">
+    <script src="https://cdn.jsdelivr.net/npm/gitalk@1/dist/gitalk.min.js"></script>
+    <script src="https://cdn.bootcss.com/blueimp-md5/2.10.0/js/md5.min.js"></script>
+    <div id="gitalk-container"></div>
+    <script type="text/javascript">
+        var gitalk = new Gitalk({
+            clientID: '643bb65e08572c0f02f9',
+            clientSecret: '267594ee5074e2f5b6392c6deba31c86b4b98abe',
+            id: md5(window.location.pathname),
+            repo: 'bitzhangmo.github.io',
+            owner: 'bitzhangmo',
+            admin: 'bitzhangmo',
+            distractionFreeMode: ''
+        })
+        gitalk.render('gitalk-container')
+    </script>
+
+
+        
+          <div id="footer-post-container">
+  <div id="footer-post">
+
+    <div id="nav-footer" style="display: none">
+      <ul>
+         
+          <li><a href="/">首页</a></li>
+         
+          <li><a href="/about/">关于</a></li>
+         
+          <li><a href="/tags/">tags</a></li>
+         
+          <li><a href="/categories/">categories</a></li>
+         
+          <li><a href="/archives/">归档</a></li>
+         
+          <li><a href="/categories/reports/">reports</a></li>
+         
+          <li><a href="/search/">搜索</a></li>
+        
+      </ul>
+    </div>
+
+    <div id="toc-footer" style="display: none">
+      <ol class="toc"><li class="toc-item toc-level-3"><a class="toc-link" href="#第二章"><span class="toc-number">1.</span> <span class="toc-text">第二章 :</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#有关对象"><span class="toc-number">1.1.</span> <span class="toc-text">有关对象 :</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#有关变量"><span class="toc-number">1.2.</span> <span class="toc-text">有关变量 :</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#有关作用域"><span class="toc-number">1.3.</span> <span class="toc-text">有关作用域 :</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#有关引用和指针"><span class="toc-number">1.4.</span> <span class="toc-text">有关引用和指针 :</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#关于复合类型的声明"><span class="toc-number">1.5.</span> <span class="toc-text">关于复合类型的声明 :</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#指针和const"><span class="toc-number">1.6.</span> <span class="toc-text">指针和const</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#顶层const与底层const"><span class="toc-number">1.7.</span> <span class="toc-text">顶层const与底层const</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#constexpr和常量表达式"><span class="toc-number">1.8.</span> <span class="toc-text">constexpr和常量表达式 :</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#关于类型别名"><span class="toc-number">1.9.</span> <span class="toc-text">关于类型别名 :</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#关于auto类型说明符"><span class="toc-number">1.10.</span> <span class="toc-text">关于auto类型说明符 :</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#decltype类型指示符"><span class="toc-number">1.11.</span> <span class="toc-text">decltype类型指示符:</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#有关头文件"><span class="toc-number">1.12.</span> <span class="toc-text">有关头文件 :</span></a></li></ol></li></ol>
+    </div>
+
+    <div id="share-footer" style="display: none">
+      <ul>
+  <li><a class="icon" href="http://www.facebook.com/sharer.php?u=https://bitzhangmo.github.io/2021/12/29/C++Primer笔记/C-Primer笔记-第二章/"><i class="fab fa-facebook fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="https://twitter.com/share?url=https://bitzhangmo.github.io/2021/12/29/C++Primer笔记/C-Primer笔记-第二章/&text=C++Primer笔记(第二章)"><i class="fab fa-twitter fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="http://www.linkedin.com/shareArticle?url=https://bitzhangmo.github.io/2021/12/29/C++Primer笔记/C-Primer笔记-第二章/&title=C++Primer笔记(第二章)"><i class="fab fa-linkedin fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="https://pinterest.com/pin/create/bookmarklet/?url=https://bitzhangmo.github.io/2021/12/29/C++Primer笔记/C-Primer笔记-第二章/&is_video=false&description=C++Primer笔记(第二章)"><i class="fab fa-pinterest fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="mailto:?subject=C++Primer笔记(第二章)&body=Check out this article: https://bitzhangmo.github.io/2021/12/29/C++Primer笔记/C-Primer笔记-第二章/"><i class="fas fa-envelope fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="https://getpocket.com/save?url=https://bitzhangmo.github.io/2021/12/29/C++Primer笔记/C-Primer笔记-第二章/&title=C++Primer笔记(第二章)"><i class="fab fa-get-pocket fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="http://reddit.com/submit?url=https://bitzhangmo.github.io/2021/12/29/C++Primer笔记/C-Primer笔记-第二章/&title=C++Primer笔记(第二章)"><i class="fab fa-reddit fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="http://www.stumbleupon.com/submit?url=https://bitzhangmo.github.io/2021/12/29/C++Primer笔记/C-Primer笔记-第二章/&title=C++Primer笔记(第二章)"><i class="fab fa-stumbleupon fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="http://digg.com/submit?url=https://bitzhangmo.github.io/2021/12/29/C++Primer笔记/C-Primer笔记-第二章/&title=C++Primer笔记(第二章)"><i class="fab fa-digg fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="http://www.tumblr.com/share/link?url=https://bitzhangmo.github.io/2021/12/29/C++Primer笔记/C-Primer笔记-第二章/&name=C++Primer笔记(第二章)&description=&lt;p&gt;关键词 : 对象 , 变量 , 引用 , 指针 , const , auto , decltype &lt;/p&gt;"><i class="fab fa-tumblr fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="https://news.ycombinator.com/submitlink?u=https://bitzhangmo.github.io/2021/12/29/C++Primer笔记/C-Primer笔记-第二章/&t=C++Primer笔记(第二章)"><i class="fab fa-hacker-news fa-lg" aria-hidden="true"></i></a></li>
+</ul>
+
+    </div>
+
+    <div id="actions-footer">
+        <a id="menu" class="icon" href="#" onclick="$('#nav-footer').toggle();return false;"><i class="fas fa-bars fa-lg" aria-hidden="true"></i> 菜单</a>
+        <a id="toc" class="icon" href="#" onclick="$('#toc-footer').toggle();return false;"><i class="fas fa-list fa-lg" aria-hidden="true"></i> 目录</a>
+        <a id="share" class="icon" href="#" onclick="$('#share-footer').toggle();return false;"><i class="fas fa-share-alt fa-lg" aria-hidden="true"></i> 分享</a>
+        <a id="top" style="display:none" class="icon" href="#" onclick="$('html, body').animate({ scrollTop: 0 }, 'fast');"><i class="fas fa-chevron-up fa-lg" aria-hidden="true"></i> 返回顶部</a>
+    </div>
+
+  </div>
+</div>
+
+        
+        <footer id="footer">
+  <div class="footer-left">
+    Copyright &copy; 2021 zhangMo
+  </div>
+  <div class="footer-right">
+    <nav>
+      <ul>
+         
+          <li><a href="/">首页</a></li>
+         
+          <li><a href="/about/">关于</a></li>
+         
+          <li><a href="/tags/">tags</a></li>
+         
+          <li><a href="/categories/">categories</a></li>
+         
+          <li><a href="/archives/">归档</a></li>
+         
+          <li><a href="/categories/reports/">reports</a></li>
+         
+          <li><a href="/search/">搜索</a></li>
+        
+      </ul>
+    </nav>
+  </div>
+</footer>
+
+        
+    </div>
+    <!-- styles -->
+<link rel="stylesheet" href="/lib/font-awesome/css/all.min.css">
+<link rel="stylesheet" href="/lib/justified-gallery/css/justifiedGallery.min.css">
+
+    <!-- jquery -->
+<script src="/lib/jquery/jquery.min.js"></script>
+<script src="/lib/justified-gallery/js/jquery.justifiedGallery.min.js"></script>
+<!-- clipboard -->
+
+  <script src="/lib/clipboard/clipboard.min.js"></script>
+  <script type="text/javascript">
+  $(function() {
+    // copy-btn HTML
+    var btn = "<span class=\"btn-copy tooltipped tooltipped-sw\" aria-label=\"复制到粘贴板!\">";
+    btn += '<i class="far fa-clone"></i>';
+    btn += '</span>'; 
+    // mount it!
+    $(".highlight table").before(btn);
+    var clip = new ClipboardJS('.btn-copy', {
+      text: function(trigger) {
+        return Array.from(trigger.nextElementSibling.querySelectorAll('.code')).reduce((str,it)=>str+it.innerText+'\n','')
+      }
+    });
+    clip.on('success', function(e) {
+      e.trigger.setAttribute('aria-label', "复制成功!");
+      e.clearSelection();
+    })
+  })
+  </script>
+
+<script src="/js/main.js"></script>
+<!-- search -->
+
+<!-- Google Analytics -->
+
+<!-- Baidu Analytics -->
+
+<!-- Disqus Comments -->
+
+
+<script src="/live2dw/lib/L2Dwidget.min.js?bd2294fafea3389ee458f1d9be5a2157"></script><script>L2Dwidget.init({"pluginRootPath":"live2dw/","pluginJsPath":"lib/","pluginModelPath":"assets/","tagMode":false,"debug":false,"model":{"jsonPath":"/live2dw/assets/hijiki.model.json"},"display":{"position":"left","width":100,"height":200},"mobile":{"show":false},"log":false});</script></body>
+</html>
