@@ -6,14 +6,18 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="HandheldFriendly" content="True">
     <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-    <meta property="og:type" content="article">
+    <meta name="description" content="关键词 : string, vector, 迭代器, 数组">
+<meta name="keywords" content="C++">
+<meta property="og:type" content="article">
 <meta property="og:title" content="C++Primer笔记(第三章)">
 <meta property="og:url" content="https://bitzhangmo.github.io/2021/12/30/C++Primer笔记/C-Primer笔记-第三章/index.html">
 <meta property="og:site_name" content="zhangMo Blog">
+<meta property="og:description" content="关键词 : string, vector, 迭代器, 数组">
 <meta property="og:locale" content="zh-CN">
-<meta property="og:updated_time" content="2021-12-29T17:07:52.455Z">
+<meta property="og:updated_time" content="2021-12-29T17:15:20.522Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="C++Primer笔记(第三章)">
+<meta name="twitter:description" content="关键词 : string, vector, 迭代器, 数组">
     
     
         
@@ -98,13 +102,13 @@
   <li><a class="icon" href="http://reddit.com/submit?url=https://bitzhangmo.github.io/2021/12/30/C++Primer笔记/C-Primer笔记-第三章/&title=C++Primer笔记(第三章)"><i class="fab fa-reddit " aria-hidden="true"></i></a></li>
   <li><a class="icon" href="http://www.stumbleupon.com/submit?url=https://bitzhangmo.github.io/2021/12/30/C++Primer笔记/C-Primer笔记-第三章/&title=C++Primer笔记(第三章)"><i class="fab fa-stumbleupon " aria-hidden="true"></i></a></li>
   <li><a class="icon" href="http://digg.com/submit?url=https://bitzhangmo.github.io/2021/12/30/C++Primer笔记/C-Primer笔记-第三章/&title=C++Primer笔记(第三章)"><i class="fab fa-digg " aria-hidden="true"></i></a></li>
-  <li><a class="icon" href="http://www.tumblr.com/share/link?url=https://bitzhangmo.github.io/2021/12/30/C++Primer笔记/C-Primer笔记-第三章/&name=C++Primer笔记(第三章)&description="><i class="fab fa-tumblr " aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="http://www.tumblr.com/share/link?url=https://bitzhangmo.github.io/2021/12/30/C++Primer笔记/C-Primer笔记-第三章/&name=C++Primer笔记(第三章)&description=&lt;p&gt;关键词 : string, vector, 迭代器, 数组&lt;/p&gt;"><i class="fab fa-tumblr " aria-hidden="true"></i></a></li>
   <li><a class="icon" href="https://news.ycombinator.com/submitlink?u=https://bitzhangmo.github.io/2021/12/30/C++Primer笔记/C-Primer笔记-第三章/&t=C++Primer笔记(第三章)"><i class="fab fa-hacker-news " aria-hidden="true"></i></a></li>
 </ul>
 
     </div>
     <div id="toc">
-      
+      <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#第三章"><span class="toc-number">1.</span> <span class="toc-text">第三章</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#关于string类型"><span class="toc-number">1.1.</span> <span class="toc-text">关于string类型 :</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#关于vector"><span class="toc-number">1.2.</span> <span class="toc-text">关于vector :</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#关于迭代器"><span class="toc-number">1.3.</span> <span class="toc-text">关于迭代器 :</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#关于数组"><span class="toc-number">1.4.</span> <span class="toc-text">关于数组 :</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#string对象与C风格字符串"><span class="toc-number">1.5.</span> <span class="toc-text">string对象与C风格字符串</span></a></li></ol></li></ol>
     </div>
   </span>
 </div>
@@ -130,22 +134,132 @@
       
         <time datetime="2021-12-29T17:07:52.000Z" itemprop="datePublished">2021-12-30</time>
         
-        (Updated: <time datetime="2021-12-29T17:07:52.455Z" itemprop="dateModified">2021-12-30</time>)
+        (Updated: <time datetime="2021-12-29T17:15:20.522Z" itemprop="dateModified">2021-12-30</time>)
         
       
     </div>
 
 
       
+    <div class="article-category">
+        <i class="fas fa-archive"></i>
+        <a class="category-link" href="/categories/2022笔记/">2022笔记</a>
+    </div>
+
 
       
+    <div class="article-tag">
+        <i class="fas fa-tag"></i>
+        <a class="tag-link" href="/tags/C/">C++</a>
+    </div>
+
 
     </div>
   </header>
   
 
   <div class="content" itemprop="articleBody">
-    <a id="more"></a>
+    <p>关键词 : string, vector, 迭代器, 数组</p>
+<a id="more"></a>
+<h2 id="第三章"><a href="#第三章" class="headerlink" title="第三章"></a>第三章</h2><h3 id="关于string类型"><a href="#关于string类型" class="headerlink" title="关于string类型 :"></a>关于string类型 :</h3><ul>
+<li><p>直接初始化和拷贝初始化 :</p>
+  <figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">/* 我理解使用的场景就是初始化需要重复的时候用直接初始化 */</span></span><br><span class="line"><span class="built_in">string</span> s5 = <span class="string">"hiya"</span>;</span><br><span class="line"><span class="function"><span class="built_in">string</span> <span class="title">s6</span><span class="params">(<span class="string">"hiya"</span>)</span></span>;		<span class="comment">// 直接初始化</span></span><br><span class="line"><span class="function"><span class="built_in">string</span> <span class="title">s7</span><span class="params">(<span class="number">10</span>, <span class="string">'c'</span>)</span></span>;		<span class="comment">// 直接初始化,s7 = "cccccccccc"</span></span><br></pre></td></tr></table></figure>
+</li>
+<li><p>读取操作时, string对象会自动忽略掉开头的空白(空格符, 换行符, 制表符等) , 并从第一个真正的字符开始读起 , 直到遇见下一处空白为止.</p>
+</li>
+<li><p>string类型内置的size函数返回string对象中字符的个数 , 但是其类型并不是int或者unsigned, 而是<code>string::size_type</code> , 作为标准库类型与机器无关 , 但可以确定的是size函数返回的是一个无符号整数 , 所以尽量避免在size()的表达式中调用int类型.</p>
+  <figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">if</span>(s.size() &lt; <span class="number">-1</span>)		<span class="comment">// 通常为true, -1会被自动转换成一个较大的无符号值</span></span><br></pre></td></tr></table></figure>
+</li>
+<li><p>标准库允许把字符字面值和字符串字面值转换为string对象, 但<strong>每个加法运算符的两侧必须确保至少有一个string对象.</strong></p>
+</li>
+<li><p>“ 因为某些历史原因 , 也为了与C兼容 “, C++中的字符串字面值并不是标准库类型string的对象, 即字符串字面值和string是不同的类型.</p>
+</li>
+<li><p>cctype头文件中定义了一组标准库函数改变某个字符的特性.</p>
+</li>
+<li><p>使用范围for语句改变字符串中的字符 , 必须把循环变量定义成<strong>引用类型</strong> :</p>
+  <figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">string</span> str1 = <span class="string">"moss"</span>;</span><br><span class="line"><span class="keyword">for</span>(<span class="keyword">auto</span> c: str1)</span><br><span class="line">&#123;</span><br><span class="line">    c = <span class="built_in">toupper</span>(c);</span><br><span class="line">&#125;</span><br><span class="line">    </span><br><span class="line"><span class="built_in">cout</span> &lt;&lt; <span class="string">"str1 "</span> + str1 &lt;&lt; <span class="built_in">endl</span>;		<span class="comment">// 输出str1 moss</span></span><br><span class="line">    </span><br><span class="line"><span class="keyword">for</span>(<span class="keyword">auto</span> &amp;c: str1)</span><br><span class="line">&#123;</span><br><span class="line">    c = <span class="built_in">toupper</span>(c);</span><br><span class="line">&#125;</span><br><span class="line"><span class="built_in">cout</span> &lt;&lt; <span class="string">"str2 "</span> + str1 &lt;&lt; <span class="built_in">endl</span>;		<span class="comment">// 输出str2 MOSS</span></span><br></pre></td></tr></table></figure>
+</li>
+<li><p>下标运算符接受的输入参数是string::size_type类型的值 , 返回值是该位置上字符的引用.</p>
+</li>
+</ul>
+<h3 id="关于vector"><a href="#关于vector" class="headerlink" title="关于vector :"></a>关于vector :</h3><blockquote>
+<p>模板本身不是类或函数 , 相反可以将模板看做为编译器生成类或函数编写的一份说明 . 编译器根据模板创建类或函数的过程称为实例化.</p>
+</blockquote>
+<ul>
+<li><p>vector能容纳绝大多数类型的对象作为其元素 , 但是因为引用不是对象 , 所以不存在包含引用的vector.</p>
+</li>
+<li><p>早期对于嵌套的vector需要在右尖括号和元素类型间加个空格 :</p>
+  <figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">vector</span>&lt;<span class="built_in">vector</span>&lt;<span class="keyword">int</span>&gt; &gt;		<span class="comment">// old</span></span><br><span class="line"><span class="built_in">vector</span>&lt;<span class="built_in">vector</span>&lt;<span class="keyword">int</span>&gt;&gt;			<span class="comment">// now</span></span><br></pre></td></tr></table></figure>
+</li>
+<li><p>初始化的三个要点:</p>
+<ul>
+<li>使用拷贝初始化时 , 只能提供一个初始值 .</li>
+<li>如果提供的是一个类内初始值 , 则只能使用拷贝初始化或者使用花括号的形式初始化 (还有什么方式? 直接初始化? ).</li>
+<li>如果提供的是初始元素值的列表 , 则只能把初始值都放在花括号里进行列表初始化 , 而不是圆括号里.</li>
+</ul>
+</li>
+</ul>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">vector</span>&lt;<span class="built_in">string</span>&gt; articles = &#123;<span class="string">"a"</span>, <span class="string">"an"</span>, <span class="string">"the"</span>&#125;;		<span class="comment">// 列表初始化</span></span><br><span class="line"><span class="built_in">vector</span>&lt;<span class="keyword">int</span>&gt;	ivec(<span class="number">10</span>);		<span class="comment">// 值初始化,长度为10,每个都是0</span></span><br><span class="line"><span class="built_in">vector</span>&lt;<span class="built_in">string</span>&gt; svec(<span class="number">10</span>);		<span class="comment">// 值初始化,长度为10,每个都是空字符串</span></span><br><span class="line"><span class="comment">/* 如果vector对象中元素的类型不支持默认初始化, 则必须提供初始的元素值 */</span></span><br><span class="line"><span class="comment">/* 如果只提供了元素的数量而没有设定初始值, 则只能使用直接初始化 */</span></span><br><span class="line"><span class="comment">/* 总结: 圆括号()用来构造vector对象, 花括号&#123;&#125;用于列表初始化vector对象*/</span></span><br></pre></td></tr></table></figure>
+<ul>
+<li>范围for语句内不应改变其所遍历序列的大小( 这点lua与其相同 ).</li>
+<li>vector对象(以及string对象)的下标运算符可用于访问<strong>已存在的元素</strong> , 而不能用于添加元素 .(仅仅是添加吗 ? 删除可不可以?)</li>
+</ul>
+<h3 id="关于迭代器"><a href="#关于迭代器" class="headerlink" title="关于迭代器 :"></a>关于迭代器 :</h3><ul>
+<li><p>所有标准库容器都可以使用迭代器 , 但是其中只有少数几种才同时支持下标运算符 .</p>
+</li>
+<li><p>end成员返回的迭代器称为<strong>尾后迭代器</strong> , 指向容器尾元素的下一位置 , 当容器为空时 , begin和end指向的是同一个迭代器 .</p>
+</li>
+<li><p>迭代器类型 :</p>
+<p>  拥有迭代器类型的标准库类型使用<code>iterator</code>和<code>const_iterator</code>来表示迭代器的类型 . 顾名思义, <code>const_iterator</code>只能读它所指元素值. 当容器中对象是一个常量 , 则只能使用<code>const_iterator</code> , 同样返回值也依据这个规则 , 可以使用<code>cbegin()</code>和<code>cend()</code>来强制获得<code>const_iterator</code>.</p>
+</li>
+<li><p>结合解引用和成员访问操作 :</p>
+<p>  解引用迭代器可获得迭代器所指的对象, 对于类对象可以进一步访问它的成员 : </p>
+  <figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">vector</span>&lt;<span class="built_in">string</span>&gt; vecs;						<span class="comment">// 定义vecs</span></span><br><span class="line"><span class="built_in">vector</span>&lt;<span class="built_in">string</span>&gt;::iterator it = vecs.begin();		<span class="comment">// 定义vecs的迭代器</span></span><br><span class="line">(*it).empty();		<span class="comment">// 解引用it, 并调用对象的empty成员, 必须加圆括号(应该是运算符优先级问题)</span></span><br><span class="line">it-&gt;empty();		<span class="comment">// 与上文等效</span></span><br></pre></td></tr></table></figure>
+<p>  <strong>箭头运算符把解引用和成员访问两个操作结合到了一起</strong>.</p>
+</li>
+<li><blockquote>
+<p>已知的一个限制是不能在范围for循环中向vector对象添加元素 , 另外一个限制是任何一种可能改变vector对象容量的操作 , 比如push_back, 都会使该vector对象的迭代器失效(待测试删除)</p>
+</blockquote>
+</li>
+</ul>
+<h3 id="关于数组"><a href="#关于数组" class="headerlink" title="关于数组 :"></a>关于数组 :</h3><ul>
+<li><p>数组长度固定 , 在编译的时候维度应该是已知的 , 所以定义的时候维度应是一个<strong>常量表达式</strong>.</p>
+</li>
+<li><p>字符串字面值末尾的空字符也会被拷贝到字符数组中.</p>
+</li>
+<li><p>不能将数组的内容拷贝给其他数组作为初始值, 也不能用数组给其他数组赋值. (某些编译器可能支持但最好不要依赖)</p>
+</li>
+<li><p>复杂的数组声明 :</p>
+  <figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">/* 要想理解数组声明的含义, 最好的办法是从数组的名字开始按照由内向外的顺序阅读 */</span></span><br><span class="line"><span class="keyword">int</span> *ptrs[<span class="number">10</span>];	<span class="comment">// 含有10个整型指针的数组</span></span><br><span class="line"><span class="keyword">int</span> &amp;refs[<span class="number">10</span>] = ;	<span class="comment">// 不存在引用的数组</span></span><br><span class="line"><span class="keyword">int</span> (*Parray)[<span class="number">10</span>] = &amp;arr;	<span class="comment">// 指针, 指向一个长度为10的整型数组</span></span><br><span class="line"><span class="keyword">int</span> (&amp;arrRef)[<span class="number">10</span>] = arr;	<span class="comment">// 引用, 绑定于一个长度为10的整型数组</span></span><br><span class="line"><span class="keyword">int</span> *(&amp;arry)[<span class="number">10</span>] = ptrs;	<span class="comment">// 引用, 绑定于一个含有10个指针的数组</span></span><br></pre></td></tr></table></figure>
+</li>
+<li><p>在大多数表达式中 , 使用数组类型的对象其实是使用一个指向该数组首元素的指针.</p>
+  <figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">int</span> ia = &#123;<span class="number">0</span>, <span class="number">1</span>, <span class="number">2</span>, <span class="number">3</span>, <span class="number">4</span>, <span class="number">5</span>, <span class="number">6</span>, <span class="number">7</span>, <span class="number">8</span>, <span class="number">9</span>&#125;;</span><br><span class="line"><span class="function"><span class="keyword">auto</span> <span class="title">ia2</span><span class="params">(ia)</span></span>;	<span class="comment">// ia2是一个整型指针, 指向ia的第一个元素</span></span><br><span class="line"><span class="comment">/* decltype关键字不会发生从数组对象到指针的转换 */</span></span><br><span class="line"><span class="keyword">decltype</span>(ia) ia3 = &#123;<span class="number">0</span>, <span class="number">1</span>, <span class="number">2</span>, <span class="number">3</span>, <span class="number">4</span>, <span class="number">5</span>, <span class="number">6</span>, <span class="number">7</span>, <span class="number">8</span>, <span class="number">9</span>&#125;;	<span class="comment">// ia3是一个长度为10的整形数组</span></span><br></pre></td></tr></table></figure>
+</li>
+<li><p>标准库函数begin和end</p>
+<p>  由于数组不是类 , 所以没有对应的成员函数 , 不过可以作为参数传入begin和end中返回对应位置的指针 .</p>
+</li>
+<li><p>两个指针相减的结果类型为<code>ptrdiff_t</code>, 是一种带符号类型 . <strong>参与运算的两个指针必须是指向同一个数组中的元素</strong>.</p>
+</li>
+<li><p>对数组执行下标运算其实是对指向数组元素的指针执行下标运算 :</p>
+  <figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">int</span> *p = &amp;ia[<span class="number">2</span>];</span><br><span class="line"><span class="keyword">int</span> k = p[<span class="number">-2</span>];		<span class="comment">// p[-2] = ia[0]</span></span><br></pre></td></tr></table></figure>
+</li>
+<li><p>多维数组 : 数组的数组</p>
+<p>  <strong>要使用范围for语句处理多维数组 , 除了最内层的循环外 , 其他所有循环的控制边浪都应该是引用类型. (否则控制变量将转换为指针, 遍历指针将非法)</strong></p>
+  <figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">for</span>(<span class="keyword">auto</span> row : ia)</span><br><span class="line">	<span class="keyword">for</span>(<span class="keyword">auto</span> col: row)	<span class="comment">// 将无法通过编译</span></span><br></pre></td></tr></table></figure>
+</li>
+</ul>
+<h3 id="string对象与C风格字符串"><a href="#string对象与C风格字符串" class="headerlink" title="string对象与C风格字符串"></a>string对象与C风格字符串</h3><ul>
+<li><p>允许使用以空字符结束的字符数组来初始化string对象或为string对象赋值</p>
+</li>
+<li><p>以空字符结束的字符数组可以参与string对象的加法运算 ; 在string对象的复合赋值运算中允许使用以空字符结束的字符数组作为右侧的运算对象</p>
+</li>
+<li><p>规则反过来则不成立</p>
+  <figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">char</span> *str = s;		<span class="comment">// 错误, 不能用string对象初始化char*</span></span><br><span class="line"><span class="keyword">const</span> <span class="keyword">char</span> *str = s.c_str();	<span class="comment">// 正确</span></span><br><span class="line"><span class="comment">/* 无法保证c_str返回的数组一直有效, 所以如果想一直使用最好copy一份自己维护 */</span></span><br></pre></td></tr></table></figure>
+</li>
+<li><p>可以使用数组初始化vector对象:</p>
+  <figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">vector</span>&lt;<span class="keyword">int</span>&gt; ivec(begin(ia), end(ia));	<span class="comment">// 同理, 可以计算指针使用部分ia内容初始化ivec</span></span><br></pre></td></tr></table></figure></li>
+</ul>
+
   </div>
 </article>
 
@@ -194,7 +308,7 @@
     </div>
 
     <div id="toc-footer" style="display: none">
-      
+      <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#第三章"><span class="toc-number">1.</span> <span class="toc-text">第三章</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#关于string类型"><span class="toc-number">1.1.</span> <span class="toc-text">关于string类型 :</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#关于vector"><span class="toc-number">1.2.</span> <span class="toc-text">关于vector :</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#关于迭代器"><span class="toc-number">1.3.</span> <span class="toc-text">关于迭代器 :</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#关于数组"><span class="toc-number">1.4.</span> <span class="toc-text">关于数组 :</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#string对象与C风格字符串"><span class="toc-number">1.5.</span> <span class="toc-text">string对象与C风格字符串</span></a></li></ol></li></ol>
     </div>
 
     <div id="share-footer" style="display: none">
@@ -208,7 +322,7 @@
   <li><a class="icon" href="http://reddit.com/submit?url=https://bitzhangmo.github.io/2021/12/30/C++Primer笔记/C-Primer笔记-第三章/&title=C++Primer笔记(第三章)"><i class="fab fa-reddit fa-lg" aria-hidden="true"></i></a></li>
   <li><a class="icon" href="http://www.stumbleupon.com/submit?url=https://bitzhangmo.github.io/2021/12/30/C++Primer笔记/C-Primer笔记-第三章/&title=C++Primer笔记(第三章)"><i class="fab fa-stumbleupon fa-lg" aria-hidden="true"></i></a></li>
   <li><a class="icon" href="http://digg.com/submit?url=https://bitzhangmo.github.io/2021/12/30/C++Primer笔记/C-Primer笔记-第三章/&title=C++Primer笔记(第三章)"><i class="fab fa-digg fa-lg" aria-hidden="true"></i></a></li>
-  <li><a class="icon" href="http://www.tumblr.com/share/link?url=https://bitzhangmo.github.io/2021/12/30/C++Primer笔记/C-Primer笔记-第三章/&name=C++Primer笔记(第三章)&description="><i class="fab fa-tumblr fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="http://www.tumblr.com/share/link?url=https://bitzhangmo.github.io/2021/12/30/C++Primer笔记/C-Primer笔记-第三章/&name=C++Primer笔记(第三章)&description=&lt;p&gt;关键词 : string, vector, 迭代器, 数组&lt;/p&gt;"><i class="fab fa-tumblr fa-lg" aria-hidden="true"></i></a></li>
   <li><a class="icon" href="https://news.ycombinator.com/submitlink?u=https://bitzhangmo.github.io/2021/12/30/C++Primer笔记/C-Primer笔记-第三章/&t=C++Primer笔记(第三章)"><i class="fab fa-hacker-news fa-lg" aria-hidden="true"></i></a></li>
 </ul>
 
