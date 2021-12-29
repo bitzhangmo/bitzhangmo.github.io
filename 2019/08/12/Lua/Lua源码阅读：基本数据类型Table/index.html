@@ -167,84 +167,17 @@
   <div class="content" itemprop="articleBody">
     <p>Lua中Table数据结构的定义、初始化、查找等。</p>
 <a id="more"></a>
-<h3 id="Table数据结构的定义："><a href="#Table数据结构的定义：" class="headerlink" title="Table数据结构的定义："></a>Table数据结构的定义：</h3><pre><code class="hljs c"><span class="hljs-keyword">typedef</span> <span class="hljs-keyword">union</span> TKey &#123;
-  <span class="hljs-class"><span class="hljs-keyword">struct</span> &#123;</span>
-    TValuefields;
-    <span class="hljs-keyword">int</span> next;  <span class="hljs-comment">/* for chaining (offset for next node) */</span>
-  &#125; nk;
-  TValue tvk;
-&#125; TKey;
-
-<span class="hljs-keyword">typedef</span> <span class="hljs-class"><span class="hljs-keyword">struct</span> <span class="hljs-title">Node</span> &#123;</span>
-  TValue i_val;
-  TKey i_key;
-&#125; Node;
-
-<span class="hljs-keyword">typedef</span> <span class="hljs-class"><span class="hljs-keyword">struct</span> <span class="hljs-title">Table</span> &#123;</span>
-  CommonHeader;
-  lu_byte flags;  <span class="hljs-comment">/* 1&lt;&lt;p means tagmethod(p) is not present */</span>
-  lu_byte lsizenode;  <span class="hljs-comment">/* log2 of size of 'node' array */</span>
-  <span class="hljs-keyword">unsigned</span> <span class="hljs-keyword">int</span> sizearray;  <span class="hljs-comment">/* size of 'array' array */</span>
-  TValue *<span class="hljs-built_in">array</span>;  <span class="hljs-comment">/* array part */</span>
-  Node *node;
-  Node *lastfree;  <span class="hljs-comment">/* any free position is before this position */</span>
-  <span class="hljs-class"><span class="hljs-keyword">struct</span> <span class="hljs-title">Table</span> *<span class="hljs-title">metatable</span>;</span>
-  GCObject *gclist;
-&#125; Table;</code></pre>
+<h3 id="Table数据结构的定义："><a href="#Table数据结构的定义：" class="headerlink" title="Table数据结构的定义："></a>Table数据结构的定义：</h3><figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br></pre></td><td class="code"><pre><code class="hljs c"><span class="hljs-keyword">typedef</span> <span class="hljs-keyword">union</span> TKey &#123;<br>  <span class="hljs-class"><span class="hljs-keyword">struct</span> &#123;</span><br>    TValuefields;<br>    <span class="hljs-keyword">int</span> next;  <span class="hljs-comment">/* for chaining (offset for next node) */</span><br>  &#125; nk;<br>  TValue tvk;<br>&#125; TKey;<br><br><span class="hljs-keyword">typedef</span> <span class="hljs-class"><span class="hljs-keyword">struct</span> <span class="hljs-title">Node</span> &#123;</span><br>  TValue i_val;<br>  TKey i_key;<br>&#125; Node;<br><br><span class="hljs-keyword">typedef</span> <span class="hljs-class"><span class="hljs-keyword">struct</span> <span class="hljs-title">Table</span> &#123;</span><br>  CommonHeader;<br>  lu_byte flags;  <span class="hljs-comment">/* 1&lt;&lt;p means tagmethod(p) is not present */</span><br>  lu_byte lsizenode;  <span class="hljs-comment">/* log2 of size of 'node' array */</span><br>  <span class="hljs-keyword">unsigned</span> <span class="hljs-keyword">int</span> sizearray;  <span class="hljs-comment">/* size of 'array' array */</span><br>  TValue *<span class="hljs-built_in">array</span>;  <span class="hljs-comment">/* array part */</span><br>  Node *node;<br>  Node *lastfree;  <span class="hljs-comment">/* any free position is before this position */</span><br>  <span class="hljs-class"><span class="hljs-keyword">struct</span> <span class="hljs-title">Table</span> *<span class="hljs-title">metatable</span>;</span><br>  GCObject *gclist;<br>&#125; Table;<br></code></pre></td></tr></table></figure>
 <ul>
 <li>Table的结构中有CommonHeader成员，这是一个在lObject.h中定义的宏，包含了一些成员，所有受gc管理的对象均含有CommonHeader，其继承自GObject对象。CommonHeader 相当于来自父类的数据，在整个结构的最前面，其他成员相当于子类数据。通过这种方式可以让GCObject 指针指向所有受gc管理的lua的对象，并且CommonHeader 结构中还有当前对象的类型，可以转换成具体类型的对象。</li>
 </ul>
-<pre><code class="hljs c"><span class="hljs-comment">/*
-** Common Header for all collectable objects (in macro form, to be
-** included in other objects)
-*/</span>
-<span class="hljs-meta">#<span class="hljs-meta-keyword">define</span> CommonHeader	GCObject *next; lu_byte tt; lu_byte marked</span></code></pre>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><code class="hljs c"><span class="hljs-comment">/*<br>** Common Header for all collectable objects (in macro form, to be<br>** included in other objects)<br>*/</span><br><span class="hljs-meta">#<span class="hljs-meta-keyword">define</span> CommonHeader	GCObject *next; lu_byte tt; lu_byte marked</span><br></code></pre></td></tr></table></figure>
 <p>TValue是所有lua数据类型的集合，其包含一个类型_tt和一个value，Value类型是一个union，可以是lua的任意类型：</p>
-<pre><code class="hljs c"><span class="hljs-comment">/*
-** Tagged Values. This is the basic representation of values in Lua,
-** an actual value plus a tag with its type.
-*/</span>
-
-<span class="hljs-meta">#<span class="hljs-meta-keyword">define</span> TValuefields	Value value_; int tt_</span>
-
-<span class="hljs-keyword">typedef</span> <span class="hljs-class"><span class="hljs-keyword">struct</span> <span class="hljs-title">lua_TValue</span> <span class="hljs-title">TValue</span>;</span>
-
-<span class="hljs-keyword">union</span> Value &#123;
-  GCObject *gc;    <span class="hljs-comment">/* collectable objects */</span>
-  <span class="hljs-keyword">void</span> *p;         <span class="hljs-comment">/* light userdata */</span>
-  <span class="hljs-keyword">int</span> b;           <span class="hljs-comment">/* booleans */</span>
-  lua_CFunction f; <span class="hljs-comment">/* light C functions */</span>
-  lua_Integer i;   <span class="hljs-comment">/* integer numbers */</span>
-  lua_Number n;    <span class="hljs-comment">/* float numbers */</span>
-&#125;;
-
-
-<span class="hljs-class"><span class="hljs-keyword">struct</span> <span class="hljs-title">lua_TValue</span> &#123;</span>
-  TValuefields;
-&#125;;</code></pre>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br></pre></td><td class="code"><pre><code class="hljs c"><span class="hljs-comment">/*<br>** Tagged Values. This is the basic representation of values in Lua,<br>** an actual value plus a tag with its type.<br>*/</span><br><br><span class="hljs-meta">#<span class="hljs-meta-keyword">define</span> TValuefields	Value value_; int tt_</span><br><br><span class="hljs-keyword">typedef</span> <span class="hljs-class"><span class="hljs-keyword">struct</span> <span class="hljs-title">lua_TValue</span> <span class="hljs-title">TValue</span>;</span><br><br><span class="hljs-keyword">union</span> Value &#123;<br>  GCObject *gc;    <span class="hljs-comment">/* collectable objects */</span><br>  <span class="hljs-keyword">void</span> *p;         <span class="hljs-comment">/* light userdata */</span><br>  <span class="hljs-keyword">int</span> b;           <span class="hljs-comment">/* booleans */</span><br>  lua_CFunction f; <span class="hljs-comment">/* light C functions */</span><br>  lua_Integer i;   <span class="hljs-comment">/* integer numbers */</span><br>  lua_Number n;    <span class="hljs-comment">/* float numbers */</span><br>&#125;;<br><br><br><span class="hljs-class"><span class="hljs-keyword">struct</span> <span class="hljs-title">lua_TValue</span> &#123;</span><br>  TValuefields;<br>&#125;;<br></code></pre></td></tr></table></figure>
 <p><strong>Table主要有两部分，数组和哈希</strong>：</p>
 <ol>
 <li><p>array和node是两个一维数组，array是普通的数组，成员为TValue，node是一个hash表存放key,value键值对。node的key为TKey类型，Tkey是一个union，当没有hash冲突的时候是一个TValue，当有hash冲突的时候TKey是一个struct，多一个next值，指向下一个有冲突的节点。</p>
-<pre><code class="hljs c"><span class="hljs-keyword">typedef</span> <span class="hljs-keyword">union</span> TKey &#123;
-  <span class="hljs-class"><span class="hljs-keyword">struct</span> &#123;</span>
-    TValuefields;
-    <span class="hljs-keyword">int</span> next;  <span class="hljs-comment">/* for chaining (offset for next node) */</span>
-  &#125; nk;
-  TValue tvk;
-&#125; TKey;
-
-
-<span class="hljs-comment">/* copy a value into a key without messing up field 'next' */</span>
-<span class="hljs-meta">#<span class="hljs-meta-keyword">define</span> setnodekey(L,key,obj) \
-	&#123; TKey *k_=(key); const TValue *io_=(obj); \
-	  k_-&gt;nk.value_ = io_-&gt;value_; k_-&gt;nk.tt_ = io_-&gt;tt_; \
-	  (void)L; checkliveness(G(L),io_); &#125;</span>
-
-
-<span class="hljs-keyword">typedef</span> <span class="hljs-class"><span class="hljs-keyword">struct</span> <span class="hljs-title">Node</span> &#123;</span>
-  TValue i_val;
-  TKey i_key;
-&#125; Node;</code></pre>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br></pre></td><td class="code"><pre><code class="hljs c"><span class="hljs-keyword">typedef</span> <span class="hljs-keyword">union</span> TKey &#123;<br>  <span class="hljs-class"><span class="hljs-keyword">struct</span> &#123;</span><br>    TValuefields;<br>    <span class="hljs-keyword">int</span> next;  <span class="hljs-comment">/* for chaining (offset for next node) */</span><br>  &#125; nk;<br>  TValue tvk;<br>&#125; TKey;<br><br><br><span class="hljs-comment">/* copy a value into a key without messing up field 'next' */</span><br><span class="hljs-meta">#<span class="hljs-meta-keyword">define</span> setnodekey(L,key,obj) \<br>true&#123; TKey *k_=(key); const TValue *io_=(obj); \<br>true  k_-&gt;nk.value_ = io_-&gt;value_; k_-&gt;nk.tt_ = io_-&gt;tt_; \<br>true  (void)L; checkliveness(G(L),io_); &#125;</span><br><br><br><span class="hljs-keyword">typedef</span> <span class="hljs-class"><span class="hljs-keyword">struct</span> <span class="hljs-title">Node</span> &#123;</span><br>  TValue i_val;<br>  TKey i_key;<br>&#125; Node;<br></code></pre></td></tr></table></figure>
 </li>
 <li><p>sizearray：是数组array的大小</p>
 </li>
@@ -260,49 +193,9 @@
 </li>
 </ol>
 <p><img src="https://i.loli.net/2019/08/21/sF6xuL3Y4eOKHUJ.png" alt="68747470733a2f2f7261772e6769746875622e636f6d2f6c69636875616e672f4c75612d536f757263652d496e7465726e616c2f6d61737465722f7069632f7461626c652e706e67.png"></p>
-<h3 id="Table的初始化："><a href="#Table的初始化：" class="headerlink" title="Table的初始化："></a>Table的初始化：</h3><pre><code class="hljs c"><span class="hljs-function">Table *<span class="hljs-title">luaH_new</span> <span class="hljs-params">(lua_State *L)</span> </span>&#123;
-  GCObject *o = luaC_newobj(L, LUA_TTABLE, <span class="hljs-keyword">sizeof</span>(Table));
-  Table *t = gco2t(o);
-  t-&gt;metatable = <span class="hljs-literal">NULL</span>;
-  t-&gt;flags = cast_byte(~<span class="hljs-number">0</span>);
-  t-&gt;<span class="hljs-built_in">array</span> = <span class="hljs-literal">NULL</span>;
-  t-&gt;sizearray = <span class="hljs-number">0</span>;
-  setnodevector(L, t, <span class="hljs-number">0</span>);
-  <span class="hljs-keyword">return</span> t;
-&#125;</code></pre>
+<h3 id="Table的初始化："><a href="#Table的初始化：" class="headerlink" title="Table的初始化："></a>Table的初始化：</h3><figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><code class="hljs c"><span class="hljs-function">Table *<span class="hljs-title">luaH_new</span> <span class="hljs-params">(lua_State *L)</span> </span>&#123;<br>  GCObject *o = luaC_newobj(L, LUA_TTABLE, <span class="hljs-keyword">sizeof</span>(Table));<br>  Table *t = gco2t(o);<br>  t-&gt;metatable = <span class="hljs-literal">NULL</span>;<br>  t-&gt;flags = cast_byte(~<span class="hljs-number">0</span>);<br>  t-&gt;<span class="hljs-built_in">array</span> = <span class="hljs-literal">NULL</span>;<br>  t-&gt;sizearray = <span class="hljs-number">0</span>;<br>  setnodevector(L, t, <span class="hljs-number">0</span>);<br>  <span class="hljs-keyword">return</span> t;<br>&#125;<br></code></pre></td></tr></table></figure>
 <p>首先，为Table开辟空间，然后将其加到allgc链表上通过gc进行管理，之后初始化Table的内容。</p>
-<pre><code class="hljs c"><span class="hljs-function"><span class="hljs-keyword">static</span> <span class="hljs-keyword">void</span> <span class="hljs-title">setnodevector</span> <span class="hljs-params">(lua_State *L, Table *t, <span class="hljs-keyword">unsigned</span> <span class="hljs-keyword">int</span> size)</span> </span>&#123;
-  <span class="hljs-keyword">int</span> lsize;
-  <span class="hljs-keyword">if</span> (size == <span class="hljs-number">0</span>) &#123;  <span class="hljs-comment">/* no elements to hash part? */</span>
-    t-&gt;node = cast(Node *, dummynode);  <span class="hljs-comment">/* use common 'dummynode' */</span>
-    lsize = <span class="hljs-number">0</span>;
-  &#125;
-  <span class="hljs-keyword">else</span> &#123;
-    <span class="hljs-keyword">int</span> i;
-    lsize = luaO_ceillog2(size);
-    <span class="hljs-keyword">if</span> (lsize &gt; MAXHBITS)
-      luaG_runerror(L, <span class="hljs-string">"table overflow"</span>);
-    size = twoto(lsize);
-    t-&gt;node = luaM_newvector(L, size, Node);
-    <span class="hljs-keyword">for</span> (i = <span class="hljs-number">0</span>; i &lt; (<span class="hljs-keyword">int</span>)size; i++) &#123;
-      Node *n = gnode(t, i);
-      gnext(n) = <span class="hljs-number">0</span>;
-      setnilvalue(wgkey(n));
-      setnilvalue(gval(n));
-    &#125;
-  &#125;
-  t-&gt;lsizenode = cast_byte(lsize);
-  t-&gt;lastfree = gnode(t, size);  <span class="hljs-comment">/* all positions are free */</span>
-&#125;
-
-<span class="hljs-meta">#<span class="hljs-meta-keyword">define</span> dummynode		(&amp;dummynode_)</span>
-
-<span class="hljs-meta">#<span class="hljs-meta-keyword">define</span> isdummy(n)		((n) == dummynode)</span>
-
-<span class="hljs-keyword">static</span> <span class="hljs-keyword">const</span> Node dummynode_ = &#123;
-  &#123;NILCONSTANT&#125;,  <span class="hljs-comment">/* value */</span>
-  &#123;&#123;NILCONSTANT, <span class="hljs-number">0</span>&#125;&#125;  <span class="hljs-comment">/* key */</span>
-&#125;;</code></pre>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br></pre></td><td class="code"><pre><code class="hljs c"><span class="hljs-function"><span class="hljs-keyword">static</span> <span class="hljs-keyword">void</span> <span class="hljs-title">setnodevector</span> <span class="hljs-params">(lua_State *L, Table *t, <span class="hljs-keyword">unsigned</span> <span class="hljs-keyword">int</span> size)</span> </span>&#123;<br>  <span class="hljs-keyword">int</span> lsize;<br>  <span class="hljs-keyword">if</span> (size == <span class="hljs-number">0</span>) &#123;  <span class="hljs-comment">/* no elements to hash part? */</span><br>    t-&gt;node = cast(Node *, dummynode);  <span class="hljs-comment">/* use common 'dummynode' */</span><br>    lsize = <span class="hljs-number">0</span>;<br>  &#125;<br>  <span class="hljs-keyword">else</span> &#123;<br>    <span class="hljs-keyword">int</span> i;<br>    lsize = luaO_ceillog2(size);<br>    <span class="hljs-keyword">if</span> (lsize &gt; MAXHBITS)<br>      luaG_runerror(L, <span class="hljs-string">"table overflow"</span>);<br>    size = twoto(lsize);<br>    t-&gt;node = luaM_newvector(L, size, Node);<br>    <span class="hljs-keyword">for</span> (i = <span class="hljs-number">0</span>; i &lt; (<span class="hljs-keyword">int</span>)size; i++) &#123;<br>      Node *n = gnode(t, i);<br>      gnext(n) = <span class="hljs-number">0</span>;<br>      setnilvalue(wgkey(n));<br>      setnilvalue(gval(n));<br>    &#125;<br>  &#125;<br>  t-&gt;lsizenode = cast_byte(lsize);<br>  t-&gt;lastfree = gnode(t, size);  <span class="hljs-comment">/* all positions are free */</span><br>&#125;<br><br><span class="hljs-meta">#<span class="hljs-meta-keyword">define</span> dummynode		(&amp;dummynode_)</span><br><br><span class="hljs-meta">#<span class="hljs-meta-keyword">define</span> isdummy(n)		((n) == dummynode)</span><br><br><span class="hljs-keyword">static</span> <span class="hljs-keyword">const</span> Node dummynode_ = &#123;<br>  &#123;NILCONSTANT&#125;,  <span class="hljs-comment">/* value */</span><br>  &#123;&#123;NILCONSTANT, <span class="hljs-number">0</span>&#125;&#125;  <span class="hljs-comment">/* key */</span><br>&#125;;<br></code></pre></td></tr></table></figure>
 <p>flag设置为全1表示没有元方法，node指向的不是NULL而是dummynode，dummynode是一个全局共享的对象（key和value均为nil），这样做可以减少NULL的判断：例如，刚初始化完table，需要查找一个key为“test”的对象，因为lsizenode为0，所以经过运算确定的位置肯定为node[0]，然后读取node[0].i_key和“test”的TKey进行比较，判断是否相同，node[0]是dummynode，所以比较结果肯定不相同，所以返回nil；如果node[0]为NULL，访问node[0]的时候必须先判断node[0]是否为NULL，否则直接访问会越界，dummynode的设计省去了NULL的判断。</p>
 <h3 id="Table的查找："><a href="#Table的查找：" class="headerlink" title="Table的查找："></a>Table的查找：</h3><p>因为<strong>table有两部分，数组和hash表</strong>，所以查找也分为两部分来进行：</p>
 <ol>
@@ -312,59 +205,9 @@
 <p>在Lua中除了nil，其他类型均可以作为表的key，那么table的key是如何与其array数组与hash表的下标对应的呢？</p>
 <p>对于array数组，如果是上述的第一种情况，则直接将key-1即得到了下标，对于hash表则需要将key转换成uint类型，然后通过计算得到下标。</p>
 <p>通过运算将各类型转换为uint 类型的值，如将LUA_TNUMFLT 类型二进制数值转成以uint 型类 型表示，将LUA_TTABLE 的gc 指针转换为uint 类型， LUA_TSHRSTR 类型直接取其hash值，因为短字符串在构造时会计算其hash值，LUA_TLNGSTR 类型则需要通过hash函数计算其hash值。在 完成了对key 的hash运算以后，需要根据key 的hash值计算该key对应hash表中的哪个下标，计算的公式是:</p>
-<pre><code class="hljs c">index = hash_value &amp; ((<span class="hljs-number">2</span>^lsizenode) - <span class="hljs-number">1</span>)</code></pre>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs c">index = hash_value &amp; ((<span class="hljs-number">2</span>^lsizenode) - <span class="hljs-number">1</span>)<br></code></pre></td></tr></table></figure>
 <p>其中2^lsizenode - 1 为一个二进制低位全为1 的值，和hash_value 相与可以保证hash_value超过2^lsizenode - 1 的部分为0，则得到的值一定在[0，(2^lsizenode) - 1] 区间内，此时key和hash 表的下标就对应了起来，并且不会越界。</p>
-<pre><code class="hljs c"><span class="hljs-comment">/*
-** main search function
-*/</span>
-<span class="hljs-function"><span class="hljs-keyword">const</span> TValue *<span class="hljs-title">luaH_get</span> <span class="hljs-params">(Table *t, <span class="hljs-keyword">const</span> TValue *key)</span> </span>&#123;
-  <span class="hljs-keyword">switch</span> (ttype(key)) &#123;
-    <span class="hljs-keyword">case</span> LUA_TSHRSTR: <span class="hljs-keyword">return</span> luaH_getstr(t, tsvalue(key));
-    <span class="hljs-keyword">case</span> LUA_TNUMINT: <span class="hljs-keyword">return</span> luaH_getint(t, ivalue(key));
-    <span class="hljs-keyword">case</span> LUA_TNIL: <span class="hljs-keyword">return</span> luaO_nilobject;
-    <span class="hljs-keyword">case</span> LUA_TNUMFLT: &#123;
-      lua_Integer k;
-      <span class="hljs-keyword">if</span> (numisinteger(fltvalue(key), &amp;k)) <span class="hljs-comment">/* index is int? */</span>
-        <span class="hljs-keyword">return</span> luaH_getint(t, k);  <span class="hljs-comment">/* use specialized version */</span>
-      <span class="hljs-comment">/* else go through */</span>
-    &#125;
-    <span class="hljs-keyword">default</span>: &#123;
-      Node *n = mainposition(t, key);
-      <span class="hljs-keyword">for</span> (;;) &#123;  <span class="hljs-comment">/* check whether 'key' is somewhere in the chain */</span>
-        <span class="hljs-keyword">if</span> (luaV_rawequalobj(gkey(n), key))
-          <span class="hljs-keyword">return</span> gval(n);  <span class="hljs-comment">/* that's it */</span>
-        <span class="hljs-keyword">else</span> &#123;
-          <span class="hljs-keyword">int</span> nx = gnext(n);
-          <span class="hljs-keyword">if</span> (nx == <span class="hljs-number">0</span>) <span class="hljs-keyword">break</span>;
-          n += nx;
-        &#125;
-      &#125;;
-      <span class="hljs-keyword">return</span> luaO_nilobject;
-    &#125;
-  &#125;
-&#125;
-
-<span class="hljs-comment">/*
-** search function for integers
-*/</span>
-<span class="hljs-function"><span class="hljs-keyword">const</span> TValue *<span class="hljs-title">luaH_getint</span> <span class="hljs-params">(Table *t, lua_Integer key)</span> </span>&#123;
-  <span class="hljs-comment">/* (1 &lt;= key &amp;&amp; key &lt;= t-&gt;sizearray) */</span>
-  <span class="hljs-keyword">if</span> (l_castS2U(key - <span class="hljs-number">1</span>) &lt; t-&gt;sizearray)
-    <span class="hljs-keyword">return</span> &amp;t-&gt;<span class="hljs-built_in">array</span>[key - <span class="hljs-number">1</span>];
-  <span class="hljs-keyword">else</span> &#123;
-    Node *n = hashint(t, key);
-    <span class="hljs-keyword">for</span> (;;) &#123;  <span class="hljs-comment">/* check whether 'key' is somewhere in the chain */</span>
-      <span class="hljs-keyword">if</span> (ttisinteger(gkey(n)) &amp;&amp; ivalue(gkey(n)) == key)
-        <span class="hljs-keyword">return</span> gval(n);  <span class="hljs-comment">/* that's it */</span>
-      <span class="hljs-keyword">else</span> &#123;
-        <span class="hljs-keyword">int</span> nx = gnext(n);
-        <span class="hljs-keyword">if</span> (nx == <span class="hljs-number">0</span>) <span class="hljs-keyword">break</span>;
-        n += nx;
-      &#125;
-    &#125;;
-    <span class="hljs-keyword">return</span> luaO_nilobject;
-  &#125;
-&#125;</code></pre>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br></pre></td><td class="code"><pre><code class="hljs c"><span class="hljs-comment">/*<br>** main search function<br>*/</span><br><span class="hljs-function"><span class="hljs-keyword">const</span> TValue *<span class="hljs-title">luaH_get</span> <span class="hljs-params">(Table *t, <span class="hljs-keyword">const</span> TValue *key)</span> </span>&#123;<br>  <span class="hljs-keyword">switch</span> (ttype(key)) &#123;<br>    <span class="hljs-keyword">case</span> LUA_TSHRSTR: <span class="hljs-keyword">return</span> luaH_getstr(t, tsvalue(key));<br>    <span class="hljs-keyword">case</span> LUA_TNUMINT: <span class="hljs-keyword">return</span> luaH_getint(t, ivalue(key));<br>    <span class="hljs-keyword">case</span> LUA_TNIL: <span class="hljs-keyword">return</span> luaO_nilobject;<br>    <span class="hljs-keyword">case</span> LUA_TNUMFLT: &#123;<br>      lua_Integer k;<br>      <span class="hljs-keyword">if</span> (numisinteger(fltvalue(key), &amp;k)) <span class="hljs-comment">/* index is int? */</span><br>        <span class="hljs-keyword">return</span> luaH_getint(t, k);  <span class="hljs-comment">/* use specialized version */</span><br>      <span class="hljs-comment">/* else go through */</span><br>    &#125;<br>    <span class="hljs-keyword">default</span>: &#123;<br>      Node *n = mainposition(t, key);<br>      <span class="hljs-keyword">for</span> (;;) &#123;  <span class="hljs-comment">/* check whether 'key' is somewhere in the chain */</span><br>        <span class="hljs-keyword">if</span> (luaV_rawequalobj(gkey(n), key))<br>          <span class="hljs-keyword">return</span> gval(n);  <span class="hljs-comment">/* that's it */</span><br>        <span class="hljs-keyword">else</span> &#123;<br>          <span class="hljs-keyword">int</span> nx = gnext(n);<br>          <span class="hljs-keyword">if</span> (nx == <span class="hljs-number">0</span>) <span class="hljs-keyword">break</span>;<br>          n += nx;<br>        &#125;<br>      &#125;;<br>      <span class="hljs-keyword">return</span> luaO_nilobject;<br>    &#125;<br>  &#125;<br>&#125;<br><br><span class="hljs-comment">/*<br>** search function for integers<br>*/</span><br><span class="hljs-function"><span class="hljs-keyword">const</span> TValue *<span class="hljs-title">luaH_getint</span> <span class="hljs-params">(Table *t, lua_Integer key)</span> </span>&#123;<br>  <span class="hljs-comment">/* (1 &lt;= key &amp;&amp; key &lt;= t-&gt;sizearray) */</span><br>  <span class="hljs-keyword">if</span> (l_castS2U(key - <span class="hljs-number">1</span>) &lt; t-&gt;sizearray)<br>    <span class="hljs-keyword">return</span> &amp;t-&gt;<span class="hljs-built_in">array</span>[key - <span class="hljs-number">1</span>];<br>  <span class="hljs-keyword">else</span> &#123;<br>    Node *n = hashint(t, key);<br>    <span class="hljs-keyword">for</span> (;;) &#123;  <span class="hljs-comment">/* check whether 'key' is somewhere in the chain */</span><br>      <span class="hljs-keyword">if</span> (ttisinteger(gkey(n)) &amp;&amp; ivalue(gkey(n)) == key)<br>        <span class="hljs-keyword">return</span> gval(n);  <span class="hljs-comment">/* that's it */</span><br>      <span class="hljs-keyword">else</span> &#123;<br>        <span class="hljs-keyword">int</span> nx = gnext(n);<br>        <span class="hljs-keyword">if</span> (nx == <span class="hljs-number">0</span>) <span class="hljs-keyword">break</span>;<br>        n += nx;<br>      &#125;<br>    &#125;;<br>    <span class="hljs-keyword">return</span> luaO_nilobject;<br>  &#125;<br>&#125;<br></code></pre></td></tr></table></figure>
 <h3 id="Table的更新："><a href="#Table的更新：" class="headerlink" title="Table的更新："></a>Table的更新：</h3><p>table 更新也分两种情况:</p>
 <ol>
 <li>通过上述查找的 value 如果不是 luaO_nilobject ，直接将 value 更改即可，即table的修改和删除(将值置为nil)</li>
@@ -388,26 +231,7 @@
 </li>
 </ol>
 <h4 id="Table的扩容："><a href="#Table的扩容：" class="headerlink" title="Table的扩容："></a>Table的扩容：</h4><p>rehash操作是hash 表不可避免的，当空间不够时就需要进行扩容，而扩容后每个元素的下标就需要重新计算。对于一般的开放地址法会有一个负载因子 ，当负载因子大于某个值的时候就需要扩容，这个是为了考虑效率问题，当负载因子越来越大的时候，元素之间冲突的可能性会越来越大，导致插入和查找的时间复杂度会增大所以需要扩容降低负载因子。lua 的table没有负载因子，而是当node 的所有空间都用完的时候才会扩容(被置为nil 也算，lastfree指针不会向右移动，而判断满的条件就是lastfree 已经到了第一个元素的位置)。</p>
-<pre><code class="hljs c"><span class="hljs-comment">/*
-** nums[i] = number of keys 'k' where 2^(i - 1) &lt; k &lt;= 2^i
-*/</span>
-<span class="hljs-function"><span class="hljs-keyword">static</span> <span class="hljs-keyword">void</span> <span class="hljs-title">rehash</span> <span class="hljs-params">(lua_State *L, Table *t, <span class="hljs-keyword">const</span> TValue *ek)</span> </span>&#123;
-  <span class="hljs-keyword">unsigned</span> <span class="hljs-keyword">int</span> nasize, na;
-  <span class="hljs-keyword">unsigned</span> <span class="hljs-keyword">int</span> nums[MAXABITS + <span class="hljs-number">1</span>];
-  <span class="hljs-keyword">int</span> i;
-  <span class="hljs-keyword">int</span> totaluse;
-  <span class="hljs-keyword">for</span> (i = <span class="hljs-number">0</span>; i &lt;= MAXABITS; i++) nums[i] = <span class="hljs-number">0</span>;  <span class="hljs-comment">/* reset counts */</span>
-  nasize = numusearray(t, nums);  <span class="hljs-comment">/* count keys in array part */</span>
-  totaluse = nasize;  <span class="hljs-comment">/* all those keys are integer keys */</span>
-  totaluse += numusehash(t, nums, &amp;nasize);  <span class="hljs-comment">/* count keys in hash part */</span>
-  <span class="hljs-comment">/* count extra key */</span>
-  nasize += countint(ek, nums);
-  totaluse++;
-  <span class="hljs-comment">/* compute new size for array part */</span>
-  na = computesizes(nums, &amp;nasize);
-  <span class="hljs-comment">/* resize the table to new computed sizes */</span>
-  luaH_resize(L, t, nasize, totaluse - na);
-&#125;</code></pre>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br></pre></td><td class="code"><pre><code class="hljs c"><span class="hljs-comment">/*<br>** nums[i] = number of keys 'k' where 2^(i - 1) &lt; k &lt;= 2^i<br>*/</span><br><span class="hljs-function"><span class="hljs-keyword">static</span> <span class="hljs-keyword">void</span> <span class="hljs-title">rehash</span> <span class="hljs-params">(lua_State *L, Table *t, <span class="hljs-keyword">const</span> TValue *ek)</span> </span>&#123;<br>  <span class="hljs-keyword">unsigned</span> <span class="hljs-keyword">int</span> nasize, na;<br>  <span class="hljs-keyword">unsigned</span> <span class="hljs-keyword">int</span> nums[MAXABITS + <span class="hljs-number">1</span>];<br>  <span class="hljs-keyword">int</span> i;<br>  <span class="hljs-keyword">int</span> totaluse;<br>  <span class="hljs-keyword">for</span> (i = <span class="hljs-number">0</span>; i &lt;= MAXABITS; i++) nums[i] = <span class="hljs-number">0</span>;  <span class="hljs-comment">/* reset counts */</span><br>  nasize = numusearray(t, nums);  <span class="hljs-comment">/* count keys in array part */</span><br>  totaluse = nasize;  <span class="hljs-comment">/* all those keys are integer keys */</span><br>  totaluse += numusehash(t, nums, &amp;nasize);  <span class="hljs-comment">/* count keys in hash part */</span><br>  <span class="hljs-comment">/* count extra key */</span><br>  nasize += countint(ek, nums);<br>  totaluse++;<br>  <span class="hljs-comment">/* compute new size for array part */</span><br>  na = computesizes(nums, &amp;nasize);<br>  <span class="hljs-comment">/* resize the table to new computed sizes */</span><br>  luaH_resize(L, t, nasize, totaluse - na);<br>&#125;<br></code></pre></td></tr></table></figure>
 <p>扩容前会先统计table中的数量，将其存至nasize中；建立了一个大小为32的数组并且初始化为0，然后统计array数组中不为nil的元素个数，统计时通过分段的方式进行统计，将所有的元素按(2\^(i-1),2\^i]分段，分为32 个区间段：(0.5, 1]、(1, 2]、(2, 4]、 (4, 8] ……，统计步骤如下：</p>
 <ol>
 <li>分配一个位图 nums，将其中的所有位置 0。这个位图的意义在于：nums 数组中第 i 个元素存放的是 key 在 2^(i-1)和 2^i 之间的元素数量。</li>
@@ -417,10 +241,7 @@
 <li>根据上面计算得到的调整后的数组和散列桶大小调整表（resize 函数）。</li>
 </ol>
 <p>调整标准：<strong>希望在调整过后，数组在每一个二次方位置容纳的元素数量都超过该范围的 50%。能达到这个目标的话，我们就认为这个数组范围发挥了最大的效率</strong>。</p>
-<h4 id="重新散列的代价与解决："><a href="#重新散列的代价与解决：" class="headerlink" title="重新散列的代价与解决："></a>重新散列的代价与解决：</h4><pre><code class="hljs lua"><span class="hljs-keyword">local</span> a = &#123;&#125;
-<span class="hljs-keyword">for</span> i = <span class="hljs-number">1</span>,<span class="hljs-number">3</span> <span class="hljs-keyword">do</span>
-	a[i] = <span class="hljs-literal">true</span>
-<span class="hljs-keyword">end</span></code></pre>
+<h4 id="重新散列的代价与解决："><a href="#重新散列的代价与解决：" class="headerlink" title="重新散列的代价与解决："></a>重新散列的代价与解决：</h4><figure class="highlight lua"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><code class="hljs lua"><span class="hljs-keyword">local</span> a = &#123;&#125;<br><span class="hljs-keyword">for</span> i = <span class="hljs-number">1</span>,<span class="hljs-number">3</span> <span class="hljs-keyword">do</span><br>truea[i] = <span class="hljs-literal">true</span><br><span class="hljs-keyword">end</span><br></code></pre></td></tr></table></figure>
 <ol>
 <li>最开始，Lua 创建了一个空表</li>
 <li>在第一次迭代中，a[1]为 true 触发了一次重新散列操作，将数组部分长度设置为 2^0，即 1，散列表部分仍为空。</li>
@@ -428,54 +249,10 @@
 <li>最后一次迭代中，a[3]又触发了一次重新散列操作，将数组部分长度设置为 2^2，即 4。</li>
 </ol>
 <p>如果有很多很小的表要进行创建，则会对开销造成巨大的影响——可以<strong>预先填充</strong>以避免重新散列操作。</p>
-<h3 id="Table-的迭代："><a href="#Table-的迭代：" class="headerlink" title="Table 的迭代："></a>Table 的迭代：</h3><pre><code class="hljs c"><span class="hljs-function"><span class="hljs-keyword">int</span> <span class="hljs-title">luaH_next</span> <span class="hljs-params">(lua_State *L, Table *t, StkId key)</span> </span>&#123;
-  <span class="hljs-keyword">unsigned</span> <span class="hljs-keyword">int</span> i = findindex(L, t, key);  <span class="hljs-comment">/* find original element */</span>
-  <span class="hljs-keyword">for</span> (; i &lt; t-&gt;sizearray; i++) &#123;  <span class="hljs-comment">/* try first array part */</span>
-    <span class="hljs-keyword">if</span> (!ttisnil(&amp;t-&gt;<span class="hljs-built_in">array</span>[i])) &#123;  <span class="hljs-comment">/* a non-nil value? */</span>
-      setivalue(key, i + <span class="hljs-number">1</span>);
-      setobj2s(L, key+<span class="hljs-number">1</span>, &amp;t-&gt;<span class="hljs-built_in">array</span>[i]);
-      <span class="hljs-keyword">return</span> <span class="hljs-number">1</span>;
-    &#125;
-  &#125;
-  <span class="hljs-keyword">for</span> (i -= t-&gt;sizearray; cast_int(i) &lt; sizenode(t); i++) &#123;  <span class="hljs-comment">/* hash part */</span>
-    <span class="hljs-keyword">if</span> (!ttisnil(gval(gnode(t, i)))) &#123;  <span class="hljs-comment">/* a non-nil value? */</span>
-      setobj2s(L, key, gkey(gnode(t, i)));
-      setobj2s(L, key+<span class="hljs-number">1</span>, gval(gnode(t, i)));
-      <span class="hljs-keyword">return</span> <span class="hljs-number">1</span>;
-    &#125;
-  &#125;
-  <span class="hljs-keyword">return</span> <span class="hljs-number">0</span>;  <span class="hljs-comment">/* no more elements */</span>
-&#125;
-
-<span class="hljs-comment">/*
-	在数组部分查找数据：
-		查找成功，则返回该 key 的下一个数据
-	否则在散列桶部分查找数据：
-		查找成功，则返回该 key 的下一个数据
-*/</span></code></pre>
+<h3 id="Table-的迭代："><a href="#Table-的迭代：" class="headerlink" title="Table 的迭代："></a>Table 的迭代：</h3><figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br></pre></td><td class="code"><pre><code class="hljs c"><span class="hljs-function"><span class="hljs-keyword">int</span> <span class="hljs-title">luaH_next</span> <span class="hljs-params">(lua_State *L, Table *t, StkId key)</span> </span>&#123;<br>  <span class="hljs-keyword">unsigned</span> <span class="hljs-keyword">int</span> i = findindex(L, t, key);  <span class="hljs-comment">/* find original element */</span><br>  <span class="hljs-keyword">for</span> (; i &lt; t-&gt;sizearray; i++) &#123;  <span class="hljs-comment">/* try first array part */</span><br>    <span class="hljs-keyword">if</span> (!ttisnil(&amp;t-&gt;<span class="hljs-built_in">array</span>[i])) &#123;  <span class="hljs-comment">/* a non-nil value? */</span><br>      setivalue(key, i + <span class="hljs-number">1</span>);<br>      setobj2s(L, key+<span class="hljs-number">1</span>, &amp;t-&gt;<span class="hljs-built_in">array</span>[i]);<br>      <span class="hljs-keyword">return</span> <span class="hljs-number">1</span>;<br>    &#125;<br>  &#125;<br>  <span class="hljs-keyword">for</span> (i -= t-&gt;sizearray; cast_int(i) &lt; sizenode(t); i++) &#123;  <span class="hljs-comment">/* hash part */</span><br>    <span class="hljs-keyword">if</span> (!ttisnil(gval(gnode(t, i)))) &#123;  <span class="hljs-comment">/* a non-nil value? */</span><br>      setobj2s(L, key, gkey(gnode(t, i)));<br>      setobj2s(L, key+<span class="hljs-number">1</span>, gval(gnode(t, i)));<br>      <span class="hljs-keyword">return</span> <span class="hljs-number">1</span>;<br>    &#125;<br>  &#125;<br>  <span class="hljs-keyword">return</span> <span class="hljs-number">0</span>;  <span class="hljs-comment">/* no more elements */</span><br>&#125;<br><br><span class="hljs-comment">/*<br>true在数组部分查找数据：<br>truetrue查找成功，则返回该 key 的下一个数据<br>true否则在散列桶部分查找数据：<br>truetrue查找成功，则返回该 key 的下一个数据<br>*/</span><br></code></pre></td></tr></table></figure>
 <p>一开始进入 findindex 函数，返回一个整数索引，如果这个索引在表的 sizearray 之内，则说明落入到数组部分，否则就落入到散列桶部分。</p>
 <h3 id="Table-取长度操作："><a href="#Table-取长度操作：" class="headerlink" title="Table 取长度操作："></a>Table 取长度操作：</h3><p>对Lua 中的表进行取长度的操作时，如果没有提供该表的原方法 _len，那么该操作只针对该表的序列部分进行——序列指的是该表的一个子集{1…n}，n是一个正整数，其中每个键对应的数据都不为 nil。</p>
-<pre><code class="hljs c"><span class="hljs-comment">/*
-** Try to find a boundary in table 't'. A 'boundary' is an integer index
-** such that t[i] is non-nil and t[i+1] is nil (and 0 if t[1] is nil).
-*/</span>
-<span class="hljs-function"><span class="hljs-keyword">int</span> <span class="hljs-title">luaH_getn</span> <span class="hljs-params">(Table *t)</span> </span>&#123;
-  <span class="hljs-keyword">unsigned</span> <span class="hljs-keyword">int</span> j = t-&gt;sizearray;
-  <span class="hljs-keyword">if</span> (j &gt; <span class="hljs-number">0</span> &amp;&amp; ttisnil(&amp;t-&gt;<span class="hljs-built_in">array</span>[j - <span class="hljs-number">1</span>])) &#123;
-    <span class="hljs-comment">/* there is a boundary in the array part: (binary) search for it */</span>
-    <span class="hljs-keyword">unsigned</span> <span class="hljs-keyword">int</span> i = <span class="hljs-number">0</span>;
-    <span class="hljs-keyword">while</span> (j - i &gt; <span class="hljs-number">1</span>) &#123;
-      <span class="hljs-keyword">unsigned</span> <span class="hljs-keyword">int</span> m = (i+j)/<span class="hljs-number">2</span>;
-      <span class="hljs-keyword">if</span> (ttisnil(&amp;t-&gt;<span class="hljs-built_in">array</span>[m - <span class="hljs-number">1</span>])) j = m;
-      <span class="hljs-keyword">else</span> i = m;
-    &#125;
-    <span class="hljs-keyword">return</span> i;
-  &#125;
-  <span class="hljs-comment">/* else must find a boundary in hash part */</span>
-  <span class="hljs-keyword">else</span> <span class="hljs-keyword">if</span> (isdummy(t-&gt;node))  <span class="hljs-comment">/* hash part is empty? */</span>
-    <span class="hljs-keyword">return</span> j;  <span class="hljs-comment">/* that is easy... */</span>
-  <span class="hljs-keyword">else</span> <span class="hljs-keyword">return</span> unbound_search(t, j);
-&#125;</code></pre>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br></pre></td><td class="code"><pre><code class="hljs c"><span class="hljs-comment">/*<br>** Try to find a boundary in table 't'. A 'boundary' is an integer index<br>** such that t[i] is non-nil and t[i+1] is nil (and 0 if t[1] is nil).<br>*/</span><br><span class="hljs-function"><span class="hljs-keyword">int</span> <span class="hljs-title">luaH_getn</span> <span class="hljs-params">(Table *t)</span> </span>&#123;<br>  <span class="hljs-keyword">unsigned</span> <span class="hljs-keyword">int</span> j = t-&gt;sizearray;<br>  <span class="hljs-keyword">if</span> (j &gt; <span class="hljs-number">0</span> &amp;&amp; ttisnil(&amp;t-&gt;<span class="hljs-built_in">array</span>[j - <span class="hljs-number">1</span>])) &#123;<br>    <span class="hljs-comment">/* there is a boundary in the array part: (binary) search for it */</span><br>    <span class="hljs-keyword">unsigned</span> <span class="hljs-keyword">int</span> i = <span class="hljs-number">0</span>;<br>    <span class="hljs-keyword">while</span> (j - i &gt; <span class="hljs-number">1</span>) &#123;<br>      <span class="hljs-keyword">unsigned</span> <span class="hljs-keyword">int</span> m = (i+j)/<span class="hljs-number">2</span>;<br>      <span class="hljs-keyword">if</span> (ttisnil(&amp;t-&gt;<span class="hljs-built_in">array</span>[m - <span class="hljs-number">1</span>])) j = m;<br>      <span class="hljs-keyword">else</span> i = m;<br>    &#125;<br>    <span class="hljs-keyword">return</span> i;<br>  &#125;<br>  <span class="hljs-comment">/* else must find a boundary in hash part */</span><br>  <span class="hljs-keyword">else</span> <span class="hljs-keyword">if</span> (isdummy(t-&gt;node))  <span class="hljs-comment">/* hash part is empty? */</span><br>    <span class="hljs-keyword">return</span> j;  <span class="hljs-comment">/* that is easy... */</span><br>  <span class="hljs-keyword">else</span> <span class="hljs-keyword">return</span> unbound_search(t, j);<br>&#125;<br></code></pre></td></tr></table></figure>
 <h3 id="Table的元表："><a href="#Table的元表：" class="headerlink" title="Table的元表："></a>Table的元表：</h3><h3 id="注意事项："><a href="#注意事项：" class="headerlink" title="注意事项："></a>注意事项：</h3><ul>
 <li>尽量不要在一个表中混用数组和散列桶部分，即一个表最好只存放一类数据。Lua 的实现上确实提供了两者统一表示的遍历，但这并不意味着使用者就应该混用这两种方式。</li>
 <li>尽量不要在表中存放 nil 值，这会让取长度操作的行为不稳定。</li>

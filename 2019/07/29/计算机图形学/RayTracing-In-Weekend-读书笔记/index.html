@@ -167,186 +167,39 @@
 <a id="more"></a>
 <h3 id="Chapter1��Output-an-Image"><a href="#Chapter1��Output-an-Image" class="headerlink" title="Chapter1��Output an Image"></a>Chapter1��Output an Image</h3><p>����һ��ppm�����������ص���<a href="https://www.xnview.com/en/" target="_blank" rel="noopener">XnView</a>��</p>
 <p>��һ����������Ĵ��벢�������������õ�PPM��ʽ���ļ��Ļ�����Ҫ�ڴ��������д��txt�ļ��Ĵ��룺</p>
-<pre><code class="hljs c++"><span class="hljs-meta">#<span class="hljs-meta-keyword">include</span> <span class="hljs-meta-string">"pch.h"</span></span>
-<span class="hljs-meta">#<span class="hljs-meta-keyword">include</span> <span class="hljs-meta-string">&lt;iostream&gt;</span></span>
-<span class="hljs-meta">#<span class="hljs-meta-keyword">include</span> <span class="hljs-meta-string">&lt;fstream&gt;</span></span>
-
-<span class="hljs-keyword">using</span> <span class="hljs-keyword">namespace</span> <span class="hljs-built_in">std</span>;
-<span class="hljs-function"><span class="hljs-keyword">int</span> <span class="hljs-title">main</span><span class="hljs-params">()</span>
-</span>&#123;
-	<span class="hljs-keyword">int</span> nx = <span class="hljs-number">200</span>;
-	<span class="hljs-keyword">int</span> ny = <span class="hljs-number">100</span>;
-
-	<span class="hljs-function">ofstream <span class="hljs-title">outfile</span><span class="hljs-params">(<span class="hljs-string">".\\result\\FirstPicture.txt"</span>, ios_base::out)</span></span>;
-	outfile &lt;&lt; <span class="hljs-string">"P3\n"</span> &lt;&lt; nx &lt;&lt; <span class="hljs-string">" "</span> &lt;&lt; ny &lt;&lt; <span class="hljs-string">"\n255\n"</span>;
-	<span class="hljs-keyword">for</span> (<span class="hljs-keyword">int</span> j = ny - <span class="hljs-number">1</span>; j &gt;= <span class="hljs-number">0</span>; j--)
-	&#123;
-		<span class="hljs-keyword">for</span> (<span class="hljs-keyword">int</span> i = <span class="hljs-number">0</span>; i &lt; nx; i++)
-		&#123;
-			<span class="hljs-keyword">float</span> r = <span class="hljs-keyword">float</span>(i) / <span class="hljs-keyword">float</span>(nx);
-			<span class="hljs-keyword">float</span> g = <span class="hljs-keyword">float</span>(j) / <span class="hljs-keyword">float</span>(ny);
-			<span class="hljs-keyword">float</span> b = <span class="hljs-number">0.2</span>;
-			<span class="hljs-keyword">int</span> ir = <span class="hljs-keyword">int</span>(<span class="hljs-number">255.99</span>*r);
-			<span class="hljs-keyword">int</span> ig = <span class="hljs-keyword">int</span>(<span class="hljs-number">255.99</span>*g);
-			<span class="hljs-keyword">int</span> ib = <span class="hljs-keyword">int</span>(<span class="hljs-number">255.99</span>*b);
-			outfile &lt;&lt; ir &lt;&lt; <span class="hljs-string">" "</span> &lt;&lt; ig &lt;&lt; <span class="hljs-string">" "</span> &lt;&lt; ib &lt;&lt; <span class="hljs-string">"\n"</span>;
-			<span class="hljs-built_in">std</span>::<span class="hljs-built_in">cout</span> &lt;&lt; ir &lt;&lt; <span class="hljs-string">" "</span> &lt;&lt; ig &lt;&lt; <span class="hljs-string">" "</span> &lt;&lt; ib &lt;&lt; <span class="hljs-string">"\n"</span>;
-		&#125;
-	&#125;
-
-	<span class="hljs-keyword">return</span> <span class="hljs-number">0</span>;
-&#125;</code></pre>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br></pre></td><td class="code"><pre><code class="hljs c++"><span class="hljs-meta">#<span class="hljs-meta-keyword">include</span> <span class="hljs-meta-string">"pch.h"</span></span><br><span class="hljs-meta">#<span class="hljs-meta-keyword">include</span> <span class="hljs-meta-string">&lt;iostream&gt;</span></span><br><span class="hljs-meta">#<span class="hljs-meta-keyword">include</span> <span class="hljs-meta-string">&lt;fstream&gt;</span></span><br><br><span class="hljs-keyword">using</span> <span class="hljs-keyword">namespace</span> <span class="hljs-built_in">std</span>;<br><span class="hljs-function"><span class="hljs-keyword">int</span> <span class="hljs-title">main</span><span class="hljs-params">()</span><br></span>&#123;<br>true<span class="hljs-keyword">int</span> nx = <span class="hljs-number">200</span>;<br>true<span class="hljs-keyword">int</span> ny = <span class="hljs-number">100</span>;<br><br>true<span class="hljs-function">ofstream <span class="hljs-title">outfile</span><span class="hljs-params">(<span class="hljs-string">".\\result\\FirstPicture.txt"</span>, ios_base::out)</span></span>;<br>trueoutfile &lt;&lt; <span class="hljs-string">"P3\n"</span> &lt;&lt; nx &lt;&lt; <span class="hljs-string">" "</span> &lt;&lt; ny &lt;&lt; <span class="hljs-string">"\n255\n"</span>;<br>true<span class="hljs-keyword">for</span> (<span class="hljs-keyword">int</span> j = ny - <span class="hljs-number">1</span>; j &gt;= <span class="hljs-number">0</span>; j--)<br>true&#123;<br>truetrue<span class="hljs-keyword">for</span> (<span class="hljs-keyword">int</span> i = <span class="hljs-number">0</span>; i &lt; nx; i++)<br>truetrue&#123;<br>truetruetrue<span class="hljs-keyword">float</span> r = <span class="hljs-keyword">float</span>(i) / <span class="hljs-keyword">float</span>(nx);<br>truetruetrue<span class="hljs-keyword">float</span> g = <span class="hljs-keyword">float</span>(j) / <span class="hljs-keyword">float</span>(ny);<br>truetruetrue<span class="hljs-keyword">float</span> b = <span class="hljs-number">0.2</span>;<br>truetruetrue<span class="hljs-keyword">int</span> ir = <span class="hljs-keyword">int</span>(<span class="hljs-number">255.99</span>*r);<br>truetruetrue<span class="hljs-keyword">int</span> ig = <span class="hljs-keyword">int</span>(<span class="hljs-number">255.99</span>*g);<br>truetruetrue<span class="hljs-keyword">int</span> ib = <span class="hljs-keyword">int</span>(<span class="hljs-number">255.99</span>*b);<br>truetruetrueoutfile &lt;&lt; ir &lt;&lt; <span class="hljs-string">" "</span> &lt;&lt; ig &lt;&lt; <span class="hljs-string">" "</span> &lt;&lt; ib &lt;&lt; <span class="hljs-string">"\n"</span>;<br>truetruetrue<span class="hljs-built_in">std</span>::<span class="hljs-built_in">cout</span> &lt;&lt; ir &lt;&lt; <span class="hljs-string">" "</span> &lt;&lt; ig &lt;&lt; <span class="hljs-string">" "</span> &lt;&lt; ib &lt;&lt; <span class="hljs-string">"\n"</span>;<br>truetrue&#125;<br>true&#125;<br><br>true<span class="hljs-keyword">return</span> <span class="hljs-number">0</span>;<br>&#125;<br></code></pre></td></tr></table></figure>
 <p>��VmView�п��Կ�����Ӧ��ͼƬ��</p>
 <p><img src="https://i.loli.net/2019/07/29/5d3e5c2ac5cfc71862.png" alt></p>
 <h3 id="Chapter2��The-vec3-class"><a href="#Chapter2��The-vec3-class" class="headerlink" title="Chapter2��The vec3 class"></a>Chapter2��The vec3 class</h3><p>������һ�����vec3���������</p>
 <p>����������ļӼ��˳�������������ļӼ��˳��������Ĳ������ȡ�</p>
-<pre><code class="hljs c++"><span class="hljs-function"><span class="hljs-keyword">inline</span> <span class="hljs-keyword">float</span> <span class="hljs-title">dot</span><span class="hljs-params">(<span class="hljs-keyword">const</span> vec3 &amp;v1, <span class="hljs-keyword">const</span> vec3 &amp;v2)</span>
-</span>&#123;
-	<span class="hljs-keyword">return</span> v1.e[<span class="hljs-number">0</span>] * v2.e[<span class="hljs-number">0</span>] + v1.e[<span class="hljs-number">1</span>] * v2.e[<span class="hljs-number">1</span>] + v1.e[<span class="hljs-number">2</span>] * v2.e[<span class="hljs-number">2</span>];
-&#125;
-
-<span class="hljs-function"><span class="hljs-keyword">inline</span> vec3 <span class="hljs-title">cross</span><span class="hljs-params">(<span class="hljs-keyword">const</span> vec3 &amp;v1, <span class="hljs-keyword">const</span> vec3 &amp;v2)</span>
-</span>&#123;
-	<span class="hljs-keyword">return</span> vec3((v1.e[<span class="hljs-number">1</span>] * v2.e[<span class="hljs-number">2</span>] - v1.e[<span class="hljs-number">2</span>] * v2.e[<span class="hljs-number">1</span>]),
-		(-(v1.e[<span class="hljs-number">0</span>] * v2.e[<span class="hljs-number">2</span>] - v1.e[<span class="hljs-number">2</span>] * v2.e[<span class="hljs-number">0</span>])),
-		(v1.e[<span class="hljs-number">0</span>] * v2.e[<span class="hljs-number">1</span>] - v1.e[<span class="hljs-number">1</span>] * v2.e[<span class="hljs-number">0</span>]));
-&#125;</code></pre>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><code class="hljs c++"><span class="hljs-function"><span class="hljs-keyword">inline</span> <span class="hljs-keyword">float</span> <span class="hljs-title">dot</span><span class="hljs-params">(<span class="hljs-keyword">const</span> vec3 &amp;v1, <span class="hljs-keyword">const</span> vec3 &amp;v2)</span><br></span>&#123;<br>true<span class="hljs-keyword">return</span> v1.e[<span class="hljs-number">0</span>] * v2.e[<span class="hljs-number">0</span>] + v1.e[<span class="hljs-number">1</span>] * v2.e[<span class="hljs-number">1</span>] + v1.e[<span class="hljs-number">2</span>] * v2.e[<span class="hljs-number">2</span>];<br>&#125;<br><br><span class="hljs-function"><span class="hljs-keyword">inline</span> vec3 <span class="hljs-title">cross</span><span class="hljs-params">(<span class="hljs-keyword">const</span> vec3 &amp;v1, <span class="hljs-keyword">const</span> vec3 &amp;v2)</span><br></span>&#123;<br>true<span class="hljs-keyword">return</span> vec3((v1.e[<span class="hljs-number">1</span>] * v2.e[<span class="hljs-number">2</span>] - v1.e[<span class="hljs-number">2</span>] * v2.e[<span class="hljs-number">1</span>]),<br>truetrue(-(v1.e[<span class="hljs-number">0</span>] * v2.e[<span class="hljs-number">2</span>] - v1.e[<span class="hljs-number">2</span>] * v2.e[<span class="hljs-number">0</span>])),<br>truetrue(v1.e[<span class="hljs-number">0</span>] * v2.e[<span class="hljs-number">1</span>] - v1.e[<span class="hljs-number">1</span>] * v2.e[<span class="hljs-number">0</span>]));<br>&#125;<br></code></pre></td></tr></table></figure>
 <h3 id="Chapter3��Rays-a-simple-camera-and-background"><a href="#Chapter3��Rays-a-simple-camera-and-background" class="headerlink" title="Chapter3��Rays,a simple camera, and background"></a>Chapter3��Rays,a simple camera, and background</h3><p>�����������࣬�������������������ֱ𷵻�ԭ�㡢�����Լ����߱��������߱�����һ��Vec3��ʾ��</p>
 <h3 id="Chapter4"><a href="#Chapter4" class="headerlink" title="Chapter4:"></a>Chapter4:</h3><p>�����еĴ����м�����һ������������ཻ�ĺ���������������Դ�2D��������Բ���ཻ��⺯������ȥ���⡣</p>
 <p>����Ὣ����뵽������ͷ�ļ��С�</p>
-<pre><code class="hljs c++"><span class="hljs-keyword">bool</span> sphere :: hit(<span class="hljs-keyword">const</span> ray&amp; r, <span class="hljs-keyword">float</span> t_min, <span class="hljs-keyword">float</span> t_max, hit_record&amp; rec)<span class="hljs-keyword">const</span> &#123;
-	vec3 oc = r.origin() - center;
-	
-	<span class="hljs-keyword">float</span> a = dot(r.direction(), r.direction());
-	<span class="hljs-keyword">float</span> b = dot(oc, r.direction());
-	<span class="hljs-keyword">float</span> c = dot(oc, oc) - radius * radius;
-
-	<span class="hljs-keyword">float</span> discriminant = b * b - a * c;
-	<span class="hljs-keyword">if</span> (discriminant &gt; <span class="hljs-number">0</span>)
-	&#123;
-		<span class="hljs-keyword">float</span> temp = (-b - <span class="hljs-built_in">sqrt</span>(b*b - a * c)) / a;
-		<span class="hljs-keyword">if</span> (temp &lt; t_max &amp;&amp; temp &gt; t_min)
-		&#123;
-			rec.t = temp;
-			rec.p = r.point_at_parameter(rec.t);
-			rec.normal = (rec.p - center) / radius;
-			<span class="hljs-keyword">return</span> <span class="hljs-literal">true</span>;
-		&#125;
-		temp = (-b + <span class="hljs-built_in">sqrt</span>(b*b - a * c)) / a;
-		<span class="hljs-keyword">if</span> (temp&lt;t_max &amp;&amp; temp&gt;t_min)
-		&#123;
-			rec.t = temp;
-			rec.p = r.point_at_parameter(rec.t);
-			rec.normal = (rec.p - center) / radius;
-			<span class="hljs-keyword">return</span> <span class="hljs-literal">true</span>;
-		&#125;
-	&#125;
-	<span class="hljs-keyword">return</span> <span class="hljs-literal">false</span>;
-&#125;</code></pre>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br></pre></td><td class="code"><pre><code class="hljs c++"><span class="hljs-keyword">bool</span> sphere :: hit(<span class="hljs-keyword">const</span> ray&amp; r, <span class="hljs-keyword">float</span> t_min, <span class="hljs-keyword">float</span> t_max, hit_record&amp; rec)<span class="hljs-keyword">const</span> &#123;<br>truevec3 oc = r.origin() - center;<br>true<br>true<span class="hljs-keyword">float</span> a = dot(r.direction(), r.direction());<br>true<span class="hljs-keyword">float</span> b = dot(oc, r.direction());<br>true<span class="hljs-keyword">float</span> c = dot(oc, oc) - radius * radius;<br><br>true<span class="hljs-keyword">float</span> discriminant = b * b - a * c;<br>true<span class="hljs-keyword">if</span> (discriminant &gt; <span class="hljs-number">0</span>)<br>true&#123;<br>truetrue<span class="hljs-keyword">float</span> temp = (-b - <span class="hljs-built_in">sqrt</span>(b*b - a * c)) / a;<br>truetrue<span class="hljs-keyword">if</span> (temp &lt; t_max &amp;&amp; temp &gt; t_min)<br>truetrue&#123;<br>truetruetruerec.t = temp;<br>truetruetruerec.p = r.point_at_parameter(rec.t);<br>truetruetruerec.normal = (rec.p - center) / radius;<br>truetruetrue<span class="hljs-keyword">return</span> <span class="hljs-literal">true</span>;<br>truetrue&#125;<br>truetruetemp = (-b + <span class="hljs-built_in">sqrt</span>(b*b - a * c)) / a;<br>truetrue<span class="hljs-keyword">if</span> (temp&lt;t_max &amp;&amp; temp&gt;t_min)<br>truetrue&#123;<br>truetruetruerec.t = temp;<br>truetruetruerec.p = r.point_at_parameter(rec.t);<br>truetruetruerec.normal = (rec.p - center) / radius;<br>truetruetrue<span class="hljs-keyword">return</span> <span class="hljs-literal">true</span>;<br>truetrue&#125;<br>true&#125;<br>true<span class="hljs-keyword">return</span> <span class="hljs-literal">false</span>;<br>&#125;<br></code></pre></td></tr></table></figure>
 <h3 id="Chapter5��Surface-normals-and-multiple-objects"><a href="#Chapter5��Surface-normals-and-multiple-objects" class="headerlink" title="Chapter5��Surface normals and multiple objects."></a>Chapter5��Surface normals and multiple objects.</h3><p>�����˶Է��߷�������㣬������Ӧ�����߼�⺯�����뵽�˶�Ӧ��ͷ�ļ��С�</p>
 <p>�����ĵ�����ĳ���������Ϊ�õ�ķ��߷���</p>
 <p>���ⶨ����һ���࣬�������㲢�洢�����������������һ����о�������ԭ�������һ���㡣</p>
 <h3 id="Chapter6��Antialasing"><a href="#Chapter6��Antialasing" class="headerlink" title="Chapter6��Antialasing"></a>Chapter6��Antialasing</h3><p>��Ŀ��Ϊ����ݡ�</p>
 <p>�������������ÿ�������ص�Ϊ���ģ��������Ϊ1�ķ�Χ�ڲ���n�Σ���n��������ֵ����ƽ����Ϊ�õ����յ�����ֵ��</p>
 <p>������ͼ���������Ƶķ�ʽ����Ϊ��ֵ�˲���</p>
-<pre><code class="hljs c++"><span class="hljs-function">vec3 <span class="hljs-title">col</span><span class="hljs-params">(<span class="hljs-number">0</span>, <span class="hljs-number">0</span>, <span class="hljs-number">0</span>)</span></span>;
-<span class="hljs-keyword">for</span> (<span class="hljs-keyword">int</span> s = <span class="hljs-number">0</span>; s &lt; ns; s++)
-&#123;
-	<span class="hljs-keyword">float</span> random = rand() % (<span class="hljs-number">100</span>) / (<span class="hljs-keyword">float</span>)(<span class="hljs-number">100</span>);
-	<span class="hljs-keyword">float</span> u = <span class="hljs-keyword">float</span>(i + random) / <span class="hljs-keyword">float</span>(nx);
-	<span class="hljs-keyword">float</span> v = <span class="hljs-keyword">float</span>(j + random) / <span class="hljs-keyword">float</span>(ny);
-	ray r = cam.get_ray(u, v);
-	vec3 p = r.point_at_parameter(<span class="hljs-number">2.0</span>);
-	col += color(r, world);
-&#125;
-col /= <span class="hljs-keyword">float</span>(ns);</code></pre>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><code class="hljs c++"><span class="hljs-function">vec3 <span class="hljs-title">col</span><span class="hljs-params">(<span class="hljs-number">0</span>, <span class="hljs-number">0</span>, <span class="hljs-number">0</span>)</span></span>;<br><span class="hljs-keyword">for</span> (<span class="hljs-keyword">int</span> s = <span class="hljs-number">0</span>; s &lt; ns; s++)<br>&#123;<br>true<span class="hljs-keyword">float</span> random = rand() % (<span class="hljs-number">100</span>) / (<span class="hljs-keyword">float</span>)(<span class="hljs-number">100</span>);<br>true<span class="hljs-keyword">float</span> u = <span class="hljs-keyword">float</span>(i + random) / <span class="hljs-keyword">float</span>(nx);<br>true<span class="hljs-keyword">float</span> v = <span class="hljs-keyword">float</span>(j + random) / <span class="hljs-keyword">float</span>(ny);<br>trueray r = cam.get_ray(u, v);<br>truevec3 p = r.point_at_parameter(<span class="hljs-number">2.0</span>);<br>truecol += color(r, world);<br>&#125;<br>col /= <span class="hljs-keyword">float</span>(ns);<br></code></pre></td></tr></table></figure>
 <h3 id="Chapter7��Diffuse-Materials"><a href="#Chapter7��Diffuse-Materials" class="headerlink" title="Chapter7��Diffuse Materials"></a>Chapter7��Diffuse Materials</h3><p>��Ŀ��Ϊ��������ʡ�</p>
 <blockquote>
 <p>Pick a random point s from the unit radius sphere that is tangent to the hitpoint, and send a ray from the hitpoint p to the random point s. That sphere has center (p+N):</p>
 <p>�������е����еĵ�λ�뾶����ѡ��һ�������s������һ�����ߴ����е����������s������Ϊ��p+N��</p>
 </blockquote>
 <p>����������ǽ����䷽�����һ������ķ�����Ϊ������ķ���</p>
-<pre><code class="hljs c++"><span class="hljs-function">vec3 <span class="hljs-title">random_in_unit_sphere</span><span class="hljs-params">()</span>
-</span>&#123;
-	vec3 p;
-	<span class="hljs-keyword">do</span> &#123;
-		<span class="hljs-keyword">float</span> random0 = rand() % (<span class="hljs-number">100</span>) / (<span class="hljs-keyword">float</span>)(<span class="hljs-number">100</span>);
-		<span class="hljs-keyword">float</span> random1 = rand() % (<span class="hljs-number">100</span>) / (<span class="hljs-keyword">float</span>)(<span class="hljs-number">100</span>);
-		<span class="hljs-keyword">float</span> random2 = rand() % (<span class="hljs-number">100</span>) / (<span class="hljs-keyword">float</span>)(<span class="hljs-number">100</span>);
-		p = <span class="hljs-number">2.0</span>*vec3(random0, random1, random2) - vec3(<span class="hljs-number">1</span>, <span class="hljs-number">1</span>, <span class="hljs-number">1</span>);
-	&#125; <span class="hljs-keyword">while</span> (p.squared_length() &gt;= <span class="hljs-number">1.0</span>);
-	
-	<span class="hljs-keyword">return</span> p;
-&#125;
-
-<span class="hljs-function">vec3 <span class="hljs-title">color</span><span class="hljs-params">(<span class="hljs-keyword">const</span> ray&amp; r, hitable *world)</span>
-</span>&#123;
-	hit_record rec;
-	<span class="hljs-keyword">if</span> (world-&gt;hit(r, <span class="hljs-number">0.001</span>, (numeric_limits&lt;<span class="hljs-keyword">float</span>&gt;::max)(), rec))
-	&#123;
-		vec3 target = rec.p + rec.normal + random_in_unit_sphere();
-		<span class="hljs-keyword">return</span> <span class="hljs-number">0.5</span>*color(ray(rec.p,target - rec.p), world);
-	&#125;
-	<span class="hljs-keyword">else</span>
-	&#123;
-		vec3 unit_direction = unit_vector(r.direction());
-		<span class="hljs-keyword">float</span> t = <span class="hljs-number">0.5</span>*(unit_direction.y() + <span class="hljs-number">1.0</span>);
-		<span class="hljs-keyword">return</span> (<span class="hljs-number">1.0</span> - t)*vec3(<span class="hljs-number">1.0</span>, <span class="hljs-number">1.0</span>, <span class="hljs-number">1.0</span>) + t * vec3(<span class="hljs-number">0.5</span>, <span class="hljs-number">0.7</span>, <span class="hljs-number">1.0</span>);
-	&#125;
-&#125;</code></pre>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br></pre></td><td class="code"><pre><code class="hljs c++"><span class="hljs-function">vec3 <span class="hljs-title">random_in_unit_sphere</span><span class="hljs-params">()</span><br></span>&#123;<br>truevec3 p;<br>true<span class="hljs-keyword">do</span> &#123;<br>truetrue<span class="hljs-keyword">float</span> random0 = rand() % (<span class="hljs-number">100</span>) / (<span class="hljs-keyword">float</span>)(<span class="hljs-number">100</span>);<br>truetrue<span class="hljs-keyword">float</span> random1 = rand() % (<span class="hljs-number">100</span>) / (<span class="hljs-keyword">float</span>)(<span class="hljs-number">100</span>);<br>truetrue<span class="hljs-keyword">float</span> random2 = rand() % (<span class="hljs-number">100</span>) / (<span class="hljs-keyword">float</span>)(<span class="hljs-number">100</span>);<br>truetruep = <span class="hljs-number">2.0</span>*vec3(random0, random1, random2) - vec3(<span class="hljs-number">1</span>, <span class="hljs-number">1</span>, <span class="hljs-number">1</span>);<br>true&#125; <span class="hljs-keyword">while</span> (p.squared_length() &gt;= <span class="hljs-number">1.0</span>);<br>true<br>true<span class="hljs-keyword">return</span> p;<br>&#125;<br><br><span class="hljs-function">vec3 <span class="hljs-title">color</span><span class="hljs-params">(<span class="hljs-keyword">const</span> ray&amp; r, hitable *world)</span><br></span>&#123;<br>truehit_record rec;<br>true<span class="hljs-keyword">if</span> (world-&gt;hit(r, <span class="hljs-number">0.001</span>, (numeric_limits&lt;<span class="hljs-keyword">float</span>&gt;::max)(), rec))<br>true&#123;<br>truetruevec3 target = rec.p + rec.normal + random_in_unit_sphere();<br>truetrue<span class="hljs-keyword">return</span> <span class="hljs-number">0.5</span>*color(ray(rec.p,target - rec.p), world);<br>true&#125;<br>true<span class="hljs-keyword">else</span><br>true&#123;<br>truetruevec3 unit_direction = unit_vector(r.direction());<br>truetrue<span class="hljs-keyword">float</span> t = <span class="hljs-number">0.5</span>*(unit_direction.y() + <span class="hljs-number">1.0</span>);<br>truetrue<span class="hljs-keyword">return</span> (<span class="hljs-number">1.0</span> - t)*vec3(<span class="hljs-number">1.0</span>, <span class="hljs-number">1.0</span>, <span class="hljs-number">1.0</span>) + t * vec3(<span class="hljs-number">0.5</span>, <span class="hljs-number">0.7</span>, <span class="hljs-number">1.0</span>);<br>true&#125;<br>&#125;<br></code></pre></td></tr></table></figure>
 <h3 id="Chapter8��Metal"><a href="#Chapter8��Metal" class="headerlink" title="Chapter8��Metal"></a>Chapter8��Metal</h3><p>�ڰ��¼����˼򵥵Ĳ��ʡ�</p>
 <p>���Ƕ�����һ���򵥵��ʲ������������������һ���ʣ�����ġ����֡����������������ԡ����۹۲��ߵ��ӽ���Σ��ʲ�����Թ۲��ߵı������ȶ�����ͬ�ġ�</p>
-<pre><code class="hljs C++"><span class="hljs-meta">#<span class="hljs-meta-keyword">ifndef</span> LANBERTIANH</span>
-<span class="hljs-meta">#<span class="hljs-meta-keyword">define</span> LANBERTIANH</span>
-
-<span class="hljs-meta">#<span class="hljs-meta-keyword">include</span> <span class="hljs-meta-string">"material.h"</span></span>
-<span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">lambertian</span> :</span><span class="hljs-keyword">public</span> material
-&#123;
-<span class="hljs-keyword">public</span>:
-	lambertian(<span class="hljs-keyword">const</span> vec3&amp; a):albedo(a)&#123;&#125;
-	<span class="hljs-function"><span class="hljs-keyword">virtual</span> <span class="hljs-keyword">bool</span> <span class="hljs-title">scatter</span><span class="hljs-params">(<span class="hljs-keyword">const</span> ray&amp; r_in, <span class="hljs-keyword">const</span> hit_record&amp; rec, vec3&amp; attenuation, ray&amp; scattered)</span><span class="hljs-keyword">const</span></span>;
-	vec3 albedo;
-&#125;;
-
-<span class="hljs-function">vec3 <span class="hljs-title">random_in_unit_sphere</span><span class="hljs-params">()</span> </span>&#123;
-	vec3 p;
-	<span class="hljs-keyword">do</span> &#123;
-		<span class="hljs-keyword">float</span> random0 = rand() % (<span class="hljs-number">100</span>) / (<span class="hljs-keyword">float</span>)(<span class="hljs-number">100</span>);
-		<span class="hljs-keyword">float</span> random1 = rand() % (<span class="hljs-number">100</span>) / (<span class="hljs-keyword">float</span>)(<span class="hljs-number">100</span>);
-		<span class="hljs-keyword">float</span> random2 = rand() % (<span class="hljs-number">100</span>) / (<span class="hljs-keyword">float</span>)(<span class="hljs-number">100</span>);
-		p = <span class="hljs-number">2.0</span>*vec3(random0, random1, random2) - vec3(<span class="hljs-number">1</span>, <span class="hljs-number">1</span>, <span class="hljs-number">1</span>);
-	&#125; <span class="hljs-keyword">while</span> (p.squared_length() &gt;= <span class="hljs-number">1.0</span>);
-	<span class="hljs-keyword">return</span> p;
-&#125;
-
-<span class="hljs-keyword">bool</span> lambertian::scatter(<span class="hljs-keyword">const</span> ray&amp; r_in, <span class="hljs-keyword">const</span> hit_record&amp; rec, vec3&amp; attenuation, ray&amp; scattered) <span class="hljs-keyword">const</span> &#123;
-	vec3 target = rec.p + rec.normal + random_in_unit_sphere();
-	scattered = ray(rec.p, target - rec.p);
-	attenuation = albedo;
-	<span class="hljs-keyword">return</span> <span class="hljs-literal">true</span>;
-&#125;
-
-<span class="hljs-meta">#<span class="hljs-meta-keyword">endif</span> <span class="hljs-comment">// !LANBERTIANH</span></span></code></pre>
+<figure class="highlight C++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br></pre></td><td class="code"><pre><code class="hljs C++"><span class="hljs-meta">#<span class="hljs-meta-keyword">ifndef</span> LANBERTIANH</span><br><span class="hljs-meta">#<span class="hljs-meta-keyword">define</span> LANBERTIANH</span><br><br><span class="hljs-meta">#<span class="hljs-meta-keyword">include</span> <span class="hljs-meta-string">"material.h"</span></span><br><span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">lambertian</span> :</span><span class="hljs-keyword">public</span> material<br>&#123;<br><span class="hljs-keyword">public</span>:<br>truelambertian(<span class="hljs-keyword">const</span> vec3&amp; a):albedo(a)&#123;&#125;<br>true<span class="hljs-function"><span class="hljs-keyword">virtual</span> <span class="hljs-keyword">bool</span> <span class="hljs-title">scatter</span><span class="hljs-params">(<span class="hljs-keyword">const</span> ray&amp; r_in, <span class="hljs-keyword">const</span> hit_record&amp; rec, vec3&amp; attenuation, ray&amp; scattered)</span><span class="hljs-keyword">const</span></span>;<br>truevec3 albedo;<br>&#125;;<br><br><span class="hljs-function">vec3 <span class="hljs-title">random_in_unit_sphere</span><span class="hljs-params">()</span> </span>&#123;<br>truevec3 p;<br>true<span class="hljs-keyword">do</span> &#123;<br>truetrue<span class="hljs-keyword">float</span> random0 = rand() % (<span class="hljs-number">100</span>) / (<span class="hljs-keyword">float</span>)(<span class="hljs-number">100</span>);<br>truetrue<span class="hljs-keyword">float</span> random1 = rand() % (<span class="hljs-number">100</span>) / (<span class="hljs-keyword">float</span>)(<span class="hljs-number">100</span>);<br>truetrue<span class="hljs-keyword">float</span> random2 = rand() % (<span class="hljs-number">100</span>) / (<span class="hljs-keyword">float</span>)(<span class="hljs-number">100</span>);<br>truetruep = <span class="hljs-number">2.0</span>*vec3(random0, random1, random2) - vec3(<span class="hljs-number">1</span>, <span class="hljs-number">1</span>, <span class="hljs-number">1</span>);<br>true&#125; <span class="hljs-keyword">while</span> (p.squared_length() &gt;= <span class="hljs-number">1.0</span>);<br>true<span class="hljs-keyword">return</span> p;<br>&#125;<br><br><span class="hljs-keyword">bool</span> lambertian::scatter(<span class="hljs-keyword">const</span> ray&amp; r_in, <span class="hljs-keyword">const</span> hit_record&amp; rec, vec3&amp; attenuation, ray&amp; scattered) <span class="hljs-keyword">const</span> &#123;<br>truevec3 target = rec.p + rec.normal + random_in_unit_sphere();<br>truescattered = ray(rec.p, target - rec.p);<br>trueattenuation = albedo;<br>true<span class="hljs-keyword">return</span> <span class="hljs-literal">true</span>;<br>&#125;<br><br><span class="hljs-meta">#<span class="hljs-meta-keyword">endif</span> <span class="hljs-comment">// !LANBERTIANH</span></span><br></code></pre></td></tr></table></figure>
 <p>ע��ԭ��������������û���ҵ���Ӧ�����ã���������ݴ�������rand()���档</p>
 <p>����ԭ�黹������һ�����淴���࣬�����ķ��亯���ο�����������</p>
-<pre><code class="hljs c++"><span class="hljs-function">vec3 <span class="hljs-title">reflect</span><span class="hljs-params">(<span class="hljs-keyword">const</span> vec3&amp; v, <span class="hljs-keyword">const</span> vec3&amp; n)</span>
-</span>&#123;
-	<span class="hljs-keyword">return</span> v - <span class="hljs-number">2</span> * dot(v, n)*n;
-&#125;</code></pre>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><code class="hljs c++"><span class="hljs-function">vec3 <span class="hljs-title">reflect</span><span class="hljs-params">(<span class="hljs-keyword">const</span> vec3&amp; v, <span class="hljs-keyword">const</span> vec3&amp; n)</span><br></span>&#123;<br>true<span class="hljs-keyword">return</span> v - <span class="hljs-number">2</span> * dot(v, n)*n;<br>&#125;<br></code></pre></td></tr></table></figure>
 <p>�ڱ��µ��������������һ��ģ���Ĳ��������ģ���Ĳ���ʹ�÷�����ߵķ�������һ������ƫ�ơ�</p>
 <h3 id="Chapter9��Dielectrics"><a href="#Chapter9��Dielectrics" class="headerlink" title="Chapter9��Dielectrics"></a>Chapter9��Dielectrics</h3><p>��һ�µı���Ϊ����ʣ�ʵ������˵�������ݰ���������ˮ����͸���Ŀ���������ߵĲ��ʣ�</p>
-<pre><code class="hljs c++"><span class="hljs-function"><span class="hljs-keyword">bool</span> <span class="hljs-title">refract</span><span class="hljs-params">(<span class="hljs-keyword">const</span> vec3&amp; v, <span class="hljs-keyword">const</span> vec3&amp; n, <span class="hljs-keyword">float</span> ni_over_nt, vec3&amp; refracted)</span>
-</span>&#123;
-	vec3 uv = unit_vector(v);
-	<span class="hljs-keyword">float</span> dt = dot(uv, n);
-	<span class="hljs-keyword">float</span> discriminant = <span class="hljs-number">1.0</span> - ni_over_nt * ni_over_nt*(<span class="hljs-number">1</span> - dt * dt);
-	<span class="hljs-keyword">if</span> (discriminant &gt; <span class="hljs-number">0</span>)
-	&#123;
-		refracted = ni_over_nt * (uv - n * dt) - n * <span class="hljs-built_in">sqrt</span>(discriminant);
-		<span class="hljs-keyword">return</span> <span class="hljs-literal">true</span>;
-	&#125;
-	<span class="hljs-keyword">else</span> <span class="hljs-keyword">return</span> <span class="hljs-literal">false</span>;
-&#125;</code></pre>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><code class="hljs c++"><span class="hljs-function"><span class="hljs-keyword">bool</span> <span class="hljs-title">refract</span><span class="hljs-params">(<span class="hljs-keyword">const</span> vec3&amp; v, <span class="hljs-keyword">const</span> vec3&amp; n, <span class="hljs-keyword">float</span> ni_over_nt, vec3&amp; refracted)</span><br></span>&#123;<br>truevec3 uv = unit_vector(v);<br>true<span class="hljs-keyword">float</span> dt = dot(uv, n);<br>true<span class="hljs-keyword">float</span> discriminant = <span class="hljs-number">1.0</span> - ni_over_nt * ni_over_nt*(<span class="hljs-number">1</span> - dt * dt);<br>true<span class="hljs-keyword">if</span> (discriminant &gt; <span class="hljs-number">0</span>)<br>true&#123;<br>truetruerefracted = ni_over_nt * (uv - n * dt) - n * <span class="hljs-built_in">sqrt</span>(discriminant);<br>truetrue<span class="hljs-keyword">return</span> <span class="hljs-literal">true</span>;<br>true&#125;<br>true<span class="hljs-keyword">else</span> <span class="hljs-keyword">return</span> <span class="hljs-literal">false</span>;<br>&#125;<br></code></pre></td></tr></table></figure>
 <p>ע�⣬���������жϰ���һ��ȫ����������</p>
 <p>��������Ĺ�ʽ��ο���<a href="[https://zh.wikipedia.org/wiki/%E6%96%AF%E6%B6%85%E5%B0%94%E5%AE%9A%E5%BE%8B](https://zh.wikipedia.org/wiki/˹��������">˹��������</a>)</p>
 <h3 id="Chapter10��Positionable-camera"><a href="#Chapter10��Positionable-camera" class="headerlink" title="Chapter10��Positionable camera"></a>Chapter10��Positionable camera</h3><p>�ڵ�ʮ�£����Ƕ�����һ������͸�ӹ��ܵ�������ڹ۲쳡����</p>

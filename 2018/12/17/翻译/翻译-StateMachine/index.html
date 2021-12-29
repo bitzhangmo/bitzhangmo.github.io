@@ -216,69 +216,15 @@
 <p>这种转换的触发和触发的分离允许转换也具有它们自己的动作。 通常，从一个状态转换到另一个状态也涉及执行某些行动。 //在这种情况下，触发转换可以将所需的操作添加到状态返回的操作。</p>
 <h4 id="5-3-3-PSEUDO-CODE-：伪代码实现"><a href="#5-3-3-PSEUDO-CODE-：伪代码实现" class="headerlink" title="5.3.3 PSEUDO-CODE ：伪代码实现"></a>5.3.3 PSEUDO-CODE ：伪代码实现</h4><p>The state machine holds a list of states, with an indication of which one is the current state. It has an update function for triggering and firing transitions and a function that returns a set of actions to carry out.</p>
 <p>状态机保存状态列表，指示哪一个是当前状态。 //它具有用于执行和触发转换的更新功能以及返回要执行的一组操作的功能。 </p>
-<pre><code class="hljs cpp"><span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">machine</span>
-&#123;</span>
-    <span class="hljs-comment">// 维护一个状态机的状态列表</span>
-    <span class="hljs-built_in">list</span>&lt;State&gt; states;
-    
-    <span class="hljs-comment">// 初始状态</span>
-    State initialState；
-    
-    <span class="hljs-comment">// 当前状态</span>
-    currentState = initialState;
-    
-    <span class="hljs-comment">// 检查并执行转换，同时返回一个动作列表</span>
-    Update()
-    &#123;
-        <span class="hljs-comment">// 假定没有转换被触发</span>
-        triggeredTransition = None;
-        
-        <span class="hljs-comment">// 遍历所有状态并保存第一个被触发的状态</span>
-        <span class="hljs-keyword">for</span> transition in currentState.getTransitions()
-        &#123;
-            <span class="hljs-keyword">if</span> transition.isTriggered():
-			triggeredTransition = transition;
-			<span class="hljs-keyword">break</span>;
-        &#125;
-        
-        <span class="hljs-comment">// 检查是否有状态被触发？</span>
-        <span class="hljs-keyword">if</span> triggeredTransition
-        &#123;
-			targetState = triggeredTransition.getTargetState();
-            
-			<span class="hljs-comment">// 在行为列表之中增加旧状态的退出操作、状态转移的操作以及新状态的入口操作</span>
-			actions = currentState.getExitAction()
-			actions += triggeredTransition.getAction()
-			actions += targetState.getEntryAction()
-            
-            <span class="hljs-comment">// 完成状态转移并返回行为列表</span>
-            currentState = targetState
-			<span class="hljs-keyword">return</span> actions
-        &#125;
-        <span class="hljs-comment">// 否则直接返回当前状态的行为列表</span>
-        <span class="hljs-keyword">else</span> <span class="hljs-keyword">return</span> currentState.getAction()
-    &#125;
-&#125;</code></pre>
+<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br></pre></td><td class="code"><pre><code class="hljs cpp"><span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">machine</span><br>&#123;</span><br>    <span class="hljs-comment">// 维护一个状态机的状态列表</span><br>    <span class="hljs-built_in">list</span>&lt;State&gt; states;<br>    <br>    <span class="hljs-comment">// 初始状态</span><br>    State initialState；<br>    <br>    <span class="hljs-comment">// 当前状态</span><br>    currentState = initialState;<br>    <br>    <span class="hljs-comment">// 检查并执行转换，同时返回一个动作列表</span><br>    Update()<br>    &#123;<br>        <span class="hljs-comment">// 假定没有转换被触发</span><br>        triggeredTransition = None;<br>        <br>        <span class="hljs-comment">// 遍历所有状态并保存第一个被触发的状态</span><br>        <span class="hljs-keyword">for</span> transition in currentState.getTransitions()<br>        &#123;<br>            <span class="hljs-keyword">if</span> transition.isTriggered():<br>truetruetruetriggeredTransition = transition;<br>truetruetrue<span class="hljs-keyword">break</span>;<br>        &#125;<br>        <br>        <span class="hljs-comment">// 检查是否有状态被触发？</span><br>        <span class="hljs-keyword">if</span> triggeredTransition<br>        &#123;<br>truetruetruetargetState = triggeredTransition.getTargetState();<br>            <br>truetruetrue<span class="hljs-comment">// 在行为列表之中增加旧状态的退出操作、状态转移的操作以及新状态的入口操作</span><br>truetruetrueactions = currentState.getExitAction()<br>truetruetrueactions += triggeredTransition.getAction()<br>truetruetrueactions += targetState.getEntryAction()<br>            <br>            <span class="hljs-comment">// 完成状态转移并返回行为列表</span><br>            currentState = targetState<br>truetruetrue<span class="hljs-keyword">return</span> actions<br>        &#125;<br>        <span class="hljs-comment">// 否则直接返回当前状态的行为列表</span><br>        <span class="hljs-keyword">else</span> <span class="hljs-keyword">return</span> currentState.getAction()<br>    &#125;<br>&#125;<br></code></pre></td></tr></table></figure>
 <h4 id="5-3-4-DATA-STRUCTURES-AND-INTERFACES-：数据结构与接口"><a href="#5-3-4-DATA-STRUCTURES-AND-INTERFACES-：数据结构与接口" class="headerlink" title="5.3.4 DATA STRUCTURES AND INTERFACES ：数据结构与接口"></a>5.3.4 DATA STRUCTURES AND INTERFACES ：数据结构与接口</h4><p>The state machine relies on having states and transitions with a particular interface.<br>The state interface has the following form:</p>
 <p>状态机依赖于具有特定接口的状态和转换。<br>状态接口具有以下形式：</p>
-<pre><code class="hljs cpp"><span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">State</span>
-&#123;</span>
-    <span class="hljs-function">def <span class="hljs-title">getAction</span><span class="hljs-params">()</span></span>;
-    <span class="hljs-function">def <span class="hljs-title">getEntryAction</span><span class="hljs-params">()</span></span>;
-    <span class="hljs-function">def <span class="hljs-title">getExitAction</span><span class="hljs-params">()</span></span>;
-    
-    <span class="hljs-function">def <span class="hljs-title">getTransitions</span><span class="hljs-params">()</span></span>;
-&#125;</code></pre>
+<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><code class="hljs cpp"><span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">State</span><br>&#123;</span><br>    <span class="hljs-function">def <span class="hljs-title">getAction</span><span class="hljs-params">()</span></span>;<br>    <span class="hljs-function">def <span class="hljs-title">getEntryAction</span><span class="hljs-params">()</span></span>;<br>    <span class="hljs-function">def <span class="hljs-title">getExitAction</span><span class="hljs-params">()</span></span>;<br>    <br>    <span class="hljs-function">def <span class="hljs-title">getTransitions</span><span class="hljs-params">()</span></span>;<br>&#125;<br></code></pre></td></tr></table></figure>
 <p>Each of the getAction methods should return a list of actions to carry out. As we will see below, the getEntryAction is only called when the state is entered from a transition, and the getExitAction is only called when the state is exited. The rest of the time that the state is active, getAction is called. The getTransitions method should return a list of transitions that are outgoing from this state. </p>
 <p>The transition interface has the following form: </p>
 <p>每个getAction方法都应返回要执行的操作列表。 正如我们将在下面看到的，只有在从转换进入状态时才调用getEntryAction，并且仅在退出状态时调用getExitAction。 其余时间状态为活动状态，调用getAction。 getTransitions方法应返回从此状态传出的转换列表。</p>
 <p>转换接口具有以下形式：</p>
-<pre><code class="hljs cpp"><span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">Transition</span>
-&#123;</span>
-  <span class="hljs-function">def <span class="hljs-title">isTriggered</span><span class="hljs-params">()</span></span>;
-  <span class="hljs-function">def <span class="hljs-title">getTargetState</span><span class="hljs-params">()</span></span>;
-  <span class="hljs-function">def <span class="hljs-title">getAction</span><span class="hljs-params">()</span></span>;
-&#125;</code></pre>
+<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><code class="hljs cpp"><span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">Transition</span><br>&#123;</span><br>  <span class="hljs-function">def <span class="hljs-title">isTriggered</span><span class="hljs-params">()</span></span>;<br>  <span class="hljs-function">def <span class="hljs-title">getTargetState</span><span class="hljs-params">()</span></span>;<br>  <span class="hljs-function">def <span class="hljs-title">getAction</span><span class="hljs-params">()</span></span>;<br>&#125;<br></code></pre></td></tr></table></figure>
 <p>The isTriggered method returns true if the transition can fire; the getTarget-State method reports which state to transition to; and the getAction method returns a list of actions to carry out when the transition fires.</p>
 <p>如果转换可以触发，则isTriggered方法返回true; getTarget-State方法报告要转换到的状态; 并且getAction方法返回转换触发时要执行的操作列表。</p>
 <h5 id="Transition-Implementation-：实现转换"><a href="#Transition-Implementation-：实现转换" class="headerlink" title="Transition Implementation ：实现转换"></a>Transition Implementation ：实现转换</h5><p>Only one implementation of the state class should be required: it can simply hold the three lists of actions and the list of transitions as data members, returning them in the corresponding get methods. </p>
@@ -293,66 +239,16 @@
 <p>与决策树不同，状态机不提供将这些测试组合在一起以进行更复杂查询的简单方法。// 如果我们需要根据敌人在远处且健康状况低的条件进行过渡，那么我们需要一些将触发器组合在一起的方法。</p>
 <p>In keeping with our polymorphic design for the state machine, we can accom- plish this with the addition of another interface: the condition interface. We can use a general transition class of the following form:</p>
 <p> 为了与状态机的多态设计保持一致，我们可以通过添加另一个接口来实现这一点：条件接口。 我们可以使用以下形式的一般转换类：</p>
-<pre><code class="hljs cpp">class Transition
-&#123;// 条件接口类
-	actions
-  	def getAction(): return actions
-  
-  	targetState
-  	def getTargetState(): return targetState
-  
-  	condition
-  	def isTriggered(): return condition.test()
-&#125;</code></pre>
+<figure class="highlight"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><code class="hljs cpp">class Transition<br>&#123;// 条件接口类<br>trueactions<br>  	def getAction(): return actions<br>  <br>  	targetState<br>  	def getTargetState(): return targetState<br>  <br>  	condition<br>  	def isTriggered(): return condition.test()<br>&#125;<br></code></pre></td></tr></table></figure>
 <p>The isTriggered function now delegates the testing to its condition member.<br>Conditions have the following simple format:</p>
 <p>isTriggered函数现在将测试委托给其条件成员。<br>条件具有以下简单格式：</p>
-<pre><code class="hljs cpp"><span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">Condition</span>
-&#123;</span>
-   <span class="hljs-function">def <span class="hljs-title">test</span><span class="hljs-params">()</span></span>;
-&#125;</code></pre>
+<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><code class="hljs cpp"><span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">Condition</span><br>&#123;</span><br>   <span class="hljs-function">def <span class="hljs-title">test</span><span class="hljs-params">()</span></span>;<br>&#125;<br></code></pre></td></tr></table></figure>
 <p>We can then make a set of sub-classes of condition for particular tests, just like we did for decision trees:</p>
 <p>然后，我们可以为特定测试创建一组条件子类，就像我们为决策树所做的那样：</p>
-<pre><code class="hljs cpp"><span class="hljs-function">class <span class="hljs-title">FloatCondition</span> <span class="hljs-params">(Condition)</span>
-</span>&#123;<span class="hljs-comment">// 数值条件</span>
-	minValue;
-	maxValue;
-  	testValue; <span class="hljs-comment">// 我们想关注的游戏数据</span>
-	<span class="hljs-function">def <span class="hljs-title">test</span><span class="hljs-params">()</span>
-	</span>&#123;
-		<span class="hljs-keyword">return</span> minValue &lt;= testValue &lt;= maxValue
-	&#125;
-&#125;</code></pre>
+<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><code class="hljs cpp"><span class="hljs-function">class <span class="hljs-title">FloatCondition</span> <span class="hljs-params">(Condition)</span><br></span>&#123;<span class="hljs-comment">// 数值条件</span><br>trueminValue;<br>truemaxValue;<br>  	testValue; <span class="hljs-comment">// 我们想关注的游戏数据</span><br>true<span class="hljs-function">def <span class="hljs-title">test</span><span class="hljs-params">()</span><br>true</span>&#123;<br>truetrue<span class="hljs-keyword">return</span> minValue &lt;= testValue &lt;= maxValue<br>true&#125;<br>&#125;<br></code></pre></td></tr></table></figure>
 <p>We can combine conditions together using Boolean sub-classes, such as AND, NOT, and OR:</p>
 <p>我们可以使用布尔子类将条件组合在一起，例如AND，NOT和OR：</p>
-<pre><code class="hljs cpp"><span class="hljs-function">class <span class="hljs-title">AndCondition</span> <span class="hljs-params">(Condition)</span>
-</span>&#123;<span class="hljs-comment">// 布尔条件</span>
-	<span class="hljs-function">conditionA
-	conditionB
-	def <span class="hljs-title">test</span><span class="hljs-params">()</span>
-	</span>&#123;
-        <span class="hljs-keyword">return</span> conditionA.test() <span class="hljs-keyword">and</span> conditionB.test();
-	&#125;
-&#125;
-
-<span class="hljs-function">class <span class="hljs-title">NotCondition</span> <span class="hljs-params">(Condition)</span>
-</span>&#123;
-	<span class="hljs-function">condition
-	def <span class="hljs-title">test</span><span class="hljs-params">()</span>
-	</span>&#123;
-    	<span class="hljs-keyword">return</span> <span class="hljs-keyword">not</span> condition.test();
-	&#125;
-  
-&#125;
-
-<span class="hljs-function">class <span class="hljs-title">OrCondition</span> <span class="hljs-params">(Condition)</span>
-</span>&#123;
-	<span class="hljs-function">conditionA
-	conditionB
-	def <span class="hljs-title">test</span><span class="hljs-params">()</span>
-	</span>&#123;
-    	<span class="hljs-keyword">return</span> conditionA.test() <span class="hljs-keyword">or</span> conditionB.test() 
-	&#125;
-&#125;</code></pre>
+<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br></pre></td><td class="code"><pre><code class="hljs cpp"><span class="hljs-function">class <span class="hljs-title">AndCondition</span> <span class="hljs-params">(Condition)</span><br></span>&#123;<span class="hljs-comment">// 布尔条件</span><br>true<span class="hljs-function">conditionA<br>trueconditionB<br>truedef <span class="hljs-title">test</span><span class="hljs-params">()</span><br>true</span>&#123;<br>        <span class="hljs-keyword">return</span> conditionA.test() <span class="hljs-keyword">and</span> conditionB.test();<br>true&#125;<br>&#125;<br><br><span class="hljs-function">class <span class="hljs-title">NotCondition</span> <span class="hljs-params">(Condition)</span><br></span>&#123;<br>true<span class="hljs-function">condition<br>truedef <span class="hljs-title">test</span><span class="hljs-params">()</span><br>true</span>&#123;<br>    	<span class="hljs-keyword">return</span> <span class="hljs-keyword">not</span> condition.test();<br>true&#125;<br>  <br>&#125;<br><br><span class="hljs-function">class <span class="hljs-title">OrCondition</span> <span class="hljs-params">(Condition)</span><br></span>&#123;<br>true<span class="hljs-function">conditionA<br>trueconditionB<br>truedef <span class="hljs-title">test</span><span class="hljs-params">()</span><br>true</span>&#123;<br>    	<span class="hljs-keyword">return</span> conditionA.test() <span class="hljs-keyword">or</span> conditionB.test() <br>true&#125;<br>&#125;<br></code></pre></td></tr></table></figure>
 <p>and so on, for any level of sophistication we need.</p>
 <p>等等……，支持我们需要的任何复杂程度。</p>
 <h5 id="Weaknesses-：缺点"><a href="#Weaknesses-：缺点" class="headerlink" title="Weaknesses ：缺点"></a>Weaknesses ：缺点</h5><p>This approach to transitions gives a lot of flexibility, but at the price of lots of method calls. In C++ these method calls have to be polymorphic, which can slow down the call and confuse the processor. All this adds time, which may make it unsuitable for use in every frame on lots of characters. </p>
@@ -369,56 +265,14 @@
 <p>几年前，几乎所有的状态机都是硬编码的。 转换规则和动作的执行是游戏代码的一部分。 随着关卡设计师对构建状态机逻辑的更多控制，它变得不那么常见，但它仍然是一种重要的方法。</p>
 <h5 id="Pseudo-Code-：伪代码"><a href="#Pseudo-Code-：伪代码" class="headerlink" title="Pseudo-Code ：伪代码"></a>Pseudo-Code ：伪代码</h5><p>In a hard-coded FSM, the state machine consists of an enumerated value, indicating which state is currently occupied, and a function that checks if a transition should be followed. Here I’ve combined the two into a class definition (although I personally tend to associate hard-coded FSMs with developers still working in C). </p>
 <p>在硬编码的FSM中，状态机由枚举值组成，指示当前占用的状态，以及检查是否应遵循转换的函数。 在这里，我将两者合并为一个类定义（尽管我个人倾向于将硬编码的FSM与仍在C中工作的开发人员联系起来）。</p>
-<pre><code class="hljs cpp"><span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">MyFSM</span>
-&#123;</span>
-	<span class="hljs-comment">// 声明所有状态名</span>
-	<span class="hljs-keyword">enum</span> State
-	&#123;
-		PATROL,
-		DEFEND,
-		SLEEP 
-	&#125;;
-	<span class="hljs-comment">// 当前状态</span>
-	myState；
-	<span class="hljs-function">def <span class="hljs-title">update</span><span class="hljs-params">()</span>
-	</span>&#123;
-		<span class="hljs-comment">// 寻找当前状态</span>
-		<span class="hljs-keyword">if</span> myState == PATROL
-		&#123;
-    		<span class="hljs-keyword">if</span> canSeePlayer()
-     		   	myState = DEFEND
-    		<span class="hljs-keyword">if</span> tired()
-      		  	myState = SLEEP
-		&#125;
-		<span class="hljs-keyword">else</span> <span class="hljs-keyword">if</span> myState == DEFEND
-		&#123;
-			<span class="hljs-keyword">if</span> <span class="hljs-keyword">not</span> canSeePlayer()
-				myState = PATROL 
-		&#125;
-		<span class="hljs-keyword">else</span> <span class="hljs-keyword">if</span> myState == SLEEP
-		&#123;
-			<span class="hljs-keyword">if</span> <span class="hljs-keyword">not</span> tired()
-				myState = PATROL
-		&#125;  
-		def notifyNoiseHeard(volume)
-		&#123;
-    		<span class="hljs-keyword">if</span> myState == SLEEP <span class="hljs-keyword">and</span> volume &gt; <span class="hljs-number">10</span>:
-    		myState = DEFEND
-		&#125;
-	&#125;
-&#125;</code></pre>
+<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br></pre></td><td class="code"><pre><code class="hljs cpp"><span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">MyFSM</span><br>&#123;</span><br>true<span class="hljs-comment">// 声明所有状态名</span><br>true<span class="hljs-keyword">enum</span> State<br>true&#123;<br>truetruePATROL,<br>truetrueDEFEND,<br>truetrueSLEEP <br>true&#125;;<br>true<span class="hljs-comment">// 当前状态</span><br>truemyState；<br>true<span class="hljs-function">def <span class="hljs-title">update</span><span class="hljs-params">()</span><br>true</span>&#123;<br>truetrue<span class="hljs-comment">// 寻找当前状态</span><br>truetrue<span class="hljs-keyword">if</span> myState == PATROL<br>truetrue&#123;<br>    		<span class="hljs-keyword">if</span> canSeePlayer()<br>     		   	myState = DEFEND<br>    		<span class="hljs-keyword">if</span> tired()<br>      		  	myState = SLEEP<br>truetrue&#125;<br>truetrue<span class="hljs-keyword">else</span> <span class="hljs-keyword">if</span> myState == DEFEND<br>truetrue&#123;<br>truetruetrue<span class="hljs-keyword">if</span> <span class="hljs-keyword">not</span> canSeePlayer()<br>truetruetruetruemyState = PATROL <br>truetrue&#125;<br>truetrue<span class="hljs-keyword">else</span> <span class="hljs-keyword">if</span> myState == SLEEP<br>truetrue&#123;<br>truetruetrue<span class="hljs-keyword">if</span> <span class="hljs-keyword">not</span> tired()<br>truetruetruetruemyState = PATROL<br>truetrue&#125;  <br>truetruedef notifyNoiseHeard(volume)<br>truetrue&#123;<br>    		<span class="hljs-keyword">if</span> myState == SLEEP <span class="hljs-keyword">and</span> volume &gt; <span class="hljs-number">10</span>:<br>    		myState = DEFEND<br>truetrue&#125;<br>true&#125;<br>&#125;<br></code></pre></td></tr></table></figure>
 <p>Notice that this is pseudo-code for a particular state machine rather than a type of state machine. In the update function there is a block of code for each state. In that block of code the conditions for each transition are checked in turn, and the state is updated if required. The transitions in this example all call functions (tired and canSeePlayer), which I am assuming have access to the current game state. </p>
 <p>请注意，这是特定状态机的伪代码，而不是一种状态机。 在更新功能中，每个状态都有一个代码块。 在该代码块中，依次检查每个转换的条件，并在需要时更新状态。 这个例子中的转换都是调用函数（tired()和canSeePlayer()），我假设它们可以访问当前的游戏状态。</p>
 <p>In addition, I’ve added a state transition in a separate function, notifyNoiseHeard. I am assuming that the game code will call this function whenever the character hears a loud noise. This illustrates the difference between a polling (asking for informa- tion explicitly) and an event-based (waiting to be told information) approach to state transitions. Chapter 10 on world interfacing contains more details on this distinction. </p>
 <p>另外，我在一个单独的函数notifyNoiseHeard中添加了一个状态转换。 我假设只要角色听到很大的噪音，游戏代码就会调用此函数。 <strong>这说明了轮询（明确要求信息）和基于事件（等待被告知信息）的状态转换方法之间的区别。</strong> 关于世界接口的第10章包含有关这种区别的更多细节。</p>
 <p>The update function is called in each frame, as before, and the current state is used to generate an output action. To do this, the FSM might have a method containing conditional blocks of the following form: </p>
 <p>更新函数像以前一样在每个帧中调用，当前状态用于生成输出动作。 为此，FSM可能有一个包含以下形式的条件块的方法：</p>
-<pre><code class="hljs cpp"><span class="hljs-function">def <span class="hljs-title">getAction</span><span class="hljs-params">()</span>
-</span>&#123;
-    <span class="hljs-keyword">if</span> myState == PATROL: <span class="hljs-keyword">return</span> PatrolAction
-	elif myState == DEFEND: <span class="hljs-keyword">return</span> DefendAction
-	elif myState == SLEEP: <span class="hljs-keyword">return</span> SleepAction
-&#125;</code></pre>
+<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><code class="hljs cpp"><span class="hljs-function">def <span class="hljs-title">getAction</span><span class="hljs-params">()</span><br></span>&#123;<br>    <span class="hljs-keyword">if</span> myState == PATROL: <span class="hljs-keyword">return</span> PatrolAction<br>trueelif myState == DEFEND: <span class="hljs-keyword">return</span> DefendAction<br>trueelif myState == SLEEP: <span class="hljs-keyword">return</span> SleepAction<br>&#125;<br></code></pre></td></tr></table></figure>
 <p>Often, the state machine simply carries out the actions directly, rather than returning details of the action for another piece of code to execute. </p>
 <p>通常，状态机只是直接执行操作，而不是返回要执行的另一段代码的操作细节。</p>
 <h5 id="Performance-：开销"><a href="#Performance-：开销" class="headerlink" title="Performance ：开销"></a>Performance ：开销</h5><p>This approach requires no memory and is O(n + m), where n is the number of states, and m is the number of transitions per state. </p>
@@ -527,198 +381,19 @@
 <p>分层状态机实现由五个类组成，并形成本书中最长的算法之一。 <strong>State和Transition类与常规有限状态机中的类相似。 HierarchicalStateMachine类运行状态转换，SubMachineState结合状态机和状态的功能。 它用于不在层次结构顶层的状态机。 除了Transition之外的所有类都继承自HSMBase类，它通过允许函数以相同的方式处理层次结构中的任何内容来简化算法。</strong></p>
 <p>The HSMBase has the following form:</p>
 <p>HSMBase类如下所示：</p>
-<pre><code class="hljs cpp"><span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">HSMBase</span>
-    # <span class="hljs-title">The</span> <span class="hljs-title">structure</span> <span class="hljs-title">returned</span> <span class="hljs-title">by</span> <span class="hljs-title">update</span>
-    // <span class="hljs-title">Update</span>函数返回结果的结构体
-    <span class="hljs-title">struct</span> <span class="hljs-title">UpdateResult</span>
-      <span class="hljs-title">actions</span>	// 行为
-      <span class="hljs-title">transition</span>// 转换路径
-      <span class="hljs-title">level</span>		// 层级
-    <span class="hljs-title">def</span> <span class="hljs-title">getAction</span>():</span> <span class="hljs-keyword">return</span> []
-    def update()
-    &#123;
-    	UpdateResult result
-		result.actions = getAction()
-		result.transition = None
-		result.level = <span class="hljs-number">0</span>
-		
-		<span class="hljs-keyword">return</span> result        
-    &#125;
-	<span class="hljs-comment">// 未实现的功能？</span>
-    def getStates() # unimplemented function</code></pre>
+<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br></pre></td><td class="code"><pre><code class="hljs cpp"><span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">HSMBase</span><br>    # <span class="hljs-title">The</span> <span class="hljs-title">structure</span> <span class="hljs-title">returned</span> <span class="hljs-title">by</span> <span class="hljs-title">update</span><br>    // <span class="hljs-title">Update</span>函数返回结果的结构体<br>    <span class="hljs-title">struct</span> <span class="hljs-title">UpdateResult</span><br>      <span class="hljs-title">actions</span>	// 行为<br>      <span class="hljs-title">transition</span>// 转换路径<br>      <span class="hljs-title">level</span>		// 层级<br>    <span class="hljs-title">def</span> <span class="hljs-title">getAction</span>():</span> <span class="hljs-keyword">return</span> []<br>    def update()<br>    &#123;<br>    	UpdateResult result<br>truetrueresult.actions = getAction()<br>truetrueresult.transition = None<br>truetrueresult.level = <span class="hljs-number">0</span><br>truetrue<br>truetrue<span class="hljs-keyword">return</span> result        <br>    &#125;<br>true<span class="hljs-comment">// 未实现的功能？</span><br>    def getStates() # unimplemented function<br></code></pre></td></tr></table></figure>
 <p>The HierarchicalStateMachine class has the following implementation:</p>
 <p>HierarchicalStateMachine类有着如下实现：</p>
-<pre><code class="hljs cpp">class HierarchicalStateMachine (HSMBase)
-    # List of states at this level of the hierarchy
-    // 本层次的状态列表
-    states
-
-    # The initial state for when the machine has to
-    # current state.
-    // 机器必须处于当前状态的初始状态
-    initialState
-    
-    # The current state of the machine.
-    // 状态机的当前状态
-    currentState = initialState
-    
-    # Gets the current state stack
-    // 获得当前状态栈
-    def getStates():
-      if currentState: return currentState.getStates()
-      else: return []
-      
-    # Recursively updates the machine.
-    // 递归更新状态机
-    def update():
-		# If we’re in no state, use the initial state
-		// 如果没有处于任何状态，使用初始状态
-		if not currentState:
-			currentState = initialState
-			return currentState.getEntryAction()
-        
-		# Try to find a transition in the current state
-		// 从当前状态尝试找到一个转换
-		triggeredTransition = None
-		for transition in currentState.getTransitions():
-			if transition.isTriggered():
-			triggeredTransition = transition
-			break
-		
-        # If we’ve found one, make a result structure for it
-		// 如果我们找到了一个转换，为其生成一个结果结构体
-		if triggeredTransition:
-        	result = UpdateResult()
-			result.actions = []
-			result.transition = triggeredTransition
-			result.level = triggeredTransition.getLevel()
-        
-        # Otherwise recurse down for a result
-        // 否则递归获得结果
-        else:
-			result = currentState.update()
-        
-        # Check if the result contains a transition
-        // 检查结果中是否包含转换
-		if result.transition:
-
-			# Act based on its level
-			// 基于本层执行
-			if result.level == 0:
-				# Its on our level: honor it
-				// 结果行为在本层：执行
-				targetState = result.transition.getTargetState()
-				result.actions += currentState.getExitAction()
-				result.actions += result.transition.getAction()
-				result.actions += targetState.getEntryAction()
-                # Set our current state
-                // 设置当前状态
-                currentState = targetState
-                
-                # Add our normal action (we may be a state)
-                // 添加基本操作
-				result.actions += getAction()
-                # Clear the transition, so nobody else does it
-				// 清除转换，因此没有其他(?)执行它
-                result.transition = None
-                
-            else if result.level &gt; 0:
-				# Its destined for a higher level
-				// 这表示一个更高的层级
-				# Exit our current state
-				// 退出当前状态
-				result.actions += currentState.getExitAction()
-				currentState = None
-				
-				# Decrease the number of levels to go
-				// 当相对于目标层级为降低时
-				result.level -= 1
-            
-            else:
-				 # It needs to be passed down
-				// 它需要向下迁移
-				targetState = result.transition.getTargetState()
-				targetMachine = targetState.parent
-    			result.actions += result.transition.getAction()
-    			result.actions += targetMachine.updateDown(targetState, -result.level)
-
-    			# Clear the transition, so nobody else does it
-                // 清除转换，因此没有其他(?)执行它
-    			result.transition = None
-    			
-    	# If we didn’t get a transition
-    	// 如果我们没有（从结果中）取得转换
-		else:
-  		# We can simply do our normal action
-		// 我们可以简单的执行我们的基本行为
-			result.action += getAction()
-		# Return the accumulated result
-        // 返回积累的结果
-			return result
-# Recurses up the parent hierarchy, transitioning into
-# each state in turn for the given number of levels
-// 递归父层次结构，依次转换到指定层级号的每个状态
-def updateDown(state, level):
-	# If we’re not at top level, continue recursing
-	// 如果不在顶层，继续递归
-	if level &gt; 0:
-  	
-	# Pass ourself as the transition state to our parent
-	// 将自己作为转换状态传递给父状态
-  		actions = parent.updateDown(this, level-1)
-	
-    # Otherwise we have no actions to add to
-    // 否则我们将没有要添加的行为
-	else: actions = []
-	
-	# If we have a current state, exit it
-	// 如果当前状态存在，退出
-	if currentState:
-		actions += currentState.getExitAction()
-	# Move to the new state, and return all the actions
-	// 转移到新的状态，并且返回所有行为
-    currentState = state
-	actions += state.getEntryAction()
-	return actions</code></pre>
+<figure class="highlight"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br><span class="line">78</span><br><span class="line">79</span><br><span class="line">80</span><br><span class="line">81</span><br><span class="line">82</span><br><span class="line">83</span><br><span class="line">84</span><br><span class="line">85</span><br><span class="line">86</span><br><span class="line">87</span><br><span class="line">88</span><br><span class="line">89</span><br><span class="line">90</span><br><span class="line">91</span><br><span class="line">92</span><br><span class="line">93</span><br><span class="line">94</span><br><span class="line">95</span><br><span class="line">96</span><br><span class="line">97</span><br><span class="line">98</span><br><span class="line">99</span><br><span class="line">100</span><br><span class="line">101</span><br><span class="line">102</span><br><span class="line">103</span><br><span class="line">104</span><br><span class="line">105</span><br><span class="line">106</span><br><span class="line">107</span><br><span class="line">108</span><br><span class="line">109</span><br><span class="line">110</span><br><span class="line">111</span><br><span class="line">112</span><br><span class="line">113</span><br><span class="line">114</span><br><span class="line">115</span><br><span class="line">116</span><br><span class="line">117</span><br><span class="line">118</span><br><span class="line">119</span><br><span class="line">120</span><br><span class="line">121</span><br><span class="line">122</span><br><span class="line">123</span><br><span class="line">124</span><br><span class="line">125</span><br><span class="line">126</span><br><span class="line">127</span><br><span class="line">128</span><br><span class="line">129</span><br><span class="line">130</span><br><span class="line">131</span><br><span class="line">132</span><br></pre></td><td class="code"><pre><code class="hljs cpp">class HierarchicalStateMachine (HSMBase)<br>    # List of states at this level of the hierarchy<br>    // 本层次的状态列表<br>    states<br><br>    # The initial state for when the machine has to<br>    # current state.<br>    // 机器必须处于当前状态的初始状态<br>    initialState<br>    <br>    # The current state of the machine.<br>    // 状态机的当前状态<br>    currentState = initialState<br>    <br>    # Gets the current state stack<br>    // 获得当前状态栈<br>    def getStates():<br>      if currentState: return currentState.getStates()<br>      else: return []<br>      <br>    # Recursively updates the machine.<br>    // 递归更新状态机<br>    def update():<br>truetrue# If we’re in no state, use the initial state<br>truetrue// 如果没有处于任何状态，使用初始状态<br>truetrueif not currentState:<br>truetruetruecurrentState = initialState<br>truetruetruereturn currentState.getEntryAction()<br>        <br>truetrue# Try to find a transition in the current state<br>truetrue// 从当前状态尝试找到一个转换<br>truetruetriggeredTransition = None<br>truetruefor transition in currentState.getTransitions():<br>truetruetrueif transition.isTriggered():<br>truetruetruetriggeredTransition = transition<br>truetruetruebreak<br>truetrue<br>        # If we’ve found one, make a result structure for it<br>truetrue// 如果我们找到了一个转换，为其生成一个结果结构体<br>truetrueif triggeredTransition:<br>        	result = UpdateResult()<br>truetruetrueresult.actions = []<br>truetruetrueresult.transition = triggeredTransition<br>truetruetrueresult.level = triggeredTransition.getLevel()<br>        <br>        # Otherwise recurse down for a result<br>        // 否则递归获得结果<br>        else:<br>truetruetrueresult = currentState.update()<br>        <br>        # Check if the result contains a transition<br>        // 检查结果中是否包含转换<br>truetrueif result.transition:<br><br>truetruetrue# Act based on its level<br>truetruetrue// 基于本层执行<br>truetruetrueif result.level == 0:<br>truetruetruetrue# Its on our level: honor it<br>truetruetruetrue// 结果行为在本层：执行<br>truetruetruetruetargetState = result.transition.getTargetState()<br>truetruetruetrueresult.actions += currentState.getExitAction()<br>truetruetruetrueresult.actions += result.transition.getAction()<br>truetruetruetrueresult.actions += targetState.getEntryAction()<br>                # Set our current state<br>                // 设置当前状态<br>                currentState = targetState<br>                <br>                # Add our normal action (we may be a state)<br>                // 添加基本操作<br>truetruetruetrueresult.actions += getAction()<br>                # Clear the transition, so nobody else does it<br>truetruetruetrue// 清除转换，因此没有其他(?)执行它<br>                result.transition = None<br>                <br>            else if result.level &gt; 0:<br>truetruetruetrue# Its destined for a higher level<br>truetruetruetrue// 这表示一个更高的层级<br>truetruetruetrue# Exit our current state<br>truetruetruetrue// 退出当前状态<br>truetruetruetrueresult.actions += currentState.getExitAction()<br>truetruetruetruecurrentState = None<br>truetruetruetrue<br>truetruetruetrue# Decrease the number of levels to go<br>truetruetruetrue// 当相对于目标层级为降低时<br>truetruetruetrueresult.level -= 1<br>            <br>            else:<br>truetruetruetrue # It needs to be passed down<br>truetruetruetrue// 它需要向下迁移<br>truetruetruetruetargetState = result.transition.getTargetState()<br>truetruetruetruetargetMachine = targetState.parent<br>    			result.actions += result.transition.getAction()<br>    			result.actions += targetMachine.updateDown(targetState, -result.level)<br><br>    			# Clear the transition, so nobody else does it<br>                // 清除转换，因此没有其他(?)执行它<br>    			result.transition = None<br>    			<br>    	# If we didn’t get a transition<br>    	// 如果我们没有（从结果中）取得转换<br>truetrueelse:<br>  		# We can simply do our normal action<br>truetrue// 我们可以简单的执行我们的基本行为<br>truetruetrueresult.action += getAction()<br>truetrue# Return the accumulated result<br>        // 返回积累的结果<br>truetruetruereturn result<br># Recurses up the parent hierarchy, transitioning into<br># each state in turn for the given number of levels<br>// 递归父层次结构，依次转换到指定层级号的每个状态<br>def updateDown(state, level):<br>true# If we’re not at top level, continue recursing<br>true// 如果不在顶层，继续递归<br>trueif level &gt; 0:<br>  	<br>true# Pass ourself as the transition state to our parent<br>true// 将自己作为转换状态传递给父状态<br>  		actions = parent.updateDown(this, level-1)<br>true<br>    # Otherwise we have no actions to add to<br>    // 否则我们将没有要添加的行为<br>trueelse: actions = []<br>true<br>true# If we have a current state, exit it<br>true// 如果当前状态存在，退出<br>trueif currentState:<br>truetrueactions += currentState.getExitAction()<br>true# Move to the new state, and return all the actions<br>true// 转移到新的状态，并且返回所有行为<br>    currentState = state<br>trueactions += state.getEntryAction()<br>truereturn actions<br></code></pre></td></tr></table></figure>
 <p>The state class is substantially the same as before, but adds an implementation for getStates:</p>
 <p>状态类的实现与之前的实现大体相同，但是增加了一个有关getStates的实现：</p>
-<pre><code class="hljs cpp">class State (HSMBase):
-	def getStates():
-    	# If we’re just a state, then the stack is just us
-    	// 如果是一个状态，那么要返回的状态栈仅有这个状态自身
-    	return [this]
-	# As before...
-	def getAction()
-  	def getEntryAction()
-  	def getExitAction()
-  	def getTransitions()</code></pre>
+<figure class="highlight"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><code class="hljs cpp">class State (HSMBase):<br>truedef getStates():<br>    	# If we’re just a state, then the stack is just us<br>    	// 如果是一个状态，那么要返回的状态栈仅有这个状态自身<br>    	return [this]<br>true# As before...<br>truedef getAction()<br>  	def getEntryAction()<br>  	def getExitAction()<br>  	def getTransitions()<br></code></pre></td></tr></table></figure>
 <p>Similarly, the Transition class is the same, but adds a method to retrieve the level of the transition.</p>
 <p>无独有偶，Transition类的实现也一样，但是添加了一个方法来返回的转换所在的层级。</p>
-<pre><code class="hljs cpp">class Transition:	
-	# Returns the different in levels of the hierarchy from
-  	# the source to the target of the transition.
-  	// 返回
-  	def getLevel()
-  	# As before...
-  	def isTriggered()
-  	def getTargetState()
-  	def getAction()</code></pre>
+<figure class="highlight"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><code class="hljs cpp">class Transition:	<br>true# Returns the different in levels of the hierarchy from<br>  	# the source to the target of the transition.<br>  	// 返回<br>  	def getLevel()<br>  	# As before...<br>  	def isTriggered()<br>  	def getTargetState()<br>  	def getAction()<br></code></pre></td></tr></table></figure>
 <p>Finally, the SubMachineState class merges the functionality of a state and a state machine.</p>
 <p>最后，SubMachineState类整合了一个状态的功能与一个状态机。</p>
-<pre><code class="hljs cpp">class SubMachineState (State, HierarchicalStateMachine):
-	# Route get action to the state
-  	// 转换
-  	def getAction(): return State::getAction()
-  	# Route update to the state machine
-	// 转换 	
-  	def update(): return HierarchicalStateMachine::update()
-  	# We get states by adding ourself to our active children
-  	// 通过将自身加入活跃子节点集中获取当前状态
-  	def getStates():
-    	if currentState:
-      		return [this] + currentState.getStates()
-    	else:
-      		return [this]</code></pre>
+<figure class="highlight"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><code class="hljs cpp">class SubMachineState (State, HierarchicalStateMachine):<br>true# Route get action to the state<br>  	// 转换<br>  	def getAction(): return State::getAction()<br>  	# Route update to the state machine<br>true// 转换 	<br>  	def update(): return HierarchicalStateMachine::update()<br>  	# We get states by adding ourself to our active children<br>  	// 通过将自身加入活跃子节点集中获取当前状态<br>  	def getStates():<br>    	if currentState:<br>      		return [this] + currentState.getStates()<br>    	else:<br>      		return [this]<br></code></pre></td></tr></table></figure>
 <h5 id="Implementation-Notes：实现说明"><a href="#Implementation-Notes：实现说明" class="headerlink" title="Implementation Notes：实现说明"></a>Implementation Notes：实现说明</h5><p>I’ve used multiple inheritance to implement SubMachineState. For languages (or programmers) that don’t support multiple inheritance, there are two options. The Sub- MachineState could encapsulate HierarchicalStateMachine, or the Hierarchical- StateMachine can be converted so that it is a sub-class of State. The downside with the latter approach is that the top-level state machine will always return its active action from the update function, and getStates will always have it as the head of the list.</p>
 <p>我已经使用多重继承来实现SubMachineState类。对于不支持多重继承的语言（或程序员），有两种选择。 Sub-MachineState可以封装HierarchicalStateMachine，或者Hierarchical-StateMachine可以被转换，使其成为State的子类。后一种方法的缺点是顶级状态机将始终从更新函数返回其活动操作，并且getStates将始终将其作为列表的头部。</p>
 <p>I’ve elected to use a polymorphic structure for the state machine again. It is possible to implement the same algorithm without any polymorphic method calls. Given that it is complex enough already, however, I’ll leave that as an exercise. My experience deploying a hierarchical state machine involved an implementation using poly- morphic method calls (provided on the CD). In-game profiling on both PC and PS2 showed that the method call overhead was not a bottleneck in the algorithm. In a system with hundreds or thousands of states, it may well be, as cache efficiency issues come into play.<br>Some implementations of hierarchical state machines are significantly simpler than this by making it a requirement that transitions can only occur between states at the same level. With this requirement, all the recursion code can be eliminated. If you don’t need cross hierarchy transitions, then the simpler version will be easier to implement. It is unlikely to be any faster, however. Because the recursion isn’t used when the transition is at the same level, the code above will run about as fast if all the transitions have a zero level.</p>

@@ -207,80 +207,35 @@
 </ol>
 </li>
 </ul>
-<pre><code class="hljs c++"><span class="hljs-keyword">double</span> dval = <span class="hljs-number">3.14</span>;
-<span class="hljs-keyword">const</span> <span class="hljs-keyword">int</span> &amp;ri = dval;
-
-<span class="hljs-comment">/* 编译器做法 */</span>
-<span class="hljs-keyword">const</span> <span class="hljs-keyword">int</span> temp = dval;		<span class="hljs-comment">// 让double类型生成一个临时的int变量</span>
-<span class="hljs-keyword">const</span> <span class="hljs-keyword">int</span> &amp;ri = temp;		<span class="hljs-comment">// 让ri绑定这个临时量</span>
-
-<span class="hljs-comment">/* 因为不可以通过被const修饰符限定的常量引用修改被引用的对象,所以该引用可以绑定在临时量上,不会对临时量产生修改的操作; 如果是非常量引用,则可能通过该引用修改对应的临时量,但是代码的目的是通过ri来修改试图绑定的dval,却绑定到了临时量上,与预期不符,所以非法 */</span>
-<span class="hljs-keyword">int</span> &amp;ri = dval;				<span class="hljs-comment">// 非法</span></code></pre>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><code class="hljs c++"><span class="hljs-keyword">double</span> dval = <span class="hljs-number">3.14</span>;<br><span class="hljs-keyword">const</span> <span class="hljs-keyword">int</span> &amp;ri = dval;<br><br><span class="hljs-comment">/* 编译器做法 */</span><br><span class="hljs-keyword">const</span> <span class="hljs-keyword">int</span> temp = dval;		<span class="hljs-comment">// 让double类型生成一个临时的int变量</span><br><span class="hljs-keyword">const</span> <span class="hljs-keyword">int</span> &amp;ri = temp;		<span class="hljs-comment">// 让ri绑定这个临时量</span><br><br><span class="hljs-comment">/* 因为不可以通过被const修饰符限定的常量引用修改被引用的对象,所以该引用可以绑定在临时量上,不会对临时量产生修改的操作; 如果是非常量引用,则可能通过该引用修改对应的临时量,但是代码的目的是通过ri来修改试图绑定的dval,却绑定到了临时量上,与预期不符,所以非法 */</span><br><span class="hljs-keyword">int</span> &amp;ri = dval;				<span class="hljs-comment">// 非法</span><br></code></pre></td></tr></table></figure>
 <p><img src="https://hust_mo.gitee.io/blogpicturerepo/image-20211228103857644.png" alt="img"></p>
 <p>常量引用仅仅对引用可参与的操作进行了限制 , 即不能通过该引用改变其引用的对象 , 对于对象本身是否是常量未做限定.</p>
 <h4 id="指针和const"><a href="#指针和const" class="headerlink" title="指针和const"></a>指针和const</h4><p>指向常量的指针(<code>pointer to const</code>)不能用于改变其所指对象的值 , 存放常量对象的地址 , 只能使用指向常量的指针.</p>
-<pre><code class="hljs c++"><span class="hljs-keyword">const</span> <span class="hljs-keyword">double</span> pi = <span class="hljs-number">3.14</span>;
-<span class="hljs-keyword">double</span> *ptr = &amp;pi;			<span class="hljs-comment">// 非法</span>
-<span class="hljs-keyword">const</span> <span class="hljs-keyword">double</span> *cptr = &amp;pi;	<span class="hljs-comment">// 合法</span>
-*cptr = <span class="hljs-number">43</span>;					<span class="hljs-comment">// 非法, 不能给*cptr赋值.</span></code></pre>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><code class="hljs c++"><span class="hljs-keyword">const</span> <span class="hljs-keyword">double</span> pi = <span class="hljs-number">3.14</span>;<br><span class="hljs-keyword">double</span> *ptr = &amp;pi;			<span class="hljs-comment">// 非法</span><br><span class="hljs-keyword">const</span> <span class="hljs-keyword">double</span> *cptr = &amp;pi;	<span class="hljs-comment">// 合法</span><br>*cptr = <span class="hljs-number">43</span>;					<span class="hljs-comment">// 非法, 不能给*cptr赋值.</span><br></code></pre></td></tr></table></figure>
 <p>同样指向常量的指针也对指向的对象本身是否是常量未做限定 , 仅仅是不能通过该指针改变所指对象的值.</p>
 <p>常量指针(<code>const pointer</code>) , 指针本身是常量 , 根据const的规则 , 必须初始化 , 初始化完成后其值不可改变 , 不可变的是指针本身而不是指向的值 , 是否可以通过该指针改变其指向的值取决于它指向的值是否是常量.</p>
 <h4 id="顶层const与底层const"><a href="#顶层const与底层const" class="headerlink" title="顶层const与底层const"></a>顶层const与底层const</h4><p>顶层const(<code>top-level const</code>) : 表示指针本身是个常量 </p>
 <p>底层const(<code>low-level const</code>) : 表示指针所指的对象是个常量</p>
-<pre><code class="hljs c++"><span class="hljs-keyword">int</span> i = <span class="hljs-number">0</span>;
-<span class="hljs-keyword">int</span> *<span class="hljs-keyword">const</span> p1 = &amp;i;		<span class="hljs-comment">// 指向int的常量指针,top-level</span>
-<span class="hljs-keyword">const</span> <span class="hljs-keyword">int</span> ci = <span class="hljs-number">42</span>;		<span class="hljs-comment">// 常量int, top-level</span>
-<span class="hljs-keyword">const</span> <span class="hljs-keyword">int</span> *p2 = &amp;ci;	<span class="hljs-comment">// 指向常量int的指针, low-level</span>
-<span class="hljs-keyword">const</span> <span class="hljs-keyword">int</span> *<span class="hljs-keyword">const</span> p3 = p2;<span class="hljs-comment">// 指向常量int的常量指针,第一个为low-level,第二个为top-level</span>
-<span class="hljs-keyword">const</span> <span class="hljs-keyword">int</span> &amp;r = ci;		<span class="hljs-comment">// 用于声明引用的const都是底层const(怎么理解? 不能通过引用改变绑定的变量, 所以是底层const? 换句话说, 常量引用认为自己绑定的变量是个常量?)</span>
-
-<span class="hljs-comment">/* 当执行对象的拷贝操作时, 拷入和拷出的对象必须有相同的底层const资格, 或者两个对象的数据类型可以相互转换, 非常量可以转换成常量, 反之不行*/</span>
-<span class="hljs-keyword">int</span> *p = p3;			<span class="hljs-comment">// 错误: p3包含了底层const, 如果正确则可能通过p改变p3指向的值, 与const冲突</span>
-p2 = p3;				<span class="hljs-comment">// 正确: p2和p3都是底层const</span>
-p2 = &amp;i;				<span class="hljs-comment">// 正确: int *可以转换成const int *</span>
-<span class="hljs-keyword">int</span> &amp;r = ci;			<span class="hljs-comment">// 错误: int&amp;不能绑定到const int上</span>
-<span class="hljs-keyword">const</span> <span class="hljs-keyword">int</span> &amp;r2 = i;		<span class="hljs-comment">// 正确: const int&amp; 可以绑定到int上</span>
-
-<span class="hljs-comment">/* 可以通过"试图改变某对象"的思路来判断是否正确, 不过这些内容应该编译器都会提示吧...... */</span></code></pre>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><code class="hljs c++"><span class="hljs-keyword">int</span> i = <span class="hljs-number">0</span>;<br><span class="hljs-keyword">int</span> *<span class="hljs-keyword">const</span> p1 = &amp;i;		<span class="hljs-comment">// 指向int的常量指针,top-level</span><br><span class="hljs-keyword">const</span> <span class="hljs-keyword">int</span> ci = <span class="hljs-number">42</span>;		<span class="hljs-comment">// 常量int, top-level</span><br><span class="hljs-keyword">const</span> <span class="hljs-keyword">int</span> *p2 = &amp;ci;	<span class="hljs-comment">// 指向常量int的指针, low-level</span><br><span class="hljs-keyword">const</span> <span class="hljs-keyword">int</span> *<span class="hljs-keyword">const</span> p3 = p2;<span class="hljs-comment">// 指向常量int的常量指针,第一个为low-level,第二个为top-level</span><br><span class="hljs-keyword">const</span> <span class="hljs-keyword">int</span> &amp;r = ci;		<span class="hljs-comment">// 用于声明引用的const都是底层const(怎么理解? 不能通过引用改变绑定的变量, 所以是底层const? 换句话说, 常量引用认为自己绑定的变量是个常量?)</span><br><br><span class="hljs-comment">/* 当执行对象的拷贝操作时, 拷入和拷出的对象必须有相同的底层const资格, 或者两个对象的数据类型可以相互转换, 非常量可以转换成常量, 反之不行*/</span><br><span class="hljs-keyword">int</span> *p = p3;			<span class="hljs-comment">// 错误: p3包含了底层const, 如果正确则可能通过p改变p3指向的值, 与const冲突</span><br>p2 = p3;				<span class="hljs-comment">// 正确: p2和p3都是底层const</span><br>p2 = &amp;i;				<span class="hljs-comment">// 正确: int *可以转换成const int *</span><br><span class="hljs-keyword">int</span> &amp;r = ci;			<span class="hljs-comment">// 错误: int&amp;不能绑定到const int上</span><br><span class="hljs-keyword">const</span> <span class="hljs-keyword">int</span> &amp;r2 = i;		<span class="hljs-comment">// 正确: const int&amp; 可以绑定到int上</span><br><br><span class="hljs-comment">/* 可以通过"试图改变某对象"的思路来判断是否正确, 不过这些内容应该编译器都会提示吧...... */</span><br></code></pre></td></tr></table></figure>
 <h4 id="constexpr和常量表达式"><a href="#constexpr和常量表达式" class="headerlink" title="constexpr和常量表达式 :"></a>constexpr和常量表达式 :</h4><p><strong>值不会改变</strong>并且<strong>在编译过程中就能得到计算结果</strong>的表达式 .</p>
-<pre><code class="hljs c++"><span class="hljs-keyword">int</span> staff_size = <span class="hljs-number">27</span>;		<span class="hljs-comment">// 不是常量表达式, staff_size可以改变</span>
-<span class="hljs-keyword">const</span> <span class="hljs-keyword">int</span> sz = get_size();	<span class="hljs-comment">// 不是常量表达式, sz的具体值直到运行时才能获得</span>
-
-<span class="hljs-keyword">const</span> <span class="hljs-keyword">int</span> *p = <span class="hljs-literal">nullptr</span>;		<span class="hljs-comment">// 指向整形常量的指针</span>
-<span class="hljs-keyword">constexpr</span> <span class="hljs-keyword">int</span> *q = <span class="hljs-literal">nullptr</span>;	<span class="hljs-comment">// 指向整数的常量指针</span></code></pre>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><code class="hljs c++"><span class="hljs-keyword">int</span> staff_size = <span class="hljs-number">27</span>;		<span class="hljs-comment">// 不是常量表达式, staff_size可以改变</span><br><span class="hljs-keyword">const</span> <span class="hljs-keyword">int</span> sz = get_size();	<span class="hljs-comment">// 不是常量表达式, sz的具体值直到运行时才能获得</span><br><br><span class="hljs-keyword">const</span> <span class="hljs-keyword">int</span> *p = <span class="hljs-literal">nullptr</span>;		<span class="hljs-comment">// 指向整形常量的指针</span><br><span class="hljs-keyword">constexpr</span> <span class="hljs-keyword">int</span> *q = <span class="hljs-literal">nullptr</span>;	<span class="hljs-comment">// 指向整数的常量指针</span><br></code></pre></td></tr></table></figure>
 <blockquote>
 <p>将会提到 , 函数体内定义的变量一般来说并非存放在固定地址中 , 因此constexpr指针不能指向这样的变量,  定义于所有函数体之外的对象地址固定不变, 能用来初始化constexpr指针 , 允许函数定义一类有效范围超出函数本身的变量, 这类变量和定义在函数体之外的变量一样有固定地址, 因此, constexpr引用能绑定到这样的变量上, constexpr指针也能指向这样的变量. (后面提到再看吧……)</p>
 </blockquote>
 <h4 id="关于类型别名"><a href="#关于类型别名" class="headerlink" title="关于类型别名 :"></a>关于类型别名 :</h4><p>可以使用typedef和using两种关键字进行定义.</p>
-<pre><code class="hljs c++"><span class="hljs-keyword">typedef</span> <span class="hljs-keyword">char</span>* pstring;
-<span class="hljs-keyword">const</span> pstring cstr = <span class="hljs-number">0</span>;		<span class="hljs-comment">// 指向char的常量指针</span>
-<span class="hljs-keyword">const</span> pstring *ps;			<span class="hljs-comment">// 指向一个指向char的常量指针的指针</span>
-
-<span class="hljs-keyword">const</span> <span class="hljs-keyword">char</span>* cstr = <span class="hljs-number">0</span>;		<span class="hljs-comment">// 指向const char的指针</span>
-<span class="hljs-keyword">const</span> <span class="hljs-keyword">char</span> **ptr;			<span class="hljs-comment">// 指向一个const char指针的指针</span>
-<span class="hljs-comment">/* const是对给定类型的修饰, 所以const pstring为指向char的常量指针, 而非指向常量char的指针*/</span>
-<span class="hljs-comment">/* 不能通过替换类型别名来理解 */</span></code></pre>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><code class="hljs c++"><span class="hljs-keyword">typedef</span> <span class="hljs-keyword">char</span>* pstring;<br><span class="hljs-keyword">const</span> pstring cstr = <span class="hljs-number">0</span>;		<span class="hljs-comment">// 指向char的常量指针</span><br><span class="hljs-keyword">const</span> pstring *ps;			<span class="hljs-comment">// 指向一个指向char的常量指针的指针</span><br><br><span class="hljs-keyword">const</span> <span class="hljs-keyword">char</span>* cstr = <span class="hljs-number">0</span>;		<span class="hljs-comment">// 指向const char的指针</span><br><span class="hljs-keyword">const</span> <span class="hljs-keyword">char</span> **ptr;			<span class="hljs-comment">// 指向一个const char指针的指针</span><br><span class="hljs-comment">/* const是对给定类型的修饰, 所以const pstring为指向char的常量指针, 而非指向常量char的指针*/</span><br><span class="hljs-comment">/* 不能通过替换类型别名来理解 */</span><br></code></pre></td></tr></table></figure>
 <h4 id="关于auto类型说明符"><a href="#关于auto类型说明符" class="headerlink" title="关于auto类型说明符 :"></a>关于auto类型说明符 :</h4><p>auto定义的变量必须有初始值 . </p>
 <p>当引用被用作初始值时 , 真正参与初始化的其实是引用对象的值 , 编译器以引用对象的类型作为auto的类型.</p>
 <p>auto一般会忽略掉顶层const , 同时底层const则会保留下来 :</p>
-<pre><code class="hljs c++"><span class="hljs-keyword">int</span> i = <span class="hljs-number">0</span>, &amp;r = i;
-<span class="hljs-keyword">auto</span> a = r;
-<span class="hljs-keyword">const</span> <span class="hljs-keyword">int</span> ci = i, &amp;cr = ci;
-<span class="hljs-keyword">auto</span> b = ci;				<span class="hljs-comment">// b推断为一个int(ci作为top-level被忽略)</span>
-<span class="hljs-keyword">auto</span> c = cr;				<span class="hljs-comment">// c推断为一个int(cr是ci的引用,ci本身是一个top-level) ??? cr不是一个底层const吗(理解: cr是ci的引用, c是ci的copy, 目的不是通过c去改变ci, 所以c推断为一个int)</span>
-
-<span class="hljs-keyword">const</span> <span class="hljs-keyword">auto</span> f = ci;			<span class="hljs-comment">// f为const int, 需要显式指定const来推断出top-level const</span></code></pre>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><code class="hljs c++"><span class="hljs-keyword">int</span> i = <span class="hljs-number">0</span>, &amp;r = i;<br><span class="hljs-keyword">auto</span> a = r;<br><span class="hljs-keyword">const</span> <span class="hljs-keyword">int</span> ci = i, &amp;cr = ci;<br><span class="hljs-keyword">auto</span> b = ci;				<span class="hljs-comment">// b推断为一个int(ci作为top-level被忽略)</span><br><span class="hljs-keyword">auto</span> c = cr;				<span class="hljs-comment">// c推断为一个int(cr是ci的引用,ci本身是一个top-level) ??? cr不是一个底层const吗(理解: cr是ci的引用, c是ci的copy, 目的不是通过c去改变ci, 所以c推断为一个int)</span><br><br><span class="hljs-keyword">const</span> <span class="hljs-keyword">auto</span> f = ci;			<span class="hljs-comment">// f为const int, 需要显式指定const来推断出top-level const</span><br></code></pre></td></tr></table></figure>
 <p><strong>符号&amp;和*只从属于某个声明符 , 而非基本数据类型的一部分 , 因此初始值必须是同一种类型.</strong></p>
 <h4 id="decltype类型指示符"><a href="#decltype类型指示符" class="headerlink" title="decltype类型指示符:"></a>decltype类型指示符:</h4><p>  类似于lua中的type()用来推断类型, 它的作用是选择并返回操作数的数据类型 , 编译器分析表达式并得到它的类型, 却不实际计算表达式的值.</p>
-  <pre><code class="hljs c++"><span class="hljs-keyword">decltype</span>(f()) sum = x;        <span class="hljs-comment">// sun类型为函数f的返回类型</span></code></pre>
+  <figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs c++"><span class="hljs-keyword">decltype</span>(f()) sum = x;        <span class="hljs-comment">// sun类型为函数f的返回类型</span><br></code></pre></td></tr></table></figure>
 <p>  如果decltype使用的表达式是一个变量, 则decltype返回该变量的类型 (包括top-level const和引用在内) ; 如果decltype使用的表达式不是一个变量 , 则decltype返回表达式结果对应的类型.</p>
 <p><code>decltype((variable))</code>的结果永远是引用 , 而<code>decltype(variable)</code>结果只有当<code>variable</code>本身是一个引用时才是引用. </p>
-<pre><code class="hljs c++"><span class="hljs-keyword">decltype</span>((i)) d;			<span class="hljs-comment">// d是int&amp;, 必须初始化</span></code></pre>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs c++"><span class="hljs-keyword">decltype</span>((i)) d;			<span class="hljs-comment">// d是int&amp;, 必须初始化</span><br></code></pre></td></tr></table></figure>
 <h4 id="有关头文件"><a href="#有关头文件" class="headerlink" title="有关头文件 :"></a>有关头文件 :</h4><p>头文件通常只包含那些只能被定义一次的实体, 如类 , const和constexpr变量.</p>
-<pre><code class="hljs c++"><span class="hljs-meta">#<span class="hljs-meta-keyword">define</span>		<span class="hljs-comment">// 把一个名字设定成预处理变量</span></span>
-<span class="hljs-meta">#<span class="hljs-meta-keyword">ifdef</span>		<span class="hljs-comment">// 当且仅当变量已定义时为真</span></span>
-<span class="hljs-meta">#<span class="hljs-meta-keyword">ifndef</span>		<span class="hljs-comment">// 当且仅当变量未定义时为真</span></span>
-<span class="hljs-meta">#<span class="hljs-meta-keyword">endif</span>		<span class="hljs-comment">// 结束符</span></span></code></pre>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><code class="hljs c++"><span class="hljs-meta">#<span class="hljs-meta-keyword">define</span>		<span class="hljs-comment">// 把一个名字设定成预处理变量</span></span><br><span class="hljs-meta">#<span class="hljs-meta-keyword">ifdef</span>		<span class="hljs-comment">// 当且仅当变量已定义时为真</span></span><br><span class="hljs-meta">#<span class="hljs-meta-keyword">ifndef</span>		<span class="hljs-comment">// 当且仅当变量未定义时为真</span></span><br><span class="hljs-meta">#<span class="hljs-meta-keyword">endif</span>		<span class="hljs-comment">// 结束符</span></span><br></code></pre></td></tr></table></figure>
 
   </div>
 </article>

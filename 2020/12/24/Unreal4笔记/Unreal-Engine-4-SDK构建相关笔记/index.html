@@ -171,7 +171,7 @@
 <h1 id="SDK构建相关阅读"><a href="#SDK构建相关阅读" class="headerlink" title="SDK构建相关阅读"></a>SDK构建相关阅读</h1><p>[toc]</p>
 <p>在Unreal项目开发的过程中，可能会用到第三方开发的库来集成一些第三方的功能，例如语音通话、播放视频等功能。虚幻引擎本身也引用了很多第三方的库,例如物理库<code>PhysX</code>、Steam平台相关的库<code>SteamWorks</code>、<code>GoogleVR</code>等等。这些库可以在引擎的<code>Engine\Source\ThirdParty</code>目录下找到。Unreal官方推荐将第三方库集成到插件目录中，这样可以将游戏代码与第三方代码进行隔离。</p>
 <h2 id="使用插件引入第三方库"><a href="#使用插件引入第三方库" class="headerlink" title="使用插件引入第三方库"></a>使用插件引入第三方库</h2><p>在Unreal的编辑器中，可以新建一个ThirdParty插件来引入SDK：在项目中点击<code>编辑-插件-新插件-第三方库</code>就可以创建一个使用已包含第三方库的插件。</p>
-<pre><code class="hljs c"><span class="hljs-number">1.</span> 貌似只有C++项目中才可以创建第三方库插件，蓝图项目中貌似只能建立空白插件</code></pre>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs c"><span class="hljs-number">1.</span> 貌似只有C++项目中才可以创建第三方库插件，蓝图项目中貌似只能建立空白插件<br></code></pre></td></tr></table></figure>
 <p>新插件的目录结构如下：</p>
 <p><img src="http://hust_mo.gitee.io/blogpicturerepo/image-20201224174958125.png" alt></p>
 <p>其中<code>SDKTest</code>是插件本身逻辑的目录，<code>ThirdParty</code>是第三方库的目录，对于不同平台，所使用的SDK文件格式也有不同，这一点我们在后面再详细展开讲。</p>
@@ -189,30 +189,9 @@
 <p><img src="http://hust_mo.gitee.io/blogpicturerepo/render" alt></p>
 <p>下载之后将文件夹拷贝到插件的Public目录下，并参考<code>AAInfo4Copy.txt</code>，在<code>xxx.Build.cs</code>文件中引入相应的插件。</p>
 <p>在官方文档中引入插件的方法是：</p>
-<pre><code class="hljs csharp">PrivateDependencyModuleNames.AddRange(<span class="hljs-keyword">new</span> <span class="hljs-keyword">string</span>[] &#123; <span class="hljs-string">"GCloudCore"</span> &#125;);
-PrivateDependencyModuleNames.AddRange(<span class="hljs-keyword">new</span> <span class="hljs-keyword">string</span>[] &#123; <span class="hljs-string">"GCloud"</span> &#125;);
-PrivateDependencyModuleNames.AddRange(<span class="hljs-keyword">new</span> <span class="hljs-keyword">string</span>[] &#123; <span class="hljs-string">"TApm"</span> &#125;);
-PrivateDependencyModuleNames.AddRange(<span class="hljs-keyword">new</span> <span class="hljs-keyword">string</span>[] &#123; <span class="hljs-string">"GVoice"</span> &#125;);
-PrivateDependencyModuleNames.AddRange(<span class="hljs-keyword">new</span> <span class="hljs-keyword">string</span>[] &#123; <span class="hljs-string">"GEM_OneSDK"</span> &#125;);</code></pre>
+<figure class="highlight csharp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><code class="hljs csharp">PrivateDependencyModuleNames.AddRange(<span class="hljs-keyword">new</span> <span class="hljs-keyword">string</span>[] &#123; <span class="hljs-string">"GCloudCore"</span> &#125;);<br>PrivateDependencyModuleNames.AddRange(<span class="hljs-keyword">new</span> <span class="hljs-keyword">string</span>[] &#123; <span class="hljs-string">"GCloud"</span> &#125;);<br>PrivateDependencyModuleNames.AddRange(<span class="hljs-keyword">new</span> <span class="hljs-keyword">string</span>[] &#123; <span class="hljs-string">"TApm"</span> &#125;);<br>PrivateDependencyModuleNames.AddRange(<span class="hljs-keyword">new</span> <span class="hljs-keyword">string</span>[] &#123; <span class="hljs-string">"GVoice"</span> &#125;);<br>PrivateDependencyModuleNames.AddRange(<span class="hljs-keyword">new</span> <span class="hljs-keyword">string</span>[] &#123; <span class="hljs-string">"GEM_OneSDK"</span> &#125;);<br></code></pre></td></tr></table></figure>
 <p>这部分的代码原理可以参考<code>Engine\Source\Programs\UnrealBuildTool\Configuration\ModuleRules.cs</code>文件中的相关定义</p>
-<pre><code class="hljs cs"><span class="hljs-comment">// 通过将插件中的Public文件夹下的相对路径添加进这个List中来暴露给其他模块</span>
-<span class="hljs-keyword">public</span> List&lt;<span class="hljs-keyword">string</span>&gt; PublicIncludePaths = <span class="hljs-keyword">new</span> List&lt;<span class="hljs-keyword">string</span>&gt;();
-<span class="hljs-comment">// 同理，如果不想暴露给其他模块，则将相对路径添加到这个List中</span>
-<span class="hljs-keyword">public</span> List&lt;<span class="hljs-keyword">string</span>&gt; PrivateIncludePaths = <span class="hljs-keyword">new</span> List&lt;<span class="hljs-keyword">string</span>&gt;();
-
-<span class="hljs-comment">// 公共依赖模块名称列表（不需要路径）（自动进行私有/公共包含）。这些模块是我们的公共源文件所需要的。</span>
-<span class="hljs-keyword">public</span> List&lt;<span class="hljs-keyword">string</span>&gt; PublicDependencyModuleNames = <span class="hljs-keyword">new</span> List&lt;<span class="hljs-keyword">string</span>&gt;();
-<span class="hljs-comment">// 私有依赖模块名称列表。 这些模块是我们的私有代码所依赖的模块，但在公共的include文件中没有任何模块可以依赖。</span>
-<span class="hljs-keyword">public</span> List&lt;<span class="hljs-keyword">string</span>&gt; PrivateDependencyModuleNames = <span class="hljs-keyword">new</span> List&lt;<span class="hljs-keyword">string</span>&gt;();
-
-<span class="hljs-comment">// 附加库列表（包括拓展名在内的.lib文件名），通常用于第三方模块</span>
-<span class="hljs-keyword">public</span> List&lt;<span class="hljs-keyword">string</span>&gt; PublicAdditionalLibraries = <span class="hljs-keyword">new</span> List&lt;<span class="hljs-keyword">string</span>&gt;();
-
-<span class="hljs-comment">//...除此之外还有很多列表，可以在上述路径中文件内查看源码和注释</span>
-
-<span class="hljs-comment">// ReceiptProperty在\Engine\Source\Programs\UnrealBuildTool\System\TargetReceipt.cs中定义</span>
-<span class="hljs-comment">// 任意属性名/值，来自构建脚本的元数据可以传递给下游任务。（这是一对键值对），在文件中存储着UPL格式写的XML文件，其中可以进行一些设置，并且可以插入代码到AndroidManifest.xml和GameActivity.java中，关于这两个文件的作用在后面会解释</span>
-<span class="hljs-keyword">public</span> List&lt;ReceiptProperty&gt; AdditionalPropertiesForReceipt = <span class="hljs-keyword">new</span> List&lt;ReceiptProperty&gt;();</code></pre>
+<figure class="highlight cs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></td><td class="code"><pre><code class="hljs cs"><span class="hljs-comment">// 通过将插件中的Public文件夹下的相对路径添加进这个List中来暴露给其他模块</span><br><span class="hljs-keyword">public</span> List&lt;<span class="hljs-keyword">string</span>&gt; PublicIncludePaths = <span class="hljs-keyword">new</span> List&lt;<span class="hljs-keyword">string</span>&gt;();<br><span class="hljs-comment">// 同理，如果不想暴露给其他模块，则将相对路径添加到这个List中</span><br><span class="hljs-keyword">public</span> List&lt;<span class="hljs-keyword">string</span>&gt; PrivateIncludePaths = <span class="hljs-keyword">new</span> List&lt;<span class="hljs-keyword">string</span>&gt;();<br><br><span class="hljs-comment">// 公共依赖模块名称列表（不需要路径）（自动进行私有/公共包含）。这些模块是我们的公共源文件所需要的。</span><br><span class="hljs-keyword">public</span> List&lt;<span class="hljs-keyword">string</span>&gt; PublicDependencyModuleNames = <span class="hljs-keyword">new</span> List&lt;<span class="hljs-keyword">string</span>&gt;();<br><span class="hljs-comment">// 私有依赖模块名称列表。 这些模块是我们的私有代码所依赖的模块，但在公共的include文件中没有任何模块可以依赖。</span><br><span class="hljs-keyword">public</span> List&lt;<span class="hljs-keyword">string</span>&gt; PrivateDependencyModuleNames = <span class="hljs-keyword">new</span> List&lt;<span class="hljs-keyword">string</span>&gt;();<br><br><span class="hljs-comment">// 附加库列表（包括拓展名在内的.lib文件名），通常用于第三方模块</span><br><span class="hljs-keyword">public</span> List&lt;<span class="hljs-keyword">string</span>&gt; PublicAdditionalLibraries = <span class="hljs-keyword">new</span> List&lt;<span class="hljs-keyword">string</span>&gt;();<br><br><span class="hljs-comment">//...除此之外还有很多列表，可以在上述路径中文件内查看源码和注释</span><br><br><span class="hljs-comment">// ReceiptProperty在\Engine\Source\Programs\UnrealBuildTool\System\TargetReceipt.cs中定义</span><br><span class="hljs-comment">// 任意属性名/值，来自构建脚本的元数据可以传递给下游任务。（这是一对键值对），在文件中存储着UPL格式写的XML文件，其中可以进行一些设置，并且可以插入代码到AndroidManifest.xml和GameActivity.java中，关于这两个文件的作用在后面会解释</span><br><span class="hljs-keyword">public</span> List&lt;ReceiptProperty&gt; AdditionalPropertiesForReceipt = <span class="hljs-keyword">new</span> List&lt;ReceiptProperty&gt;();<br></code></pre></td></tr></table></figure>
 <p>总而言之，在<code>xxx.Build.cs</code>文件中，将对应的第三方库路径和设置文件的路径加入到了全局的List中，在之后的编译过程中，UBT会根据这个文件将对应的第三方库文件编译构建到指定的位置。</p>
 <h3 id="虚幻插件语言（Unreal-Plugin-Language-UPL）"><a href="#虚幻插件语言（Unreal-Plugin-Language-UPL）" class="headerlink" title="虚幻插件语言（Unreal Plugin Language, UPL）"></a>虚幻插件语言（Unreal Plugin Language, UPL）</h3><blockquote>
 <p><strong>虚幻插件语言</strong> (UPL)是一种基于XML的简单语言，用于操作XML和返回字符串。它包含一个分段，在计算任何其他分段之前，每个架构计算一次这个分段。状态被维护并推进到下个分段进行评估，因此分段的执行顺序很重要。虽然UPL是一个用于修改和查询XML的通用系统，但它专门用于允许插件影响其所属包的全局配置。例如，它允许插件修改Android APK AndroidManfiest.xml文件或IOS IPA plist文件。UBT还将查询插件的UPL xml文件，查找文件中要包含的字符串（对于包来说必须是常见的字符串），例如Android上的一些.java文件。</p>
@@ -257,15 +236,7 @@ PrivateDependencyModuleNames.AddRange(<span class="hljs-keyword">new</span> <spa
 <p>在<a href="https://github.com/EpicGames/UnrealEngine/blob/f8f4b403eb682ffc055613c7caf9d2ba5df7f319/Engine/Source/Programs/UnrealBuildTool/System/UnrealPluginLanguage.cs#L378" target="_blank" rel="noopener">UPL</a>的源代码中可以看到全部的API，在SDK文档中应该会说明SDK的使用步骤，例如GCloud的文档中：</p>
 <p><img src="http://hust_mo.gitee.io/blogpicturerepo/image-20201225151117492.png" alt></p>
 <p>这部分的初始化代码就可以使用UPL插入到<code>GameActivity.java</code>中：</p>
-<pre><code class="hljs xml"><span class="hljs-tag">&lt;<span class="hljs-name">gameActivityOnCreateAdditions</span>&gt;</span>
-	<span class="hljs-tag">&lt;<span class="hljs-name">insert</span>&gt;</span>
-       	GCloud::InitializeInfo initInfo;
-		initInfo.GameId = GCLOUD_GAME_ID;
-		initInfo.GameKey = GCLOUD_GAME_KEY;
-
-		IGCloud::GetInstance().Initialize(initInfo);
-    <span class="hljs-tag">&lt;/<span class="hljs-name">insert</span>&gt;</span>
-<span class="hljs-tag">&lt;/<span class="hljs-name">gameActivityOnCreateAdditions</span>&gt;</span></code></pre>
+<figure class="highlight xml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><code class="hljs xml"><span class="hljs-tag">&lt;<span class="hljs-name">gameActivityOnCreateAdditions</span>&gt;</span><br>true<span class="hljs-tag">&lt;<span class="hljs-name">insert</span>&gt;</span><br>       	GCloud::InitializeInfo initInfo;<br>truetrueinitInfo.GameId = GCLOUD_GAME_ID;<br>truetrueinitInfo.GameKey = GCLOUD_GAME_KEY;<br><br>truetrueIGCloud::GetInstance().Initialize(initInfo);<br>    <span class="hljs-tag">&lt;/<span class="hljs-name">insert</span>&gt;</span><br><span class="hljs-tag">&lt;/<span class="hljs-name">gameActivityOnCreateAdditions</span>&gt;</span><br></code></pre></td></tr></table></figure>
 <p>当然具体的实现要参考不同SDK文档中提供的实现。</p>
 </li>
 </ol>
@@ -281,51 +252,24 @@ PrivateDependencyModuleNames.AddRange(<span class="hljs-keyword">new</span> <spa
 <h2 id="在虚幻中调用Java代码"><a href="#在虚幻中调用Java代码" class="headerlink" title="在虚幻中调用Java代码"></a>在虚幻中调用Java代码</h2><h3 id="JNI：Java-Native-Interface"><a href="#JNI：Java-Native-Interface" class="headerlink" title="JNI：Java Native Interface"></a>JNI：Java Native Interface</h3><p>Java Native Interface , Java原生接口，一种让其他语言或程序调用Java代码的方法，具体实现细节笔者并不清楚，可以参考<a href="https://docs.oracle.com/javase/7/docs/technotes/guides/jni/spec/jniTOC.html" target="_blank" rel="noopener">官方文档</a>，此处仅对项目中遇到的问题进行总结和梳理。</p>
 <p>对于Android平台，SDK提供方可能会提供一些Java版本的函数接口，这些Java函数接口需要我们在虚幻引擎中调用，我们假定前置的接入插件的步骤已经完成。</p>
 <p>以<a href="https://slugteam.qq.com/sdk/v2/install/android-ue4.html#slugsdk-build-cs" target="_blank" rel="noopener">SlugSDK</a>为例，它提供了一个初始化SDK组件的接口：</p>
-<pre><code class="hljs java"><span class="hljs-comment">/*
-* @url 打开的页面url
-* @supportedOrientations 设置屏幕方向类型（1：只支持横屏，2：只支持竖屏，3：横竖屏都支持）
-* @qqAppid 设置游戏的qq Appid（用来分享到qq）
-* @wxAppid 设置游戏的微信Appid（用来分享到微信）
-* @className: String类型,比如"com.tencent.ingame.TestActivity"，从H5页面跳转到游戏的某个界面，如果不需要可以设置为""，H5页面跳转到游戏的某个界面时，会先跳转到游戏的该Activity（Activity声明需设置singleTask或singleTop）再由该Activity作为中转跳转到具体的游戏界面，该Activity先在onNewIntent方法setIntent(intent)，然后可以通过getIntent().getStringExtra("routeInfo")获取跳转的路由信息，比如关闭浏览器时获取的routeInfo值为"close"
-* @finishShouldSendMsgToGame 浏览器webview finish时向游戏发送close消息，不需要可以传false，如果需要则必须先设置@className参数
-* @webviewBackground 设置打开的浏览器背景颜色，比如#ffffffff
-* */</span>
-<span class="hljs-function"><span class="hljs-keyword">public</span> <span class="hljs-keyword">static</span> <span class="hljs-keyword">void</span> <span class="hljs-title">openIngameCommunityByUrl</span><span class="hljs-params">(Activity currentActivity, String url, <span class="hljs-keyword">int</span> supportedOrientations, String qqAppid, String wxAppid, String className, <span class="hljs-keyword">boolean</span> finishShouldSendMsgToGame, String webviewBackground)</span></span></code></pre>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><code class="hljs java"><span class="hljs-comment">/*<br>* @url 打开的页面url<br>* @supportedOrientations 设置屏幕方向类型（1：只支持横屏，2：只支持竖屏，3：横竖屏都支持）<br>* @qqAppid 设置游戏的qq Appid（用来分享到qq）<br>* @wxAppid 设置游戏的微信Appid（用来分享到微信）<br>* @className: String类型,比如"com.tencent.ingame.TestActivity"，从H5页面跳转到游戏的某个界面，如果不需要可以设置为""，H5页面跳转到游戏的某个界面时，会先跳转到游戏的该Activity（Activity声明需设置singleTask或singleTop）再由该Activity作为中转跳转到具体的游戏界面，该Activity先在onNewIntent方法setIntent(intent)，然后可以通过getIntent().getStringExtra("routeInfo")获取跳转的路由信息，比如关闭浏览器时获取的routeInfo值为"close"<br>* @finishShouldSendMsgToGame 浏览器webview finish时向游戏发送close消息，不需要可以传false，如果需要则必须先设置@className参数<br>* @webviewBackground 设置打开的浏览器背景颜色，比如#ffffffff<br>* */</span><br><span class="hljs-function"><span class="hljs-keyword">public</span> <span class="hljs-keyword">static</span> <span class="hljs-keyword">void</span> <span class="hljs-title">openIngameCommunityByUrl</span><span class="hljs-params">(Activity currentActivity, String url, <span class="hljs-keyword">int</span> supportedOrientations, String qqAppid, String wxAppid, String className, <span class="hljs-keyword">boolean</span> finishShouldSendMsgToGame, String webviewBackground)</span></span><br></code></pre></td></tr></table></figure>
 <p>该函数的函数签名如下:</p>
 <ul>
 <li>参数 : <code>Activity currentActivity, String url, int supportedOrientations, String qqAppid, String wxAppid, String className, boolean finishShouldSendMsgToGame, String webviewBackground</code></li>
 <li>返回值 :<code>void</code></li>
 </ul>
 <p>我们可以用命令行工具 : <code>javap -s</code>输出函数签名 , 具体可以参考博文 : <a href="https://blog.csdn.net/qq_36642554/article/details/69834428" target="_blank" rel="noopener">Java dos命令窗口获取方法的签名</a> ; 也可以根据JNI函数签名的<a href="https://docs.oracle.com/javase/7/docs/technotes/guides/jni/spec/types.html#wp15954" target="_blank" rel="noopener">转换规则(详见Type Signatures部分)</a>进行转换 , 以上面的函数为例 :</p>
-<pre><code class="hljs undefined">Activity	-- Landroid/app/Activity
-string		-- Ljava/lang/String;
-int 		-- I
-string		-- Ljava/lang/String;
-string		-- Ljava/lang/String;
-string		-- Ljava/lang/String;
-bool		-- Z
-string		-- Ljava/lang/String;
-void		-- V</code></pre>
+<figure class="highlight lua"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><code class="hljs undefined">Activity	<span class="hljs-comment">-- Landroid/app/Activity</span><br><span class="hljs-built_in">string</span>		<span class="hljs-comment">-- Ljava/lang/String;</span><br>int 		<span class="hljs-comment">-- I</span><br><span class="hljs-built_in">string</span>		<span class="hljs-comment">-- Ljava/lang/String;</span><br><span class="hljs-built_in">string</span>		<span class="hljs-comment">-- Ljava/lang/String;</span><br><span class="hljs-built_in">string</span>		<span class="hljs-comment">-- Ljava/lang/String;</span><br>bool		<span class="hljs-comment">-- Z</span><br><span class="hljs-built_in">string</span>		<span class="hljs-comment">-- Ljava/lang/String;</span><br>void		<span class="hljs-comment">-- V</span><br></code></pre></td></tr></table></figure>
 <p>需要注意的是 : <strong>内置基础类型对应的签名后面没有分号 , 不要擅自加上分号 , 这样会导致搜索不到对应的方法!</strong></p>
 <p>因此最后该函数我们导出的函数签名为(注意为<code>ILjava/lang/String</code>) :</p>
-<pre><code class="hljs undefined">(Landroid/app/Activity;Ljava/lang/String;ILjava/lang/String;Ljava/lang/String;Ljava/lang/String;ZLjava/lang/String;)V</code></pre>
+<figure class="highlight awk"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs undefined">(Landroid<span class="hljs-regexp">/app/</span>Activity;Ljava<span class="hljs-regexp">/lang/</span>String;ILjava<span class="hljs-regexp">/lang/</span>String;Ljava<span class="hljs-regexp">/lang/</span>String;Ljava<span class="hljs-regexp">/lang/</span>String;ZLjava<span class="hljs-regexp">/lang/</span>String;)V<br></code></pre></td></tr></table></figure>
 <p>至此 , 我们完成了调用Java代码的准备工作。</p>
 <h3 id="在虚幻中调用"><a href="#在虚幻中调用" class="headerlink" title="在虚幻中调用 :"></a>在虚幻中调用 :</h3><p>我们需要JNIEnv环境 , 在虚幻中我们可以使用<code>FAndroidApplication::GetJavaEnv();</code></p>
 <p>我们需要对应的jclass , 在虚幻中我们可以使用<code>FAndroidApplication::FindJavaClass(ClassName)</code>进行获取</p>
 <p>我们需要对应的函数 , 此时我们就用上了刚刚推导的函数签名 , 同样在虚幻中我们可以使用<code>env-&gt;GetStaticMethodID(signature)</code>获得</p>
 <p>最后我们需要调用函数 , 还是通过env完成 , 可以调用<code>env-&gt;CallStaticVoidMethod()</code>完成</p>
 <p>整个过程的伪代码如下(对于env , cls , jmethodID必要时可以做一些防御性检查): </p>
-<pre><code class="hljs c++"><span class="hljs-keyword">void</span> AndroidSlugSDK::OpenIngameCommunity(FString url, <span class="hljs-keyword">int</span> supportedOrientations, FString qqAppid, FString wxAppid, FString className, <span class="hljs-keyword">bool</span> finishShouldSendMsgToGame, FString webviewBackground)&#123;
-    JNIEnv *env = FAndroidApplication::GetJavaEnv();
-    jclass cls = FAndroidApplication::FindJavaClass(<span class="hljs-string">"com/tencent/slugsdk/SlugWebAdapter"</span>);
-    jmethodID jOpenCommunityMthod = env-&gt;GetStaticMethodID(cls, <span class="hljs-string">"openIngameCommunityByUrl"</span>, <span class="hljs-string">"(Landroid/app/Activity;Ljava/lang/String;ILjava/lang/String;Ljava/lang/String;Ljava/lang/String;ZLjava/lang/String;)V"</span>);
-    jstring jUrl = env-&gt;NewStringUTF(TCHAR_TO_UTF8(*url));
-	jstring jqqAppID = env-&gt;NewStringUTF(TCHAR_TO_UTF8(*qqAppID));
-	jstring jwxAppID = env-&gt;NewStringUTF(TCHAR_TO_UTF8(*wxAppID));
-	jstring jclassName = env-&gt;NewStringUTF(TCHAR_TO_UTF8(*className));
-	jstring jwebColor = env-&gt;NewStringUTF(TCHAR_TO_UTF8(*WebViewBackgroundColor));
-	env-&gt;CallStaticVoidMethod(cls, jOpenCommunityMthod, FAndroidApplication::GetGameActivityThis(), jUrl, supportedOrientations, jqqAppID, jwxAppID, jclassName, finishShouldSendMsgToGame, jwebColor);
-&#125;</code></pre>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><code class="hljs c++"><span class="hljs-keyword">void</span> AndroidSlugSDK::OpenIngameCommunity(FString url, <span class="hljs-keyword">int</span> supportedOrientations, FString qqAppid, FString wxAppid, FString className, <span class="hljs-keyword">bool</span> finishShouldSendMsgToGame, FString webviewBackground)&#123;<br>    JNIEnv *env = FAndroidApplication::GetJavaEnv();<br>    jclass cls = FAndroidApplication::FindJavaClass(<span class="hljs-string">"com/tencent/slugsdk/SlugWebAdapter"</span>);<br>    jmethodID jOpenCommunityMthod = env-&gt;GetStaticMethodID(cls, <span class="hljs-string">"openIngameCommunityByUrl"</span>, <span class="hljs-string">"(Landroid/app/Activity;Ljava/lang/String;ILjava/lang/String;Ljava/lang/String;Ljava/lang/String;ZLjava/lang/String;)V"</span>);<br>    jstring jUrl = env-&gt;NewStringUTF(TCHAR_TO_UTF8(*url));<br>truejstring jqqAppID = env-&gt;NewStringUTF(TCHAR_TO_UTF8(*qqAppID));<br>truejstring jwxAppID = env-&gt;NewStringUTF(TCHAR_TO_UTF8(*wxAppID));<br>truejstring jclassName = env-&gt;NewStringUTF(TCHAR_TO_UTF8(*className));<br>truejstring jwebColor = env-&gt;NewStringUTF(TCHAR_TO_UTF8(*WebViewBackgroundColor));<br>trueenv-&gt;CallStaticVoidMethod(cls, jOpenCommunityMthod, FAndroidApplication::GetGameActivityThis(), jUrl, supportedOrientations, jqqAppID, jwxAppID, jclassName, finishShouldSendMsgToGame, jwebColor);<br>&#125;<br></code></pre></td></tr></table></figure>
 <h3 id="一些其他的坑"><a href="#一些其他的坑" class="headerlink" title="一些其他的坑 :"></a>一些其他的坑 :</h3><ol>
 <li>要明确项目是否支持aar包 , 貌似用gradle构建才可以使用aar包</li>
 <li>ios的代码调用要在主线程 , 防止崩溃</li>

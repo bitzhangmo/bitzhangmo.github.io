@@ -197,86 +197,14 @@
 </li>
 </ul>
 <h3 id="Linking"><a href="#Linking" class="headerlink" title="Linking"></a>Linking</h3><p>在Visual Studio中，打开<strong>YourProjectName.Build.cs</strong>，这个文件位于 Source/YourProjectName/ 文件夹中。默认情况下，此文件仅链接默认引擎模块。要对此链接Lua，我们需要向其中添加一些代码。由于展示每一个细节实在是太多了，所以我只向你展示我对Build.cs文件的改动：</p>
-<pre><code class="hljs csharp"><span class="hljs-keyword">using</span> System.IO;
-<span class="hljs-keyword">using</span> UnrealBuildTool;
-
-<span class="hljs-keyword">public</span> <span class="hljs-keyword">class</span> <span class="hljs-title">ProjectName</span> : <span class="hljs-title">ModuleRules</span>
-&#123;    
-	<span class="hljs-keyword">private</span> <span class="hljs-keyword">string</span> ThirdPartyPath
-	&#123;
-		<span class="hljs-keyword">get</span> &#123; <span class="hljs-keyword">return</span> Path.GetFullPath(Path.Combine(ModuleDirectory, <span class="hljs-string">"../../ThirdParty/"</span>)); &#125;
-	&#125;
-
-	<span class="hljs-function"><span class="hljs-keyword">public</span> <span class="hljs-title">ProjectName</span>(<span class="hljs-params">TargetInfo Target</span>)</span>
-	&#123;
-		PublicDependencyModuleNames.AddRange(<span class="hljs-keyword">new</span> <span class="hljs-keyword">string</span>[] &#123; <span class="hljs-string">"Core"</span>, <span class="hljs-string">"CoreUObject"</span>, <span class="hljs-string">"Engine"</span>, <span class="hljs-string">"InputCore"</span> &#125;);
-
-		PrivateDependencyModuleNames.AddRange(<span class="hljs-keyword">new</span> <span class="hljs-keyword">string</span>[] &#123;  &#125;);
-
-		<span class="hljs-comment">// 如果使用Slate UI，则取消注释</span>
-    <span class="hljs-comment">// PrivateDependencyModuleNames.AddRange(new string[] &#123; "Slate", "SlateCore" &#125;);</span>
-
-		<span class="hljs-comment">// 如果使用在线功能，则取消注释</span>
-		<span class="hljs-comment">// PrivateDependencyModuleNames.Add("OnlineSubsystem");</span>
-
-		<span class="hljs-comment">// 要包含 OnlineSubsystemSteam, 请将其添加到uproject文件的plugins部分中，并将Enabled属性设置为true</span>
-
-		LoadLua(TargetRules); <span class="hljs-comment">// 此函数加载Lua</span>
-	&#125;
-
-	<span class="hljs-function"><span class="hljs-keyword">private</span> <span class="hljs-keyword">bool</span> <span class="hljs-title">LoadLua</span>(<span class="hljs-params">ReadOnlyTargetRules TargetRules</span>)</span>
-	&#123;
-		<span class="hljs-keyword">bool</span> isLibSupported = <span class="hljs-literal">false</span>;
-
-		<span class="hljs-comment">// 检查是否使用的是Windows</span>
-		<span class="hljs-keyword">if</span> ((Target.Platform == UnrealTargetPlatform.Win64) || (Target.Platform == UnrealTargetPlatform.Win32))
-		&#123;
-			isLibSupported = <span class="hljs-literal">true</span>;
-
-			<span class="hljs-keyword">string</span> PlatformString = (Target.Platform == UnrealTargetPlatform.Win64) ? <span class="hljs-string">"x64"</span> : <span class="hljs-string">"x86"</span>; <span class="hljs-comment">// 此字符串是“x64”或“x86”，因此我们可以将其附加到lib文件名</span>
-			<span class="hljs-keyword">string</span> LibrariesPath = Path.Combine(ThirdPartyPath, <span class="hljs-string">"Lua"</span>, <span class="hljs-string">"libraries"</span>);
-
-			PublicAdditionalLibraries.Add(Path.Combine(LibrariesPath, <span class="hljs-string">"lua53."</span> + PlatformString + <span class="hljs-string">".lib"</span>));
-
-			PublicIncludePaths.Add(Path.Combine(ThirdPartyPath, <span class="hljs-string">"Lua"</span>, <span class="hljs-string">"includes"</span>));
-		&#125;
-
-		Definitions.Add(<span class="hljs-keyword">string</span>.Format(<span class="hljs-string">"WITH_LUA_BINDING=&#123;0&#125;"</span>, isLibSupported ? <span class="hljs-number">1</span> : <span class="hljs-number">0</span>));
-
-		<span class="hljs-keyword">return</span> isLibSupported;
-	&#125;
-&#125;</code></pre>
+<figure class="highlight csharp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br></pre></td><td class="code"><pre><code class="hljs csharp"><span class="hljs-keyword">using</span> System.IO;<br><span class="hljs-keyword">using</span> UnrealBuildTool;<br><br><span class="hljs-keyword">public</span> <span class="hljs-keyword">class</span> <span class="hljs-title">ProjectName</span> : <span class="hljs-title">ModuleRules</span><br>&#123;    <br>true<span class="hljs-keyword">private</span> <span class="hljs-keyword">string</span> ThirdPartyPath<br>true&#123;<br>truetrue<span class="hljs-keyword">get</span> &#123; <span class="hljs-keyword">return</span> Path.GetFullPath(Path.Combine(ModuleDirectory, <span class="hljs-string">"../../ThirdParty/"</span>)); &#125;<br>true&#125;<br><br>true<span class="hljs-function"><span class="hljs-keyword">public</span> <span class="hljs-title">ProjectName</span>(<span class="hljs-params">TargetInfo Target</span>)</span><br>true&#123;<br>truetruePublicDependencyModuleNames.AddRange(<span class="hljs-keyword">new</span> <span class="hljs-keyword">string</span>[] &#123; <span class="hljs-string">"Core"</span>, <span class="hljs-string">"CoreUObject"</span>, <span class="hljs-string">"Engine"</span>, <span class="hljs-string">"InputCore"</span> &#125;);<br><br>truetruePrivateDependencyModuleNames.AddRange(<span class="hljs-keyword">new</span> <span class="hljs-keyword">string</span>[] &#123;  &#125;);<br><br>truetrue<span class="hljs-comment">// 如果使用Slate UI，则取消注释</span><br>    <span class="hljs-comment">// PrivateDependencyModuleNames.AddRange(new string[] &#123; "Slate", "SlateCore" &#125;);</span><br><br>truetrue<span class="hljs-comment">// 如果使用在线功能，则取消注释</span><br>truetrue<span class="hljs-comment">// PrivateDependencyModuleNames.Add("OnlineSubsystem");</span><br><br>truetrue<span class="hljs-comment">// 要包含 OnlineSubsystemSteam, 请将其添加到uproject文件的plugins部分中，并将Enabled属性设置为true</span><br><br>truetrueLoadLua(TargetRules); <span class="hljs-comment">// 此函数加载Lua</span><br>true&#125;<br><br>true<span class="hljs-function"><span class="hljs-keyword">private</span> <span class="hljs-keyword">bool</span> <span class="hljs-title">LoadLua</span>(<span class="hljs-params">ReadOnlyTargetRules TargetRules</span>)</span><br>true&#123;<br>truetrue<span class="hljs-keyword">bool</span> isLibSupported = <span class="hljs-literal">false</span>;<br><br>truetrue<span class="hljs-comment">// 检查是否使用的是Windows</span><br>truetrue<span class="hljs-keyword">if</span> ((Target.Platform == UnrealTargetPlatform.Win64) || (Target.Platform == UnrealTargetPlatform.Win32))<br>truetrue&#123;<br>truetruetrueisLibSupported = <span class="hljs-literal">true</span>;<br><br>truetruetrue<span class="hljs-keyword">string</span> PlatformString = (Target.Platform == UnrealTargetPlatform.Win64) ? <span class="hljs-string">"x64"</span> : <span class="hljs-string">"x86"</span>; <span class="hljs-comment">// 此字符串是“x64”或“x86”，因此我们可以将其附加到lib文件名</span><br>truetruetrue<span class="hljs-keyword">string</span> LibrariesPath = Path.Combine(ThirdPartyPath, <span class="hljs-string">"Lua"</span>, <span class="hljs-string">"libraries"</span>);<br><br>truetruetruePublicAdditionalLibraries.Add(Path.Combine(LibrariesPath, <span class="hljs-string">"lua53."</span> + PlatformString + <span class="hljs-string">".lib"</span>));<br><br>truetruetruePublicIncludePaths.Add(Path.Combine(ThirdPartyPath, <span class="hljs-string">"Lua"</span>, <span class="hljs-string">"includes"</span>));<br>truetrue&#125;<br><br>truetrueDefinitions.Add(<span class="hljs-keyword">string</span>.Format(<span class="hljs-string">"WITH_LUA_BINDING=&#123;0&#125;"</span>, isLibSupported ? <span class="hljs-number">1</span> : <span class="hljs-number">0</span>));<br><br>truetrue<span class="hljs-keyword">return</span> isLibSupported;<br>true&#125;<br>&#125;<br></code></pre></td></tr></table></figure>
 <p>“LoadLua”方法检查我们是否在Windows上，如果是，则根据编译的体系结构创建一个包含“x64”或“x86”的字符串，因此我们可以轻松的找到lib文件。然后，我们创建库路径，该路径就是（在这个例子中为“ThirdParty/”）/Lua/libraries。从那里，我们将平台字符串附加到文件名的前缀和后缀，因此最后应该是lua53.xxx.lib。此路径已添加到PublicAdditionalLibraries中，这会强制编译器使用我们放在其中的lib文件。我们还将includes目录添加到PublicIncludePaths，以便编译器找到我们的includes。最后也很重要的一点是，我们向已编译的游戏中添加了一个定义：WITH_LUA_BINDING = x，其中x为0（不支持Lua）或1（支持Lua）。</p>
 <h4 id="First-steps"><a href="#First-steps" class="headerlink" title="First steps"></a>First steps</h4><p>现在，我们已经将Lua二进制文件集成到我们的游戏中，让我们通过在Visual Studio中右键单击该项目并选择“Build”来进行尝试。它应该会成功！下一步：编写一个蓝图节点，该节点从我们输入的字符串中执行Lua代码。打开您创建的蓝图函数库的头文件（.h）。空文件如下所示：</p>
-<pre><code class="hljs cpp"><span class="hljs-meta">#<span class="hljs-meta-keyword">pragma</span> once</span>
-
-<span class="hljs-meta">#<span class="hljs-meta-keyword">include</span> <span class="hljs-meta-string">"Kismet/BlueprintFunctionLibrary.h"</span></span>
-<span class="hljs-meta">#<span class="hljs-meta-keyword">include</span> <span class="hljs-meta-string">"LuaBlueprints.generated.h"</span></span>
-
-<span class="hljs-comment">/**
- * 
- */</span>
-UCLASS()
-<span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">YOURPROJECT_API</span> <span class="hljs-title">ULuaBlueprints</span> :</span> <span class="hljs-keyword">public</span> UBlueprintFunctionLibrary
-&#123;
-	GENERATED_BODY()
-&#125;;</code></pre>
+<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><code class="hljs cpp"><span class="hljs-meta">#<span class="hljs-meta-keyword">pragma</span> once</span><br><br><span class="hljs-meta">#<span class="hljs-meta-keyword">include</span> <span class="hljs-meta-string">"Kismet/BlueprintFunctionLibrary.h"</span></span><br><span class="hljs-meta">#<span class="hljs-meta-keyword">include</span> <span class="hljs-meta-string">"LuaBlueprints.generated.h"</span></span><br><br><span class="hljs-comment">/**<br> * <br> */</span><br>UCLASS()<br><span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">YOURPROJECT_API</span> <span class="hljs-title">ULuaBlueprints</span> :</span> <span class="hljs-keyword">public</span> UBlueprintFunctionLibrary<br>&#123;<br>trueGENERATED_BODY()<br>&#125;;<br></code></pre></td></tr></table></figure>
 <p>首先，在顶部添加Lua包含项，以便编译器知道声明函数的位置。为此，请在其他包含项的头部添加<code>#include &quot;lua.hpp&quot;</code>。接下来，我们向其中添加一个新的UFUNCTION，将其解析为带有以下声明的蓝图节点：</p>
-<pre><code class="hljs cpp"><span class="hljs-keyword">public</span>:
-	UFUNCTION(BlueprintCallable, Category = <span class="hljs-string">"Lua"</span>)
-	<span class="hljs-function"><span class="hljs-keyword">static</span> <span class="hljs-keyword">void</span> <span class="hljs-title">RunLua</span><span class="hljs-params">(<span class="hljs-keyword">const</span> FString&amp; code)</span></span>;</code></pre>
+<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><code class="hljs cpp"><span class="hljs-keyword">public</span>:<br>trueUFUNCTION(BlueprintCallable, Category = <span class="hljs-string">"Lua"</span>)<br>true<span class="hljs-function"><span class="hljs-keyword">static</span> <span class="hljs-keyword">void</span> <span class="hljs-title">RunLua</span><span class="hljs-params">(<span class="hljs-keyword">const</span> FString&amp; code)</span></span>;<br></code></pre></td></tr></table></figure>
 <p>这将创建一个可调用的蓝图节点，该节点带有一个字符串（FString），我们可以在其中输入将要运行的Lua代码。请注意，这是静态的，因为我们没有要在上下文中调用此对象的对象，换言之，我们想在没有任何目标的情况下从任何地方调用它。让我们进入LuaBlueprints.cpp文件，该文件应该为空（include文件除外）。我们为RunLua函数添加定义：</p>
-<pre><code class="hljs cpp"><span class="hljs-keyword">void</span> ULuaBlueprints::RunLua(<span class="hljs-keyword">const</span> FString&amp; code)
-&#123;
-	lua_State* L = luaL_newstate();
-	luaL_openlibs(L);
-
-	<span class="hljs-keyword">int</span> result = luaL_dostring(L, TCHAR_TO_ANSI(*code));
-	<span class="hljs-keyword">if</span> (result != <span class="hljs-number">0</span>)
-	&#123;
-		UE_LOG(LogTemp, Error, TEXT(<span class="hljs-string">"Lua Script error: %s"</span>), ANSI_TO_TCHAR(lua_tostring(L, <span class="hljs-number">-1</span>)));
-	&#125;
-&#125;</code></pre>
+<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><code class="hljs cpp"><span class="hljs-keyword">void</span> ULuaBlueprints::RunLua(<span class="hljs-keyword">const</span> FString&amp; code)<br>&#123;<br>truelua_State* L = luaL_newstate();<br>trueluaL_openlibs(L);<br><br>true<span class="hljs-keyword">int</span> result = luaL_dostring(L, TCHAR_TO_ANSI(*code));<br>true<span class="hljs-keyword">if</span> (result != <span class="hljs-number">0</span>)<br>true&#123;<br>truetrueUE_LOG(LogTemp, Error, TEXT(<span class="hljs-string">"Lua Script error: %s"</span>), ANSI_TO_TCHAR(lua_tostring(L, <span class="hljs-number">-1</span>)));<br>true&#125;<br>&#125;<br></code></pre></td></tr></table></figure>
 <p>这很容易。它使用Lua C API创建一个新的Lua状态，将其分配给名为L的变量。然后，打开标准的lua库（例如math），然后通过执行luaL_dostring()运行代码。这将Lua状态L作为一个参数，并将要运行的代码作为另一个参数。该函数返回一个整数，如果一切正常，则返回0。如果不为0，则显然出了问题。在这种情况下，我使用UE_LOG将其打印到日志中。注意，我们通过lua_tostring(L,-1)得到Lua错误消息。</p>
 
   </div>
