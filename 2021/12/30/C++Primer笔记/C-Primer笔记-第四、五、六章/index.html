@@ -1,0 +1,406 @@
+<!DOCTYPE html>
+<html lang=zh>
+<head><meta name="generator" content="Hexo 3.9.0">
+    <!-- so meta -->
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="HandheldFriendly" content="True">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+    <meta name="description" content="关键词: 左值, 右值, 运算符, 强制类型转换 第四章主要描述了运算符以及相关的优先级;">
+<meta name="keywords" content="C++">
+<meta property="og:type" content="article">
+<meta property="og:title" content="C++Primer笔记(第四、五、六章)">
+<meta property="og:url" content="https://bitzhangmo.github.io/2021/12/30/C++Primer笔记/C-Primer笔记-第四、五、六章/index.html">
+<meta property="og:site_name" content="zhangMo Blog">
+<meta property="og:description" content="关键词: 左值, 右值, 运算符, 强制类型转换 第四章主要描述了运算符以及相关的优先级;">
+<meta property="og:locale" content="zh-CN">
+<meta property="og:image" content="https://gitee.com/hust_mo/BlogPictureRepo/raw/master/image-20211231163925916.png">
+<meta property="og:updated_time" content="2022-01-01T15:51:01.712Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="C++Primer笔记(第四、五、六章)">
+<meta name="twitter:description" content="关键词: 左值, 右值, 运算符, 强制类型转换 第四章主要描述了运算符以及相关的优先级;">
+<meta name="twitter:image" content="https://gitee.com/hust_mo/BlogPictureRepo/raw/master/image-20211231163925916.png">
+    
+    
+        
+          
+              <link rel="shortcut icon" href="/images/favicon.ico">
+          
+        
+        
+          
+            <link rel="icon" type="image/png" href="/images/favicon-192x192.png" sizes="192x192">
+          
+        
+        
+          
+            <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon.png">
+          
+        
+    
+    <!-- title -->
+    <title>C++Primer笔记(第四、五、六章)</title>
+    <!-- styles -->
+    <link rel="stylesheet" href="/css/style.css">
+    <!-- persian styles -->
+    
+      <link rel="stylesheet" href="/css/rtl.css">
+    
+    <!-- rss -->
+    
+    
+</head>
+
+<body class="max-width mx-auto px3 ltr">
+    
+      <div id="header-post">
+  <a id="menu-icon" href="#"><i class="fas fa-bars fa-lg"></i></a>
+  <a id="menu-icon-tablet" href="#"><i class="fas fa-bars fa-lg"></i></a>
+  <a id="top-icon-tablet" href="#" onclick="$('html, body').animate({ scrollTop: 0 }, 'fast');" style="display:none;"><i class="fas fa-chevron-up fa-lg"></i></a>
+  <span id="menu">
+    <span id="nav">
+      <ul>
+         
+          <li><a href="/">首页</a></li>
+         
+          <li><a href="/about/">关于</a></li>
+         
+          <li><a href="/tags/">tags</a></li>
+         
+          <li><a href="/categories/">categories</a></li>
+         
+          <li><a href="/archives/">归档</a></li>
+         
+          <li><a href="/categories/reports/">reports</a></li>
+         
+          <li><a href="/search/">搜索</a></li>
+        
+      </ul>
+    </span>
+    <br/>
+    <span id="actions">
+      <ul>
+        
+        
+        <li><a class="icon" href="/2021/12/30/C++Primer笔记/C-Primer笔记-第三章/"><i class="fas fa-chevron-right" aria-hidden="true" onmouseover="$('#i-next').toggle();" onmouseout="$('#i-next').toggle();"></i></a></li>
+        
+        <li><a class="icon" href="#" onclick="$('html, body').animate({ scrollTop: 0 }, 'fast');"><i class="fas fa-chevron-up" aria-hidden="true" onmouseover="$('#i-top').toggle();" onmouseout="$('#i-top').toggle();"></i></a></li>
+        <li><a class="icon" href="#"><i class="fas fa-share-alt" aria-hidden="true" onmouseover="$('#i-share').toggle();" onmouseout="$('#i-share').toggle();" onclick="$('#share').toggle();return false;"></i></a></li>
+      </ul>
+      <span id="i-prev" class="info" style="display:none;">上一篇</span>
+      <span id="i-next" class="info" style="display:none;">下一篇</span>
+      <span id="i-top" class="info" style="display:none;">返回顶部</span>
+      <span id="i-share" class="info" style="display:none;">分享文章</span>
+    </span>
+    <br/>
+    <div id="share" style="display: none">
+      <ul>
+  <li><a class="icon" href="http://www.facebook.com/sharer.php?u=https://bitzhangmo.github.io/2021/12/30/C++Primer笔记/C-Primer笔记-第四、五、六章/"><i class="fab fa-facebook " aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="https://twitter.com/share?url=https://bitzhangmo.github.io/2021/12/30/C++Primer笔记/C-Primer笔记-第四、五、六章/&text=C++Primer笔记(第四、五、六章)"><i class="fab fa-twitter " aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="http://www.linkedin.com/shareArticle?url=https://bitzhangmo.github.io/2021/12/30/C++Primer笔记/C-Primer笔记-第四、五、六章/&title=C++Primer笔记(第四、五、六章)"><i class="fab fa-linkedin " aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="https://pinterest.com/pin/create/bookmarklet/?url=https://bitzhangmo.github.io/2021/12/30/C++Primer笔记/C-Primer笔记-第四、五、六章/&is_video=false&description=C++Primer笔记(第四、五、六章)"><i class="fab fa-pinterest " aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="mailto:?subject=C++Primer笔记(第四、五、六章)&body=Check out this article: https://bitzhangmo.github.io/2021/12/30/C++Primer笔记/C-Primer笔记-第四、五、六章/"><i class="fas fa-envelope " aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="https://getpocket.com/save?url=https://bitzhangmo.github.io/2021/12/30/C++Primer笔记/C-Primer笔记-第四、五、六章/&title=C++Primer笔记(第四、五、六章)"><i class="fab fa-get-pocket " aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="http://reddit.com/submit?url=https://bitzhangmo.github.io/2021/12/30/C++Primer笔记/C-Primer笔记-第四、五、六章/&title=C++Primer笔记(第四、五、六章)"><i class="fab fa-reddit " aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="http://www.stumbleupon.com/submit?url=https://bitzhangmo.github.io/2021/12/30/C++Primer笔记/C-Primer笔记-第四、五、六章/&title=C++Primer笔记(第四、五、六章)"><i class="fab fa-stumbleupon " aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="http://digg.com/submit?url=https://bitzhangmo.github.io/2021/12/30/C++Primer笔记/C-Primer笔记-第四、五、六章/&title=C++Primer笔记(第四、五、六章)"><i class="fab fa-digg " aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="http://www.tumblr.com/share/link?url=https://bitzhangmo.github.io/2021/12/30/C++Primer笔记/C-Primer笔记-第四、五、六章/&name=C++Primer笔记(第四、五、六章)&description=&lt;p&gt;关键词: 左值, 右值, 运算符, 强制类型转换&lt;/p&gt;
+&lt;p&gt;第四章主要描述了运算符以及相关的优先级; &lt;/p&gt;"><i class="fab fa-tumblr " aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="https://news.ycombinator.com/submitlink?u=https://bitzhangmo.github.io/2021/12/30/C++Primer笔记/C-Primer笔记-第四、五、六章/&t=C++Primer笔记(第四、五、六章)"><i class="fab fa-hacker-news " aria-hidden="true"></i></a></li>
+</ul>
+
+    </div>
+    <div id="toc">
+      <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#第四章"><span class="toc-number">1.</span> <span class="toc-text">第四章</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#左值和右值"><span class="toc-number">1.0.1.</span> <span class="toc-text">左值和右值 :</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#复合运算符"><span class="toc-number">1.0.2.</span> <span class="toc-text">复合运算符 :</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#递增和递减运算符"><span class="toc-number">1.0.3.</span> <span class="toc-text">递增和递减运算符 :</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#sizeof运算符"><span class="toc-number">1.0.4.</span> <span class="toc-text">sizeof运算符 :</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#强制类型转换"><span class="toc-number">1.0.5.</span> <span class="toc-text">强制类型转换 :</span></a></li></ol></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#第五章"><span class="toc-number">2.</span> <span class="toc-text">第五章</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#switch语句"><span class="toc-number">2.0.1.</span> <span class="toc-text">switch语句 :</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#范围for语句"><span class="toc-number">2.0.2.</span> <span class="toc-text">范围for语句 :</span></a></li></ol></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#第六章-函数"><span class="toc-number">3.</span> <span class="toc-text">第六章 : 函数</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#局部静态对象"><span class="toc-number">3.0.1.</span> <span class="toc-text">局部静态对象 :</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#参数传递"><span class="toc-number">3.0.2.</span> <span class="toc-text">参数传递 :</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#const形参和实参"><span class="toc-number">3.0.3.</span> <span class="toc-text">const形参和实参 :</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#数组形参"><span class="toc-number">3.0.4.</span> <span class="toc-text">数组形参 :</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#含有可变形参的函数"><span class="toc-number">3.0.5.</span> <span class="toc-text">含有可变形参的函数 :</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#省略符形参"><span class="toc-number">3.0.6.</span> <span class="toc-text">省略符形参 :</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#函数的返回值"><span class="toc-number">3.0.7.</span> <span class="toc-text">函数的返回值 :</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#返回数组指针"><span class="toc-number">3.0.8.</span> <span class="toc-text">返回数组指针 :</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#函数重载"><span class="toc-number">3.0.9.</span> <span class="toc-text">函数重载 :</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#特殊用途语言特性"><span class="toc-number">3.0.10.</span> <span class="toc-text">特殊用途语言特性:</span></a></li></ol></li></ol></li></ol>
+    </div>
+  </span>
+</div>
+
+    
+    <div class="content index py4">
+        
+        <article class="post" itemscope itemtype="http://schema.org/BlogPosting">
+  <header>
+    
+    <h1 class="posttitle" itemprop="name headline">
+        C++Primer笔记(第四、五、六章)
+    </h1>
+
+
+
+    <div class="meta">
+      <span class="author" itemprop="author" itemscope itemtype="http://schema.org/Person">
+        <span itemprop="name">zhangMo Blog</span>
+      </span>
+      
+    <div class="postdate">
+      
+        <time datetime="2021-12-29T17:33:49.000Z" itemprop="datePublished">2021-12-30</time>
+        
+        (Updated: <time datetime="2022-01-01T15:51:01.712Z" itemprop="dateModified">2022-01-01</time>)
+        
+      
+    </div>
+
+
+      
+    <div class="article-category">
+        <i class="fas fa-archive"></i>
+        <a class="category-link" href="/categories/2022笔记/">2022笔记</a>
+    </div>
+
+
+      
+    <div class="article-tag">
+        <i class="fas fa-tag"></i>
+        <a class="tag-link" href="/tags/C/">C++</a>
+    </div>
+
+
+    </div>
+  </header>
+  
+
+  <div class="content" itemprop="articleBody">
+    <p>关键词: 左值, 右值, 运算符, 强制类型转换</p>
+<p>第四章主要描述了运算符以及相关的优先级; </p>
+<a id="more"></a>
+<h2 id="第四章"><a href="#第四章" class="headerlink" title="第四章"></a>第四章</h2><h4 id="左值和右值"><a href="#左值和右值" class="headerlink" title="左值和右值 :"></a>左值和右值 :</h4><p>当一个对象被用作右值的时候, 用的是对象的值(内容); 当对象被用作左值的时候, 用的是对象的身份(内存中的位置). 在需要右值的地方可以用左值来代替, 但不能把右值当做左值来使用, 当一个左值被用作右值时, 实际使用的是它的值. </p>
+<h4 id="复合运算符"><a href="#复合运算符" class="headerlink" title="复合运算符 :"></a>复合运算符 :</h4><p>使用复合运算符只求值一次 , 使用普通的运算符则求值两次 . (区别除了对程序性能有些许影响外几乎可以忽略不计)</p>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">int</span> a += <span class="number">1</span>;</span><br><span class="line"><span class="keyword">int</span> a = a + <span class="number">1</span>;		<span class="comment">// 基本等价</span></span><br></pre></td></tr></table></figure>
+<h4 id="递增和递减运算符"><a href="#递增和递减运算符" class="headerlink" title="递增和递减运算符 :"></a>递增和递减运算符 :</h4><p>此前只知道这里的区别在于先递增(减)还是后递增(减) , 还有一个求值结果的细节.</p>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">int</span> i = <span class="number">0</span>, j;</span><br><span class="line">j = ++i;		<span class="comment">// j = 1, i = 1; 前置版本得到递增后的值(即改变后的对象作为求值结果)</span></span><br><span class="line">j = i++;		<span class="comment">// j = 1, i = 2; 后置版本得到递增之前的值(即运算对象改变之前的副本作为求值结果)</span></span><br><span class="line"><span class="comment">/* 前置版本把对象本身作为左值返回, 后置版本则将对象原始值的副本作为右值返回 */</span></span><br></pre></td></tr></table></figure>
+<p>后置递增运算符的优先级高于解引用运算符:</p>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">auto</span> pbeg = v.begin();</span><br><span class="line"><span class="keyword">while</span>(pbeg != v.end() &amp;&amp; *pbeg &gt;=<span class="number">0</span>)</span><br><span class="line">    <span class="built_in">cout</span> &lt;&lt; *pbeg++ &lt;&lt; <span class="built_in">endl</span>;		<span class="comment">// 等价于*(pbeg++);</span></span><br></pre></td></tr></table></figure>
+<h4 id="sizeof运算符"><a href="#sizeof运算符" class="headerlink" title="sizeof运算符 :"></a>sizeof运算符 :</h4><p>sizeof运算符返回一条表达式或一个类型名字所占的字节数 , 所得的值类型为size_t.</p>
+<p>sizeof并不实际计算其运算对象的值.对数组执行sizeof运算得到整个数组所占空间的大小, 等价于对数组中所有的元素各执行一次sizeof运算并将所得结果求和.</p>
+<h4 id="强制类型转换"><a href="#强制类型转换" class="headerlink" title="强制类型转换 :"></a>强制类型转换 :</h4><ul>
+<li><p>static_cast :</p>
+<p>任何具有明确定义的类型转换, 只要不包含底层const, 都可以使用static_cast.</p>
+</li>
+<li><p>const_cast :</p>
+<p>const_cast只能改变运算对象的底层const (移除or增加对象的const性质). 如果对象本身不是一个常量, 使用强制类型转换获得写权限是合法的行为, 如果对象是一个常量, 再使用const_cast执行写操作就会产生未定义的后果.</p>
+</li>
+<li><p>reinterpret_cast :</p>
+<p>通常为运算对象的位模式提供较低层次上的重新解释.(想像不出对应的应用场景)</p>
+</li>
+</ul>
+<h2 id="第五章"><a href="#第五章" class="headerlink" title="第五章"></a>第五章</h2><h4 id="switch语句"><a href="#switch语句" class="headerlink" title="switch语句 :"></a>switch语句 :</h4><ul>
+<li><p>为了安全起见, 最好在最后一个标签后面加上break, 这样新增case就不需要加了.</p>
+</li>
+<li><p>如果在某处一个带有初值的变量位于作用域之外, 在另一处该变量位于作用域之内, 则从前一处跳转到后一处的行为是非法行为.</p>
+</li>
+</ul>
+<h4 id="范围for语句"><a href="#范围for语句" class="headerlink" title="范围for语句 :"></a>范围for语句 :</h4><p>如果需要对序列中的元素进行写操作, 循环变量必须声明成引用类型.</p>
+<h2 id="第六章-函数"><a href="#第六章-函数" class="headerlink" title="第六章 : 函数"></a>第六章 : 函数</h2><h4 id="局部静态对象"><a href="#局部静态对象" class="headerlink" title="局部静态对象 :"></a>局部静态对象 :</h4><p>可以将局部变量定义成static类型从而获得局部静态对象, 在程序的执行路径第一次经过对象定义语句时初始化, 并且直到程序终止才被销毁 ; 在此期间即使对象所在的函数结束执行也不会对它有影响.</p>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">size_t</span> count_calls()</span><br><span class="line">&#123;</span><br><span class="line">	<span class="keyword">static</span> <span class="keyword">size_t</span> ctr = <span class="number">0</span>;		<span class="comment">// 调用结束后, 这个值仍然有效</span></span><br><span class="line">	<span class="keyword">return</span> ++ctr;</span><br><span class="line">&#125;</span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">main</span><span class="params">()</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">	<span class="keyword">for</span>(<span class="keyword">size_t</span> i = <span class="number">0</span>; i != <span class="number">10</span>; ++i)</span><br><span class="line">	&#123;</span><br><span class="line">		<span class="built_in">cout</span> &lt;&lt; count_calls() &lt;&lt; <span class="built_in">endl</span>;	</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h4 id="参数传递"><a href="#参数传递" class="headerlink" title="参数传递 :"></a>参数传递 :</h4><ul>
+<li>拷贝大的类类型对象或者容器对象比较低效, 有的类烈性不支持拷贝操作, 出于这两种原因, 函数只能通过引用形参访问该类型的对象.</li>
+<li>当函数无需修改引用形参的值时, 最好使用常量引用.</li>
+<li>通过引用形参, 可以突破函数一次只能返回一个值的限制 (C#里可以使用out关键字)</li>
+</ul>
+<h4 id="const形参和实参"><a href="#const形参和实参" class="headerlink" title="const形参和实参 :"></a>const形参和实参 :</h4><p>当用实参初始化形参时会忽略掉顶层const, 可以传递给它常量对象与非常量对象. 这个初始化方式和变量的初始化方式相同.</p>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">fcn</span><span class="params">(<span class="keyword">const</span> <span class="keyword">int</span> i)</span>	</span>&#123;<span class="comment">/* fcn能够读取i, 但是不能向i写值 */</span>&#125;</span><br></pre></td></tr></table></figure>
+<h4 id="数组形参"><a href="#数组形参" class="headerlink" title="数组形参 :"></a>数组形参 :</h4><p>因为不能拷贝数组, 所以我们无法以值传递的方式使用数组参数. 当为函数传递一个数组时, 实际上传递的是指向数组首元素的指针.</p>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">print</span><span class="params">(<span class="keyword">const</span> <span class="keyword">int</span>*)</span></span>;</span><br><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">print</span><span class="params">(<span class="keyword">const</span> <span class="keyword">int</span>[])</span></span>;</span><br><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">print</span><span class="params">(<span class="keyword">const</span> <span class="keyword">int</span>[<span class="number">10</span>])</span></span>;		<span class="comment">// 三种写法是等价的,这里的10仅仅是希望的维度,实际不一定</span></span><br></pre></td></tr></table></figure>
+<p>数组引用形参 :</p>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">f(<span class="keyword">int</span> &amp;arr[<span class="number">10</span>])		<span class="comment">// 第三章提过: 这是引用的数组, 但不存在引用的数组</span></span><br><span class="line">f(<span class="keyword">int</span> (&amp;arr)[<span class="number">10</span>])	<span class="comment">// 正确, arr是具有10个整型的整形数组的引用</span></span><br><span class="line">f(<span class="keyword">int</span> (&amp;arr)[])		<span class="comment">// 错误:无法将参数 1 从“int [10]”转换为“int (&amp;)[]”</span></span><br></pre></td></tr></table></figure>
+<p>传递多维数组:</p>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">print</span><span class="params">(<span class="keyword">int</span> (*matrix)[<span class="number">10</span>], <span class="keyword">int</span> rowSize)</span> </span>&#123;&#125;</span><br><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">print</span><span class="params">(<span class="keyword">int</span> (*matrix)[][<span class="number">10</span>], <span class="keyword">int</span> rowSize)</span> </span>&#123;&#125;	<span class="comment">// 两种等价, 注意第二维开始的维度都是数组类型的一部分, 不可缺少</span></span><br></pre></td></tr></table></figure>
+<h4 id="含有可变形参的函数"><a href="#含有可变形参的函数" class="headerlink" title="含有可变形参的函数 :"></a>含有可变形参的函数 :</h4><ul>
+<li><p>initializer_list形参 :</p>
+<p>如果函数的实参数量未知但是全部实参的类型都相同,  我们可以使用<code>initializer_list</code>类型的形参. <code>initializer_list</code>是一种标准库类型, 用于表示某种特定类型的值的数组.</p>
+<p>与vector不一样的是, <code>initializer_list</code>对象中的元素永远是常量值, 我们无法改变其中元素的值.</p>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">error_msg</span><span class="params">(<span class="built_in">initializer_list</span>&lt;<span class="built_in">string</span>&gt; il)</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">    <span class="keyword">for</span>(<span class="keyword">auto</span> beg = il.begin(); beg != il.end(); ++beg)</span><br><span class="line">        <span class="built_in">cout</span> &lt;&lt; *beg &lt;&lt; <span class="string">" "</span>;</span><br><span class="line">    <span class="built_in">cout</span> &lt;&lt; <span class="built_in">endl</span>;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">error_msg3</span><span class="params">(<span class="keyword">const</span> <span class="built_in">vector</span>&lt;<span class="built_in">string</span>&gt; il)</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">    <span class="keyword">for</span>(<span class="keyword">auto</span> beg = il.begin(); beg != il.end(); ++beg)</span><br><span class="line">        <span class="built_in">cout</span> &lt;&lt; *beg &lt;&lt; <span class="string">" "</span>;</span><br><span class="line">    <span class="built_in">cout</span> &lt;&lt; <span class="built_in">endl</span>;</span><br><span class="line">&#125;</span><br><span class="line"><span class="comment">// 两个函数输出相同</span></span><br><span class="line">error_msg(&#123;<span class="string">"moss1"</span>, <span class="string">"moss2"</span>, <span class="string">"moss3"</span>&#125;);</span><br><span class="line">error_msg3(&#123;<span class="string">"moss1"</span>, <span class="string">"moss2"</span>, <span class="string">"moss3"</span>&#125;);</span><br></pre></td></tr></table></figure>
+<p>为什么不能用<code>const vector&lt;T&gt;</code>?</p>
+<p>这个问题在网上搜了下, 发现8年前就有人问过了 : <a href="https://stackoverflow.com/questions/14414832/why-use-initializer-list-instead-of-vector-in-parameters" target="_blank" rel="noopener">Why use initializer_list instead of vector in parameters?</a></p>
+<p>看了下里面的回答, 大概是说vector不支持列表初始化? 不过上面的代码是可以正常运行不报错的.<br>同样的问题在2015年也有人问过 :<a href="https://stackoverflow.com/questions/27753420/initializer-list-vs-vector" target="_blank" rel="noopener">Initializer list vs. vector</a> , 此时的最高赞回答大意为<code>initializer_list</code>的实现更加高效, 而<code>vector</code>由于需要动态分配内存导致此处开销可能增大.</p>
+<p><img src="https://gitee.com/hust_mo/BlogPictureRepo/raw/master/image-20211231163925916.png" alt="image-20211231163925916"> </p>
+<p>具体实现逻辑以及根据笔者暂时没有能力考究, 欢迎读者在本文的评论区附上相关讨论.<br>另附拓展阅读 : <a href="https://akrzemi1.wordpress.com/2016/07/07/the-cost-of-stdinitializer_list/" target="_blank" rel="noopener">The cost of std::initializer_list</a></p>
+<h4 id="省略符形参"><a href="#省略符形参" class="headerlink" title="省略符形参 :"></a>省略符形参 :</h4><p>省略符形参是为了便于C++程序访问某些特殊的C代码而设置的, 这些代码使用了名为varargs的C标准库功能(详见C编译器文档).<br>省略符形参应该仅仅用于C和C++通用的类型, 应当特别注意的是: 大多数类型的对象在传递给省略符形参时都无法正确拷贝, 省略符形参只能出现在形参列表的最后一个位置.</p>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">foo</span><span class="params">(parm_list, ...)</span></span>;</span><br><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">foo</span><span class="params">(...)</span></span>;</span><br></pre></td></tr></table></figure>
+</li>
+</ul>
+<h4 id="函数的返回值"><a href="#函数的返回值" class="headerlink" title="函数的返回值 :"></a>函数的返回值 :</h4><p>返回一个值的方式和初始化一个变量或者形参的方式完全一样: 返回的值用于初始化调用点的一个临时量, 该临时量就是函数调用的结果.</p>
+<p>不要返回局部对象的引用或指针, 因为函数终止之后局部变量的引用将不再指向有效的内存区域.</p>
+<h4 id="返回数组指针"><a href="#返回数组指针" class="headerlink" title="返回数组指针 :"></a>返回数组指针 :</h4><p>因为数组不能被拷贝, 所以函数不能返回数组, 但可以返回数组的指针或引用, 可以通过以下几种方法进行定义:</p>
+<ul>
+<li><p>类型别名: </p>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">typedef</span> <span class="keyword">int</span> arrT[<span class="number">10</span>];		<span class="comment">// 类型别名: 含有10个整数的数组</span></span><br><span class="line"><span class="keyword">using</span> arrT = <span class="keyword">int</span>[<span class="number">10</span>];		<span class="comment">// 等价于第一行</span></span><br><span class="line"></span><br><span class="line"><span class="function">arrT* <span class="title">func</span><span class="params">(<span class="keyword">int</span> i)</span></span>;		<span class="comment">// func返回一个指向含有10个整数的数组的指针</span></span><br></pre></td></tr></table></figure>
+</li>
+<li><p>直接声明:</p>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">int</span> (*func(<span class="keyword">int</span> i))[<span class="number">10</span>];		<span class="comment">// 最外层的括号必须存在, 不然将返回指针的数组</span></span><br></pre></td></tr></table></figure>
+</li>
+<li><p>尾置返回类型:</p>
+<figure class="highlight"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">auto func(int i)-&gt; int(*)[10];		// 跟在形参列表后, 并以一个-&gt;开头</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>使用<code>decltype</code>:</p>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">int</span> odd[] =&#123;<span class="number">1</span>,<span class="number">3</span>,<span class="number">5</span>,<span class="number">7</span>,<span class="number">9</span>&#125;;</span><br><span class="line"><span class="keyword">int</span> even[] = &#123;<span class="number">2</span>,<span class="number">4</span>,<span class="number">6</span>,<span class="number">8</span>,<span class="number">10</span>&#125;;</span><br><span class="line"><span class="keyword">decltype</span>(odd) *arrPtr(<span class="keyword">int</span> i)</span><br><span class="line">&#123;</span><br><span class="line">	<span class="keyword">return</span> (i % <span class="number">2</span>) ? &amp;odd : &amp;even;		<span class="comment">// 返回一个指向数组的指针</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+</li>
+</ul>
+<h4 id="函数重载"><a href="#函数重载" class="headerlink" title="函数重载 :"></a>函数重载 :</h4><p>同一作用域内的几个函数名字相同但形参列表不同.</p>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// top-level const 无法用来区分形参</span></span><br><span class="line"><span class="function">Record <span class="title">lookup</span><span class="params">(Phone)</span></span>;</span><br><span class="line"><span class="function">Record <span class="title">lookup</span><span class="params">(<span class="keyword">const</span> Phone)</span></span>;		<span class="comment">// 重复声明了</span></span><br><span class="line"></span><br><span class="line"><span class="comment">// low-level const 可以用来区分形参</span></span><br><span class="line"><span class="function">Record <span class="title">lookup</span><span class="params">(Account&amp;)</span></span>;		<span class="comment">// 作用于Account的引用</span></span><br><span class="line"><span class="function">Record <span class="title">lookup</span><span class="params">(<span class="keyword">const</span> Account&amp;)</span></span>;		<span class="comment">// 作用于常量引用</span></span><br><span class="line"></span><br><span class="line"><span class="function">Record <span class="title">lookup</span><span class="params">(Account*)</span></span>;		<span class="comment">// 作用于Account的指针</span></span><br><span class="line"><span class="function">Record <span class="title">lookup</span><span class="params">(<span class="keyword">const</span> Account*)</span></span>;		<span class="comment">// 作用域指向常量的指针</span></span><br></pre></td></tr></table></figure>
+<p><code>const_cast</code>和重载 :</p>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 参数和返回类型都是const string, 传入非const时, 返回的依然为const string</span></span><br><span class="line"><span class="function"><span class="keyword">const</span> <span class="built_in">string</span> &amp;<span class="title">shorterString</span><span class="params">(<span class="keyword">const</span> <span class="built_in">string</span> &amp;s1, <span class="keyword">const</span> <span class="built_in">string</span> &amp;s2)</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">	<span class="keyword">return</span> s1.size() &lt;= s2.size() ? s1 : s2;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="comment">// 当实参不是常量时, 得到的结果依然是一个普通的引用</span></span><br><span class="line"><span class="function"><span class="built_in">string</span> &amp;<span class="title">shorterString</span><span class="params">(<span class="built_in">string</span> &amp;s1, <span class="built_in">string</span>&amp; s2)</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">	<span class="keyword">auto</span> &amp;r = shorterString(<span class="keyword">const_cast</span>&lt;<span class="keyword">const</span> <span class="built_in">string</span>&amp;&gt;(s1), <span class="keyword">const_cast</span>&lt;<span class="keyword">const</span> <span class="built_in">string</span>&amp;&gt;(s2));</span><br><span class="line">	<span class="keyword">return</span> <span class="keyword">const_cast</span>&lt;<span class="built_in">string</span>&amp;&gt;(r);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h4 id="特殊用途语言特性"><a href="#特殊用途语言特性" class="headerlink" title="特殊用途语言特性:"></a>特殊用途语言特性:</h4><ul>
+<li><p>默认实参 :</p>
+  <figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="built_in">string</span> <span class="title">screen</span><span class="params">(<span class="keyword">int</span> ht = <span class="number">24</span>, <span class="keyword">int</span> wid = <span class="number">80.</span> <span class="keyword">char</span> backgrnd = <span class="string">' '</span>)</span></span>;</span><br><span class="line"><span class="comment">// 为每个形参提供了默认实参, 一旦某个形参被赋予了默认值, 它后面的所有形参都必须有默认值</span></span><br><span class="line"><span class="comment">// 在给定的作用域中一个形参只能被赋予一次默认实参</span></span><br><span class="line"><span class="comment">// 局部变量不能作为默认实参</span></span><br></pre></td></tr></table></figure>
+</li>
+<li><p>内联函数和constexpr函数 :</p>
+<p>  背景: 调用函数一般比求等价表达式的值要慢一些 , 将函数指定为内联函数可避免函数调用的开销.</p>
+<p>  在函数的返回类型前面加上关键字<code>inline</code>, 将其声明为内联函数, 适用于规模较小, 流程直接, 频繁调用的函数. (感觉类似#define的功能)</p>
+<p>  (待续)</p>
+</li>
+</ul>
+
+  </div>
+</article>
+
+
+
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/gitalk@1/dist/gitalk.css">
+    <script src="https://cdn.jsdelivr.net/npm/gitalk@1/dist/gitalk.min.js"></script>
+    <script src="https://cdn.bootcss.com/blueimp-md5/2.10.0/js/md5.min.js"></script>
+    <div id="gitalk-container"></div>
+    <script type="text/javascript">
+        var gitalk = new Gitalk({
+            clientID: '643bb65e08572c0f02f9',
+            clientSecret: '267594ee5074e2f5b6392c6deba31c86b4b98abe',
+            id: md5(window.location.pathname),
+            repo: 'bitzhangmo.github.io',
+            owner: 'bitzhangmo',
+            admin: 'bitzhangmo',
+            distractionFreeMode: ''
+        })
+        gitalk.render('gitalk-container')
+    </script>
+
+
+        
+          <div id="footer-post-container">
+  <div id="footer-post">
+
+    <div id="nav-footer" style="display: none">
+      <ul>
+         
+          <li><a href="/">首页</a></li>
+         
+          <li><a href="/about/">关于</a></li>
+         
+          <li><a href="/tags/">tags</a></li>
+         
+          <li><a href="/categories/">categories</a></li>
+         
+          <li><a href="/archives/">归档</a></li>
+         
+          <li><a href="/categories/reports/">reports</a></li>
+         
+          <li><a href="/search/">搜索</a></li>
+        
+      </ul>
+    </div>
+
+    <div id="toc-footer" style="display: none">
+      <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#第四章"><span class="toc-number">1.</span> <span class="toc-text">第四章</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#左值和右值"><span class="toc-number">1.0.1.</span> <span class="toc-text">左值和右值 :</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#复合运算符"><span class="toc-number">1.0.2.</span> <span class="toc-text">复合运算符 :</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#递增和递减运算符"><span class="toc-number">1.0.3.</span> <span class="toc-text">递增和递减运算符 :</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#sizeof运算符"><span class="toc-number">1.0.4.</span> <span class="toc-text">sizeof运算符 :</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#强制类型转换"><span class="toc-number">1.0.5.</span> <span class="toc-text">强制类型转换 :</span></a></li></ol></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#第五章"><span class="toc-number">2.</span> <span class="toc-text">第五章</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#switch语句"><span class="toc-number">2.0.1.</span> <span class="toc-text">switch语句 :</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#范围for语句"><span class="toc-number">2.0.2.</span> <span class="toc-text">范围for语句 :</span></a></li></ol></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#第六章-函数"><span class="toc-number">3.</span> <span class="toc-text">第六章 : 函数</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#局部静态对象"><span class="toc-number">3.0.1.</span> <span class="toc-text">局部静态对象 :</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#参数传递"><span class="toc-number">3.0.2.</span> <span class="toc-text">参数传递 :</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#const形参和实参"><span class="toc-number">3.0.3.</span> <span class="toc-text">const形参和实参 :</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#数组形参"><span class="toc-number">3.0.4.</span> <span class="toc-text">数组形参 :</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#含有可变形参的函数"><span class="toc-number">3.0.5.</span> <span class="toc-text">含有可变形参的函数 :</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#省略符形参"><span class="toc-number">3.0.6.</span> <span class="toc-text">省略符形参 :</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#函数的返回值"><span class="toc-number">3.0.7.</span> <span class="toc-text">函数的返回值 :</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#返回数组指针"><span class="toc-number">3.0.8.</span> <span class="toc-text">返回数组指针 :</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#函数重载"><span class="toc-number">3.0.9.</span> <span class="toc-text">函数重载 :</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#特殊用途语言特性"><span class="toc-number">3.0.10.</span> <span class="toc-text">特殊用途语言特性:</span></a></li></ol></li></ol></li></ol>
+    </div>
+
+    <div id="share-footer" style="display: none">
+      <ul>
+  <li><a class="icon" href="http://www.facebook.com/sharer.php?u=https://bitzhangmo.github.io/2021/12/30/C++Primer笔记/C-Primer笔记-第四、五、六章/"><i class="fab fa-facebook fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="https://twitter.com/share?url=https://bitzhangmo.github.io/2021/12/30/C++Primer笔记/C-Primer笔记-第四、五、六章/&text=C++Primer笔记(第四、五、六章)"><i class="fab fa-twitter fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="http://www.linkedin.com/shareArticle?url=https://bitzhangmo.github.io/2021/12/30/C++Primer笔记/C-Primer笔记-第四、五、六章/&title=C++Primer笔记(第四、五、六章)"><i class="fab fa-linkedin fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="https://pinterest.com/pin/create/bookmarklet/?url=https://bitzhangmo.github.io/2021/12/30/C++Primer笔记/C-Primer笔记-第四、五、六章/&is_video=false&description=C++Primer笔记(第四、五、六章)"><i class="fab fa-pinterest fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="mailto:?subject=C++Primer笔记(第四、五、六章)&body=Check out this article: https://bitzhangmo.github.io/2021/12/30/C++Primer笔记/C-Primer笔记-第四、五、六章/"><i class="fas fa-envelope fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="https://getpocket.com/save?url=https://bitzhangmo.github.io/2021/12/30/C++Primer笔记/C-Primer笔记-第四、五、六章/&title=C++Primer笔记(第四、五、六章)"><i class="fab fa-get-pocket fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="http://reddit.com/submit?url=https://bitzhangmo.github.io/2021/12/30/C++Primer笔记/C-Primer笔记-第四、五、六章/&title=C++Primer笔记(第四、五、六章)"><i class="fab fa-reddit fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="http://www.stumbleupon.com/submit?url=https://bitzhangmo.github.io/2021/12/30/C++Primer笔记/C-Primer笔记-第四、五、六章/&title=C++Primer笔记(第四、五、六章)"><i class="fab fa-stumbleupon fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="http://digg.com/submit?url=https://bitzhangmo.github.io/2021/12/30/C++Primer笔记/C-Primer笔记-第四、五、六章/&title=C++Primer笔记(第四、五、六章)"><i class="fab fa-digg fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="http://www.tumblr.com/share/link?url=https://bitzhangmo.github.io/2021/12/30/C++Primer笔记/C-Primer笔记-第四、五、六章/&name=C++Primer笔记(第四、五、六章)&description=&lt;p&gt;关键词: 左值, 右值, 运算符, 强制类型转换&lt;/p&gt;
+&lt;p&gt;第四章主要描述了运算符以及相关的优先级; &lt;/p&gt;"><i class="fab fa-tumblr fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="https://news.ycombinator.com/submitlink?u=https://bitzhangmo.github.io/2021/12/30/C++Primer笔记/C-Primer笔记-第四、五、六章/&t=C++Primer笔记(第四、五、六章)"><i class="fab fa-hacker-news fa-lg" aria-hidden="true"></i></a></li>
+</ul>
+
+    </div>
+
+    <div id="actions-footer">
+        <a id="menu" class="icon" href="#" onclick="$('#nav-footer').toggle();return false;"><i class="fas fa-bars fa-lg" aria-hidden="true"></i> 菜单</a>
+        <a id="toc" class="icon" href="#" onclick="$('#toc-footer').toggle();return false;"><i class="fas fa-list fa-lg" aria-hidden="true"></i> 目录</a>
+        <a id="share" class="icon" href="#" onclick="$('#share-footer').toggle();return false;"><i class="fas fa-share-alt fa-lg" aria-hidden="true"></i> 分享</a>
+        <a id="top" style="display:none" class="icon" href="#" onclick="$('html, body').animate({ scrollTop: 0 }, 'fast');"><i class="fas fa-chevron-up fa-lg" aria-hidden="true"></i> 返回顶部</a>
+    </div>
+
+  </div>
+</div>
+
+        
+        <footer id="footer">
+  <div class="footer-left">
+    Copyright &copy; 2022 zhangMo
+  </div>
+  <div class="footer-right">
+    <nav>
+      <ul>
+         
+          <li><a href="/">首页</a></li>
+         
+          <li><a href="/about/">关于</a></li>
+         
+          <li><a href="/tags/">tags</a></li>
+         
+          <li><a href="/categories/">categories</a></li>
+         
+          <li><a href="/archives/">归档</a></li>
+         
+          <li><a href="/categories/reports/">reports</a></li>
+         
+          <li><a href="/search/">搜索</a></li>
+        
+      </ul>
+    </nav>
+  </div>
+</footer>
+
+        
+    </div>
+    <!-- styles -->
+<link rel="stylesheet" href="/lib/font-awesome/css/all.min.css">
+<link rel="stylesheet" href="/lib/justified-gallery/css/justifiedGallery.min.css">
+
+    <!-- jquery -->
+<script src="/lib/jquery/jquery.min.js"></script>
+<script src="/lib/justified-gallery/js/jquery.justifiedGallery.min.js"></script>
+<!-- clipboard -->
+
+  <script src="/lib/clipboard/clipboard.min.js"></script>
+  <script type="text/javascript">
+  $(function() {
+    // copy-btn HTML
+    var btn = "<span class=\"btn-copy tooltipped tooltipped-sw\" aria-label=\"复制到粘贴板!\">";
+    btn += '<i class="far fa-clone"></i>';
+    btn += '</span>'; 
+    // mount it!
+    $(".highlight table").before(btn);
+    var clip = new ClipboardJS('.btn-copy', {
+      text: function(trigger) {
+        return Array.from(trigger.nextElementSibling.querySelectorAll('.code')).reduce((str,it)=>str+it.innerText+'\n','')
+      }
+    });
+    clip.on('success', function(e) {
+      e.trigger.setAttribute('aria-label', "复制成功!");
+      e.clearSelection();
+    })
+  })
+  </script>
+
+<script src="/js/main.js"></script>
+<!-- search -->
+
+<!-- Google Analytics -->
+
+<!-- Baidu Analytics -->
+
+<!-- Disqus Comments -->
+
+
+<script src="/live2dw/lib/L2Dwidget.min.js?bd2294fafea3389ee458f1d9be5a2157"></script><script>L2Dwidget.init({"pluginRootPath":"live2dw/","pluginJsPath":"lib/","pluginModelPath":"assets/","tagMode":false,"debug":false,"model":{"jsonPath":"/live2dw/assets/hijiki.model.json"},"display":{"position":"left","width":100,"height":200},"mobile":{"show":false},"log":false});</script></body>
+</html>
