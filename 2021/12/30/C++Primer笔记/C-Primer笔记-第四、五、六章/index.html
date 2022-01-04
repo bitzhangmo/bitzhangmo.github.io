@@ -15,7 +15,7 @@
 <meta property="og:description" content="关键词: 左值, 右值, 运算符, 强制类型转换 第四章主要描述了运算符以及相关的优先级;">
 <meta property="og:locale" content="zh-CN">
 <meta property="og:image" content="https://gitee.com/hust_mo/BlogPictureRepo/raw/master/image-20211231163925916.png">
-<meta property="og:updated_time" content="2022-01-01T15:51:01.712Z">
+<meta property="og:updated_time" content="2022-01-04T16:42:19.876Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="C++Primer笔记(第四、五、六章)">
 <meta name="twitter:description" content="关键词: 左值, 右值, 运算符, 强制类型转换 第四章主要描述了运算符以及相关的优先级;">
@@ -81,6 +81,8 @@
     <span id="actions">
       <ul>
         
+        <li><a class="icon" href="/2022/01/04/C++Primer笔记/C-Primer阅读笔记-第七章/"><i class="fas fa-chevron-left" aria-hidden="true" onmouseover="$('#i-prev').toggle();" onmouseout="$('#i-prev').toggle();"></i></a></li>
+        
         
         <li><a class="icon" href="/2021/12/30/C++Primer笔记/C-Primer笔记-第三章/"><i class="fas fa-chevron-right" aria-hidden="true" onmouseover="$('#i-next').toggle();" onmouseout="$('#i-next').toggle();"></i></a></li>
         
@@ -137,7 +139,7 @@
       
         <time datetime="2021-12-29T17:33:49.000Z" itemprop="datePublished">2021-12-30</time>
         
-        (Updated: <time datetime="2022-01-01T15:51:01.712Z" itemprop="dateModified">2022-01-01</time>)
+        (Updated: <time datetime="2022-01-04T16:42:19.876Z" itemprop="dateModified">2022-01-05</time>)
         
       
     </div>
@@ -246,10 +248,27 @@
 <li><p>默认实参 :</p>
   <figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="built_in">string</span> <span class="title">screen</span><span class="params">(<span class="keyword">int</span> ht = <span class="number">24</span>, <span class="keyword">int</span> wid = <span class="number">80.</span> <span class="keyword">char</span> backgrnd = <span class="string">' '</span>)</span></span>;</span><br><span class="line"><span class="comment">// 为每个形参提供了默认实参, 一旦某个形参被赋予了默认值, 它后面的所有形参都必须有默认值</span></span><br><span class="line"><span class="comment">// 在给定的作用域中一个形参只能被赋予一次默认实参</span></span><br><span class="line"><span class="comment">// 局部变量不能作为默认实参</span></span><br></pre></td></tr></table></figure>
 </li>
-<li><p>内联函数和constexpr函数 :</p>
+<li><p>内联函数 :</p>
 <p>  背景: 调用函数一般比求等价表达式的值要慢一些 , 将函数指定为内联函数可避免函数调用的开销.</p>
-<p>  在函数的返回类型前面加上关键字<code>inline</code>, 将其声明为内联函数, 适用于规模较小, 流程直接, 频繁调用的函数. (感觉类似#define的功能)</p>
-<p>  (待续)</p>
+<p>  在函数的返回类型前面加上关键字<code>inline</code>, 将其声明为内联函数, 适用于<strong>规模较小, 流程直接, 频繁调用</strong>的函数. (感觉类似#define的功能)</p>
+  <figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">inline</span> <span class="keyword">const</span> <span class="built_in">string</span>&amp; <span class="title">shorterString</span><span class="params">(<span class="keyword">const</span> <span class="built_in">string</span> &amp;s1, <span class="keyword">const</span> <span class="built_in">string</span> &amp;s2)</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">	<span class="keyword">return</span> si.size() &lt;= s2.size() ? s1 : s2;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="built_in">cout</span> &lt;&lt; shorterString(s1, s2) &lt;&lt; <span class="built_in">endl</span>;</span><br><span class="line"><span class="comment">// 在编译过程中展开如下(原书此处为&lt;号, 没道理吧......)</span></span><br><span class="line"><span class="built_in">cout</span> &lt;&lt; s1.size() &lt;= s2.size() &gt; s1 : s2;</span><br></pre></td></tr></table></figure>
+</li>
+</ul>
+<ul>
+<li><p>constexpr函数 :</p>
+<p>  能用于常量表达式的函数, 函数的返回值类型以及所有形参的类型都得是字面值类型, 而且函数体中必须有且仅有一条return语句(注: 在C++14标准中这条被删除了, 参考来源:<a href="https://en.cppreference.com/w/cpp/language/constexpr" target="_blank" rel="noopener">constexpr specifier</a>).</p>
+<p>  当constexpr函数的实参是常量表达式时, 返回值也是常量表达式, <strong>反之不然</strong>.</p>
+<p>  书中这里特意强调了 :</p>
+<blockquote>
+<p>constexpr函数不一定返回常量表达式.</p>
+</blockquote>
+<p>  在不需要返回常量表达式的上下文, constexpr函数可以不返回常量表达式, 编译器不会检查函数的结果是否是一个常量表达式; 但在需要返回常量表达式的上下文中, 如果结果不是常量表达式, 编译器会报错.</p>
+  <figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;iostream&gt;</span></span></span><br><span class="line"><span class="function"><span class="keyword">constexpr</span> size_t <span class="title">scale</span><span class="params">(<span class="keyword">size_t</span> cnt)</span> </span>&#123; <span class="keyword">return</span> <span class="number">32</span> * cnt; &#125;	<span class="comment">// scale是一个constexpr函数</span></span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">main</span><span class="params">()</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">    <span class="keyword">int</span> num = <span class="number">10</span>;	<span class="comment">// num非常量表达式</span></span><br><span class="line">    <span class="keyword">constexpr</span> <span class="keyword">int</span> a = scale(<span class="number">10</span>); <span class="comment">// 正确,实参是一个字面值常量</span></span><br><span class="line">    <span class="comment">//constexpr int b = scale(num);	// 错误, 实参非常量表达式, 返回值也不是</span></span><br><span class="line">    <span class="keyword">int</span> c = scale(num);	<span class="comment">// 正确, 上下文未要求返回常量表达式, 可以不返回</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>  相关讨论 : </p>
+<ul>
+<li><a href="https://segmentfault.com/q/1010000004615565" target="_blank" rel="noopener">关于constexpr函数的一个问题</a></li>
+<li><a href="https://stackoverflow.com/questions/31206937/a-constexpr-function-is-not-required-to-return-a-constant-expression" target="_blank" rel="noopener">A constexpr function is not required to return a constant expression?</a></li>
+</ul>
 </li>
 </ul>
 
