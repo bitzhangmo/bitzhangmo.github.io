@@ -1,0 +1,359 @@
+<!DOCTYPE html>
+<html lang=zh>
+<head><meta name="generator" content="Hexo 3.9.0">
+    <!-- so meta -->
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="HandheldFriendly" content="True">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+    <meta name="description" content="类 : 定义在类内部的函数是隐式的inline函数.  成员函数:成员函数通过一个名为this的额外的隐式参数来访问调用它的那个对象, 当我们调用一个成员函数时, 用请求该函数的对象地址初始化this. 任何对类成员的直接访问都被看作this的隐式引用, this是一个常量指针.  const成员函数 :  默认情况下, this的类型是指向类类型非常量版本的常量指针. 即this的类型为T *">
+<meta name="keywords" content="C++">
+<meta property="og:type" content="article">
+<meta property="og:title" content="C++Primer笔记(第七章)">
+<meta property="og:url" content="https://bitzhangmo.github.io/2022/01/04/C++Primer笔记/C-Primer笔记-第七章/index.html">
+<meta property="og:site_name" content="zhangMo Blog">
+<meta property="og:description" content="类 : 定义在类内部的函数是隐式的inline函数.  成员函数:成员函数通过一个名为this的额外的隐式参数来访问调用它的那个对象, 当我们调用一个成员函数时, 用请求该函数的对象地址初始化this. 任何对类成员的直接访问都被看作this的隐式引用, this是一个常量指针.  const成员函数 :  默认情况下, this的类型是指向类类型非常量版本的常量指针. 即this的类型为T *">
+<meta property="og:locale" content="zh-CN">
+<meta property="og:updated_time" content="2022-01-06T15:34:36.259Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="C++Primer笔记(第七章)">
+<meta name="twitter:description" content="类 : 定义在类内部的函数是隐式的inline函数.  成员函数:成员函数通过一个名为this的额外的隐式参数来访问调用它的那个对象, 当我们调用一个成员函数时, 用请求该函数的对象地址初始化this. 任何对类成员的直接访问都被看作this的隐式引用, this是一个常量指针.  const成员函数 :  默认情况下, this的类型是指向类类型非常量版本的常量指针. 即this的类型为T *">
+    
+    
+        
+          
+              <link rel="shortcut icon" href="/images/favicon.ico">
+          
+        
+        
+          
+            <link rel="icon" type="image/png" href="/images/favicon-192x192.png" sizes="192x192">
+          
+        
+        
+          
+            <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon.png">
+          
+        
+    
+    <!-- title -->
+    <title>C++Primer笔记(第七章)</title>
+    <!-- styles -->
+    <link rel="stylesheet" href="/css/style.css">
+    <!-- persian styles -->
+    
+      <link rel="stylesheet" href="/css/rtl.css">
+    
+    <!-- rss -->
+    
+    
+</head>
+
+<body class="max-width mx-auto px3 ltr">
+    
+      <div id="header-post">
+  <a id="menu-icon" href="#"><i class="fas fa-bars fa-lg"></i></a>
+  <a id="menu-icon-tablet" href="#"><i class="fas fa-bars fa-lg"></i></a>
+  <a id="top-icon-tablet" href="#" onclick="$('html, body').animate({ scrollTop: 0 }, 'fast');" style="display:none;"><i class="fas fa-chevron-up fa-lg"></i></a>
+  <span id="menu">
+    <span id="nav">
+      <ul>
+         
+          <li><a href="/">首页</a></li>
+         
+          <li><a href="/about/">关于</a></li>
+         
+          <li><a href="/tags/">tags</a></li>
+         
+          <li><a href="/categories/">categories</a></li>
+         
+          <li><a href="/archives/">归档</a></li>
+         
+          <li><a href="/categories/reports/">reports</a></li>
+         
+          <li><a href="/search/">搜索</a></li>
+        
+      </ul>
+    </span>
+    <br/>
+    <span id="actions">
+      <ul>
+        
+        
+        <li><a class="icon" href="/2021/12/30/C++Primer笔记/C-Primer笔记-第四、五、六章/"><i class="fas fa-chevron-right" aria-hidden="true" onmouseover="$('#i-next').toggle();" onmouseout="$('#i-next').toggle();"></i></a></li>
+        
+        <li><a class="icon" href="#" onclick="$('html, body').animate({ scrollTop: 0 }, 'fast');"><i class="fas fa-chevron-up" aria-hidden="true" onmouseover="$('#i-top').toggle();" onmouseout="$('#i-top').toggle();"></i></a></li>
+        <li><a class="icon" href="#"><i class="fas fa-share-alt" aria-hidden="true" onmouseover="$('#i-share').toggle();" onmouseout="$('#i-share').toggle();" onclick="$('#share').toggle();return false;"></i></a></li>
+      </ul>
+      <span id="i-prev" class="info" style="display:none;">上一篇</span>
+      <span id="i-next" class="info" style="display:none;">下一篇</span>
+      <span id="i-top" class="info" style="display:none;">返回顶部</span>
+      <span id="i-share" class="info" style="display:none;">分享文章</span>
+    </span>
+    <br/>
+    <div id="share" style="display: none">
+      <ul>
+  <li><a class="icon" href="http://www.facebook.com/sharer.php?u=https://bitzhangmo.github.io/2022/01/04/C++Primer笔记/C-Primer笔记-第七章/"><i class="fab fa-facebook " aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="https://twitter.com/share?url=https://bitzhangmo.github.io/2022/01/04/C++Primer笔记/C-Primer笔记-第七章/&text=C++Primer笔记(第七章)"><i class="fab fa-twitter " aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="http://www.linkedin.com/shareArticle?url=https://bitzhangmo.github.io/2022/01/04/C++Primer笔记/C-Primer笔记-第七章/&title=C++Primer笔记(第七章)"><i class="fab fa-linkedin " aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="https://pinterest.com/pin/create/bookmarklet/?url=https://bitzhangmo.github.io/2022/01/04/C++Primer笔记/C-Primer笔记-第七章/&is_video=false&description=C++Primer笔记(第七章)"><i class="fab fa-pinterest " aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="mailto:?subject=C++Primer笔记(第七章)&body=Check out this article: https://bitzhangmo.github.io/2022/01/04/C++Primer笔记/C-Primer笔记-第七章/"><i class="fas fa-envelope " aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="https://getpocket.com/save?url=https://bitzhangmo.github.io/2022/01/04/C++Primer笔记/C-Primer笔记-第七章/&title=C++Primer笔记(第七章)"><i class="fab fa-get-pocket " aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="http://reddit.com/submit?url=https://bitzhangmo.github.io/2022/01/04/C++Primer笔记/C-Primer笔记-第七章/&title=C++Primer笔记(第七章)"><i class="fab fa-reddit " aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="http://www.stumbleupon.com/submit?url=https://bitzhangmo.github.io/2022/01/04/C++Primer笔记/C-Primer笔记-第七章/&title=C++Primer笔记(第七章)"><i class="fab fa-stumbleupon " aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="http://digg.com/submit?url=https://bitzhangmo.github.io/2022/01/04/C++Primer笔记/C-Primer笔记-第七章/&title=C++Primer笔记(第七章)"><i class="fab fa-digg " aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="http://www.tumblr.com/share/link?url=https://bitzhangmo.github.io/2022/01/04/C++Primer笔记/C-Primer笔记-第七章/&name=C++Primer笔记(第七章)&description="><i class="fab fa-tumblr " aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="https://news.ycombinator.com/submitlink?u=https://bitzhangmo.github.io/2022/01/04/C++Primer笔记/C-Primer笔记-第七章/&t=C++Primer笔记(第七章)"><i class="fab fa-hacker-news " aria-hidden="true"></i></a></li>
+</ul>
+
+    </div>
+    <div id="toc">
+      <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#类"><span class="toc-number">1.</span> <span class="toc-text">类 :</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#成员函数"><span class="toc-number">1.0.1.</span> <span class="toc-text">成员函数:</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#类作用域和成员函数"><span class="toc-number">1.0.2.</span> <span class="toc-text">类作用域和成员函数 :</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#构造函数："><span class="toc-number">1.0.3.</span> <span class="toc-text">构造函数：</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#访问控制与封装"><span class="toc-number">1.0.4.</span> <span class="toc-text">访问控制与封装:</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#友元"><span class="toc-number">1.0.5.</span> <span class="toc-text">友元:</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#可变数据成员"><span class="toc-number">1.0.6.</span> <span class="toc-text">可变数据成员:</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#从const成员函数返回-this"><span class="toc-number">1.0.7.</span> <span class="toc-text">从const成员函数返回*this:</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#类的声明"><span class="toc-number">1.0.8.</span> <span class="toc-text">类的声明:</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#名字查找与类的作用域"><span class="toc-number">1.0.9.</span> <span class="toc-text">名字查找与类的作用域:</span></a></li></ol></li></ol></li></ol>
+    </div>
+  </span>
+</div>
+
+    
+    <div class="content index py4">
+        
+        <article class="post" itemscope itemtype="http://schema.org/BlogPosting">
+  <header>
+    
+    <h1 class="posttitle" itemprop="name headline">
+        C++Primer笔记(第七章)
+    </h1>
+
+
+
+    <div class="meta">
+      <span class="author" itemprop="author" itemscope itemtype="http://schema.org/Person">
+        <span itemprop="name">zhangMo Blog</span>
+      </span>
+      
+    <div class="postdate">
+      
+        <time datetime="2022-01-04T15:48:51.000Z" itemprop="datePublished">2022-01-04</time>
+        
+        (Updated: <time datetime="2022-01-06T15:34:36.259Z" itemprop="dateModified">2022-01-06</time>)
+        
+      
+    </div>
+
+
+      
+    <div class="article-category">
+        <i class="fas fa-archive"></i>
+        <a class="category-link" href="/categories/2022笔记/">2022笔记</a>
+    </div>
+
+
+      
+    <div class="article-tag">
+        <i class="fas fa-tag"></i>
+        <a class="tag-link" href="/tags/C/">C++</a>
+    </div>
+
+
+    </div>
+  </header>
+  
+
+  <div class="content" itemprop="articleBody">
+    <a id="more"></a>
+<h2 id="类"><a href="#类" class="headerlink" title="类 :"></a>类 :</h2><ul>
+<li>定义在类内部的函数是隐式的<code>inline</code>函数.</li>
+</ul>
+<h4 id="成员函数"><a href="#成员函数" class="headerlink" title="成员函数:"></a>成员函数:</h4><p>成员函数通过一个名为this的额外的隐式参数来访问调用它的那个对象, 当我们调用一个成员函数时, 用请求该函数的对象地址初始化this.</p>
+<p>任何对类成员的直接访问都被看作this的隐式引用, this是一个常量指针.</p>
+<ul>
+<li>const成员函数 :</li>
+</ul>
+<p>默认情况下, this的类型是指向类类型非常量版本的常量指针. 即this的类型为<code>T *const</code>, 所以按照初始化原则, 在默认情况下不能把this绑定到一个常量对象上, 因此就不能在常量对象上调用普通的成员函数.</p>
+<p>如果想调用常量成员函数, 可以在参数列表后添加一个const, 表示this是一个指向常量的指针 , 也因此常量成员函数对于对象来说是只读的.</p>
+<p>常量对象, 以及常量对象的引用或指针都只能调用常量成员函数.</p>
+<h4 id="类作用域和成员函数"><a href="#类作用域和成员函数" class="headerlink" title="类作用域和成员函数 :"></a>类作用域和成员函数 :</h4><p>编译器分两步处理类 : 首先编译成员的声明, 然后才轮到成员函数体, 因此成员函数体可以随意使用类中的其他成员而无需在意这些成员出现的次序.</p>
+<p>在类的外部定义成员函数时, 成员函数的定义必须与声明匹配, 同时包含所属类名.</p>
+<h4 id="构造函数："><a href="#构造函数：" class="headerlink" title="构造函数："></a>构造函数：</h4><p>构造函数没有返回类型, 与类的名字相同, 不能被声明成const的.</p>
+<p>如果没有显式的定义构造函数 (只有当类没有声明任何构造函数时), 编译器会隐式的定义一个默认构造函数, 按照如下规则初始化类的数据成员: </p>
+<ol>
+<li>如果存在类内的初始值, 用它来初始化成员</li>
+<li>否则默认初始化该成员.</li>
+</ol>
+<p>在C++11中可以通过在参数列表后面写上<code>= default</code>来要求编译器生成构造函数.</p>
+<h4 id="访问控制与封装"><a href="#访问控制与封装" class="headerlink" title="访问控制与封装:"></a>访问控制与封装:</h4><ul>
+<li>定义在public说明符之后的成员在整个程序内可被访问, public成员定义类的接口</li>
+<li>定义在private说明符之后的成员可以被类的成员函数访问, 但是不能被使用该类的代码访问, private部分封装了类的实现细节.</li>
+</ul>
+<blockquote>
+<p>class和struct定义类唯一的区别就是默认的访问权限: 在struct中, 定义第一个访问说明符之前的成员是public的, 而在class中, 这些成员是private的.</p>
+</blockquote>
+<h4 id="友元"><a href="#友元" class="headerlink" title="友元:"></a>友元:</h4><p>通过友元使其他类或函数访问类的非公有成员, 在函数声明前加一条friend关键字即可.</p>
+<p>友元声明只能出现在类定义的内部, 但是在类内出现的具体位置不限. 友元不是类的成员也不受它所在区域访问级别的约束.</p>
+<p><strong>友元的声明仅仅指定了访问的权限, 而非一个通常意义上的函数声明, 如果我们希望类的用户能够调用某个友元函数, 那么我们就必须在友元声明之外再专门对函数进行一次声明.</strong></p>
+<p>友元关系不存在传递性, B类被声明成A类的友元, B类的友元C类不能拥有访问A类的特性, 即每个类负责控制自己的友元类或友元函数.</p>
+<p>如果一个类想把一组重载函数声明其友元, 它需要对这组函数中的每一个分别声明.</p>
+<h4 id="可变数据成员"><a href="#可变数据成员" class="headerlink" title="可变数据成员:"></a>可变数据成员:</h4><p>背景: 我们希望能修改类的某个数据成员, 即使它是const对象的成员.因此一个const成员函数可以改变一个可变成员的值.</p>
+<p>可以通过在变量的声明中加入<code>mutable</code>关键字实现这个目的.</p>
+<h4 id="从const成员函数返回-this"><a href="#从const成员函数返回-this" class="headerlink" title="从const成员函数返回*this:"></a>从const成员函数返回*this:</h4><p>一个const成员函数如果以引用的形式返回*this, 那么它的返回类型将是常量引用, 这意味着不能将其嵌入到一组动作中的序列中去.</p>
+<h4 id="类的声明"><a href="#类的声明" class="headerlink" title="类的声明:"></a>类的声明:</h4><p>类可以通过暂时仅声明类而不定义来进行前向声明, 此时它是个不完全类型.</p>
+<p>使用场景: 可以定义指向这种类型的指针或引用, 也可以声明(但是不能定义)以不完全类型作为参数或者返回类型的函数.</p>
+<h4 id="名字查找与类的作用域"><a href="#名字查找与类的作用域" class="headerlink" title="名字查找与类的作用域:"></a>名字查找与类的作用域:</h4><p>声明中使用的名字, 包括返回类型或者参数列表中使用的名字, 都必须在使用前确保可见.</p>
+<p>对于定义在类内部的<strong>成员函数</strong>来说(只适用于成员函数), 分两步解析其中名字:</p>
+<ul>
+<li>首先, 编译成员的声明</li>
+<li>直到类全部可见后才编译函数体</li>
+</ul>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">typedef</span> <span class="keyword">double</span> Money;</span><br><span class="line"><span class="built_in">string</span> bal;</span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Account</span> &#123;</span></span><br><span class="line"><span class="keyword">public</span>:</span><br><span class="line">	<span class="function">Money <span class="title">balance</span><span class="params">()</span> </span>&#123; <span class="keyword">return</span> bal; &#125;</span><br><span class="line"><span class="keyword">private</span>:</span><br><span class="line">	Money bal;	</span><br><span class="line">&#125;</span><br><span class="line"><span class="comment">// 该例中, balance函数返回的是类成员而非string对象, 因为"直到类全部可见后才编译函数体, 此时先查找类中是否出现bal, 已经出现则返回"</span></span><br></pre></td></tr></table></figure>
+<p>在类中, 如果成员使用了外层作用域中的某个名字, 而该名字代表一种类型, 则类不能在之后重新定义该名字.</p>
+<p>成员函数的匹配方式类似, 都是先从最小的作用域搜索起, 逐步向上扩大范围, 这里就不做赘述了. 当形参名和成员名相同时, 按照上面的规则就是先匹配到形参名, 如果想访问成员可以通过显式使用this指针来强制访问.(但是最好别这么写了……)</p>
+
+  </div>
+</article>
+
+
+
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/gitalk@1/dist/gitalk.css">
+    <script src="https://cdn.jsdelivr.net/npm/gitalk@1/dist/gitalk.min.js"></script>
+    <script src="https://cdn.bootcss.com/blueimp-md5/2.10.0/js/md5.min.js"></script>
+    <div id="gitalk-container"></div>
+    <script type="text/javascript">
+        var gitalk = new Gitalk({
+            clientID: '643bb65e08572c0f02f9',
+            clientSecret: '267594ee5074e2f5b6392c6deba31c86b4b98abe',
+            id: md5(window.location.pathname),
+            repo: 'bitzhangmo.github.io',
+            owner: 'bitzhangmo',
+            admin: 'bitzhangmo',
+            distractionFreeMode: ''
+        })
+        gitalk.render('gitalk-container')
+    </script>
+
+
+        
+          <div id="footer-post-container">
+  <div id="footer-post">
+
+    <div id="nav-footer" style="display: none">
+      <ul>
+         
+          <li><a href="/">首页</a></li>
+         
+          <li><a href="/about/">关于</a></li>
+         
+          <li><a href="/tags/">tags</a></li>
+         
+          <li><a href="/categories/">categories</a></li>
+         
+          <li><a href="/archives/">归档</a></li>
+         
+          <li><a href="/categories/reports/">reports</a></li>
+         
+          <li><a href="/search/">搜索</a></li>
+        
+      </ul>
+    </div>
+
+    <div id="toc-footer" style="display: none">
+      <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#类"><span class="toc-number">1.</span> <span class="toc-text">类 :</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#成员函数"><span class="toc-number">1.0.1.</span> <span class="toc-text">成员函数:</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#类作用域和成员函数"><span class="toc-number">1.0.2.</span> <span class="toc-text">类作用域和成员函数 :</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#构造函数："><span class="toc-number">1.0.3.</span> <span class="toc-text">构造函数：</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#访问控制与封装"><span class="toc-number">1.0.4.</span> <span class="toc-text">访问控制与封装:</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#友元"><span class="toc-number">1.0.5.</span> <span class="toc-text">友元:</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#可变数据成员"><span class="toc-number">1.0.6.</span> <span class="toc-text">可变数据成员:</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#从const成员函数返回-this"><span class="toc-number">1.0.7.</span> <span class="toc-text">从const成员函数返回*this:</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#类的声明"><span class="toc-number">1.0.8.</span> <span class="toc-text">类的声明:</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#名字查找与类的作用域"><span class="toc-number">1.0.9.</span> <span class="toc-text">名字查找与类的作用域:</span></a></li></ol></li></ol></li></ol>
+    </div>
+
+    <div id="share-footer" style="display: none">
+      <ul>
+  <li><a class="icon" href="http://www.facebook.com/sharer.php?u=https://bitzhangmo.github.io/2022/01/04/C++Primer笔记/C-Primer笔记-第七章/"><i class="fab fa-facebook fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="https://twitter.com/share?url=https://bitzhangmo.github.io/2022/01/04/C++Primer笔记/C-Primer笔记-第七章/&text=C++Primer笔记(第七章)"><i class="fab fa-twitter fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="http://www.linkedin.com/shareArticle?url=https://bitzhangmo.github.io/2022/01/04/C++Primer笔记/C-Primer笔记-第七章/&title=C++Primer笔记(第七章)"><i class="fab fa-linkedin fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="https://pinterest.com/pin/create/bookmarklet/?url=https://bitzhangmo.github.io/2022/01/04/C++Primer笔记/C-Primer笔记-第七章/&is_video=false&description=C++Primer笔记(第七章)"><i class="fab fa-pinterest fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="mailto:?subject=C++Primer笔记(第七章)&body=Check out this article: https://bitzhangmo.github.io/2022/01/04/C++Primer笔记/C-Primer笔记-第七章/"><i class="fas fa-envelope fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="https://getpocket.com/save?url=https://bitzhangmo.github.io/2022/01/04/C++Primer笔记/C-Primer笔记-第七章/&title=C++Primer笔记(第七章)"><i class="fab fa-get-pocket fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="http://reddit.com/submit?url=https://bitzhangmo.github.io/2022/01/04/C++Primer笔记/C-Primer笔记-第七章/&title=C++Primer笔记(第七章)"><i class="fab fa-reddit fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="http://www.stumbleupon.com/submit?url=https://bitzhangmo.github.io/2022/01/04/C++Primer笔记/C-Primer笔记-第七章/&title=C++Primer笔记(第七章)"><i class="fab fa-stumbleupon fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="http://digg.com/submit?url=https://bitzhangmo.github.io/2022/01/04/C++Primer笔记/C-Primer笔记-第七章/&title=C++Primer笔记(第七章)"><i class="fab fa-digg fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="http://www.tumblr.com/share/link?url=https://bitzhangmo.github.io/2022/01/04/C++Primer笔记/C-Primer笔记-第七章/&name=C++Primer笔记(第七章)&description="><i class="fab fa-tumblr fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="https://news.ycombinator.com/submitlink?u=https://bitzhangmo.github.io/2022/01/04/C++Primer笔记/C-Primer笔记-第七章/&t=C++Primer笔记(第七章)"><i class="fab fa-hacker-news fa-lg" aria-hidden="true"></i></a></li>
+</ul>
+
+    </div>
+
+    <div id="actions-footer">
+        <a id="menu" class="icon" href="#" onclick="$('#nav-footer').toggle();return false;"><i class="fas fa-bars fa-lg" aria-hidden="true"></i> 菜单</a>
+        <a id="toc" class="icon" href="#" onclick="$('#toc-footer').toggle();return false;"><i class="fas fa-list fa-lg" aria-hidden="true"></i> 目录</a>
+        <a id="share" class="icon" href="#" onclick="$('#share-footer').toggle();return false;"><i class="fas fa-share-alt fa-lg" aria-hidden="true"></i> 分享</a>
+        <a id="top" style="display:none" class="icon" href="#" onclick="$('html, body').animate({ scrollTop: 0 }, 'fast');"><i class="fas fa-chevron-up fa-lg" aria-hidden="true"></i> 返回顶部</a>
+    </div>
+
+  </div>
+</div>
+
+        
+        <footer id="footer">
+  <div class="footer-left">
+    Copyright &copy; 2022 zhangMo
+  </div>
+  <div class="footer-right">
+    <nav>
+      <ul>
+         
+          <li><a href="/">首页</a></li>
+         
+          <li><a href="/about/">关于</a></li>
+         
+          <li><a href="/tags/">tags</a></li>
+         
+          <li><a href="/categories/">categories</a></li>
+         
+          <li><a href="/archives/">归档</a></li>
+         
+          <li><a href="/categories/reports/">reports</a></li>
+         
+          <li><a href="/search/">搜索</a></li>
+        
+      </ul>
+    </nav>
+  </div>
+</footer>
+
+        
+    </div>
+    <!-- styles -->
+<link rel="stylesheet" href="/lib/font-awesome/css/all.min.css">
+<link rel="stylesheet" href="/lib/justified-gallery/css/justifiedGallery.min.css">
+
+    <!-- jquery -->
+<script src="/lib/jquery/jquery.min.js"></script>
+<script src="/lib/justified-gallery/js/jquery.justifiedGallery.min.js"></script>
+<!-- clipboard -->
+
+  <script src="/lib/clipboard/clipboard.min.js"></script>
+  <script type="text/javascript">
+  $(function() {
+    // copy-btn HTML
+    var btn = "<span class=\"btn-copy tooltipped tooltipped-sw\" aria-label=\"复制到粘贴板!\">";
+    btn += '<i class="far fa-clone"></i>';
+    btn += '</span>'; 
+    // mount it!
+    $(".highlight table").before(btn);
+    var clip = new ClipboardJS('.btn-copy', {
+      text: function(trigger) {
+        return Array.from(trigger.nextElementSibling.querySelectorAll('.code')).reduce((str,it)=>str+it.innerText+'\n','')
+      }
+    });
+    clip.on('success', function(e) {
+      e.trigger.setAttribute('aria-label', "复制成功!");
+      e.clearSelection();
+    })
+  })
+  </script>
+
+<script src="/js/main.js"></script>
+<!-- search -->
+
+<!-- Google Analytics -->
+
+<!-- Baidu Analytics -->
+
+<!-- Disqus Comments -->
+
+
+<script src="/live2dw/lib/L2Dwidget.min.js?bd2294fafea3389ee458f1d9be5a2157"></script><script>L2Dwidget.init({"pluginRootPath":"live2dw/","pluginJsPath":"lib/","pluginModelPath":"assets/","tagMode":false,"debug":false,"model":{"jsonPath":"/live2dw/assets/hijiki.model.json"},"display":{"position":"left","width":100,"height":200},"mobile":{"show":false},"log":false});</script></body>
+</html>
