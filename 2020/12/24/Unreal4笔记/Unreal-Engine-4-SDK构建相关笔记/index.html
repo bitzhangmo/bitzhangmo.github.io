@@ -213,8 +213,8 @@
 <blockquote>
 <p>Extending NativeActivity so that this Java class is instantiated from the beginning of the program.  This will allow the user to instantiate other Java libraries from here, that the user can then use the functions from C++</p>
 <p>扩展NativeActivity，使这个Java类从程序开始就被实例化。 这将允许用户从这里实例化其他Java库，然后用户可以使用C++中的函数。</p>
-<p>NOTE – This class is not necessary for the UnrealEngine C++ code to startup, as this is handled through the base NativeActivity class. This class’s functionality is to provide a way to instantiate other  Java libraries at the startup of the program and store references to them in this class.</p>
-<p>注意 – 这个类对于UnrealEngine C++代码的启动是不必要的，因为这是由基础NativeActivity类处理的。这个类的功能是提供一种方法，在程序启动时实例化其他Java库，并在这个类中存储对它们的引用。</p>
+<p>NOTE — This class is not necessary for the UnrealEngine C++ code to startup, as this is handled through the base NativeActivity class. This class’s functionality is to provide a way to instantiate other  Java libraries at the startup of the program and store references to them in this class.</p>
+<p>注意 — 这个类对于UnrealEngine C++代码的启动是不必要的，因为这是由基础NativeActivity类处理的。这个类的功能是提供一种方法，在程序启动时实例化其他Java库，并在这个类中存储对它们的引用。</p>
 </blockquote>
 <p>那么，在Android的文档中找到了关于<a href="https://developer.android.com/reference/android/app/NativeActivity" target="_blank" rel="noopener">NativeActivity</a>类的描述，而GameActivity类继承自这个类。在文档内对NativeActivity的描述如下：</p>
 <blockquote>
