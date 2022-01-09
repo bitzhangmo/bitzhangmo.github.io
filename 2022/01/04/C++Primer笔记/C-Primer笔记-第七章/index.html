@@ -6,18 +6,18 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="HandheldFriendly" content="True">
     <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-    <meta name="description" content="类 : 定义在类内部的函数是隐式的inline函数.  成员函数:成员函数通过一个名为this的额外的隐式参数来访问调用它的那个对象, 当我们调用一个成员函数时, 用请求该函数的对象地址初始化this. 任何对类成员的直接访问都被看作this的隐式引用, this是一个常量指针.  const成员函数 :  默认情况下, this的类型是指向类类型非常量版本的常量指针. 即this的类型为T *">
+    <meta name="description" content="关键词: 成员函数, 构造函数, 友元, 静态成员">
 <meta name="keywords" content="C++">
 <meta property="og:type" content="article">
 <meta property="og:title" content="C++Primer笔记(第七章)">
 <meta property="og:url" content="https://bitzhangmo.github.io/2022/01/04/C++Primer笔记/C-Primer笔记-第七章/index.html">
 <meta property="og:site_name" content="zhangMo Blog">
-<meta property="og:description" content="类 : 定义在类内部的函数是隐式的inline函数.  成员函数:成员函数通过一个名为this的额外的隐式参数来访问调用它的那个对象, 当我们调用一个成员函数时, 用请求该函数的对象地址初始化this. 任何对类成员的直接访问都被看作this的隐式引用, this是一个常量指针.  const成员函数 :  默认情况下, this的类型是指向类类型非常量版本的常量指针. 即this的类型为T *">
+<meta property="og:description" content="关键词: 成员函数, 构造函数, 友元, 静态成员">
 <meta property="og:locale" content="zh-CN">
-<meta property="og:updated_time" content="2022-01-06T15:34:36.259Z">
+<meta property="og:updated_time" content="2022-01-09T12:32:20.855Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="C++Primer笔记(第七章)">
-<meta name="twitter:description" content="类 : 定义在类内部的函数是隐式的inline函数.  成员函数:成员函数通过一个名为this的额外的隐式参数来访问调用它的那个对象, 当我们调用一个成员函数时, 用请求该函数的对象地址初始化this. 任何对类成员的直接访问都被看作this的隐式引用, this是一个常量指针.  const成员函数 :  默认情况下, this的类型是指向类类型非常量版本的常量指针. 即this的类型为T *">
+<meta name="twitter:description" content="关键词: 成员函数, 构造函数, 友元, 静态成员">
     
     
         
@@ -102,13 +102,13 @@
   <li><a class="icon" href="http://reddit.com/submit?url=https://bitzhangmo.github.io/2022/01/04/C++Primer笔记/C-Primer笔记-第七章/&title=C++Primer笔记(第七章)"><i class="fab fa-reddit " aria-hidden="true"></i></a></li>
   <li><a class="icon" href="http://www.stumbleupon.com/submit?url=https://bitzhangmo.github.io/2022/01/04/C++Primer笔记/C-Primer笔记-第七章/&title=C++Primer笔记(第七章)"><i class="fab fa-stumbleupon " aria-hidden="true"></i></a></li>
   <li><a class="icon" href="http://digg.com/submit?url=https://bitzhangmo.github.io/2022/01/04/C++Primer笔记/C-Primer笔记-第七章/&title=C++Primer笔记(第七章)"><i class="fab fa-digg " aria-hidden="true"></i></a></li>
-  <li><a class="icon" href="http://www.tumblr.com/share/link?url=https://bitzhangmo.github.io/2022/01/04/C++Primer笔记/C-Primer笔记-第七章/&name=C++Primer笔记(第七章)&description="><i class="fab fa-tumblr " aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="http://www.tumblr.com/share/link?url=https://bitzhangmo.github.io/2022/01/04/C++Primer笔记/C-Primer笔记-第七章/&name=C++Primer笔记(第七章)&description=&lt;p&gt;关键词: 成员函数, 构造函数, 友元, 静态成员&lt;/p&gt;"><i class="fab fa-tumblr " aria-hidden="true"></i></a></li>
   <li><a class="icon" href="https://news.ycombinator.com/submitlink?u=https://bitzhangmo.github.io/2022/01/04/C++Primer笔记/C-Primer笔记-第七章/&t=C++Primer笔记(第七章)"><i class="fab fa-hacker-news " aria-hidden="true"></i></a></li>
 </ul>
 
     </div>
     <div id="toc">
-      <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#类"><span class="toc-number">1.</span> <span class="toc-text">类 :</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#成员函数"><span class="toc-number">1.0.1.</span> <span class="toc-text">成员函数:</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#类作用域和成员函数"><span class="toc-number">1.0.2.</span> <span class="toc-text">类作用域和成员函数 :</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#构造函数："><span class="toc-number">1.0.3.</span> <span class="toc-text">构造函数：</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#访问控制与封装"><span class="toc-number">1.0.4.</span> <span class="toc-text">访问控制与封装:</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#友元"><span class="toc-number">1.0.5.</span> <span class="toc-text">友元:</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#可变数据成员"><span class="toc-number">1.0.6.</span> <span class="toc-text">可变数据成员:</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#从const成员函数返回-this"><span class="toc-number">1.0.7.</span> <span class="toc-text">从const成员函数返回*this:</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#类的声明"><span class="toc-number">1.0.8.</span> <span class="toc-text">类的声明:</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#名字查找与类的作用域"><span class="toc-number">1.0.9.</span> <span class="toc-text">名字查找与类的作用域:</span></a></li></ol></li></ol></li></ol>
+      <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#类"><span class="toc-number">1.</span> <span class="toc-text">类 :</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#成员函数"><span class="toc-number">1.0.1.</span> <span class="toc-text">成员函数:</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#类作用域和成员函数"><span class="toc-number">1.0.2.</span> <span class="toc-text">类作用域和成员函数 :</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#构造函数："><span class="toc-number">1.0.3.</span> <span class="toc-text">构造函数：</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#访问控制与封装"><span class="toc-number">1.0.4.</span> <span class="toc-text">访问控制与封装:</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#友元"><span class="toc-number">1.0.5.</span> <span class="toc-text">友元:</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#可变数据成员"><span class="toc-number">1.0.6.</span> <span class="toc-text">可变数据成员:</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#从const成员函数返回-this"><span class="toc-number">1.0.7.</span> <span class="toc-text">从const成员函数返回*this:</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#类的声明"><span class="toc-number">1.0.8.</span> <span class="toc-text">类的声明:</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#名字查找与类的作用域"><span class="toc-number">1.0.9.</span> <span class="toc-text">名字查找与类的作用域:</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#聚合类与字面值常量类"><span class="toc-number">1.0.10.</span> <span class="toc-text">聚合类与字面值常量类</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#类的静态成员"><span class="toc-number">1.0.11.</span> <span class="toc-text">类的静态成员;</span></a></li></ol></li></ol></li></ol>
     </div>
   </span>
 </div>
@@ -134,7 +134,7 @@
       
         <time datetime="2022-01-04T15:48:51.000Z" itemprop="datePublished">2022-01-04</time>
         
-        (Updated: <time datetime="2022-01-06T15:34:36.259Z" itemprop="dateModified">2022-01-06</time>)
+        (Updated: <time datetime="2022-01-09T12:32:20.855Z" itemprop="dateModified">2022-01-09</time>)
         
       
     </div>
@@ -159,7 +159,8 @@
   
 
   <div class="content" itemprop="articleBody">
-    <a id="more"></a>
+    <p>关键词: 成员函数, 构造函数, 友元, 静态成员</p>
+<a id="more"></a>
 <h2 id="类"><a href="#类" class="headerlink" title="类 :"></a>类 :</h2><ul>
 <li>定义在类内部的函数是隐式的<code>inline</code>函数.</li>
 </ul>
@@ -174,12 +175,31 @@
 <h4 id="类作用域和成员函数"><a href="#类作用域和成员函数" class="headerlink" title="类作用域和成员函数 :"></a>类作用域和成员函数 :</h4><p>编译器分两步处理类 : 首先编译成员的声明, 然后才轮到成员函数体, 因此成员函数体可以随意使用类中的其他成员而无需在意这些成员出现的次序.</p>
 <p>在类的外部定义成员函数时, 成员函数的定义必须与声明匹配, 同时包含所属类名.</p>
 <h4 id="构造函数："><a href="#构造函数：" class="headerlink" title="构造函数："></a>构造函数：</h4><p>构造函数没有返回类型, 与类的名字相同, 不能被声明成const的.</p>
-<p>如果没有显式的定义构造函数 (只有当类没有声明任何构造函数时), 编译器会隐式的定义一个默认构造函数, 按照如下规则初始化类的数据成员: </p>
+<ul>
+<li><p>默认构造函数</p>
+<p>  如果没有显式的定义构造函数 (只有当类没有声明任何构造函数时), 编译器会隐式的定义一个默认构造函数, 按照如下规则初始化类的数据成员: </p>
 <ol>
 <li>如果存在类内的初始值, 用它来初始化成员</li>
-<li>否则默认初始化该成员.</li>
-</ol>
+<li><p>否则默认初始化该成员.</p>
 <p>在C++11中可以通过在参数列表后面写上<code>= default</code>来要求编译器生成构造函数.</p>
+<p>如果一个函数为所有参数都提供了默认实参, 则它实际上也定义了默认构造函数.</p>
+</li>
+</ol>
+</li>
+<li><p>成员初始化相关:</p>
+<p>  如果没有在构造函数的初始值列表中显式的初始化成员, 则该成员将在构造函数体之前执行默认初始化.</p>
+<p>  对于成员是const或者引用的情况, 必须将其初始化而非先定义再赋值.</p>
+<p>  构造函数初始值列表只说明用于初始化成员的值, 而不限定初始化的具体执行顺序. 成员的初始化顺序和它们在类定义中的出现顺序一致, 当用某些成员初始化其他成员的时候, 要注意初始化顺序, 不要用未定义的值初始化已经定义的成员.</p>
+</li>
+<li><p>委托构造函数</p>
+<p>  简单的说就是构造函数调用其他构造函数.</p>
+<p>  当一个构造函数委托给另一个构造函数时, 受委托的构造函数的初始值列表和函数体被一次执行, 假如函数体包含代码的话, 将先执行这些代码, 然后控制权才会交还给委托者的函数体.</p>
+</li>
+<li><p>隐式的类类型转换(转换构造函数)</p>
+<p>  如果构造函数只接受一个实参, 则它实际上定义了转换为此类类型的隐式转换机制, 但编译器只会执行一步类型转换.</p>
+<p>  可以通过<code>explicit</code>关键字来屏蔽这个特性, 使得被修饰的构造函数不可用于隐式类型转换, 只能以直接初始化的方式使用. 该关键字只能用来修饰”转换构造函数”, 而且只能在类内声明构造函数时使用, 而在类外部定义时不应重复.</p>
+</li>
+</ul>
 <h4 id="访问控制与封装"><a href="#访问控制与封装" class="headerlink" title="访问控制与封装:"></a>访问控制与封装:</h4><ul>
 <li>定义在public说明符之后的成员在整个程序内可被访问, public成员定义类的接口</li>
 <li>定义在private说明符之后的成员可以被类的成员函数访问, 但是不能被使用该类的代码访问, private部分封装了类的实现细节.</li>
@@ -206,6 +226,33 @@
 <figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">typedef</span> <span class="keyword">double</span> Money;</span><br><span class="line"><span class="built_in">string</span> bal;</span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Account</span> &#123;</span></span><br><span class="line"><span class="keyword">public</span>:</span><br><span class="line">	<span class="function">Money <span class="title">balance</span><span class="params">()</span> </span>&#123; <span class="keyword">return</span> bal; &#125;</span><br><span class="line"><span class="keyword">private</span>:</span><br><span class="line">	Money bal;	</span><br><span class="line">&#125;</span><br><span class="line"><span class="comment">// 该例中, balance函数返回的是类成员而非string对象, 因为"直到类全部可见后才编译函数体, 此时先查找类中是否出现bal, 已经出现则返回"</span></span><br></pre></td></tr></table></figure>
 <p>在类中, 如果成员使用了外层作用域中的某个名字, 而该名字代表一种类型, 则类不能在之后重新定义该名字.</p>
 <p>成员函数的匹配方式类似, 都是先从最小的作用域搜索起, 逐步向上扩大范围, 这里就不做赘述了. 当形参名和成员名相同时, 按照上面的规则就是先匹配到形参名, 如果想访问成员可以通过显式使用this指针来强制访问.(但是最好别这么写了……)</p>
+<h4 id="聚合类与字面值常量类"><a href="#聚合类与字面值常量类" class="headerlink" title="聚合类与字面值常量类"></a>聚合类与字面值常量类</h4><ul>
+<li>聚合类:<ul>
+<li>所有成员都是public的</li>
+<li>没有定义任何构造函数</li>
+<li>没有类内初始值</li>
+<li>没有基类和virtual函数</li>
+</ul>
+</li>
+<li>字面值常量类: 数据成员都是字面值类型的聚合类或满足下述要求<ul>
+<li>数据成员都必须是字面值类型</li>
+<li>类必须至少含有一个constexpr构造函数</li>
+<li>如果一个数据成员含有类内初始值, 则内置类型成员的初始值必须是一条常量表达式; 或者如果成员属于某种类类型, 则初始值必须使用成员自己的constexpr构造函数</li>
+<li>类必须使用析构函数的默认定义, 该成员负责销毁类的对象.</li>
+</ul>
+</li>
+</ul>
+<p>(没有想象出使用的场景应该是什么)</p>
+<h4 id="类的静态成员"><a href="#类的静态成员" class="headerlink" title="类的静态成员;"></a>类的静态成员;</h4><p>在成员的声明前加上关键字static使得其与类关联在一起, 它与对象无关, 对象中不包含与静态数据成员有关的数据, 静态成员对象被所有类对象共享.</p>
+<p>静态成员函数也不与任何对象绑定在一起, 不包含this指针, 不能声明成const的, 且不能在static函数体内使用this指针.</p>
+<p>可以使用作用域运算符, 类的对象, 引用或指针来访问类的静态成员.</p>
+<p>成员函数不用通过作用域运算符就能直接使用静态成员.</p>
+<p>一般来说, 我们不能在类的内部初始化静态成员, 必须在类的外部定义和初始化每个静态成员,</p>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 定义并初始化一个静态成员</span></span><br><span class="line"><span class="keyword">double</span> Account::interestRate = initRate();</span><br></pre></td></tr></table></figure>
+<p>可以给字面值常量类型的静态成员提供const整数类型的类内初始值.</p>
+<p>静态数据成员可以使不完全类型, 可以是其所属的类类型, 而非静态数据成员则受到限制, 只能声明成它所属的类的指针或引用.</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">class Bar &#123;</span><br><span class="line">public:</span><br><span class="line">	//...</span><br><span class="line">private:</span><br><span class="line">	static Bar mem1;	// 正确, 静态成员可以是不完全类型</span><br><span class="line">	Bar *mem2;		// 正确, 指针成员可以是不完全类型</span><br><span class="line">	Bar mem2;		// 错误, 数据成员必须是完全类型</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>静态成员还可以作为默认实参.</p>
 
   </div>
 </article>
@@ -255,7 +302,7 @@
     </div>
 
     <div id="toc-footer" style="display: none">
-      <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#类"><span class="toc-number">1.</span> <span class="toc-text">类 :</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#成员函数"><span class="toc-number">1.0.1.</span> <span class="toc-text">成员函数:</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#类作用域和成员函数"><span class="toc-number">1.0.2.</span> <span class="toc-text">类作用域和成员函数 :</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#构造函数："><span class="toc-number">1.0.3.</span> <span class="toc-text">构造函数：</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#访问控制与封装"><span class="toc-number">1.0.4.</span> <span class="toc-text">访问控制与封装:</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#友元"><span class="toc-number">1.0.5.</span> <span class="toc-text">友元:</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#可变数据成员"><span class="toc-number">1.0.6.</span> <span class="toc-text">可变数据成员:</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#从const成员函数返回-this"><span class="toc-number">1.0.7.</span> <span class="toc-text">从const成员函数返回*this:</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#类的声明"><span class="toc-number">1.0.8.</span> <span class="toc-text">类的声明:</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#名字查找与类的作用域"><span class="toc-number">1.0.9.</span> <span class="toc-text">名字查找与类的作用域:</span></a></li></ol></li></ol></li></ol>
+      <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#类"><span class="toc-number">1.</span> <span class="toc-text">类 :</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#成员函数"><span class="toc-number">1.0.1.</span> <span class="toc-text">成员函数:</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#类作用域和成员函数"><span class="toc-number">1.0.2.</span> <span class="toc-text">类作用域和成员函数 :</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#构造函数："><span class="toc-number">1.0.3.</span> <span class="toc-text">构造函数：</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#访问控制与封装"><span class="toc-number">1.0.4.</span> <span class="toc-text">访问控制与封装:</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#友元"><span class="toc-number">1.0.5.</span> <span class="toc-text">友元:</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#可变数据成员"><span class="toc-number">1.0.6.</span> <span class="toc-text">可变数据成员:</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#从const成员函数返回-this"><span class="toc-number">1.0.7.</span> <span class="toc-text">从const成员函数返回*this:</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#类的声明"><span class="toc-number">1.0.8.</span> <span class="toc-text">类的声明:</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#名字查找与类的作用域"><span class="toc-number">1.0.9.</span> <span class="toc-text">名字查找与类的作用域:</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#聚合类与字面值常量类"><span class="toc-number">1.0.10.</span> <span class="toc-text">聚合类与字面值常量类</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#类的静态成员"><span class="toc-number">1.0.11.</span> <span class="toc-text">类的静态成员;</span></a></li></ol></li></ol></li></ol>
     </div>
 
     <div id="share-footer" style="display: none">
@@ -269,7 +316,7 @@
   <li><a class="icon" href="http://reddit.com/submit?url=https://bitzhangmo.github.io/2022/01/04/C++Primer笔记/C-Primer笔记-第七章/&title=C++Primer笔记(第七章)"><i class="fab fa-reddit fa-lg" aria-hidden="true"></i></a></li>
   <li><a class="icon" href="http://www.stumbleupon.com/submit?url=https://bitzhangmo.github.io/2022/01/04/C++Primer笔记/C-Primer笔记-第七章/&title=C++Primer笔记(第七章)"><i class="fab fa-stumbleupon fa-lg" aria-hidden="true"></i></a></li>
   <li><a class="icon" href="http://digg.com/submit?url=https://bitzhangmo.github.io/2022/01/04/C++Primer笔记/C-Primer笔记-第七章/&title=C++Primer笔记(第七章)"><i class="fab fa-digg fa-lg" aria-hidden="true"></i></a></li>
-  <li><a class="icon" href="http://www.tumblr.com/share/link?url=https://bitzhangmo.github.io/2022/01/04/C++Primer笔记/C-Primer笔记-第七章/&name=C++Primer笔记(第七章)&description="><i class="fab fa-tumblr fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="http://www.tumblr.com/share/link?url=https://bitzhangmo.github.io/2022/01/04/C++Primer笔记/C-Primer笔记-第七章/&name=C++Primer笔记(第七章)&description=&lt;p&gt;关键词: 成员函数, 构造函数, 友元, 静态成员&lt;/p&gt;"><i class="fab fa-tumblr fa-lg" aria-hidden="true"></i></a></li>
   <li><a class="icon" href="https://news.ycombinator.com/submitlink?u=https://bitzhangmo.github.io/2022/01/04/C++Primer笔记/C-Primer笔记-第七章/&t=C++Primer笔记(第七章)"><i class="fab fa-hacker-news fa-lg" aria-hidden="true"></i></a></li>
 </ul>
 
