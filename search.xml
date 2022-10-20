@@ -1,22 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <search>
   <entry>
-    <title><![CDATA[Unreal中打开手机相册]]></title>
-    <url>%2F2022%2F01%2F14%2FUnreal4%E7%AC%94%E8%AE%B0%2FUnreal-JNI%E9%98%85%E8%AF%BB%E7%AC%94%E8%AE%B0%2F</url>
-    <content type="text"><![CDATA[最近接到了一个需求, 需要提供一个功能, 让玩家可以在游戏中打开自己的相册, 并从中选择照片上传, 现阶段的需求就是需要实现打开相册-&gt;选取照片-&gt;加载到内存-&gt;显示在UI上的功能, 本篇内容是实现此需求的笔记. Android平台:目前Android平台的想法是, Unreal-&gt;Java层通过JNI调用: 参考: https://blog.csdn.net/wbin233/article/details/50954868#comments 添加权限: &lt;uses-permission android:name=“android.permission.READ_EXTERNAL_STORAGE” /&gt; 调用系统相册: 1234private static final int CHOOSE_PHOTO=0; Intent intent = new Intent(“android.intent.action.GET_CONTENT”); intent.setType(”image/*”); startActivityForResult(intent, CHOOSE_PHOTO); 关于StartActivityForResult可以参考: https://developer.android.google.cn/guide/components/activities/activity-lifecycle 函数原型: https://developer.android.google.cn/reference/android/app/Activity#onActivityResult(int,%20int,%20android.content.Intent) 123456public void startActivityForResult (Intent intent, int requestCode) protected void onActivityResult (int requestCode, int resultCode, Intent data) startactivityForResult之后, 结果通过OnActivityResult返回, 上面的参数requestCode需要设计一下. 貌似Intent中获得的数据(文件路径)还要自己写个解析函数得到文件储存地址 https://blog.csdn.net/zhanghao_Hulk/article/details/105389870 https://www.cnblogs.com/zhujiabin/p/6692025.html 上面的代码封装后通过JNI加入到GameActivity.java中, 使用 12345&lt;gameActivityClassAdditions&gt; &lt;insert&gt; // TODO &lt;/insert&gt;&lt;/gameActivityClassAdditions&gt; 通过这个方法可以在回调中拿到相关数据, 具体内容还需要进一步分析 直觉上可以把处理的函数也插入到GameActivity中: 1&lt;gameActivityOnActivityResultAdditions&gt; &lt;/gameActivityOnActivityResultAdditions&gt; 然后在Java里调用C++函数? 也可以通过AndroidJNI.h中定义的回调来注册: 123// In AndroidJNI.h // Delegate that can be registered to that is called when an activity is finished static FOnActivityResult OnActivityResultDelegate; 貌似直接可以放在C++里处理 全局搜索搜到了一个原生的处理方法, 可以参考一下: 1234567891011121314151617181920212223242526272829//E:\UnrealEngine4.18\Engine\Plugins\Online\Android\OnlineSubsystemGooglePlay\Source\Public\OnlineSubsystemGooglePlay.h// 它里面定义了一个 /** Handle of registered delegate for onActivityResult */ FDelegateHandle OnActivityResultDelegateHandle;// 用来处理该代理 //E:\UnrealEngine4.18\Engine\Plugins\Online\Android\OnlineSubsystemGooglePlay\Source\Private\OnlineSubsystemGooglePlay.cpp中的处理函数:bool FOnlineSubsystemGooglePlay::Init() &#123; //... OnActivityResultDelegateHandle = FJavaWrapper::OnActivityResultDelegate.AddRaw(this, &amp;FOnlineSubsystemGooglePlay::OnActivityResult); return true;&#125;bool FOnlineSubsystemGooglePlay::Shutdown() &#123; FJavaWrapper::OnActivityResultDelegate.Remove(OnActivityResultDelegateHandle); //... return true;&#125;void FOnlineSubsystemGooglePlay::OnActivityResult(JNIEnv *env, jobject thiz, jobject activity, jint requestCode, jint resultCode, jobject data)&#123; // Pass the result on to google play - otherwise, some callbacks for the turn based system do not get called. AndroidSupport::OnActivityResult(env, activity, requestCode, resultCode, data);&#125; 可供参考并仔细阅读: 累了, 今天不写了]]></content>
-      <tags>
-        <tag>Unreal</tag>
-      </tags>
-  </entry>
-  <entry>
-    <title><![CDATA[Unreal中打开手机相册]]></title>
-    <url>%2F2022%2F01%2F14%2FUnreal4%E7%AC%94%E8%AE%B0%2FUnreal%E4%B8%AD%E6%89%93%E5%BC%80%E6%89%8B%E6%9C%BA%E7%9B%B8%E5%86%8C%2F</url>
-    <content type="text"><![CDATA[最近接到了一个需求, 需要提供一个功能, 让玩家可以在游戏中打开自己的相册, 并从中选择照片上传, 现阶段的需求就是需要实现打开相册-&gt;选取照片-&gt;加载到内存-&gt;显示在UI上的功能, 本篇内容是实现此需求的笔记. Android平台:对于Android平台, 我们可以]]></content>
-      <tags>
-        <tag>Unreal</tag>
-      </tags>
-  </entry>
-  <entry>
     <title><![CDATA[C++Primer笔记(第八,九章)]]></title>
     <url>%2F2022%2F01%2F10%2FC%2B%2BPrimer%E7%AC%94%E8%AE%B0%2FC-Primer%E7%AC%94%E8%AE%B0-%E7%AC%AC%E5%85%AB%E7%AB%A0%2F</url>
     <content type="text"><![CDATA[关键词 : 输入输出流, 顺序容器 第八章: IO库略. 第九章: 顺序容器顺序容器: 元素在顺序容器中的顺序与其加入容器时的位置相对应. 关联容器: 元素的位置由元素相关联的关键字值决定. 顺序容器的两个性能指标: 向容器中增删元素的代价 非顺序访问容器中元素的代价 特性 vector 可变大小数组, 支持快速随机访问, 在尾部之外的位置插入或删除元素可能很慢 deque 双端队列, 支持快速随机访问, 在头尾位置插入\删除元素很快 list 双向链表, 只支持双向顺序访问, 在任何位置插入\删除元素都很快 forward_list 单向链表, 只支持单向顺序访问, 在任何位置插入\删除元素都很快 array 固定大小数组, 支持快速随机访问, 不支持插入\删除元素 string 与vector类似, 但专门用于保存字符(这也算是容器吗) 选择容器的基本原则: 优先选用vector 如果程序有很多小的元素, 且空间的额外开销很重要, 则不要使用list或forward_list 如果要求随机访问元素, 应使用vector或deque 如果需要在容器中间插入\删除元素, 应使用list或forward_list 如果只在读取输入时才需要向容器中间插入元素, 随后随机访问 : 可以通过向vector追加元素再sort的方式避免在中间位置添加元素(原文: “确定是否真的需要在容器中间位置添加元素”, 理解: 当元素无序或者不能用某种顺序表达时上面这种方式就失效了) 如果必须在中间位置插入元素, 考虑在输入阶段使用list, 一旦输入完成, 将list中的内容拷贝到一个vector中(空间换时间罢). 一般来说, 应用中占主导地位的操作(访问or增删更多)决定了容器类型的选择]]></content>
@@ -113,116 +97,6 @@
       </categories>
       <tags>
         <tag>随笔</tag>
-      </tags>
-  </entry>
-  <entry>
-    <title><![CDATA[“2020年第33周周报”]]></title>
-    <url>%2F2020%2F08%2F19%2F%E4%B8%AA%E4%BA%BA%E6%8A%A5%E5%91%8A%2F202033%2F</url>
-    <content type="text"><![CDATA[这是2020年的第33周报告。 上周计划完成情况 导师给Review了一下代码，改了之后提交了。 测试了一下性能，没什么问题。 本周做了什么 接了一个新需求，目前就是在看新需求涉及到的相关代码。 在看现有系统有没有可以重构的地方。 购物： 《世界经典鸡尾酒大全（珍藏版）》，可以说受到《赛博朋克酒保行动 VA-11 Hall-A: Cyberpunk Bartender Action》的强烈影响，对调酒有点感兴趣，二手书，130r。 摩飞的多功能锅，打算学学做饭，750r。 投资： 定投50r。 把1000左右放进余额宝了。 锻炼：无，体重维持在150上下，有点怪，现在进入了平衡，虽然感觉每天上下班汽车运动量也很大，但是从数字上看还是不太行。 下周打算做点什么 弹电吉他，我的电吉他到了，买了4年了还没有好好练过。 看看Unity的知识，写一点小轮子。 锻炼，看EVA。]]></content>
-      <categories>
-        <category>reports</category>
-      </categories>
-      <tags>
-        <tag>report</tag>
-      </tags>
-  </entry>
-  <entry>
-    <title><![CDATA[“2020年第32周周报”]]></title>
-    <url>%2F2020%2F08%2F09%2F%E4%B8%AA%E4%BA%BA%E6%8A%A5%E5%91%8A%2F202032%2F</url>
-    <content type="text"><![CDATA[这是2020年的第32周报告。 上周计划完成情况 邮箱基本上重构完成了，wiki读的还是太少，周五的时候把代码提了，等新包出来测试一下。 本周做了什么 前两天去事业群的培训了，大概就是通知一些事情。 开始读《大象无形：虚幻引擎程序设计浅析》，周末打游戏的时候脑海里总回想着“客户端是对服务端的拙劣模仿”这句话，可能是打游戏的时候总卡顿的缘故。还是要多看文档。 购物，简要清单如下： 铁三角CLR100，99r，放在公司用来听电脑的音频。 投资：买了50块的基金，每周一 定投50r。 锻炼：无，体重维持着150上下。 公益：给水灾捐了20r，助学捐了20r 下周打算做点什么 我必健身环。 看看Unity的知识，阅读项目代码，接需求。 等补发的自行车零件到了就可以骑自行车上班了。]]></content>
-      <categories>
-        <category>reports</category>
-      </categories>
-      <tags>
-        <tag>report</tag>
-      </tags>
-  </entry>
-  <entry>
-    <title><![CDATA[“2020年第31周周报”]]></title>
-    <url>%2F2020%2F08%2F05%2F%E4%B8%AA%E4%BA%BA%E6%8A%A5%E5%91%8A%2F202031%2F</url>
-    <content type="text"><![CDATA[这是2020年的第31周报告。 上周计划完成情况 邮箱重构要比想象中难很多，导师说的原来是两周不是两天。 本周做了什么入职快一个月了，上周去封闭培训了，所以两周报告和在一起，简单讲讲做了什么： 封闭培训，认识了一些还不错的人，但我并不怀念它。 阅读项目源码并重构某系统：大概实际耗时应该在5天，其中某些流程卡了我很久，还有一个恶性Bug需要明天去公司解决，如果顺利的话这周就能解决（希望这周就能解决，听说下周要接现行分支上的需求了）。 购物，简要清单如下： 充电宝：99r，华为 瑜伽垫：49r，用于健身环大冒险 剃须刀：小米 自行车：600r，凤凰，通勤用 上述消费大概在1000以内 锻炼：两周实际上没有怎么锻炼，封培期间一直在忙各种事，开始上班之后才能走走路，重新回到每天1w+的节奏，体重从7月25日的152.7斤降到了149.2斤，距离目标体重还有29.2斤。 本周开销较少，都是一些一次性消费重复使用的物品。 书影音：基本没有。 只言片语：这部分是从封培期间得到的一点体悟： 用利益驱动别人构成合作。（其实是换位思考的一种，想想对方想要什么。） 沟通时把别人当傻逼似的事无巨细有助于帮助你把潜在的傻逼教成正常人，从而规避掉坑。 人太分奴，或者得失心太重有时候会搞得吃相太难看。 待人礼貌是基本原则。 下周打算做点什么 把邮箱系统重构完，梳理整个系统结构。 学习性能分析部分。 读书，学习Lua和Unity。 找个周末去看场电影，《乔乔的奇妙冒险》、《妙先生》都在想看之列。]]></content>
-      <categories>
-        <category>reports</category>
-      </categories>
-      <tags>
-        <tag>report</tag>
-      </tags>
-  </entry>
-  <entry>
-    <title><![CDATA[“2020年第29周周报”]]></title>
-    <url>%2F2020%2F07%2F18%2F%E4%B8%AA%E4%BA%BA%E6%8A%A5%E5%91%8A%2F202029%2F</url>
-    <content type="text"><![CDATA[这是2020年的第29周报告。 本周做了什么这周是入职之后的经历过的第一个完整的一周，简单讲讲做了些什么。 阅读项目源码：项目发展到现在已经很庞大了，如果想要入手需要对整个项目有一个明确的认识，这一周就择性的阅读了项目的源码。 购物，简要清单如下： 吹风机：小米 台灯：小米 桌子：宜家 椅子：宜家 邮差包：TIMBUK2 锻炼：除了每天的1w+步以外，周三还玩了10分钟的健身环大冒险，体重情况则从157斤减少到了154斤，距离目标还有30斤。 本月开销较大，粗略计算达到了惊人的15600块，其中有12000属于房租，暂无收入。 想了下不是暂无收入，四个月前买了10块钱的基金，前两天卖了，扣除手续费之后大概卖了10块零八毛。 书影音： 在读《Lua设计与实现》和《Lua程序设计》 看过了《千年女优》，很喜欢，运镜太流畅了。 游戏打了打《和平精英》，算是做作业了。 只言片语： ​ 「我们一切都是从体验出发，我们要去了解后台那边是怎么写的，如果仅仅是少了几个函数，导致体验变差了，他们不给我们改，这说不过去的。」——我们组长和其他前辈沟通时说的话，有点动人。 ​ 「企业会怕你混日子，不怕你有企图。」——请教张老师后，张老师给出的点拨，挺有道理的，欲望写在脸上，如果是正当的欲望，没什么不好，我这人其实有欲望，但是因为胆怯或者懦弱总不愿意表达出来，感觉有的时候有点吃亏。 下周打算做点什么 工作：把邮箱系统改写好，听导师说好像两三天就能写好（？）。 体重：再减三斤！ 书影音： 把在读的两本书尽量读一些。 电影的话可能会再看一部今敏的片子。 消费：自行车？还有一些衣物。 自我盘点： 工作时应该更专心，必要时应该去除一些干扰。 记得写日志和周报，起码让你的上级了解你在做什么，这没什么坏处，就够了。]]></content>
-      <categories>
-        <category>reports</category>
-      </categories>
-      <tags>
-        <tag>report</tag>
-      </tags>
-  </entry>
-  <entry>
-    <title><![CDATA[“2020年第21周周报”]]></title>
-    <url>%2F2020%2F05%2F26%2F%E4%B8%AA%E4%BA%BA%E6%8A%A5%E5%91%8A%2F202021%2F</url>
-    <content type="text"><![CDATA[这是2020年的第21周报告（0518～0524）。 上周计划完成情况 摸鱼。 本周做了什么输出 答辩：18号毕业答辩结束，反正是平平淡淡就结束了，竟然还有点怅然若失，不知道是不是没有进行过一段校园恋情的缘故，还是对未来的迷茫，也或者两者都有。 答辩结束之后提交各种表格，文档。 摄影一则：寒风中接着大街上插座给手机充电的男子。生活不易啊。 消费 机票退款了，退了一半。 下周打算做点什么 看看蒙哥推荐的那个那本小说：《doom启示录》 尝试着写一个软渲染的Demo。 学C++。]]></content>
-      <categories>
-        <category>reports</category>
-      </categories>
-      <tags>
-        <tag>report</tag>
-      </tags>
-  </entry>
-  <entry>
-    <title><![CDATA[“2020年第20周周报”]]></title>
-    <url>%2F2020%2F05%2F26%2F%E4%B8%AA%E4%BA%BA%E6%8A%A5%E5%91%8A%2F202020%2F</url>
-    <content type="text"><![CDATA[这是2020年的第20周报告（0511～0517）。 上周计划完成情况 毕业论文：把论文的重复率降了下来。 本周做了什么输出 论文：把论文的内容修改了一下。 制作了一个毕业设计答辩的PPT和对应的讲稿。 消费 返校机票：¥880 无主之地3：¥35.48，Epic就是我大哥。 发现账本app只记到11日，没有坚持记账的习惯并不好。 输入 看了Epic关于Unreal Engine 5的演示视频，有点恍惚，我还能跟得上吗？ 虚幻引擎5！！！4K画质PS5实机演示！ 下周打算做点什么 摸鱼]]></content>
-      <categories>
-        <category>reports</category>
-      </categories>
-      <tags>
-        <tag>report</tag>
-      </tags>
-  </entry>
-  <entry>
-    <title><![CDATA[“2020年第19周周报”]]></title>
-    <url>%2F2020%2F05%2F12%2F%E4%B8%AA%E4%BA%BA%E6%8A%A5%E5%91%8A%2F202019%2F</url>
-    <content type="text"><![CDATA[这是2020年的第19周报告（0504～0510）。 上周计划完成情况 毕业设计：改初稿。 8号老师才给我反馈意见，在这之前基本上是放飞自我，这之后开始苦哈哈的改稿。 本周做了什么输出 摄影： 姑且命名为「马其顿防线」 改论文稿。 消费 美的台灯：¥59，之前搬家，东西都搬走了，在家这边又买了一个台灯，和寝室用的一样，能亮就行。 和朋友聚餐：¥88，社交花费。 输入 《羞羞的铁拳》：作为一个喜剧片来说还可以。 《bilibili献给新一代的演讲《后浪》》：一种目前无法企及的生活状态宣传片。 《动物新世代 BNA ビー・エヌ・エー》：老生常谈的设定和出色的画面表现，以及合适的BGM切入时机。 下周打算做点什么 论文改稿，降重，答辩。 学习C++。 学习Unreal。 坚持跑步。]]></content>
-      <categories>
-        <category>reports</category>
-      </categories>
-      <tags>
-        <tag>report</tag>
-      </tags>
-  </entry>
-  <entry>
-    <title><![CDATA[“2020年第18周周报”]]></title>
-    <url>%2F2020%2F05%2F07%2F%E4%B8%AA%E4%BA%BA%E6%8A%A5%E5%91%8A%2F202018%2F</url>
-    <content type="text"><![CDATA[这是2020年的第18周报告（0427～0503）。 上周计划完成情况 毕业设计：继续写论文。 基本完成了，稍作修改就可以发给老师看看了。 本周做了什么输出 毕业设计：把论文写的差不多了。由于毕业设计的存在，这一周基本上都是起床、摸鱼、吃饭、写论文、和方佬快乐联盟，看直播、睡觉度过的。 消费 FPX的锤石冠军皮肤：¥115.43，冲动消费一则。 Moo音乐会员月票：¥15，非必要消费一则。 敲钟牛皮肤：¥21.82，冲动消费两则。 输入 看了一眼让·鲍德里亚的《消费社会》，感觉太高深了，没看下去。 《新喜剧之王》：一场尴尬的闹剧和并不高明的讽刺。 下周打算做点什么 毕业设计：改初稿。]]></content>
-      <categories>
-        <category>reports</category>
-      </categories>
-      <tags>
-        <tag>report</tag>
-      </tags>
-  </entry>
-  <entry>
-    <title><![CDATA[“2020年第17周周报”]]></title>
-    <url>%2F2020%2F04%2F28%2F%E4%B8%AA%E4%BA%BA%E6%8A%A5%E5%91%8A%2F202017%2F</url>
-    <content type="text"><![CDATA[这是2020年的第17周报告（0420～0426）。 上周计划完成情况 毕设：把测试用例写完，虽然感觉大概率是我自己写，而不是从CTS这个项目里移植过来。然后把日志整理出来，再写一份论文初稿。 基本完成，但是日志还没有写完……太难编了。 出门走走：买了相机之后利用率不高，希望下周开始能出门透透气，顺便拍点东西。 调整作息：就像这篇周报写完的此刻，已经是00:52分了，希望之后能12点前睡觉，早上早点起床。 没有完成，下周继续努力。 本周做了什么输出： 毕业设计：改写了一部分CTS项目里的测试用例到GP101的测试框架下，然后每天写了写论文。 每天基本上都是在写毕业设计和论文，没什么其他好说的。 消费： 《仙剑奇侠传4》：¥25，Steam上买的，买一个算是补票，致敬一下当年感动到我的经典游戏。 《游戏开发：世嘉新人培训教材》：¥138.60，当当网购买，打算读读看。 《程序员修炼之道：通向务实的最高境界》：¥75.65，当当网购买，既然游戏业内的dalao都推荐了，就买来看看，当然这种思路不太理性。 《算法竞赛入门到进阶》：¥52.62，当当网购买，本质上说这本书是为了凑满减的，另一个动机来说这本书当作刷leetcode的一个教材来看，纯粹属于个人爱好了，类似于数独那种脑力游戏罢了，没有指望发挥什么现实作用。 输入： 了解了一下「入关学」的概念：https://zhuanlan.zhihu.com/p/120432699 看了看英雄联盟里锤石的玩法，虽然已经玩了好几年的锤石了，但是想看看还能不能更上一层楼。 下周打算做点什么 毕业设计：继续写论文。]]></content>
-      <categories>
-        <category>reports</category>
-      </categories>
-      <tags>
-        <tag>report</tag>
-      </tags>
-  </entry>
-  <entry>
-    <title><![CDATA[“2020年第16周周报”]]></title>
-    <url>%2F2020%2F04%2F20%2F%E4%B8%AA%E4%BA%BA%E6%8A%A5%E5%91%8A%2F202016%2F</url>
-    <content type="text"><![CDATA[这是2020年的第16周报告。 上周计划完成情况上周实际上没有什么计划，说起来这是第一次正式记录周报，就写这些好了。 本周做了什么本周实际上也没有完成什么特别值得拿来说说的事情。 消费： 路由器：京东上买的TP-LINK WDR7660千兆路由器，189.90元。 动机：买这个的缘由是觉得内蒙广电这里的机顶盒&amp;路由器太垃圾了（误），所以想换一个相对好一点点的路由器，上知乎看了一圈，买了这个。家里的宽带实际上只有100M，想着饱和式配置，就直接上了一个千兆的路由器，如果以后升级宽带就能派上用场了，就算不能，那其实这100M的宽带也能跑满。 体验：目前还可以，算是从东非走出来了，终于从手动在浏览器里输入192.168.1.1变成了在手机&amp;电脑双端都能进行控制，美中不足的是这个路由器貌似可玩性小一点，不能自己设置加速器的相关配置，不过一分钱一分货，也没什么奢望了。 输出： 博客相关：探索了一下关于hexo模版以及生成命令的知识 比如这篇博客，生成的命令就是hexo new report -p /个人报告/202016 “2020年第16周周报”，这行命令会从我写好的report模版出发，在-post文件夹下的「个人报告」文件夹中生成一篇报告，这样做的好处是省去了一些手动复制的过程，比较省事，同时看起来比较整洁。 社交媒体：没有什么值得一说的更新。 输入： 《我是于欢水》：看了这部电视剧，感觉还可以，一开始在朋友的豆瓣动态里看过，后来因为有关女权的争论所以打算看看。不到一下午的时间，用2倍速看完了这部剧。一些内容不能细品，另外一些内容又详细的出人意料，我不喜欢国产电视剧的一个原因在于感觉房间里的布景太亮了，过于惨白，以至于有一种隔阂感。日剧里的房间给我的印象都是暖黄色的光，比较柔和。此外还有一点就是有的时候主人公居住的环境往往超过他的消费水平，让我感觉非常突兀。说回这部剧，如果你把他当作一个重逻辑的电视剧去推敲可能会大失所望；但如果你就把他当作茶余饭后打发时间的剧，那还是能看看的。 《OpenGL ES 3.0 编程指南》：非常粗浅的翻阅了开头，记录了一下ES2.0与ES3.0的差别，作为毕业设计测试API的选取标准。 看了一下有关斐讯的新闻，为了骗钱真是什么手段都有啊，防不胜防。 事件： 笔记本电脑电池彻底不行了，只有33%的容量了，而且现在也完全充不进去电了，打算忙完毕设之后就保存数据，再之后要么换个新电脑，要么换个新电池了。 忘了买大头菜了，血亏。 下周打算做点什么 毕设：把测试用例写完，虽然感觉大概率是我自己写，而不是从CTS这个项目里移植过来。然后把日志整理出来，再写一份论文初稿。 出门走走：买了相机之后利用率不高，希望下周开始能出门透透气，顺便拍点东西。 调整作息：就像这篇周报写完的此刻，已经是00:52分了，希望之后能12点前睡觉，早上早点起床。]]></content>
-      <categories>
-        <category>reports</category>
-      </categories>
-      <tags>
-        <tag>report</tag>
       </tags>
   </entry>
   <entry>
