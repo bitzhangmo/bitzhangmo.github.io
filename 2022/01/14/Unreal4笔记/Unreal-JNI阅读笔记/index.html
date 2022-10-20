@@ -1,0 +1,336 @@
+<!DOCTYPE html>
+<html lang=zh>
+<head><meta name="generator" content="Hexo 3.9.0">
+    <!-- so meta -->
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="HandheldFriendly" content="True">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+    <meta name="description" content="最近接到了一个需求, 需要提供一个功能, 让玩家可以在游戏中打开自己的相册, 并从中选择照片上传, 现阶段的需求就是需要实现打开相册-&amp;gt;选取照片-&amp;gt;加载到内存-&amp;gt;显示在UI上的功能, 本篇内容是实现此需求的笔记. Android平台:目前Android平台的想法是, Unreal-&amp;gt;Java层通过JNI调用: 参考: https://blog.csdn.net/wbin2">
+<meta name="keywords" content="Unreal">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Unreal中打开手机相册">
+<meta property="og:url" content="https://bitzhangmo.github.io/2022/01/14/Unreal4笔记/Unreal-JNI阅读笔记/index.html">
+<meta property="og:site_name" content="zhangMo Blog">
+<meta property="og:description" content="最近接到了一个需求, 需要提供一个功能, 让玩家可以在游戏中打开自己的相册, 并从中选择照片上传, 现阶段的需求就是需要实现打开相册-&amp;gt;选取照片-&amp;gt;加载到内存-&amp;gt;显示在UI上的功能, 本篇内容是实现此需求的笔记. Android平台:目前Android平台的想法是, Unreal-&amp;gt;Java层通过JNI调用: 参考: https://blog.csdn.net/wbin2">
+<meta property="og:locale" content="zh-CN">
+<meta property="og:updated_time" content="2022-01-17T15:18:51.384Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="Unreal中打开手机相册">
+<meta name="twitter:description" content="最近接到了一个需求, 需要提供一个功能, 让玩家可以在游戏中打开自己的相册, 并从中选择照片上传, 现阶段的需求就是需要实现打开相册-&amp;gt;选取照片-&amp;gt;加载到内存-&amp;gt;显示在UI上的功能, 本篇内容是实现此需求的笔记. Android平台:目前Android平台的想法是, Unreal-&amp;gt;Java层通过JNI调用: 参考: https://blog.csdn.net/wbin2">
+    
+    
+        
+          
+              <link rel="shortcut icon" href="/images/favicon.ico">
+          
+        
+        
+          
+            <link rel="icon" type="image/png" href="/images/favicon-192x192.png" sizes="192x192">
+          
+        
+        
+          
+            <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon.png">
+          
+        
+    
+    <!-- title -->
+    <title>Unreal中打开手机相册</title>
+    <!-- styles -->
+    <link rel="stylesheet" href="/css/style.css">
+    <!-- persian styles -->
+    
+      <link rel="stylesheet" href="/css/rtl.css">
+    
+    <!-- rss -->
+    
+    
+</head>
+
+<body class="max-width mx-auto px3 ltr">
+    
+      <div id="header-post">
+  <a id="menu-icon" href="#"><i class="fas fa-bars fa-lg"></i></a>
+  <a id="menu-icon-tablet" href="#"><i class="fas fa-bars fa-lg"></i></a>
+  <a id="top-icon-tablet" href="#" onclick="$('html, body').animate({ scrollTop: 0 }, 'fast');" style="display:none;"><i class="fas fa-chevron-up fa-lg"></i></a>
+  <span id="menu">
+    <span id="nav">
+      <ul>
+         
+          <li><a href="/">首页</a></li>
+         
+          <li><a href="/about/">关于</a></li>
+         
+          <li><a href="/tags/">tags</a></li>
+         
+          <li><a href="/categories/">categories</a></li>
+         
+          <li><a href="/archives/">归档</a></li>
+         
+          <li><a href="/categories/reports/">reports</a></li>
+         
+          <li><a href="/search/">搜索</a></li>
+        
+      </ul>
+    </span>
+    <br/>
+    <span id="actions">
+      <ul>
+        
+        
+        <li><a class="icon" href="/2022/01/14/Unreal4笔记/Unreal中打开手机相册/"><i class="fas fa-chevron-right" aria-hidden="true" onmouseover="$('#i-next').toggle();" onmouseout="$('#i-next').toggle();"></i></a></li>
+        
+        <li><a class="icon" href="#" onclick="$('html, body').animate({ scrollTop: 0 }, 'fast');"><i class="fas fa-chevron-up" aria-hidden="true" onmouseover="$('#i-top').toggle();" onmouseout="$('#i-top').toggle();"></i></a></li>
+        <li><a class="icon" href="#"><i class="fas fa-share-alt" aria-hidden="true" onmouseover="$('#i-share').toggle();" onmouseout="$('#i-share').toggle();" onclick="$('#share').toggle();return false;"></i></a></li>
+      </ul>
+      <span id="i-prev" class="info" style="display:none;">上一篇</span>
+      <span id="i-next" class="info" style="display:none;">下一篇</span>
+      <span id="i-top" class="info" style="display:none;">返回顶部</span>
+      <span id="i-share" class="info" style="display:none;">分享文章</span>
+    </span>
+    <br/>
+    <div id="share" style="display: none">
+      <ul>
+  <li><a class="icon" href="http://www.facebook.com/sharer.php?u=https://bitzhangmo.github.io/2022/01/14/Unreal4笔记/Unreal-JNI阅读笔记/"><i class="fab fa-facebook " aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="https://twitter.com/share?url=https://bitzhangmo.github.io/2022/01/14/Unreal4笔记/Unreal-JNI阅读笔记/&text=Unreal中打开手机相册"><i class="fab fa-twitter " aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="http://www.linkedin.com/shareArticle?url=https://bitzhangmo.github.io/2022/01/14/Unreal4笔记/Unreal-JNI阅读笔记/&title=Unreal中打开手机相册"><i class="fab fa-linkedin " aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="https://pinterest.com/pin/create/bookmarklet/?url=https://bitzhangmo.github.io/2022/01/14/Unreal4笔记/Unreal-JNI阅读笔记/&is_video=false&description=Unreal中打开手机相册"><i class="fab fa-pinterest " aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="mailto:?subject=Unreal中打开手机相册&body=Check out this article: https://bitzhangmo.github.io/2022/01/14/Unreal4笔记/Unreal-JNI阅读笔记/"><i class="fas fa-envelope " aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="https://getpocket.com/save?url=https://bitzhangmo.github.io/2022/01/14/Unreal4笔记/Unreal-JNI阅读笔记/&title=Unreal中打开手机相册"><i class="fab fa-get-pocket " aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="http://reddit.com/submit?url=https://bitzhangmo.github.io/2022/01/14/Unreal4笔记/Unreal-JNI阅读笔记/&title=Unreal中打开手机相册"><i class="fab fa-reddit " aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="http://www.stumbleupon.com/submit?url=https://bitzhangmo.github.io/2022/01/14/Unreal4笔记/Unreal-JNI阅读笔记/&title=Unreal中打开手机相册"><i class="fab fa-stumbleupon " aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="http://digg.com/submit?url=https://bitzhangmo.github.io/2022/01/14/Unreal4笔记/Unreal-JNI阅读笔记/&title=Unreal中打开手机相册"><i class="fab fa-digg " aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="http://www.tumblr.com/share/link?url=https://bitzhangmo.github.io/2022/01/14/Unreal4笔记/Unreal-JNI阅读笔记/&name=Unreal中打开手机相册&description="><i class="fab fa-tumblr " aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="https://news.ycombinator.com/submitlink?u=https://bitzhangmo.github.io/2022/01/14/Unreal4笔记/Unreal-JNI阅读笔记/&t=Unreal中打开手机相册"><i class="fab fa-hacker-news " aria-hidden="true"></i></a></li>
+</ul>
+
+    </div>
+    <div id="toc">
+      <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#Android平台"><span class="toc-number">1.</span> <span class="toc-text">Android平台:</span></a></li></ol>
+    </div>
+  </span>
+</div>
+
+    
+    <div class="content index py4">
+        
+        <article class="post" itemscope itemtype="http://schema.org/BlogPosting">
+  <header>
+    
+    <h1 class="posttitle" itemprop="name headline">
+        Unreal中打开手机相册
+    </h1>
+
+
+
+    <div class="meta">
+      <span class="author" itemprop="author" itemscope itemtype="http://schema.org/Person">
+        <span itemprop="name">zhangMo Blog</span>
+      </span>
+      
+    <div class="postdate">
+      
+        <time datetime="2022-01-14T15:23:10.000Z" itemprop="datePublished">2022-01-14</time>
+        
+        (Updated: <time datetime="2022-01-17T15:18:51.384Z" itemprop="dateModified">2022-01-17</time>)
+        
+      
+    </div>
+
+
+      
+
+      
+    <div class="article-tag">
+        <i class="fas fa-tag"></i>
+        <a class="tag-link" href="/tags/Unreal/">Unreal</a>
+    </div>
+
+
+    </div>
+  </header>
+  
+
+  <div class="content" itemprop="articleBody">
+    <a id="more"></a>
+<p>最近接到了一个需求, 需要提供一个功能, 让玩家可以在游戏中打开自己的相册, 并从中选择照片上传, 现阶段的需求就是需要实现<code>打开相册-&gt;选取照片-&gt;加载到内存-&gt;显示在UI上</code>的功能, 本篇内容是实现此需求的笔记.</p>
+<h2 id="Android平台"><a href="#Android平台" class="headerlink" title="Android平台:"></a>Android平台:</h2><p>目前Android平台的想法是, Unreal-&gt;Java层通过JNI调用:</p>
+<p>参考: <a href="https://blog.csdn.net/wbin233/article/details/50954868#comments" target="_blank" rel="noopener">https://blog.csdn.net/wbin233/article/details/50954868#comments</a></p>
+<p>添加权限: </p>
+<p><code>&lt;uses-permission android:name=“android.permission.READ_EXTERNAL_STORAGE” /&gt;</code></p>
+<p>调用系统相册:</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">private</span> <span class="keyword">static</span> <span class="keyword">final</span> <span class="keyword">int</span> CHOOSE_PHOTO=<span class="number">0</span>;  </span><br><span class="line">Intent intent = <span class="keyword">new</span> Intent(“android.intent.action.GET_CONTENT”);  </span><br><span class="line">intent.setType(”image<span class="comment">/*”);  </span></span><br><span class="line"><span class="comment">startActivityForResult(intent, CHOOSE_PHOTO);</span></span><br></pre></td></tr></table></figure>
+<p>关于StartActivityForResult可以参考: <a href="https://developer.android.google.cn/guide/components/activities/activity-lifecycle" target="_blank" rel="noopener">https://developer.android.google.cn/guide/components/activities/activity-lifecycle</a></p>
+<p>函数原型:</p>
+<p><a href="https://developer.android.google.cn/reference/android/app/Activity#onActivityResult(int,%20int,%20android.content.Intent)" target="_blank" rel="noopener">https://developer.android.google.cn/reference/android/app/Activity#onActivityResult(int,%20int,%20android.content.Intent)</a></p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">startActivityForResult</span> <span class="params">(Intent intent, </span></span></span><br><span class="line"><span class="function"><span class="params">                <span class="keyword">int</span> requestCode)</span></span></span><br><span class="line"><span class="function">    </span></span><br><span class="line"><span class="function"><span class="keyword">protected</span> <span class="keyword">void</span> <span class="title">onActivityResult</span> <span class="params">(<span class="keyword">int</span> requestCode, </span></span></span><br><span class="line"><span class="function"><span class="params">                <span class="keyword">int</span> resultCode, </span></span></span><br><span class="line"><span class="function"><span class="params">                Intent data)</span></span></span><br></pre></td></tr></table></figure>
+<p>startactivityForResult之后, 结果通过OnActivityResult返回, 上面的参数requestCode需要设计一下.</p>
+<p>貌似Intent中获得的数据(文件路径)还要自己写个解析函数得到文件储存地址</p>
+<p><a href="https://blog.csdn.net/zhanghao_Hulk/article/details/105389870" target="_blank" rel="noopener">https://blog.csdn.net/zhanghao_Hulk/article/details/105389870</a></p>
+<p><a href="https://www.cnblogs.com/zhujiabin/p/6692025.html" target="_blank" rel="noopener">https://www.cnblogs.com/zhujiabin/p/6692025.html</a></p>
+<p>上面的代码封装后通过JNI加入到<code>GameActivity.java</code>中, 使用</p>
+<figure class="highlight xml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">gameActivityClassAdditions</span>&gt;</span></span><br><span class="line">	<span class="tag">&lt;<span class="name">insert</span>&gt;</span></span><br><span class="line">        // TODO</span><br><span class="line">	<span class="tag">&lt;/<span class="name">insert</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">gameActivityClassAdditions</span>&gt;</span></span><br></pre></td></tr></table></figure>
+<p>通过这个方法可以在回调中拿到相关数据, 具体内容还需要进一步分析</p>
+<p>直觉上可以把处理的函数也插入到GameActivity中:</p>
+<figure class="highlight xml"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">gameActivityOnActivityResultAdditions</span>&gt;</span>	<span class="tag">&lt;/<span class="name">gameActivityOnActivityResultAdditions</span>&gt;</span></span><br></pre></td></tr></table></figure>
+<p>然后在Java里调用C++函数?</p>
+<p>也可以通过AndroidJNI.h中定义的回调来注册:</p>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// In AndroidJNI.h</span></span><br><span class="line">	<span class="comment">// Delegate that can be registered to that is called when an activity is finished</span></span><br><span class="line">	<span class="keyword">static</span> FOnActivityResult OnActivityResultDelegate;</span><br></pre></td></tr></table></figure>
+<p>貌似直接可以放在C++里处理</p>
+<p>全局搜索搜到了一个原生的处理方法, 可以参考一下:</p>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">//E:\UnrealEngine4.18\Engine\Plugins\Online\Android\OnlineSubsystemGooglePlay\Source\Public\OnlineSubsystemGooglePlay.h</span></span><br><span class="line"><span class="comment">// 它里面定义了一个	</span></span><br><span class="line"><span class="comment">/** Handle of registered delegate for onActivityResult */</span></span><br><span class="line">	FDelegateHandle OnActivityResultDelegateHandle;</span><br><span class="line"><span class="comment">//	用来处理该代理</span></span><br><span class="line">	</span><br><span class="line"><span class="comment">//E:\UnrealEngine4.18\Engine\Plugins\Online\Android\OnlineSubsystemGooglePlay\Source\Private\OnlineSubsystemGooglePlay.cpp中的处理函数:</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">bool</span> FOnlineSubsystemGooglePlay::Init() </span><br><span class="line">&#123;</span><br><span class="line">	<span class="comment">//...</span></span><br><span class="line"></span><br><span class="line">	OnActivityResultDelegateHandle = FJavaWrapper::OnActivityResultDelegate.AddRaw(<span class="keyword">this</span>, &amp;FOnlineSubsystemGooglePlay::OnActivityResult);</span><br><span class="line"></span><br><span class="line">	<span class="keyword">return</span> <span class="literal">true</span>;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="keyword">bool</span> FOnlineSubsystemGooglePlay::Shutdown() </span><br><span class="line">&#123;</span><br><span class="line">	FJavaWrapper::OnActivityResultDelegate.Remove(OnActivityResultDelegateHandle);</span><br><span class="line">	<span class="comment">//...</span></span><br><span class="line">	<span class="keyword">return</span> <span class="literal">true</span>;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="keyword">void</span> FOnlineSubsystemGooglePlay::OnActivityResult(JNIEnv *env, jobject thiz, jobject activity, jint requestCode, jint resultCode, jobject data)</span><br><span class="line">&#123;</span><br><span class="line">	<span class="comment">// Pass the result on to google play - otherwise, some callbacks for the turn based system do not get called.</span></span><br><span class="line">	AndroidSupport::OnActivityResult(env, activity, requestCode, resultCode, data);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>可供参考并仔细阅读:</p>
+<p>累了, 今天不写了</p>
+
+  </div>
+</article>
+
+
+
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/gitalk@1/dist/gitalk.css">
+    <script src="https://cdn.jsdelivr.net/npm/gitalk@1/dist/gitalk.min.js"></script>
+    <script src="https://cdn.bootcss.com/blueimp-md5/2.10.0/js/md5.min.js"></script>
+    <div id="gitalk-container"></div>
+    <script type="text/javascript">
+        var gitalk = new Gitalk({
+            clientID: '643bb65e08572c0f02f9',
+            clientSecret: '267594ee5074e2f5b6392c6deba31c86b4b98abe',
+            id: md5(window.location.pathname),
+            repo: 'bitzhangmo.github.io',
+            owner: 'bitzhangmo',
+            admin: 'bitzhangmo',
+            distractionFreeMode: ''
+        })
+        gitalk.render('gitalk-container')
+    </script>
+
+
+        
+          <div id="footer-post-container">
+  <div id="footer-post">
+
+    <div id="nav-footer" style="display: none">
+      <ul>
+         
+          <li><a href="/">首页</a></li>
+         
+          <li><a href="/about/">关于</a></li>
+         
+          <li><a href="/tags/">tags</a></li>
+         
+          <li><a href="/categories/">categories</a></li>
+         
+          <li><a href="/archives/">归档</a></li>
+         
+          <li><a href="/categories/reports/">reports</a></li>
+         
+          <li><a href="/search/">搜索</a></li>
+        
+      </ul>
+    </div>
+
+    <div id="toc-footer" style="display: none">
+      <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#Android平台"><span class="toc-number">1.</span> <span class="toc-text">Android平台:</span></a></li></ol>
+    </div>
+
+    <div id="share-footer" style="display: none">
+      <ul>
+  <li><a class="icon" href="http://www.facebook.com/sharer.php?u=https://bitzhangmo.github.io/2022/01/14/Unreal4笔记/Unreal-JNI阅读笔记/"><i class="fab fa-facebook fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="https://twitter.com/share?url=https://bitzhangmo.github.io/2022/01/14/Unreal4笔记/Unreal-JNI阅读笔记/&text=Unreal中打开手机相册"><i class="fab fa-twitter fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="http://www.linkedin.com/shareArticle?url=https://bitzhangmo.github.io/2022/01/14/Unreal4笔记/Unreal-JNI阅读笔记/&title=Unreal中打开手机相册"><i class="fab fa-linkedin fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="https://pinterest.com/pin/create/bookmarklet/?url=https://bitzhangmo.github.io/2022/01/14/Unreal4笔记/Unreal-JNI阅读笔记/&is_video=false&description=Unreal中打开手机相册"><i class="fab fa-pinterest fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="mailto:?subject=Unreal中打开手机相册&body=Check out this article: https://bitzhangmo.github.io/2022/01/14/Unreal4笔记/Unreal-JNI阅读笔记/"><i class="fas fa-envelope fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="https://getpocket.com/save?url=https://bitzhangmo.github.io/2022/01/14/Unreal4笔记/Unreal-JNI阅读笔记/&title=Unreal中打开手机相册"><i class="fab fa-get-pocket fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="http://reddit.com/submit?url=https://bitzhangmo.github.io/2022/01/14/Unreal4笔记/Unreal-JNI阅读笔记/&title=Unreal中打开手机相册"><i class="fab fa-reddit fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="http://www.stumbleupon.com/submit?url=https://bitzhangmo.github.io/2022/01/14/Unreal4笔记/Unreal-JNI阅读笔记/&title=Unreal中打开手机相册"><i class="fab fa-stumbleupon fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="http://digg.com/submit?url=https://bitzhangmo.github.io/2022/01/14/Unreal4笔记/Unreal-JNI阅读笔记/&title=Unreal中打开手机相册"><i class="fab fa-digg fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="http://www.tumblr.com/share/link?url=https://bitzhangmo.github.io/2022/01/14/Unreal4笔记/Unreal-JNI阅读笔记/&name=Unreal中打开手机相册&description="><i class="fab fa-tumblr fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="https://news.ycombinator.com/submitlink?u=https://bitzhangmo.github.io/2022/01/14/Unreal4笔记/Unreal-JNI阅读笔记/&t=Unreal中打开手机相册"><i class="fab fa-hacker-news fa-lg" aria-hidden="true"></i></a></li>
+</ul>
+
+    </div>
+
+    <div id="actions-footer">
+        <a id="menu" class="icon" href="#" onclick="$('#nav-footer').toggle();return false;"><i class="fas fa-bars fa-lg" aria-hidden="true"></i> 菜单</a>
+        <a id="toc" class="icon" href="#" onclick="$('#toc-footer').toggle();return false;"><i class="fas fa-list fa-lg" aria-hidden="true"></i> 目录</a>
+        <a id="share" class="icon" href="#" onclick="$('#share-footer').toggle();return false;"><i class="fas fa-share-alt fa-lg" aria-hidden="true"></i> 分享</a>
+        <a id="top" style="display:none" class="icon" href="#" onclick="$('html, body').animate({ scrollTop: 0 }, 'fast');"><i class="fas fa-chevron-up fa-lg" aria-hidden="true"></i> 返回顶部</a>
+    </div>
+
+  </div>
+</div>
+
+        
+        <footer id="footer">
+  <div class="footer-left">
+    Copyright &copy; 2022 zhangMo
+  </div>
+  <div class="footer-right">
+    <nav>
+      <ul>
+         
+          <li><a href="/">首页</a></li>
+         
+          <li><a href="/about/">关于</a></li>
+         
+          <li><a href="/tags/">tags</a></li>
+         
+          <li><a href="/categories/">categories</a></li>
+         
+          <li><a href="/archives/">归档</a></li>
+         
+          <li><a href="/categories/reports/">reports</a></li>
+         
+          <li><a href="/search/">搜索</a></li>
+        
+      </ul>
+    </nav>
+  </div>
+</footer>
+
+        
+    </div>
+    <!-- styles -->
+<link rel="stylesheet" href="/lib/font-awesome/css/all.min.css">
+<link rel="stylesheet" href="/lib/justified-gallery/css/justifiedGallery.min.css">
+
+    <!-- jquery -->
+<script src="/lib/jquery/jquery.min.js"></script>
+<script src="/lib/justified-gallery/js/jquery.justifiedGallery.min.js"></script>
+<!-- clipboard -->
+
+  <script src="/lib/clipboard/clipboard.min.js"></script>
+  <script type="text/javascript">
+  $(function() {
+    // copy-btn HTML
+    var btn = "<span class=\"btn-copy tooltipped tooltipped-sw\" aria-label=\"复制到粘贴板!\">";
+    btn += '<i class="far fa-clone"></i>';
+    btn += '</span>'; 
+    // mount it!
+    $(".highlight table").before(btn);
+    var clip = new ClipboardJS('.btn-copy', {
+      text: function(trigger) {
+        return Array.from(trigger.nextElementSibling.querySelectorAll('.code')).reduce((str,it)=>str+it.innerText+'\n','')
+      }
+    });
+    clip.on('success', function(e) {
+      e.trigger.setAttribute('aria-label', "复制成功!");
+      e.clearSelection();
+    })
+  })
+  </script>
+
+<script src="/js/main.js"></script>
+<!-- search -->
+
+<!-- Google Analytics -->
+
+<!-- Baidu Analytics -->
+
+<!-- Disqus Comments -->
+
+
+<script src="/live2dw/lib/L2Dwidget.min.js?bd2294fafea3389ee458f1d9be5a2157"></script><script>L2Dwidget.init({"pluginRootPath":"live2dw/","pluginJsPath":"lib/","pluginModelPath":"assets/","tagMode":false,"debug":false,"model":{"jsonPath":"/live2dw/assets/hijiki.model.json"},"display":{"position":"left","width":100,"height":200},"mobile":{"show":false},"log":false});</script></body>
+</html>
