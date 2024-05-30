@@ -15,7 +15,7 @@
 <meta property="og:description" content="关键词: 左值, 右值, 运算符, 强制类型转换, 函数重载, 函数指针等 第四章主要描述了运算符以及相关的优先级; 第五章讲了一些基本的语句以及流程控制符; 第六章讲了函数相关的内容, 重点在于参数, 重载函数以及函数指针等.">
 <meta property="og:locale" content="zh-CN">
 <meta property="og:image" content="https://gitee.com/hust_mo/BlogPictureRepo/raw/master/image-20211231163925916.png">
-<meta property="og:updated_time" content="2022-01-05T11:41:11.121Z">
+<meta property="og:updated_time" content="2024-05-30T15:28:13.281Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="C++Primer笔记(第四、五、六章)">
 <meta name="twitter:description" content="关键词: 左值, 右值, 运算符, 强制类型转换, 函数重载, 函数指针等 第四章主要描述了运算符以及相关的优先级; 第五章讲了一些基本的语句以及流程控制符; 第六章讲了函数相关的内容, 重点在于参数, 重载函数以及函数指针等.">
@@ -137,7 +137,7 @@
       
         <time datetime="2021-12-29T17:33:49.000Z" itemprop="datePublished">2021-12-30</time>
         
-        (Updated: <time datetime="2022-01-05T11:41:11.121Z" itemprop="dateModified">2022-01-05</time>)
+        (Updated: <time datetime="2024-05-30T15:28:13.281Z" itemprop="dateModified">2024-05-30</time>)
         
       
     </div>
@@ -246,7 +246,7 @@
 <li><p>默认实参 :</p>
   <figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="built_in">string</span> <span class="title">screen</span><span class="params">(<span class="keyword">int</span> ht = <span class="number">24</span>, <span class="keyword">int</span> wid = <span class="number">80.</span> <span class="keyword">char</span> backgrnd = <span class="string">' '</span>)</span></span>;</span><br><span class="line"><span class="comment">// 为每个形参提供了默认实参, 一旦某个形参被赋予了默认值, 它后面的所有形参都必须有默认值</span></span><br><span class="line"><span class="comment">// 在给定的作用域中一个形参只能被赋予一次默认实参</span></span><br><span class="line"><span class="comment">// 局部变量不能作为默认实参</span></span><br></pre></td></tr></table></figure>
 </li>
-<li><p>内联函数 :</p>
+<li><p>xxxxxxxxxx1 1vector<int> ivec(begin(ia), end(ia));   // 同理, 可以计算指针使用部分ia内容初始化ivecc++</int></p>
 <p>  背景: 调用函数一般比求等价表达式的值要慢一些 , 将函数指定为内联函数可避免函数调用的开销.</p>
 <p>  在函数的返回类型前面加上关键字<code>inline</code>, 将其声明为内联函数, 适用于<strong>规模较小, 流程直接, 频繁调用</strong>的函数. (感觉类似#define的功能)</p>
   <figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">inline</span> <span class="keyword">const</span> <span class="built_in">string</span>&amp; <span class="title">shorterString</span><span class="params">(<span class="keyword">const</span> <span class="built_in">string</span> &amp;s1, <span class="keyword">const</span> <span class="built_in">string</span> &amp;s2)</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">	<span class="keyword">return</span> si.size() &lt;= s2.size() ? s1 : s2;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="built_in">cout</span> &lt;&lt; shorterString(s1, s2) &lt;&lt; <span class="built_in">endl</span>;</span><br><span class="line"><span class="comment">// 在编译过程中展开如下(原书此处为&lt;号, 没道理吧......)</span></span><br><span class="line"><span class="built_in">cout</span> &lt;&lt; s1.size() &lt;= s2.size() &gt; s1 : s2;</span><br></pre></td></tr></table></figure>
