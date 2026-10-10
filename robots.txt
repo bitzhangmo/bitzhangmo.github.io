@@ -1,0 +1,5 @@
+User-agent: *
+Allow: /
+
+Sitemap: https://mosswang.com/sitemap.xml
+Sitemap: https://mosswang.com/baidusitemap.xml

@@ -1,0 +1,473 @@
+<?xml version="1.0" encoding="utf-8"?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+  <title>zhangMo Blog</title>
+  
+  
+  <link href="https://mosswang.com/atom.xml" rel="self"/>
+  
+  <link href="https://mosswang.com/"/>
+  <updated>2026-10-10T15:17:21.719Z</updated>
+  <id>https://mosswang.com/</id>
+  
+  <author>
+    <name>zhangMo</name>
+    
+  </author>
+  
+  <generator uri="https://hexo.io/">Hexo</generator>
+  
+  <entry>
+    <title>证券市场基础知识</title>
+    <link href="https://mosswang.com/2024/05/30/%E8%AF%81%E5%88%B8%E5%B8%82%E5%9C%BA%E5%9F%BA%E7%A1%80%E7%9F%A5%E8%AF%86/"/>
+    <id>https://mosswang.com/2024/05/30/%E8%AF%81%E5%88%B8%E5%B8%82%E5%9C%BA%E5%9F%BA%E7%A1%80%E7%9F%A5%E8%AF%86/</id>
+    <published>2024-05-30T15:22:14.000Z</published>
+    <updated>2026-10-10T15:17:21.719Z</updated>
+    
+    
+    <summary type="html">&lt;p&gt;关键词 : 股票,债券,基金,ETF,期货交易&lt;/p&gt;</summary>
+    
+    
+    
+    <category term="读书笔记" scheme="https://mosswang.com/categories/%E8%AF%BB%E4%B9%A6%E7%AC%94%E8%AE%B0/"/>
+    
+    
+    <category term="股票" scheme="https://mosswang.com/tags/%E8%82%A1%E7%A5%A8/"/>
+    
+    <category term="债券" scheme="https://mosswang.com/tags/%E5%80%BA%E5%88%B8/"/>
+    
+    <category term="基金" scheme="https://mosswang.com/tags/%E5%9F%BA%E9%87%91/"/>
+    
+    <category term="ETF" scheme="https://mosswang.com/tags/ETF/"/>
+    
+    <category term="期货交易" scheme="https://mosswang.com/tags/%E6%9C%9F%E8%B4%A7%E4%BA%A4%E6%98%93/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>Unreal中打开手机相册</title>
+    <link href="https://mosswang.com/2022/01/14/Unreal4%E7%AC%94%E8%AE%B0/Unreal-JNI%E9%98%85%E8%AF%BB%E7%AC%94%E8%AE%B0/"/>
+    <id>https://mosswang.com/2022/01/14/Unreal4%E7%AC%94%E8%AE%B0/Unreal-JNI%E9%98%85%E8%AF%BB%E7%AC%94%E8%AE%B0/</id>
+    <published>2022-01-14T15:23:10.000Z</published>
+    <updated>2026-10-10T15:17:21.693Z</updated>
+    
+    
+      
+      
+    <summary type="html">&lt;span id=&quot;more&quot;&gt;&lt;/span&gt;
+
+&lt;p&gt;最近接到了一个需求, 需要提供一个功能, 让玩家可以在游戏中打开自己的相册, 并从中选择照片上传, 现阶段的需求就是需要实现&lt;code&gt;打开相册-&amp;gt;选取照片-&amp;gt;加载到内存-&amp;gt;显示在UI上&lt;/code&gt;的功能</summary>
+      
+    
+    
+    
+    
+    <category term="Unreal" scheme="https://mosswang.com/tags/Unreal/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>Unreal中打开手机相册</title>
+    <link href="https://mosswang.com/2022/01/14/Unreal4%E7%AC%94%E8%AE%B0/Unreal%E4%B8%AD%E6%89%93%E5%BC%80%E6%89%8B%E6%9C%BA%E7%9B%B8%E5%86%8C/"/>
+    <id>https://mosswang.com/2022/01/14/Unreal4%E7%AC%94%E8%AE%B0/Unreal%E4%B8%AD%E6%89%93%E5%BC%80%E6%89%8B%E6%9C%BA%E7%9B%B8%E5%86%8C/</id>
+    <published>2022-01-14T15:23:10.000Z</published>
+    <updated>2026-10-10T15:17:21.694Z</updated>
+    
+    
+      
+      
+    <summary type="html">&lt;span id=&quot;more&quot;&gt;&lt;/span&gt;
+
+&lt;p&gt;最近接到了一个需求, 需要提供一个功能, 让玩家可以在游戏中打开自己的相册, 并从中选择照片上传, 现阶段的需求就是需要实现&lt;code&gt;打开相册-&amp;gt;选取照片-&amp;gt;加载到内存-&amp;gt;显示在UI上&lt;/code&gt;的功能</summary>
+      
+    
+    
+    
+    
+    <category term="Unreal" scheme="https://mosswang.com/tags/Unreal/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>C++Primer笔记(第八,九章)</title>
+    <link href="https://mosswang.com/2022/01/10/C++Primer%E7%AC%94%E8%AE%B0/C-Primer%E7%AC%94%E8%AE%B0-%E7%AC%AC%E5%85%AB%E7%AB%A0/"/>
+    <id>https://mosswang.com/2022/01/10/C++Primer%E7%AC%94%E8%AE%B0/C-Primer%E7%AC%94%E8%AE%B0-%E7%AC%AC%E5%85%AB%E7%AB%A0/</id>
+    <published>2022-01-10T15:47:02.000Z</published>
+    <updated>2026-10-10T15:17:21.638Z</updated>
+    
+    
+    <summary type="html">&lt;p&gt;关键词 : 输入输出流, 顺序容器&lt;/p&gt;</summary>
+    
+    
+    
+    <category term="2022笔记" scheme="https://mosswang.com/categories/2022%E7%AC%94%E8%AE%B0/"/>
+    
+    
+    <category term="C++" scheme="https://mosswang.com/tags/C/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>C++Primer笔记(第七章)</title>
+    <link href="https://mosswang.com/2022/01/04/C++Primer%E7%AC%94%E8%AE%B0/C-Primer%E7%AC%94%E8%AE%B0-%E7%AC%AC%E4%B8%83%E7%AB%A0/"/>
+    <id>https://mosswang.com/2022/01/04/C++Primer%E7%AC%94%E8%AE%B0/C-Primer%E7%AC%94%E8%AE%B0-%E7%AC%AC%E4%B8%83%E7%AB%A0/</id>
+    <published>2022-01-04T15:48:51.000Z</published>
+    <updated>2026-10-10T15:17:21.634Z</updated>
+    
+    
+    <summary type="html">&lt;p&gt;关键词: 成员函数, 构造函数, 友元, 静态成员&lt;/p&gt;</summary>
+    
+    
+    
+    <category term="2022笔记" scheme="https://mosswang.com/categories/2022%E7%AC%94%E8%AE%B0/"/>
+    
+    
+    <category term="C++" scheme="https://mosswang.com/tags/C/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>C++Primer笔记(第四、五、六章)</title>
+    <link href="https://mosswang.com/2021/12/30/C++Primer%E7%AC%94%E8%AE%B0/C-Primer%E7%AC%94%E8%AE%B0-%E7%AC%AC%E5%9B%9B%E3%80%81%E4%BA%94%E3%80%81%E5%85%AD%E7%AB%A0/"/>
+    <id>https://mosswang.com/2021/12/30/C++Primer%E7%AC%94%E8%AE%B0/C-Primer%E7%AC%94%E8%AE%B0-%E7%AC%AC%E5%9B%9B%E3%80%81%E4%BA%94%E3%80%81%E5%85%AD%E7%AB%A0/</id>
+    <published>2021-12-29T17:33:49.000Z</published>
+    <updated>2026-10-10T15:17:21.639Z</updated>
+    
+    
+    <summary type="html">&lt;p&gt;关键词: 左值, 右值, 运算符, 强制类型转换, 函数重载, 函数指针等&lt;/p&gt;
+&lt;p&gt;第四章主要描述了运算符以及相关的优先级; 第五章讲了一些基本的语句以及流程控制符; 第六章讲了函数相关的内容, 重点在于参数, 重载函数以及函数指针等.&lt;/p&gt;</summary>
+    
+    
+    
+    <category term="2022笔记" scheme="https://mosswang.com/categories/2022%E7%AC%94%E8%AE%B0/"/>
+    
+    
+    <category term="C++" scheme="https://mosswang.com/tags/C/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>C++Primer笔记(第三章)</title>
+    <link href="https://mosswang.com/2021/12/30/C++Primer%E7%AC%94%E8%AE%B0/C-Primer%E7%AC%94%E8%AE%B0-%E7%AC%AC%E4%B8%89%E7%AB%A0/"/>
+    <id>https://mosswang.com/2021/12/30/C++Primer%E7%AC%94%E8%AE%B0/C-Primer%E7%AC%94%E8%AE%B0-%E7%AC%AC%E4%B8%89%E7%AB%A0/</id>
+    <published>2021-12-29T17:07:52.000Z</published>
+    <updated>2026-10-10T15:17:21.635Z</updated>
+    
+    
+    <summary type="html">&lt;p&gt;关键词 : string, vector, 迭代器, 数组&lt;/p&gt;</summary>
+    
+    
+    
+    <category term="2022笔记" scheme="https://mosswang.com/categories/2022%E7%AC%94%E8%AE%B0/"/>
+    
+    
+    <category term="C++" scheme="https://mosswang.com/tags/C/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>C++Primer笔记(第二章)</title>
+    <link href="https://mosswang.com/2021/12/29/C++Primer%E7%AC%94%E8%AE%B0/C-Primer%E7%AC%94%E8%AE%B0-%E7%AC%AC%E4%BA%8C%E7%AB%A0/"/>
+    <id>https://mosswang.com/2021/12/29/C++Primer%E7%AC%94%E8%AE%B0/C-Primer%E7%AC%94%E8%AE%B0-%E7%AC%AC%E4%BA%8C%E7%AB%A0/</id>
+    <published>2021-12-28T17:26:17.000Z</published>
+    <updated>2026-10-10T15:17:21.637Z</updated>
+    
+    
+    <summary type="html">&lt;p&gt;关键词 : 对象 , 变量 , 引用 , 指针 , const , auto , decltype &lt;/p&gt;</summary>
+    
+    
+    
+    <category term="2022笔记" scheme="https://mosswang.com/categories/2022%E7%AC%94%E8%AE%B0/"/>
+    
+    
+    <category term="C++" scheme="https://mosswang.com/tags/C/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>&lt;自己动手实现Lua:虚拟机,编译器和标准库&gt;读书笔记</title>
+    <link href="https://mosswang.com/2021/07/06/Lua/%E8%87%AA%E5%B7%B1%E5%8A%A8%E6%89%8B%E5%AE%9E%E7%8E%B0Lua-%E8%99%9A%E6%8B%9F%E6%9C%BA-%E7%BC%96%E8%AF%91%E5%99%A8%E5%92%8C%E6%A0%87%E5%87%86%E5%BA%93-%E8%AF%BB%E4%B9%A6%E7%AC%94%E8%AE%B0/"/>
+    <id>https://mosswang.com/2021/07/06/Lua/%E8%87%AA%E5%B7%B1%E5%8A%A8%E6%89%8B%E5%AE%9E%E7%8E%B0Lua-%E8%99%9A%E6%8B%9F%E6%9C%BA-%E7%BC%96%E8%AF%91%E5%99%A8%E5%92%8C%E6%A0%87%E5%87%86%E5%BA%93-%E8%AF%BB%E4%B9%A6%E7%AC%94%E8%AE%B0/</id>
+    <published>2021-07-06T14:30:53.000Z</published>
+    <updated>2026-10-10T15:17:21.654Z</updated>
+    
+    
+    <summary type="html">&lt;p&gt;本篇是《自己动手实现Lua：虚拟机、编译器和标准库》的读书笔记，持续更新中。&lt;/p&gt;</summary>
+    
+    
+    
+    <category term="读书笔记" scheme="https://mosswang.com/categories/%E8%AF%BB%E4%B9%A6%E7%AC%94%E8%AE%B0/"/>
+    
+    
+    <category term="Lua" scheme="https://mosswang.com/tags/Lua/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>&lt;Lua程序设计&gt;读书笔记</title>
+    <link href="https://mosswang.com/2021/06/02/Lua/Lua%E8%AF%BB%E4%B9%A6%E7%AC%94%E8%AE%B0/"/>
+    <id>https://mosswang.com/2021/06/02/Lua/Lua%E8%AF%BB%E4%B9%A6%E7%AC%94%E8%AE%B0/</id>
+    <published>2021-06-02T15:14:53.000Z</published>
+    <updated>2026-10-10T15:17:21.652Z</updated>
+    
+    
+    <summary type="html">&lt;p&gt;康复训练。&lt;/p&gt;</summary>
+    
+    
+    
+    <category term="读书笔记" scheme="https://mosswang.com/categories/%E8%AF%BB%E4%B9%A6%E7%AC%94%E8%AE%B0/"/>
+    
+    
+    <category term="Lua" scheme="https://mosswang.com/tags/Lua/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>Unreal Engine 4 SDK构建相关笔记</title>
+    <link href="https://mosswang.com/2020/12/24/Unreal4%E7%AC%94%E8%AE%B0/Unreal-Engine-4-SDK%E6%9E%84%E5%BB%BA%E7%9B%B8%E5%85%B3%E7%AC%94%E8%AE%B0/"/>
+    <id>https://mosswang.com/2020/12/24/Unreal4%E7%AC%94%E8%AE%B0/Unreal-Engine-4-SDK%E6%9E%84%E5%BB%BA%E7%9B%B8%E5%85%B3%E7%AC%94%E8%AE%B0/</id>
+    <published>2020-12-23T16:04:56.000Z</published>
+    <updated>2026-10-10T15:17:21.692Z</updated>
+    
+    
+      
+      
+    <summary type="html">&lt;span id=&quot;more&quot;&gt;&lt;/span&gt;
+
+&lt;h1 id=&quot;SDK构建相关阅读&quot;&gt;&lt;a href=&quot;#SDK构建相关阅读&quot; class=&quot;headerlink&quot; title=&quot;SDK构建相关阅读&quot;&gt;&lt;/a&gt;SDK构建相关阅读&lt;/h1&gt;&lt;p&gt;[toc]&lt;/p&gt;
+&lt;p&gt;在Unr</summary>
+      
+    
+    
+    
+    <category term="开发相关" scheme="https://mosswang.com/categories/%E5%BC%80%E5%8F%91%E7%9B%B8%E5%85%B3/"/>
+    
+    
+    <category term="Unreal,SDK" scheme="https://mosswang.com/tags/Unreal-SDK/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>Minigame以及其他有的没的</title>
+    <link href="https://mosswang.com/2020/09/17/%E9%9A%8F%E7%AC%94/Minigame%E4%BB%A5%E5%8F%8A%E5%85%B6%E4%BB%96%E6%9C%89%E7%9A%84%E6%B2%A1%E7%9A%84/"/>
+    <id>https://mosswang.com/2020/09/17/%E9%9A%8F%E7%AC%94/Minigame%E4%BB%A5%E5%8F%8A%E5%85%B6%E4%BB%96%E6%9C%89%E7%9A%84%E6%B2%A1%E7%9A%84/</id>
+    <published>2020-09-16T18:49:00.000Z</published>
+    <updated>2026-10-10T15:17:21.722Z</updated>
+    
+    
+      
+      
+    <summary type="html">&lt;span id=&quot;more&quot;&gt;&lt;/span&gt;
+
+&lt;h4 id=&quot;从上海归来：&quot;&gt;&lt;a href=&quot;#从上海归来：&quot; class=&quot;headerlink&quot; title=&quot;从上海归来：&quot;&gt;&lt;/a&gt;从上海归来：&lt;/h4&gt;&lt;p&gt;这一段时间在搞Minigame，有点感触。从上海和顺佬还有</summary>
+      
+    
+    
+    
+    <category term="文字" scheme="https://mosswang.com/categories/%E6%96%87%E5%AD%97/"/>
+    
+    
+    <category term="随笔" scheme="https://mosswang.com/tags/%E9%9A%8F%E7%AC%94/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>“2020年第33周周报”</title>
+    <link href="https://mosswang.com/2020/08/19/%E4%B8%AA%E4%BA%BA%E6%8A%A5%E5%91%8A/202033/"/>
+    <id>https://mosswang.com/2020/08/19/%E4%B8%AA%E4%BA%BA%E6%8A%A5%E5%91%8A/202033/</id>
+    <published>2020-08-18T16:09:30.000Z</published>
+    <updated>2026-10-10T15:17:21.706Z</updated>
+    
+    
+      
+      
+    <summary type="html">&lt;span id=&quot;more&quot;&gt;&lt;/span&gt;
+
+&lt;p&gt;这是2020年的第33周报告。&lt;/p&gt;
+&lt;h3 id=&quot;上周计划完成情况&quot;&gt;&lt;a href=&quot;#上周计划完成情况&quot; class=&quot;headerlink&quot; title=&quot;上周计划完成情况&quot;&gt;&lt;/a&gt;上周计划完成情况&lt;/h3&gt;&lt;</summary>
+      
+    
+    
+    
+    <category term="reports" scheme="https://mosswang.com/categories/reports/"/>
+    
+    
+    <category term="report" scheme="https://mosswang.com/tags/report/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>“2020年第32周周报”</title>
+    <link href="https://mosswang.com/2020/08/09/%E4%B8%AA%E4%BA%BA%E6%8A%A5%E5%91%8A/202032/"/>
+    <id>https://mosswang.com/2020/08/09/%E4%B8%AA%E4%BA%BA%E6%8A%A5%E5%91%8A/202032/</id>
+    <published>2020-08-09T15:58:48.000Z</published>
+    <updated>2026-10-10T15:17:21.705Z</updated>
+    
+    
+      
+      
+    <summary type="html">&lt;span id=&quot;more&quot;&gt;&lt;/span&gt;
+
+&lt;p&gt;这是2020年的第32周报告。&lt;/p&gt;
+&lt;h3 id=&quot;上周计划完成情况&quot;&gt;&lt;a href=&quot;#上周计划完成情况&quot; class=&quot;headerlink&quot; title=&quot;上周计划完成情况&quot;&gt;&lt;/a&gt;上周计划完成情况&lt;/h3&gt;&lt;</summary>
+      
+    
+    
+    
+    <category term="reports" scheme="https://mosswang.com/categories/reports/"/>
+    
+    
+    <category term="report" scheme="https://mosswang.com/tags/report/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>“2020年第31周周报”</title>
+    <link href="https://mosswang.com/2020/08/05/%E4%B8%AA%E4%BA%BA%E6%8A%A5%E5%91%8A/202031/"/>
+    <id>https://mosswang.com/2020/08/05/%E4%B8%AA%E4%BA%BA%E6%8A%A5%E5%91%8A/202031/</id>
+    <published>2020-08-05T14:03:43.000Z</published>
+    <updated>2026-10-10T15:17:21.704Z</updated>
+    
+    
+      
+      
+    <summary type="html">&lt;span id=&quot;more&quot;&gt;&lt;/span&gt;
+
+&lt;p&gt;这是2020年的第31周报告。&lt;/p&gt;
+&lt;h3 id=&quot;上周计划完成情况&quot;&gt;&lt;a href=&quot;#上周计划完成情况&quot; class=&quot;headerlink&quot; title=&quot;上周计划完成情况&quot;&gt;&lt;/a&gt;上周计划完成情况&lt;/h3&gt;&lt;</summary>
+      
+    
+    
+    
+    <category term="reports" scheme="https://mosswang.com/categories/reports/"/>
+    
+    
+    <category term="report" scheme="https://mosswang.com/tags/report/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>“2020年第29周周报”</title>
+    <link href="https://mosswang.com/2020/07/18/%E4%B8%AA%E4%BA%BA%E6%8A%A5%E5%91%8A/202029/"/>
+    <id>https://mosswang.com/2020/07/18/%E4%B8%AA%E4%BA%BA%E6%8A%A5%E5%91%8A/202029/</id>
+    <published>2020-07-17T16:06:21.000Z</published>
+    <updated>2026-10-10T15:17:21.703Z</updated>
+    
+    
+      
+      
+    <summary type="html">&lt;span id=&quot;more&quot;&gt;&lt;/span&gt;
+
+&lt;p&gt;这是2020年的第29周报告。&lt;/p&gt;
+&lt;h3 id=&quot;本周做了什么&quot;&gt;&lt;a href=&quot;#本周做了什么&quot; class=&quot;headerlink&quot; title=&quot;本周做了什么&quot;&gt;&lt;/a&gt;本周做了什么&lt;/h3&gt;&lt;p&gt;这周是入职之</summary>
+      
+    
+    
+    
+    <category term="reports" scheme="https://mosswang.com/categories/reports/"/>
+    
+    
+    <category term="report" scheme="https://mosswang.com/tags/report/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>“2020年第21周周报”</title>
+    <link href="https://mosswang.com/2020/05/26/%E4%B8%AA%E4%BA%BA%E6%8A%A5%E5%91%8A/202021/"/>
+    <id>https://mosswang.com/2020/05/26/%E4%B8%AA%E4%BA%BA%E6%8A%A5%E5%91%8A/202021/</id>
+    <published>2020-05-26T10:18:26.000Z</published>
+    <updated>2026-10-10T15:17:21.702Z</updated>
+    
+    
+      
+      
+    <summary type="html">&lt;span id=&quot;more&quot;&gt;&lt;/span&gt;
+
+&lt;p&gt;这是2020年的第21周报告（0518～0524）。&lt;/p&gt;
+&lt;h3 id=&quot;上周计划完成情况&quot;&gt;&lt;a href=&quot;#上周计划完成情况&quot; class=&quot;headerlink&quot; title=&quot;上周计划完成情况&quot;&gt;&lt;/a&gt;上周计</summary>
+      
+    
+    
+    
+    <category term="reports" scheme="https://mosswang.com/categories/reports/"/>
+    
+    
+    <category term="report" scheme="https://mosswang.com/tags/report/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>“2020年第20周周报”</title>
+    <link href="https://mosswang.com/2020/05/26/%E4%B8%AA%E4%BA%BA%E6%8A%A5%E5%91%8A/202020/"/>
+    <id>https://mosswang.com/2020/05/26/%E4%B8%AA%E4%BA%BA%E6%8A%A5%E5%91%8A/202020/</id>
+    <published>2020-05-26T10:17:14.000Z</published>
+    <updated>2026-10-10T15:17:21.701Z</updated>
+    
+    
+      
+      
+    <summary type="html">&lt;span id=&quot;more&quot;&gt;&lt;/span&gt;
+
+&lt;p&gt;这是2020年的第20周报告（0511～0517）。&lt;/p&gt;
+&lt;h3 id=&quot;上周计划完成情况&quot;&gt;&lt;a href=&quot;#上周计划完成情况&quot; class=&quot;headerlink&quot; title=&quot;上周计划完成情况&quot;&gt;&lt;/a&gt;上周计</summary>
+      
+    
+    
+    
+    <category term="reports" scheme="https://mosswang.com/categories/reports/"/>
+    
+    
+    <category term="report" scheme="https://mosswang.com/tags/report/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>“2020年第19周周报”</title>
+    <link href="https://mosswang.com/2020/05/12/%E4%B8%AA%E4%BA%BA%E6%8A%A5%E5%91%8A/202019/"/>
+    <id>https://mosswang.com/2020/05/12/%E4%B8%AA%E4%BA%BA%E6%8A%A5%E5%91%8A/202019/</id>
+    <published>2020-05-12T08:15:06.000Z</published>
+    <updated>2026-10-10T15:17:21.699Z</updated>
+    
+    
+      
+      
+    <summary type="html">&lt;span id=&quot;more&quot;&gt;&lt;/span&gt;
+
+&lt;p&gt;这是2020年的第19周报告（0504～0510）。&lt;/p&gt;
+&lt;h3 id=&quot;上周计划完成情况&quot;&gt;&lt;a href=&quot;#上周计划完成情况&quot; class=&quot;headerlink&quot; title=&quot;上周计划完成情况&quot;&gt;&lt;/a&gt;上周计</summary>
+      
+    
+    
+    
+    <category term="reports" scheme="https://mosswang.com/categories/reports/"/>
+    
+    
+    <category term="report" scheme="https://mosswang.com/tags/report/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>“2020年第18周周报”</title>
+    <link href="https://mosswang.com/2020/05/07/%E4%B8%AA%E4%BA%BA%E6%8A%A5%E5%91%8A/202018/"/>
+    <id>https://mosswang.com/2020/05/07/%E4%B8%AA%E4%BA%BA%E6%8A%A5%E5%91%8A/202018/</id>
+    <published>2020-05-07T09:58:05.000Z</published>
+    <updated>2026-10-10T15:17:21.698Z</updated>
+    
+    
+      
+      
+    <summary type="html">&lt;span id=&quot;more&quot;&gt;&lt;/span&gt;
+
+&lt;p&gt;这是2020年的第18周报告（0427～0503）。&lt;/p&gt;
+&lt;h3 id=&quot;上周计划完成情况&quot;&gt;&lt;a href=&quot;#上周计划完成情况&quot; class=&quot;headerlink&quot; title=&quot;上周计划完成情况&quot;&gt;&lt;/a&gt;上周计</summary>
+      
+    
+    
+    
+    <category term="reports" scheme="https://mosswang.com/categories/reports/"/>
+    
+    
+    <category term="report" scheme="https://mosswang.com/tags/report/"/>
+    
+  </entry>
+  
+</feed>

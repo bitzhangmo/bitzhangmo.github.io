@@ -1,0 +1,467 @@
+<!DOCTYPE html>
+<html lang=zh>
+<head>
+    <!-- so meta -->
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="HandheldFriendly" content="True">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1" />
+    <meta name="description" content="SDK构建相关阅读[toc] 在Unreal项目开发的过程中，可能会用到第三方开发的库来集成一些第三方的功能，例如语音通话、播放视频等功能。虚幻引擎本身也引用了很多第三方的库,例如物理库PhysX、Steam平台相关的库SteamWorks、GoogleVR等等。这些库可以在引擎的Engine\Source\ThirdParty目录下找到。Unreal官方推荐将第三方库集成到插件目录中，这样可">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Unreal Engine 4 SDK构建相关笔记">
+<meta property="og:url" content="https://mosswang.com/2020/12/24/Unreal4%E7%AC%94%E8%AE%B0/Unreal-Engine-4-SDK%E6%9E%84%E5%BB%BA%E7%9B%B8%E5%85%B3%E7%AC%94%E8%AE%B0/index.html">
+<meta property="og:site_name" content="zhangMo Blog">
+<meta property="og:description" content="SDK构建相关阅读[toc] 在Unreal项目开发的过程中，可能会用到第三方开发的库来集成一些第三方的功能，例如语音通话、播放视频等功能。虚幻引擎本身也引用了很多第三方的库,例如物理库PhysX、Steam平台相关的库SteamWorks、GoogleVR等等。这些库可以在引擎的Engine\Source\ThirdParty目录下找到。Unreal官方推荐将第三方库集成到插件目录中，这样可">
+<meta property="og:locale" content="zh_CN">
+<meta property="og:image" content="http://hust_mo.gitee.io/blogpicturerepo/image-20201224174958125.png">
+<meta property="og:image" content="http://hust_mo.gitee.io/blogpicturerepo/image-20201224210510607.png">
+<meta property="og:image" content="http://hust_mo.gitee.io/blogpicturerepo/render">
+<meta property="og:image" content="http://hust_mo.gitee.io/blogpicturerepo/image-20201224221924928.png">
+<meta property="og:image" content="http://hust_mo.gitee.io/blogpicturerepo/image-20201225151117492.png">
+<meta property="article:published_time" content="2020-12-23T16:04:56.000Z">
+<meta property="article:modified_time" content="2026-10-10T15:17:21.692Z">
+<meta property="article:author" content="zhangMo">
+<meta property="article:tag" content="Unreal,SDK">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="http://hust_mo.gitee.io/blogpicturerepo/image-20201224174958125.png">
+    
+    
+        
+          
+              <link rel="shortcut icon" href="/images/favicon.ico">
+          
+        
+        
+          
+            <link rel="icon" type="image/png" href="/images/favicon-192x192.png" sizes="192x192">
+          
+        
+        
+          
+            <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon.png">
+          
+        
+    
+    <!-- title -->
+    <title>Unreal Engine 4 SDK构建相关笔记</title>
+    <!-- styles -->
+    
+<link rel="stylesheet" href="/css/style.css">
+
+    <!-- persian styles -->
+    
+      
+<link rel="stylesheet" href="/css/rtl.css">
+
+    
+    <!-- rss -->
+    
+    
+      <link rel="alternate" href="/true" title="zhangMo Blog" type="application/atom+xml" />
+    
+<meta name="generator" content="Hexo 7.3.0"></head>
+
+<body class="max-width mx-auto px3 ltr">
+    
+      <div id="header-post">
+  <a id="menu-icon" href="#"><i class="fas fa-bars fa-lg"></i></a>
+  <a id="menu-icon-tablet" href="#"><i class="fas fa-bars fa-lg"></i></a>
+  <a id="top-icon-tablet" href="#" onclick="$('html, body').animate({ scrollTop: 0 }, 'fast');" style="display:none;"><i class="fas fa-chevron-up fa-lg"></i></a>
+  <span id="menu">
+    <span id="nav">
+      <ul>
+         
+          <li><a href="/">首页</a></li>
+         
+          <li><a href="/about/">关于</a></li>
+         
+          <li><a href="/tags/">tags</a></li>
+         
+          <li><a href="/categories/">categories</a></li>
+         
+          <li><a href="/archives/">归档</a></li>
+         
+          <li><a href="/photos/">相册</a></li>
+         
+          <li><a href="/search/">搜索</a></li>
+        
+      </ul>
+    </span>
+    <br/>
+    <span id="actions">
+      <ul>
+        
+        <li><a class="icon" href="/2021/06/02/Lua/Lua%E8%AF%BB%E4%B9%A6%E7%AC%94%E8%AE%B0/"><i class="fas fa-chevron-left" aria-hidden="true" onmouseover="$('#i-prev').toggle();" onmouseout="$('#i-prev').toggle();"></i></a></li>
+        
+        
+        <li><a class="icon" href="/2020/09/17/%E9%9A%8F%E7%AC%94/Minigame%E4%BB%A5%E5%8F%8A%E5%85%B6%E4%BB%96%E6%9C%89%E7%9A%84%E6%B2%A1%E7%9A%84/"><i class="fas fa-chevron-right" aria-hidden="true" onmouseover="$('#i-next').toggle();" onmouseout="$('#i-next').toggle();"></i></a></li>
+        
+        <li><a class="icon" href="#" onclick="$('html, body').animate({ scrollTop: 0 }, 'fast');"><i class="fas fa-chevron-up" aria-hidden="true" onmouseover="$('#i-top').toggle();" onmouseout="$('#i-top').toggle();"></i></a></li>
+        <li><a class="icon" href="#"><i class="fas fa-share-alt" aria-hidden="true" onmouseover="$('#i-share').toggle();" onmouseout="$('#i-share').toggle();" onclick="$('#share').toggle();return false;"></i></a></li>
+      </ul>
+      <span id="i-prev" class="info" style="display:none;">上一篇</span>
+      <span id="i-next" class="info" style="display:none;">下一篇</span>
+      <span id="i-top" class="info" style="display:none;">返回顶部</span>
+      <span id="i-share" class="info" style="display:none;">分享文章</span>
+    </span>
+    <br/>
+    <div id="share" style="display: none">
+      <ul>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://www.facebook.com/sharer.php?u=https://mosswang.com/2020/12/24/Unreal4%E7%AC%94%E8%AE%B0/Unreal-Engine-4-SDK%E6%9E%84%E5%BB%BA%E7%9B%B8%E5%85%B3%E7%AC%94%E8%AE%B0/"><i class="fab fa-facebook " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="https://twitter.com/share?url=https://mosswang.com/2020/12/24/Unreal4%E7%AC%94%E8%AE%B0/Unreal-Engine-4-SDK%E6%9E%84%E5%BB%BA%E7%9B%B8%E5%85%B3%E7%AC%94%E8%AE%B0/&text=Unreal Engine 4 SDK构建相关笔记"><i class="fab fa-twitter " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://www.linkedin.com/shareArticle?url=https://mosswang.com/2020/12/24/Unreal4%E7%AC%94%E8%AE%B0/Unreal-Engine-4-SDK%E6%9E%84%E5%BB%BA%E7%9B%B8%E5%85%B3%E7%AC%94%E8%AE%B0/&title=Unreal Engine 4 SDK构建相关笔记"><i class="fab fa-linkedin " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="https://pinterest.com/pin/create/bookmarklet/?url=https://mosswang.com/2020/12/24/Unreal4%E7%AC%94%E8%AE%B0/Unreal-Engine-4-SDK%E6%9E%84%E5%BB%BA%E7%9B%B8%E5%85%B3%E7%AC%94%E8%AE%B0/&is_video=false&description=Unreal Engine 4 SDK构建相关笔记"><i class="fab fa-pinterest " aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="mailto:?subject=Unreal Engine 4 SDK构建相关笔记&body=Check out this article: https://mosswang.com/2020/12/24/Unreal4%E7%AC%94%E8%AE%B0/Unreal-Engine-4-SDK%E6%9E%84%E5%BB%BA%E7%9B%B8%E5%85%B3%E7%AC%94%E8%AE%B0/"><i class="fas fa-envelope " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="https://getpocket.com/save?url=https://mosswang.com/2020/12/24/Unreal4%E7%AC%94%E8%AE%B0/Unreal-Engine-4-SDK%E6%9E%84%E5%BB%BA%E7%9B%B8%E5%85%B3%E7%AC%94%E8%AE%B0/&title=Unreal Engine 4 SDK构建相关笔记"><i class="fab fa-get-pocket " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://reddit.com/submit?url=https://mosswang.com/2020/12/24/Unreal4%E7%AC%94%E8%AE%B0/Unreal-Engine-4-SDK%E6%9E%84%E5%BB%BA%E7%9B%B8%E5%85%B3%E7%AC%94%E8%AE%B0/&title=Unreal Engine 4 SDK构建相关笔记"><i class="fab fa-reddit " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://www.stumbleupon.com/submit?url=https://mosswang.com/2020/12/24/Unreal4%E7%AC%94%E8%AE%B0/Unreal-Engine-4-SDK%E6%9E%84%E5%BB%BA%E7%9B%B8%E5%85%B3%E7%AC%94%E8%AE%B0/&title=Unreal Engine 4 SDK构建相关笔记"><i class="fab fa-stumbleupon " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://digg.com/submit?url=https://mosswang.com/2020/12/24/Unreal4%E7%AC%94%E8%AE%B0/Unreal-Engine-4-SDK%E6%9E%84%E5%BB%BA%E7%9B%B8%E5%85%B3%E7%AC%94%E8%AE%B0/&title=Unreal Engine 4 SDK构建相关笔记"><i class="fab fa-digg " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://www.tumblr.com/share/link?url=https://mosswang.com/2020/12/24/Unreal4%E7%AC%94%E8%AE%B0/Unreal-Engine-4-SDK%E6%9E%84%E5%BB%BA%E7%9B%B8%E5%85%B3%E7%AC%94%E8%AE%B0/&name=Unreal Engine 4 SDK构建相关笔记&description="><i class="fab fa-tumblr " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="https://news.ycombinator.com/submitlink?u=https://mosswang.com/2020/12/24/Unreal4%E7%AC%94%E8%AE%B0/Unreal-Engine-4-SDK%E6%9E%84%E5%BB%BA%E7%9B%B8%E5%85%B3%E7%AC%94%E8%AE%B0/&t=Unreal Engine 4 SDK构建相关笔记"><i class="fab fa-hacker-news " aria-hidden="true"></i></a></li>
+</ul>
+
+    </div>
+    <div id="toc">
+      <ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#SDK%E6%9E%84%E5%BB%BA%E7%9B%B8%E5%85%B3%E9%98%85%E8%AF%BB"><span class="toc-number">1.</span> <span class="toc-text">SDK构建相关阅读</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#%E4%BD%BF%E7%94%A8%E6%8F%92%E4%BB%B6%E5%BC%95%E5%85%A5%E7%AC%AC%E4%B8%89%E6%96%B9%E5%BA%93"><span class="toc-number">1.1.</span> <span class="toc-text">使用插件引入第三方库</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E4%B8%80%E4%B8%AA%E4%BE%8B%E5%AD%90%EF%BC%9A"><span class="toc-number">1.1.1.</span> <span class="toc-text">一个例子：</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E8%99%9A%E5%B9%BB%E6%8F%92%E4%BB%B6%E8%AF%AD%E8%A8%80%EF%BC%88Unreal-Plugin-Language-UPL%EF%BC%89"><span class="toc-number">1.1.2.</span> <span class="toc-text">虚幻插件语言（Unreal Plugin Language, UPL）</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#%E4%B8%80%E4%B8%AA%E4%BE%8B%E5%AD%90"><span class="toc-number">1.1.2.1.</span> <span class="toc-text">一个例子</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E5%AF%B9GameActivity-java%E7%9A%84%E6%8B%93%E5%B1%95%EF%BC%9A"><span class="toc-number">1.1.2.2.</span> <span class="toc-text">对GameActivity.java的拓展：</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#IOS%E5%B9%B3%E5%8F%B0%E8%AE%BE%E7%BD%AE%E7%9B%B8%E5%85%B3%EF%BC%9A"><span class="toc-number">1.1.2.3.</span> <span class="toc-text">IOS平台设置相关：</span></a></li></ol></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%9C%A8%E8%99%9A%E5%B9%BB%E4%B8%AD%E8%B0%83%E7%94%A8Java%E4%BB%A3%E7%A0%81"><span class="toc-number">1.2.</span> <span class="toc-text">在虚幻中调用Java代码</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#JNI%EF%BC%9AJava-Native-Interface"><span class="toc-number">1.2.1.</span> <span class="toc-text">JNI：Java Native Interface</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%9C%A8%E8%99%9A%E5%B9%BB%E4%B8%AD%E8%B0%83%E7%94%A8"><span class="toc-number">1.2.2.</span> <span class="toc-text">在虚幻中调用 :</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E4%B8%80%E4%BA%9B%E5%85%B6%E4%BB%96%E7%9A%84%E5%9D%91"><span class="toc-number">1.2.3.</span> <span class="toc-text">一些其他的坑 :</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%8F%82%E8%80%83"><span class="toc-number">1.3.</span> <span class="toc-text">参考</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E6%8F%92%E4%BB%B6"><span class="toc-number">1.3.1.</span> <span class="toc-text">插件</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E6%A8%A1%E5%9D%97"><span class="toc-number">1.3.2.</span> <span class="toc-text">模块</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%B9%B3%E5%8F%B0%E7%9B%B8%E5%85%B3"><span class="toc-number">1.4.</span> <span class="toc-text">平台相关</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#Android"><span class="toc-number">1.4.1.</span> <span class="toc-text">Android</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#IOS"><span class="toc-number">1.4.1.1.</span> <span class="toc-text">IOS</span></a></li></ol></li></ol></li></ol></li></ol>
+    </div>
+  </span>
+</div>
+
+    
+    <div class="content index py4">
+        
+        <article class="post" itemscope itemtype="http://schema.org/BlogPosting">
+  <header>
+    
+    <h1 class="posttitle" itemprop="name headline">
+        Unreal Engine 4 SDK构建相关笔记
+    </h1>
+
+
+
+    <div class="meta">
+      <span class="author" itemprop="author" itemscope itemtype="http://schema.org/Person">
+        <span itemprop="name">zhangMo Blog</span>
+      </span>
+      
+    <div class="postdate">
+      
+        <time datetime="2020-12-23T16:04:56.000Z" itemprop="datePublished">2020-12-24</time>
+        
+        (Updated: <time datetime="2026-10-10T15:17:21.692Z" itemprop="dateModified">2026-10-10</time>)
+        
+      
+    </div>
+
+
+      
+    <div class="article-category">
+        <i class="fas fa-archive"></i>
+        <a class="category-link" href="/categories/%E5%BC%80%E5%8F%91%E7%9B%B8%E5%85%B3/">开发相关</a>
+    </div>
+
+
+      
+    <div class="article-tag">
+        <i class="fas fa-tag"></i>
+        <a class="tag-link-link" href="/tags/Unreal-SDK/" rel="tag">Unreal,SDK</a>
+    </div>
+
+
+    </div>
+  </header>
+  
+
+  <div class="content" itemprop="articleBody">
+    <span id="more"></span>
+
+<h1 id="SDK构建相关阅读"><a href="#SDK构建相关阅读" class="headerlink" title="SDK构建相关阅读"></a>SDK构建相关阅读</h1><p>[toc]</p>
+<p>在Unreal项目开发的过程中，可能会用到第三方开发的库来集成一些第三方的功能，例如语音通话、播放视频等功能。虚幻引擎本身也引用了很多第三方的库,例如物理库<code>PhysX</code>、Steam平台相关的库<code>SteamWorks</code>、<code>GoogleVR</code>等等。这些库可以在引擎的<code>Engine\Source\ThirdParty</code>目录下找到。Unreal官方推荐将第三方库集成到插件目录中，这样可以将游戏代码与第三方代码进行隔离。</p>
+<h2 id="使用插件引入第三方库"><a href="#使用插件引入第三方库" class="headerlink" title="使用插件引入第三方库"></a>使用插件引入第三方库</h2><p>在Unreal的编辑器中，可以新建一个ThirdParty插件来引入SDK：在项目中点击<code>编辑-插件-新插件-第三方库</code>就可以创建一个使用已包含第三方库的插件。</p>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="number">1.</span> 貌似只有C++项目中才可以创建第三方库插件，蓝图项目中貌似只能建立空白插件</span><br></pre></td></tr></table></figure>
+
+<p>新插件的目录结构如下：</p>
+<p><img loading="lazy" src="http://hust_mo.gitee.io/blogpicturerepo/image-20201224174958125.png"></p>
+<p>其中<code>SDKTest</code>是插件本身逻辑的目录，<code>ThirdParty</code>是第三方库的目录，对于不同平台，所使用的SDK文件格式也有不同，这一点我们在后面再详细展开讲。</p>
+<ul>
+<li><p><code>.uplugin</code>文件是<a target="_blank" rel="noopener" href="https://docs.unrealengine.com/zh-CN/ProductionPipelines/Plugins/index.html#%E6%8F%92%E4%BB%B6%E6%8F%8F%E8%BF%B0%E6%96%87%E4%BB%B6">插件描述文件</a>，虚幻引擎通过搜索这个格式的文件来查找插件，这个文件提供插件相关的基本信息。</p>
+</li>
+<li><p><code>XXX.Build.cs</code>文件是<a target="_blank" rel="noopener" href="https://docs.unrealengine.com/zh-CN/ProductionPipelines/BuildTools/UnrealBuildTool/ModuleFiles/index.html">模块描述文件</a>，虚幻引擎使用UnrealBuildTool编译这个文件，并构造来确定整个编译环境。</p>
+</li>
+<li><p><code>Mac</code>,<code>x64</code>文件夹内是不同平台下引入的库文件，x64平台下一般为<code>.lib</code>和<code>.dll</code>文件，Mac平台下一般为<code>dylib</code>，IOS平台下一般为<code>.a</code>文件、<code>.dylib</code>文件和<code>.framework</code>文件，Android平台下一般为<code>.aar</code>和<code>.jar</code>文件。这些文件在模块描述文件中进行引入，在实例项目中如图所示：</p>
+<p><img loading="lazy" src="http://hust_mo.gitee.io/blogpicturerepo/image-20201224210510607.png"></p>
+</li>
+</ul>
+<h3 id="一个例子："><a href="#一个例子：" class="headerlink" title="一个例子："></a>一个例子：</h3><p>以GCloud的相关SDK接入为例（<a target="_blank" rel="noopener" href="https://sdk.gcloud.tencent.com/documents/details/GCloudSDK%E4%BA%A7%E5%93%81%E4%BD%BF%E7%94%A8%E8%AF%B4%E6%98%8E/%E6%8E%A5%E5%85%A5%E6%8C%87%E5%BC%95">GCloud相关文档</a>）:</p>
+<p><del>(由于没有SDK的下载权限所以只能用官网的图来意思意思)</del></p>
+<p><img loading="lazy" src="http://hust_mo.gitee.io/blogpicturerepo/render"></p>
+<p>下载之后将文件夹拷贝到插件的Public目录下，并参考<code>AAInfo4Copy.txt</code>，在<code>xxx.Build.cs</code>文件中引入相应的插件。</p>
+<p>在官方文档中引入插件的方法是：</p>
+<figure class="highlight csharp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">PrivateDependencyModuleNames.AddRange(<span class="keyword">new</span> <span class="built_in">string</span>[] &#123; <span class="string">&quot;GCloudCore&quot;</span> &#125;);</span><br><span class="line">PrivateDependencyModuleNames.AddRange(<span class="keyword">new</span> <span class="built_in">string</span>[] &#123; <span class="string">&quot;GCloud&quot;</span> &#125;);</span><br><span class="line">PrivateDependencyModuleNames.AddRange(<span class="keyword">new</span> <span class="built_in">string</span>[] &#123; <span class="string">&quot;TApm&quot;</span> &#125;);</span><br><span class="line">PrivateDependencyModuleNames.AddRange(<span class="keyword">new</span> <span class="built_in">string</span>[] &#123; <span class="string">&quot;GVoice&quot;</span> &#125;);</span><br><span class="line">PrivateDependencyModuleNames.AddRange(<span class="keyword">new</span> <span class="built_in">string</span>[] &#123; <span class="string">&quot;GEM_OneSDK&quot;</span> &#125;);</span><br></pre></td></tr></table></figure>
+
+<p>这部分的代码原理可以参考<code>Engine\Source\Programs\UnrealBuildTool\Configuration\ModuleRules.cs</code>文件中的相关定义</p>
+<figure class="highlight cs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 通过将插件中的Public文件夹下的相对路径添加进这个List中来暴露给其他模块</span></span><br><span class="line"><span class="keyword">public</span> List&lt;<span class="built_in">string</span>&gt; PublicIncludePaths = <span class="keyword">new</span> List&lt;<span class="built_in">string</span>&gt;();</span><br><span class="line"><span class="comment">// 同理，如果不想暴露给其他模块，则将相对路径添加到这个List中</span></span><br><span class="line"><span class="keyword">public</span> List&lt;<span class="built_in">string</span>&gt; PrivateIncludePaths = <span class="keyword">new</span> List&lt;<span class="built_in">string</span>&gt;();</span><br><span class="line"></span><br><span class="line"><span class="comment">// 公共依赖模块名称列表（不需要路径）（自动进行私有/公共包含）。这些模块是我们的公共源文件所需要的。</span></span><br><span class="line"><span class="keyword">public</span> List&lt;<span class="built_in">string</span>&gt; PublicDependencyModuleNames = <span class="keyword">new</span> List&lt;<span class="built_in">string</span>&gt;();</span><br><span class="line"><span class="comment">// 私有依赖模块名称列表。 这些模块是我们的私有代码所依赖的模块，但在公共的include文件中没有任何模块可以依赖。</span></span><br><span class="line"><span class="keyword">public</span> List&lt;<span class="built_in">string</span>&gt; PrivateDependencyModuleNames = <span class="keyword">new</span> List&lt;<span class="built_in">string</span>&gt;();</span><br><span class="line"></span><br><span class="line"><span class="comment">// 附加库列表（包括拓展名在内的.lib文件名），通常用于第三方模块</span></span><br><span class="line"><span class="keyword">public</span> List&lt;<span class="built_in">string</span>&gt; PublicAdditionalLibraries = <span class="keyword">new</span> List&lt;<span class="built_in">string</span>&gt;();</span><br><span class="line"></span><br><span class="line"><span class="comment">//...除此之外还有很多列表，可以在上述路径中文件内查看源码和注释</span></span><br><span class="line"></span><br><span class="line"><span class="comment">// ReceiptProperty在\Engine\Source\Programs\UnrealBuildTool\System\TargetReceipt.cs中定义</span></span><br><span class="line"><span class="comment">// 任意属性名/值，来自构建脚本的元数据可以传递给下游任务。（这是一对键值对），在文件中存储着UPL格式写的XML文件，其中可以进行一些设置，并且可以插入代码到AndroidManifest.xml和GameActivity.java中，关于这两个文件的作用在后面会解释</span></span><br><span class="line"><span class="keyword">public</span> List&lt;ReceiptProperty&gt; AdditionalPropertiesForReceipt = <span class="keyword">new</span> List&lt;ReceiptProperty&gt;();</span><br></pre></td></tr></table></figure>
+
+<p>总而言之，在<code>xxx.Build.cs</code>文件中，将对应的第三方库路径和设置文件的路径加入到了全局的List中，在之后的编译过程中，UBT会根据这个文件将对应的第三方库文件编译构建到指定的位置。</p>
+<h3 id="虚幻插件语言（Unreal-Plugin-Language-UPL）"><a href="#虚幻插件语言（Unreal-Plugin-Language-UPL）" class="headerlink" title="虚幻插件语言（Unreal Plugin Language, UPL）"></a>虚幻插件语言（Unreal Plugin Language, UPL）</h3><blockquote>
+<p><strong>虚幻插件语言</strong> (UPL)是一种基于XML的简单语言，用于操作XML和返回字符串。它包含一个分段，在计算任何其他分段之前，每个架构计算一次这个分段。状态被维护并推进到下个分段进行评估，因此分段的执行顺序很重要。虽然UPL是一个用于修改和查询XML的通用系统，但它专门用于允许插件影响其所属包的全局配置。例如，它允许插件修改Android APK AndroidManfiest.xml文件或IOS IPA plist文件。UBT还将查询插件的UPL xml文件，查找文件中要包含的字符串（对于包来说必须是常见的字符串），例如Android上的一些.java文件。</p>
+</blockquote>
+<p>首先贴一个相关的文档在这里：<a target="_blank" rel="noopener" href="https://docs.unrealengine.com/zh-CN/SharingAndReleasing/Mobile/UnrealPluginLanguage/index.html">https://docs.unrealengine.com/zh-CN/SharingAndReleasing/Mobile/UnrealPluginLanguage/index.html</a></p>
+<p>在第三方库的引入过程中，可能会涉及到一些平台相关的功能，比如说权限获取等，这部分的设置文件，不同平台下有不同的规定，以Android和ios为例，在安卓平台下，使用<a target="_blank" rel="noopener" href="https://developer.android.com/guide/topics/manifest/manifest-intro?hl=zh-cn">应用清单概览</a>文件对组件和权限进行控制，即<code>AndroidManifest.xml</code>文件；而在IOS下，使用Property List文件来存储用户设置。</p>
+<p>对于Android平台，可能需要对<code>AndroidManifest.xml</code>文件进行一些修改，这时候就需要使用UPL来对该文件进行改动。</p>
+<h4 id="一个例子"><a href="#一个例子" class="headerlink" title="一个例子"></a>一个例子</h4><p>以GCloudSDK中的<a target="_blank" rel="noopener" href="http://sdk.gcloud.tencent.com/documents/details/%E7%A7%BB%E5%8A%A8%E6%B8%B8%E6%88%8F%E5%BC%80%E5%8F%91%E5%A5%97%E4%BB%B6MSDK/SDK%E6%8E%A5%E5%85%A5%E6%8C%87%E5%8D%97/%E6%8E%A5%E5%85%A5%E6%95%99%E7%A8%8B%EF%BC%88UE4%EF%BC%89">MSDK</a>为例：</p>
+<p><img loading="lazy" src="http://hust_mo.gitee.io/blogpicturerepo/image-20201224221924928.png"></p>
+<p>这里的一些参数本质上是Android的一些参数，如果详细了解请阅读：<a target="_blank" rel="noopener" href="https://developer.android.com/guide?hl=zh-cn">Android开发者指南</a>，<del>(有一说一Google这个文档写的是真滴好，什么是国际大厂啊)</del></p>
+<p>以其中几个为例：</p>
+<ul>
+<li>android:name : 实现 Activity 的类的名称，是 <code>Activity</code> 的子类。此属性值应为完全限定类名称（例如，“<code>com.example.project.ExtracurricularActivity</code>”）。不过，为简便起见，如果名称的第一个字符是句点（例如，“<code>.ExtracurricularActivity</code>”），则名称将追加至 <code>&lt;manifest&gt;</code> 元素中指定的软件包名称。</li>
+<li>android:screenOrientation : Activity 在设备上的显示方向。如果 Activity 是在<a target="_blank" rel="noopener" href="https://developer.android.com/guide/topics/ui/multi-window?hl=zh-cn">多窗口模式</a>下运行，则系统会忽略该属性。</li>
+</ul>
+<h4 id="对GameActivity-java的拓展："><a href="#对GameActivity-java的拓展：" class="headerlink" title="对GameActivity.java的拓展："></a>对GameActivity.java的拓展：</h4><ol>
+<li><p>什么是GameActivity.java：</p>
+<p>在网上搜索了一下，大多数都是讲述这个文件是如何通过UPL插入修改的，没有描述这个文件本身是什么作用的。这个文件可以在<code>\Engine\Build\Android\Java\src\com\epicgames\ue4\GameActivity.java</code>下找到，在开头的注释中可以看到：</p>
+<blockquote>
+<p>Extending NativeActivity so that this Java class is instantiated from the beginning of the program.  This will allow the user to instantiate other Java libraries from here, that the user can then use the functions from C++</p>
+<p>扩展NativeActivity，使这个Java类从程序开始就被实例化。 这将允许用户从这里实例化其他Java库，然后用户可以使用C++中的函数。</p>
+<p>NOTE – This class is not necessary for the UnrealEngine C++ code to startup, as this is handled through the base NativeActivity class. This class’s functionality is to provide a way to instantiate other  Java libraries at the startup of the program and store references to them in this class.</p>
+<p>注意 – 这个类对于UnrealEngine C++代码的启动是不必要的，因为这是由基础NativeActivity类处理的。这个类的功能是提供一种方法，在程序启动时实例化其他Java库，并在这个类中存储对它们的引用。</p>
+</blockquote>
+<p>那么，在Android的文档中找到了关于<a target="_blank" rel="noopener" href="https://developer.android.com/reference/android/app/NativeActivity">NativeActivity</a>类的描述，而GameActivity类继承自这个类。在文档内对NativeActivity的描述如下：</p>
+<blockquote>
+<p>Convenience for implementing an activity that will be implemented purely in native code. That is, a game (or game-like thing). There is no need to derive from this class; you can simply declare it in your manifest, and use the NDK APIs from there.</p>
+<p>方便实现一个将纯用本地代码实现的活动。也就是说，一个游戏（或类似游戏的东西）。不需要从这个类派生出来；你可以简单地在你的manifest中声明它，然后从那里使用NDK API。</p>
+</blockquote>
+<p>继续向上追溯，看看<a target="_blank" rel="noopener" href="https://developer.android.com/reference/android/app/Activity">Acitvity</a>类意在负责什么事：</p>
+<blockquote>
+<p>An activity is a single, focused thing that the user can do. Almost all activities interact with the user, so the Activity class takes care of creating a window for you in which you can place your UI with <code>setContentView(View)</code>. While activities are often presented to the user as full-screen windows, they can also be used in other ways: as floating windows (via a theme with <code>R.attr.windowIsFloating</code> set), <a target="_blank" rel="noopener" href="https://developer.android.com/guide/topics/ui/multi-window">Multi-Window mode</a> or embedded into other windows. There are two methods almost all subclasses of Activity will implement:</p>
+<p>一个Activity是用户可以做的独立的事情。几乎所有的Activity都可以与用户产生交互，因此Activity类负责为你创建一个窗口，你可以通过<code>setContentView(View)</code>来放置你的UI。虽然Activity通常以全屏窗口的方式呈现给用户，但是它们同样可以以其他的方式进行展示：例如浮动窗口（通过一个主题设置<code>R.attr.windowIsFloating</code>实现），多窗口模式或者嵌入到其他窗口中。几乎所有的Activity的子类都会实现两个方法:</p>
+<ul>
+<li>onCreate(Bundle)</li>
+<li>onPause()</li>
+</ul>
+</blockquote>
+<p>看到这两个函数命名就大概能知道这个Activity类是贯穿一个应用的生命周期的，那么NaviteActivity类以及GameActivity类中的内容就是用来在应用生命周期的不同阶段执行不同逻辑的。</p>
+</li>
+<li><p>如何拓展：</p>
+<p>在<a target="_blank" rel="noopener" href="https://github.com/EpicGames/UnrealEngine/blob/f8f4b403eb682ffc055613c7caf9d2ba5df7f319/Engine/Source/Programs/UnrealBuildTool/System/UnrealPluginLanguage.cs#L378">UPL</a>的源代码中可以看到全部的API，在SDK文档中应该会说明SDK的使用步骤，例如GCloud的文档中：</p>
+<p><img loading="lazy" src="http://hust_mo.gitee.io/blogpicturerepo/image-20201225151117492.png"></p>
+<p>这部分的初始化代码就可以使用UPL插入到<code>GameActivity.java</code>中：</p>
+<figure class="highlight xml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">gameActivityOnCreateAdditions</span>&gt;</span></span><br><span class="line">	<span class="tag">&lt;<span class="name">insert</span>&gt;</span></span><br><span class="line">       	GCloud::InitializeInfo initInfo;</span><br><span class="line">		initInfo.GameId = GCLOUD_GAME_ID;</span><br><span class="line">		initInfo.GameKey = GCLOUD_GAME_KEY;</span><br><span class="line"></span><br><span class="line">		IGCloud::GetInstance().Initialize(initInfo);</span><br><span class="line">    <span class="tag">&lt;/<span class="name">insert</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">gameActivityOnCreateAdditions</span>&gt;</span></span><br></pre></td></tr></table></figure>
+
+<p>当然具体的实现要参考不同SDK文档中提供的实现。</p>
+</li>
+</ol>
+<h4 id="IOS平台设置相关："><a href="#IOS平台设置相关：" class="headerlink" title="IOS平台设置相关："></a>IOS平台设置相关：</h4><ol>
+<li><p><a target="_blank" rel="noopener" href="https://developer.apple.com/library/archive/documentation/General/Reference/InfoPlistKeyReference/Articles/AboutInformationPropertyListFiles.html">info.plist</a>文件</p>
+<p>这个文件的作用就是提供应用在运行期间的一些设置，是一个XML格式组织起来的文件。</p>
+</li>
+<li><p>在虚幻引擎中的设置：</p>
+<p>在 <strong>Project Settings</strong> - <strong>iOS</strong> - <strong>Extra Plist Data</strong> - <strong>Aditional Plist Data</strong> - 中添加相关的配置信息中添加相关的渠道信息。</p>
+</li>
+</ol>
+<p>一些详细的解读可以参考查利鹏大佬的这篇博文：<a target="_blank" rel="noopener" href="https://imzlp.me/posts/1948/">UE4 开发笔记：Mac&#x2F;iOS 篇</a></p>
+<h2 id="在虚幻中调用Java代码"><a href="#在虚幻中调用Java代码" class="headerlink" title="在虚幻中调用Java代码"></a>在虚幻中调用Java代码</h2><h3 id="JNI：Java-Native-Interface"><a href="#JNI：Java-Native-Interface" class="headerlink" title="JNI：Java Native Interface"></a>JNI：Java Native Interface</h3><p>Java Native Interface , Java原生接口，一种让其他语言或程序调用Java代码的方法，具体实现细节笔者并不清楚，可以参考<a target="_blank" rel="noopener" href="https://docs.oracle.com/javase/7/docs/technotes/guides/jni/spec/jniTOC.html">官方文档</a>，此处仅对项目中遇到的问题进行总结和梳理。</p>
+<p>对于Android平台，SDK提供方可能会提供一些Java版本的函数接口，这些Java函数接口需要我们在虚幻引擎中调用，我们假定前置的接入插件的步骤已经完成。</p>
+<p>以<a target="_blank" rel="noopener" href="https://slugteam.qq.com/sdk/v2/install/android-ue4.html#slugsdk-build-cs">SlugSDK</a>为例，它提供了一个初始化SDK组件的接口：</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">/*</span></span><br><span class="line"><span class="comment">* @url 打开的页面url</span></span><br><span class="line"><span class="comment">* @supportedOrientations 设置屏幕方向类型（1：只支持横屏，2：只支持竖屏，3：横竖屏都支持）</span></span><br><span class="line"><span class="comment">* @qqAppid 设置游戏的qq Appid（用来分享到qq）</span></span><br><span class="line"><span class="comment">* @wxAppid 设置游戏的微信Appid（用来分享到微信）</span></span><br><span class="line"><span class="comment">* @className: String类型,比如&quot;com.tencent.ingame.TestActivity&quot;，从H5页面跳转到游戏的某个界面，如果不需要可以设置为&quot;&quot;，H5页面跳转到游戏的某个界面时，会先跳转到游戏的该Activity（Activity声明需设置singleTask或singleTop）再由该Activity作为中转跳转到具体的游戏界面，该Activity先在onNewIntent方法setIntent(intent)，然后可以通过getIntent().getStringExtra(&quot;routeInfo&quot;)获取跳转的路由信息，比如关闭浏览器时获取的routeInfo值为&quot;close&quot;</span></span><br><span class="line"><span class="comment">* @finishShouldSendMsgToGame 浏览器webview finish时向游戏发送close消息，不需要可以传false，如果需要则必须先设置@className参数</span></span><br><span class="line"><span class="comment">* @webviewBackground 设置打开的浏览器背景颜色，比如#ffffffff</span></span><br><span class="line"><span class="comment">* */</span></span><br><span class="line"><span class="keyword">public</span> <span class="keyword">static</span> <span class="type">void</span> <span class="title function_">openIngameCommunityByUrl</span><span class="params">(Activity currentActivity, String url, <span class="type">int</span> supportedOrientations, String qqAppid, String wxAppid, String className, <span class="type">boolean</span> finishShouldSendMsgToGame, String webviewBackground)</span></span><br></pre></td></tr></table></figure>
+
+<p>该函数的函数签名如下:</p>
+<ul>
+<li>参数 : <code>Activity currentActivity, String url, int supportedOrientations, String qqAppid, String wxAppid, String className, boolean finishShouldSendMsgToGame, String webviewBackground</code></li>
+<li>返回值 :<code>void</code></li>
+</ul>
+<p>我们可以用命令行工具 : <code>javap -s</code>输出函数签名 , 具体可以参考博文 : <a target="_blank" rel="noopener" href="https://blog.csdn.net/qq_36642554/article/details/69834428">Java dos命令窗口获取方法的签名</a> ; 也可以根据JNI函数签名的<a target="_blank" rel="noopener" href="https://docs.oracle.com/javase/7/docs/technotes/guides/jni/spec/types.html#wp15954">转换规则(详见Type Signatures部分)</a>进行转换 , 以上面的函数为例 :</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">Activity	-- Landroid/app/Activity</span><br><span class="line">string		-- Ljava/lang/String;</span><br><span class="line">int 		-- I</span><br><span class="line">string		-- Ljava/lang/String;</span><br><span class="line">string		-- Ljava/lang/String;</span><br><span class="line">string		-- Ljava/lang/String;</span><br><span class="line">bool		-- Z</span><br><span class="line">string		-- Ljava/lang/String;</span><br><span class="line">void		-- V</span><br></pre></td></tr></table></figure>
+
+<p>需要注意的是 : <strong>内置基础类型对应的签名后面没有分号 , 不要擅自加上分号 , 这样会导致搜索不到对应的方法!</strong></p>
+<p>因此最后该函数我们导出的函数签名为(注意为<code>ILjava/lang/String</code>) :</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">(Landroid/app/Activity;Ljava/lang/String;ILjava/lang/String;Ljava/lang/String;Ljava/lang/String;ZLjava/lang/String;)V</span><br></pre></td></tr></table></figure>
+
+<p>至此 , 我们完成了调用Java代码的准备工作。</p>
+<h3 id="在虚幻中调用"><a href="#在虚幻中调用" class="headerlink" title="在虚幻中调用 :"></a>在虚幻中调用 :</h3><p>我们需要JNIEnv环境 , 在虚幻中我们可以使用<code>FAndroidApplication::GetJavaEnv();</code></p>
+<p>我们需要对应的jclass , 在虚幻中我们可以使用<code>FAndroidApplication::FindJavaClass(ClassName)</code>进行获取</p>
+<p>我们需要对应的函数 , 此时我们就用上了刚刚推导的函数签名 , 同样在虚幻中我们可以使用<code>env-&gt;GetStaticMethodID(signature)</code>获得</p>
+<p>最后我们需要调用函数 , 还是通过env完成 , 可以调用<code>env-&gt;CallStaticVoidMethod()</code>完成</p>
+<p>整个过程的伪代码如下(对于env , cls , jmethodID必要时可以做一些防御性检查): </p>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="type">void</span> <span class="title">AndroidSlugSDK::OpenIngameCommunity</span><span class="params">(FString url, <span class="type">int</span> supportedOrientations, FString qqAppid, FString wxAppid, FString className, <span class="type">bool</span> finishShouldSendMsgToGame, FString webviewBackground)</span></span>&#123;</span><br><span class="line">    JNIEnv *env = FAndroidApplication::<span class="built_in">GetJavaEnv</span>();</span><br><span class="line">    jclass cls = FAndroidApplication::<span class="built_in">FindJavaClass</span>(<span class="string">&quot;com/tencent/slugsdk/SlugWebAdapter&quot;</span>);</span><br><span class="line">    jmethodID jOpenCommunityMthod = env-&gt;<span class="built_in">GetStaticMethodID</span>(cls, <span class="string">&quot;openIngameCommunityByUrl&quot;</span>, <span class="string">&quot;(Landroid/app/Activity;Ljava/lang/String;ILjava/lang/String;Ljava/lang/String;Ljava/lang/String;ZLjava/lang/String;)V&quot;</span>);</span><br><span class="line">    jstring jUrl = env-&gt;<span class="built_in">NewStringUTF</span>(<span class="built_in">TCHAR_TO_UTF8</span>(*url));</span><br><span class="line">	jstring jqqAppID = env-&gt;<span class="built_in">NewStringUTF</span>(<span class="built_in">TCHAR_TO_UTF8</span>(*qqAppID));</span><br><span class="line">	jstring jwxAppID = env-&gt;<span class="built_in">NewStringUTF</span>(<span class="built_in">TCHAR_TO_UTF8</span>(*wxAppID));</span><br><span class="line">	jstring jclassName = env-&gt;<span class="built_in">NewStringUTF</span>(<span class="built_in">TCHAR_TO_UTF8</span>(*className));</span><br><span class="line">	jstring jwebColor = env-&gt;<span class="built_in">NewStringUTF</span>(<span class="built_in">TCHAR_TO_UTF8</span>(*WebViewBackgroundColor));</span><br><span class="line">	env-&gt;<span class="built_in">CallStaticVoidMethod</span>(cls, jOpenCommunityMthod, FAndroidApplication::<span class="built_in">GetGameActivityThis</span>(), jUrl, supportedOrientations, jqqAppID, jwxAppID, jclassName, finishShouldSendMsgToGame, jwebColor);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h3 id="一些其他的坑"><a href="#一些其他的坑" class="headerlink" title="一些其他的坑 :"></a>一些其他的坑 :</h3><ol>
+<li>要明确项目是否支持aar包 , 貌似用gradle构建才可以使用aar包</li>
+<li>ios的代码调用要在主线程 , 防止崩溃</li>
+</ol>
+<h2 id="参考"><a href="#参考" class="headerlink" title="参考"></a>参考</h2><h3 id="插件"><a href="#插件" class="headerlink" title="插件"></a>插件</h3><ol>
+<li>虚幻插件语言(Unreal Plugin Language) : <a target="_blank" rel="noopener" href="https://docs.unrealengine.com/en-US/SharingAndReleasing/Mobile/UnrealPluginLanguage/index.html">https://docs.unrealengine.com/en-US/SharingAndReleasing/Mobile/UnrealPluginLanguage/index.html</a></li>
+<li>虚幻插件语言参考：<a target="_blank" rel="noopener" href="https://qiita.com/shiena/items/fe0e4cc1de4ddbaa60f0">https://qiita.com/shiena/items/fe0e4cc1de4ddbaa60f0</a></li>
+<li>UE4:UPL与JNI调用的最佳实践：<a target="_blank" rel="noopener" href="https://imzlp.me/posts/27289/">https://imzlp.me/posts/27289/</a></li>
+</ol>
+<h3 id="模块"><a href="#模块" class="headerlink" title="模块"></a>模块</h3><ol>
+<li>模块的官方文档 : <a target="_blank" rel="noopener" href="https://docs.unrealengine.com/en-US/ProductionPipelines/BuildTools/UnrealBuildTool/ModuleFiles/index.html">https://docs.unrealengine.com/en-US/ProductionPipelines/BuildTools/UnrealBuildTool/ModuleFiles/index.html</a></li>
+<li>详解UE4静态库与动态库的导入与使用：<a target="_blank" rel="noopener" href="https://www.cnblogs.com/sevenyuan/p/7161516.html">https://www.cnblogs.com/sevenyuan/p/7161516.html</a></li>
+</ol>
+<h2 id="平台相关"><a href="#平台相关" class="headerlink" title="平台相关"></a>平台相关</h2><h3 id="Android"><a href="#Android" class="headerlink" title="Android"></a>Android</h3><ol>
+<li><p>应用清单 (<strong>AndroidManifest</strong>) : <a target="_blank" rel="noopener" href="https://developer.android.com/guide/topics/manifest/manifest-intro?hl=zh-cn">https://developer.android.com/guide/topics/manifest/manifest-intro?hl=zh-cn</a></p>
+<ul>
+<li>AndroidManifest.xml详解 : <a target="_blank" rel="noopener" href="https://www.jianshu.com/p/3b5b89d4e154">https://www.jianshu.com/p/3b5b89d4e154</a></li>
+</ul>
+</li>
+<li><p>权限 (<strong>Permission</strong>) : <a target="_blank" rel="noopener" href="https://developer.android.com/guide/topics/permissions/overview?hl=zh-cn">https://developer.android.com/guide/topics/permissions/overview?hl=zh-cn</a></p>
+</li>
+<li><p>应用二进制接口 (<strong>Android ABI, Application Binary Interface</strong>) : <a target="_blank" rel="noopener" href="https://developer.android.com/ndk/guides/abis">https://developer.android.com/ndk/guides/abis</a></p>
+<ol>
+<li>Android 关于arm64-v8a、armeabi-v7a、armeabi、x86下的so文件兼容问题：<a target="_blank" rel="noopener" href="https://zhuanlan.zhihu.com/p/23102158">https://zhuanlan.zhihu.com/p/23102158</a></li>
+</ol>
+</li>
+<li><p>aar与jar : <a target="_blank" rel="noopener" href="https://developer.android.com/studio/projects/android-library?hl=zh-cn">https://developer.android.com/studio/projects/android-library?hl=zh-cn</a></p>
+</li>
+</ol>
+<h4 id="IOS"><a href="#IOS" class="headerlink" title="IOS"></a>IOS</h4><ol>
+<li><code>.bundle</code>资源文件 : <a target="_blank" rel="noopener" href="https://www.jianshu.com/p/55038871e7de">https://www.jianshu.com/p/55038871e7de</a></li>
+<li><code>framework</code>库文件 : <a target="_blank" rel="noopener" href="https://blog.csdn.net/lvxiangan/article/details/43115131">https://blog.csdn.net/lvxiangan/article/details/43115131</a></li>
+<li>info.plist：<a target="_blank" rel="noopener" href="https://my.oschina.net/hmj/blog/104196">https://my.oschina.net/hmj/blog/104196</a></li>
+</ol>
+
+  </div>
+</article>
+
+
+
+
+        
+          <div id="footer-post-container">
+  <div id="footer-post">
+
+    <div id="nav-footer" style="display: none">
+      <ul>
+         
+          <li><a href="/">首页</a></li>
+         
+          <li><a href="/about/">关于</a></li>
+         
+          <li><a href="/tags/">tags</a></li>
+         
+          <li><a href="/categories/">categories</a></li>
+         
+          <li><a href="/archives/">归档</a></li>
+         
+          <li><a href="/photos/">相册</a></li>
+         
+          <li><a href="/search/">搜索</a></li>
+        
+      </ul>
+    </div>
+
+    <div id="toc-footer" style="display: none">
+      <ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#SDK%E6%9E%84%E5%BB%BA%E7%9B%B8%E5%85%B3%E9%98%85%E8%AF%BB"><span class="toc-number">1.</span> <span class="toc-text">SDK构建相关阅读</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#%E4%BD%BF%E7%94%A8%E6%8F%92%E4%BB%B6%E5%BC%95%E5%85%A5%E7%AC%AC%E4%B8%89%E6%96%B9%E5%BA%93"><span class="toc-number">1.1.</span> <span class="toc-text">使用插件引入第三方库</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E4%B8%80%E4%B8%AA%E4%BE%8B%E5%AD%90%EF%BC%9A"><span class="toc-number">1.1.1.</span> <span class="toc-text">一个例子：</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E8%99%9A%E5%B9%BB%E6%8F%92%E4%BB%B6%E8%AF%AD%E8%A8%80%EF%BC%88Unreal-Plugin-Language-UPL%EF%BC%89"><span class="toc-number">1.1.2.</span> <span class="toc-text">虚幻插件语言（Unreal Plugin Language, UPL）</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#%E4%B8%80%E4%B8%AA%E4%BE%8B%E5%AD%90"><span class="toc-number">1.1.2.1.</span> <span class="toc-text">一个例子</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E5%AF%B9GameActivity-java%E7%9A%84%E6%8B%93%E5%B1%95%EF%BC%9A"><span class="toc-number">1.1.2.2.</span> <span class="toc-text">对GameActivity.java的拓展：</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#IOS%E5%B9%B3%E5%8F%B0%E8%AE%BE%E7%BD%AE%E7%9B%B8%E5%85%B3%EF%BC%9A"><span class="toc-number">1.1.2.3.</span> <span class="toc-text">IOS平台设置相关：</span></a></li></ol></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%9C%A8%E8%99%9A%E5%B9%BB%E4%B8%AD%E8%B0%83%E7%94%A8Java%E4%BB%A3%E7%A0%81"><span class="toc-number">1.2.</span> <span class="toc-text">在虚幻中调用Java代码</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#JNI%EF%BC%9AJava-Native-Interface"><span class="toc-number">1.2.1.</span> <span class="toc-text">JNI：Java Native Interface</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%9C%A8%E8%99%9A%E5%B9%BB%E4%B8%AD%E8%B0%83%E7%94%A8"><span class="toc-number">1.2.2.</span> <span class="toc-text">在虚幻中调用 :</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E4%B8%80%E4%BA%9B%E5%85%B6%E4%BB%96%E7%9A%84%E5%9D%91"><span class="toc-number">1.2.3.</span> <span class="toc-text">一些其他的坑 :</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%8F%82%E8%80%83"><span class="toc-number">1.3.</span> <span class="toc-text">参考</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E6%8F%92%E4%BB%B6"><span class="toc-number">1.3.1.</span> <span class="toc-text">插件</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E6%A8%A1%E5%9D%97"><span class="toc-number">1.3.2.</span> <span class="toc-text">模块</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%B9%B3%E5%8F%B0%E7%9B%B8%E5%85%B3"><span class="toc-number">1.4.</span> <span class="toc-text">平台相关</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#Android"><span class="toc-number">1.4.1.</span> <span class="toc-text">Android</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#IOS"><span class="toc-number">1.4.1.1.</span> <span class="toc-text">IOS</span></a></li></ol></li></ol></li></ol></li></ol>
+    </div>
+
+    <div id="share-footer" style="display: none">
+      <ul>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://www.facebook.com/sharer.php?u=https://mosswang.com/2020/12/24/Unreal4%E7%AC%94%E8%AE%B0/Unreal-Engine-4-SDK%E6%9E%84%E5%BB%BA%E7%9B%B8%E5%85%B3%E7%AC%94%E8%AE%B0/"><i class="fab fa-facebook fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="https://twitter.com/share?url=https://mosswang.com/2020/12/24/Unreal4%E7%AC%94%E8%AE%B0/Unreal-Engine-4-SDK%E6%9E%84%E5%BB%BA%E7%9B%B8%E5%85%B3%E7%AC%94%E8%AE%B0/&text=Unreal Engine 4 SDK构建相关笔记"><i class="fab fa-twitter fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://www.linkedin.com/shareArticle?url=https://mosswang.com/2020/12/24/Unreal4%E7%AC%94%E8%AE%B0/Unreal-Engine-4-SDK%E6%9E%84%E5%BB%BA%E7%9B%B8%E5%85%B3%E7%AC%94%E8%AE%B0/&title=Unreal Engine 4 SDK构建相关笔记"><i class="fab fa-linkedin fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="https://pinterest.com/pin/create/bookmarklet/?url=https://mosswang.com/2020/12/24/Unreal4%E7%AC%94%E8%AE%B0/Unreal-Engine-4-SDK%E6%9E%84%E5%BB%BA%E7%9B%B8%E5%85%B3%E7%AC%94%E8%AE%B0/&is_video=false&description=Unreal Engine 4 SDK构建相关笔记"><i class="fab fa-pinterest fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="mailto:?subject=Unreal Engine 4 SDK构建相关笔记&body=Check out this article: https://mosswang.com/2020/12/24/Unreal4%E7%AC%94%E8%AE%B0/Unreal-Engine-4-SDK%E6%9E%84%E5%BB%BA%E7%9B%B8%E5%85%B3%E7%AC%94%E8%AE%B0/"><i class="fas fa-envelope fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="https://getpocket.com/save?url=https://mosswang.com/2020/12/24/Unreal4%E7%AC%94%E8%AE%B0/Unreal-Engine-4-SDK%E6%9E%84%E5%BB%BA%E7%9B%B8%E5%85%B3%E7%AC%94%E8%AE%B0/&title=Unreal Engine 4 SDK构建相关笔记"><i class="fab fa-get-pocket fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://reddit.com/submit?url=https://mosswang.com/2020/12/24/Unreal4%E7%AC%94%E8%AE%B0/Unreal-Engine-4-SDK%E6%9E%84%E5%BB%BA%E7%9B%B8%E5%85%B3%E7%AC%94%E8%AE%B0/&title=Unreal Engine 4 SDK构建相关笔记"><i class="fab fa-reddit fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://www.stumbleupon.com/submit?url=https://mosswang.com/2020/12/24/Unreal4%E7%AC%94%E8%AE%B0/Unreal-Engine-4-SDK%E6%9E%84%E5%BB%BA%E7%9B%B8%E5%85%B3%E7%AC%94%E8%AE%B0/&title=Unreal Engine 4 SDK构建相关笔记"><i class="fab fa-stumbleupon fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://digg.com/submit?url=https://mosswang.com/2020/12/24/Unreal4%E7%AC%94%E8%AE%B0/Unreal-Engine-4-SDK%E6%9E%84%E5%BB%BA%E7%9B%B8%E5%85%B3%E7%AC%94%E8%AE%B0/&title=Unreal Engine 4 SDK构建相关笔记"><i class="fab fa-digg fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://www.tumblr.com/share/link?url=https://mosswang.com/2020/12/24/Unreal4%E7%AC%94%E8%AE%B0/Unreal-Engine-4-SDK%E6%9E%84%E5%BB%BA%E7%9B%B8%E5%85%B3%E7%AC%94%E8%AE%B0/&name=Unreal Engine 4 SDK构建相关笔记&description="><i class="fab fa-tumblr fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="https://news.ycombinator.com/submitlink?u=https://mosswang.com/2020/12/24/Unreal4%E7%AC%94%E8%AE%B0/Unreal-Engine-4-SDK%E6%9E%84%E5%BB%BA%E7%9B%B8%E5%85%B3%E7%AC%94%E8%AE%B0/&t=Unreal Engine 4 SDK构建相关笔记"><i class="fab fa-hacker-news fa-lg" aria-hidden="true"></i></a></li>
+</ul>
+
+    </div>
+
+    <div id="actions-footer">
+        <a id="menu" class="icon" href="#" onclick="$('#nav-footer').toggle();return false;"><i class="fas fa-bars fa-lg" aria-hidden="true"></i> 菜单</a>
+        <a id="toc" class="icon" href="#" onclick="$('#toc-footer').toggle();return false;"><i class="fas fa-list fa-lg" aria-hidden="true"></i> 目录</a>
+        <a id="share" class="icon" href="#" onclick="$('#share-footer').toggle();return false;"><i class="fas fa-share-alt fa-lg" aria-hidden="true"></i> 分享</a>
+        <a id="top" style="display:none" class="icon" href="#" onclick="$('html, body').animate({ scrollTop: 0 }, 'fast');"><i class="fas fa-chevron-up fa-lg" aria-hidden="true"></i> 返回顶部</a>
+    </div>
+
+  </div>
+</div>
+
+        
+        <footer id="footer">
+  <div class="footer-left">
+    Copyright &copy; 2026 zhangMo
+  </div>
+  <div class="footer-right">
+    <nav>
+      <ul>
+         
+          <li><a href="/">首页</a></li>
+         
+          <li><a href="/about/">关于</a></li>
+         
+          <li><a href="/tags/">tags</a></li>
+         
+          <li><a href="/categories/">categories</a></li>
+         
+          <li><a href="/archives/">归档</a></li>
+         
+          <li><a href="/photos/">相册</a></li>
+         
+          <li><a href="/search/">搜索</a></li>
+        
+      </ul>
+    </nav>
+  </div>
+</footer>
+
+        
+    </div>
+    <!-- styles -->
+
+<link rel="stylesheet" href="/lib/font-awesome/css/all.min.css">
+
+
+<link rel="stylesheet" href="/lib/justified-gallery/css/justifiedGallery.min.css">
+
+
+    <!-- jquery -->
+
+<script src="/lib/jquery/jquery.min.js"></script>
+
+
+<script src="/lib/justified-gallery/js/jquery.justifiedGallery.min.js"></script>
+
+<!-- clipboard -->
+
+  
+<script src="/lib/clipboard/clipboard.min.js"></script>
+
+  <script type="text/javascript">
+  $(function() {
+    // copy-btn HTML
+    var btn = "<span class=\"btn-copy tooltipped tooltipped-sw\" aria-label=\"复制到粘贴板!\">";
+    btn += '<i class="far fa-clone"></i>';
+    btn += '</span>'; 
+    // mount it!
+    $(".highlight table").before(btn);
+    var clip = new ClipboardJS('.btn-copy', {
+      text: function(trigger) {
+        return Array.from(trigger.nextElementSibling.querySelectorAll('.code')).reduce((str,it)=>str+it.innerText+'\n','')
+      }
+    });
+    clip.on('success', function(e) {
+      e.trigger.setAttribute('aria-label', "复制成功!");
+      e.clearSelection();
+    })
+  })
+  </script>
+
+
+<script src="/js/main.js"></script>
+
+<!-- search -->
+
+<!-- Google Analytics -->
+
+<!-- Baidu Analytics -->
+
+<!-- Disqus Comments -->
+
+
+</body>
+</html>
